@@ -1,0 +1,2873 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"RTC001.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	RTC001_DAYS_IN_MONTH
+  20              		.section	.rodata
+  21              		.align	2
+  24              	RTC001_DAYS_IN_MONTH:
+  25 0000 00000000 		.word	0
+  26 0004 1F000000 		.word	31
+  27 0008 1C000000 		.word	28
+  28 000c 1F000000 		.word	31
+  29 0010 1E000000 		.word	30
+  30 0014 1F000000 		.word	31
+  31 0018 1E000000 		.word	30
+  32 001c 1F000000 		.word	31
+  33 0020 1F000000 		.word	31
+  34 0024 1E000000 		.word	30
+  35 0028 1F000000 		.word	31
+  36 002c 1E000000 		.word	30
+  37 0030 1F000000 		.word	31
+  38              		.section	.text.RTC001_lInit,"ax",%progbits
+  39              		.align	2
+  40              		.thumb
+  41              		.thumb_func
+  43              	RTC001_lInit:
+  44              	.LFB120:
+  45              		.file 1 "../Dave/Generated/src/RTC001/RTC001.c"
+   1:../Dave/Generated/src/RTC001/RTC001.c **** 
+   2:../Dave/Generated/src/RTC001/RTC001.c **** /*CODE_BLOCK_BEGIN[RTC001.c]*/
+   3:../Dave/Generated/src/RTC001/RTC001.c **** 
+   4:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+   5:../Dave/Generated/src/RTC001/RTC001.c ****  Copyright (c) 2011-2013, Infineon Technologies AG                            **
+   6:../Dave/Generated/src/RTC001/RTC001.c ****  All rights reserved.                                                         **
+   7:../Dave/Generated/src/RTC001/RTC001.c ****                                                                               **
+   8:../Dave/Generated/src/RTC001/RTC001.c ****  Redistribution and use in source and binary forms, with or without           **
+   9:../Dave/Generated/src/RTC001/RTC001.c ****  modification,are permitted provided that the following conditions are met:   **
+  10:../Dave/Generated/src/RTC001/RTC001.c ****                                                                               **
+  11:../Dave/Generated/src/RTC001/RTC001.c ****  *Redistributions of source code must retain the above copyright notice,      **
+  12:../Dave/Generated/src/RTC001/RTC001.c ****  this list of conditions and the following disclaimer.                        **
+  13:../Dave/Generated/src/RTC001/RTC001.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  14:../Dave/Generated/src/RTC001/RTC001.c ****  this list of conditions and the following disclaimer in the documentation    **
+  15:../Dave/Generated/src/RTC001/RTC001.c ****  and/or other materials provided with the distribution.                       **
+  16:../Dave/Generated/src/RTC001/RTC001.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  17:../Dave/Generated/src/RTC001/RTC001.c ****  may be used to endorse or promote products derived from this software without**
+  18:../Dave/Generated/src/RTC001/RTC001.c ****  specific prior written permission.                                           **
+  19:../Dave/Generated/src/RTC001/RTC001.c ****                                                                               **
+  20:../Dave/Generated/src/RTC001/RTC001.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  21:../Dave/Generated/src/RTC001/RTC001.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  22:../Dave/Generated/src/RTC001/RTC001.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  23:../Dave/Generated/src/RTC001/RTC001.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  24:../Dave/Generated/src/RTC001/RTC001.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  25:../Dave/Generated/src/RTC001/RTC001.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  26:../Dave/Generated/src/RTC001/RTC001.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  27:../Dave/Generated/src/RTC001/RTC001.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  28:../Dave/Generated/src/RTC001/RTC001.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  29:../Dave/Generated/src/RTC001/RTC001.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  30:../Dave/Generated/src/RTC001/RTC001.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  31:../Dave/Generated/src/RTC001/RTC001.c ****                                                                               **
+  32:../Dave/Generated/src/RTC001/RTC001.c ****  To improve the quality of the software, users are encouraged to share        **
+  33:../Dave/Generated/src/RTC001/RTC001.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  34:../Dave/Generated/src/RTC001/RTC001.c ****  dave@infineon.com).                                                          **
+  35:../Dave/Generated/src/RTC001/RTC001.c ****                                                                               **
+  36:../Dave/Generated/src/RTC001/RTC001.c **** ********************************************************************************
+  37:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  38:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  39:../Dave/Generated/src/RTC001/RTC001.c **** ** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+  40:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  41:../Dave/Generated/src/RTC001/RTC001.c **** ** COMPILER : Compiler Independent                                            **
+  42:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  43:../Dave/Generated/src/RTC001/RTC001.c **** ** AUTHOR   : App Developer                                                   **
+  44:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  45:../Dave/Generated/src/RTC001/RTC001.c **** ** NOTE     : Any Changes made to this file will be overwritten during Code   **
+  46:../Dave/Generated/src/RTC001/RTC001.c **** **            Generation                                                      **
+  47:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  48:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  49:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/
+  50:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+  51:../Dave/Generated/src/RTC001/RTC001.c **** ** Version History:                                                           **
+  52:../Dave/Generated/src/RTC001/RTC001.c **** ********************************************************************************
+  53:../Dave/Generated/src/RTC001/RTC001.c **** ** v1.0.22    23 Feb 2013  JP: Ported for XMC4400 and XMC1000 Devices.        **
+  54:../Dave/Generated/src/RTC001/RTC001.c **** **                            Conditional consumption of NVIC_SCU,NVIC_SR101  **
+  55:../Dave/Generated/src/RTC001/RTC001.c **** **                            Apps based on the device.                       ** 
+  56:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  57:../Dave/Generated/src/RTC001/RTC001.c **** ** v1.0.24    20 Mar 2013  JP: Mirror register status check                   **
+  58:../Dave/Generated/src/RTC001/RTC001.c **** **                            statements under the functions RTC001_Disable(),**
+  59:../Dave/Generated/src/RTC001/RTC001.c **** **                            RTC001_ConfigAlarm() and RTC001_Clock_SetTime() ** 
+  60:../Dave/Generated/src/RTC001/RTC001.c **** **                            are maintained uniquely for both XMC4000 and    ** 
+  61:../Dave/Generated/src/RTC001/RTC001.c **** **                            XMC1000 devices. DBG002 related bugs(ID22796)   ** 
+  62:../Dave/Generated/src/RTC001/RTC001.c **** **                            are fixed. Revision History added.              **
+  63:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  64:../Dave/Generated/src/RTC001/RTC001.c **** ** v1.0.26    23 Apr 2013  JP: In Function RTC001_ldatevalid(uint16_t m,      **
+  65:../Dave/Generated/src/RTC001/RTC001.c **** **                            uint16_t d,uint16_t y), "Day (d) == 0" is       ** 
+  66:../Dave/Generated/src/RTC001/RTC001.c **** **                            checked.                                        **
+  67:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  68:../Dave/Generated/src/RTC001/RTC001.c **** ** v1.0.28    09 Sep 2013  JP: XMC1000 Five new SW IDs are supported.         **
+  69:../Dave/Generated/src/RTC001/RTC001.c **** **                            RTC001 --> wrong handling of Hibernate register **  
+  70:../Dave/Generated/src/RTC001/RTC001.c **** **                            is fixed.                                       **
+  71:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  72:../Dave/Generated/src/RTC001/RTC001.c **** ** v1.0.30    16 Oct 2013  JP: Code has been updated in compliant to          **
+  73:../Dave/Generated/src/RTC001/RTC001.c **** **                            coding guidelines.                              **                   
+  74:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  75:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  76:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  77:../Dave/Generated/src/RTC001/RTC001.c **** **                                                                            **
+  78:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/ 
+  79:../Dave/Generated/src/RTC001/RTC001.c **** 
+  80:../Dave/Generated/src/RTC001/RTC001.c **** 
+  81:../Dave/Generated/src/RTC001/RTC001.c **** /**
+  82:../Dave/Generated/src/RTC001/RTC001.c ****  * @file RTC001.c
+  83:../Dave/Generated/src/RTC001/RTC001.c ****  * 
+  84:../Dave/Generated/src/RTC001/RTC001.c ****  *
+  85:../Dave/Generated/src/RTC001/RTC001.c ****  * @brief  Real Time Clock App Implementation Source File.
+  86:../Dave/Generated/src/RTC001/RTC001.c ****  *
+  87:../Dave/Generated/src/RTC001/RTC001.c ****  *                          
+  88:../Dave/Generated/src/RTC001/RTC001.c ****  */
+  89:../Dave/Generated/src/RTC001/RTC001.c ****  
+  90:../Dave/Generated/src/RTC001/RTC001.c ****  
+  91:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+  92:../Dave/Generated/src/RTC001/RTC001.c ****  ** Include Files:                                                            **
+  93:../Dave/Generated/src/RTC001/RTC001.c ****  ******************************************************************************/
+  94:../Dave/Generated/src/RTC001/RTC001.c **** 
+  95:../Dave/Generated/src/RTC001/RTC001.c **** /* Inclusion of header file */
+  96:../Dave/Generated/src/RTC001/RTC001.c **** #include "../../inc/RTC001/RTC001.h"
+  97:../Dave/Generated/src/RTC001/RTC001.c **** #ifdef DAVE_CE
+  98:../Dave/Generated/src/RTC001/RTC001.c **** #include "../../inc/RTC001/RTC001_Conf.h"
+  99:../Dave/Generated/src/RTC001/RTC001.c **** #endif
+ 100:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 101:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 102:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+ 103:../Dave/Generated/src/RTC001/RTC001.c **** ** Private Macro Definitions:                                                 **
+ 104:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/
+ 105:../Dave/Generated/src/RTC001/RTC001.c **** /* Define used for APP_GID */
+ 106:../Dave/Generated/src/RTC001/RTC001.c **** #define APP_GID DBG002_GID_RTC001
+ 107:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 108:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+ 109:../Dave/Generated/src/RTC001/RTC001.c **** ** Private Type Definitions:                                                  **
+ 110:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/
+ 111:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 112:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+ 113:../Dave/Generated/src/RTC001/RTC001.c **** ** Private Function Declarations:                                             **
+ 114:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/
+ 115:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 116:../Dave/Generated/src/RTC001/RTC001.c ****  * @brief Function to check whether the time is valid
+ 117:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 118:../Dave/Generated/src/RTC001/RTC001.c ****  * @param[in]  Seconds, Minutes and Hour of type uint8_t
+ 119:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 120:../Dave/Generated/src/RTC001/RTC001.c ****  * @return     1 if time is valid, 0 otherwise
+ 121:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 122:../Dave/Generated/src/RTC001/RTC001.c ****  * <b>Reentrant: NO </b><BR>
+ 123:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 124:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 125:../Dave/Generated/src/RTC001/RTC001.c **** static uint32_t RTC001_ltimevalid(uint8_t sec, uint8_t min, uint8_t hour);
+ 126:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 127:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 128:../Dave/Generated/src/RTC001/RTC001.c ****  * @brief Function to check whether the date is valid
+ 129:../Dave/Generated/src/RTC001/RTC001.c ****  *   
+ 130:../Dave/Generated/src/RTC001/RTC001.c ****  * @param[in]  Month, Day and Year of type uint16_t 
+ 131:../Dave/Generated/src/RTC001/RTC001.c ****  *           
+ 132:../Dave/Generated/src/RTC001/RTC001.c ****  * @return     1 if date is valid, 0 otherwise 
+ 133:../Dave/Generated/src/RTC001/RTC001.c ****  *      
+ 134:../Dave/Generated/src/RTC001/RTC001.c ****  * <b>Reentrant: NO </b><BR>
+ 135:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 136:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 137:../Dave/Generated/src/RTC001/RTC001.c **** static uint32_t RTC001_ldatevalid(uint16_t month, uint16_t day, uint16_t year);
+ 138:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 139:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 140:../Dave/Generated/src/RTC001/RTC001.c ****  * @brief Function to check whether the year is leap year
+ 141:../Dave/Generated/src/RTC001/RTC001.c ****  *   
+ 142:../Dave/Generated/src/RTC001/RTC001.c ****  * @param[in]  Year of type uint16_t 
+ 143:../Dave/Generated/src/RTC001/RTC001.c ****  *           
+ 144:../Dave/Generated/src/RTC001/RTC001.c ****  * @return     1 if year is leap year, 0 otherwise 
+ 145:../Dave/Generated/src/RTC001/RTC001.c ****  *      
+ 146:../Dave/Generated/src/RTC001/RTC001.c ****  * <b>Reentrant: NO </b><BR>
+ 147:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 148:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 149:../Dave/Generated/src/RTC001/RTC001.c **** static uint8_t RTC001_lleapyear(uint16_t year);
+ 150:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 151:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 152:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 153:../Dave/Generated/src/RTC001/RTC001.c ****  * @brief Function to calculate day of the week
+ 154:../Dave/Generated/src/RTC001/RTC001.c ****  * 
+ 155:../Dave/Generated/src/RTC001/RTC001.c ****  * @param[in]  Month, Day and Year of type uint16_t 
+ 156:../Dave/Generated/src/RTC001/RTC001.c ****  *             
+ 157:../Dave/Generated/src/RTC001/RTC001.c ****  * @return     Day of week, eg. Monday = 0 etc.
+ 158:../Dave/Generated/src/RTC001/RTC001.c ****  *      
+ 159:../Dave/Generated/src/RTC001/RTC001.c ****  * <b>Reentrant: NO </b><BR>
+ 160:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 161:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 162:../Dave/Generated/src/RTC001/RTC001.c **** static uint32_t RTC001_lweekday(uint16_t month, uint16_t day, uint16_t year);
+ 163:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 164:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 165:../Dave/Generated/src/RTC001/RTC001.c ****  * @brief  Initialization function for the app. Configures the registers
+ 166:../Dave/Generated/src/RTC001/RTC001.c ****  *         based on options selected in UI.
+ 167:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 168:../Dave/Generated/src/RTC001/RTC001.c ****  * @param[in]  Handle of type RTC001_HandleType
+ 169:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 170:../Dave/Generated/src/RTC001/RTC001.c ****  * @return     None
+ 171:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 172:../Dave/Generated/src/RTC001/RTC001.c ****  * <b>Reentrant: NO </b><BR>
+ 173:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 174:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 175:../Dave/Generated/src/RTC001/RTC001.c **** static void  RTC001_lInit(const RTC001_HandleType* Handle);
+ 176:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 177:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+ 178:../Dave/Generated/src/RTC001/RTC001.c **** ** Global Constant Definitions:                                               **
+ 179:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/
+ 180:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 181:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 182:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 183:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+ 184:../Dave/Generated/src/RTC001/RTC001.c **** ** Global Variable Definitions:                                               **
+ 185:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/
+ 186:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 187:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+ 188:../Dave/Generated/src/RTC001/RTC001.c **** ** Private Constant Definitions:                                              **
+ 189:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/
+ 190:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 191:../Dave/Generated/src/RTC001/RTC001.c **** /* Constant array used to store the number of days in each month */
+ 192:../Dave/Generated/src/RTC001/RTC001.c **** const uint32_t RTC001_DAYS_IN_MONTH[13] =
+ 193:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 194:../Dave/Generated/src/RTC001/RTC001.c ****    /* Index from 1, hence skip 0*/
+ 195:../Dave/Generated/src/RTC001/RTC001.c ****     0U,
+ 196:../Dave/Generated/src/RTC001/RTC001.c ****     /*Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec*/
+ 197:../Dave/Generated/src/RTC001/RTC001.c ****       31U, 28U, 31U, 30U, 31U, 30U, 31U, 31U, 30U, 31U, 30U, 31U
+ 198:../Dave/Generated/src/RTC001/RTC001.c **** };
+ 199:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 200:../Dave/Generated/src/RTC001/RTC001.c **** /* Constant used for the number of days in an year */
+ 201:../Dave/Generated/src/RTC001/RTC001.c **** #define RTC001_DAYS_IN_AN_YEAR     (365U)
+ 202:../Dave/Generated/src/RTC001/RTC001.c **** /* Constant used for the seconds in a day */
+ 203:../Dave/Generated/src/RTC001/RTC001.c **** #define RTC001_SECONDS_IN_A_DAY    (24U * 60U * 60U)
+ 204:../Dave/Generated/src/RTC001/RTC001.c **** /* Constant used for the seconds in an hour */
+ 205:../Dave/Generated/src/RTC001/RTC001.c **** #define RTC001_SECONDS_IN_AN_HOUR  (60U * 60U)
+ 206:../Dave/Generated/src/RTC001/RTC001.c **** /* Constant used for the seconds in a minute */
+ 207:../Dave/Generated/src/RTC001/RTC001.c **** #define RTC001_SECONDS_IN_A_MINUTE (60U)
+ 208:../Dave/Generated/src/RTC001/RTC001.c **** /* Constant used for the epoch year */
+ 209:../Dave/Generated/src/RTC001/RTC001.c **** #define RTC001_EPOCH_YEAR          (1970U)
+ 210:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+ 211:../Dave/Generated/src/RTC001/RTC001.c **** ** Function Like Macro Definitions:                                           **
+ 212:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/
+ 213:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 214:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 215:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 216:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+ 217:../Dave/Generated/src/RTC001/RTC001.c **** ** Private Function Definitions:                                              **
+ 218:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/
+ 219:../Dave/Generated/src/RTC001/RTC001.c ****  
+ 220:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 221:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 222:../Dave/Generated/src/RTC001/RTC001.c ****  *  Initialization function for the app. Configures the registers
+ 223:../Dave/Generated/src/RTC001/RTC001.c ****  *  based on options selected in UI.
+ 224:../Dave/Generated/src/RTC001/RTC001.c ****  */ 
+ 225:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 226:../Dave/Generated/src/RTC001/RTC001.c **** static void  RTC001_lInit(const RTC001_HandleType* Handle)
+ 227:../Dave/Generated/src/RTC001/RTC001.c **** {
+  46              		.loc 1 227 0
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 16
+  49              		@ frame_needed = 1, uses_anonymous_args = 0
+  50 0000 80B5     		push	{r7, lr}
+  51              	.LCFI0:
+  52              		.cfi_def_cfa_offset 8
+  53              		.cfi_offset 7, -8
+  54              		.cfi_offset 14, -4
+  55 0002 84B0     		sub	sp, sp, #16
+  56              	.LCFI1:
+  57              		.cfi_def_cfa_offset 24
+  58 0004 00AF     		add	r7, sp, #0
+  59              	.LCFI2:
+  60              		.cfi_def_cfa_register 7
+  61 0006 7860     		str	r0, [r7, #4]
+ 228:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 229:../Dave/Generated/src/RTC001/RTC001.c ****   /* Used to store the return status */
+ 230:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t status = (uint32_t) RTC001App_SUCCESS;
+  62              		.loc 1 230 0
+  63 0008 4FF00003 		mov	r3, #0
+  64 000c FB60     		str	r3, [r7, #12]
+ 231:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 232:../Dave/Generated/src/RTC001/RTC001.c ****   /* Used to store the value that needs to be loaded to register */
+ 233:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t uRegValue = 0U;
+  65              		.loc 1 233 0
+  66 000e 4FF00003 		mov	r3, #0
+  67 0012 BB60     		str	r3, [r7, #8]
+ 234:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 235:../Dave/Generated/src/RTC001/RTC001.c ****    /* <<<DD_RTC001_API_1>>> */
+ 236:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_ENTRY(APP_GID,RTC001_FUNCTION_ENTRY); 
+ 237:../Dave/Generated/src/RTC001/RTC001.c ****    	  
+ 238:../Dave/Generated/src/RTC001/RTC001.c ****   #if (UC_FAMILY == XMC1)
+ 239:../Dave/Generated/src/RTC001/RTC001.c ****    /* Used for delay */
+ 240:../Dave/Generated/src/RTC001/RTC001.c ****    uRegValue = 0x3FFU;
+ 241:../Dave/Generated/src/RTC001/RTC001.c ****   /* To disable gating for RTC : RTC Gating Clear  */
+ 242:../Dave/Generated/src/RTC001/RTC001.c ****   SCU_CLK->CLKCR =(((uint32_t)uRegValue << (uint32_t)SCU_CLK_CLKCR_CNTADJ_Pos)&\
+ 243:../Dave/Generated/src/RTC001/RTC001.c ****                   (uint32_t)SCU_CLK_CLKCR_CNTADJ_Msk) | \
+ 244:../Dave/Generated/src/RTC001/RTC001.c **** 	              ((uint32_t)SCU_CLK->CLKCR & \
+ 245:../Dave/Generated/src/RTC001/RTC001.c **** 				  ((uint32_t)~((uint32_t)SCU_CLK_CLKCR_CNTADJ_Msk)));
+ 246:../Dave/Generated/src/RTC001/RTC001.c ****    SCU_GENERAL->PASSWD = 0x000000C0UL;
+ 247:../Dave/Generated/src/RTC001/RTC001.c ****    SET_BIT(SCU_CLK->CGATCLR0, SCU_CLK_CGATCLR0_RTC_Pos);
+ 248:../Dave/Generated/src/RTC001/RTC001.c ****    while(SCU_CLK->CLKCR & SCU_CLK_CLKCR_VDDC2LOW_Msk)
+ 249:../Dave/Generated/src/RTC001/RTC001.c ****    {}
+ 250:../Dave/Generated/src/RTC001/RTC001.c ****    SCU_GENERAL->PASSWD = 0x000000C3UL;
+ 251:../Dave/Generated/src/RTC001/RTC001.c ****    uRegValue = 0U;
+ 252:../Dave/Generated/src/RTC001/RTC001.c ****   #endif
+ 253:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 254:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear Mirror register update status of RTC registers in SCU*/
+ 255:../Dave/Generated/src/RTC001/RTC001.c ****   SCU_INTERRUPT->SRCLR = \
+  68              		.loc 1 255 0
+  69 0014 44F27403 		movw	r3, #16500
+  70 0018 C5F20003 		movt	r3, 20480
+  71 001c 4FF0F852 		mov	r2, #520093696
+  72 0020 DA60     		str	r2, [r3, #12]
+ 256:../Dave/Generated/src/RTC001/RTC001.c ****       (uint32_t)(SCU_INTERRUPT_SRCLR_RTC_CTR_Msk | \
+ 257:../Dave/Generated/src/RTC001/RTC001.c **** 	   SCU_INTERRUPT_SRCLR_RTC_ATIM0_Msk | SCU_INTERRUPT_SRCLR_RTC_ATIM1_Msk | \
+ 258:../Dave/Generated/src/RTC001/RTC001.c ****   	   SCU_INTERRUPT_SRCLR_RTC_TIM0_Msk | SCU_INTERRUPT_SRCLR_RTC_TIM1_Msk);
+ 259:../Dave/Generated/src/RTC001/RTC001.c **** 	   
+ 260:../Dave/Generated/src/RTC001/RTC001.c ****   if ((((RTC->CTR & RTC_CTR_ENB_Msk) >> RTC_CTR_ENB_Pos) == 0U ) || \
+  73              		.loc 1 260 0
+  74 0022 4FF49443 		mov	r3, #18944
+  75 0026 C5F20003 		movt	r3, 20480
+  76 002a 5B68     		ldr	r3, [r3, #4]
+  77 002c 03F00103 		and	r3, r3, #1
+  78 0030 002B     		cmp	r3, #0
+  79 0032 03D0     		beq	.L2
+ 261:../Dave/Generated/src/RTC001/RTC001.c ****      (Handle->RTCInitOnce != RTC001_INITONCE_ENABLE))
+  80              		.loc 1 261 0 discriminator 1
+  81 0034 7B68     		ldr	r3, [r7, #4]
+  82 0036 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 260:../Dave/Generated/src/RTC001/RTC001.c ****   if ((((RTC->CTR & RTC_CTR_ENB_Msk) >> RTC_CTR_ENB_Pos) == 0U ) || \
+  83              		.loc 1 260 0 discriminator 1
+  84 0038 012B     		cmp	r3, #1
+  85 003a 09D0     		beq	.L9
+  86              	.L2:
+ 262:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 263:../Dave/Generated/src/RTC001/RTC001.c ****      /* <<<DD_RTC001_API_4>>> */
+ 264:../Dave/Generated/src/RTC001/RTC001.c **** 	 /* RTC disabled to set the time */
+ 265:../Dave/Generated/src/RTC001/RTC001.c ****      status = RTC001_Disable();
+  87              		.loc 1 265 0
+  88 003c FFF7FEFF 		bl	RTC001_Disable
+  89 0040 F860     		str	r0, [r7, #12]
+ 266:../Dave/Generated/src/RTC001/RTC001.c ****      /*Assert status == RTC001App_SUCCESS*/
+ 267:../Dave/Generated/src/RTC001/RTC001.c ****      DBG002_I(status == RTC001App_SUCCESS);
+ 268:../Dave/Generated/src/RTC001/RTC001.c ****      /* Calendar time and date set in RTC registers */
+ 269:../Dave/Generated/src/RTC001/RTC001.c ****      status = RTC001_Clock_SetTime(&timeptr1);
+  90              		.loc 1 269 0
+  91 0042 40F20000 		movw	r0, #:lower16:timeptr1
+  92 0046 C0F20000 		movt	r0, #:upper16:timeptr1
+  93 004a FFF7FEFF 		bl	RTC001_Clock_SetTime
+  94 004e F860     		str	r0, [r7, #12]
+  95              	.L9:
+ 270:../Dave/Generated/src/RTC001/RTC001.c ****      /*Assert status == RTC001App_SUCCESS*/
+ 271:../Dave/Generated/src/RTC001/RTC001.c ****      DBG002_I(status == RTC001App_SUCCESS);
+ 272:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 273:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 274:../Dave/Generated/src/RTC001/RTC001.c ****   /* Wait for Mirror register update */
+ 275:../Dave/Generated/src/RTC001/RTC001.c ****   while(SCU_GENERAL->MIRRSTS & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk)
+  96              		.loc 1 275 0
+  97 0050 00BF     		nop
+  98              	.L4:
+  99              		.loc 1 275 0 is_stmt 0 discriminator 1
+ 100 0052 4FF48043 		mov	r3, #16384
+ 101 0056 C5F20003 		movt	r3, 20480
+ 102 005a D3F8C430 		ldr	r3, [r3, #196]
+ 103 005e 03F48073 		and	r3, r3, #256
+ 104 0062 002B     		cmp	r3, #0
+ 105 0064 F5D1     		bne	.L4
+ 276:../Dave/Generated/src/RTC001/RTC001.c ****   {}
+ 277:../Dave/Generated/src/RTC001/RTC001.c ****   /* Enable the RTC module */
+ 278:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->CTR |= (((uint32_t)Handle->RTCEnable) << RTC_CTR_ENB_Pos);
+ 106              		.loc 1 278 0 is_stmt 1
+ 107 0066 4FF49443 		mov	r3, #18944
+ 108 006a C5F20003 		movt	r3, 20480
+ 109 006e 4FF49442 		mov	r2, #18944
+ 110 0072 C5F20002 		movt	r2, 20480
+ 111 0076 5168     		ldr	r1, [r2, #4]
+ 112 0078 7A68     		ldr	r2, [r7, #4]
+ 113 007a 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 114 007c 0A43     		orrs	r2, r2, r1
+ 115 007e 5A60     		str	r2, [r3, #4]
+ 279:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 280:../Dave/Generated/src/RTC001/RTC001.c ****   /* Enable interrupt on alarm event  */
+ 281:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->MSKSR |= (((uint32_t)Handle->RTCAlarmInterrupt) << RTC_MSKSR_MAI_Pos);
+ 116              		.loc 1 281 0
+ 117 0080 4FF49443 		mov	r3, #18944
+ 118 0084 C5F20003 		movt	r3, 20480
+ 119 0088 4FF49442 		mov	r2, #18944
+ 120 008c C5F20002 		movt	r2, 20480
+ 121 0090 1169     		ldr	r1, [r2, #16]
+ 122 0092 7A68     		ldr	r2, [r7, #4]
+ 123 0094 D27A     		ldrb	r2, [r2, #11]	@ zero_extendqisi2
+ 124 0096 4FEA0222 		lsl	r2, r2, #8
+ 125 009a 0A43     		orrs	r2, r2, r1
+ 126 009c 1A61     		str	r2, [r3, #16]
+ 282:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 283:../Dave/Generated/src/RTC001/RTC001.c ****   #if (UC_FAMILY == XMC4)
+ 284:../Dave/Generated/src/RTC001/RTC001.c ****    
+ 285:../Dave/Generated/src/RTC001/RTC001.c ****    /* Enable RTC alarm interrupt in SCU */
+ 286:../Dave/Generated/src/RTC001/RTC001.c ****    SCU_INTERRUPT->SRMSK |= (((uint32_t)Handle->RTCAlarmInterrupt) << \
+ 127              		.loc 1 286 0
+ 128 009e 44F27403 		movw	r3, #16500
+ 129 00a2 C5F20003 		movt	r3, 20480
+ 130 00a6 44F27402 		movw	r2, #16500
+ 131 00aa C5F20002 		movt	r2, 20480
+ 132 00ae 9168     		ldr	r1, [r2, #8]
+ 133 00b0 7A68     		ldr	r2, [r7, #4]
+ 134 00b2 D27A     		ldrb	r2, [r2, #11]	@ zero_extendqisi2
+ 135 00b4 4FEA8202 		lsl	r2, r2, #2
+ 136 00b8 0A43     		orrs	r2, r2, r1
+ 137 00ba 9A60     		str	r2, [r3, #8]
+ 287:../Dave/Generated/src/RTC001/RTC001.c ****    SCU_INTERRUPT_SRMSK_AI_Pos);   
+ 288:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 289:../Dave/Generated/src/RTC001/RTC001.c ****    /*Enable wake up from hibernate mode on an RTC alarm, periodic second,
+ 290:../Dave/Generated/src/RTC001/RTC001.c ****      minute, hour, day, month and year events	 
+ 291:../Dave/Generated/src/RTC001/RTC001.c ****    */   
+ 292:../Dave/Generated/src/RTC001/RTC001.c ****    uRegValue = (((uint32_t)Handle->RTCHibAlarmEvent << RTC_CTR_TAE_Pos) | \
+ 138              		.loc 1 292 0
+ 139 00bc 7B68     		ldr	r3, [r7, #4]
+ 140 00be 5B7B     		ldrb	r3, [r3, #13]	@ zero_extendqisi2
+ 141 00c0 4FEA8302 		lsl	r2, r3, #2
+ 293:../Dave/Generated/src/RTC001/RTC001.c ****              ((uint32_t)Handle->RTCHibPeriodicSecEvent << RTC_CTR_ESEC_Pos) | \
+ 142              		.loc 1 293 0
+ 143 00c4 7B68     		ldr	r3, [r7, #4]
+ 144 00c6 9B7B     		ldrb	r3, [r3, #14]	@ zero_extendqisi2
+ 145 00c8 4FEA0323 		lsl	r3, r3, #8
+ 292:../Dave/Generated/src/RTC001/RTC001.c ****    uRegValue = (((uint32_t)Handle->RTCHibAlarmEvent << RTC_CTR_TAE_Pos) | \
+ 146              		.loc 1 292 0
+ 147 00cc 1A43     		orrs	r2, r2, r3
+ 294:../Dave/Generated/src/RTC001/RTC001.c ****              ((uint32_t)Handle->RTCHibPeriodicMinEvent << RTC_CTR_EMIC_Pos) | \
+ 148              		.loc 1 294 0
+ 149 00ce 7B68     		ldr	r3, [r7, #4]
+ 150 00d0 DB7B     		ldrb	r3, [r3, #15]	@ zero_extendqisi2
+ 151 00d2 4FEA4323 		lsl	r3, r3, #9
+ 293:../Dave/Generated/src/RTC001/RTC001.c ****              ((uint32_t)Handle->RTCHibPeriodicSecEvent << RTC_CTR_ESEC_Pos) | \
+ 152              		.loc 1 293 0
+ 153 00d6 1A43     		orrs	r2, r2, r3
+ 295:../Dave/Generated/src/RTC001/RTC001.c **** 			 ((uint32_t)Handle->RTCHibPeriodicHourEvent << RTC_CTR_EHOC_Pos)| \
+ 154              		.loc 1 295 0
+ 155 00d8 7B68     		ldr	r3, [r7, #4]
+ 156 00da 1B7C     		ldrb	r3, [r3, #16]	@ zero_extendqisi2
+ 157 00dc 4FEA8323 		lsl	r3, r3, #10
+ 294:../Dave/Generated/src/RTC001/RTC001.c ****              ((uint32_t)Handle->RTCHibPeriodicMinEvent << RTC_CTR_EMIC_Pos) | \
+ 158              		.loc 1 294 0
+ 159 00e0 1A43     		orrs	r2, r2, r3
+ 296:../Dave/Generated/src/RTC001/RTC001.c **** 			 ((uint32_t)Handle->RTCHibPeriodicDayEvent << RTC_CTR_EDAC_Pos) | \
+ 160              		.loc 1 296 0
+ 161 00e2 7B68     		ldr	r3, [r7, #4]
+ 162 00e4 5B7C     		ldrb	r3, [r3, #17]	@ zero_extendqisi2
+ 163 00e6 4FEAC323 		lsl	r3, r3, #11
+ 295:../Dave/Generated/src/RTC001/RTC001.c **** 			 ((uint32_t)Handle->RTCHibPeriodicHourEvent << RTC_CTR_EHOC_Pos)| \
+ 164              		.loc 1 295 0
+ 165 00ea 1A43     		orrs	r2, r2, r3
+ 297:../Dave/Generated/src/RTC001/RTC001.c **** 			 ((uint32_t)Handle->RTCHibPeriodicMonthEvent << RTC_CTR_EMOC_Pos)| \
+ 166              		.loc 1 297 0
+ 167 00ec 7B68     		ldr	r3, [r7, #4]
+ 168 00ee 9B7C     		ldrb	r3, [r3, #18]	@ zero_extendqisi2
+ 169 00f0 4FEA4333 		lsl	r3, r3, #13
+ 296:../Dave/Generated/src/RTC001/RTC001.c **** 			 ((uint32_t)Handle->RTCHibPeriodicDayEvent << RTC_CTR_EDAC_Pos) | \
+ 170              		.loc 1 296 0
+ 171 00f4 1A43     		orrs	r2, r2, r3
+ 298:../Dave/Generated/src/RTC001/RTC001.c **** 			 ((uint32_t)Handle->RTCHibPeriodicYearEvent << RTC_CTR_EYEC_Pos));
+ 172              		.loc 1 298 0
+ 173 00f6 7B68     		ldr	r3, [r7, #4]
+ 174 00f8 DB7C     		ldrb	r3, [r3, #19]	@ zero_extendqisi2
+ 175 00fa 4FEA8333 		lsl	r3, r3, #14
+ 292:../Dave/Generated/src/RTC001/RTC001.c ****    uRegValue = (((uint32_t)Handle->RTCHibAlarmEvent << RTC_CTR_TAE_Pos) | \
+ 176              		.loc 1 292 0
+ 177 00fe 1343     		orrs	r3, r3, r2
+ 178 0100 BB60     		str	r3, [r7, #8]
+ 299:../Dave/Generated/src/RTC001/RTC001.c ****    /**
+ 300:../Dave/Generated/src/RTC001/RTC001.c ****     * Program Control Register (CTR)
+ 301:../Dave/Generated/src/RTC001/RTC001.c ****     */
+ 302:../Dave/Generated/src/RTC001/RTC001.c ****    /* Wait for Mirror register update */
+ 303:../Dave/Generated/src/RTC001/RTC001.c ****    while(SCU_GENERAL->MIRRSTS & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk)
+ 179              		.loc 1 303 0
+ 180 0102 00BF     		nop
+ 181              	.L5:
+ 182              		.loc 1 303 0 is_stmt 0 discriminator 1
+ 183 0104 4FF48043 		mov	r3, #16384
+ 184 0108 C5F20003 		movt	r3, 20480
+ 185 010c D3F8C430 		ldr	r3, [r3, #196]
+ 186 0110 03F48073 		and	r3, r3, #256
+ 187 0114 002B     		cmp	r3, #0
+ 188 0116 F5D1     		bne	.L5
+ 304:../Dave/Generated/src/RTC001/RTC001.c ****    {}
+ 305:../Dave/Generated/src/RTC001/RTC001.c ****    RTC->CTR |= uRegValue;
+ 189              		.loc 1 305 0 is_stmt 1
+ 190 0118 4FF49443 		mov	r3, #18944
+ 191 011c C5F20003 		movt	r3, 20480
+ 192 0120 4FF49442 		mov	r2, #18944
+ 193 0124 C5F20002 		movt	r2, 20480
+ 194 0128 5168     		ldr	r1, [r2, #4]
+ 195 012a BA68     		ldr	r2, [r7, #8]
+ 196 012c 0A43     		orrs	r2, r2, r1
+ 197 012e 5A60     		str	r2, [r3, #4]
+ 306:../Dave/Generated/src/RTC001/RTC001.c ****    
+ 307:../Dave/Generated/src/RTC001/RTC001.c ****   #endif
+ 308:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 309:../Dave/Generated/src/RTC001/RTC001.c ****    while(SCU_GENERAL->MIRRSTS & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk)
+ 198              		.loc 1 309 0
+ 199 0130 00BF     		nop
+ 200              	.L6:
+ 201              		.loc 1 309 0 is_stmt 0 discriminator 1
+ 202 0132 4FF48043 		mov	r3, #16384
+ 203 0136 C5F20003 		movt	r3, 20480
+ 204 013a D3F8C430 		ldr	r3, [r3, #196]
+ 205 013e 03F48073 		and	r3, r3, #256
+ 206 0142 002B     		cmp	r3, #0
+ 207 0144 F5D1     		bne	.L6
+ 310:../Dave/Generated/src/RTC001/RTC001.c ****    {}
+ 311:../Dave/Generated/src/RTC001/RTC001.c ****    /*Configure RTC prescaler*/
+ 312:../Dave/Generated/src/RTC001/RTC001.c ****    RTC->CTR = (((uint32_t)Handle->DividerValue << (uint32_t)RTC_CTR_DIV_Pos) & \
+ 208              		.loc 1 312 0 is_stmt 1
+ 209 0146 4FF49443 		mov	r3, #18944
+ 210 014a C5F20003 		movt	r3, 20480
+ 211 014e 7A68     		ldr	r2, [r7, #4]
+ 212 0150 5288     		ldrh	r2, [r2, #2]
+ 213 0152 4FEA0241 		lsl	r1, r2, #16
+ 313:../Dave/Generated/src/RTC001/RTC001.c ****               (uint32_t)RTC_CTR_DIV_Msk) | \
+ 314:../Dave/Generated/src/RTC001/RTC001.c ****     	      (RTC->CTR & ((uint32_t)~((uint32_t)RTC_CTR_DIV_Msk)));
+ 214              		.loc 1 314 0
+ 215 0156 4FF49442 		mov	r2, #18944
+ 216 015a C5F20002 		movt	r2, 20480
+ 217 015e 5268     		ldr	r2, [r2, #4]
+ 218 0160 4FEA0242 		lsl	r2, r2, #16
+ 219 0164 4FEA1242 		lsr	r2, r2, #16
+ 313:../Dave/Generated/src/RTC001/RTC001.c ****               (uint32_t)RTC_CTR_DIV_Msk) | \
+ 220              		.loc 1 313 0
+ 221 0168 0A43     		orrs	r2, r2, r1
+ 312:../Dave/Generated/src/RTC001/RTC001.c ****    RTC->CTR = (((uint32_t)Handle->DividerValue << (uint32_t)RTC_CTR_DIV_Pos) & \
+ 222              		.loc 1 312 0
+ 223 016a 5A60     		str	r2, [r3, #4]
+ 315:../Dave/Generated/src/RTC001/RTC001.c **** 					
+ 316:../Dave/Generated/src/RTC001/RTC001.c ****   /* Reset the variable */
+ 317:../Dave/Generated/src/RTC001/RTC001.c ****   uRegValue = 0U;
+ 224              		.loc 1 317 0
+ 225 016c 4FF00003 		mov	r3, #0
+ 226 0170 BB60     		str	r3, [r7, #8]
+ 318:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 319:../Dave/Generated/src/RTC001/RTC001.c ****   /* Enable periodic seconds, minutes, hours 
+ 320:../Dave/Generated/src/RTC001/RTC001.c **** 	 days, months and years interrupts
+ 321:../Dave/Generated/src/RTC001/RTC001.c ****    */
+ 322:../Dave/Generated/src/RTC001/RTC001.c ****   uRegValue =(((uint32_t)Handle->RTCPeriodicSecInterrupt<<RTC_MSKSR_MPSE_Pos)| \
+ 227              		.loc 1 322 0
+ 228 0172 7B68     		ldr	r3, [r7, #4]
+ 229 0174 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 230 0176 1A46     		mov	r2, r3
+ 323:../Dave/Generated/src/RTC001/RTC001.c ****             ((uint32_t)Handle->RTCPeriodicMinInterrupt<<RTC_MSKSR_MPMI_Pos) | \
+ 231              		.loc 1 323 0
+ 232 0178 7B68     		ldr	r3, [r7, #4]
+ 233 017a 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 234 017c 4FEA4303 		lsl	r3, r3, #1
+ 322:../Dave/Generated/src/RTC001/RTC001.c ****   uRegValue =(((uint32_t)Handle->RTCPeriodicSecInterrupt<<RTC_MSKSR_MPSE_Pos)| \
+ 235              		.loc 1 322 0
+ 236 0180 1A43     		orrs	r2, r2, r3
+ 324:../Dave/Generated/src/RTC001/RTC001.c ****             ((uint32_t)Handle->RTCPeriodicHourInterrupt<<RTC_MSKSR_MPHO_Pos) | \
+ 237              		.loc 1 324 0
+ 238 0182 7B68     		ldr	r3, [r7, #4]
+ 239 0184 DB79     		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 240 0186 4FEA8303 		lsl	r3, r3, #2
+ 323:../Dave/Generated/src/RTC001/RTC001.c ****             ((uint32_t)Handle->RTCPeriodicMinInterrupt<<RTC_MSKSR_MPMI_Pos) | \
+ 241              		.loc 1 323 0
+ 242 018a 1A43     		orrs	r2, r2, r3
+ 325:../Dave/Generated/src/RTC001/RTC001.c **** 			((uint32_t)Handle->RTCPeriodicDayInterrupt<<RTC_MSKSR_MPDA_Pos) | \
+ 243              		.loc 1 325 0
+ 244 018c 7B68     		ldr	r3, [r7, #4]
+ 245 018e 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ 246 0190 4FEAC303 		lsl	r3, r3, #3
+ 324:../Dave/Generated/src/RTC001/RTC001.c ****             ((uint32_t)Handle->RTCPeriodicHourInterrupt<<RTC_MSKSR_MPHO_Pos) | \
+ 247              		.loc 1 324 0
+ 248 0194 1A43     		orrs	r2, r2, r3
+ 326:../Dave/Generated/src/RTC001/RTC001.c **** 			((uint32_t)Handle->RTCPeriodicMonthInterrupt<< RTC_MSKSR_MPMO_Pos)|\
+ 249              		.loc 1 326 0
+ 250 0196 7B68     		ldr	r3, [r7, #4]
+ 251 0198 5B7A     		ldrb	r3, [r3, #9]	@ zero_extendqisi2
+ 252 019a 4FEA4313 		lsl	r3, r3, #5
+ 325:../Dave/Generated/src/RTC001/RTC001.c **** 			((uint32_t)Handle->RTCPeriodicDayInterrupt<<RTC_MSKSR_MPDA_Pos) | \
+ 253              		.loc 1 325 0
+ 254 019e 1A43     		orrs	r2, r2, r3
+ 327:../Dave/Generated/src/RTC001/RTC001.c **** 			((uint32_t)Handle->RTCPeriodicYearInterrupt<< RTC_MSKSR_MPYE_Pos));
+ 255              		.loc 1 327 0
+ 256 01a0 7B68     		ldr	r3, [r7, #4]
+ 257 01a2 9B7A     		ldrb	r3, [r3, #10]	@ zero_extendqisi2
+ 258 01a4 4FEA8313 		lsl	r3, r3, #6
+ 322:../Dave/Generated/src/RTC001/RTC001.c ****   uRegValue =(((uint32_t)Handle->RTCPeriodicSecInterrupt<<RTC_MSKSR_MPSE_Pos)| \
+ 259              		.loc 1 322 0
+ 260 01a8 1343     		orrs	r3, r3, r2
+ 261 01aa BB60     		str	r3, [r7, #8]
+ 328:../Dave/Generated/src/RTC001/RTC001.c ****   /**
+ 329:../Dave/Generated/src/RTC001/RTC001.c ****    * Program Service Request Mask Register (MSKSR)
+ 330:../Dave/Generated/src/RTC001/RTC001.c ****    */
+ 331:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->MSKSR |= uRegValue;
+ 262              		.loc 1 331 0
+ 263 01ac 4FF49443 		mov	r3, #18944
+ 264 01b0 C5F20003 		movt	r3, 20480
+ 265 01b4 4FF49442 		mov	r2, #18944
+ 266 01b8 C5F20002 		movt	r2, 20480
+ 267 01bc 1169     		ldr	r1, [r2, #16]
+ 268 01be BA68     		ldr	r2, [r7, #8]
+ 269 01c0 0A43     		orrs	r2, r2, r1
+ 270 01c2 1A61     		str	r2, [r3, #16]
+ 332:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 333:../Dave/Generated/src/RTC001/RTC001.c ****   #if (UC_FAMILY == XMC4)
+ 334:../Dave/Generated/src/RTC001/RTC001.c ****    /* Enable RTC periodic interrupt in SCU 
+ 335:../Dave/Generated/src/RTC001/RTC001.c ****     * when any of the periodic interrupts are enabled
+ 336:../Dave/Generated/src/RTC001/RTC001.c ****     */
+ 337:../Dave/Generated/src/RTC001/RTC001.c ****    if (uRegValue != 0U)
+ 271              		.loc 1 337 0
+ 272 01c4 BB68     		ldr	r3, [r7, #8]
+ 273 01c6 002B     		cmp	r3, #0
+ 274 01c8 0BD0     		beq	.L7
+ 338:../Dave/Generated/src/RTC001/RTC001.c ****    {
+ 339:../Dave/Generated/src/RTC001/RTC001.c ****      SCU_INTERRUPT->SRMSK |= (uint32_t)SCU_INTERRUPT_SRMSK_PI_Msk;       
+ 275              		.loc 1 339 0
+ 276 01ca 44F27403 		movw	r3, #16500
+ 277 01ce C5F20003 		movt	r3, 20480
+ 278 01d2 44F27402 		movw	r2, #16500
+ 279 01d6 C5F20002 		movt	r2, 20480
+ 280 01da 9268     		ldr	r2, [r2, #8]
+ 281 01dc 42F00202 		orr	r2, r2, #2
+ 282 01e0 9A60     		str	r2, [r3, #8]
+ 283              	.L7:
+ 340:../Dave/Generated/src/RTC001/RTC001.c ****    }
+ 341:../Dave/Generated/src/RTC001/RTC001.c ****    /* Register User defined Event Handler for Timer function
+ 342:../Dave/Generated/src/RTC001/RTC001.c ****     * when user defines the handler name in the UI
+ 343:../Dave/Generated/src/RTC001/RTC001.c ****     */
+ 344:../Dave/Generated/src/RTC001/RTC001.c ****    #ifdef RTC001_EVENTTRIGTOSCU
+ 345:../Dave/Generated/src/RTC001/RTC001.c ****    	if ((Handle->RTC001_PI_Listener != NULL) && (uRegValue != 0U))
+ 284              		.loc 1 345 0
+ 285 01e2 7B68     		ldr	r3, [r7, #4]
+ 286 01e4 5B69     		ldr	r3, [r3, #20]
+ 287 01e6 002B     		cmp	r3, #0
+ 288 01e8 0BD0     		beq	.L1
+ 289              		.loc 1 345 0 is_stmt 0 discriminator 1
+ 290 01ea BB68     		ldr	r3, [r7, #8]
+ 291 01ec 002B     		cmp	r3, #0
+ 292 01ee 08D0     		beq	.L1
+ 346:../Dave/Generated/src/RTC001/RTC001.c **** 	{
+ 347:../Dave/Generated/src/RTC001/RTC001.c ****      NVIC_SCU001_RegisterCallback(NVIC_SCU001_PI,Handle->RTC001_PI_Listener,0U);
+ 293              		.loc 1 347 0 is_stmt 1
+ 294 01f0 7B68     		ldr	r3, [r7, #4]
+ 295 01f2 5B69     		ldr	r3, [r3, #20]
+ 296 01f4 4FF00100 		mov	r0, #1
+ 297 01f8 1946     		mov	r1, r3
+ 298 01fa 4FF00002 		mov	r2, #0
+ 299 01fe FFF7FEFF 		bl	NVIC_SCU001_RegisterCallback
+ 300              	.L1:
+ 348:../Dave/Generated/src/RTC001/RTC001.c **** 	}
+ 349:../Dave/Generated/src/RTC001/RTC001.c ****    #endif
+ 350:../Dave/Generated/src/RTC001/RTC001.c ****   #endif
+ 351:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 352:../Dave/Generated/src/RTC001/RTC001.c ****   #if (UC_FAMILY == XMC1)
+ 353:../Dave/Generated/src/RTC001/RTC001.c ****    /* Register User defined Event Handler for Timer function
+ 354:../Dave/Generated/src/RTC001/RTC001.c ****     * when user defines the handler name in the UI
+ 355:../Dave/Generated/src/RTC001/RTC001.c ****     */
+ 356:../Dave/Generated/src/RTC001/RTC001.c ****    if ((Handle->RTC001_PI_Listener != NULL) && (uRegValue != 0U))  
+ 357:../Dave/Generated/src/RTC001/RTC001.c ****    { 
+ 358:../Dave/Generated/src/RTC001/RTC001.c ****      NVIC_SR101_RegisterCallback(NVIC_SR101_PI,Handle->RTC001_PI_Listener,0U);
+ 359:../Dave/Generated/src/RTC001/RTC001.c ****    }
+ 360:../Dave/Generated/src/RTC001/RTC001.c ****   #endif
+ 361:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 362:../Dave/Generated/src/RTC001/RTC001.c ****   #ifdef RTC001_ALARMINTERRUPT
+ 363:../Dave/Generated/src/RTC001/RTC001.c ****    /* Configure RTC alarm and register the call back function */
+ 364:../Dave/Generated/src/RTC001/RTC001.c ****    status = \
+ 365:../Dave/Generated/src/RTC001/RTC001.c ****    RTC001_ConfigAlarm(&RTC001_Handle,&Alarmptr1,Handle->RTC001_AI_Listener,0U);
+ 366:../Dave/Generated/src/RTC001/RTC001.c ****   #endif
+ 367:../Dave/Generated/src/RTC001/RTC001.c ****   if (status != (uint32_t)RTC001App_SUCCESS)
+ 368:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 369:../Dave/Generated/src/RTC001/RTC001.c ****     DBG002_ERROR(APP_GID, 0, 4,status);
+ 370:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 371:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_EXIT(APP_GID,RTC001_FUNCTION_EXIT);
+ 372:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 301              		.loc 1 372 0
+ 302 0202 07F11007 		add	r7, r7, #16
+ 303 0206 BD46     		mov	sp, r7
+ 304 0208 80BD     		pop	{r7, pc}
+ 305              		.cfi_endproc
+ 306              	.LFE120:
+ 308 020a 00BF     		.section	.text.RTC001_Init,"ax",%progbits
+ 309              		.align	2
+ 310              		.global	RTC001_Init
+ 311              		.thumb
+ 312              		.thumb_func
+ 314              	RTC001_Init:
+ 315              	.LFB121:
+ 373:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 374:../Dave/Generated/src/RTC001/RTC001.c **** /**
+ 375:../Dave/Generated/src/RTC001/RTC001.c ****  *@}
+ 376:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 377:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 378:../Dave/Generated/src/RTC001/RTC001.c **** /*******************************************************************************
+ 379:../Dave/Generated/src/RTC001/RTC001.c **** **                      Public Function Definitions                           **
+ 380:../Dave/Generated/src/RTC001/RTC001.c **** *******************************************************************************/
+ 381:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 382:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 383:../Dave/Generated/src/RTC001/RTC001.c **** /** @ingroup RTC001_publicparam
+ 384:../Dave/Generated/src/RTC001/RTC001.c ****  * @{
+ 385:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 386:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 387:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 388:../Dave/Generated/src/RTC001/RTC001.c ****  *  Initialization function for the app. Configures the registers
+ 389:../Dave/Generated/src/RTC001/RTC001.c ****  *  based on options selected in UI.
+ 390:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 391:../Dave/Generated/src/RTC001/RTC001.c **** void RTC001_Init(void)
+ 392:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 316              		.loc 1 392 0
+ 317              		.cfi_startproc
+ 318              		@ args = 0, pretend = 0, frame = 0
+ 319              		@ frame_needed = 1, uses_anonymous_args = 0
+ 320 0000 80B5     		push	{r7, lr}
+ 321              	.LCFI3:
+ 322              		.cfi_def_cfa_offset 8
+ 323              		.cfi_offset 7, -8
+ 324              		.cfi_offset 14, -4
+ 325 0002 00AF     		add	r7, sp, #0
+ 326              	.LCFI4:
+ 327              		.cfi_def_cfa_register 7
+ 393:../Dave/Generated/src/RTC001/RTC001.c **** 	RTC001_lInit(&RTC001_Handle);
+ 328              		.loc 1 393 0
+ 329 0004 40F20000 		movw	r0, #:lower16:RTC001_Handle
+ 330 0008 C0F20000 		movt	r0, #:upper16:RTC001_Handle
+ 331 000c FFF7FEFF 		bl	RTC001_lInit
+ 394:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 395:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 332              		.loc 1 395 0
+ 333 0010 80BD     		pop	{r7, pc}
+ 334              		.cfi_endproc
+ 335              	.LFE121:
+ 337 0012 00BF     		.section	.text.RTC001_DeInit,"ax",%progbits
+ 338              		.align	2
+ 339              		.global	RTC001_DeInit
+ 340              		.thumb
+ 341              		.thumb_func
+ 343              	RTC001_DeInit:
+ 344              	.LFB122:
+ 396:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 397:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 398:../Dave/Generated/src/RTC001/RTC001.c ****  *  Deinitialization function which initializes the App internal data
+ 399:../Dave/Generated/src/RTC001/RTC001.c ****  *  structures to default values. 
+ 400:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 401:../Dave/Generated/src/RTC001/RTC001.c **** void  RTC001_DeInit(void)
+ 402:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 345              		.loc 1 402 0
+ 346              		.cfi_startproc
+ 347              		@ args = 0, pretend = 0, frame = 0
+ 348              		@ frame_needed = 1, uses_anonymous_args = 0
+ 349              		@ link register save eliminated.
+ 350 0000 80B4     		push	{r7}
+ 351              	.LCFI5:
+ 352              		.cfi_def_cfa_offset 4
+ 353              		.cfi_offset 7, -4
+ 354 0002 00AF     		add	r7, sp, #0
+ 355              	.LCFI6:
+ 356              		.cfi_def_cfa_register 7
+ 403:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_ENTRY(APP_GID,RTC001_FUNCTION_ENTRY);
+ 404:../Dave/Generated/src/RTC001/RTC001.c ****    /* <<<DD_RTC001_API_2>>> */
+ 405:../Dave/Generated/src/RTC001/RTC001.c ****   /* Wait for Mirror register update */
+ 406:../Dave/Generated/src/RTC001/RTC001.c ****   while(SCU_GENERAL->MIRRSTS & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk)
+ 357              		.loc 1 406 0
+ 358 0004 00BF     		nop
+ 359              	.L12:
+ 360              		.loc 1 406 0 is_stmt 0 discriminator 1
+ 361 0006 4FF48043 		mov	r3, #16384
+ 362 000a C5F20003 		movt	r3, 20480
+ 363 000e D3F8C430 		ldr	r3, [r3, #196]
+ 364 0012 03F48073 		and	r3, r3, #256
+ 365 0016 002B     		cmp	r3, #0
+ 366 0018 F5D1     		bne	.L12
+ 407:../Dave/Generated/src/RTC001/RTC001.c ****   {}
+ 408:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear the RTC Control registers */
+ 409:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->CTR &= (0xFFFF0000U);
+ 367              		.loc 1 409 0 is_stmt 1
+ 368 001a 4FF49443 		mov	r3, #18944
+ 369 001e C5F20003 		movt	r3, 20480
+ 370 0022 4FF49442 		mov	r2, #18944
+ 371 0026 C5F20002 		movt	r2, 20480
+ 372 002a 5268     		ldr	r2, [r2, #4]
+ 373 002c 4FEA1242 		lsr	r2, r2, #16
+ 374 0030 4FEA0242 		lsl	r2, r2, #16
+ 375 0034 5A60     		str	r2, [r3, #4]
+ 410:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 411:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear the Service Request Mask Register */  
+ 412:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->MSKSR = 0x00000000U;
+ 376              		.loc 1 412 0
+ 377 0036 4FF49443 		mov	r3, #18944
+ 378 003a C5F20003 		movt	r3, 20480
+ 379 003e 4FF00002 		mov	r2, #0
+ 380 0042 1A61     		str	r2, [r3, #16]
+ 413:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 414:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear the Clear Service Request Register */ 
+ 415:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->CLRSR |= 0x0000016FU;
+ 381              		.loc 1 415 0
+ 382 0044 4FF49443 		mov	r3, #18944
+ 383 0048 C5F20003 		movt	r3, 20480
+ 384 004c 4FF49442 		mov	r2, #18944
+ 385 0050 C5F20002 		movt	r2, 20480
+ 386 0054 5269     		ldr	r2, [r2, #20]
+ 387 0056 42F4B772 		orr	r2, r2, #366
+ 388 005a 42F00102 		orr	r2, r2, #1
+ 389 005e 5A61     		str	r2, [r3, #20]
+ 416:../Dave/Generated/src/RTC001/RTC001.c ****       	
+ 417:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear the RTC Time registers */ 
+ 418:../Dave/Generated/src/RTC001/RTC001.c ****   while((SCU_GENERAL->MIRRSTS & (SCU_GENERAL_MIRRSTS_RTC_TIM0_Msk | \
+ 390              		.loc 1 418 0
+ 391 0060 00BF     		nop
+ 392              	.L13:
+ 393              		.loc 1 418 0 is_stmt 0 discriminator 1
+ 394 0062 4FF48043 		mov	r3, #16384
+ 395 0066 C5F20003 		movt	r3, 20480
+ 396 006a D3F8C430 		ldr	r3, [r3, #196]
+ 397 006e 03F4C053 		and	r3, r3, #6144
+ 398 0072 002B     		cmp	r3, #0
+ 399 0074 F5D1     		bne	.L13
+ 419:../Dave/Generated/src/RTC001/RTC001.c ****          SCU_GENERAL_MIRRSTS_RTC_TIM1_Msk))!= 0x0U)
+ 420:../Dave/Generated/src/RTC001/RTC001.c ****   {}
+ 421:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->TIM0 = 0x00000000U;
+ 400              		.loc 1 421 0 is_stmt 1
+ 401 0076 4FF49443 		mov	r3, #18944
+ 402 007a C5F20003 		movt	r3, 20480
+ 403 007e 4FF00002 		mov	r2, #0
+ 404 0082 1A62     		str	r2, [r3, #32]
+ 422:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->TIM1 = 0x00000000U;
+ 405              		.loc 1 422 0
+ 406 0084 4FF49443 		mov	r3, #18944
+ 407 0088 C5F20003 		movt	r3, 20480
+ 408 008c 4FF00002 		mov	r2, #0
+ 409 0090 5A62     		str	r2, [r3, #36]
+ 423:../Dave/Generated/src/RTC001/RTC001.c ****  
+ 424:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear the Alarm registers */  
+ 425:../Dave/Generated/src/RTC001/RTC001.c ****   while((SCU_GENERAL->MIRRSTS & (SCU_GENERAL_MIRRSTS_RTC_ATIM0_Msk | \
+ 410              		.loc 1 425 0
+ 411 0092 00BF     		nop
+ 412              	.L14:
+ 413              		.loc 1 425 0 is_stmt 0 discriminator 1
+ 414 0094 4FF48043 		mov	r3, #16384
+ 415 0098 C5F20003 		movt	r3, 20480
+ 416 009c D3F8C430 		ldr	r3, [r3, #196]
+ 417 00a0 03F4C063 		and	r3, r3, #1536
+ 418 00a4 002B     		cmp	r3, #0
+ 419 00a6 F5D1     		bne	.L14
+ 426:../Dave/Generated/src/RTC001/RTC001.c ****          SCU_GENERAL_MIRRSTS_RTC_ATIM1_Msk))!= 0x0U)
+ 427:../Dave/Generated/src/RTC001/RTC001.c ****   {}
+ 428:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->ATIM0 = 0x00000000U;
+ 420              		.loc 1 428 0 is_stmt 1
+ 421 00a8 4FF49443 		mov	r3, #18944
+ 422 00ac C5F20003 		movt	r3, 20480
+ 423 00b0 4FF00002 		mov	r2, #0
+ 424 00b4 9A61     		str	r2, [r3, #24]
+ 429:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->ATIM1 = 0x00000000U;
+ 425              		.loc 1 429 0
+ 426 00b6 4FF49443 		mov	r3, #18944
+ 427 00ba C5F20003 		movt	r3, 20480
+ 428 00be 4FF00002 		mov	r2, #0
+ 429 00c2 DA61     		str	r2, [r3, #28]
+ 430:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 431:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear Mirror register update status of RTC registers in SCU*/
+ 432:../Dave/Generated/src/RTC001/RTC001.c ****   SCU_INTERRUPT->SRCLR |= (uint32_t)\
+ 430              		.loc 1 432 0
+ 431 00c4 44F27403 		movw	r3, #16500
+ 432 00c8 C5F20003 		movt	r3, 20480
+ 433 00cc 44F27402 		movw	r2, #16500
+ 434 00d0 C5F20002 		movt	r2, 20480
+ 435 00d4 D268     		ldr	r2, [r2, #12]
+ 436 00d6 42F0F852 		orr	r2, r2, #520093696
+ 437 00da DA60     		str	r2, [r3, #12]
+ 433:../Dave/Generated/src/RTC001/RTC001.c ****     (SCU_INTERRUPT_SRCLR_RTC_CTR_Msk | SCU_INTERRUPT_SRCLR_RTC_ATIM0_Msk | \
+ 434:../Dave/Generated/src/RTC001/RTC001.c ****   	 SCU_INTERRUPT_SRCLR_RTC_ATIM1_Msk | SCU_INTERRUPT_SRCLR_RTC_TIM0_Msk | \
+ 435:../Dave/Generated/src/RTC001/RTC001.c ****   	 SCU_INTERRUPT_SRCLR_RTC_TIM1_Msk);    
+ 436:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_EXIT(APP_GID,RTC001_FUNCTION_EXIT);
+ 437:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 438              		.loc 1 437 0
+ 439 00dc BD46     		mov	sp, r7
+ 440 00de 80BC     		pop	{r7}
+ 441 00e0 7047     		bx	lr
+ 442              		.cfi_endproc
+ 443              	.LFE122:
+ 445 00e2 00BF     		.section	.text.RTC001_Enable,"ax",%progbits
+ 446              		.align	2
+ 447              		.global	RTC001_Enable
+ 448              		.thumb
+ 449              		.thumb_func
+ 451              	RTC001_Enable:
+ 452              	.LFB123:
+ 438:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 439:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 440:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 441:../Dave/Generated/src/RTC001/RTC001.c ****  * This function enables the RTC module. It may be called 
+ 442:../Dave/Generated/src/RTC001/RTC001.c ****  * if the RTC module is disabled previously.
+ 443:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 444:../Dave/Generated/src/RTC001/RTC001.c ****  * Note : This function is not required after Initialization if the RTC Enable 
+ 445:../Dave/Generated/src/RTC001/RTC001.c ****  *        UI option is checked. 
+ 446:../Dave/Generated/src/RTC001/RTC001.c ****  *
+ 447:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 448:../Dave/Generated/src/RTC001/RTC001.c **** uint32_t  RTC001_Enable(void)
+ 449:../Dave/Generated/src/RTC001/RTC001.c **** {  
+ 453              		.loc 1 449 0
+ 454              		.cfi_startproc
+ 455              		@ args = 0, pretend = 0, frame = 0
+ 456              		@ frame_needed = 1, uses_anonymous_args = 0
+ 457              		@ link register save eliminated.
+ 458 0000 80B4     		push	{r7}
+ 459              	.LCFI7:
+ 460              		.cfi_def_cfa_offset 4
+ 461              		.cfi_offset 7, -4
+ 462 0002 00AF     		add	r7, sp, #0
+ 463              	.LCFI8:
+ 464              		.cfi_def_cfa_register 7
+ 450:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_ENTRY(APP_GID,RTC001_FUNCTION_ENTRY);
+ 451:../Dave/Generated/src/RTC001/RTC001.c ****    /* <<<DD_RTC001_API_3>>> */
+ 452:../Dave/Generated/src/RTC001/RTC001.c ****  
+ 453:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear Mirror register update status of RTC registers in SCU*/
+ 454:../Dave/Generated/src/RTC001/RTC001.c ****   SCU_INTERRUPT->SRCLR |= (uint32_t)\
+ 465              		.loc 1 454 0
+ 466 0004 44F27403 		movw	r3, #16500
+ 467 0008 C5F20003 		movt	r3, 20480
+ 468 000c 44F27402 		movw	r2, #16500
+ 469 0010 C5F20002 		movt	r2, 20480
+ 470 0014 D268     		ldr	r2, [r2, #12]
+ 471 0016 42F0F852 		orr	r2, r2, #520093696
+ 472 001a DA60     		str	r2, [r3, #12]
+ 455:../Dave/Generated/src/RTC001/RTC001.c ****     (SCU_INTERRUPT_SRCLR_RTC_CTR_Msk | SCU_INTERRUPT_SRCLR_RTC_ATIM0_Msk | \
+ 456:../Dave/Generated/src/RTC001/RTC001.c ****   	 SCU_INTERRUPT_SRCLR_RTC_ATIM1_Msk | SCU_INTERRUPT_SRCLR_RTC_TIM0_Msk | \
+ 457:../Dave/Generated/src/RTC001/RTC001.c ****   	 SCU_INTERRUPT_SRCLR_RTC_TIM1_Msk);
+ 458:../Dave/Generated/src/RTC001/RTC001.c ****   /* Wait for Mirror register update */
+ 459:../Dave/Generated/src/RTC001/RTC001.c ****   while(SCU_GENERAL->MIRRSTS & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk)
+ 473              		.loc 1 459 0
+ 474 001c 00BF     		nop
+ 475              	.L16:
+ 476              		.loc 1 459 0 is_stmt 0 discriminator 1
+ 477 001e 4FF48043 		mov	r3, #16384
+ 478 0022 C5F20003 		movt	r3, 20480
+ 479 0026 D3F8C430 		ldr	r3, [r3, #196]
+ 480 002a 03F48073 		and	r3, r3, #256
+ 481 002e 002B     		cmp	r3, #0
+ 482 0030 F5D1     		bne	.L16
+ 460:../Dave/Generated/src/RTC001/RTC001.c ****   {}
+ 461:../Dave/Generated/src/RTC001/RTC001.c ****   /* Enable the RTC module */
+ 462:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->CTR  |= ((uint32_t)(RTC_CTR_ENB_Msk));
+ 483              		.loc 1 462 0 is_stmt 1
+ 484 0032 4FF49443 		mov	r3, #18944
+ 485 0036 C5F20003 		movt	r3, 20480
+ 486 003a 4FF49442 		mov	r2, #18944
+ 487 003e C5F20002 		movt	r2, 20480
+ 488 0042 5268     		ldr	r2, [r2, #4]
+ 489 0044 42F00102 		orr	r2, r2, #1
+ 490 0048 5A60     		str	r2, [r3, #4]
+ 463:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 464:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_EXIT(APP_GID,RTC001_FUNCTION_EXIT);
+ 465:../Dave/Generated/src/RTC001/RTC001.c ****   return ((uint32_t)RTC001App_SUCCESS);
+ 491              		.loc 1 465 0
+ 492 004a 4FF00003 		mov	r3, #0
+ 466:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 493              		.loc 1 466 0
+ 494 004e 1846     		mov	r0, r3
+ 495 0050 BD46     		mov	sp, r7
+ 496 0052 80BC     		pop	{r7}
+ 497 0054 7047     		bx	lr
+ 498              		.cfi_endproc
+ 499              	.LFE123:
+ 501 0056 00BF     		.section	.text.RTC001_Disable,"ax",%progbits
+ 502              		.align	2
+ 503              		.global	RTC001_Disable
+ 504              		.thumb
+ 505              		.thumb_func
+ 507              	RTC001_Disable:
+ 508              	.LFB124:
+ 467:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 468:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 469:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 470:../Dave/Generated/src/RTC001/RTC001.c ****  *  The function disables the RTC module.
+ 471:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 472:../Dave/Generated/src/RTC001/RTC001.c ****  
+ 473:../Dave/Generated/src/RTC001/RTC001.c **** uint32_t  RTC001_Disable(void)
+ 474:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 509              		.loc 1 474 0
+ 510              		.cfi_startproc
+ 511              		@ args = 0, pretend = 0, frame = 0
+ 512              		@ frame_needed = 1, uses_anonymous_args = 0
+ 513              		@ link register save eliminated.
+ 514 0000 80B4     		push	{r7}
+ 515              	.LCFI9:
+ 516              		.cfi_def_cfa_offset 4
+ 517              		.cfi_offset 7, -4
+ 518 0002 00AF     		add	r7, sp, #0
+ 519              	.LCFI10:
+ 520              		.cfi_def_cfa_register 7
+ 475:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_ENTRY(APP_GID,RTC001_FUNCTION_ENTRY);
+ 476:../Dave/Generated/src/RTC001/RTC001.c ****    /* <<<DD_RTC001_API_4>>> */
+ 477:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 478:../Dave/Generated/src/RTC001/RTC001.c ****   /* Wait for Mirror register update */
+ 479:../Dave/Generated/src/RTC001/RTC001.c ****   while(SCU_GENERAL->MIRRSTS & SCU_GENERAL_MIRRSTS_RTC_CTR_Msk)
+ 521              		.loc 1 479 0
+ 522 0004 00BF     		nop
+ 523              	.L19:
+ 524              		.loc 1 479 0 is_stmt 0 discriminator 1
+ 525 0006 4FF48043 		mov	r3, #16384
+ 526 000a C5F20003 		movt	r3, 20480
+ 527 000e D3F8C430 		ldr	r3, [r3, #196]
+ 528 0012 03F48073 		and	r3, r3, #256
+ 529 0016 002B     		cmp	r3, #0
+ 530 0018 F5D1     		bne	.L19
+ 480:../Dave/Generated/src/RTC001/RTC001.c ****   {}
+ 481:../Dave/Generated/src/RTC001/RTC001.c ****   /* Disable the RTC module */
+ 482:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->CTR &= (uint32_t)(~(RTC_CTR_ENB_Msk));
+ 531              		.loc 1 482 0 is_stmt 1
+ 532 001a 4FF49443 		mov	r3, #18944
+ 533 001e C5F20003 		movt	r3, 20480
+ 534 0022 4FF49442 		mov	r2, #18944
+ 535 0026 C5F20002 		movt	r2, 20480
+ 536 002a 5268     		ldr	r2, [r2, #4]
+ 537 002c 22F00102 		bic	r2, r2, #1
+ 538 0030 5A60     		str	r2, [r3, #4]
+ 483:../Dave/Generated/src/RTC001/RTC001.c ****       	
+ 484:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear the RTC Time registers */ 
+ 485:../Dave/Generated/src/RTC001/RTC001.c ****   while((SCU_GENERAL->MIRRSTS & (SCU_GENERAL_MIRRSTS_RTC_TIM0_Msk | \
+ 539              		.loc 1 485 0
+ 540 0032 00BF     		nop
+ 541              	.L20:
+ 542              		.loc 1 485 0 is_stmt 0 discriminator 1
+ 543 0034 4FF48043 		mov	r3, #16384
+ 544 0038 C5F20003 		movt	r3, 20480
+ 545 003c D3F8C430 		ldr	r3, [r3, #196]
+ 546 0040 03F4C053 		and	r3, r3, #6144
+ 547 0044 002B     		cmp	r3, #0
+ 548 0046 F5D1     		bne	.L20
+ 486:../Dave/Generated/src/RTC001/RTC001.c ****          SCU_GENERAL_MIRRSTS_RTC_TIM1_Msk))!= 0x0U)
+ 487:../Dave/Generated/src/RTC001/RTC001.c ****   {}
+ 488:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->TIM0 = 0x00000000U;
+ 549              		.loc 1 488 0 is_stmt 1
+ 550 0048 4FF49443 		mov	r3, #18944
+ 551 004c C5F20003 		movt	r3, 20480
+ 552 0050 4FF00002 		mov	r2, #0
+ 553 0054 1A62     		str	r2, [r3, #32]
+ 489:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->TIM1 = 0x00000000U;
+ 554              		.loc 1 489 0
+ 555 0056 4FF49443 		mov	r3, #18944
+ 556 005a C5F20003 		movt	r3, 20480
+ 557 005e 4FF00002 		mov	r2, #0
+ 558 0062 5A62     		str	r2, [r3, #36]
+ 490:../Dave/Generated/src/RTC001/RTC001.c ****  
+ 491:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear the Alarm registers */  
+ 492:../Dave/Generated/src/RTC001/RTC001.c ****   while((SCU_GENERAL->MIRRSTS & (SCU_GENERAL_MIRRSTS_RTC_ATIM0_Msk | \
+ 559              		.loc 1 492 0
+ 560 0064 00BF     		nop
+ 561              	.L21:
+ 562              		.loc 1 492 0 is_stmt 0 discriminator 1
+ 563 0066 4FF48043 		mov	r3, #16384
+ 564 006a C5F20003 		movt	r3, 20480
+ 565 006e D3F8C430 		ldr	r3, [r3, #196]
+ 566 0072 03F4C063 		and	r3, r3, #1536
+ 567 0076 002B     		cmp	r3, #0
+ 568 0078 F5D1     		bne	.L21
+ 493:../Dave/Generated/src/RTC001/RTC001.c ****          SCU_GENERAL_MIRRSTS_RTC_ATIM1_Msk))!= 0x0U)
+ 494:../Dave/Generated/src/RTC001/RTC001.c ****   {}
+ 495:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->ATIM0 = 0x00000000U;
+ 569              		.loc 1 495 0 is_stmt 1
+ 570 007a 4FF49443 		mov	r3, #18944
+ 571 007e C5F20003 		movt	r3, 20480
+ 572 0082 4FF00002 		mov	r2, #0
+ 573 0086 9A61     		str	r2, [r3, #24]
+ 496:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->ATIM1 = 0x00000000U;
+ 574              		.loc 1 496 0
+ 575 0088 4FF49443 		mov	r3, #18944
+ 576 008c C5F20003 		movt	r3, 20480
+ 577 0090 4FF00002 		mov	r2, #0
+ 578 0094 DA61     		str	r2, [r3, #28]
+ 497:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 498:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear Mirror register update status of RTC registers in SCU*/
+ 499:../Dave/Generated/src/RTC001/RTC001.c ****   SCU_INTERRUPT->SRCLR |= (uint32_t)\
+ 579              		.loc 1 499 0
+ 580 0096 44F27403 		movw	r3, #16500
+ 581 009a C5F20003 		movt	r3, 20480
+ 582 009e 44F27402 		movw	r2, #16500
+ 583 00a2 C5F20002 		movt	r2, 20480
+ 584 00a6 D268     		ldr	r2, [r2, #12]
+ 585 00a8 42F0F852 		orr	r2, r2, #520093696
+ 586 00ac DA60     		str	r2, [r3, #12]
+ 500:../Dave/Generated/src/RTC001/RTC001.c ****     (SCU_INTERRUPT_SRCLR_RTC_CTR_Msk | SCU_INTERRUPT_SRCLR_RTC_ATIM0_Msk | \
+ 501:../Dave/Generated/src/RTC001/RTC001.c ****   	 SCU_INTERRUPT_SRCLR_RTC_ATIM1_Msk | SCU_INTERRUPT_SRCLR_RTC_TIM0_Msk | \
+ 502:../Dave/Generated/src/RTC001/RTC001.c ****   	 SCU_INTERRUPT_SRCLR_RTC_TIM1_Msk);    
+ 503:../Dave/Generated/src/RTC001/RTC001.c ****   							
+ 504:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_EXIT(APP_GID,RTC001_FUNCTION_EXIT);
+ 505:../Dave/Generated/src/RTC001/RTC001.c ****   return ((uint32_t)RTC001App_SUCCESS);
+ 587              		.loc 1 505 0
+ 588 00ae 4FF00003 		mov	r3, #0
+ 506:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 589              		.loc 1 506 0
+ 590 00b2 1846     		mov	r0, r3
+ 591 00b4 BD46     		mov	sp, r7
+ 592 00b6 80BC     		pop	{r7}
+ 593 00b8 7047     		bx	lr
+ 594              		.cfi_endproc
+ 595              	.LFE124:
+ 597 00ba 00BF     		.section	.text.RTC001_GetFlagStatus,"ax",%progbits
+ 598              		.align	2
+ 599              		.global	RTC001_GetFlagStatus
+ 600              		.thumb
+ 601              		.thumb_func
+ 603              	RTC001_GetFlagStatus:
+ 604              	.LFB125:
+ 507:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 508:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 509:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 510:../Dave/Generated/src/RTC001/RTC001.c ****  *  The function gets RTC status flag for Alarm and Periodic Timer Events.
+ 511:../Dave/Generated/src/RTC001/RTC001.c ****  */	
+ 512:../Dave/Generated/src/RTC001/RTC001.c **** uint32_t  RTC001_GetFlagStatus(RTC001_FlagType Flag)
+ 513:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 605              		.loc 1 513 0
+ 606              		.cfi_startproc
+ 607              		@ args = 0, pretend = 0, frame = 16
+ 608              		@ frame_needed = 1, uses_anonymous_args = 0
+ 609              		@ link register save eliminated.
+ 610 0000 80B4     		push	{r7}
+ 611              	.LCFI11:
+ 612              		.cfi_def_cfa_offset 4
+ 613              		.cfi_offset 7, -4
+ 614 0002 85B0     		sub	sp, sp, #20
+ 615              	.LCFI12:
+ 616              		.cfi_def_cfa_offset 24
+ 617 0004 00AF     		add	r7, sp, #0
+ 618              	.LCFI13:
+ 619              		.cfi_def_cfa_register 7
+ 620 0006 0346     		mov	r3, r0
+ 621 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 514:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t status = (uint32_t) RTC001_RESET;
+ 622              		.loc 1 514 0
+ 623 000a 4FF00403 		mov	r3, #4
+ 624 000e FB60     		str	r3, [r7, #12]
+ 515:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t StatusValue = 0U;
+ 625              		.loc 1 515 0
+ 626 0010 4FF00003 		mov	r3, #0
+ 627 0014 BB60     		str	r3, [r7, #8]
+ 516:../Dave/Generated/src/RTC001/RTC001.c ****   /* <<<DD_RTC001_API_6>>> */
+ 517:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_ENTRY(APP_GID,RTC001_FUNCTION_ENTRY);
+ 518:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 519:../Dave/Generated/src/RTC001/RTC001.c ****   /*Read the Status Service Request Register*/
+ 520:../Dave/Generated/src/RTC001/RTC001.c ****   StatusValue = RTC->STSSR;
+ 628              		.loc 1 520 0
+ 629 0016 4FF49443 		mov	r3, #18944
+ 630 001a C5F20003 		movt	r3, 20480
+ 631 001e DB68     		ldr	r3, [r3, #12]
+ 632 0020 BB60     		str	r3, [r7, #8]
+ 521:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 522:../Dave/Generated/src/RTC001/RTC001.c ****   /*Check the given flag*/
+ 523:../Dave/Generated/src/RTC001/RTC001.c **** 	if((StatusValue & (uint32_t) Flag) != 0U)
+ 633              		.loc 1 523 0
+ 634 0022 FA88     		ldrh	r2, [r7, #6]
+ 635 0024 BB68     		ldr	r3, [r7, #8]
+ 636 0026 1340     		ands	r3, r3, r2
+ 637 0028 002B     		cmp	r3, #0
+ 638 002a 02D0     		beq	.L24
+ 524:../Dave/Generated/src/RTC001/RTC001.c **** 	{
+ 525:../Dave/Generated/src/RTC001/RTC001.c **** 	  status = (uint32_t) RTC001_SET;
+ 639              		.loc 1 525 0
+ 640 002c 4FF00303 		mov	r3, #3
+ 641 0030 FB60     		str	r3, [r7, #12]
+ 642              	.L24:
+ 526:../Dave/Generated/src/RTC001/RTC001.c **** 	}
+ 527:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 528:../Dave/Generated/src/RTC001/RTC001.c **** 	DBG002_FUNCTION_EXIT(APP_GID,RTC001_FUNCTION_EXIT);
+ 529:../Dave/Generated/src/RTC001/RTC001.c **** 	return status;
+ 643              		.loc 1 529 0
+ 644 0032 FB68     		ldr	r3, [r7, #12]
+ 530:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 645              		.loc 1 530 0
+ 646 0034 1846     		mov	r0, r3
+ 647 0036 07F11407 		add	r7, r7, #20
+ 648 003a BD46     		mov	sp, r7
+ 649 003c 80BC     		pop	{r7}
+ 650 003e 7047     		bx	lr
+ 651              		.cfi_endproc
+ 652              	.LFE125:
+ 654              		.section	.text.RTC001_ClearFlagStatus,"ax",%progbits
+ 655              		.align	2
+ 656              		.global	RTC001_ClearFlagStatus
+ 657              		.thumb
+ 658              		.thumb_func
+ 660              	RTC001_ClearFlagStatus:
+ 661              	.LFB126:
+ 531:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 532:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 533:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 534:../Dave/Generated/src/RTC001/RTC001.c ****  *  The function clears RTC status flag for Alarm and Periodic Timer Events.
+ 535:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 536:../Dave/Generated/src/RTC001/RTC001.c **** void  RTC001_ClearFlagStatus(RTC001_FlagType Flag)
+ 537:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 662              		.loc 1 537 0
+ 663              		.cfi_startproc
+ 664              		@ args = 0, pretend = 0, frame = 8
+ 665              		@ frame_needed = 1, uses_anonymous_args = 0
+ 666              		@ link register save eliminated.
+ 667 0000 80B4     		push	{r7}
+ 668              	.LCFI14:
+ 669              		.cfi_def_cfa_offset 4
+ 670              		.cfi_offset 7, -4
+ 671 0002 83B0     		sub	sp, sp, #12
+ 672              	.LCFI15:
+ 673              		.cfi_def_cfa_offset 16
+ 674 0004 00AF     		add	r7, sp, #0
+ 675              	.LCFI16:
+ 676              		.cfi_def_cfa_register 7
+ 677 0006 0346     		mov	r3, r0
+ 678 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 538:../Dave/Generated/src/RTC001/RTC001.c ****   /* <<<DD_RTC001_API_5>>> */
+ 539:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_ENTRY(APP_GID,RTC001_FUNCTION_ENTRY);
+ 540:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 541:../Dave/Generated/src/RTC001/RTC001.c ****   /*Write to the Clear Service Request Register*/
+ 542:../Dave/Generated/src/RTC001/RTC001.c ****   RTC->CLRSR |= (uint32_t)Flag;
+ 679              		.loc 1 542 0
+ 680 000a 4FF49443 		mov	r3, #18944
+ 681 000e C5F20003 		movt	r3, 20480
+ 682 0012 4FF49442 		mov	r2, #18944
+ 683 0016 C5F20002 		movt	r2, 20480
+ 684 001a 5169     		ldr	r1, [r2, #20]
+ 685 001c FA88     		ldrh	r2, [r7, #6]
+ 686 001e 0A43     		orrs	r2, r2, r1
+ 687 0020 5A61     		str	r2, [r3, #20]
+ 543:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 544:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_EXIT(APP_GID,RTC001_FUNCTION_EXIT);
+ 545:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 688              		.loc 1 545 0
+ 689 0022 07F10C07 		add	r7, r7, #12
+ 690 0026 BD46     		mov	sp, r7
+ 691 0028 80BC     		pop	{r7}
+ 692 002a 7047     		bx	lr
+ 693              		.cfi_endproc
+ 694              	.LFE126:
+ 696              		.section	.text.RTC001_ConfigAlarm,"ax",%progbits
+ 697              		.align	2
+ 698              		.global	RTC001_ConfigAlarm
+ 699              		.thumb
+ 700              		.thumb_func
+ 702              	RTC001_ConfigAlarm:
+ 703              	.LFB127:
+ 546:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 547:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 548:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 549:../Dave/Generated/src/RTC001/RTC001.c ****  *  Interface to configure the RTC alarm.
+ 550:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 551:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 552:../Dave/Generated/src/RTC001/RTC001.c **** uint32_t RTC001_ConfigAlarm (const RTC001_HandleType* Handle,
+ 553:../Dave/Generated/src/RTC001/RTC001.c ****     RTC001_TimeHandle* timeptr, AlarmCallBackPtr CallBack,uint32_t CbArg)
+ 554:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 704              		.loc 1 554 0
+ 705              		.cfi_startproc
+ 706              		@ args = 0, pretend = 0, frame = 32
+ 707              		@ frame_needed = 1, uses_anonymous_args = 0
+ 708 0000 80B5     		push	{r7, lr}
+ 709              	.LCFI17:
+ 710              		.cfi_def_cfa_offset 8
+ 711              		.cfi_offset 7, -8
+ 712              		.cfi_offset 14, -4
+ 713 0002 88B0     		sub	sp, sp, #32
+ 714              	.LCFI18:
+ 715              		.cfi_def_cfa_offset 40
+ 716 0004 00AF     		add	r7, sp, #0
+ 717              	.LCFI19:
+ 718              		.cfi_def_cfa_register 7
+ 719 0006 F860     		str	r0, [r7, #12]
+ 720 0008 B960     		str	r1, [r7, #8]
+ 721 000a 7A60     		str	r2, [r7, #4]
+ 722 000c 3B60     		str	r3, [r7, #0]
+ 555:../Dave/Generated/src/RTC001/RTC001.c ****   uint16_t month1 = 0U,year1 = 0U,day1 = 0U;
+ 723              		.loc 1 555 0
+ 724 000e 4FF00003 		mov	r3, #0
+ 725 0012 7B83     		strh	r3, [r7, #26]	@ movhi
+ 726 0014 4FF00003 		mov	r3, #0
+ 727 0018 3B83     		strh	r3, [r7, #24]	@ movhi
+ 728 001a 4FF00003 		mov	r3, #0
+ 729 001e FB82     		strh	r3, [r7, #22]	@ movhi
+ 556:../Dave/Generated/src/RTC001/RTC001.c ****   uint8_t  sec1 = 0U, min1 = 0U, hour1 = 0U;
+ 730              		.loc 1 556 0
+ 731 0020 4FF00003 		mov	r3, #0
+ 732 0024 7B75     		strb	r3, [r7, #21]
+ 733 0026 4FF00003 		mov	r3, #0
+ 734 002a 3B75     		strb	r3, [r7, #20]
+ 735 002c 4FF00003 		mov	r3, #0
+ 736 0030 FB74     		strb	r3, [r7, #19]
+ 557:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t status = (uint32_t)RTC001_ERROR;
+ 737              		.loc 1 557 0
+ 738 0032 4FF00203 		mov	r3, #2
+ 739 0036 FB61     		str	r3, [r7, #28]
+ 558:../Dave/Generated/src/RTC001/RTC001.c ****   /* <<<DD_RTC001_API_7>>> */
+ 559:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_ENTRY(APP_GID,RTC001_FUNCTION_ENTRY);
+ 560:../Dave/Generated/src/RTC001/RTC001.c ****   do
+ 561:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 562:../Dave/Generated/src/RTC001/RTC001.c ****     /* Clear Mirror register update status of RTC registers in SCU*/
+ 563:../Dave/Generated/src/RTC001/RTC001.c ****     SCU_INTERRUPT->SRCLR = (uint32_t)\
+ 740              		.loc 1 563 0
+ 741 0038 44F27403 		movw	r3, #16500
+ 742 003c C5F20003 		movt	r3, 20480
+ 743 0040 4FF0F852 		mov	r2, #520093696
+ 744 0044 DA60     		str	r2, [r3, #12]
+ 564:../Dave/Generated/src/RTC001/RTC001.c ****       (SCU_INTERRUPT_SRCLR_RTC_CTR_Msk | SCU_INTERRUPT_SRCLR_RTC_ATIM0_Msk | \
+ 565:../Dave/Generated/src/RTC001/RTC001.c ****   	   SCU_INTERRUPT_SRCLR_RTC_ATIM1_Msk | SCU_INTERRUPT_SRCLR_RTC_TIM0_Msk | \
+ 566:../Dave/Generated/src/RTC001/RTC001.c ****   	   SCU_INTERRUPT_SRCLR_RTC_TIM1_Msk);  	
+ 567:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 568:../Dave/Generated/src/RTC001/RTC001.c ****     #ifdef RTC001_EVENTTRIGTOSCU
+ 569:../Dave/Generated/src/RTC001/RTC001.c **** 	/* Register the call back function with NVIC_SCU001 Or NVIC_SR101 */		
+ 570:../Dave/Generated/src/RTC001/RTC001.c ****     if (Handle->RTCAlarmInterrupt != RTC001_ALARMINT_DISABLE )
+ 745              		.loc 1 570 0
+ 746 0046 FB68     		ldr	r3, [r7, #12]
+ 747 0048 DB7A     		ldrb	r3, [r3, #11]	@ zero_extendqisi2
+ 748 004a 002B     		cmp	r3, #0
+ 749 004c 08D0     		beq	.L28
+ 571:../Dave/Generated/src/RTC001/RTC001.c **** 	{
+ 572:../Dave/Generated/src/RTC001/RTC001.c **** 		if(CallBack != NULL)
+ 750              		.loc 1 572 0
+ 751 004e 7B68     		ldr	r3, [r7, #4]
+ 752 0050 002B     		cmp	r3, #0
+ 753 0052 05D0     		beq	.L28
+ 573:../Dave/Generated/src/RTC001/RTC001.c **** 		{
+ 574:../Dave/Generated/src/RTC001/RTC001.c ****             #if (UC_FAMILY == XMC4)
+ 575:../Dave/Generated/src/RTC001/RTC001.c **** 			  /* Register User defined Event Handler for Timer function */
+ 576:../Dave/Generated/src/RTC001/RTC001.c **** 			  NVIC_SCU001_RegisterCallback(NVIC_SCU001_AI,CallBack,CbArg);
+ 754              		.loc 1 576 0
+ 755 0054 4FF00200 		mov	r0, #2
+ 756 0058 7968     		ldr	r1, [r7, #4]
+ 757 005a 3A68     		ldr	r2, [r7, #0]
+ 758 005c FFF7FEFF 		bl	NVIC_SCU001_RegisterCallback
+ 759              	.L28:
+ 577:../Dave/Generated/src/RTC001/RTC001.c ****             #endif
+ 578:../Dave/Generated/src/RTC001/RTC001.c ****             #if (UC_FAMILY == XMC1)
+ 579:../Dave/Generated/src/RTC001/RTC001.c **** 			  /* Register User defined Event Handler for Timer function */
+ 580:../Dave/Generated/src/RTC001/RTC001.c **** 			  NVIC_SR101_RegisterCallback(NVIC_SR101_AI,CallBack,CbArg);
+ 581:../Dave/Generated/src/RTC001/RTC001.c ****             #endif
+ 582:../Dave/Generated/src/RTC001/RTC001.c **** 		} 
+ 583:../Dave/Generated/src/RTC001/RTC001.c **** 	}
+ 584:../Dave/Generated/src/RTC001/RTC001.c **** 	#endif
+ 585:../Dave/Generated/src/RTC001/RTC001.c **** 	
+ 586:../Dave/Generated/src/RTC001/RTC001.c ****     /*   Write values into ATIM0 and ATIM1 registers  */
+ 587:../Dave/Generated/src/RTC001/RTC001.c ****     month1 = timeptr->Month;
+ 760              		.loc 1 587 0
+ 761 0060 BB68     		ldr	r3, [r7, #8]
+ 762 0062 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 763 0064 7B83     		strh	r3, [r7, #26]	@ movhi
+ 588:../Dave/Generated/src/RTC001/RTC001.c ****     year1 = timeptr->Year;
+ 764              		.loc 1 588 0
+ 765 0066 BB68     		ldr	r3, [r7, #8]
+ 766 0068 DB88     		ldrh	r3, [r3, #6]	@ movhi
+ 767 006a 3B83     		strh	r3, [r7, #24]	@ movhi
+ 589:../Dave/Generated/src/RTC001/RTC001.c ****     day1 = timeptr->Days;
+ 768              		.loc 1 589 0
+ 769 006c BB68     		ldr	r3, [r7, #8]
+ 770 006e DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 771 0070 FB82     		strh	r3, [r7, #22]	@ movhi
+ 590:../Dave/Generated/src/RTC001/RTC001.c ****     /* Time value */
+ 591:../Dave/Generated/src/RTC001/RTC001.c ****     hour1 = timeptr->Hours;
+ 772              		.loc 1 591 0
+ 773 0072 BB68     		ldr	r3, [r7, #8]
+ 774 0074 9B78     		ldrb	r3, [r3, #2]
+ 775 0076 FB74     		strb	r3, [r7, #19]
+ 592:../Dave/Generated/src/RTC001/RTC001.c ****     min1 = timeptr->Min;
+ 776              		.loc 1 592 0
+ 777 0078 BB68     		ldr	r3, [r7, #8]
+ 778 007a 5B78     		ldrb	r3, [r3, #1]
+ 779 007c 3B75     		strb	r3, [r7, #20]
+ 593:../Dave/Generated/src/RTC001/RTC001.c ****     sec1 = timeptr->Sec;
+ 780              		.loc 1 593 0
+ 781 007e BB68     		ldr	r3, [r7, #8]
+ 782 0080 1B78     		ldrb	r3, [r3, #0]
+ 783 0082 7B75     		strb	r3, [r7, #21]
+ 594:../Dave/Generated/src/RTC001/RTC001.c ****     /* Check whether the date entered is valid */
+ 595:../Dave/Generated/src/RTC001/RTC001.c ****     if((RTC001_ldatevalid(month1,day1,year1)) && \
+ 784              		.loc 1 595 0
+ 785 0084 798B     		ldrh	r1, [r7, #26]
+ 786 0086 FA8A     		ldrh	r2, [r7, #22]
+ 787 0088 3B8B     		ldrh	r3, [r7, #24]
+ 788 008a 0846     		mov	r0, r1
+ 789 008c 1146     		mov	r1, r2
+ 790 008e 1A46     		mov	r2, r3
+ 791 0090 FFF7FEFF 		bl	RTC001_ldatevalid
+ 792 0094 0346     		mov	r3, r0
+ 793 0096 002B     		cmp	r3, #0
+ 794 0098 4BD0     		beq	.L29
+ 596:../Dave/Generated/src/RTC001/RTC001.c ****        (RTC001_ltimevalid(sec1,min1,hour1)))
+ 795              		.loc 1 596 0 discriminator 1
+ 796 009a 797D     		ldrb	r1, [r7, #21]	@ zero_extendqisi2
+ 797 009c 3A7D     		ldrb	r2, [r7, #20]	@ zero_extendqisi2
+ 798 009e FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 799 00a0 0846     		mov	r0, r1
+ 800 00a2 1146     		mov	r1, r2
+ 801 00a4 1A46     		mov	r2, r3
+ 802 00a6 FFF7FEFF 		bl	RTC001_ltimevalid
+ 803 00aa 0346     		mov	r3, r0
+ 595:../Dave/Generated/src/RTC001/RTC001.c ****     if((RTC001_ldatevalid(month1,day1,year1)) && \
+ 804              		.loc 1 595 0 discriminator 1
+ 805 00ac 002B     		cmp	r3, #0
+ 806 00ae 40D0     		beq	.L29
+ 597:../Dave/Generated/src/RTC001/RTC001.c ****     { 
+ 598:../Dave/Generated/src/RTC001/RTC001.c ****        /*Wait until any transfer over serial interface to ATIM0 and ATIM1 is 
+ 599:../Dave/Generated/src/RTC001/RTC001.c **** 	     completed*/
+ 600:../Dave/Generated/src/RTC001/RTC001.c ****        while((SCU_GENERAL->MIRRSTS & (SCU_GENERAL_MIRRSTS_RTC_ATIM0_Msk | \
+ 807              		.loc 1 600 0
+ 808 00b0 00BF     		nop
+ 809              	.L30:
+ 810              		.loc 1 600 0 is_stmt 0 discriminator 1
+ 811 00b2 4FF48043 		mov	r3, #16384
+ 812 00b6 C5F20003 		movt	r3, 20480
+ 813 00ba D3F8C430 		ldr	r3, [r3, #196]
+ 814 00be 03F4C063 		and	r3, r3, #1536
+ 815 00c2 002B     		cmp	r3, #0
+ 816 00c4 F5D1     		bne	.L30
+ 601:../Dave/Generated/src/RTC001/RTC001.c ****               SCU_GENERAL_MIRRSTS_RTC_ATIM1_Msk))!= 0x0U)
+ 602:../Dave/Generated/src/RTC001/RTC001.c ****        {}   
+ 603:../Dave/Generated/src/RTC001/RTC001.c ****        /*Configure the Alarm Time Register 0 */
+ 604:../Dave/Generated/src/RTC001/RTC001.c ****        RTC->ATIM0 = (uint32_t)\
+ 817              		.loc 1 604 0 is_stmt 1
+ 818 00c6 4FF49443 		mov	r3, #18944
+ 819 00ca C5F20003 		movt	r3, 20480
+ 605:../Dave/Generated/src/RTC001/RTC001.c ****                (((timeptr->Sec) & (uint32_t)RTC_ATIM0_ASE_Msk) | \
+ 820              		.loc 1 605 0
+ 821 00ce BA68     		ldr	r2, [r7, #8]
+ 822 00d0 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 823 00d2 02F03F01 		and	r1, r2, #63
+ 606:../Dave/Generated/src/RTC001/RTC001.c ****               ((((uint32_t)timeptr->Min) << RTC_ATIM0_AMI_Pos) & \
+ 824              		.loc 1 606 0
+ 825 00d6 BA68     		ldr	r2, [r7, #8]
+ 826 00d8 5278     		ldrb	r2, [r2, #1]	@ zero_extendqisi2
+ 827 00da 4FEA0222 		lsl	r2, r2, #8
+ 828 00de 02F47C52 		and	r2, r2, #16128
+ 605:../Dave/Generated/src/RTC001/RTC001.c ****                (((timeptr->Sec) & (uint32_t)RTC_ATIM0_ASE_Msk) | \
+ 829              		.loc 1 605 0
+ 830 00e2 1143     		orrs	r1, r1, r2
+ 607:../Dave/Generated/src/RTC001/RTC001.c ****                                   (uint32_t)RTC_ATIM0_AMI_Msk) | \
+ 608:../Dave/Generated/src/RTC001/RTC001.c ****             ((((uint32_t)timeptr->Hours) << RTC_ATIM0_AHO_Pos) & \
+ 831              		.loc 1 608 0
+ 832 00e4 BA68     		ldr	r2, [r7, #8]
+ 833 00e6 9278     		ldrb	r2, [r2, #2]	@ zero_extendqisi2
+ 834 00e8 4FEA0242 		lsl	r2, r2, #16
+ 835 00ec 02F4F812 		and	r2, r2, #2031616
+ 607:../Dave/Generated/src/RTC001/RTC001.c ****                                   (uint32_t)RTC_ATIM0_AMI_Msk) | \
+ 836              		.loc 1 607 0
+ 837 00f0 1143     		orrs	r1, r1, r2
+ 609:../Dave/Generated/src/RTC001/RTC001.c ****                                   (uint32_t)RTC_ATIM0_AHO_Msk) | \
+ 610:../Dave/Generated/src/RTC001/RTC001.c ****         (((((uint32_t)timeptr->Days)-1U) << RTC_ATIM0_ADA_Pos) & \
+ 838              		.loc 1 610 0
+ 839 00f2 BA68     		ldr	r2, [r7, #8]
+ 840 00f4 D278     		ldrb	r2, [r2, #3]	@ zero_extendqisi2
+ 841 00f6 02F1FF32 		add	r2, r2, #-1
+ 842 00fa 4FEA0262 		lsl	r2, r2, #24
+ 843 00fe 02F0F852 		and	r2, r2, #520093696
+ 604:../Dave/Generated/src/RTC001/RTC001.c ****        RTC->ATIM0 = (uint32_t)\
+ 844              		.loc 1 604 0
+ 845 0102 0A43     		orrs	r2, r2, r1
+ 846 0104 9A61     		str	r2, [r3, #24]
+ 611:../Dave/Generated/src/RTC001/RTC001.c ****                                   (uint32_t)RTC_ATIM0_ADA_Msk));        
+ 612:../Dave/Generated/src/RTC001/RTC001.c ****        /*Configure the Alarm Time Register 1 */
+ 613:../Dave/Generated/src/RTC001/RTC001.c ****        RTC->ATIM1 = (uint32_t)\
+ 847              		.loc 1 613 0
+ 848 0106 4FF49443 		mov	r3, #18944
+ 849 010a C5F20003 		movt	r3, 20480
+ 614:../Dave/Generated/src/RTC001/RTC001.c ****            ((((((uint32_t)timeptr->Month)-1U) << RTC_ATIM1_AMO_Pos) & \
+ 850              		.loc 1 614 0
+ 851 010e BA68     		ldr	r2, [r7, #8]
+ 852 0110 5279     		ldrb	r2, [r2, #5]	@ zero_extendqisi2
+ 853 0112 02F1FF32 		add	r2, r2, #-1
+ 854 0116 4FEA0222 		lsl	r2, r2, #8
+ 855 011a 02F47061 		and	r1, r2, #3840
+ 615:../Dave/Generated/src/RTC001/RTC001.c ****                                        (uint32_t)RTC_ATIM1_AMO_Msk) | \
+ 616:../Dave/Generated/src/RTC001/RTC001.c ****         ((uint32_t)(((uint32_t)timeptr->Year) << RTC_ATIM1_AYE_Pos) & \
+ 856              		.loc 1 616 0
+ 857 011e BA68     		ldr	r2, [r7, #8]
+ 858 0120 D288     		ldrh	r2, [r2, #6]
+ 859 0122 4FEA0242 		lsl	r2, r2, #16
+ 613:../Dave/Generated/src/RTC001/RTC001.c ****        RTC->ATIM1 = (uint32_t)\
+ 860              		.loc 1 613 0
+ 861 0126 0A43     		orrs	r2, r2, r1
+ 862 0128 DA61     		str	r2, [r3, #28]
+ 617:../Dave/Generated/src/RTC001/RTC001.c ****                                        (uint32_t)RTC_ATIM1_AYE_Msk));	     			       
+ 618:../Dave/Generated/src/RTC001/RTC001.c ****       status = (uint32_t)RTC001App_SUCCESS;
+ 863              		.loc 1 618 0
+ 864 012a 4FF00003 		mov	r3, #0
+ 865 012e FB61     		str	r3, [r7, #28]
+ 866 0130 02E0     		b	.L31
+ 867              	.L29:
+ 619:../Dave/Generated/src/RTC001/RTC001.c ****     }  
+ 620:../Dave/Generated/src/RTC001/RTC001.c ****     else /*Date is not valid*/
+ 621:../Dave/Generated/src/RTC001/RTC001.c ****     {
+ 622:../Dave/Generated/src/RTC001/RTC001.c ****       status = (uint32_t)RTC001_INVALID_HANDLE;      
+ 868              		.loc 1 622 0
+ 869 0132 4FF00103 		mov	r3, #1
+ 870 0136 FB61     		str	r3, [r7, #28]
+ 871              	.L31:
+ 623:../Dave/Generated/src/RTC001/RTC001.c **** 	  DBG002_ERROR(APP_GID, 1, 4,status);
+ 624:../Dave/Generated/src/RTC001/RTC001.c ****     }
+ 625:../Dave/Generated/src/RTC001/RTC001.c ****  
+ 626:../Dave/Generated/src/RTC001/RTC001.c ****   }while(0);
+ 627:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_EXIT(APP_GID,RTC001_FUNCTION_EXIT);
+ 628:../Dave/Generated/src/RTC001/RTC001.c ****   return status;
+ 872              		.loc 1 628 0
+ 873 0138 FB69     		ldr	r3, [r7, #28]
+ 629:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 874              		.loc 1 629 0
+ 875 013a 1846     		mov	r0, r3
+ 876 013c 07F12007 		add	r7, r7, #32
+ 877 0140 BD46     		mov	sp, r7
+ 878 0142 80BD     		pop	{r7, pc}
+ 879              		.cfi_endproc
+ 880              	.LFE127:
+ 882              		.section	.text.RTC001_Clock_GetTime,"ax",%progbits
+ 883              		.align	2
+ 884              		.global	RTC001_Clock_GetTime
+ 885              		.thumb
+ 886              		.thumb_func
+ 888              	RTC001_Clock_GetTime:
+ 889              	.LFB128:
+ 630:../Dave/Generated/src/RTC001/RTC001.c **** 	
+ 631:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 632:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 633:../Dave/Generated/src/RTC001/RTC001.c ****  *  Function to read the current RTC time
+ 634:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 635:../Dave/Generated/src/RTC001/RTC001.c ****  
+ 636:../Dave/Generated/src/RTC001/RTC001.c **** uint32_t RTC001_Clock_GetTime (RTC001_TimeHandle* timeptr)
+ 637:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 890              		.loc 1 637 0
+ 891              		.cfi_startproc
+ 892              		@ args = 0, pretend = 0, frame = 16
+ 893              		@ frame_needed = 1, uses_anonymous_args = 0
+ 894              		@ link register save eliminated.
+ 895 0000 80B4     		push	{r7}
+ 896              	.LCFI20:
+ 897              		.cfi_def_cfa_offset 4
+ 898              		.cfi_offset 7, -4
+ 899 0002 85B0     		sub	sp, sp, #20
+ 900              	.LCFI21:
+ 901              		.cfi_def_cfa_offset 24
+ 902 0004 00AF     		add	r7, sp, #0
+ 903              	.LCFI22:
+ 904              		.cfi_def_cfa_register 7
+ 905 0006 7860     		str	r0, [r7, #4]
+ 638:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t TimeReg0Value,TimeReg1Value;
+ 639:../Dave/Generated/src/RTC001/RTC001.c ****   TimeReg0Value = RTC->TIM0;
+ 906              		.loc 1 639 0
+ 907 0008 4FF49443 		mov	r3, #18944
+ 908 000c C5F20003 		movt	r3, 20480
+ 909 0010 1B6A     		ldr	r3, [r3, #32]
+ 910 0012 FB60     		str	r3, [r7, #12]
+ 640:../Dave/Generated/src/RTC001/RTC001.c ****   TimeReg1Value = RTC->TIM1;
+ 911              		.loc 1 640 0
+ 912 0014 4FF49443 		mov	r3, #18944
+ 913 0018 C5F20003 		movt	r3, 20480
+ 914 001c 5B6A     		ldr	r3, [r3, #36]
+ 915 001e BB60     		str	r3, [r7, #8]
+ 641:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_ENTRY(APP_GID,RTC001_FUNCTION_ENTRY);
+ 642:../Dave/Generated/src/RTC001/RTC001.c ****    /* <<<DD_RTC001_API_8>>> */
+ 643:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 644:../Dave/Generated/src/RTC001/RTC001.c ****   /*   Read values from TIM0 and TIM1 registers  */
+ 645:../Dave/Generated/src/RTC001/RTC001.c ****   /*   Days of Week value  */
+ 646:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->DaWe = (uint8_t)(TimeReg1Value & RTC_TIM1_DAWE_Msk);
+ 916              		.loc 1 646 0
+ 917 0020 BB68     		ldr	r3, [r7, #8]
+ 918 0022 DBB2     		uxtb	r3, r3
+ 919 0024 03F00703 		and	r3, r3, #7
+ 920 0028 DAB2     		uxtb	r2, r3
+ 921 002a 7B68     		ldr	r3, [r7, #4]
+ 922 002c 1A71     		strb	r2, [r3, #4]
+ 647:../Dave/Generated/src/RTC001/RTC001.c ****   /*   Month value  */
+ 648:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Month = \
+ 649:../Dave/Generated/src/RTC001/RTC001.c ****         (uint8_t)(((TimeReg1Value & RTC_TIM1_MO_Msk) >> RTC_TIM1_MO_Pos) + 1U);
+ 923              		.loc 1 649 0
+ 924 002e BB68     		ldr	r3, [r7, #8]
+ 925 0030 03F47063 		and	r3, r3, #3840
+ 926 0034 4FEA1323 		lsr	r3, r3, #8
+ 927 0038 DBB2     		uxtb	r3, r3
+ 928 003a 03F10103 		add	r3, r3, #1
+ 929 003e DAB2     		uxtb	r2, r3
+ 648:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Month = \
+ 930              		.loc 1 648 0
+ 931 0040 7B68     		ldr	r3, [r7, #4]
+ 932 0042 5A71     		strb	r2, [r3, #5]
+ 650:../Dave/Generated/src/RTC001/RTC001.c ****   /*   Year value  */
+ 651:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Year = \
+ 652:../Dave/Generated/src/RTC001/RTC001.c **** 	    (uint16_t)((TimeReg1Value & RTC_TIM1_YE_Msk) >> RTC_TIM1_YE_Pos);
+ 933              		.loc 1 652 0
+ 934 0044 BB68     		ldr	r3, [r7, #8]
+ 935 0046 4FEA1343 		lsr	r3, r3, #16
+ 936 004a 9AB2     		uxth	r2, r3
+ 651:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Year = \
+ 937              		.loc 1 651 0
+ 938 004c 7B68     		ldr	r3, [r7, #4]
+ 939 004e DA80     		strh	r2, [r3, #6]	@ movhi
+ 653:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 654:../Dave/Generated/src/RTC001/RTC001.c ****   /*   Seconds value  */
+ 655:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Sec =  (uint8_t)((TimeReg0Value & RTC_TIM0_SE_Msk));
+ 940              		.loc 1 655 0
+ 941 0050 FB68     		ldr	r3, [r7, #12]
+ 942 0052 DBB2     		uxtb	r3, r3
+ 943 0054 03F03F03 		and	r3, r3, #63
+ 944 0058 DAB2     		uxtb	r2, r3
+ 945 005a 7B68     		ldr	r3, [r7, #4]
+ 946 005c 1A70     		strb	r2, [r3, #0]
+ 656:../Dave/Generated/src/RTC001/RTC001.c ****   /*   Minutes value  */
+ 657:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Min = \
+ 658:../Dave/Generated/src/RTC001/RTC001.c **** 	    (uint8_t)(((TimeReg0Value & RTC_TIM0_MI_Msk) >> RTC_TIM0_MI_Pos));
+ 947              		.loc 1 658 0
+ 948 005e FB68     		ldr	r3, [r7, #12]
+ 949 0060 03F47C53 		and	r3, r3, #16128
+ 950 0064 4FEA1323 		lsr	r3, r3, #8
+ 951 0068 DAB2     		uxtb	r2, r3
+ 657:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Min = \
+ 952              		.loc 1 657 0
+ 953 006a 7B68     		ldr	r3, [r7, #4]
+ 954 006c 5A70     		strb	r2, [r3, #1]
+ 659:../Dave/Generated/src/RTC001/RTC001.c ****   /*   Hours value  */
+ 660:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Hours = \
+ 661:../Dave/Generated/src/RTC001/RTC001.c **** 	    (uint8_t)(((TimeReg0Value & RTC_TIM0_HO_Msk) >> RTC_TIM0_HO_Pos));
+ 955              		.loc 1 661 0
+ 956 006e FB68     		ldr	r3, [r7, #12]
+ 957 0070 03F4F813 		and	r3, r3, #2031616
+ 958 0074 4FEA1343 		lsr	r3, r3, #16
+ 959 0078 DAB2     		uxtb	r2, r3
+ 660:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Hours = \
+ 960              		.loc 1 660 0
+ 961 007a 7B68     		ldr	r3, [r7, #4]
+ 962 007c 9A70     		strb	r2, [r3, #2]
+ 662:../Dave/Generated/src/RTC001/RTC001.c ****   /*   Days value starting from the 1st day of the month */
+ 663:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Days = \
+ 664:../Dave/Generated/src/RTC001/RTC001.c ****         (uint8_t)(((TimeReg0Value & RTC_TIM0_DA_Msk) >> RTC_TIM0_DA_Pos) + 1U);	
+ 963              		.loc 1 664 0
+ 964 007e FB68     		ldr	r3, [r7, #12]
+ 965 0080 03F0F853 		and	r3, r3, #520093696
+ 966 0084 4FEA1363 		lsr	r3, r3, #24
+ 967 0088 DBB2     		uxtb	r3, r3
+ 968 008a 03F10103 		add	r3, r3, #1
+ 969 008e DAB2     		uxtb	r2, r3
+ 663:../Dave/Generated/src/RTC001/RTC001.c **** 	timeptr->Days = \
+ 970              		.loc 1 663 0
+ 971 0090 7B68     		ldr	r3, [r7, #4]
+ 972 0092 DA70     		strb	r2, [r3, #3]
+ 665:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_EXIT(APP_GID,RTC001_FUNCTION_EXIT);
+ 666:../Dave/Generated/src/RTC001/RTC001.c ****   return ((uint32_t)RTC001App_SUCCESS);
+ 973              		.loc 1 666 0
+ 974 0094 4FF00003 		mov	r3, #0
+ 667:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 975              		.loc 1 667 0
+ 976 0098 1846     		mov	r0, r3
+ 977 009a 07F11407 		add	r7, r7, #20
+ 978 009e BD46     		mov	sp, r7
+ 979 00a0 80BC     		pop	{r7}
+ 980 00a2 7047     		bx	lr
+ 981              		.cfi_endproc
+ 982              	.LFE128:
+ 984              		.section	.text.RTC001_Clock_SetTime,"ax",%progbits
+ 985              		.align	2
+ 986              		.global	RTC001_Clock_SetTime
+ 987              		.thumb
+ 988              		.thumb_func
+ 990              	RTC001_Clock_SetTime:
+ 991              	.LFB129:
+ 668:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 669:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 670:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 671:../Dave/Generated/src/RTC001/RTC001.c ****  *  This function is to set the time.
+ 672:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 673:../Dave/Generated/src/RTC001/RTC001.c **** uint32_t RTC001_Clock_SetTime(RTC001_TimeHandle* timeptr)
+ 674:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 992              		.loc 1 674 0
+ 993              		.cfi_startproc
+ 994              		@ args = 0, pretend = 0, frame = 32
+ 995              		@ frame_needed = 1, uses_anonymous_args = 0
+ 996 0000 80B5     		push	{r7, lr}
+ 997              	.LCFI23:
+ 998              		.cfi_def_cfa_offset 8
+ 999              		.cfi_offset 7, -8
+ 1000              		.cfi_offset 14, -4
+ 1001 0002 88B0     		sub	sp, sp, #32
+ 1002              	.LCFI24:
+ 1003              		.cfi_def_cfa_offset 40
+ 1004 0004 00AF     		add	r7, sp, #0
+ 1005              	.LCFI25:
+ 1006              		.cfi_def_cfa_register 7
+ 1007 0006 7860     		str	r0, [r7, #4]
+ 675:../Dave/Generated/src/RTC001/RTC001.c ****   uint16_t month1 = 0U,year1 = 0U,day1 = 0U;
+ 1008              		.loc 1 675 0
+ 1009 0008 4FF00003 		mov	r3, #0
+ 1010 000c FB82     		strh	r3, [r7, #22]	@ movhi
+ 1011 000e 4FF00003 		mov	r3, #0
+ 1012 0012 BB82     		strh	r3, [r7, #20]	@ movhi
+ 1013 0014 4FF00003 		mov	r3, #0
+ 1014 0018 7B82     		strh	r3, [r7, #18]	@ movhi
+ 676:../Dave/Generated/src/RTC001/RTC001.c ****   uint8_t  sec1 = 0U, min1 = 0U, hour1 = 0U;
+ 1015              		.loc 1 676 0
+ 1016 001a 4FF00003 		mov	r3, #0
+ 1017 001e 7B74     		strb	r3, [r7, #17]
+ 1018 0020 4FF00003 		mov	r3, #0
+ 1019 0024 3B74     		strb	r3, [r7, #16]
+ 1020 0026 4FF00003 		mov	r3, #0
+ 1021 002a FB73     		strb	r3, [r7, #15]
+ 677:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t weekDay = 0U;
+ 1022              		.loc 1 677 0
+ 1023 002c 4FF00003 		mov	r3, #0
+ 1024 0030 FB61     		str	r3, [r7, #28]
+ 678:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t status = (uint32_t)RTC001_ERROR;
+ 1025              		.loc 1 678 0
+ 1026 0032 4FF00203 		mov	r3, #2
+ 1027 0036 BB61     		str	r3, [r7, #24]
+ 679:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 680:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_ENTRY(APP_GID,RTC001_FUNCTION_ENTRY);
+ 681:../Dave/Generated/src/RTC001/RTC001.c ****    /* <<<DD_RTC001_API_9>>> */
+ 682:../Dave/Generated/src/RTC001/RTC001.c ****    
+ 683:../Dave/Generated/src/RTC001/RTC001.c ****   /* Clear Mirror register update status of RTC registers in SCU*/
+ 684:../Dave/Generated/src/RTC001/RTC001.c ****   SCU_INTERRUPT->SRCLR = \
+ 1028              		.loc 1 684 0
+ 1029 0038 44F27403 		movw	r3, #16500
+ 1030 003c C5F20003 		movt	r3, 20480
+ 1031 0040 4FF0F852 		mov	r2, #520093696
+ 1032 0044 DA60     		str	r2, [r3, #12]
+ 685:../Dave/Generated/src/RTC001/RTC001.c ****       (SCU_INTERRUPT_SRCLR_RTC_CTR_Msk | SCU_INTERRUPT_SRCLR_RTC_ATIM0_Msk | \
+ 686:../Dave/Generated/src/RTC001/RTC001.c ****   	   SCU_INTERRUPT_SRCLR_RTC_ATIM1_Msk | SCU_INTERRUPT_SRCLR_RTC_TIM0_Msk | \
+ 687:../Dave/Generated/src/RTC001/RTC001.c ****   	   SCU_INTERRUPT_SRCLR_RTC_TIM1_Msk);
+ 688:../Dave/Generated/src/RTC001/RTC001.c ****  
+ 689:../Dave/Generated/src/RTC001/RTC001.c ****   /*   Days of Week value  */
+ 690:../Dave/Generated/src/RTC001/RTC001.c ****   month1 = timeptr->Month;
+ 1033              		.loc 1 690 0
+ 1034 0046 7B68     		ldr	r3, [r7, #4]
+ 1035 0048 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 1036 004a FB82     		strh	r3, [r7, #22]	@ movhi
+ 691:../Dave/Generated/src/RTC001/RTC001.c ****   year1 = timeptr->Year;
+ 1037              		.loc 1 691 0
+ 1038 004c 7B68     		ldr	r3, [r7, #4]
+ 1039 004e DB88     		ldrh	r3, [r3, #6]	@ movhi
+ 1040 0050 BB82     		strh	r3, [r7, #20]	@ movhi
+ 692:../Dave/Generated/src/RTC001/RTC001.c ****   day1 = timeptr->Days;
+ 1041              		.loc 1 692 0
+ 1042 0052 7B68     		ldr	r3, [r7, #4]
+ 1043 0054 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 1044 0056 7B82     		strh	r3, [r7, #18]	@ movhi
+ 693:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 694:../Dave/Generated/src/RTC001/RTC001.c ****   /* Time value */
+ 695:../Dave/Generated/src/RTC001/RTC001.c ****   hour1 = timeptr->Hours;
+ 1045              		.loc 1 695 0
+ 1046 0058 7B68     		ldr	r3, [r7, #4]
+ 1047 005a 9B78     		ldrb	r3, [r3, #2]
+ 1048 005c FB73     		strb	r3, [r7, #15]
+ 696:../Dave/Generated/src/RTC001/RTC001.c ****   min1 = timeptr->Min;
+ 1049              		.loc 1 696 0
+ 1050 005e 7B68     		ldr	r3, [r7, #4]
+ 1051 0060 5B78     		ldrb	r3, [r3, #1]
+ 1052 0062 3B74     		strb	r3, [r7, #16]
+ 697:../Dave/Generated/src/RTC001/RTC001.c ****   sec1 = timeptr->Sec;
+ 1053              		.loc 1 697 0
+ 1054 0064 7B68     		ldr	r3, [r7, #4]
+ 1055 0066 1B78     		ldrb	r3, [r3, #0]
+ 1056 0068 7B74     		strb	r3, [r7, #17]
+ 698:../Dave/Generated/src/RTC001/RTC001.c ****   do
+ 699:../Dave/Generated/src/RTC001/RTC001.c ****   {    
+ 700:../Dave/Generated/src/RTC001/RTC001.c ****     if((RTC001_ldatevalid(month1,day1,year1)) && \
+ 1057              		.loc 1 700 0
+ 1058 006a F98A     		ldrh	r1, [r7, #22]
+ 1059 006c 7A8A     		ldrh	r2, [r7, #18]
+ 1060 006e BB8A     		ldrh	r3, [r7, #20]
+ 1061 0070 0846     		mov	r0, r1
+ 1062 0072 1146     		mov	r1, r2
+ 1063 0074 1A46     		mov	r2, r3
+ 1064 0076 FFF7FEFF 		bl	RTC001_ldatevalid
+ 1065 007a 0346     		mov	r3, r0
+ 1066 007c 002B     		cmp	r3, #0
+ 1067 007e 68D0     		beq	.L36
+ 701:../Dave/Generated/src/RTC001/RTC001.c ****        (RTC001_ltimevalid(sec1,min1,hour1)))
+ 1068              		.loc 1 701 0 discriminator 1
+ 1069 0080 797C     		ldrb	r1, [r7, #17]	@ zero_extendqisi2
+ 1070 0082 3A7C     		ldrb	r2, [r7, #16]	@ zero_extendqisi2
+ 1071 0084 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1072 0086 0846     		mov	r0, r1
+ 1073 0088 1146     		mov	r1, r2
+ 1074 008a 1A46     		mov	r2, r3
+ 1075 008c FFF7FEFF 		bl	RTC001_ltimevalid
+ 1076 0090 0346     		mov	r3, r0
+ 700:../Dave/Generated/src/RTC001/RTC001.c ****     if((RTC001_ldatevalid(month1,day1,year1)) && \
+ 1077              		.loc 1 700 0 discriminator 1
+ 1078 0092 002B     		cmp	r3, #0
+ 1079 0094 5DD0     		beq	.L36
+ 702:../Dave/Generated/src/RTC001/RTC001.c ****     { 
+ 703:../Dave/Generated/src/RTC001/RTC001.c ****       weekDay = ((uint32_t)(RTC001_lweekday(month1,day1,year1)));
+ 1080              		.loc 1 703 0
+ 1081 0096 F98A     		ldrh	r1, [r7, #22]
+ 1082 0098 7A8A     		ldrh	r2, [r7, #18]
+ 1083 009a BB8A     		ldrh	r3, [r7, #20]
+ 1084 009c 0846     		mov	r0, r1
+ 1085 009e 1146     		mov	r1, r2
+ 1086 00a0 1A46     		mov	r2, r3
+ 1087 00a2 FFF7FEFF 		bl	RTC001_lweekday
+ 1088 00a6 F861     		str	r0, [r7, #28]
+ 704:../Dave/Generated/src/RTC001/RTC001.c ****       if(weekDay < 6U)
+ 1089              		.loc 1 704 0
+ 1090 00a8 FB69     		ldr	r3, [r7, #28]
+ 1091 00aa 052B     		cmp	r3, #5
+ 1092 00ac 04D8     		bhi	.L37
+ 705:../Dave/Generated/src/RTC001/RTC001.c ****       {
+ 706:../Dave/Generated/src/RTC001/RTC001.c ****         weekDay += 1U;
+ 1093              		.loc 1 706 0
+ 1094 00ae FB69     		ldr	r3, [r7, #28]
+ 1095 00b0 03F10103 		add	r3, r3, #1
+ 1096 00b4 FB61     		str	r3, [r7, #28]
+ 707:../Dave/Generated/src/RTC001/RTC001.c ****       }
+ 708:../Dave/Generated/src/RTC001/RTC001.c ****       else if(weekDay == 6U)
+ 709:../Dave/Generated/src/RTC001/RTC001.c ****       {
+ 710:../Dave/Generated/src/RTC001/RTC001.c ****         weekDay = 0U;
+ 711:../Dave/Generated/src/RTC001/RTC001.c ****       }
+ 712:../Dave/Generated/src/RTC001/RTC001.c ****       else
+ 713:../Dave/Generated/src/RTC001/RTC001.c ****       {
+ 714:../Dave/Generated/src/RTC001/RTC001.c ****         status = (uint32_t)RTC001_INVALID_HANDLE;        
+ 715:../Dave/Generated/src/RTC001/RTC001.c **** 		DBG002_ERROR(APP_GID, 2, 4,status);
+ 716:../Dave/Generated/src/RTC001/RTC001.c ****         break;
+ 717:../Dave/Generated/src/RTC001/RTC001.c ****       }
+ 718:../Dave/Generated/src/RTC001/RTC001.c ****       /*Write values into TIM0 and TIM1 registers  */
+ 719:../Dave/Generated/src/RTC001/RTC001.c ****       /*Wait until any serial transaction is completed*/
+ 720:../Dave/Generated/src/RTC001/RTC001.c ****       while((SCU_GENERAL->MIRRSTS & (SCU_GENERAL_MIRRSTS_RTC_TIM0_Msk | \
+ 1097              		.loc 1 720 0
+ 1098 00b6 0AE0     		b	.L41
+ 1099              	.L37:
+ 708:../Dave/Generated/src/RTC001/RTC001.c ****       else if(weekDay == 6U)
+ 1100              		.loc 1 708 0
+ 1101 00b8 FB69     		ldr	r3, [r7, #28]
+ 1102 00ba 062B     		cmp	r3, #6
+ 1103 00bc 03D1     		bne	.L39
+ 710:../Dave/Generated/src/RTC001/RTC001.c ****         weekDay = 0U;
+ 1104              		.loc 1 710 0
+ 1105 00be 4FF00003 		mov	r3, #0
+ 1106 00c2 FB61     		str	r3, [r7, #28]
+ 1107              		.loc 1 720 0
+ 1108 00c4 03E0     		b	.L41
+ 1109              	.L39:
+ 714:../Dave/Generated/src/RTC001/RTC001.c ****         status = (uint32_t)RTC001_INVALID_HANDLE;        
+ 1110              		.loc 1 714 0
+ 1111 00c6 4FF00103 		mov	r3, #1
+ 1112 00ca BB61     		str	r3, [r7, #24]
+ 716:../Dave/Generated/src/RTC001/RTC001.c ****         break;
+ 1113              		.loc 1 716 0
+ 1114 00cc 44E0     		b	.L40
+ 1115              	.L41:
+ 1116              		.loc 1 720 0 discriminator 1
+ 1117 00ce 4FF48043 		mov	r3, #16384
+ 1118 00d2 C5F20003 		movt	r3, 20480
+ 1119 00d6 D3F8C430 		ldr	r3, [r3, #196]
+ 1120 00da 03F4C053 		and	r3, r3, #6144
+ 1121 00de 002B     		cmp	r3, #0
+ 1122 00e0 F5D1     		bne	.L41
+ 721:../Dave/Generated/src/RTC001/RTC001.c ****              SCU_GENERAL_MIRRSTS_RTC_TIM1_Msk))!= 0x0U)
+ 722:../Dave/Generated/src/RTC001/RTC001.c ****       {}
+ 723:../Dave/Generated/src/RTC001/RTC001.c ****       /*Configure RTC Time register 0*/
+ 724:../Dave/Generated/src/RTC001/RTC001.c ****       RTC->TIM0 = (uint32_t)\
+ 1123              		.loc 1 724 0
+ 1124 00e2 4FF49443 		mov	r3, #18944
+ 1125 00e6 C5F20003 		movt	r3, 20480
+ 725:../Dave/Generated/src/RTC001/RTC001.c ****                (((timeptr->Sec) & (uint32_t)RTC_TIM0_SE_Msk) | \
+ 1126              		.loc 1 725 0
+ 1127 00ea 7A68     		ldr	r2, [r7, #4]
+ 1128 00ec 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 1129 00ee 02F03F01 		and	r1, r2, #63
+ 726:../Dave/Generated/src/RTC001/RTC001.c ****               ((((uint32_t)timeptr->Min) << RTC_TIM0_MI_Pos) & \
+ 1130              		.loc 1 726 0
+ 1131 00f2 7A68     		ldr	r2, [r7, #4]
+ 1132 00f4 5278     		ldrb	r2, [r2, #1]	@ zero_extendqisi2
+ 1133 00f6 4FEA0222 		lsl	r2, r2, #8
+ 1134 00fa 02F47C52 		and	r2, r2, #16128
+ 725:../Dave/Generated/src/RTC001/RTC001.c ****                (((timeptr->Sec) & (uint32_t)RTC_TIM0_SE_Msk) | \
+ 1135              		.loc 1 725 0
+ 1136 00fe 1143     		orrs	r1, r1, r2
+ 727:../Dave/Generated/src/RTC001/RTC001.c ****                                   (uint32_t)RTC_TIM0_MI_Msk) | \
+ 728:../Dave/Generated/src/RTC001/RTC001.c ****             ((((uint32_t)timeptr->Hours) << RTC_TIM0_HO_Pos) & \
+ 1137              		.loc 1 728 0
+ 1138 0100 7A68     		ldr	r2, [r7, #4]
+ 1139 0102 9278     		ldrb	r2, [r2, #2]	@ zero_extendqisi2
+ 1140 0104 4FEA0242 		lsl	r2, r2, #16
+ 1141 0108 02F4F812 		and	r2, r2, #2031616
+ 727:../Dave/Generated/src/RTC001/RTC001.c ****                                   (uint32_t)RTC_TIM0_MI_Msk) | \
+ 1142              		.loc 1 727 0
+ 1143 010c 1143     		orrs	r1, r1, r2
+ 729:../Dave/Generated/src/RTC001/RTC001.c ****                                   (uint32_t)RTC_TIM0_HO_Msk) | \
+ 730:../Dave/Generated/src/RTC001/RTC001.c ****       ((((((uint32_t)timeptr->Days)-1U)) << RTC_TIM0_DA_Pos) & \
+ 1144              		.loc 1 730 0
+ 1145 010e 7A68     		ldr	r2, [r7, #4]
+ 1146 0110 D278     		ldrb	r2, [r2, #3]	@ zero_extendqisi2
+ 1147 0112 02F1FF32 		add	r2, r2, #-1
+ 1148 0116 4FEA0262 		lsl	r2, r2, #24
+ 1149 011a 02F0F852 		and	r2, r2, #520093696
+ 724:../Dave/Generated/src/RTC001/RTC001.c ****       RTC->TIM0 = (uint32_t)\
+ 1150              		.loc 1 724 0
+ 1151 011e 0A43     		orrs	r2, r2, r1
+ 1152 0120 1A62     		str	r2, [r3, #32]
+ 731:../Dave/Generated/src/RTC001/RTC001.c ****                                   (uint32_t)RTC_TIM0_DA_Msk));  
+ 732:../Dave/Generated/src/RTC001/RTC001.c ****       /*Configure RTC Time register 1*/
+ 733:../Dave/Generated/src/RTC001/RTC001.c ****       RTC->TIM1 = (uint32_t) (weekDay |\
+ 1153              		.loc 1 733 0
+ 1154 0122 4FF49443 		mov	r3, #18944
+ 1155 0126 C5F20003 		movt	r3, 20480
+ 734:../Dave/Generated/src/RTC001/RTC001.c ****                    (((((uint32_t)timeptr->Month)-1U) << RTC_TIM1_MO_Pos) & \
+ 1156              		.loc 1 734 0
+ 1157 012a 7A68     		ldr	r2, [r7, #4]
+ 1158 012c 5279     		ldrb	r2, [r2, #5]	@ zero_extendqisi2
+ 1159 012e 02F1FF32 		add	r2, r2, #-1
+ 1160 0132 4FEA0222 		lsl	r2, r2, #8
+ 1161 0136 02F47061 		and	r1, r2, #3840
+ 733:../Dave/Generated/src/RTC001/RTC001.c ****       RTC->TIM1 = (uint32_t) (weekDay |\
+ 1162              		.loc 1 733 0
+ 1163 013a FA69     		ldr	r2, [r7, #28]
+ 1164 013c 1143     		orrs	r1, r1, r2
+ 735:../Dave/Generated/src/RTC001/RTC001.c ****                                               (uint32_t)RTC_TIM1_MO_Msk) | \
+ 736:../Dave/Generated/src/RTC001/RTC001.c ****                          ((((uint32_t)timeptr->Year) << RTC_TIM1_YE_Pos) & \
+ 1165              		.loc 1 736 0
+ 1166 013e 7A68     		ldr	r2, [r7, #4]
+ 1167 0140 D288     		ldrh	r2, [r2, #6]
+ 1168 0142 4FEA0242 		lsl	r2, r2, #16
+ 733:../Dave/Generated/src/RTC001/RTC001.c ****       RTC->TIM1 = (uint32_t) (weekDay |\
+ 1169              		.loc 1 733 0
+ 1170 0146 0A43     		orrs	r2, r2, r1
+ 1171 0148 5A62     		str	r2, [r3, #36]
+ 737:../Dave/Generated/src/RTC001/RTC001.c ****                                               (uint32_t)RTC_TIM1_YE_Msk));  
+ 738:../Dave/Generated/src/RTC001/RTC001.c ****       status = (uint32_t) RTC001App_SUCCESS;
+ 1172              		.loc 1 738 0
+ 1173 014a 4FF00003 		mov	r3, #0
+ 1174 014e BB61     		str	r3, [r7, #24]
+ 1175 0150 02E0     		b	.L40
+ 1176              	.L36:
+ 739:../Dave/Generated/src/RTC001/RTC001.c ****     }  
+ 740:../Dave/Generated/src/RTC001/RTC001.c ****     else
+ 741:../Dave/Generated/src/RTC001/RTC001.c ****     {
+ 742:../Dave/Generated/src/RTC001/RTC001.c ****       status = (uint32_t) RTC001_INVALID_HANDLE;
+ 1177              		.loc 1 742 0
+ 1178 0152 4FF00103 		mov	r3, #1
+ 1179 0156 BB61     		str	r3, [r7, #24]
+ 1180              	.L40:
+ 743:../Dave/Generated/src/RTC001/RTC001.c **** 	  DBG002_ERROR(APP_GID, 3, 4,status);
+ 744:../Dave/Generated/src/RTC001/RTC001.c ****     }
+ 745:../Dave/Generated/src/RTC001/RTC001.c ****   }while(0);
+ 746:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 747:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_EXIT(APP_GID,RTC001_FUNCTION_EXIT);
+ 748:../Dave/Generated/src/RTC001/RTC001.c ****   return status;
+ 1181              		.loc 1 748 0
+ 1182 0158 BB69     		ldr	r3, [r7, #24]
+ 749:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 1183              		.loc 1 749 0
+ 1184 015a 1846     		mov	r0, r3
+ 1185 015c 07F12007 		add	r7, r7, #32
+ 1186 0160 BD46     		mov	sp, r7
+ 1187 0162 80BD     		pop	{r7, pc}
+ 1188              		.cfi_endproc
+ 1189              	.LFE129:
+ 1191              		.section	.text.RTC001_Time,"ax",%progbits
+ 1192              		.align	2
+ 1193              		.global	RTC001_Time
+ 1194              		.thumb
+ 1195              		.thumb_func
+ 1197              	RTC001_Time:
+ 1198              	.LFB130:
+ 750:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 751:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 752:../Dave/Generated/src/RTC001/RTC001.c **** /*
+ 753:../Dave/Generated/src/RTC001/RTC001.c ****  *  This function is to get the time in seconds calculated from Epoch time 
+ 754:../Dave/Generated/src/RTC001/RTC001.c ****  *  (01/01/1970).
+ 755:../Dave/Generated/src/RTC001/RTC001.c ****  */
+ 756:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 757:../Dave/Generated/src/RTC001/RTC001.c **** uint32_t RTC001_Time(time_t* time_value)
+ 758:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 1199              		.loc 1 758 0
+ 1200              		.cfi_startproc
+ 1201              		@ args = 0, pretend = 0, frame = 56
+ 1202              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1203 0000 80B5     		push	{r7, lr}
+ 1204              	.LCFI26:
+ 1205              		.cfi_def_cfa_offset 8
+ 1206              		.cfi_offset 7, -8
+ 1207              		.cfi_offset 14, -4
+ 1208 0002 8EB0     		sub	sp, sp, #56
+ 1209              	.LCFI27:
+ 1210              		.cfi_def_cfa_offset 64
+ 1211 0004 00AF     		add	r7, sp, #0
+ 1212              	.LCFI28:
+ 1213              		.cfi_def_cfa_register 7
+ 1214 0006 7860     		str	r0, [r7, #4]
+ 759:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 760:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t CurrentYear = 0U, ElapsedYear = 0U;
+ 1215              		.loc 1 760 0
+ 1216 0008 4FF00003 		mov	r3, #0
+ 1217 000c 7B62     		str	r3, [r7, #36]
+ 1218 000e 4FF00003 		mov	r3, #0
+ 1219 0012 7B63     		str	r3, [r7, #52]
+ 761:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t CurrentMonth = 0U, ElapsedMonth = 0U;
+ 1220              		.loc 1 761 0
+ 1221 0014 4FF00003 		mov	r3, #0
+ 1222 0018 3B62     		str	r3, [r7, #32]
+ 1223 001a 4FF00003 		mov	r3, #0
+ 1224 001e 3B63     		str	r3, [r7, #48]
+ 762:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t CurrentDay = 0U, ElapsedDays = 0U;
+ 1225              		.loc 1 762 0
+ 1226 0020 4FF00003 		mov	r3, #0
+ 1227 0024 FB61     		str	r3, [r7, #28]
+ 1228 0026 4FF00003 		mov	r3, #0
+ 1229 002a FB62     		str	r3, [r7, #44]
+ 763:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t CurrentHour = 0U;
+ 1230              		.loc 1 763 0
+ 1231 002c 4FF00003 		mov	r3, #0
+ 1232 0030 BB61     		str	r3, [r7, #24]
+ 764:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t CurrentMin = 0U;
+ 1233              		.loc 1 764 0
+ 1234 0032 4FF00003 		mov	r3, #0
+ 1235 0036 7B61     		str	r3, [r7, #20]
+ 765:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t CurrentSec = 0U;
+ 1236              		.loc 1 765 0
+ 1237 0038 4FF00003 		mov	r3, #0
+ 1238 003c 3B61     		str	r3, [r7, #16]
+ 766:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t ElapsedSeconds = 0U;
+ 1239              		.loc 1 766 0
+ 1240 003e 4FF00003 		mov	r3, #0
+ 1241 0042 FB60     		str	r3, [r7, #12]
+ 767:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t status = (uint32_t)RTC001_ERROR;
+ 1242              		.loc 1 767 0
+ 1243 0044 4FF00203 		mov	r3, #2
+ 1244 0048 BB62     		str	r3, [r7, #40]
+ 768:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 769:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_ENTRY(APP_GID,RTC001_FUNCTION_ENTRY);
+ 770:../Dave/Generated/src/RTC001/RTC001.c ****    /* <<<DD_RTC001_API_10>>> */
+ 771:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 772:../Dave/Generated/src/RTC001/RTC001.c ****   /*Check if RTC module is enabled and no NULL pointer*/
+ 773:../Dave/Generated/src/RTC001/RTC001.c ****   if(((RTC->CTR & (RTC_CTR_ENB_Msk)) != 0U) && (time_value != NULL))
+ 1245              		.loc 1 773 0
+ 1246 004a 4FF49443 		mov	r3, #18944
+ 1247 004e C5F20003 		movt	r3, 20480
+ 1248 0052 5B68     		ldr	r3, [r3, #4]
+ 1249 0054 03F00103 		and	r3, r3, #1
+ 1250 0058 002B     		cmp	r3, #0
+ 1251 005a 00F0B380 		beq	.L44
+ 1252              		.loc 1 773 0 is_stmt 0 discriminator 1
+ 1253 005e 7B68     		ldr	r3, [r7, #4]
+ 1254 0060 002B     		cmp	r3, #0
+ 1255 0062 00F0AF80 		beq	.L44
+ 774:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 775:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 776:../Dave/Generated/src/RTC001/RTC001.c ****     /*   Read values from TIM0 and TIM1 registers  */
+ 777:../Dave/Generated/src/RTC001/RTC001.c ****     CurrentYear = ((uint32_t)((RTC->TIM1 & RTC_TIM1_YE_Msk) >> 16U));
+ 1256              		.loc 1 777 0 is_stmt 1
+ 1257 0066 4FF49443 		mov	r3, #18944
+ 1258 006a C5F20003 		movt	r3, 20480
+ 1259 006e 5B6A     		ldr	r3, [r3, #36]
+ 1260 0070 4FEA1343 		lsr	r3, r3, #16
+ 1261 0074 7B62     		str	r3, [r7, #36]
+ 778:../Dave/Generated/src/RTC001/RTC001.c ****     CurrentMonth = 	((uint32_t)(((RTC->TIM1 & RTC_TIM1_MO_Msk) >> 8U) + 1U));
+ 1262              		.loc 1 778 0
+ 1263 0076 4FF49443 		mov	r3, #18944
+ 1264 007a C5F20003 		movt	r3, 20480
+ 1265 007e 5B6A     		ldr	r3, [r3, #36]
+ 1266 0080 03F47063 		and	r3, r3, #3840
+ 1267 0084 4FEA1323 		lsr	r3, r3, #8
+ 1268 0088 03F10103 		add	r3, r3, #1
+ 1269 008c 3B62     		str	r3, [r7, #32]
+ 779:../Dave/Generated/src/RTC001/RTC001.c ****     CurrentDay = ((uint32_t)(((RTC->TIM0 & RTC_TIM0_DA_Msk) >> 24U) + 1U));
+ 1270              		.loc 1 779 0
+ 1271 008e 4FF49443 		mov	r3, #18944
+ 1272 0092 C5F20003 		movt	r3, 20480
+ 1273 0096 1B6A     		ldr	r3, [r3, #32]
+ 1274 0098 03F0F853 		and	r3, r3, #520093696
+ 1275 009c 4FEA1363 		lsr	r3, r3, #24
+ 1276 00a0 03F10103 		add	r3, r3, #1
+ 1277 00a4 FB61     		str	r3, [r7, #28]
+ 780:../Dave/Generated/src/RTC001/RTC001.c ****     CurrentHour = ((uint32_t)(((RTC->TIM0 & RTC_TIM0_HO_Msk) >> 16U)));
+ 1278              		.loc 1 780 0
+ 1279 00a6 4FF49443 		mov	r3, #18944
+ 1280 00aa C5F20003 		movt	r3, 20480
+ 1281 00ae 1B6A     		ldr	r3, [r3, #32]
+ 1282 00b0 03F4F813 		and	r3, r3, #2031616
+ 1283 00b4 4FEA1343 		lsr	r3, r3, #16
+ 1284 00b8 BB61     		str	r3, [r7, #24]
+ 781:../Dave/Generated/src/RTC001/RTC001.c ****     CurrentMin = ((uint32_t)(((RTC->TIM0 & RTC_TIM0_MI_Msk) >> 8U)));
+ 1285              		.loc 1 781 0
+ 1286 00ba 4FF49443 		mov	r3, #18944
+ 1287 00be C5F20003 		movt	r3, 20480
+ 1288 00c2 1B6A     		ldr	r3, [r3, #32]
+ 1289 00c4 03F47C53 		and	r3, r3, #16128
+ 1290 00c8 4FEA1323 		lsr	r3, r3, #8
+ 1291 00cc 7B61     		str	r3, [r7, #20]
+ 782:../Dave/Generated/src/RTC001/RTC001.c ****     CurrentSec = ((uint32_t)((RTC->TIM0 & RTC_TIM0_SE_Msk)));
+ 1292              		.loc 1 782 0
+ 1293 00ce 4FF49443 		mov	r3, #18944
+ 1294 00d2 C5F20003 		movt	r3, 20480
+ 1295 00d6 1B6A     		ldr	r3, [r3, #32]
+ 1296 00d8 03F03F03 		and	r3, r3, #63
+ 1297 00dc 3B61     		str	r3, [r7, #16]
+ 783:../Dave/Generated/src/RTC001/RTC001.c ****     
+ 784:../Dave/Generated/src/RTC001/RTC001.c ****     /*Count number of Days for Elapsed Years since Epoch*/
+ 785:../Dave/Generated/src/RTC001/RTC001.c ****     ElapsedDays = (uint32_t)(CurrentYear - RTC001_EPOCH_YEAR) *\
+ 1298              		.loc 1 785 0
+ 1299 00de 7B6A     		ldr	r3, [r7, #36]
+ 1300 00e0 40F26D12 		movw	r2, #365
+ 1301 00e4 02FB03F3 		mul	r3, r2, r3
+ 1302 00e8 A3F52F23 		sub	r3, r3, #716800
+ 1303 00ec A3F6CA03 		subw	r3, r3, #2250
+ 1304 00f0 FB62     		str	r3, [r7, #44]
+ 786:../Dave/Generated/src/RTC001/RTC001.c ****                   (uint32_t) RTC001_DAYS_IN_AN_YEAR;
+ 787:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 788:../Dave/Generated/src/RTC001/RTC001.c ****     /* Add the number of days to be adjusted for leap years, 
+ 789:../Dave/Generated/src/RTC001/RTC001.c ****     start from previous year and check backwords */
+ 790:../Dave/Generated/src/RTC001/RTC001.c ****     for (ElapsedYear=(CurrentYear-1U); ElapsedYear>= 1970U; ElapsedYear--)
+ 1305              		.loc 1 790 0
+ 1306 00f2 7B6A     		ldr	r3, [r7, #36]
+ 1307 00f4 03F1FF33 		add	r3, r3, #-1
+ 1308 00f8 7B63     		str	r3, [r7, #52]
+ 1309 00fa 0FE0     		b	.L45
+ 1310              	.L47:
+ 791:../Dave/Generated/src/RTC001/RTC001.c ****     {
+ 792:../Dave/Generated/src/RTC001/RTC001.c ****       if (RTC001_lleapyear((uint16_t)ElapsedYear))
+ 1311              		.loc 1 792 0
+ 1312 00fc 7B6B     		ldr	r3, [r7, #52]
+ 1313 00fe 9BB2     		uxth	r3, r3
+ 1314 0100 1846     		mov	r0, r3
+ 1315 0102 FFF7FEFF 		bl	RTC001_lleapyear
+ 1316 0106 0346     		mov	r3, r0
+ 1317 0108 002B     		cmp	r3, #0
+ 1318 010a 03D0     		beq	.L46
+ 793:../Dave/Generated/src/RTC001/RTC001.c ****       {
+ 794:../Dave/Generated/src/RTC001/RTC001.c ****         ElapsedDays++;
+ 1319              		.loc 1 794 0
+ 1320 010c FB6A     		ldr	r3, [r7, #44]
+ 1321 010e 03F10103 		add	r3, r3, #1
+ 1322 0112 FB62     		str	r3, [r7, #44]
+ 1323              	.L46:
+ 790:../Dave/Generated/src/RTC001/RTC001.c ****     for (ElapsedYear=(CurrentYear-1U); ElapsedYear>= 1970U; ElapsedYear--)
+ 1324              		.loc 1 790 0
+ 1325 0114 7B6B     		ldr	r3, [r7, #52]
+ 1326 0116 03F1FF33 		add	r3, r3, #-1
+ 1327 011a 7B63     		str	r3, [r7, #52]
+ 1328              	.L45:
+ 790:../Dave/Generated/src/RTC001/RTC001.c ****     for (ElapsedYear=(CurrentYear-1U); ElapsedYear>= 1970U; ElapsedYear--)
+ 1329              		.loc 1 790 0 is_stmt 0 discriminator 1
+ 1330 011c 7A6B     		ldr	r2, [r7, #52]
+ 1331 011e 40F2B173 		movw	r3, #1969
+ 1332 0122 9A42     		cmp	r2, r3
+ 1333 0124 EAD8     		bhi	.L47
+ 795:../Dave/Generated/src/RTC001/RTC001.c ****       }
+ 796:../Dave/Generated/src/RTC001/RTC001.c ****     }
+ 797:../Dave/Generated/src/RTC001/RTC001.c ****     /*If current year is leap year add 1 only if March or later*/
+ 798:../Dave/Generated/src/RTC001/RTC001.c ****     if (RTC001_lleapyear((uint16_t)CurrentYear))
+ 1334              		.loc 1 798 0 is_stmt 1
+ 1335 0126 7B6A     		ldr	r3, [r7, #36]
+ 1336 0128 9BB2     		uxth	r3, r3
+ 1337 012a 1846     		mov	r0, r3
+ 1338 012c FFF7FEFF 		bl	RTC001_lleapyear
+ 1339 0130 0346     		mov	r3, r0
+ 1340 0132 002B     		cmp	r3, #0
+ 1341 0134 06D0     		beq	.L48
+ 799:../Dave/Generated/src/RTC001/RTC001.c ****     {
+ 800:../Dave/Generated/src/RTC001/RTC001.c ****       if(CurrentMonth > 2U)
+ 1342              		.loc 1 800 0
+ 1343 0136 3B6A     		ldr	r3, [r7, #32]
+ 1344 0138 022B     		cmp	r3, #2
+ 1345 013a 03D9     		bls	.L48
+ 801:../Dave/Generated/src/RTC001/RTC001.c ****       {
+ 802:../Dave/Generated/src/RTC001/RTC001.c ****         ElapsedDays++;
+ 1346              		.loc 1 802 0
+ 1347 013c FB6A     		ldr	r3, [r7, #44]
+ 1348 013e 03F10103 		add	r3, r3, #1
+ 1349 0142 FB62     		str	r3, [r7, #44]
+ 1350              	.L48:
+ 803:../Dave/Generated/src/RTC001/RTC001.c ****       }
+ 804:../Dave/Generated/src/RTC001/RTC001.c ****     }
+ 805:../Dave/Generated/src/RTC001/RTC001.c ****     
+ 806:../Dave/Generated/src/RTC001/RTC001.c ****     /*Add number of Days from Elapsed months from current year*/
+ 807:../Dave/Generated/src/RTC001/RTC001.c ****     for (ElapsedMonth = (CurrentMonth - 1U); ElapsedMonth != 0U; ElapsedMonth--)
+ 1351              		.loc 1 807 0
+ 1352 0144 3B6A     		ldr	r3, [r7, #32]
+ 1353 0146 03F1FF33 		add	r3, r3, #-1
+ 1354 014a 3B63     		str	r3, [r7, #48]
+ 1355 014c 0DE0     		b	.L49
+ 1356              	.L50:
+ 808:../Dave/Generated/src/RTC001/RTC001.c ****     {
+ 809:../Dave/Generated/src/RTC001/RTC001.c ****       ElapsedDays += RTC001_DAYS_IN_MONTH[ElapsedMonth];  
+ 1357              		.loc 1 809 0 discriminator 2
+ 1358 014e 40F20003 		movw	r3, #:lower16:RTC001_DAYS_IN_MONTH
+ 1359 0152 C0F20003 		movt	r3, #:upper16:RTC001_DAYS_IN_MONTH
+ 1360 0156 3A6B     		ldr	r2, [r7, #48]
+ 1361 0158 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 1362 015c FA6A     		ldr	r2, [r7, #44]
+ 1363 015e D318     		adds	r3, r2, r3
+ 1364 0160 FB62     		str	r3, [r7, #44]
+ 807:../Dave/Generated/src/RTC001/RTC001.c ****     for (ElapsedMonth = (CurrentMonth - 1U); ElapsedMonth != 0U; ElapsedMonth--)
+ 1365              		.loc 1 807 0 discriminator 2
+ 1366 0162 3B6B     		ldr	r3, [r7, #48]
+ 1367 0164 03F1FF33 		add	r3, r3, #-1
+ 1368 0168 3B63     		str	r3, [r7, #48]
+ 1369              	.L49:
+ 807:../Dave/Generated/src/RTC001/RTC001.c ****     for (ElapsedMonth = (CurrentMonth - 1U); ElapsedMonth != 0U; ElapsedMonth--)
+ 1370              		.loc 1 807 0 is_stmt 0 discriminator 1
+ 1371 016a 3B6B     		ldr	r3, [r7, #48]
+ 1372 016c 002B     		cmp	r3, #0
+ 1373 016e EED1     		bne	.L50
+ 810:../Dave/Generated/src/RTC001/RTC001.c ****     } 
+ 811:../Dave/Generated/src/RTC001/RTC001.c ****     
+ 812:../Dave/Generated/src/RTC001/RTC001.c ****     /*Add Elapsed days from current month*/
+ 813:../Dave/Generated/src/RTC001/RTC001.c ****     ElapsedDays += CurrentDay - 1U;
+ 1374              		.loc 1 813 0 is_stmt 1
+ 1375 0170 FA69     		ldr	r2, [r7, #28]
+ 1376 0172 FB6A     		ldr	r3, [r7, #44]
+ 1377 0174 D318     		adds	r3, r2, r3
+ 1378 0176 03F1FF33 		add	r3, r3, #-1
+ 1379 017a FB62     		str	r3, [r7, #44]
+ 814:../Dave/Generated/src/RTC001/RTC001.c ****     
+ 815:../Dave/Generated/src/RTC001/RTC001.c ****     /*Accumulate the total seconds for ElapsedDays*/
+ 816:../Dave/Generated/src/RTC001/RTC001.c ****     ElapsedSeconds = (ElapsedDays * RTC001_SECONDS_IN_A_DAY);
+ 1380              		.loc 1 816 0
+ 1381 017c FA6A     		ldr	r2, [r7, #44]
+ 1382 017e 4FF4A343 		mov	r3, #20864
+ 1383 0182 C0F20103 		movt	r3, 1
+ 1384 0186 03FB02F3 		mul	r3, r3, r2
+ 1385 018a FB60     		str	r3, [r7, #12]
+ 817:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 818:../Dave/Generated/src/RTC001/RTC001.c ****     /*Add seconds for current hour, minute and seconds*/
+ 819:../Dave/Generated/src/RTC001/RTC001.c ****     ElapsedSeconds += (CurrentHour * RTC001_SECONDS_IN_AN_HOUR);   
+ 1386              		.loc 1 819 0
+ 1387 018c BB69     		ldr	r3, [r7, #24]
+ 1388 018e 4FF46162 		mov	r2, #3600
+ 1389 0192 02FB03F3 		mul	r3, r2, r3
+ 1390 0196 FA68     		ldr	r2, [r7, #12]
+ 1391 0198 D318     		adds	r3, r2, r3
+ 1392 019a FB60     		str	r3, [r7, #12]
+ 820:../Dave/Generated/src/RTC001/RTC001.c ****     ElapsedSeconds += (CurrentMin * RTC001_SECONDS_IN_A_MINUTE); 
+ 1393              		.loc 1 820 0
+ 1394 019c 7A69     		ldr	r2, [r7, #20]
+ 1395 019e 1346     		mov	r3, r2
+ 1396 01a0 4FEA0313 		lsl	r3, r3, #4
+ 1397 01a4 9B1A     		subs	r3, r3, r2
+ 1398 01a6 4FEA8303 		lsl	r3, r3, #2
+ 1399 01aa FA68     		ldr	r2, [r7, #12]
+ 1400 01ac D318     		adds	r3, r2, r3
+ 1401 01ae FB60     		str	r3, [r7, #12]
+ 821:../Dave/Generated/src/RTC001/RTC001.c ****     ElapsedSeconds += CurrentSec; 
+ 1402              		.loc 1 821 0
+ 1403 01b0 FA68     		ldr	r2, [r7, #12]
+ 1404 01b2 3B69     		ldr	r3, [r7, #16]
+ 1405 01b4 D318     		adds	r3, r2, r3
+ 1406 01b6 FB60     		str	r3, [r7, #12]
+ 822:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 823:../Dave/Generated/src/RTC001/RTC001.c ****     *time_value = (time_t) ElapsedSeconds;
+ 1407              		.loc 1 823 0
+ 1408 01b8 FA68     		ldr	r2, [r7, #12]
+ 1409 01ba 7B68     		ldr	r3, [r7, #4]
+ 1410 01bc 1A60     		str	r2, [r3, #0]
+ 824:../Dave/Generated/src/RTC001/RTC001.c ****     status = (uint32_t) RTC001App_SUCCESS;
+ 1411              		.loc 1 824 0
+ 1412 01be 4FF00003 		mov	r3, #0
+ 1413 01c2 BB62     		str	r3, [r7, #40]
+ 1414              	.L44:
+ 825:../Dave/Generated/src/RTC001/RTC001.c ****     
+ 826:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 827:../Dave/Generated/src/RTC001/RTC001.c ****   DBG002_FUNCTION_EXIT(APP_GID,RTC001_FUNCTION_EXIT);
+ 828:../Dave/Generated/src/RTC001/RTC001.c ****   return status;
+ 1415              		.loc 1 828 0
+ 1416 01c4 BB6A     		ldr	r3, [r7, #40]
+ 829:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 1417              		.loc 1 829 0
+ 1418 01c6 1846     		mov	r0, r3
+ 1419 01c8 07F13807 		add	r7, r7, #56
+ 1420 01cc BD46     		mov	sp, r7
+ 1421 01ce 80BD     		pop	{r7, pc}
+ 1422              		.cfi_endproc
+ 1423              	.LFE130:
+ 1425              		.section	.text.RTC001_ldatevalid,"ax",%progbits
+ 1426              		.align	2
+ 1427              		.thumb
+ 1428              		.thumb_func
+ 1430              	RTC001_ldatevalid:
+ 1431              	.LFB131:
+ 830:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 831:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 832:../Dave/Generated/src/RTC001/RTC001.c **** /* Return 1 if date is valid, 0 otherwise.	*/
+ 833:../Dave/Generated/src/RTC001/RTC001.c **** static uint32_t RTC001_ldatevalid(uint16_t month,uint16_t day,uint16_t year)
+ 834:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 1432              		.loc 1 834 0
+ 1433              		.cfi_startproc
+ 1434              		@ args = 0, pretend = 0, frame = 16
+ 1435              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1436 0000 80B5     		push	{r7, lr}
+ 1437              	.LCFI29:
+ 1438              		.cfi_def_cfa_offset 8
+ 1439              		.cfi_offset 7, -8
+ 1440              		.cfi_offset 14, -4
+ 1441 0002 84B0     		sub	sp, sp, #16
+ 1442              	.LCFI30:
+ 1443              		.cfi_def_cfa_offset 24
+ 1444 0004 00AF     		add	r7, sp, #0
+ 1445              	.LCFI31:
+ 1446              		.cfi_def_cfa_register 7
+ 1447 0006 1346     		mov	r3, r2
+ 1448 0008 0246     		mov	r2, r0	@ movhi
+ 1449 000a FA80     		strh	r2, [r7, #6]	@ movhi
+ 1450 000c 0A46     		mov	r2, r1	@ movhi
+ 1451 000e BA80     		strh	r2, [r7, #4]	@ movhi
+ 1452 0010 7B80     		strh	r3, [r7, #2]	@ movhi
+ 835:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t valid = 0U;
+ 1453              		.loc 1 835 0
+ 1454 0012 4FF00003 		mov	r3, #0
+ 1455 0016 FB60     		str	r3, [r7, #12]
+ 836:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 837:../Dave/Generated/src/RTC001/RTC001.c ****   if ((month == 0U) || (month > 12U) )
+ 1456              		.loc 1 837 0
+ 1457 0018 FB88     		ldrh	r3, [r7, #6]
+ 1458 001a 002B     		cmp	r3, #0
+ 1459 001c 02D0     		beq	.L53
+ 1460              		.loc 1 837 0 is_stmt 0 discriminator 1
+ 1461 001e FB88     		ldrh	r3, [r7, #6]
+ 1462 0020 0C2B     		cmp	r3, #12
+ 1463 0022 03D9     		bls	.L54
+ 1464              	.L53:
+ 838:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 839:../Dave/Generated/src/RTC001/RTC001.c ****     valid = 0U;
+ 1465              		.loc 1 839 0 is_stmt 1
+ 1466 0024 4FF00003 		mov	r3, #0
+ 1467 0028 FB60     		str	r3, [r7, #12]
+ 1468 002a 25E0     		b	.L55
+ 1469              	.L54:
+ 840:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 841:../Dave/Generated/src/RTC001/RTC001.c ****   else  if ((month != 2U) || (day < 29U))
+ 1470              		.loc 1 841 0
+ 1471 002c FB88     		ldrh	r3, [r7, #6]
+ 1472 002e 022B     		cmp	r3, #2
+ 1473 0030 02D1     		bne	.L56
+ 1474              		.loc 1 841 0 is_stmt 0 discriminator 1
+ 1475 0032 BB88     		ldrh	r3, [r7, #4]
+ 1476 0034 1C2B     		cmp	r3, #28
+ 1477 0036 10D8     		bhi	.L57
+ 1478              	.L56:
+ 842:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 843:../Dave/Generated/src/RTC001/RTC001.c ****      if ((day <= RTC001_DAYS_IN_MONTH[month]) && (day > 0U))
+ 1479              		.loc 1 843 0 is_stmt 1
+ 1480 0038 BA88     		ldrh	r2, [r7, #4]
+ 1481 003a F988     		ldrh	r1, [r7, #6]
+ 1482 003c 40F20003 		movw	r3, #:lower16:RTC001_DAYS_IN_MONTH
+ 1483 0040 C0F20003 		movt	r3, #:upper16:RTC001_DAYS_IN_MONTH
+ 1484 0044 53F82130 		ldr	r3, [r3, r1, lsl #2]
+ 1485 0048 9A42     		cmp	r2, r3
+ 1486 004a 14D8     		bhi	.L60
+ 1487              		.loc 1 843 0 is_stmt 0 discriminator 1
+ 1488 004c BB88     		ldrh	r3, [r7, #4]
+ 1489 004e 002B     		cmp	r3, #0
+ 1490 0050 11D0     		beq	.L60
+ 844:../Dave/Generated/src/RTC001/RTC001.c ****      {
+ 845:../Dave/Generated/src/RTC001/RTC001.c ****        valid = 1U;
+ 1491              		.loc 1 845 0 is_stmt 1
+ 1492 0052 4FF00103 		mov	r3, #1
+ 1493 0056 FB60     		str	r3, [r7, #12]
+ 843:../Dave/Generated/src/RTC001/RTC001.c ****      if ((day <= RTC001_DAYS_IN_MONTH[month]) && (day > 0U))
+ 1494              		.loc 1 843 0
+ 1495 0058 0DE0     		b	.L60
+ 1496              	.L57:
+ 846:../Dave/Generated/src/RTC001/RTC001.c ****      }
+ 847:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 848:../Dave/Generated/src/RTC001/RTC001.c ****   else /*Reaches here only if month = February and day = 29*/
+ 849:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 850:../Dave/Generated/src/RTC001/RTC001.c ****     /*Check if it is leap year*/
+ 851:../Dave/Generated/src/RTC001/RTC001.c ****     if (RTC001_lleapyear(year))
+ 1497              		.loc 1 851 0
+ 1498 005a 7B88     		ldrh	r3, [r7, #2]
+ 1499 005c 1846     		mov	r0, r3
+ 1500 005e FFF7FEFF 		bl	RTC001_lleapyear
+ 1501 0062 0346     		mov	r3, r0
+ 1502 0064 002B     		cmp	r3, #0
+ 1503 0066 07D0     		beq	.L55
+ 852:../Dave/Generated/src/RTC001/RTC001.c ****     {
+ 853:../Dave/Generated/src/RTC001/RTC001.c ****       if (day == 29U)
+ 1504              		.loc 1 853 0
+ 1505 0068 BB88     		ldrh	r3, [r7, #4]
+ 1506 006a 1D2B     		cmp	r3, #29
+ 1507 006c 04D1     		bne	.L55
+ 854:../Dave/Generated/src/RTC001/RTC001.c ****       { 
+ 855:../Dave/Generated/src/RTC001/RTC001.c ****         valid = 1U;
+ 1508              		.loc 1 855 0
+ 1509 006e 4FF00103 		mov	r3, #1
+ 1510 0072 FB60     		str	r3, [r7, #12]
+ 1511 0074 00E0     		b	.L55
+ 1512              	.L60:
+ 843:../Dave/Generated/src/RTC001/RTC001.c ****      if ((day <= RTC001_DAYS_IN_MONTH[month]) && (day > 0U))
+ 1513              		.loc 1 843 0
+ 1514 0076 00BF     		nop
+ 1515              	.L55:
+ 856:../Dave/Generated/src/RTC001/RTC001.c ****       }
+ 857:../Dave/Generated/src/RTC001/RTC001.c ****     }
+ 858:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 859:../Dave/Generated/src/RTC001/RTC001.c ****   return valid;
+ 1516              		.loc 1 859 0
+ 1517 0078 FB68     		ldr	r3, [r7, #12]
+ 860:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 1518              		.loc 1 860 0
+ 1519 007a 1846     		mov	r0, r3
+ 1520 007c 07F11007 		add	r7, r7, #16
+ 1521 0080 BD46     		mov	sp, r7
+ 1522 0082 80BD     		pop	{r7, pc}
+ 1523              		.cfi_endproc
+ 1524              	.LFE131:
+ 1526              		.section	.text.RTC001_lleapyear,"ax",%progbits
+ 1527              		.align	2
+ 1528              		.thumb
+ 1529              		.thumb_func
+ 1531              	RTC001_lleapyear:
+ 1532              	.LFB132:
+ 861:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 862:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 863:../Dave/Generated/src/RTC001/RTC001.c **** /* Return 1 if year is leap year, 0 otherwise.	*/
+ 864:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 865:../Dave/Generated/src/RTC001/RTC001.c **** static uint8_t RTC001_lleapyear(uint16_t year)
+ 866:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 1533              		.loc 1 866 0
+ 1534              		.cfi_startproc
+ 1535              		@ args = 0, pretend = 0, frame = 16
+ 1536              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1537              		@ link register save eliminated.
+ 1538 0000 80B4     		push	{r7}
+ 1539              	.LCFI32:
+ 1540              		.cfi_def_cfa_offset 4
+ 1541              		.cfi_offset 7, -4
+ 1542 0002 85B0     		sub	sp, sp, #20
+ 1543              	.LCFI33:
+ 1544              		.cfi_def_cfa_offset 24
+ 1545 0004 00AF     		add	r7, sp, #0
+ 1546              	.LCFI34:
+ 1547              		.cfi_def_cfa_register 7
+ 1548 0006 0346     		mov	r3, r0
+ 1549 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 867:../Dave/Generated/src/RTC001/RTC001.c ****   uint8_t valid = 0U;
+ 1550              		.loc 1 867 0
+ 1551 000a 4FF00003 		mov	r3, #0
+ 1552 000e FB73     		strb	r3, [r7, #15]
+ 868:../Dave/Generated/src/RTC001/RTC001.c ****   
+ 869:../Dave/Generated/src/RTC001/RTC001.c ****   if ((((year) % 400U) == 0U) || ((((year) % 100U) != 0U) && \
+ 1553              		.loc 1 869 0
+ 1554 0010 FA88     		ldrh	r2, [r7, #6]
+ 1555 0012 48F21F53 		movw	r3, #34079
+ 1556 0016 C5F2EB13 		movt	r3, 20971
+ 1557 001a A3FB0213 		umull	r1, r3, r3, r2
+ 1558 001e 4FEAD313 		lsr	r3, r3, #7
+ 1559 0022 4FF4C871 		mov	r1, #400
+ 1560 0026 01FB03F3 		mul	r3, r1, r3
+ 1561 002a D31A     		subs	r3, r2, r3
+ 1562 002c 9BB2     		uxth	r3, r3
+ 1563 002e 002B     		cmp	r3, #0
+ 1564 0030 16D0     		beq	.L62
+ 1565              		.loc 1 869 0 is_stmt 0 discriminator 1
+ 1566 0032 FA88     		ldrh	r2, [r7, #6]
+ 1567 0034 48F21F53 		movw	r3, #34079
+ 1568 0038 C5F2EB13 		movt	r3, 20971
+ 1569 003c A3FB0213 		umull	r1, r3, r3, r2
+ 1570 0040 4FEA5313 		lsr	r3, r3, #5
+ 1571 0044 4FF06401 		mov	r1, #100
+ 1572 0048 01FB03F3 		mul	r3, r1, r3
+ 1573 004c D31A     		subs	r3, r2, r3
+ 1574 004e 9BB2     		uxth	r3, r3
+ 1575 0050 002B     		cmp	r3, #0
+ 1576 0052 08D0     		beq	.L63
+ 870:../Dave/Generated/src/RTC001/RTC001.c ****      (((year) %4U) == 0U)))
+ 1577              		.loc 1 870 0 is_stmt 1 discriminator 1
+ 1578 0054 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 1579 0056 03F00303 		and	r3, r3, #3
+ 1580 005a 9BB2     		uxth	r3, r3
+ 869:../Dave/Generated/src/RTC001/RTC001.c ****   if ((((year) % 400U) == 0U) || ((((year) % 100U) != 0U) && \
+ 1581              		.loc 1 869 0 discriminator 1
+ 1582 005c 002B     		cmp	r3, #0
+ 1583 005e 02D1     		bne	.L63
+ 1584              	.L62:
+ 871:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 872:../Dave/Generated/src/RTC001/RTC001.c **** 	valid = 1U;
+ 1585              		.loc 1 872 0
+ 1586 0060 4FF00103 		mov	r3, #1
+ 1587 0064 FB73     		strb	r3, [r7, #15]
+ 1588              	.L63:
+ 873:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 874:../Dave/Generated/src/RTC001/RTC001.c ****   return valid;
+ 1589              		.loc 1 874 0
+ 1590 0066 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 875:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 1591              		.loc 1 875 0
+ 1592 0068 1846     		mov	r0, r3
+ 1593 006a 07F11407 		add	r7, r7, #20
+ 1594 006e BD46     		mov	sp, r7
+ 1595 0070 80BC     		pop	{r7}
+ 1596 0072 7047     		bx	lr
+ 1597              		.cfi_endproc
+ 1598              	.LFE132:
+ 1600              		.section	.rodata
+ 1601              		.align	2
+ 1602              	.LC0:
+ 1603 0034 00       		.byte	0
+ 1604 0035 14       		.byte	20
+ 1605 0036 00       		.byte	0
+ 1606 0037 10       		.byte	16
+ 1607 0038 18       		.byte	24
+ 1608 0039 14       		.byte	20
+ 1609 003a 00       		.byte	0
+ 1610 003b 18       		.byte	24
+ 1611 003c 04       		.byte	4
+ 1612 003d 0C       		.byte	12
+ 1613 003e 08       		.byte	8
+ 1614 003f 10       		.byte	16
+ 1615 0040 0C       		.byte	12
+ 1616 0041 000000   		.section	.text.RTC001_lweekday,"ax",%progbits
+ 1617              		.align	2
+ 1618              		.thumb
+ 1619              		.thumb_func
+ 1621              	RTC001_lweekday:
+ 1622              	.LFB133:
+ 876:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 877:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 878:../Dave/Generated/src/RTC001/RTC001.c **** /* Given month, day, year, returns day of week, eg. Monday = 0 etc.
+ 879:../Dave/Generated/src/RTC001/RTC001.c **** */ 
+ 880:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 881:../Dave/Generated/src/RTC001/RTC001.c **** static uint32_t RTC001_lweekday(uint16_t month,uint16_t day,uint16_t year)
+ 882:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 1623              		.loc 1 882 0
+ 1624              		.cfi_startproc
+ 1625              		@ args = 0, pretend = 0, frame = 32
+ 1626              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1627              		@ link register save eliminated.
+ 1628 0000 90B4     		push	{r4, r7}
+ 1629              	.LCFI35:
+ 1630              		.cfi_def_cfa_offset 8
+ 1631              		.cfi_offset 4, -8
+ 1632              		.cfi_offset 7, -4
+ 1633 0002 88B0     		sub	sp, sp, #32
+ 1634              	.LCFI36:
+ 1635              		.cfi_def_cfa_offset 40
+ 1636 0004 00AF     		add	r7, sp, #0
+ 1637              	.LCFI37:
+ 1638              		.cfi_def_cfa_register 7
+ 1639 0006 1346     		mov	r3, r2
+ 1640 0008 0246     		mov	r2, r0	@ movhi
+ 1641 000a FA80     		strh	r2, [r7, #6]	@ movhi
+ 1642 000c 0A46     		mov	r2, r1	@ movhi
+ 1643 000e BA80     		strh	r2, [r7, #4]	@ movhi
+ 1644 0010 7B80     		strh	r3, [r7, #2]	@ movhi
+ 883:../Dave/Generated/src/RTC001/RTC001.c ****   uint16_t vx, tx, ix, feb;
+ 884:../Dave/Generated/src/RTC001/RTC001.c ****   const uint8_t vx_list[] = 
+ 1645              		.loc 1 884 0
+ 1646 0012 40F20002 		movw	r2, #:lower16:.LC0
+ 1647 0016 C0F20002 		movt	r2, #:upper16:.LC0
+ 1648 001a 07F10803 		add	r3, r7, #8
+ 1649 001e 1446     		mov	r4, r2
+ 1650 0020 2068     		ldr	r0, [r4, #0]	@ unaligned
+ 1651 0022 6168     		ldr	r1, [r4, #4]	@ unaligned
+ 1652 0024 A268     		ldr	r2, [r4, #8]	@ unaligned
+ 1653 0026 07C3     		stmia	r3!, {r0, r1, r2}
+ 1654 0028 227B     		ldrb	r2, [r4, #12]
+ 1655 002a 1A70     		strb	r2, [r3, #0]
+ 885:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 886:../Dave/Generated/src/RTC001/RTC001.c ****       0U, 20U, 0U, 16U, 24U, 20U, 0U, 24U, 4U, 12U, 8U, 16U, 12U
+ 887:../Dave/Generated/src/RTC001/RTC001.c ****   };
+ 888:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 889:../Dave/Generated/src/RTC001/RTC001.c ****   vx = vx_list[month];
+ 1656              		.loc 1 889 0
+ 1657 002c FB88     		ldrh	r3, [r7, #6]
+ 1658 002e 07F12000 		add	r0, r7, #32
+ 1659 0032 C318     		adds	r3, r0, r3
+ 1660 0034 13F8183C 		ldrb	r3, [r3, #-24]	@ zero_extendqisi2
+ 1661 0038 FB83     		strh	r3, [r7, #30]	@ movhi
+ 890:../Dave/Generated/src/RTC001/RTC001.c ****   if(year > 1900U)
+ 1662              		.loc 1 890 0
+ 1663 003a 7A88     		ldrh	r2, [r7, #2]
+ 1664 003c 40F26C73 		movw	r3, #1900
+ 1665 0040 9A42     		cmp	r2, r3
+ 1666 0042 03D9     		bls	.L66
+ 891:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 892:../Dave/Generated/src/RTC001/RTC001.c ****     year = year - 1900U;
+ 1667              		.loc 1 892 0
+ 1668 0044 7B88     		ldrh	r3, [r7, #2]	@ movhi
+ 1669 0046 A3F26C73 		subw	r3, r3, #1900
+ 1670 004a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 1671              	.L66:
+ 893:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 894:../Dave/Generated/src/RTC001/RTC001.c ****   feb = (month  > 2U)? 1U : 0U;
+ 1672              		.loc 1 894 0
+ 1673 004c FB88     		ldrh	r3, [r7, #6]
+ 1674 004e 022B     		cmp	r3, #2
+ 1675 0050 02D9     		bls	.L67
+ 1676              		.loc 1 894 0 is_stmt 0 discriminator 1
+ 1677 0052 4FF00103 		mov	r3, #1
+ 1678 0056 01E0     		b	.L68
+ 1679              	.L67:
+ 1680              		.loc 1 894 0 discriminator 2
+ 1681 0058 4FF00003 		mov	r3, #0
+ 1682              	.L68:
+ 1683              		.loc 1 894 0 discriminator 3
+ 1684 005c BB83     		strh	r3, [r7, #28]	@ movhi
+ 895:../Dave/Generated/src/RTC001/RTC001.c **** /* Take care of February */
+ 896:../Dave/Generated/src/RTC001/RTC001.c ****   ix = ((year - 21U) % 28U) + vx + feb;
+ 1685              		.loc 1 896 0 is_stmt 1 discriminator 3
+ 1686 005e 7B88     		ldrh	r3, [r7, #2]
+ 1687 0060 A3F11502 		sub	r2, r3, #21
+ 1688 0064 4FEA9201 		lsr	r1, r2, #2
+ 1689 0068 44F62513 		movw	r3, #18725
+ 1690 006c C2F29243 		movt	r3, 9362
+ 1691 0070 A3FB0101 		umull	r0, r1, r3, r1
+ 1692 0074 0B46     		mov	r3, r1
+ 1693 0076 4FEAC303 		lsl	r3, r3, #3
+ 1694 007a 5B1A     		subs	r3, r3, r1
+ 1695 007c 4FEA8303 		lsl	r3, r3, #2
+ 1696 0080 D31A     		subs	r3, r2, r3
+ 1697 0082 9AB2     		uxth	r2, r3
+ 1698 0084 FB8B     		ldrh	r3, [r7, #30]	@ movhi
+ 1699 0086 D318     		adds	r3, r2, r3
+ 1700 0088 9AB2     		uxth	r2, r3
+ 1701 008a BB8B     		ldrh	r3, [r7, #28]	@ movhi
+ 1702 008c D318     		adds	r3, r2, r3
+ 1703 008e 7B83     		strh	r3, [r7, #26]	@ movhi
+ 897:../Dave/Generated/src/RTC001/RTC001.c **** /* Take care of leap year */
+ 898:../Dave/Generated/src/RTC001/RTC001.c ****   tx = ((ix + (ix / 4U)) % 7U) + day;
+ 1704              		.loc 1 898 0 discriminator 3
+ 1705 0090 7A8B     		ldrh	r2, [r7, #26]
+ 1706 0092 7B8B     		ldrh	r3, [r7, #26]
+ 1707 0094 4FEA9303 		lsr	r3, r3, #2
+ 1708 0098 9BB2     		uxth	r3, r3
+ 1709 009a D118     		adds	r1, r2, r3
+ 1710 009c 44F62513 		movw	r3, #18725
+ 1711 00a0 C2F29243 		movt	r3, 9362
+ 1712 00a4 A3FB0123 		umull	r2, r3, r3, r1
+ 1713 00a8 CA1A     		subs	r2, r1, r3
+ 1714 00aa 4FEA5202 		lsr	r2, r2, #1
+ 1715 00ae 9B18     		adds	r3, r3, r2
+ 1716 00b0 4FEA9302 		lsr	r2, r3, #2
+ 1717 00b4 1346     		mov	r3, r2
+ 1718 00b6 4FEAC303 		lsl	r3, r3, #3
+ 1719 00ba 9B1A     		subs	r3, r3, r2
+ 1720 00bc CA1A     		subs	r2, r1, r3
+ 1721 00be 92B2     		uxth	r2, r2
+ 1722 00c0 BB88     		ldrh	r3, [r7, #4]	@ movhi
+ 1723 00c2 D318     		adds	r3, r2, r3
+ 1724 00c4 3B83     		strh	r3, [r7, #24]	@ movhi
+ 899:../Dave/Generated/src/RTC001/RTC001.c ****   tx = tx % 7U;
+ 1725              		.loc 1 899 0 discriminator 3
+ 1726 00c6 3A8B     		ldrh	r2, [r7, #24]
+ 1727 00c8 44F62513 		movw	r3, #18725
+ 1728 00cc C2F29243 		movt	r3, 9362
+ 1729 00d0 A3FB0203 		umull	r0, r3, r3, r2
+ 1730 00d4 D11A     		subs	r1, r2, r3
+ 1731 00d6 4FEA5101 		lsr	r1, r1, #1
+ 1732 00da 5B18     		adds	r3, r3, r1
+ 1733 00dc 4FEA9301 		lsr	r1, r3, #2
+ 1734 00e0 0B46     		mov	r3, r1
+ 1735 00e2 4FEAC303 		lsl	r3, r3, #3
+ 1736 00e6 5B1A     		subs	r3, r3, r1
+ 1737 00e8 D31A     		subs	r3, r2, r3
+ 1738 00ea 3B83     		strh	r3, [r7, #24]	@ movhi
+ 900:../Dave/Generated/src/RTC001/RTC001.c ****   return ((uint32_t)tx);
+ 1739              		.loc 1 900 0 discriminator 3
+ 1740 00ec 3B8B     		ldrh	r3, [r7, #24]
+ 901:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 1741              		.loc 1 901 0 discriminator 3
+ 1742 00ee 1846     		mov	r0, r3
+ 1743 00f0 07F12007 		add	r7, r7, #32
+ 1744 00f4 BD46     		mov	sp, r7
+ 1745 00f6 90BC     		pop	{r4, r7}
+ 1746 00f8 7047     		bx	lr
+ 1747              		.cfi_endproc
+ 1748              	.LFE133:
+ 1750 00fa 00BF     		.section	.text.RTC001_ltimevalid,"ax",%progbits
+ 1751              		.align	2
+ 1752              		.thumb
+ 1753              		.thumb_func
+ 1755              	RTC001_ltimevalid:
+ 1756              	.LFB134:
+ 902:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 903:../Dave/Generated/src/RTC001/RTC001.c **** /* Return 1 if time is valid, 0 otherwise.	*/
+ 904:../Dave/Generated/src/RTC001/RTC001.c **** static uint32_t RTC001_ltimevalid(uint8_t sec, uint8_t min, uint8_t hour)
+ 905:../Dave/Generated/src/RTC001/RTC001.c **** {
+ 1757              		.loc 1 905 0
+ 1758              		.cfi_startproc
+ 1759              		@ args = 0, pretend = 0, frame = 16
+ 1760              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1761              		@ link register save eliminated.
+ 1762 0000 80B4     		push	{r7}
+ 1763              	.LCFI38:
+ 1764              		.cfi_def_cfa_offset 4
+ 1765              		.cfi_offset 7, -4
+ 1766 0002 85B0     		sub	sp, sp, #20
+ 1767              	.LCFI39:
+ 1768              		.cfi_def_cfa_offset 24
+ 1769 0004 00AF     		add	r7, sp, #0
+ 1770              	.LCFI40:
+ 1771              		.cfi_def_cfa_register 7
+ 1772 0006 1346     		mov	r3, r2
+ 1773 0008 0246     		mov	r2, r0
+ 1774 000a FA71     		strb	r2, [r7, #7]
+ 1775 000c 0A46     		mov	r2, r1
+ 1776 000e BA71     		strb	r2, [r7, #6]
+ 1777 0010 7B71     		strb	r3, [r7, #5]
+ 906:../Dave/Generated/src/RTC001/RTC001.c ****   uint32_t valid = 0U;
+ 1778              		.loc 1 906 0
+ 1779 0012 4FF00003 		mov	r3, #0
+ 1780 0016 FB60     		str	r3, [r7, #12]
+ 907:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 908:../Dave/Generated/src/RTC001/RTC001.c ****   if ((sec < 0U) || (min < 0U) || (hour < 0U))
+ 909:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 910:../Dave/Generated/src/RTC001/RTC001.c ****     valid = 0U;
+ 911:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 912:../Dave/Generated/src/RTC001/RTC001.c ****   else if ((sec >= 60U) || (min >= 60U) || (hour >= 24U))
+ 1781              		.loc 1 912 0
+ 1782 0018 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1783 001a 3B2B     		cmp	r3, #59
+ 1784 001c 05D8     		bhi	.L71
+ 1785              		.loc 1 912 0 is_stmt 0 discriminator 1
+ 1786 001e BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 1787 0020 3B2B     		cmp	r3, #59
+ 1788 0022 02D8     		bhi	.L71
+ 1789 0024 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 1790 0026 172B     		cmp	r3, #23
+ 1791 0028 03D9     		bls	.L72
+ 1792              	.L71:
+ 913:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 914:../Dave/Generated/src/RTC001/RTC001.c ****     valid = 0U;
+ 1793              		.loc 1 914 0 is_stmt 1
+ 1794 002a 4FF00003 		mov	r3, #0
+ 1795 002e FB60     		str	r3, [r7, #12]
+ 1796 0030 02E0     		b	.L73
+ 1797              	.L72:
+ 915:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 916:../Dave/Generated/src/RTC001/RTC001.c ****   else
+ 917:../Dave/Generated/src/RTC001/RTC001.c ****   {
+ 918:../Dave/Generated/src/RTC001/RTC001.c **** 	  valid = 1U;
+ 1798              		.loc 1 918 0
+ 1799 0032 4FF00103 		mov	r3, #1
+ 1800 0036 FB60     		str	r3, [r7, #12]
+ 1801              	.L73:
+ 919:../Dave/Generated/src/RTC001/RTC001.c ****   }
+ 920:../Dave/Generated/src/RTC001/RTC001.c **** 
+ 921:../Dave/Generated/src/RTC001/RTC001.c ****   return valid;
+ 1802              		.loc 1 921 0
+ 1803 0038 FB68     		ldr	r3, [r7, #12]
+ 922:../Dave/Generated/src/RTC001/RTC001.c **** }
+ 1804              		.loc 1 922 0
+ 1805 003a 1846     		mov	r0, r3
+ 1806 003c 07F11407 		add	r7, r7, #20
+ 1807 0040 BD46     		mov	sp, r7
+ 1808 0042 80BC     		pop	{r7}
+ 1809 0044 7047     		bx	lr
+ 1810              		.cfi_endproc
+ 1811              	.LFE134:
+ 1813 0046 00BF     		.text
+ 1814              	.Letext0:
+ 1815              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1816              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1817              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 1818              		.file 5 "../Dave/Generated/src/RTC001/../../inc/RTC001/RTC001.h"
+ 1819              		.file 6 "../Dave/Generated/src/RTC001/../../inc/RTC001/../../inc/NVIC_SCU001/NVIC_SCU001.h"
+ 1820              		.file 7 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 1821              		.file 8 "../Dave/Generated/src/RTC001/../../inc/RTC001/../../inc/RTC001/RTC001_Extern.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 RTC001.c
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:24     .rodata:00000000 RTC001_DAYS_IN_MONTH
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:21     .rodata:00000000 $d
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:39     .text.RTC001_lInit:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:43     .text.RTC001_lInit:00000000 RTC001_lInit
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:507    .text.RTC001_Disable:00000000 RTC001_Disable
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:990    .text.RTC001_Clock_SetTime:00000000 RTC001_Clock_SetTime
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:309    .text.RTC001_Init:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:314    .text.RTC001_Init:00000000 RTC001_Init
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:338    .text.RTC001_DeInit:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:343    .text.RTC001_DeInit:00000000 RTC001_DeInit
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:446    .text.RTC001_Enable:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:451    .text.RTC001_Enable:00000000 RTC001_Enable
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:502    .text.RTC001_Disable:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:598    .text.RTC001_GetFlagStatus:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:603    .text.RTC001_GetFlagStatus:00000000 RTC001_GetFlagStatus
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:655    .text.RTC001_ClearFlagStatus:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:660    .text.RTC001_ClearFlagStatus:00000000 RTC001_ClearFlagStatus
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:697    .text.RTC001_ConfigAlarm:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:702    .text.RTC001_ConfigAlarm:00000000 RTC001_ConfigAlarm
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1430   .text.RTC001_ldatevalid:00000000 RTC001_ldatevalid
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1755   .text.RTC001_ltimevalid:00000000 RTC001_ltimevalid
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:883    .text.RTC001_Clock_GetTime:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:888    .text.RTC001_Clock_GetTime:00000000 RTC001_Clock_GetTime
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:985    .text.RTC001_Clock_SetTime:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1621   .text.RTC001_lweekday:00000000 RTC001_lweekday
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1192   .text.RTC001_Time:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1197   .text.RTC001_Time:00000000 RTC001_Time
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1531   .text.RTC001_lleapyear:00000000 RTC001_lleapyear
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1426   .text.RTC001_ldatevalid:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1527   .text.RTC001_lleapyear:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1602   .rodata:00000034 .LC0
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1617   .text.RTC001_lweekday:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc9hbydp.s:1751   .text.RTC001_ltimevalid:00000000 $t
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.RTC001.h.113.715d6fcab1863c6656b238bddd304166
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.reent.h.11.a39e4126dcf3c6afd3054e0622577bae
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.LMM001.h.45.fa2df8bae969f45df5071221ac433ffa
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.104.05371e300b30617373255b3cdb4765a2
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.stdarg.h.31.fa591a4b1df9e413e9f5b8097f9ae89d
+                           .group:00000000 wm4.Type_CM.h.61.3660c940695d7d5fef91de9c4081d0f0
+                           .group:00000000 wm4.dwc_os.h.82.db2ca40c41e2f648d146b8942e5157d9
+                           .group:00000000 wm4.dwc_otg_core_if.h.95.37e41eee47e9a4502e4044edf60ea92d
+                           .group:00000000 wm4.usbcore001_device.h.107.6c032c9c28ac6c3f4e5e24a068720cd7
+                           .group:00000000 wm4.USB.h.399.44a2bec94122294f06c4d854450494d3
+                           .group:00000000 wm4.Common.h.102.bc881ac788d1d7ce84e651cbaa40f2c2
+                           .group:00000000 wm4.Common.h.134.5069b632a0407201156f18fde915b80c
+                           .group:00000000 wm4.USBMode.h.234.0cc9e23131c025605bb7c0db3ebb8ac9
+                           .group:00000000 wm4.StdRequestType.h.93.4e19c7c655f990c2abedbb76a546fcde
+                           .group:00000000 wm4.Endpoint.h.116.4ef46b127c9047ed49fe1e0df19e09b8
+                           .group:00000000 wm4.StdDescriptors.h.120.0ce817e16dcc91b8cf4a79ba0e0e19b6
+                           .group:00000000 wm4.CDC.h.103.7ce3e4692dde29e827f8736493eef7ef
+                           .group:00000000 wm4.CDC.h.115.c83a7d6c5b6c8644b3dec6212d4ced09
+                           .group:00000000 wm4.Descriptors.h.91.5cf84c2489ee54d154cabfe9e14b5c19
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.fce01a2aa073e958cae0b1cc894db26c
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.a52fac0daa39b5f58343578312b4eb54
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.2cf6f4b7cf62c0c8f8d5baa4db880def
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.e471e519f7471a50493b6f4fe912ee0d
+                           .group:00000000 wm4.ERU001_Conf.h.69.6d7c31a774e428b1dc8770c7c31047dd
+                           .group:00000000 wm4.ERU002_Conf.h.49.47045c766c6d22ab1185285e9d568758
+                           .group:00000000 wm4.IO002_Conf.h.51.be0baad511cf66771895fab0bf90f390
+                           .group:00000000 wm4.RTC001_Conf.h.104.b6522967f566c43aad1edd57a7a63c2d
+
+UNDEFINED SYMBOLS
+timeptr1
+NVIC_SCU001_RegisterCallback
+RTC001_Handle

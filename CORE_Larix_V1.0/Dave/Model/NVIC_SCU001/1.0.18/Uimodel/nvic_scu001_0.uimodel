@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="Configuration" className="IfxGroupBox" controlId="1322066013859">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group31" displayName="Interrupt Configuration" className="IfxGroupBox" controlId="1322103185940">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic_scu001/0/NVIC_SCU001_irwInterruptPriority" displayName="Priority" className="IntegerType" paramName="app/nvic_scu001/0/NVIC_SCU001_irwInterruptPriority:Priority" controlId="1322103200494">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic_scu001/0/NVIC_SCU001_irwInterruptSubPriority" displayName="Subpriority" className="IntegerType" constraint="CM.setEnable(false);" paramName="app/nvic_scu001/0/NVIC_SCU001_irwInterruptSubPriority:Subpriority" controlId="1322103203848">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

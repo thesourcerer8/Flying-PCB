@@ -1,0 +1,665 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"SLTHA003.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text._malloc_r,"ax",%progbits
+  20              		.align	2
+  21              		.global	_malloc_r
+  22              		.thumb
+  23              		.thumb_func
+  25              	_malloc_r:
+  26              	.LFB120:
+  27              		.file 1 "../Dave/Generated/src/SLTHA003/SLTHA003.c"
+   1:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*******************************************************************************
+   2:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  Copyright (c) 2011, Infineon Technologies AG                                 **
+   3:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  All rights reserved.                                                         **
+   4:../Dave/Generated/src/SLTHA003/SLTHA003.c ****                                                                               **
+   5:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  Redistribution and use in source and binary forms, with or without           **
+   6:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  modification,are permitted provided that the following conditions are met:   **
+   7:../Dave/Generated/src/SLTHA003/SLTHA003.c ****                                                                               **
+   8:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  *Redistributions of source code must retain the above copyright notice,      **
+   9:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  this list of conditions and the following disclaimer.                        **
+  10:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  11:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  this list of conditions and the following disclaimer in the documentation    **
+  12:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  and/or other materials provided with the distribution.                       **
+  13:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  14:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  may be used to endorse or promote products derived from this software without** 
+  15:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  specific prior written permission.                                           **
+  16:../Dave/Generated/src/SLTHA003/SLTHA003.c ****                                                                               **
+  17:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  18:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  19:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  20:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  21:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  22:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  23:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  24:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  25:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  26:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  27:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  28:../Dave/Generated/src/SLTHA003/SLTHA003.c ****                                                                               **
+  29:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  To improve the quality of the software, users are encouraged to share        **
+  30:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  31:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  dave@infineon.com).                                                          **
+  32:../Dave/Generated/src/SLTHA003/SLTHA003.c ****                                                                               **
+  33:../Dave/Generated/src/SLTHA003/SLTHA003.c **** ********************************************************************************
+  34:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                                                                            **
+  35:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                                                                            **
+  36:../Dave/Generated/src/SLTHA003/SLTHA003.c **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  37:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                                                                            **
+  38:../Dave/Generated/src/SLTHA003/SLTHA003.c **** ** COMPILER : GCC                                                             **
+  39:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                                                                            **
+  40:../Dave/Generated/src/SLTHA003/SLTHA003.c **** ** AUTHOR : App Developer                                                     **
+  41:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                                                                            **
+  42:../Dave/Generated/src/SLTHA003/SLTHA003.c **** ** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+  43:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                                                                            **
+  44:../Dave/Generated/src/SLTHA003/SLTHA003.c **** ** MODIFICATION DATE : Oct 24, 2012                                           **
+  45:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                                                                            **
+  46:../Dave/Generated/src/SLTHA003/SLTHA003.c **** *******************************************************************************/
+  47:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  48:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*******************************************************************************
+  49:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                       Author(s) Identity                                   **
+  50:../Dave/Generated/src/SLTHA003/SLTHA003.c **** ********************************************************************************
+  51:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                                                                            **
+  52:../Dave/Generated/src/SLTHA003/SLTHA003.c **** ** Initials    Name                                                           **
+  53:../Dave/Generated/src/SLTHA003/SLTHA003.c **** ** ---------------------------------------------------------------------------**
+  54:../Dave/Generated/src/SLTHA003/SLTHA003.c **** ** SK          App Developer                                                  **
+  55:../Dave/Generated/src/SLTHA003/SLTHA003.c **** *******************************************************************************/
+  56:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  57:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  58:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /**
+  59:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * @file   SLTHA003.c
+  60:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  *
+  61:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * @brief  This file contains definitions of all private and public
+  62:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  *         functions of Timer & Memory related Standard Library App.
+  63:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  *
+  64:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * The memory related functions are only applicable for XMC4500 device
+  65:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  
+  66:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * Revision History
+  67:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * 12 July 2012  v1.0.2    Initial version
+  68:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * 24 Oct 2012   v1.0.4    Function macros used for different compilers.
+  69:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * 26 Nov 2012   v1.0.5    GMM dependency removed.
+  70:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  */
+  71:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  72:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*****************************************************************************
+  73:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * INCLUDE FILES
+  74:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  *****************************************************************************/
+  75:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #include <DAVE3.h>
+  76:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #include "../../inc/SLTHA003/SLTHA003_HW_Private.h"
+  77:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  78:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  79:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*******************************************************************************
+  80:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                      Private Function Definitions                          **
+  81:../Dave/Generated/src/SLTHA003/SLTHA003.c **** *******************************************************************************/
+  82:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  83:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  84:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*******************************************************************************
+  85:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  *                                ARRAYS                                      **
+  86:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  ******************************************************************************/
+  87:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  88:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*******************************************************************************
+  89:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                      Global Constant Definitions                           **
+  90:../Dave/Generated/src/SLTHA003/SLTHA003.c **** *******************************************************************************/
+  91:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  92:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*******************************************************************************
+  93:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                      Global Variable Definitions                           **
+  94:../Dave/Generated/src/SLTHA003/SLTHA003.c **** *******************************************************************************/
+  95:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  96:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  97:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+  98:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*******************************************************************************
+  99:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                      Private Constant Definitions                          **
+ 100:../Dave/Generated/src/SLTHA003/SLTHA003.c **** *******************************************************************************/
+ 101:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+ 102:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*******************************************************************************
+ 103:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                 Function like macro definitions                            **
+ 104:../Dave/Generated/src/SLTHA003/SLTHA003.c **** *******************************************************************************/
+ 105:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+ 106:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*******************************************************************************
+ 107:../Dave/Generated/src/SLTHA003/SLTHA003.c **** **                      Private Function Definitions                          **
+ 108:../Dave/Generated/src/SLTHA003/SLTHA003.c **** *******************************************************************************/
+ 109:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* Since the memory management with GMM and LMMM is not needed for devices
+ 110:../Dave/Generated/src/SLTHA003/SLTHA003.c ****    other than XMC4500, the complete GMM related calls should be suppressed.
+ 111:../Dave/Generated/src/SLTHA003/SLTHA003.c ****    Depending upon the target macro definition the code snippet will be 
+ 112:../Dave/Generated/src/SLTHA003/SLTHA003.c ****    bypassed for XMC 4400 and 4200 controllers
+ 113:../Dave/Generated/src/SLTHA003/SLTHA003.c **** */     
+ 114:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #if (__TARGET_DEVICE__ == XMC45)
+ 115:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #if defined(__GNUC__)
+ 116:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #ifdef USE_SBRK
+ 117:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* <<<DD_SLTHA003_API_5>>> */
+ 118:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*  This function Increase program data space.
+ 119:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * malloc and related functions depend on this. *
+ 120:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * This API is only applicable for XMC4500 device
+ 121:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  */
+ 122:../Dave/Generated/src/SLTHA003/SLTHA003.c **** uint8_t HeapArea[10240];
+ 123:../Dave/Generated/src/SLTHA003/SLTHA003.c **** caddr_t _sbrk(int Incr)
+ 124:../Dave/Generated/src/SLTHA003/SLTHA003.c **** {
+ 125:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   caddr_t RetVal;
+ 126:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   static uint8_t *HeapPtr = NULL;
+ 127:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   uint8_t *EndofMem;
+ 128:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   uint8_t *PrevHeapPtr;
+ 129:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   EndofMem = HeapArea + sizeof(HeapArea);
+ 130:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   //todo: This needs to be refined once global memory manager approach is finalised.
+ 131:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   if (HeapPtr == NULL)
+ 132:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   {
+ 133:../Dave/Generated/src/SLTHA003/SLTHA003.c ****     HeapPtr = HeapArea;
+ 134:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   } 
+ 135:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   PrevHeapPtr = HeapPtr;
+ 136:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+ 137:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   if (HeapPtr + Incr > EndofMem)
+ 138:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   {
+ 139:../Dave/Generated/src/SLTHA003/SLTHA003.c ****     errno = ENOMEM;
+ 140:../Dave/Generated/src/SLTHA003/SLTHA003.c ****     RetVal = (caddr_t)-1;
+ 141:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   }
+ 142:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   else
+ 143:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   {
+ 144:../Dave/Generated/src/SLTHA003/SLTHA003.c ****     HeapPtr += Incr;
+ 145:../Dave/Generated/src/SLTHA003/SLTHA003.c ****     RetVal = (caddr_t)PrevHeapPtr;
+ 146:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   }
+ 147:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   return RetVal;
+ 148:../Dave/Generated/src/SLTHA003/SLTHA003.c **** }
+ 149:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #else
+ 150:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* <<<DD_SLTHA003_API_1>>> */
+ 151:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*  This function can be used to request allocation of an object with at least 
+ 152:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  *  Size bytes of storage available. If the space is available, malloc returns a
+ 153:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  *  pointer to a newly allocated block as its result. *
+ 154:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * This API is only applicable for XMC4500 device
+ 155:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  */
+ 156:../Dave/Generated/src/SLTHA003/SLTHA003.c **** void* _malloc_r( struct _reent* Rptr, size_t Size )
+ 157:../Dave/Generated/src/SLTHA003/SLTHA003.c **** {
+  28              		.loc 1 157 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 82B0     		sub	sp, sp, #8
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  44 0008 3960     		str	r1, [r7, #0]
+ 158:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* Call malloc function of GMM App. */
+ 159:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   return (GMM001_malloc(Size)); 
+  45              		.loc 1 159 0
+  46 000a 3868     		ldr	r0, [r7, #0]
+  47 000c FFF7FEFF 		bl	GMM001_malloc
+  48 0010 0346     		mov	r3, r0
+ 160:../Dave/Generated/src/SLTHA003/SLTHA003.c **** }
+  49              		.loc 1 160 0
+  50 0012 1846     		mov	r0, r3
+  51 0014 07F10807 		add	r7, r7, #8
+  52 0018 BD46     		mov	sp, r7
+  53 001a 80BD     		pop	{r7, pc}
+  54              		.cfi_endproc
+  55              	.LFE120:
+  57              		.section	.text._calloc_r,"ax",%progbits
+  58              		.align	2
+  59              		.global	_calloc_r
+  60              		.thumb
+  61              		.thumb_func
+  63              	_calloc_r:
+  64              	.LFB121:
+ 161:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+ 162:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* This function can be used to request a block of memory sufficient to hold 
+ 163:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * an array of NoOfElem elements, each of which has size ElemSize.The memory 
+ 164:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * allocated by calloc comes out of the same memory pool used by malloc, 
+ 165:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * but the memory block is initialized to all zero bytes. *
+ 166:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * This API is only applicable for XMC4500 device
+ 167:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  */
+ 168:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* <<<DD_SLTHA003_API_2>>> */
+ 169:../Dave/Generated/src/SLTHA003/SLTHA003.c **** void* _calloc_r( struct _reent *Rptr, size_t NoOfElem, size_t ElemSize )
+ 170:../Dave/Generated/src/SLTHA003/SLTHA003.c **** {
+  65              		.loc 1 170 0
+  66              		.cfi_startproc
+  67              		@ args = 0, pretend = 0, frame = 24
+  68              		@ frame_needed = 1, uses_anonymous_args = 0
+  69 0000 80B5     		push	{r7, lr}
+  70              	.LCFI3:
+  71              		.cfi_def_cfa_offset 8
+  72              		.cfi_offset 7, -8
+  73              		.cfi_offset 14, -4
+  74 0002 86B0     		sub	sp, sp, #24
+  75              	.LCFI4:
+  76              		.cfi_def_cfa_offset 32
+  77 0004 00AF     		add	r7, sp, #0
+  78              	.LCFI5:
+  79              		.cfi_def_cfa_register 7
+  80 0006 F860     		str	r0, [r7, #12]
+  81 0008 B960     		str	r1, [r7, #8]
+  82 000a 7A60     		str	r2, [r7, #4]
+ 171:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   void *MemPtr = NULL;
+  83              		.loc 1 171 0
+  84 000c 4FF00003 		mov	r3, #0
+  85 0010 7B61     		str	r3, [r7, #20]
+ 172:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* Call malloc function of GMM App. */
+ 173:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   MemPtr = GMM001_malloc( NoOfElem * ElemSize);
+  86              		.loc 1 173 0
+  87 0012 BB68     		ldr	r3, [r7, #8]
+  88 0014 7A68     		ldr	r2, [r7, #4]
+  89 0016 02FB03F3 		mul	r3, r2, r3
+  90 001a 1846     		mov	r0, r3
+  91 001c FFF7FEFF 		bl	GMM001_malloc
+  92 0020 7861     		str	r0, [r7, #20]
+ 174:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   memset(MemPtr, 0, (NoOfElem * ElemSize));
+  93              		.loc 1 174 0
+  94 0022 BB68     		ldr	r3, [r7, #8]
+  95 0024 7A68     		ldr	r2, [r7, #4]
+  96 0026 02FB03F3 		mul	r3, r2, r3
+  97 002a 7869     		ldr	r0, [r7, #20]
+  98 002c 4FF00001 		mov	r1, #0
+  99 0030 1A46     		mov	r2, r3
+ 100 0032 FFF7FEFF 		bl	memset
+ 175:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   return MemPtr;
+ 101              		.loc 1 175 0
+ 102 0036 7B69     		ldr	r3, [r7, #20]
+ 176:../Dave/Generated/src/SLTHA003/SLTHA003.c **** }
+ 103              		.loc 1 176 0
+ 104 0038 1846     		mov	r0, r3
+ 105 003a 07F11807 		add	r7, r7, #24
+ 106 003e BD46     		mov	sp, r7
+ 107 0040 80BD     		pop	{r7, pc}
+ 108              		.cfi_endproc
+ 109              	.LFE121:
+ 111 0042 00BF     		.section	.text._free_r,"ax",%progbits
+ 112              		.align	2
+ 113              		.global	_free_r
+ 114              		.thumb
+ 115              		.thumb_func
+ 117              	_free_r:
+ 118              	.LFB122:
+ 177:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+ 178:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* This function can be used When you no longer need an object originally 
+ 179:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * allocated by malloc or realloc (or the related function calloc), 
+ 180:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * return it to the memory storage pool by calling free with the address of the
+ 181:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * object as the argument. *
+ 182:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * This API is only applicable for XMC4500 device
+ 183:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  */ 
+ 184:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* <<<DD_SLTHA003_API_3>>> */
+ 185:../Dave/Generated/src/SLTHA003/SLTHA003.c **** void _free_r( struct _reent *Rptr, void *Ptr )
+ 186:../Dave/Generated/src/SLTHA003/SLTHA003.c **** {
+ 119              		.loc 1 186 0
+ 120              		.cfi_startproc
+ 121              		@ args = 0, pretend = 0, frame = 8
+ 122              		@ frame_needed = 1, uses_anonymous_args = 0
+ 123 0000 80B5     		push	{r7, lr}
+ 124              	.LCFI6:
+ 125              		.cfi_def_cfa_offset 8
+ 126              		.cfi_offset 7, -8
+ 127              		.cfi_offset 14, -4
+ 128 0002 82B0     		sub	sp, sp, #8
+ 129              	.LCFI7:
+ 130              		.cfi_def_cfa_offset 16
+ 131 0004 00AF     		add	r7, sp, #0
+ 132              	.LCFI8:
+ 133              		.cfi_def_cfa_register 7
+ 134 0006 7860     		str	r0, [r7, #4]
+ 135 0008 3960     		str	r1, [r7, #0]
+ 187:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* Call free function of GMM App. */
+ 188:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   GMM001_free(Ptr);
+ 136              		.loc 1 188 0
+ 137 000a 3868     		ldr	r0, [r7, #0]
+ 138 000c FFF7FEFF 		bl	GMM001_free
+ 189:../Dave/Generated/src/SLTHA003/SLTHA003.c **** }
+ 139              		.loc 1 189 0
+ 140 0010 07F10807 		add	r7, r7, #8
+ 141 0014 BD46     		mov	sp, r7
+ 142 0016 80BD     		pop	{r7, pc}
+ 143              		.cfi_endproc
+ 144              	.LFE122:
+ 146              		.section	.text._realloc_r,"ax",%progbits
+ 147              		.align	2
+ 148              		.global	_realloc_r
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	_realloc_r:
+ 153              	.LFB123:
+ 190:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+ 191:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* This function can be used if you already have a block of storage allocated by
+ 192:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * malloc, but you no longer need all the space allocated to it, you can make it
+ 193:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * smaller or larger by calling realloc with both the object pointer and the new 
+ 194:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * desired size as arguments. realloc guarantees that the beginning of the new,
+ 195:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * object matches the contents of the original object. *
+ 196:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * This API is only applicable for XMC4500 device
+ 197:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  */
+ 198:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* <<<DD_SLTHA003_API_4>>> */
+ 199:../Dave/Generated/src/SLTHA003/SLTHA003.c **** void* _realloc_r( struct _reent *Rptr, void *Ptr, size_t Size )
+ 200:../Dave/Generated/src/SLTHA003/SLTHA003.c **** {
+ 154              		.loc 1 200 0
+ 155              		.cfi_startproc
+ 156              		@ args = 0, pretend = 0, frame = 16
+ 157              		@ frame_needed = 1, uses_anonymous_args = 0
+ 158 0000 80B5     		push	{r7, lr}
+ 159              	.LCFI9:
+ 160              		.cfi_def_cfa_offset 8
+ 161              		.cfi_offset 7, -8
+ 162              		.cfi_offset 14, -4
+ 163 0002 84B0     		sub	sp, sp, #16
+ 164              	.LCFI10:
+ 165              		.cfi_def_cfa_offset 24
+ 166 0004 00AF     		add	r7, sp, #0
+ 167              	.LCFI11:
+ 168              		.cfi_def_cfa_register 7
+ 169 0006 F860     		str	r0, [r7, #12]
+ 170 0008 B960     		str	r1, [r7, #8]
+ 171 000a 7A60     		str	r2, [r7, #4]
+ 201:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* Call realloc function of GMM App. */
+ 202:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   return (GMM001_realloc( Size, Ptr));
+ 172              		.loc 1 202 0
+ 173 000c 7868     		ldr	r0, [r7, #4]
+ 174 000e B968     		ldr	r1, [r7, #8]
+ 175 0010 FFF7FEFF 		bl	GMM001_realloc
+ 176 0014 0346     		mov	r3, r0
+ 203:../Dave/Generated/src/SLTHA003/SLTHA003.c **** }
+ 177              		.loc 1 203 0
+ 178 0016 1846     		mov	r0, r3
+ 179 0018 07F11007 		add	r7, r7, #16
+ 180 001c BD46     		mov	sp, r7
+ 181 001e 80BD     		pop	{r7, pc}
+ 182              		.cfi_endproc
+ 183              	.LFE123:
+ 185              		.section	.text._gettimeofday_r,"ax",%progbits
+ 186              		.align	2
+ 187              		.global	_gettimeofday_r
+ 188              		.thumb
+ 189              		.thumb_func
+ 191              	_gettimeofday_r:
+ 192              	.LFB124:
+ 204:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* End of #else (USE_SBRK) */ 
+ 205:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #endif
+ 206:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* End of #ifdef(__GNUC__) */
+ 207:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #endif
+ 208:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* End of #if(__TARGET_DEVICE__ == XMC45) */
+ 209:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #endif
+ 210:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+ 211:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* <<<DD_SLTHA003_API_5>>> */
+ 212:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*
+ 213:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * This function gets the calendar time in seconds.
+ 214:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  */
+ 215:../Dave/Generated/src/SLTHA003/SLTHA003.c **** SLTHA003_Time()
+ 216:../Dave/Generated/src/SLTHA003/SLTHA003.c **** {
+ 193              		.loc 1 216 0
+ 194              		.cfi_startproc
+ 195              		@ args = 0, pretend = 0, frame = 32
+ 196              		@ frame_needed = 1, uses_anonymous_args = 0
+ 197 0000 80B5     		push	{r7, lr}
+ 198              	.LCFI12:
+ 199              		.cfi_def_cfa_offset 8
+ 200              		.cfi_offset 7, -8
+ 201              		.cfi_offset 14, -4
+ 202 0002 88B0     		sub	sp, sp, #32
+ 203              	.LCFI13:
+ 204              		.cfi_def_cfa_offset 40
+ 205 0004 00AF     		add	r7, sp, #0
+ 206              	.LCFI14:
+ 207              		.cfi_def_cfa_register 7
+ 208 0006 F860     		str	r0, [r7, #12]
+ 209 0008 B960     		str	r1, [r7, #8]
+ 210 000a 7A60     		str	r2, [r7, #4]
+ 217:../Dave/Generated/src/SLTHA003/SLTHA003.c ****    time_t Seconds ;
+ 218:../Dave/Generated/src/SLTHA003/SLTHA003.c ****    status_t Status;
+ 219:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #if defined (__GNUC__)
+ 220:../Dave/Generated/src/SLTHA003/SLTHA003.c ****        struct timezone *TimeZonePtr;
+ 221:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #endif
+ 222:../Dave/Generated/src/SLTHA003/SLTHA003.c ****    if (TimePtr)
+ 211              		.loc 1 222 0
+ 212 000c BB68     		ldr	r3, [r7, #8]
+ 213 000e 002B     		cmp	r3, #0
+ 214 0010 0FD0     		beq	.L9
+ 223:../Dave/Generated/src/SLTHA003/SLTHA003.c ****    {
+ 224:../Dave/Generated/src/SLTHA003/SLTHA003.c ****      Status = RTC001_Time(&Seconds);
+ 215              		.loc 1 224 0
+ 216 0012 07F11403 		add	r3, r7, #20
+ 217 0016 1846     		mov	r0, r3
+ 218 0018 FFF7FEFF 		bl	RTC001_Time
+ 219 001c F861     		str	r0, [r7, #28]
+ 225:../Dave/Generated/src/SLTHA003/SLTHA003.c ****      if (Status == (uint32_t)DAVEApp_SUCCESS)
+ 220              		.loc 1 225 0
+ 221 001e FB69     		ldr	r3, [r7, #28]
+ 222 0020 002B     		cmp	r3, #0
+ 223 0022 06D1     		bne	.L9
+ 226:../Dave/Generated/src/SLTHA003/SLTHA003.c ****      {
+ 227:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #if defined (__GNUC__)
+ 228:../Dave/Generated/src/SLTHA003/SLTHA003.c ****       TimePtr->tv_sec =  Seconds;
+ 224              		.loc 1 228 0
+ 225 0024 7A69     		ldr	r2, [r7, #20]
+ 226 0026 BB68     		ldr	r3, [r7, #8]
+ 227 0028 1A60     		str	r2, [r3, #0]
+ 229:../Dave/Generated/src/SLTHA003/SLTHA003.c ****       TimePtr->tv_usec = 0;
+ 228              		.loc 1 229 0
+ 229 002a BB68     		ldr	r3, [r7, #8]
+ 230 002c 4FF00002 		mov	r2, #0
+ 231 0030 5A60     		str	r2, [r3, #4]
+ 232              	.L9:
+ 230:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #elif defined (__CC_ARM) || defined (__ICCARM__) || defined ( __TASKING__)
+ 231:../Dave/Generated/src/SLTHA003/SLTHA003.c ****       *TimePtr = Seconds;
+ 232:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #endif
+ 233:../Dave/Generated/src/SLTHA003/SLTHA003.c ****     }
+ 234:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   }
+ 235:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #if defined (__GNUC__)
+ 236:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   /*  Return fixed data for the timezone */
+ 237:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   TimeZonePtr =  (struct timezone *)TimeZone;
+ 233              		.loc 1 237 0
+ 234 0032 7B68     		ldr	r3, [r7, #4]
+ 235 0034 BB61     		str	r3, [r7, #24]
+ 238:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 	TimeZonePtr->tz_minuteswest = 0;
+ 236              		.loc 1 238 0
+ 237 0036 BB69     		ldr	r3, [r7, #24]
+ 238 0038 4FF00002 		mov	r2, #0
+ 239 003c 1A60     		str	r2, [r3, #0]
+ 239:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   TimeZonePtr->tz_dsttime = 0;
+ 240              		.loc 1 239 0
+ 241 003e BB69     		ldr	r3, [r7, #24]
+ 242 0040 4FF00002 		mov	r2, #0
+ 243 0044 5A60     		str	r2, [r3, #4]
+ 240:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #endif
+ 241:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   return (int)Seconds;
+ 244              		.loc 1 241 0
+ 245 0046 7B69     		ldr	r3, [r7, #20]
+ 242:../Dave/Generated/src/SLTHA003/SLTHA003.c **** }
+ 246              		.loc 1 242 0
+ 247 0048 1846     		mov	r0, r3
+ 248 004a 07F12007 		add	r7, r7, #32
+ 249 004e BD46     		mov	sp, r7
+ 250 0050 80BD     		pop	{r7, pc}
+ 251              		.cfi_endproc
+ 252              	.LFE124:
+ 254 0052 00BF     		.section	.text._times_r,"ax",%progbits
+ 255              		.align	2
+ 256              		.global	_times_r
+ 257              		.thumb
+ 258              		.thumb_func
+ 260              	_times_r:
+ 261              	.LFB125:
+ 243:../Dave/Generated/src/SLTHA003/SLTHA003.c **** 
+ 244:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /* <<<DD_SLTHA003_API_6>>> */
+ 245:../Dave/Generated/src/SLTHA003/SLTHA003.c **** /*
+ 246:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  * This function gets the processor time. 
+ 247:../Dave/Generated/src/SLTHA003/SLTHA003.c ****  */
+ 248:../Dave/Generated/src/SLTHA003/SLTHA003.c **** SLTHA003_Clock()
+ 249:../Dave/Generated/src/SLTHA003/SLTHA003.c **** {
+ 262              		.loc 1 249 0
+ 263              		.cfi_startproc
+ 264              		@ args = 0, pretend = 0, frame = 8
+ 265              		@ frame_needed = 1, uses_anonymous_args = 0
+ 266              		@ link register save eliminated.
+ 267 0000 80B4     		push	{r7}
+ 268              	.LCFI15:
+ 269              		.cfi_def_cfa_offset 4
+ 270              		.cfi_offset 7, -4
+ 271 0002 83B0     		sub	sp, sp, #12
+ 272              	.LCFI16:
+ 273              		.cfi_def_cfa_offset 16
+ 274 0004 00AF     		add	r7, sp, #0
+ 275              	.LCFI17:
+ 276              		.cfi_def_cfa_register 7
+ 277 0006 7860     		str	r0, [r7, #4]
+ 278 0008 3960     		str	r1, [r7, #0]
+ 250:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #if  defined (__GNUC__)
+ 251:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   TmsPtr->tms_utime = 0;
+ 279              		.loc 1 251 0
+ 280 000a 3B68     		ldr	r3, [r7, #0]
+ 281 000c 4FF00002 		mov	r2, #0
+ 282 0010 1A60     		str	r2, [r3, #0]
+ 252:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   TmsPtr->tms_stime = 0;
+ 283              		.loc 1 252 0
+ 284 0012 3B68     		ldr	r3, [r7, #0]
+ 285 0014 4FF00002 		mov	r2, #0
+ 286 0018 5A60     		str	r2, [r3, #4]
+ 253:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   TmsPtr->tms_cutime = 0;
+ 287              		.loc 1 253 0
+ 288 001a 3B68     		ldr	r3, [r7, #0]
+ 289 001c 4FF00002 		mov	r2, #0
+ 290 0020 9A60     		str	r2, [r3, #8]
+ 254:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   TmsPtr->tms_cstime = 0;
+ 291              		.loc 1 254 0
+ 292 0022 3B68     		ldr	r3, [r7, #0]
+ 293 0024 4FF00002 		mov	r2, #0
+ 294 0028 DA60     		str	r2, [r3, #12]
+ 255:../Dave/Generated/src/SLTHA003/SLTHA003.c **** #endif
+ 256:../Dave/Generated/src/SLTHA003/SLTHA003.c ****   return 0;
+ 295              		.loc 1 256 0
+ 296 002a 4FF00003 		mov	r3, #0
+ 257:../Dave/Generated/src/SLTHA003/SLTHA003.c **** }
+ 297              		.loc 1 257 0
+ 298 002e 1846     		mov	r0, r3
+ 299 0030 07F10C07 		add	r7, r7, #12
+ 300 0034 BD46     		mov	sp, r7
+ 301 0036 80BC     		pop	{r7}
+ 302 0038 7047     		bx	lr
+ 303              		.cfi_endproc
+ 304              	.LFE125:
+ 306 003a 00BF     		.text
+ 307              	.Letext0:
+ 308              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 309              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/include/stddef.h"
+ 310              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVESupport/../../i
+ 311              		.file 5 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 312              		.file 6 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 313              		.file 7 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 314              		.file 8 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 315              		.file 9 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 316              		.file 10 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/
+ 317              		.file 11 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/
+ 318              		.file 12 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/
+ 319              		.file 13 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 SLTHA003.c
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:20     .text._malloc_r:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:25     .text._malloc_r:00000000 _malloc_r
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:58     .text._calloc_r:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:63     .text._calloc_r:00000000 _calloc_r
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:112    .text._free_r:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:117    .text._free_r:00000000 _free_r
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:147    .text._realloc_r:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:152    .text._realloc_r:00000000 _realloc_r
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:186    .text._gettimeofday_r:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:191    .text._gettimeofday_r:00000000 _gettimeofday_r
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:255    .text._times_r:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccEuFtmh.s:260    .text._times_r:00000000 _times_r
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.RTC001.h.113.715d6fcab1863c6656b238bddd304166
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.reent.h.11.a39e4126dcf3c6afd3054e0622577bae
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.LMM001.h.45.fa2df8bae969f45df5071221ac433ffa
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.104.05371e300b30617373255b3cdb4765a2
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.stdarg.h.31.fa591a4b1df9e413e9f5b8097f9ae89d
+                           .group:00000000 wm4.Type_CM.h.61.3660c940695d7d5fef91de9c4081d0f0
+                           .group:00000000 wm4.dwc_os.h.82.db2ca40c41e2f648d146b8942e5157d9
+                           .group:00000000 wm4.dwc_otg_core_if.h.95.37e41eee47e9a4502e4044edf60ea92d
+                           .group:00000000 wm4.usbcore001_device.h.107.6c032c9c28ac6c3f4e5e24a068720cd7
+                           .group:00000000 wm4.USB.h.399.44a2bec94122294f06c4d854450494d3
+                           .group:00000000 wm4.Common.h.102.bc881ac788d1d7ce84e651cbaa40f2c2
+                           .group:00000000 wm4.Common.h.134.5069b632a0407201156f18fde915b80c
+                           .group:00000000 wm4.USBMode.h.234.0cc9e23131c025605bb7c0db3ebb8ac9
+                           .group:00000000 wm4.StdRequestType.h.93.4e19c7c655f990c2abedbb76a546fcde
+                           .group:00000000 wm4.Endpoint.h.116.4ef46b127c9047ed49fe1e0df19e09b8
+                           .group:00000000 wm4.StdDescriptors.h.120.0ce817e16dcc91b8cf4a79ba0e0e19b6
+                           .group:00000000 wm4.CDC.h.103.7ce3e4692dde29e827f8736493eef7ef
+                           .group:00000000 wm4.CDC.h.115.c83a7d6c5b6c8644b3dec6212d4ced09
+                           .group:00000000 wm4.Descriptors.h.91.5cf84c2489ee54d154cabfe9e14b5c19
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.fce01a2aa073e958cae0b1cc894db26c
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.a52fac0daa39b5f58343578312b4eb54
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.2cf6f4b7cf62c0c8f8d5baa4db880def
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.e471e519f7471a50493b6f4fe912ee0d
+                           .group:00000000 wm4.ERU001_Conf.h.69.6d7c31a774e428b1dc8770c7c31047dd
+                           .group:00000000 wm4.ERU002_Conf.h.49.47045c766c6d22ab1185285e9d568758
+                           .group:00000000 wm4.IO002_Conf.h.51.be0baad511cf66771895fab0bf90f390
+
+UNDEFINED SYMBOLS
+GMM001_malloc
+memset
+GMM001_free
+GMM001_realloc
+RTC001_Time

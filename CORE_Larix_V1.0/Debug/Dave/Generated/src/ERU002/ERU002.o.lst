@@ -1,0 +1,760 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ERU002.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ERU002_Init,"ax",%progbits
+  20              		.align	2
+  21              		.global	ERU002_Init
+  22              		.thumb
+  23              		.thumb_func
+  25              	ERU002_Init:
+  26              	.LFB112:
+  27              		.file 1 "../Dave/Generated/src/ERU002/ERU002.c"
+   1:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+   2:../Dave/Generated/src/ERU002/ERU002.c ****  Copyright (c) 2013, Infineon Technologies AG                                 **
+   3:../Dave/Generated/src/ERU002/ERU002.c ****  All rights reserved.                                                         **
+   4:../Dave/Generated/src/ERU002/ERU002.c ****                                                                               **
+   5:../Dave/Generated/src/ERU002/ERU002.c ****  Redistribution and use in source and binary forms, with or without           **
+   6:../Dave/Generated/src/ERU002/ERU002.c ****  modification,are permitted provided that the following conditions are met:   **
+   7:../Dave/Generated/src/ERU002/ERU002.c ****                                                                               **
+   8:../Dave/Generated/src/ERU002/ERU002.c ****  *Redistributions of source code must retain the above copyright notice,      **
+   9:../Dave/Generated/src/ERU002/ERU002.c ****  this list of conditions and the following disclaimer.                        **
+  10:../Dave/Generated/src/ERU002/ERU002.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  11:../Dave/Generated/src/ERU002/ERU002.c ****  this list of conditions and the following disclaimer in the documentation    **
+  12:../Dave/Generated/src/ERU002/ERU002.c ****  and/or other materials provided with the distribution.                       **
+  13:../Dave/Generated/src/ERU002/ERU002.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  14:../Dave/Generated/src/ERU002/ERU002.c ****  may be used to endorse or promote products derived from this software without** 
+  15:../Dave/Generated/src/ERU002/ERU002.c ****  specific prior written permission.                                           **
+  16:../Dave/Generated/src/ERU002/ERU002.c ****                                                                               **
+  17:../Dave/Generated/src/ERU002/ERU002.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  18:../Dave/Generated/src/ERU002/ERU002.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  19:../Dave/Generated/src/ERU002/ERU002.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  20:../Dave/Generated/src/ERU002/ERU002.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  21:../Dave/Generated/src/ERU002/ERU002.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  22:../Dave/Generated/src/ERU002/ERU002.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  23:../Dave/Generated/src/ERU002/ERU002.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  24:../Dave/Generated/src/ERU002/ERU002.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  25:../Dave/Generated/src/ERU002/ERU002.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  26:../Dave/Generated/src/ERU002/ERU002.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  27:../Dave/Generated/src/ERU002/ERU002.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  28:../Dave/Generated/src/ERU002/ERU002.c ****                                                                               **
+  29:../Dave/Generated/src/ERU002/ERU002.c ****  To improve the quality of the software, users are encouraged to share        **
+  30:../Dave/Generated/src/ERU002/ERU002.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  31:../Dave/Generated/src/ERU002/ERU002.c ****  dave@infineon.com).                                                          **
+  32:../Dave/Generated/src/ERU002/ERU002.c ****                                                                               **
+  33:../Dave/Generated/src/ERU002/ERU002.c **** ********************************************************************************
+  34:../Dave/Generated/src/ERU002/ERU002.c **** **                                                                            **
+  35:../Dave/Generated/src/ERU002/ERU002.c **** **                                                                            **
+  36:../Dave/Generated/src/ERU002/ERU002.c **** ** PLATFORM : Infineon XMC4000 Series/XMC1000 series                          **
+  37:../Dave/Generated/src/ERU002/ERU002.c **** **                                                                            **
+  38:../Dave/Generated/src/ERU002/ERU002.c **** ** COMPILER : Compiler Independent                                            **
+  39:../Dave/Generated/src/ERU002/ERU002.c **** **                                                                            **
+  40:../Dave/Generated/src/ERU002/ERU002.c **** ** AUTHOR   : App Developer                                                   **
+  41:../Dave/Generated/src/ERU002/ERU002.c **** **                                                                            **
+  42:../Dave/Generated/src/ERU002/ERU002.c **** ** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+  43:../Dave/Generated/src/ERU002/ERU002.c **** **                                                                            **
+  44:../Dave/Generated/src/ERU002/ERU002.c **** ** MODIFICATION DATE : Nov 13, 2013                                           **
+  45:../Dave/Generated/src/ERU002/ERU002.c **** **                                                                            **
+  46:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+  47:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+  48:../Dave/Generated/src/ERU002/ERU002.c **** **                      Author(s) Identity                                    **
+  49:../Dave/Generated/src/ERU002/ERU002.c **** ********************************************************************************
+  50:../Dave/Generated/src/ERU002/ERU002.c **** **                                                                            **
+  51:../Dave/Generated/src/ERU002/ERU002.c **** ** Initials     Name                                                          **
+  52:../Dave/Generated/src/ERU002/ERU002.c **** ** ---------------------------------------------------------------------------**
+  53:../Dave/Generated/src/ERU002/ERU002.c **** ** SNR        App Developer                                                   **
+  54:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+  55:../Dave/Generated/src/ERU002/ERU002.c **** /**
+  56:../Dave/Generated/src/ERU002/ERU002.c ****  * @file   ERU002.c
+  57:../Dave/Generated/src/ERU002/ERU002.c ****  *
+  58:../Dave/Generated/src/ERU002/ERU002.c ****  * Revision History
+  59:../Dave/Generated/src/ERU002/ERU002.c ****  * 25 Jan 2013 v1.0.4 Initial Version
+  60:../Dave/Generated/src/ERU002/ERU002.c ****  * 14 Mar 2013 v1.0.6 Porting to XMC42xx and XMC44xx
+  61:../Dave/Generated/src/ERU002/ERU002.c ****  * 13 Nov 2013 v1.0.12 Made it as static code 
+  62:../Dave/Generated/src/ERU002/ERU002.c ****  * @brief  ERU002 App Implementation
+  63:../Dave/Generated/src/ERU002/ERU002.c ****  *
+  64:../Dave/Generated/src/ERU002/ERU002.c ****  */
+  65:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+  66:../Dave/Generated/src/ERU002/ERU002.c ****  ** INCLUDE FILES                                                             **
+  67:../Dave/Generated/src/ERU002/ERU002.c ****  ******************************************************************************/
+  68:../Dave/Generated/src/ERU002/ERU002.c **** 
+  69:../Dave/Generated/src/ERU002/ERU002.c **** /** Inclusion of header file */
+  70:../Dave/Generated/src/ERU002/ERU002.c **** #include "../../inc/ERU002/ERU002.h"
+  71:../Dave/Generated/src/ERU002/ERU002.c **** 
+  72:../Dave/Generated/src/ERU002/ERU002.c **** 
+  73:../Dave/Generated/src/ERU002/ERU002.c **** #if (DEBUG_APP==0)  
+  74:../Dave/Generated/src/ERU002/ERU002.c **** /*****************************************************************************
+  75:../Dave/Generated/src/ERU002/ERU002.c ****               DUMMY DEFINTIONS OF DEBUG LOG MACROS
+  76:../Dave/Generated/src/ERU002/ERU002.c **** *****************************************************************************/
+  77:../Dave/Generated/src/ERU002/ERU002.c **** /*These definitions are included here to avoid compilation errors,
+  78:../Dave/Generated/src/ERU002/ERU002.c ****  since the DBG002 app is not part of the project. All the macros are defined
+  79:../Dave/Generated/src/ERU002/ERU002.c ****  as empty*/ 
+  80:../Dave/Generated/src/ERU002/ERU002.c **** #ifndef _DBG002_H_
+  81:../Dave/Generated/src/ERU002/ERU002.c **** 
+  82:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_RegisterCallBack(A,B,C)
+  83:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_I(e) 
+  84:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_IG(e,g) 
+  85:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_IH(e,h) 
+  86:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_IP(e,p) 
+  87:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_IGH(e,g,h) 
+  88:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_IGP(e,g,p) 
+  89:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_IHP(e,h,p) 
+  90:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_IGHP(e,g,h,p) 
+  91:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_N(e) 
+  92:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_NG(e,g) 
+  93:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_NH(e,h) 
+  94:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_NP(e,p) 
+  95:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_NGH(e,g,h) 
+  96:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_NGP(e,g,p) 
+  97:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_NHP(e,h,p) 
+  98:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_NGHP(e,g,h,p) 
+  99:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_ID(e) 
+ 100:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_IS(e) 
+ 101:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_ISG(e,g) 
+ 102:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_SAFETY_CRITICAL(groupid,messageid,length,value)
+ 103:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_CRITICAL(groupid,messageid,length,value)
+ 104:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_ERROR(groupid,messageid,length,value)
+ 105:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_WARNING(groupid,messageid,length,value)
+ 106:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_INFO(groupid,messageid,length,value)
+ 107:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_TRACE(groupid,messageid,length,value)
+ 108:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_FUNCTION_ENTRY(GID, Status) 
+ 109:../Dave/Generated/src/ERU002/ERU002.c **** #define DBG002_FUNCTION_EXIT(GID, Status) 
+ 110:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 111:../Dave/Generated/src/ERU002/ERU002.c **** #endif/* End of defintions of dummy Debug Log macros*/
+ 112:../Dave/Generated/src/ERU002/ERU002.c **** #endif 
+ 113:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 114:../Dave/Generated/src/ERU002/ERU002.c **** #undef APP_GID
+ 115:../Dave/Generated/src/ERU002/ERU002.c **** #define APP_GID DBG002_GID_ERU002	
+ 116:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 117:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+ 118:../Dave/Generated/src/ERU002/ERU002.c **** **                      Private Macro Definitions                             **
+ 119:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+ 120:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 121:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 122:../Dave/Generated/src/ERU002/ERU002.c **** #define ERU_INVALID_INPUT     0x0000000FU
+ 123:../Dave/Generated/src/ERU002/ERU002.c **** #define ERU_INPUT_LEVEL_SET   0x00000001U
+ 124:../Dave/Generated/src/ERU002/ERU002.c **** #define ERU_OGU_Y_MAX          (uint8_t)3
+ 125:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 126:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 127:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+ 128:../Dave/Generated/src/ERU002/ERU002.c **** **                      Private Type Definitions                              **
+ 129:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+ 130:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 131:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+ 132:../Dave/Generated/src/ERU002/ERU002.c **** **                 Private Function Declarations:
+ 133:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+ 134:../Dave/Generated/src/ERU002/ERU002.c **** void ERU002_lInit(const ERU002_HandleType * Handle);
+ 135:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 136:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+ 137:../Dave/Generated/src/ERU002/ERU002.c **** **                      Global Constant Definitions                           **
+ 138:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+ 139:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 140:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 141:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 142:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+ 143:../Dave/Generated/src/ERU002/ERU002.c **** **                      Global Variable Definitions                           **
+ 144:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+ 145:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 146:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 147:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+ 148:../Dave/Generated/src/ERU002/ERU002.c **** **                      Private Constant Definitions                          **
+ 149:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+ 150:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 151:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 152:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 153:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+ 154:../Dave/Generated/src/ERU002/ERU002.c **** **                 Function like macro definitions                            **
+ 155:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+ 156:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 157:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 158:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 159:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+ 160:../Dave/Generated/src/ERU002/ERU002.c **** **                      Private Function Definitions                          **
+ 161:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+ 162:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 163:../Dave/Generated/src/ERU002/ERU002.c **** /*******************************************************************************
+ 164:../Dave/Generated/src/ERU002/ERU002.c **** **                      Public Function Definitions                           **
+ 165:../Dave/Generated/src/ERU002/ERU002.c **** *******************************************************************************/
+ 166:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 167:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 168:../Dave/Generated/src/ERU002/ERU002.c **** /** @addtogroup ERU002_app Func
+ 169:../Dave/Generated/src/ERU002/ERU002.c ****  * @{
+ 170:../Dave/Generated/src/ERU002/ERU002.c ****  */
+ 171:../Dave/Generated/src/ERU002/ERU002.c **** /*
+ 172:../Dave/Generated/src/ERU002/ERU002.c ****  * Function to initialize ERU channel
+ 173:../Dave/Generated/src/ERU002/ERU002.c ****  */
+ 174:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 175:../Dave/Generated/src/ERU002/ERU002.c **** void ERU002_Init(void)
+ 176:../Dave/Generated/src/ERU002/ERU002.c **** {
+  28              		.loc 1 176 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 82B0     		sub	sp, sp, #8
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+ 177:../Dave/Generated/src/ERU002/ERU002.c ****   uint32_t Count;
+ 178:../Dave/Generated/src/ERU002/ERU002.c ****   
+ 179:../Dave/Generated/src/ERU002/ERU002.c ****   for (Count = 0U; Count<(uint32_t)ERU002_NUM_INSTANCES; Count++)
+  43              		.loc 1 179 0
+  44 0006 4FF00003 		mov	r3, #0
+  45 000a 7B60     		str	r3, [r7, #4]
+  46 000c 0DE0     		b	.L2
+  47              	.L3:
+ 180:../Dave/Generated/src/ERU002/ERU002.c ****   {
+ 181:../Dave/Generated/src/ERU002/ERU002.c **** 	  ERU002_lInit(ERU002_HandleArray[Count]);
+  48              		.loc 1 181 0 discriminator 2
+  49 000e 40F20003 		movw	r3, #:lower16:ERU002_HandleArray
+  50 0012 C0F20003 		movt	r3, #:upper16:ERU002_HandleArray
+  51 0016 7A68     		ldr	r2, [r7, #4]
+  52 0018 53F82230 		ldr	r3, [r3, r2, lsl #2]
+  53 001c 1846     		mov	r0, r3
+  54 001e FFF7FEFF 		bl	ERU002_lInit
+ 179:../Dave/Generated/src/ERU002/ERU002.c ****   for (Count = 0U; Count<(uint32_t)ERU002_NUM_INSTANCES; Count++)
+  55              		.loc 1 179 0 discriminator 2
+  56 0022 7B68     		ldr	r3, [r7, #4]
+  57 0024 03F10103 		add	r3, r3, #1
+  58 0028 7B60     		str	r3, [r7, #4]
+  59              	.L2:
+ 179:../Dave/Generated/src/ERU002/ERU002.c ****   for (Count = 0U; Count<(uint32_t)ERU002_NUM_INSTANCES; Count++)
+  60              		.loc 1 179 0 is_stmt 0 discriminator 1
+  61 002a 7B68     		ldr	r3, [r7, #4]
+  62 002c 002B     		cmp	r3, #0
+  63 002e EED0     		beq	.L3
+ 182:../Dave/Generated/src/ERU002/ERU002.c ****   }
+ 183:../Dave/Generated/src/ERU002/ERU002.c **** }
+  64              		.loc 1 183 0 is_stmt 1
+  65 0030 07F10807 		add	r7, r7, #8
+  66 0034 BD46     		mov	sp, r7
+  67 0036 80BD     		pop	{r7, pc}
+  68              		.cfi_endproc
+  69              	.LFE112:
+  71              		.section	.text.ERU002_lInit,"ax",%progbits
+  72              		.align	2
+  73              		.global	ERU002_lInit
+  74              		.thumb
+  75              		.thumb_func
+  77              	ERU002_lInit:
+  78              	.LFB113:
+ 184:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 185:../Dave/Generated/src/ERU002/ERU002.c **** void ERU002_lInit(const ERU002_HandleType * Handle)
+ 186:../Dave/Generated/src/ERU002/ERU002.c **** {
+  79              		.loc 1 186 0
+  80              		.cfi_startproc
+  81              		@ args = 0, pretend = 0, frame = 8
+  82              		@ frame_needed = 1, uses_anonymous_args = 0
+  83 0000 90B5     		push	{r4, r7, lr}
+  84              	.LCFI3:
+  85              		.cfi_def_cfa_offset 12
+  86              		.cfi_offset 4, -12
+  87              		.cfi_offset 7, -8
+  88              		.cfi_offset 14, -4
+  89 0002 83B0     		sub	sp, sp, #12
+  90              	.LCFI4:
+  91              		.cfi_def_cfa_offset 24
+  92 0004 00AF     		add	r7, sp, #0
+  93              	.LCFI5:
+  94              		.cfi_def_cfa_register 7
+  95 0006 7860     		str	r0, [r7, #4]
+ 187:../Dave/Generated/src/ERU002/ERU002.c **** #if (UC_FAMILY == XMC4) 
+ 188:../Dave/Generated/src/ERU002/ERU002.c ****   if (ERU1 == Handle->ERURegs)
+  96              		.loc 1 188 0
+  97 0008 7B68     		ldr	r3, [r7, #4]
+  98 000a 1A68     		ldr	r2, [r3, #0]
+  99 000c 4FF48043 		mov	r3, #16384
+ 100 0010 C4F20403 		movt	r3, 16388
+ 101 0014 9A42     		cmp	r2, r3
+ 102 0016 0AD1     		bne	.L5
+ 189:../Dave/Generated/src/ERU002/ERU002.c ****   {
+ 190:../Dave/Generated/src/ERU002/ERU002.c **** 	  /* Reset the ERU Unit 1*/
+ 191:../Dave/Generated/src/ERU002/ERU002.c **** 	  if(RESET001_GetStatus(PER0_ERU1) == 1)
+ 103              		.loc 1 191 0
+ 104 0018 4FF48030 		mov	r0, #65536
+ 105 001c FFF7FEFF 		bl	RESET001_GetStatus
+ 106 0020 0346     		mov	r3, r0
+ 107 0022 012B     		cmp	r3, #1
+ 108 0024 03D1     		bne	.L5
+ 192:../Dave/Generated/src/ERU002/ERU002.c **** 	  {
+ 193:../Dave/Generated/src/ERU002/ERU002.c **** 	    /* De-assert the module */
+ 194:../Dave/Generated/src/ERU002/ERU002.c **** 	    RESET001_DeassertReset(PER0_ERU1);
+ 109              		.loc 1 194 0
+ 110 0026 4FF48030 		mov	r0, #65536
+ 111 002a FFF7FEFF 		bl	RESET001_DeassertReset
+ 112              	.L5:
+ 195:../Dave/Generated/src/ERU002/ERU002.c **** 	  }
+ 196:../Dave/Generated/src/ERU002/ERU002.c **** 	  
+ 197:../Dave/Generated/src/ERU002/ERU002.c **** 	#if ((__TARGET_DEVICE__ == XMC44) || (__TARGET_DEVICE__ == XMC42) || \
+ 198:../Dave/Generated/src/ERU002/ERU002.c **** 		 (__TARGET_DEVICE__ == XMC41))
+ 199:../Dave/Generated/src/ERU002/ERU002.c **** 	   /* Deassert the clock gating under SCU module to enable the WDT 
+ 200:../Dave/Generated/src/ERU002/ERU002.c **** 	      peripheral */
+ 201:../Dave/Generated/src/ERU002/ERU002.c **** 	  	WR_REG(SCU_CLK->CGATCLR0, SCU_CLK_CGATCLR0_ERU1_Msk, 
+ 202:../Dave/Generated/src/ERU002/ERU002.c **** 	  	       SCU_CLK_CGATCLR0_ERU1_Pos, 1U);
+ 203:../Dave/Generated/src/ERU002/ERU002.c **** 	#endif
+ 204:../Dave/Generated/src/ERU002/ERU002.c ****   }
+ 205:../Dave/Generated/src/ERU002/ERU002.c **** #endif
+ 206:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 207:../Dave/Generated/src/ERU002/ERU002.c ****   Handle->ERURegs->EXOCON[Handle->OutputChannel] |=  
+ 113              		.loc 1 207 0
+ 114 002e 7B68     		ldr	r3, [r7, #4]
+ 115 0030 1B68     		ldr	r3, [r3, #0]
+ 116 0032 7A68     		ldr	r2, [r7, #4]
+ 117 0034 5268     		ldr	r2, [r2, #4]
+ 118 0036 7968     		ldr	r1, [r7, #4]
+ 119 0038 0968     		ldr	r1, [r1, #0]
+ 120 003a 7868     		ldr	r0, [r7, #4]
+ 121 003c 4068     		ldr	r0, [r0, #4]
+ 122 003e 00F10800 		add	r0, r0, #8
+ 123 0042 51F82000 		ldr	r0, [r1, r0, lsl #2]
+ 208:../Dave/Generated/src/ERU002/ERU002.c ****   (((uint32_t)((uint32_t)Handle->GP_Value  << ERU_EXOCON_GP_Pos) & \
+ 124              		.loc 1 208 0
+ 125 0046 7968     		ldr	r1, [r7, #4]
+ 126 0048 8968     		ldr	r1, [r1, #8]
+ 127 004a 4FEA0111 		lsl	r1, r1, #4
+ 128 004e 01F03004 		and	r4, r1, #48
+ 209:../Dave/Generated/src/ERU002/ERU002.c **** 	                     ERU_EXOCON_GP_Msk) | \
+ 210:../Dave/Generated/src/ERU002/ERU002.c **** 	((uint32_t)( Handle->GEEN_Value << ERU_EXOCON_GEEN_Pos) & \
+ 129              		.loc 1 210 0
+ 130 0052 7968     		ldr	r1, [r7, #4]
+ 131 0054 C968     		ldr	r1, [r1, #12]
+ 132 0056 4FEA8101 		lsl	r1, r1, #2
+ 133 005a 01F00401 		and	r1, r1, #4
+ 209:../Dave/Generated/src/ERU002/ERU002.c **** 	                     ERU_EXOCON_GP_Msk) | \
+ 134              		.loc 1 209 0
+ 135 005e 2143     		orrs	r1, r1, r4
+ 207:../Dave/Generated/src/ERU002/ERU002.c ****   Handle->ERURegs->EXOCON[Handle->OutputChannel] |=  
+ 136              		.loc 1 207 0
+ 137 0060 0143     		orrs	r1, r1, r0
+ 138 0062 02F10802 		add	r2, r2, #8
+ 139 0066 43F82210 		str	r1, [r3, r2, lsl #2]
+ 211:../Dave/Generated/src/ERU002/ERU002.c **** 			ERU_EXOCON_GEEN_Msk));	  					 
+ 212:../Dave/Generated/src/ERU002/ERU002.c ****  
+ 213:../Dave/Generated/src/ERU002/ERU002.c **** }
+ 140              		.loc 1 213 0
+ 141 006a 07F10C07 		add	r7, r7, #12
+ 142 006e BD46     		mov	sp, r7
+ 143 0070 90BD     		pop	{r4, r7, pc}
+ 144              		.cfi_endproc
+ 145              	.LFE113:
+ 147 0072 00BF     		.section	.text.ERU002_SetPeripheralTrigInputSrc,"ax",%progbits
+ 148              		.align	2
+ 149              		.global	ERU002_SetPeripheralTrigInputSrc
+ 150              		.thumb
+ 151              		.thumb_func
+ 153              	ERU002_SetPeripheralTrigInputSrc:
+ 154              	.LFB114:
+ 214:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 215:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 216:../Dave/Generated/src/ERU002/ERU002.c **** 	
+ 217:../Dave/Generated/src/ERU002/ERU002.c **** /*  Function to Select peripheral trigger input Source 
+ 218:../Dave/Generated/src/ERU002/ERU002.c ****  *  ERU_OGU_y = SIGNAL_ERU_OGU_y3 for signal 1
+ 219:../Dave/Generated/src/ERU002/ERU002.c ****  *  ERU_OGU_y = SIGNAL_ERU_OGU_y1 for signal 0
+ 220:../Dave/Generated/src/ERU002/ERU002.c ****  */
+ 221:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 222:../Dave/Generated/src/ERU002/ERU002.c **** uint32_t  ERU002_SetPeripheralTrigInputSrc(const ERU002_HandleType *Handle, 
+ 223:../Dave/Generated/src/ERU002/ERU002.c ****                                            uint32_t ERU_OGU_y)
+ 224:../Dave/Generated/src/ERU002/ERU002.c **** {
+ 155              		.loc 1 224 0
+ 156              		.cfi_startproc
+ 157              		@ args = 0, pretend = 0, frame = 16
+ 158              		@ frame_needed = 1, uses_anonymous_args = 0
+ 159              		@ link register save eliminated.
+ 160 0000 80B4     		push	{r7}
+ 161              	.LCFI6:
+ 162              		.cfi_def_cfa_offset 4
+ 163              		.cfi_offset 7, -4
+ 164 0002 85B0     		sub	sp, sp, #20
+ 165              	.LCFI7:
+ 166              		.cfi_def_cfa_offset 24
+ 167 0004 00AF     		add	r7, sp, #0
+ 168              	.LCFI8:
+ 169              		.cfi_def_cfa_register 7
+ 170 0006 7860     		str	r0, [r7, #4]
+ 171 0008 3960     		str	r1, [r7, #0]
+ 225:../Dave/Generated/src/ERU002/ERU002.c **** 	 
+ 226:../Dave/Generated/src/ERU002/ERU002.c **** 	uint32_t status = 0;
+ 172              		.loc 1 226 0
+ 173 000a 4FF00003 		mov	r3, #0
+ 174 000e FB60     		str	r3, [r7, #12]
+ 227:../Dave/Generated/src/ERU002/ERU002.c **** 	
+ 228:../Dave/Generated/src/ERU002/ERU002.c **** 	ERU_GLOBAL_TypeDef *ERURegs = Handle->ERURegs;
+ 175              		.loc 1 228 0
+ 176 0010 7B68     		ldr	r3, [r7, #4]
+ 177 0012 1B68     		ldr	r3, [r3, #0]
+ 178 0014 BB60     		str	r3, [r7, #8]
+ 229:../Dave/Generated/src/ERU002/ERU002.c **** 	
+ 230:../Dave/Generated/src/ERU002/ERU002.c **** 	/* Check the OGU_y value */
+ 231:../Dave/Generated/src/ERU002/ERU002.c **** 	if( ( ERU_OGU_y <= ERU_OGU_Y_MAX ) && ( ERURegs != NULL) )
+ 179              		.loc 1 231 0
+ 180 0016 3B68     		ldr	r3, [r7, #0]
+ 181 0018 032B     		cmp	r3, #3
+ 182 001a 1AD8     		bhi	.L7
+ 183              		.loc 1 231 0 is_stmt 0 discriminator 1
+ 184 001c BB68     		ldr	r3, [r7, #8]
+ 185 001e 002B     		cmp	r3, #0
+ 186 0020 17D0     		beq	.L7
+ 232:../Dave/Generated/src/ERU002/ERU002.c **** 	{
+ 233:../Dave/Generated/src/ERU002/ERU002.c **** 		/* ERUx_EXOCON[y]_ISS x =0 and 1, y = 0, 1, 2 and 3 */
+ 234:../Dave/Generated/src/ERU002/ERU002.c **** 		WR_REG(ERURegs->EXOCON[Handle->OutputChannel], ERU_EXOCON_ISS_Msk, 
+ 187              		.loc 1 234 0 is_stmt 1
+ 188 0022 7B68     		ldr	r3, [r7, #4]
+ 189 0024 5A68     		ldr	r2, [r3, #4]
+ 190 0026 3B68     		ldr	r3, [r7, #0]
+ 191 0028 03F00301 		and	r1, r3, #3
+ 192 002c 7B68     		ldr	r3, [r7, #4]
+ 193 002e 5868     		ldr	r0, [r3, #4]
+ 194 0030 BB68     		ldr	r3, [r7, #8]
+ 195 0032 00F10800 		add	r0, r0, #8
+ 196 0036 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 197 003a 23F00303 		bic	r3, r3, #3
+ 198 003e 1943     		orrs	r1, r1, r3
+ 199 0040 BB68     		ldr	r3, [r7, #8]
+ 200 0042 02F10802 		add	r2, r2, #8
+ 201 0046 43F82210 		str	r1, [r3, r2, lsl #2]
+ 235:../Dave/Generated/src/ERU002/ERU002.c **** 		       ERU_EXOCON_ISS_Pos, ERU_OGU_y);
+ 236:../Dave/Generated/src/ERU002/ERU002.c **** 		
+ 237:../Dave/Generated/src/ERU002/ERU002.c **** 		status = ERU_INPUT_LEVEL_SET;
+ 202              		.loc 1 237 0
+ 203 004a 4FF00103 		mov	r3, #1
+ 204 004e FB60     		str	r3, [r7, #12]
+ 205 0050 02E0     		b	.L8
+ 206              	.L7:
+ 238:../Dave/Generated/src/ERU002/ERU002.c **** 	}
+ 239:../Dave/Generated/src/ERU002/ERU002.c **** 	else
+ 240:../Dave/Generated/src/ERU002/ERU002.c **** 	{
+ 241:../Dave/Generated/src/ERU002/ERU002.c **** 		status = ERU_INVALID_INPUT;
+ 207              		.loc 1 241 0
+ 208 0052 4FF00F03 		mov	r3, #15
+ 209 0056 FB60     		str	r3, [r7, #12]
+ 210              	.L8:
+ 242:../Dave/Generated/src/ERU002/ERU002.c **** 	}
+ 243:../Dave/Generated/src/ERU002/ERU002.c **** 	return status;
+ 211              		.loc 1 243 0
+ 212 0058 FB68     		ldr	r3, [r7, #12]
+ 244:../Dave/Generated/src/ERU002/ERU002.c **** 	
+ 245:../Dave/Generated/src/ERU002/ERU002.c **** }
+ 213              		.loc 1 245 0
+ 214 005a 1846     		mov	r0, r3
+ 215 005c 07F11407 		add	r7, r7, #20
+ 216 0060 BD46     		mov	sp, r7
+ 217 0062 80BC     		pop	{r7}
+ 218 0064 7047     		bx	lr
+ 219              		.cfi_endproc
+ 220              	.LFE114:
+ 222 0066 00BF     		.section	.text.ERU002_GetPatternResult,"ax",%progbits
+ 223              		.align	2
+ 224              		.global	ERU002_GetPatternResult
+ 225              		.thumb
+ 226              		.thumb_func
+ 228              	ERU002_GetPatternResult:
+ 229              	.LFB115:
+ 246:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 247:../Dave/Generated/src/ERU002/ERU002.c **** /*
+ 248:../Dave/Generated/src/ERU002/ERU002.c ****  * Function to get pattern result
+ 249:../Dave/Generated/src/ERU002/ERU002.c ****  */
+ 250:../Dave/Generated/src/ERU002/ERU002.c **** inline uint32_t ERU002_GetPatternResult(const ERU002_HandleType Handle)
+ 251:../Dave/Generated/src/ERU002/ERU002.c **** {
+ 230              		.loc 1 251 0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 24
+ 233              		@ frame_needed = 1, uses_anonymous_args = 0
+ 234              		@ link register save eliminated.
+ 235 0000 90B4     		push	{r4, r7}
+ 236              	.LCFI9:
+ 237              		.cfi_def_cfa_offset 8
+ 238              		.cfi_offset 4, -8
+ 239              		.cfi_offset 7, -4
+ 240 0002 86B0     		sub	sp, sp, #24
+ 241              	.LCFI10:
+ 242              		.cfi_def_cfa_offset 32
+ 243 0004 00AF     		add	r7, sp, #0
+ 244              	.LCFI11:
+ 245              		.cfi_def_cfa_register 7
+ 246 0006 3C46     		mov	r4, r7
+ 247 0008 84E80F00 		stmia	r4, {r0, r1, r2, r3}
+ 252:../Dave/Generated/src/ERU002/ERU002.c **** 	uint32_t Status;
+ 253:../Dave/Generated/src/ERU002/ERU002.c **** 	
+ 254:../Dave/Generated/src/ERU002/ERU002.c **** 	Status = RD_REG(Handle.ERURegs->EXOCON[Handle.OutputChannel],
+ 248              		.loc 1 254 0
+ 249 000c 3B68     		ldr	r3, [r7, #0]
+ 250 000e 7A68     		ldr	r2, [r7, #4]
+ 251 0010 02F10802 		add	r2, r2, #8
+ 252 0014 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 253 0018 03F00803 		and	r3, r3, #8
+ 254 001c 4FEAD303 		lsr	r3, r3, #3
+ 255 0020 7B61     		str	r3, [r7, #20]
+ 255:../Dave/Generated/src/ERU002/ERU002.c **** 						  ERU_EXOCON_PDR_Msk,ERU_EXOCON_PDR_Pos);
+ 256:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 257:../Dave/Generated/src/ERU002/ERU002.c **** 	return Status;
+ 256              		.loc 1 257 0
+ 257 0022 7B69     		ldr	r3, [r7, #20]
+ 258:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 259:../Dave/Generated/src/ERU002/ERU002.c **** }
+ 258              		.loc 1 259 0
+ 259 0024 1846     		mov	r0, r3
+ 260 0026 07F11807 		add	r7, r7, #24
+ 261 002a BD46     		mov	sp, r7
+ 262 002c 90BC     		pop	{r4, r7}
+ 263 002e 7047     		bx	lr
+ 264              		.cfi_endproc
+ 265              	.LFE115:
+ 267              		.section	.text.ERU002_EnablePatternDetection,"ax",%progbits
+ 268              		.align	2
+ 269              		.global	ERU002_EnablePatternDetection
+ 270              		.thumb
+ 271              		.thumb_func
+ 273              	ERU002_EnablePatternDetection:
+ 274              	.LFB116:
+ 260:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 261:../Dave/Generated/src/ERU002/ERU002.c **** /*
+ 262:../Dave/Generated/src/ERU002/ERU002.c ****  * Function to enable pattern result
+ 263:../Dave/Generated/src/ERU002/ERU002.c ****  */
+ 264:../Dave/Generated/src/ERU002/ERU002.c **** void ERU002_EnablePatternDetection(const ERU002_HandleType *Handle)
+ 265:../Dave/Generated/src/ERU002/ERU002.c **** {
+ 275              		.loc 1 265 0
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 8
+ 278              		@ frame_needed = 1, uses_anonymous_args = 0
+ 279              		@ link register save eliminated.
+ 280 0000 80B4     		push	{r7}
+ 281              	.LCFI12:
+ 282              		.cfi_def_cfa_offset 4
+ 283              		.cfi_offset 7, -4
+ 284 0002 83B0     		sub	sp, sp, #12
+ 285              	.LCFI13:
+ 286              		.cfi_def_cfa_offset 16
+ 287 0004 00AF     		add	r7, sp, #0
+ 288              	.LCFI14:
+ 289              		.cfi_def_cfa_register 7
+ 290 0006 7860     		str	r0, [r7, #4]
+ 266:../Dave/Generated/src/ERU002/ERU002.c **** 	if( Handle != NULL )
+ 291              		.loc 1 266 0
+ 292 0008 7B68     		ldr	r3, [r7, #4]
+ 293 000a 002B     		cmp	r3, #0
+ 294 000c 11D0     		beq	.L12
+ 267:../Dave/Generated/src/ERU002/ERU002.c **** 	{
+ 268:../Dave/Generated/src/ERU002/ERU002.c **** 		WR_REG(Handle->ERURegs->EXOCON[Handle->OutputChannel],
+ 295              		.loc 1 268 0
+ 296 000e 7B68     		ldr	r3, [r7, #4]
+ 297 0010 1B68     		ldr	r3, [r3, #0]
+ 298 0012 7A68     		ldr	r2, [r7, #4]
+ 299 0014 5268     		ldr	r2, [r2, #4]
+ 300 0016 7968     		ldr	r1, [r7, #4]
+ 301 0018 0968     		ldr	r1, [r1, #0]
+ 302 001a 7868     		ldr	r0, [r7, #4]
+ 303 001c 4068     		ldr	r0, [r0, #4]
+ 304 001e 00F10800 		add	r0, r0, #8
+ 305 0022 51F82010 		ldr	r1, [r1, r0, lsl #2]
+ 306 0026 41F00401 		orr	r1, r1, #4
+ 307 002a 02F10802 		add	r2, r2, #8
+ 308 002e 43F82210 		str	r1, [r3, r2, lsl #2]
+ 309              	.L12:
+ 269:../Dave/Generated/src/ERU002/ERU002.c **** 				ERU_EXOCON_GEEN_Msk,ERU_EXOCON_GEEN_Pos, 1);
+ 270:../Dave/Generated/src/ERU002/ERU002.c **** 	}
+ 271:../Dave/Generated/src/ERU002/ERU002.c **** }
+ 310              		.loc 1 271 0
+ 311 0032 07F10C07 		add	r7, r7, #12
+ 312 0036 BD46     		mov	sp, r7
+ 313 0038 80BC     		pop	{r7}
+ 314 003a 7047     		bx	lr
+ 315              		.cfi_endproc
+ 316              	.LFE116:
+ 318              		.section	.text.ERU002_DisablePatternDetection,"ax",%progbits
+ 319              		.align	2
+ 320              		.global	ERU002_DisablePatternDetection
+ 321              		.thumb
+ 322              		.thumb_func
+ 324              	ERU002_DisablePatternDetection:
+ 325              	.LFB117:
+ 272:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 273:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 274:../Dave/Generated/src/ERU002/ERU002.c **** /*
+ 275:../Dave/Generated/src/ERU002/ERU002.c ****  * Function to disable pattern result
+ 276:../Dave/Generated/src/ERU002/ERU002.c ****  */
+ 277:../Dave/Generated/src/ERU002/ERU002.c **** void ERU002_DisablePatternDetection(const ERU002_HandleType *Handle)
+ 278:../Dave/Generated/src/ERU002/ERU002.c **** {
+ 326              		.loc 1 278 0
+ 327              		.cfi_startproc
+ 328              		@ args = 0, pretend = 0, frame = 8
+ 329              		@ frame_needed = 1, uses_anonymous_args = 0
+ 330              		@ link register save eliminated.
+ 331 0000 80B4     		push	{r7}
+ 332              	.LCFI15:
+ 333              		.cfi_def_cfa_offset 4
+ 334              		.cfi_offset 7, -4
+ 335 0002 83B0     		sub	sp, sp, #12
+ 336              	.LCFI16:
+ 337              		.cfi_def_cfa_offset 16
+ 338 0004 00AF     		add	r7, sp, #0
+ 339              	.LCFI17:
+ 340              		.cfi_def_cfa_register 7
+ 341 0006 7860     		str	r0, [r7, #4]
+ 279:../Dave/Generated/src/ERU002/ERU002.c **** 	if( Handle != NULL )
+ 342              		.loc 1 279 0
+ 343 0008 7B68     		ldr	r3, [r7, #4]
+ 344 000a 002B     		cmp	r3, #0
+ 345 000c 11D0     		beq	.L14
+ 280:../Dave/Generated/src/ERU002/ERU002.c **** 	{	
+ 281:../Dave/Generated/src/ERU002/ERU002.c **** 		WR_REG(Handle->ERURegs->EXOCON[Handle->OutputChannel],
+ 346              		.loc 1 281 0
+ 347 000e 7B68     		ldr	r3, [r7, #4]
+ 348 0010 1B68     		ldr	r3, [r3, #0]
+ 349 0012 7A68     		ldr	r2, [r7, #4]
+ 350 0014 5268     		ldr	r2, [r2, #4]
+ 351 0016 7968     		ldr	r1, [r7, #4]
+ 352 0018 0968     		ldr	r1, [r1, #0]
+ 353 001a 7868     		ldr	r0, [r7, #4]
+ 354 001c 4068     		ldr	r0, [r0, #4]
+ 355 001e 00F10800 		add	r0, r0, #8
+ 356 0022 51F82010 		ldr	r1, [r1, r0, lsl #2]
+ 357 0026 21F00401 		bic	r1, r1, #4
+ 358 002a 02F10802 		add	r2, r2, #8
+ 359 002e 43F82210 		str	r1, [r3, r2, lsl #2]
+ 360              	.L14:
+ 282:../Dave/Generated/src/ERU002/ERU002.c **** 				ERU_EXOCON_GEEN_Msk,ERU_EXOCON_GEEN_Pos, 0);
+ 283:../Dave/Generated/src/ERU002/ERU002.c **** 	}
+ 284:../Dave/Generated/src/ERU002/ERU002.c **** }
+ 361              		.loc 1 284 0
+ 362 0032 07F10C07 		add	r7, r7, #12
+ 363 0036 BD46     		mov	sp, r7
+ 364 0038 80BC     		pop	{r7}
+ 365 003a 7047     		bx	lr
+ 366              		.cfi_endproc
+ 367              	.LFE117:
+ 369              		.section	.text.ERU002_SelectServiceRequestMode,"ax",%progbits
+ 370              		.align	2
+ 371              		.global	ERU002_SelectServiceRequestMode
+ 372              		.thumb
+ 373              		.thumb_func
+ 375              	ERU002_SelectServiceRequestMode:
+ 376              	.LFB118:
+ 285:../Dave/Generated/src/ERU002/ERU002.c **** 
+ 286:../Dave/Generated/src/ERU002/ERU002.c **** /*
+ 287:../Dave/Generated/src/ERU002/ERU002.c ****  * Function to select service request mode
+ 288:../Dave/Generated/src/ERU002/ERU002.c ****  */
+ 289:../Dave/Generated/src/ERU002/ERU002.c **** void ERU002_SelectServiceRequestMode(const ERU002_HandleType *Handle, 
+ 290:../Dave/Generated/src/ERU002/ERU002.c **** 		                             ERU002_ServiceRequestMode_t scheme)
+ 291:../Dave/Generated/src/ERU002/ERU002.c **** {
+ 377              		.loc 1 291 0
+ 378              		.cfi_startproc
+ 379              		@ args = 0, pretend = 0, frame = 8
+ 380              		@ frame_needed = 1, uses_anonymous_args = 0
+ 381              		@ link register save eliminated.
+ 382 0000 90B4     		push	{r4, r7}
+ 383              	.LCFI18:
+ 384              		.cfi_def_cfa_offset 8
+ 385              		.cfi_offset 4, -8
+ 386              		.cfi_offset 7, -4
+ 387 0002 82B0     		sub	sp, sp, #8
+ 388              	.LCFI19:
+ 389              		.cfi_def_cfa_offset 16
+ 390 0004 00AF     		add	r7, sp, #0
+ 391              	.LCFI20:
+ 392              		.cfi_def_cfa_register 7
+ 393 0006 7860     		str	r0, [r7, #4]
+ 394 0008 0B46     		mov	r3, r1
+ 395 000a FB70     		strb	r3, [r7, #3]
+ 292:../Dave/Generated/src/ERU002/ERU002.c **** 	if( Handle != NULL )
+ 396              		.loc 1 292 0
+ 397 000c 7B68     		ldr	r3, [r7, #4]
+ 398 000e 002B     		cmp	r3, #0
+ 399 0010 17D0     		beq	.L16
+ 293:../Dave/Generated/src/ERU002/ERU002.c **** 	{
+ 294:../Dave/Generated/src/ERU002/ERU002.c **** 		WR_REG(Handle->ERURegs->EXOCON[Handle->OutputChannel],
+ 400              		.loc 1 294 0
+ 401 0012 7B68     		ldr	r3, [r7, #4]
+ 402 0014 1B68     		ldr	r3, [r3, #0]
+ 403 0016 7A68     		ldr	r2, [r7, #4]
+ 404 0018 5268     		ldr	r2, [r2, #4]
+ 405 001a F978     		ldrb	r1, [r7, #3]	@ zero_extendqisi2
+ 406 001c 4FEA0111 		lsl	r1, r1, #4
+ 407 0020 01F03000 		and	r0, r1, #48
+ 408 0024 7968     		ldr	r1, [r7, #4]
+ 409 0026 0968     		ldr	r1, [r1, #0]
+ 410 0028 7C68     		ldr	r4, [r7, #4]
+ 411 002a 6468     		ldr	r4, [r4, #4]
+ 412 002c 04F10804 		add	r4, r4, #8
+ 413 0030 51F82410 		ldr	r1, [r1, r4, lsl #2]
+ 414 0034 21F03001 		bic	r1, r1, #48
+ 415 0038 0143     		orrs	r1, r1, r0
+ 416 003a 02F10802 		add	r2, r2, #8
+ 417 003e 43F82210 		str	r1, [r3, r2, lsl #2]
+ 418              	.L16:
+ 295:../Dave/Generated/src/ERU002/ERU002.c **** 			   ERU_EXOCON_GP_Msk,ERU_EXOCON_GP_Pos,scheme);
+ 296:../Dave/Generated/src/ERU002/ERU002.c **** 	}
+ 297:../Dave/Generated/src/ERU002/ERU002.c **** }
+ 419              		.loc 1 297 0
+ 420 0042 07F10807 		add	r7, r7, #8
+ 421 0046 BD46     		mov	sp, r7
+ 422 0048 90BC     		pop	{r4, r7}
+ 423 004a 7047     		bx	lr
+ 424              		.cfi_endproc
+ 425              	.LFE118:
+ 427              		.text
+ 428              	.Letext0:
+ 429              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 430              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 431              		.file 4 "../Dave/Generated/src/ERU002/../../inc/ERU002/ERU002.h"
+ 432              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 433              		.file 6 "../Dave/Generated/src/ERU002/../../inc/ERU002/ERU002_Extern.h"
+ 434              		.file 7 "../Dave/Generated/src/ERU002/../../inc/ERU002/../../inc/RESET001/RESET001.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ERU002.c
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:20     .text.ERU002_Init:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:25     .text.ERU002_Init:00000000 ERU002_Init
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:77     .text.ERU002_lInit:00000000 ERU002_lInit
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:72     .text.ERU002_lInit:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:148    .text.ERU002_SetPeripheralTrigInputSrc:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:153    .text.ERU002_SetPeripheralTrigInputSrc:00000000 ERU002_SetPeripheralTrigInputSrc
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:223    .text.ERU002_GetPatternResult:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:228    .text.ERU002_GetPatternResult:00000000 ERU002_GetPatternResult
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:268    .text.ERU002_EnablePatternDetection:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:273    .text.ERU002_EnablePatternDetection:00000000 ERU002_EnablePatternDetection
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:319    .text.ERU002_DisablePatternDetection:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:324    .text.ERU002_DisablePatternDetection:00000000 ERU002_DisablePatternDetection
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:370    .text.ERU002_SelectServiceRequestMode:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cctGMM63.s:375    .text.ERU002_SelectServiceRequestMode:00000000 ERU002_SelectServiceRequestMode
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.ERU002_Conf.h.49.47045c766c6d22ab1185285e9d568758
+
+UNDEFINED SYMBOLS
+ERU002_HandleArray
+RESET001_GetStatus
+RESET001_DeassertReset

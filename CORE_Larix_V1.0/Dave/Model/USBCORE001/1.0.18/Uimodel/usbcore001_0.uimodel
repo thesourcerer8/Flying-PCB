@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="DefaultPage" className="IfxGroupBox" controlId="1323684974912">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/usbcore001/0/usbore001_erwusbmode" displayName="USB Mode Select" className="EnumerationType" constraint="if (CM.getParamValue(&quot;app/usbcore001/0/usbcore001_irwusbdevicedma_disable&quot;) == &quot;1&quot;) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}" paramName="app/usbcore001/0/usbore001_erwusbmode:USB Mode Select" controlId="1337236943551">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group34" displayName="Interrupt Priority Configuration" className="IfxGroupBox" controlId="1327065617677">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/usbcore001/0/usbcore001_irwInterruptPriority" displayName="Premption Priority" className="IntegerType" paramName="app/usbcore001/0/usbcore001_irwInterruptPriority:Premption Priority" controlId="1337237157297">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/usbcore001/0/usbcore001_irwInterruptSubPriority" displayName="Sub Priority" className="IntegerType" paramName="app/usbcore001/0/usbcore001_irwInterruptSubPriority:Sub Priority" controlId="1337237160479">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

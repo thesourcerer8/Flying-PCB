@@ -1,0 +1,79 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"IO002_Conf.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	IO002_Handle0
+  20              		.section	.rodata
+  21              		.align	2
+  24              	IO002_Handle0:
+  25 0000 00       		.byte	0
+  26 0001 05       		.byte	5
+  27 0002 0000     		.space	2
+  28 0004 00000000 		.word	0
+  29 0008 00000000 		.word	0
+  30 000c 00000000 		.word	0
+  31 0010 00000000 		.word	0
+  32 0014 00000000 		.word	0
+  33 0018 00000000 		.word	0
+  34 001c 00000000 		.word	0
+  35 0020 00000000 		.word	0
+  36 0024 00000000 		.word	0
+  37 0028 00007000 		.word	7340032
+  38 002c 14000000 		.word	20
+  39 0030 00000000 		.space	16
+  39      00000000 
+  39      00000000 
+  39      00000000 
+  40 0040 00800248 		.word	1208123392
+  41 0044 40800248 		.word	1208123456
+  42 0048 00000000 		.space	4
+  43              		.global	IO002_HandleArr
+  44              		.data
+  45              		.align	2
+  48              	IO002_HandleArr:
+  49 0000 00000000 		.word	IO002_Handle0
+  50              		.text
+  51              	.Letext0:
+  52              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+  53              		.file 2 "../Dave/Generated/src/IO002/../../inc/IO002/IO002.h"
+  54              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+  55              		.file 4 "../Dave/Generated/src/IO002/IO002_Conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO002_Conf.c
+C:\Users\maan\AppData\Local\Temp\cct4YO59.s:24     .rodata:00000000 IO002_Handle0
+C:\Users\maan\AppData\Local\Temp\cct4YO59.s:21     .rodata:00000000 $d
+C:\Users\maan\AppData\Local\Temp\cct4YO59.s:48     .data:00000000 IO002_HandleArr
+C:\Users\maan\AppData\Local\Temp\cct4YO59.s:45     .data:00000000 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.IO002_Conf.h.51.be0baad511cf66771895fab0bf90f390
+
+NO UNDEFINED SYMBOLS

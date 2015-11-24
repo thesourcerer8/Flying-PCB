@@ -1,0 +1,40 @@
+package CodeGenerator;
+
+import com.ifx.davex.appjetinteract.App2JetInterface;
+
+public class usbld001_delayc_template
+{
+  protected static String nl;
+  public static synchronized usbld001_delayc_template create(String lineSeparator)
+  {
+    nl = lineSeparator;
+    usbld001_delayc_template result = new usbld001_delayc_template();
+    nl = null;
+    return result;
+  }
+
+  public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
+  protected final String TEXT_1 = "/*******************************************************************************" + NL + " Copyright (c) 2011, Infineon Technologies AG                                 **" + NL + " All rights reserved.                                                         **" + NL + "                                                                              **" + NL + " Redistribution and use in source and binary forms, with or without           **" + NL + " modification,are permitted provided that the following conditions are met:   **" + NL + "                                                                              **" + NL + " *Redistributions of source code must retain the above copyright notice,      **" + NL + " this list of conditions and the following disclaimer.                        **" + NL + " *Redistributions in binary form must reproduce the above copyright notice,   **" + NL + " this list of conditions and the following disclaimer in the documentation    **" + NL + " and/or other materials provided with the distribution.                       **" + NL + " *Neither the name of the copyright holders nor the names of its contributors **" + NL + " may be used to endorse or promote products derived from this software without** " + NL + " specific prior written permission.                                           **" + NL + "                                                                              **" + NL + " THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"  **" + NL + " AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **" + NL + " IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **" + NL + " ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **" + NL + " LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **" + NL + " CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **" + NL + " SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **" + NL + " INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **" + NL + " CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **" + NL + " ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **" + NL + " POSSIBILITY OF SUCH DAMAGE.                                                  **" + NL + "                                                                              **" + NL + " To improve the quality of the software, users are encouraged to share        **" + NL + " modifications, enhancements or bug fixes with Infineon Technologies AG       **" + NL + " dave@infineon.com).                                                          **" + NL + "                                                                              **" + NL + "********************************************************************************" + NL + "**                                                                            **" + NL + "**                                                                            **" + NL + "** PLATFORM : Infineon XMC4000 Series                                         **" + NL + "**                                                                            **" + NL + "** COMPILER : Compiler Independent                                            **" + NL + "**                                                                            **" + NL + "** AUTHOR : App Developer                                                     **" + NL + "**                                                                            **" + NL + "** MAY BE CHANGED BY USER [yes/no]: Yes                                       **" + NL + "**                                                                            **" + NL + "** MODIFICATION DATE : Apr 8, 2012                                           **" + NL + "**                                                                            **" + NL + "*******************************************************************************/" + NL + "" + NL + "/*******************************************************************************" + NL + "**                       Author(s) Identity                                   **" + NL + "********************************************************************************" + NL + "**                                                                            **" + NL + "** Initials    Name                                                           **" + NL + "** ---------------------------------------------------------------------------**" + NL + "** CM          App Developer                                                  **" + NL + "*******************************************************************************/" + NL + "" + NL + "#include <DAVE3.h>" + NL;
+  protected final String TEXT_2 = NL;
+  protected final String TEXT_3 = NL + NL + NL + "#define RTOS_MODE\t";
+  protected final String TEXT_4 = NL + NL + "#if RTOS_MODE" + NL + "" + NL + "void USBLD001_lDelay(uint32_t DelayTime)" + NL + "{" + NL + "\tosStatus status;" + NL + "    uint32_t count = 0;" + NL + "    uint32_t usec = DelayTime * 1000;" + NL + "    const uint32_t utime = (120 * usec / 7);" + NL + "" + NL + "    status = osDelay(DelayTime);" + NL + "\tif((status == osErrorISR))" + NL + "\t{" + NL + "\t\t/*" + NL + "\t\t * Since synopsys driver expects delay in ISR, which RTOS does not" + NL + "\t\t * support." + NL + "\t\t * Hence manual delay added." + NL + "\t\t */" + NL + "\t\t  do" + NL + "\t\t  {" + NL + "\t\t\tif ( ++count > utime )" + NL + "\t\t\t{" + NL + "\t\t\t  return ;" + NL + "\t\t\t}" + NL + "\t\t  }while (1);" + NL + "\t}" + NL + "}" + NL + "" + NL + "#else" + NL + "" + NL + "static volatile bool TimerExpire;" + NL + "" + NL + "void USBLD001_Timer_CallBack(void* Temp)" + NL + "{" + NL + "  TimerExpire = 0;" + NL + "}" + NL + "" + NL + "/**" + NL + " * This function is used to some delay in RTOS or NON-RTOS environment." + NL + " */" + NL + "void USBLD001_lDelay(uint32_t DelayTime)" + NL + "{" + NL + "  handle_t TimerId;" + NL + "  status_t Status;" + NL + "  TimerExpire = 1;" + NL + "  TimerId = SYSTM001_CreateTimer(DelayTime,SYSTM001_ONE_SHOT,USBLD001_Timer_CallBack,NULL);" + NL + "  if(TimerId != 0)" + NL + "  {" + NL + "    /* Timer is created successfully */" + NL + "    Status = SYSTM001_StartTimer(TimerId);" + NL + "    if(Status == DAVEApp_SUCCESS)" + NL + "    {" + NL + "      /* Wait in infinite loop till the timer expires */" + NL + "      while(TimerExpire)" + NL + "      {" + NL + "      }" + NL + "      /* stop the timer */" + NL + "      Status = SYSTM001_StopTimer(TimerId);" + NL + "      /* Delete the Timer*/" + NL + "      if(Status == DAVEApp_SUCCESS)" + NL + "      {" + NL + "        SYSTM001_DeleteTimer(TimerId);" + NL + "      }" + NL + "         " + NL + "    }" + NL + "  }" + NL + "}" + NL + "" + NL + "#endif";
+  protected final String TEXT_5 = NL;
+
+  public String generate(Object argument)
+  {
+    final StringBuffer stringBuffer = new StringBuffer();
+     App2JetInterface app = (App2JetInterface) argument; 
+    stringBuffer.append(TEXT_1);
+     String AppBaseuri = "app/usbld001/";
+    stringBuffer.append(TEXT_2);
+     int appInst = 0; 
+   int RtosMode = 0;
+   RtosMode = app.getIntegerValue(AppBaseuri + appInst +"/usbld001_erwrtos_mode/0");
+
+    stringBuffer.append(TEXT_3);
+    stringBuffer.append( RtosMode );
+    stringBuffer.append(TEXT_4);
+    stringBuffer.append(TEXT_5);
+    return stringBuffer.toString();
+  }
+}

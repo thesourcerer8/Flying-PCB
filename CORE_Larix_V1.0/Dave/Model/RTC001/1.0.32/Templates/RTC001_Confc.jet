@@ -1,0 +1,346 @@
+<%@ jet package="CodeGenerator" class="rtc001_confc_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+
+/*CODE_BLOCK_BEGIN[RTC001_Conf.c]*/
+/*******************************************************************************
+ Copyright (c) 2011-2013, Infineon Technologies AG                            **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without**
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** NOTE     : Any Changes made to this file will be overwritten during Code   **
+**            Generation                                                      **
+**                                                                            **
+**                                                                            **
+*******************************************************************************/
+/*******************************************************************************
+** Version History:                                                           **
+********************************************************************************
+** v1.0.22    23 Feb 2013  JP: Ported for XMC4400 and XMC1000 Devices.        **
+**                            Conditional consumption of NVIC_SCU,NVIC_SR101  **
+**                            Apps based on the device.                       ** 
+**                                                                            **
+** v1.0.24    20 Mar 2013  JP: Mirror register status check                   **
+**                            statements under the functions RTC001_Disable(),**
+**                            RTC001_ConfigAlarm() and RTC001_Clock_SetTime() ** 
+**                            are maintained uniquely for both XMC4000 and    ** 
+**                            XMC1000 devices. DBG002 related bugs(ID22796)   ** 
+**                            are fixed. Revision History added.              **
+**                                                                            **
+** v1.0.26    23 Apr 2013  JP: In Function RTC001_ldatevalid(uint16_t m,      **
+**                            uint16_t d,uint16_t y), "Day (d) == 0" is       ** 
+**                            checked.                                        **
+**                                                                            **
+** v1.0.28    09 Sep 2013  JP: XMC1000 Five new SW IDs are supported.         **
+**                            RTC001 --> wrong handling of Hibernate register **  
+**                            is fixed.                                       **
+**                                                                            **
+** v1.0.30    16 Oct 2013  JP: Code has been updated in compliant to          **
+**                            coding guidelines.                              **                                                                           
+**                                                                            **
+**                                                                            **
+**                                                                            **
+**                                                                            **
+*******************************************************************************/ 
+<% String AppBaseuri = "app/RTC001/0";%>
+/**
+ *******************************************************************************
+ *
+ * @file RTC001_Conf.c
+ *
+ 
+ *
+ * @brief Handle definitions based on UI configuration for rtc001 App 
+ *        Instances.
+*/
+
+/*******************************************************************************
+ ** Include Files:                                                            **
+ ******************************************************************************/
+#include "../../inc/RTC001/RTC001_Conf.h"
+#include "../../inc/RTC001/RTC001.h"
+
+/* GUI configurations made for a RTC001 app. */
+
+
+const RTC001_HandleType RTC001_Handle  = 
+{
+  /**
+   * General Configurations
+   */             
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwTimeInitialisation/0")==1) {%>		
+  /* Time Initialization Once Enabled */
+  .RTCInitOnce = RTC001_INITONCE_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwTimeInitialisation/0")==0) {%>
+  /* Time Initialization Once Disabled */
+  .RTCInitOnce = RTC001_INITONCE_DISABLE, 	 	
+ <%}%>    
+  /*DividerValue*/
+  .DividerValue = 0x<%= app.getHexValue(AppBaseuri + "/rtc/ctr/div") %>U,   
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnableRTC/0")==1) {%>		
+  /* RTC Module Enabled */
+  .RTCEnable = RTC001_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnableRTC/0")==0) {%>
+  /* RTC Module Disabled */
+  .RTCEnable = RTC001_DISABLE, 	 	
+ <%}%>
+    
+  /**
+   * Interrupt Configurations
+   */      
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_Eventtrigger_timer/0")==1) {%>		
+  /* Event trigger to SCU interrupt enabled */
+  .RTCEventTrigTimer = RTC001_EVENTTRIGSCU_TIMER_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_Eventtrigger_timer/1")==1) {%>
+  /* Event trigger to NMI interrupt enabled */
+  .RTCEventTrigTimer = RTC001_EVENTTRIGNMI_TIMER_ENABLE, 	 	
+ <%}%>   
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicSecInter/0")==1) {%>		
+  /* Timer Periodic seconds interrupt enabled */
+  .RTCPeriodicSecInterrupt = RTC001_PERIODICSECINT_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicSecInter/0")==0) {%>
+  /* Timer Periodic seconds interrupt disabled */
+  .RTCPeriodicSecInterrupt = RTC001_PERIODICSECINT_DISABLE, 	 	
+ <%}%>    
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicMinInter/0")==1) {%>		
+  /* Timer Periodic minutes interrupt enabled */
+  .RTCPeriodicMinInterrupt = RTC001_PERIODICMININT_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicMinInter/0")==0) {%>
+  /* Timer Periodic minutes interrupt disabled */
+  .RTCPeriodicMinInterrupt = RTC001_PERIODICMININT_DISABLE, 	 	
+ <%}%>    
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicHrsInter/0")==1) {%>		
+  /* Timer Periodic hours interrupt enabled */
+  .RTCPeriodicHourInterrupt = RTC001_PERIODICHOURINT_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicHrsInter/0")==0) {%>
+  /* Timer Periodic hours interrupt disabled */
+  .RTCPeriodicHourInterrupt = RTC001_PERIODICHOURINT_DISABLE, 	 	
+ <%}%>      
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicDaysInter/0")==1) {%>		
+  /* Timer Periodic days interrupt enabled */
+  .RTCPeriodicDayInterrupt = RTC001_PERIODICDAYINT_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicDaysInter/0")==0) {%>
+  /* Timer Periodic days interrupt disabled */
+  .RTCPeriodicDayInterrupt = RTC001_PERIODICDAYINT_DISABLE, 	 	
+ <%}%>      
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicMonths/0")==1) {%>		
+  /* Timer Periodic months interrupt enabled */
+  .RTCPeriodicMonthInterrupt = RTC001_PERIODICMONTHINT_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicMonths/0")==0) {%>
+  /* Timer Periodic months interrupt disabled */
+  .RTCPeriodicMonthInterrupt = RTC001_PERIODICMONTHINT_DISABLE, 	 	
+ <%}%> 
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicYears/0")==1) {%>		
+  /* Timer Periodic years interrupt enabled */
+  .RTCPeriodicYearInterrupt = RTC001_PERIODICYEARINT_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwPeriodicYears/0")==0) {%>
+  /* Timer Periodic years interrupt disabled */
+  .RTCPeriodicYearInterrupt = RTC001_PERIODICYEARINT_DISABLE, 	 	
+ <%}%> 
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwAlarmIntrptEna/0")==1) {%>		
+  /* Alarm interrupt enabled */
+  .RTCAlarmInterrupt = RTC001_ALARMINT_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwAlarmIntrptEna/0")==0) {%>
+  /* Alarm interrupt disabled */
+  .RTCAlarmInterrupt = RTC001_ALARMINT_DISABLE, 	 	
+ <%}%> 
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_Eventtrigger_Alarm/0")==1) {%>		
+  /* Event trigger to SCU interrupt enabled */
+  .RTCEventTrigAlarm = RTC001_EVENTTRIGSCU_ALARM_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_Eventtrigger_Alarm/1")==1) {%>
+  /* Event trigger to NMI interrupt dnabled */
+  .RTCEventTrigAlarm = RTC001_EVENTTRIGNMI_ALARM_ENABLE, 	 	
+ <%}%>
+   
+  /**
+   * Hibernate Configurations
+   */      
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwTimerAlarm/0")==1) {%>		
+  /* Alarm event in hibernate mode enabled */
+  .RTCHibAlarmEvent = RTC001_HIBALARM_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwTimerAlarm/0")==0) {%>
+  /* Alarm event in hibernate mode disabled */
+  .RTCHibAlarmEvent = RTC001_HIBALARM_DISABLE, 	 	
+ <%}%> 
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaSecComp/0")==1) {%>		
+  /* Periodic seconds event in hibernate mode enabled */
+  .RTCHibPeriodicSecEvent = RTC001_HIBPERIODICSEC_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaSecComp/0")==0) {%>
+  /* Periodic seconds event in hibernate mode disabled */
+  .RTCHibPeriodicSecEvent = RTC001_HIBPERIODICSEC_DISABLE, 	 	
+ <%}%> 
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaMinComp/0")==1) {%>		
+  /* Periodic minutes event in hibernate mode enabled */
+  .RTCHibPeriodicMinEvent = RTC001_HIBPERIODICMIN_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaMinComp/0")==0) {%>
+  /* Periodic minutes event in hibernate mode disabled */
+  .RTCHibPeriodicMinEvent = RTC001_HIBPERIODICMIN_DISABLE, 	 	
+ <%}%> 
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaHrsComp/0")==1) {%>		
+  /* Periodic hours event in hibernate mode enabled */
+  .RTCHibPeriodicHourEvent = RTC001_HIBPERIODICHOUR_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaHrsComp/0")==0) {%>
+  /* Periodic hours event in hibernate mode disabled */
+  .RTCHibPeriodicHourEvent = RTC001_HIBPERIODICHOUR_DISABLE, 	 	
+ <%}%>
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaDaysComp/0")==1) {%>		
+  /* Periodic days event in hibernate mode enabled */
+  .RTCHibPeriodicDayEvent = RTC001_HIBPERIODICDAY_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaDaysComp/0")==0) {%>
+  /* Periodic days event in hibernate mode disabled */
+  .RTCHibPeriodicDayEvent = RTC001_HIBPERIODICDAY_DISABLE, 	 	
+ <%}%> 
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaMonthsComp/0")==1) {%>		
+  /* Periodic months event in hibernate mode enabled */
+  .RTCHibPeriodicMonthEvent = RTC001_HIBPERIODICMONTH_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaMonthsComp/0")==0) {%>
+  /* Periodic months event in hibernate mode disabled */
+  .RTCHibPeriodicMonthEvent = RTC001_HIBPERIODICMONTH_DISABLE, 	 	
+ <%}%>
+ <% if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaYearsComp/0")==1) {%>		
+  /* Periodic years event in hibernate mode enabled */
+  .RTCHibPeriodicYearEvent = RTC001_HIBPERIODICYEAR_ENABLE,  	
+ <%} else if(app.getIntegerValue(AppBaseuri + "/RTC001_erwEnaYearsComp/0")==0) {%>
+  /* Periodic years event in hibernate mode disabled */
+  .RTCHibPeriodicYearEvent = RTC001_HIBPERIODICYEAR_DISABLE, 	 	
+ <%}%>
+ 
+  /**
+   * Listener functions for RTC Interrupt Events
+   */
+ <%String EventHandlerTimer = app.getStringValue(AppBaseuri +"/RTC001_srwTimerUserFunction");
+ 
+ if((EventHandlerTimer != null) && (EventHandlerTimer.compareTo("") != 0)) 
+ {    
+   if (app.getIntegerValue(AppBaseuri + "/RTC001_Eventtrigger_timer/0") == 1) 
+   { %> 
+  /* Event: Timer Periodic Interrupt */ 
+  .RTC001_PI_Listener = <%= app.getStringValue(AppBaseuri +"/RTC001_srwTimerUserFunction")%>,      
+ <% }
+ else { %>
+  /* Event: Timer Periodic Interrupt */ 
+  .RTC001_PI_Listener = NULL, 
+   <% } 
+  } %>    
+  <%String EventHandlerAlarm1 = app.getStringValue(AppBaseuri +"/RTC001_srwAlarmUserFunction"); 
+  if ((app.getIntegerValue(AppBaseuri + "/RTC001_erwAlarmIntrptEna/0") == 1)) 
+  { 
+    if((EventHandlerAlarm1 != null) && (EventHandlerAlarm1.compareTo("") != 0) && (app.getIntegerValue(AppBaseuri + "/RTC001_Eventtrigger_Alarm/0") == 1)) 
+    { %>   
+  /* Event: Alarm Interrupt */	
+  .RTC001_AI_Listener = <%= app.getStringValue(AppBaseuri +"/RTC001_srwAlarmUserFunction")%> 
+  <% }
+  else { %> 
+  /* Event: Alarm Interrupt */  
+  .RTC001_AI_Listener = NULL 
+   <% } 
+  } %>
+};
+
+
+/* User Set Calendar Date manually */
+   RTC001_TimeHandle timeptr1 =
+  { 
+  <%String Date = app.getStringValue(AppBaseuri + "/RTC001_srwDateValue");   
+   	String[] SplitDate = Date.split("\\/"); %>
+   	
+ <%int Datemm  = Integer.parseInt(SplitDate[0]); 
+   int Datedd  = Integer.parseInt(SplitDate[1]); 
+   int Dateyyyy  = Integer.parseInt(SplitDate[2]); %>
+   
+  /* User Set Time manually */
+  <% String Time = app.getStringValue(AppBaseuri + "/RTC001_srwTimeValue");   
+   	String[] SplitTime = Time.split("\\:"); %>
+  
+  <%int Timehh  = Integer.parseInt(SplitTime[0]);
+  	int Timemm  = Integer.parseInt(SplitTime[1]);
+  	int Timess  = Integer.parseInt(SplitTime[2]); %>
+
+    /* Second provided in GUI */
+    .Sec = <%=Timess%>U,
+    /* Minute provided in GUI */
+    .Min = <%=Timemm%>U,    
+  	/* Hour provided in GUI */
+    .Hours = <%=Timehh%>U,    
+    /* Day provided in GUI */
+    .Days = <%=Datedd%>U,
+    /* Month provided in GUI */
+    .Month = <%=Datemm%>U,
+    /* Year provided in GUI */
+    .Year = <%=Dateyyyy%>U   
+  };
+  
+  <% if (app.getIntegerValue(AppBaseuri + "/RTC001_erwAlarmIntrptEna/0") == 1) { %>
+  /* User Set Alarm Configurations */
+  /* Alarm Date configuration */
+  RTC001_TimeHandle Alarmptr1 = 
+  {  
+  <%String AlarmDate = app.getStringValue(AppBaseuri + "/RTC001_srwAlarmDate");   
+   	String[] SplitAlarmDate = AlarmDate.split("\\/"); %>
+   	
+ <%int Alarmmm1  = Integer.parseInt(SplitAlarmDate[0]);  
+   int Alarmdd  = Integer.parseInt(SplitAlarmDate[1]); 
+   int Alarmyyyy  = Integer.parseInt(SplitAlarmDate[2]); %> 
+  
+  /* Alarm time configuration */ 
+  <% String AlarmTime = app.getStringValue(AppBaseuri + "/RTC001_srwAlarmTime");   
+   	String[] SplitAlarmTime = AlarmTime.split("\\:"); %>
+  
+  <%int Alarmhh  = Integer.parseInt(SplitAlarmTime[0]);
+  	int Alarmmm2  = Integer.parseInt(SplitAlarmTime[1]);
+  	int Alarmss  = Integer.parseInt(SplitAlarmTime[2]); %>
+       
+    /* Alarm seconds provided in GUI */
+    .Sec = <%=Alarmss%>U,
+    /* Alarm minutes provided in GUI */
+    .Min = <%=Alarmmm2%>U,
+    /* Alarm hours provided in GUI */
+    .Hours = <%=Alarmhh%>U,
+    /* Alarm day provided in GUI */
+    .Days = <%=Alarmdd%>U,
+    /* Alarm month provided in GUI */
+    .Month = <%=Alarmmm1%>U,
+    /* Alarm year provided in GUI */
+    .Year = <%=Alarmyyyy%>U
+    };
+  <% } %>    
+ 
+  
+/*CODE_BLOCK_END*/ 

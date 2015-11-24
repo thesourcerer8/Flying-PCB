@@ -1,0 +1,1950 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"QuaternionFilters.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	__aeabi_f2d
+  20              		.global	__aeabi_d2f
+  21              		.section	.text.MadgwickQuaternionUpdate,"ax",%progbits
+  22              		.align	2
+  23              		.global	MadgwickQuaternionUpdate
+  24              		.thumb
+  25              		.thumb_func
+  27              	MadgwickQuaternionUpdate:
+  28              	.LFB153:
+  29              		.file 1 "../QuaternionFilters.c"
+   1:../QuaternionFilters.c **** /*
+   2:../QuaternionFilters.c ****  * QuaternionFilters.c
+   3:../QuaternionFilters.c ****  *
+   4:../QuaternionFilters.c ****  *  Created on: 06.05.2015
+   5:../QuaternionFilters.c ****  *      Author: maan
+   6:../QuaternionFilters.c ****  */
+   7:../QuaternionFilters.c **** 
+   8:../QuaternionFilters.c **** #include "QuaternionFilters.h"
+   9:../QuaternionFilters.c **** 
+  10:../QuaternionFilters.c **** // Implementation of Sebastian Madgwick's "...efficient orientation filter for... inertial/magnetic
+  11:../QuaternionFilters.c **** // (see http://www.x-io.co.uk/category/open-source/ for examples and more details)
+  12:../QuaternionFilters.c **** // which fuses acceleration, rotation rate, and magnetic moments to produce a quaternion-based esti
+  13:../QuaternionFilters.c **** // device orientation -- which can be converted to yaw, pitch, and roll. Useful for stabilizing qua
+  14:../QuaternionFilters.c **** // The performance of the orientation filter is at least as good as conventional Kalman-based filte
+  15:../QuaternionFilters.c **** // but is much less computationally intensive---it can be performed on a 3.3 V Pro Mini operating a
+  16:../QuaternionFilters.c **** void MadgwickQuaternionUpdate(float* q, float deltat, float ax, float ay, float az, float gx, float
+  17:../QuaternionFilters.c **** {
+  30              		.loc 1 17 0
+  31              		.cfi_startproc
+  32              		@ args = 28, pretend = 0, frame = 176
+  33              		@ frame_needed = 1, uses_anonymous_args = 0
+  34 0000 80B5     		push	{r7, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 7, -8
+  38              		.cfi_offset 14, -4
+  39 0002 ACB0     		sub	sp, sp, #176
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 184
+  42 0004 00AF     		add	r7, sp, #0
+  43              	.LCFI2:
+  44              		.cfi_def_cfa_register 7
+  45 0006 F860     		str	r0, [r7, #12]
+  46 0008 B960     		str	r1, [r7, #8]	@ float
+  47 000a 7A60     		str	r2, [r7, #4]	@ float
+  48 000c 3B60     		str	r3, [r7, #0]	@ float
+  18:../QuaternionFilters.c **** 	float q1 = q[0], q2 = q[1], q3 = q[2], q4 = q[3];   // short name local variable for readability
+  49              		.loc 1 18 0
+  50 000e FB68     		ldr	r3, [r7, #12]
+  51 0010 1B68     		ldr	r3, [r3, #0]	@ float
+  52 0012 C7F8AC30 		str	r3, [r7, #172]	@ float
+  53 0016 FB68     		ldr	r3, [r7, #12]
+  54 0018 5B68     		ldr	r3, [r3, #4]	@ float
+  55 001a C7F8A830 		str	r3, [r7, #168]	@ float
+  56 001e FB68     		ldr	r3, [r7, #12]
+  57 0020 9B68     		ldr	r3, [r3, #8]	@ float
+  58 0022 C7F8A430 		str	r3, [r7, #164]	@ float
+  59 0026 FB68     		ldr	r3, [r7, #12]
+  60 0028 DB68     		ldr	r3, [r3, #12]	@ float
+  61 002a C7F8A030 		str	r3, [r7, #160]	@ float
+  19:../QuaternionFilters.c **** 	float norm;
+  20:../QuaternionFilters.c **** 	float hx, hy, _2bx, _2bz;
+  21:../QuaternionFilters.c **** 	float s1, s2, s3, s4;
+  22:../QuaternionFilters.c **** 	float qDot1, qDot2, qDot3, qDot4;
+  23:../QuaternionFilters.c **** 
+  24:../QuaternionFilters.c **** 	float beta = sqrt(3.0f / 4.0f) * GYROMEASERROR;
+  62              		.loc 1 24 0
+  63 002e 4CF20E73 		movw	r3, #50958
+  64 0032 C3F61A73 		movt	r3, 16154
+  65 0036 C7F89C30 		str	r3, [r7, #156]	@ float
+  25:../QuaternionFilters.c **** 
+  26:../QuaternionFilters.c **** 	// Auxiliary variables to avoid repeated arithmetic
+  27:../QuaternionFilters.c **** 	float _2q1mx;
+  28:../QuaternionFilters.c **** 	float _2q1my;
+  29:../QuaternionFilters.c **** 	float _2q1mz;
+  30:../QuaternionFilters.c **** 	float _2q2mx;
+  31:../QuaternionFilters.c **** 	float _4bx;
+  32:../QuaternionFilters.c **** 	float _4bz;
+  33:../QuaternionFilters.c **** 	float _2q1 = 2.0f * q1;
+  66              		.loc 1 33 0
+  67 003a D7ED2B7A 		flds	s15, [r7, #172]
+  68 003e 77EEA77A 		fadds	s15, s15, s15
+  69 0042 C7ED267A 		fsts	s15, [r7, #152]
+  34:../QuaternionFilters.c **** 	float _2q2 = 2.0f * q2;
+  70              		.loc 1 34 0
+  71 0046 D7ED2A7A 		flds	s15, [r7, #168]
+  72 004a 77EEA77A 		fadds	s15, s15, s15
+  73 004e C7ED257A 		fsts	s15, [r7, #148]
+  35:../QuaternionFilters.c **** 	float _2q3 = 2.0f * q3;
+  74              		.loc 1 35 0
+  75 0052 D7ED297A 		flds	s15, [r7, #164]
+  76 0056 77EEA77A 		fadds	s15, s15, s15
+  77 005a C7ED247A 		fsts	s15, [r7, #144]
+  36:../QuaternionFilters.c **** 	float _2q4 = 2.0f * q4;
+  78              		.loc 1 36 0
+  79 005e D7ED287A 		flds	s15, [r7, #160]
+  80 0062 77EEA77A 		fadds	s15, s15, s15
+  81 0066 C7ED237A 		fsts	s15, [r7, #140]
+  37:../QuaternionFilters.c **** 	float _2q1q3 = 2.0f * q1 * q3;
+  82              		.loc 1 37 0
+  83 006a D7ED2B7A 		flds	s15, [r7, #172]
+  84 006e 37EEA77A 		fadds	s14, s15, s15
+  85 0072 D7ED297A 		flds	s15, [r7, #164]
+  86 0076 67EE277A 		fmuls	s15, s14, s15
+  87 007a C7ED227A 		fsts	s15, [r7, #136]
+  38:../QuaternionFilters.c **** 	float _2q3q4 = 2.0f * q3 * q4;
+  88              		.loc 1 38 0
+  89 007e D7ED297A 		flds	s15, [r7, #164]
+  90 0082 37EEA77A 		fadds	s14, s15, s15
+  91 0086 D7ED287A 		flds	s15, [r7, #160]
+  92 008a 67EE277A 		fmuls	s15, s14, s15
+  93 008e C7ED217A 		fsts	s15, [r7, #132]
+  39:../QuaternionFilters.c **** 	float q1q1 = q1 * q1;
+  94              		.loc 1 39 0
+  95 0092 97ED2B7A 		flds	s14, [r7, #172]
+  96 0096 D7ED2B7A 		flds	s15, [r7, #172]
+  97 009a 67EE277A 		fmuls	s15, s14, s15
+  98 009e C7ED207A 		fsts	s15, [r7, #128]
+  40:../QuaternionFilters.c **** 	float q1q2 = q1 * q2;
+  99              		.loc 1 40 0
+ 100 00a2 97ED2B7A 		flds	s14, [r7, #172]
+ 101 00a6 D7ED2A7A 		flds	s15, [r7, #168]
+ 102 00aa 67EE277A 		fmuls	s15, s14, s15
+ 103 00ae C7ED1F7A 		fsts	s15, [r7, #124]
+  41:../QuaternionFilters.c **** 	float q1q3 = q1 * q3;
+ 104              		.loc 1 41 0
+ 105 00b2 97ED2B7A 		flds	s14, [r7, #172]
+ 106 00b6 D7ED297A 		flds	s15, [r7, #164]
+ 107 00ba 67EE277A 		fmuls	s15, s14, s15
+ 108 00be C7ED1E7A 		fsts	s15, [r7, #120]
+  42:../QuaternionFilters.c **** 	float q1q4 = q1 * q4;
+ 109              		.loc 1 42 0
+ 110 00c2 97ED2B7A 		flds	s14, [r7, #172]
+ 111 00c6 D7ED287A 		flds	s15, [r7, #160]
+ 112 00ca 67EE277A 		fmuls	s15, s14, s15
+ 113 00ce C7ED1D7A 		fsts	s15, [r7, #116]
+  43:../QuaternionFilters.c **** 	float q2q2 = q2 * q2;
+ 114              		.loc 1 43 0
+ 115 00d2 97ED2A7A 		flds	s14, [r7, #168]
+ 116 00d6 D7ED2A7A 		flds	s15, [r7, #168]
+ 117 00da 67EE277A 		fmuls	s15, s14, s15
+ 118 00de C7ED1C7A 		fsts	s15, [r7, #112]
+  44:../QuaternionFilters.c **** 	float q2q3 = q2 * q3;
+ 119              		.loc 1 44 0
+ 120 00e2 97ED2A7A 		flds	s14, [r7, #168]
+ 121 00e6 D7ED297A 		flds	s15, [r7, #164]
+ 122 00ea 67EE277A 		fmuls	s15, s14, s15
+ 123 00ee C7ED1B7A 		fsts	s15, [r7, #108]
+  45:../QuaternionFilters.c **** 	float q2q4 = q2 * q4;
+ 124              		.loc 1 45 0
+ 125 00f2 97ED2A7A 		flds	s14, [r7, #168]
+ 126 00f6 D7ED287A 		flds	s15, [r7, #160]
+ 127 00fa 67EE277A 		fmuls	s15, s14, s15
+ 128 00fe C7ED1A7A 		fsts	s15, [r7, #104]
+  46:../QuaternionFilters.c **** 	float q3q3 = q3 * q3;
+ 129              		.loc 1 46 0
+ 130 0102 97ED297A 		flds	s14, [r7, #164]
+ 131 0106 D7ED297A 		flds	s15, [r7, #164]
+ 132 010a 67EE277A 		fmuls	s15, s14, s15
+ 133 010e C7ED197A 		fsts	s15, [r7, #100]
+  47:../QuaternionFilters.c **** 	float q3q4 = q3 * q4;
+ 134              		.loc 1 47 0
+ 135 0112 97ED297A 		flds	s14, [r7, #164]
+ 136 0116 D7ED287A 		flds	s15, [r7, #160]
+ 137 011a 67EE277A 		fmuls	s15, s14, s15
+ 138 011e C7ED187A 		fsts	s15, [r7, #96]
+  48:../QuaternionFilters.c **** 	float q4q4 = q4 * q4;
+ 139              		.loc 1 48 0
+ 140 0122 97ED287A 		flds	s14, [r7, #160]
+ 141 0126 D7ED287A 		flds	s15, [r7, #160]
+ 142 012a 67EE277A 		fmuls	s15, s14, s15
+ 143 012e C7ED177A 		fsts	s15, [r7, #92]
+  49:../QuaternionFilters.c **** 
+  50:../QuaternionFilters.c **** 	// Normalise accelerometer measurement
+  51:../QuaternionFilters.c **** 	norm = sqrt(ax * ax + ay * ay + az * az);
+ 144              		.loc 1 51 0
+ 145 0132 97ED017A 		flds	s14, [r7, #4]
+ 146 0136 D7ED017A 		flds	s15, [r7, #4]
+ 147 013a 27EE277A 		fmuls	s14, s14, s15
+ 148 013e D7ED006A 		flds	s13, [r7, #0]
+ 149 0142 D7ED007A 		flds	s15, [r7, #0]
+ 150 0146 66EEA77A 		fmuls	s15, s13, s15
+ 151 014a 37EE277A 		fadds	s14, s14, s15
+ 152 014e D7ED2E6A 		flds	s13, [r7, #184]
+ 153 0152 D7ED2E7A 		flds	s15, [r7, #184]
+ 154 0156 66EEA77A 		fmuls	s15, s13, s15
+ 155 015a 77EE277A 		fadds	s15, s14, s15
+ 156 015e 17EE900A 		fmrs	r0, s15
+ 157 0162 FFF7FEFF 		bl	__aeabi_f2d
+ 158 0166 0246     		mov	r2, r0
+ 159 0168 0B46     		mov	r3, r1
+ 160 016a 1046     		mov	r0, r2
+ 161 016c 1946     		mov	r1, r3
+ 162 016e FFF7FEFF 		bl	sqrt
+ 163 0172 0246     		mov	r2, r0
+ 164 0174 0B46     		mov	r3, r1
+ 165 0176 1046     		mov	r0, r2
+ 166 0178 1946     		mov	r1, r3
+ 167 017a FFF7FEFF 		bl	__aeabi_d2f
+ 168 017e 0346     		mov	r3, r0	@ float
+ 169 0180 BB65     		str	r3, [r7, #88]	@ float
+  52:../QuaternionFilters.c **** 	if (norm == 0.0f) return; // handle NaN
+ 170              		.loc 1 52 0
+ 171 0182 D7ED167A 		flds	s15, [r7, #88]
+ 172 0186 F5EE407A 		fcmpzs	s15
+ 173 018a F1EE10FA 		fmstat
+ 174 018e 00F0F785 		beq	.L5
+ 175              	.L2:
+  53:../QuaternionFilters.c **** 	norm = 1.0f/norm;
+ 176              		.loc 1 53 0
+ 177 0192 B7EE007A 		fconsts	s14, #112
+ 178 0196 D7ED167A 		flds	s15, [r7, #88]
+ 179 019a C7EE277A 		fdivs	s15, s14, s15
+ 180 019e C7ED167A 		fsts	s15, [r7, #88]
+  54:../QuaternionFilters.c **** 	ax *= norm;
+ 181              		.loc 1 54 0
+ 182 01a2 97ED017A 		flds	s14, [r7, #4]
+ 183 01a6 D7ED167A 		flds	s15, [r7, #88]
+ 184 01aa 67EE277A 		fmuls	s15, s14, s15
+ 185 01ae C7ED017A 		fsts	s15, [r7, #4]
+  55:../QuaternionFilters.c **** 	ay *= norm;
+ 186              		.loc 1 55 0
+ 187 01b2 97ED007A 		flds	s14, [r7, #0]
+ 188 01b6 D7ED167A 		flds	s15, [r7, #88]
+ 189 01ba 67EE277A 		fmuls	s15, s14, s15
+ 190 01be C7ED007A 		fsts	s15, [r7, #0]
+  56:../QuaternionFilters.c **** 	az *= norm;
+ 191              		.loc 1 56 0
+ 192 01c2 97ED2E7A 		flds	s14, [r7, #184]
+ 193 01c6 D7ED167A 		flds	s15, [r7, #88]
+ 194 01ca 67EE277A 		fmuls	s15, s14, s15
+ 195 01ce C7ED2E7A 		fsts	s15, [r7, #184]
+  57:../QuaternionFilters.c **** 
+  58:../QuaternionFilters.c **** 	// Normalise magnetometer measurement
+  59:../QuaternionFilters.c **** 	norm = sqrt(mx * mx + my * my + mz * mz);
+ 196              		.loc 1 59 0
+ 197 01d2 97ED327A 		flds	s14, [r7, #200]
+ 198 01d6 D7ED327A 		flds	s15, [r7, #200]
+ 199 01da 27EE277A 		fmuls	s14, s14, s15
+ 200 01de D7ED336A 		flds	s13, [r7, #204]
+ 201 01e2 D7ED337A 		flds	s15, [r7, #204]
+ 202 01e6 66EEA77A 		fmuls	s15, s13, s15
+ 203 01ea 37EE277A 		fadds	s14, s14, s15
+ 204 01ee D7ED346A 		flds	s13, [r7, #208]
+ 205 01f2 D7ED347A 		flds	s15, [r7, #208]
+ 206 01f6 66EEA77A 		fmuls	s15, s13, s15
+ 207 01fa 77EE277A 		fadds	s15, s14, s15
+ 208 01fe 17EE900A 		fmrs	r0, s15
+ 209 0202 FFF7FEFF 		bl	__aeabi_f2d
+ 210 0206 0246     		mov	r2, r0
+ 211 0208 0B46     		mov	r3, r1
+ 212 020a 1046     		mov	r0, r2
+ 213 020c 1946     		mov	r1, r3
+ 214 020e FFF7FEFF 		bl	sqrt
+ 215 0212 0246     		mov	r2, r0
+ 216 0214 0B46     		mov	r3, r1
+ 217 0216 1046     		mov	r0, r2
+ 218 0218 1946     		mov	r1, r3
+ 219 021a FFF7FEFF 		bl	__aeabi_d2f
+ 220 021e 0346     		mov	r3, r0	@ float
+ 221 0220 BB65     		str	r3, [r7, #88]	@ float
+  60:../QuaternionFilters.c **** 	if (norm == 0.0f) return; // handle NaN
+ 222              		.loc 1 60 0
+ 223 0222 D7ED167A 		flds	s15, [r7, #88]
+ 224 0226 F5EE407A 		fcmpzs	s15
+ 225 022a F1EE10FA 		fmstat
+ 226 022e 00F0A985 		beq	.L6
+ 227              	.L4:
+  61:../QuaternionFilters.c **** 	norm = 1.0f/norm;
+ 228              		.loc 1 61 0
+ 229 0232 B7EE007A 		fconsts	s14, #112
+ 230 0236 D7ED167A 		flds	s15, [r7, #88]
+ 231 023a C7EE277A 		fdivs	s15, s14, s15
+ 232 023e C7ED167A 		fsts	s15, [r7, #88]
+  62:../QuaternionFilters.c **** 	mx *= norm;
+ 233              		.loc 1 62 0
+ 234 0242 97ED327A 		flds	s14, [r7, #200]
+ 235 0246 D7ED167A 		flds	s15, [r7, #88]
+ 236 024a 67EE277A 		fmuls	s15, s14, s15
+ 237 024e C7ED327A 		fsts	s15, [r7, #200]
+  63:../QuaternionFilters.c **** 	my *= norm;
+ 238              		.loc 1 63 0
+ 239 0252 97ED337A 		flds	s14, [r7, #204]
+ 240 0256 D7ED167A 		flds	s15, [r7, #88]
+ 241 025a 67EE277A 		fmuls	s15, s14, s15
+ 242 025e C7ED337A 		fsts	s15, [r7, #204]
+  64:../QuaternionFilters.c **** 	mz *= norm;
+ 243              		.loc 1 64 0
+ 244 0262 97ED347A 		flds	s14, [r7, #208]
+ 245 0266 D7ED167A 		flds	s15, [r7, #88]
+ 246 026a 67EE277A 		fmuls	s15, s14, s15
+ 247 026e C7ED347A 		fsts	s15, [r7, #208]
+  65:../QuaternionFilters.c **** 
+  66:../QuaternionFilters.c **** 	// Reference direction of Earth's magnetic field
+  67:../QuaternionFilters.c **** 	_2q1mx = 2.0f * q1 * mx;
+ 248              		.loc 1 67 0
+ 249 0272 D7ED2B7A 		flds	s15, [r7, #172]
+ 250 0276 37EEA77A 		fadds	s14, s15, s15
+ 251 027a D7ED327A 		flds	s15, [r7, #200]
+ 252 027e 67EE277A 		fmuls	s15, s14, s15
+ 253 0282 C7ED157A 		fsts	s15, [r7, #84]
+  68:../QuaternionFilters.c **** 	_2q1my = 2.0f * q1 * my;
+ 254              		.loc 1 68 0
+ 255 0286 D7ED2B7A 		flds	s15, [r7, #172]
+ 256 028a 37EEA77A 		fadds	s14, s15, s15
+ 257 028e D7ED337A 		flds	s15, [r7, #204]
+ 258 0292 67EE277A 		fmuls	s15, s14, s15
+ 259 0296 C7ED147A 		fsts	s15, [r7, #80]
+  69:../QuaternionFilters.c **** 	_2q1mz = 2.0f * q1 * mz;
+ 260              		.loc 1 69 0
+ 261 029a D7ED2B7A 		flds	s15, [r7, #172]
+ 262 029e 37EEA77A 		fadds	s14, s15, s15
+ 263 02a2 D7ED347A 		flds	s15, [r7, #208]
+ 264 02a6 67EE277A 		fmuls	s15, s14, s15
+ 265 02aa C7ED137A 		fsts	s15, [r7, #76]
+  70:../QuaternionFilters.c **** 	_2q2mx = 2.0f * q2 * mx;
+ 266              		.loc 1 70 0
+ 267 02ae D7ED2A7A 		flds	s15, [r7, #168]
+ 268 02b2 37EEA77A 		fadds	s14, s15, s15
+ 269 02b6 D7ED327A 		flds	s15, [r7, #200]
+ 270 02ba 67EE277A 		fmuls	s15, s14, s15
+ 271 02be C7ED127A 		fsts	s15, [r7, #72]
+  71:../QuaternionFilters.c **** 	hx = mx * q1q1 - _2q1my * q4 + _2q1mz * q3 + mx * q2q2 + _2q2 * my * q3 + _2q2 * mz * q4 - mx * q3
+ 272              		.loc 1 71 0
+ 273 02c2 97ED327A 		flds	s14, [r7, #200]
+ 274 02c6 D7ED207A 		flds	s15, [r7, #128]
+ 275 02ca 27EE277A 		fmuls	s14, s14, s15
+ 276 02ce D7ED146A 		flds	s13, [r7, #80]
+ 277 02d2 D7ED287A 		flds	s15, [r7, #160]
+ 278 02d6 66EEA77A 		fmuls	s15, s13, s15
+ 279 02da 37EE677A 		fsubs	s14, s14, s15
+ 280 02de D7ED136A 		flds	s13, [r7, #76]
+ 281 02e2 D7ED297A 		flds	s15, [r7, #164]
+ 282 02e6 66EEA77A 		fmuls	s15, s13, s15
+ 283 02ea 37EE277A 		fadds	s14, s14, s15
+ 284 02ee D7ED326A 		flds	s13, [r7, #200]
+ 285 02f2 D7ED1C7A 		flds	s15, [r7, #112]
+ 286 02f6 66EEA77A 		fmuls	s15, s13, s15
+ 287 02fa 37EE277A 		fadds	s14, s14, s15
+ 288 02fe D7ED256A 		flds	s13, [r7, #148]
+ 289 0302 D7ED337A 		flds	s15, [r7, #204]
+ 290 0306 66EEA76A 		fmuls	s13, s13, s15
+ 291 030a D7ED297A 		flds	s15, [r7, #164]
+ 292 030e 66EEA77A 		fmuls	s15, s13, s15
+ 293 0312 37EE277A 		fadds	s14, s14, s15
+ 294 0316 D7ED256A 		flds	s13, [r7, #148]
+ 295 031a D7ED347A 		flds	s15, [r7, #208]
+ 296 031e 66EEA76A 		fmuls	s13, s13, s15
+ 297 0322 D7ED287A 		flds	s15, [r7, #160]
+ 298 0326 66EEA77A 		fmuls	s15, s13, s15
+ 299 032a 37EE277A 		fadds	s14, s14, s15
+ 300 032e D7ED326A 		flds	s13, [r7, #200]
+ 301 0332 D7ED197A 		flds	s15, [r7, #100]
+ 302 0336 66EEA77A 		fmuls	s15, s13, s15
+ 303 033a 37EE677A 		fsubs	s14, s14, s15
+ 304 033e D7ED326A 		flds	s13, [r7, #200]
+ 305 0342 D7ED177A 		flds	s15, [r7, #92]
+ 306 0346 66EEA77A 		fmuls	s15, s13, s15
+ 307 034a 77EE677A 		fsubs	s15, s14, s15
+ 308 034e C7ED117A 		fsts	s15, [r7, #68]
+  72:../QuaternionFilters.c **** 	hy = _2q1mx * q4 + my * q1q1 - _2q1mz * q2 + _2q2mx * q3 - my * q2q2 + my * q3q3 + _2q3 * mz * q4 
+ 309              		.loc 1 72 0
+ 310 0352 97ED157A 		flds	s14, [r7, #84]
+ 311 0356 D7ED287A 		flds	s15, [r7, #160]
+ 312 035a 27EE277A 		fmuls	s14, s14, s15
+ 313 035e D7ED336A 		flds	s13, [r7, #204]
+ 314 0362 D7ED207A 		flds	s15, [r7, #128]
+ 315 0366 66EEA77A 		fmuls	s15, s13, s15
+ 316 036a 37EE277A 		fadds	s14, s14, s15
+ 317 036e D7ED136A 		flds	s13, [r7, #76]
+ 318 0372 D7ED2A7A 		flds	s15, [r7, #168]
+ 319 0376 66EEA77A 		fmuls	s15, s13, s15
+ 320 037a 37EE677A 		fsubs	s14, s14, s15
+ 321 037e D7ED126A 		flds	s13, [r7, #72]
+ 322 0382 D7ED297A 		flds	s15, [r7, #164]
+ 323 0386 66EEA77A 		fmuls	s15, s13, s15
+ 324 038a 37EE277A 		fadds	s14, s14, s15
+ 325 038e D7ED336A 		flds	s13, [r7, #204]
+ 326 0392 D7ED1C7A 		flds	s15, [r7, #112]
+ 327 0396 66EEA77A 		fmuls	s15, s13, s15
+ 328 039a 37EE677A 		fsubs	s14, s14, s15
+ 329 039e D7ED336A 		flds	s13, [r7, #204]
+ 330 03a2 D7ED197A 		flds	s15, [r7, #100]
+ 331 03a6 66EEA77A 		fmuls	s15, s13, s15
+ 332 03aa 37EE277A 		fadds	s14, s14, s15
+ 333 03ae D7ED246A 		flds	s13, [r7, #144]
+ 334 03b2 D7ED347A 		flds	s15, [r7, #208]
+ 335 03b6 66EEA76A 		fmuls	s13, s13, s15
+ 336 03ba D7ED287A 		flds	s15, [r7, #160]
+ 337 03be 66EEA77A 		fmuls	s15, s13, s15
+ 338 03c2 37EE277A 		fadds	s14, s14, s15
+ 339 03c6 D7ED336A 		flds	s13, [r7, #204]
+ 340 03ca D7ED177A 		flds	s15, [r7, #92]
+ 341 03ce 66EEA77A 		fmuls	s15, s13, s15
+ 342 03d2 77EE677A 		fsubs	s15, s14, s15
+ 343 03d6 C7ED107A 		fsts	s15, [r7, #64]
+  73:../QuaternionFilters.c **** 	_2bx = sqrt(hx * hx + hy * hy);
+ 344              		.loc 1 73 0
+ 345 03da 97ED117A 		flds	s14, [r7, #68]
+ 346 03de D7ED117A 		flds	s15, [r7, #68]
+ 347 03e2 27EE277A 		fmuls	s14, s14, s15
+ 348 03e6 D7ED106A 		flds	s13, [r7, #64]
+ 349 03ea D7ED107A 		flds	s15, [r7, #64]
+ 350 03ee 66EEA77A 		fmuls	s15, s13, s15
+ 351 03f2 77EE277A 		fadds	s15, s14, s15
+ 352 03f6 17EE900A 		fmrs	r0, s15
+ 353 03fa FFF7FEFF 		bl	__aeabi_f2d
+ 354 03fe 0246     		mov	r2, r0
+ 355 0400 0B46     		mov	r3, r1
+ 356 0402 1046     		mov	r0, r2
+ 357 0404 1946     		mov	r1, r3
+ 358 0406 FFF7FEFF 		bl	sqrt
+ 359 040a 0246     		mov	r2, r0
+ 360 040c 0B46     		mov	r3, r1
+ 361 040e 1046     		mov	r0, r2
+ 362 0410 1946     		mov	r1, r3
+ 363 0412 FFF7FEFF 		bl	__aeabi_d2f
+ 364 0416 0346     		mov	r3, r0	@ float
+ 365 0418 FB63     		str	r3, [r7, #60]	@ float
+  74:../QuaternionFilters.c **** 	_2bz = -_2q1mx * q3 + _2q1my * q2 + mz * q1q1 + _2q2mx * q4 - mz * q2q2 + _2q3 * my * q4 - mz * q3
+ 366              		.loc 1 74 0
+ 367 041a D7ED157A 		flds	s15, [r7, #84]
+ 368 041e B1EE677A 		fnegs	s14, s15
+ 369 0422 D7ED297A 		flds	s15, [r7, #164]
+ 370 0426 27EE277A 		fmuls	s14, s14, s15
+ 371 042a D7ED146A 		flds	s13, [r7, #80]
+ 372 042e D7ED2A7A 		flds	s15, [r7, #168]
+ 373 0432 66EEA77A 		fmuls	s15, s13, s15
+ 374 0436 37EE277A 		fadds	s14, s14, s15
+ 375 043a D7ED346A 		flds	s13, [r7, #208]
+ 376 043e D7ED207A 		flds	s15, [r7, #128]
+ 377 0442 66EEA77A 		fmuls	s15, s13, s15
+ 378 0446 37EE277A 		fadds	s14, s14, s15
+ 379 044a D7ED126A 		flds	s13, [r7, #72]
+ 380 044e D7ED287A 		flds	s15, [r7, #160]
+ 381 0452 66EEA77A 		fmuls	s15, s13, s15
+ 382 0456 37EE277A 		fadds	s14, s14, s15
+ 383 045a D7ED346A 		flds	s13, [r7, #208]
+ 384 045e D7ED1C7A 		flds	s15, [r7, #112]
+ 385 0462 66EEA77A 		fmuls	s15, s13, s15
+ 386 0466 37EE677A 		fsubs	s14, s14, s15
+ 387 046a D7ED246A 		flds	s13, [r7, #144]
+ 388 046e D7ED337A 		flds	s15, [r7, #204]
+ 389 0472 66EEA76A 		fmuls	s13, s13, s15
+ 390 0476 D7ED287A 		flds	s15, [r7, #160]
+ 391 047a 66EEA77A 		fmuls	s15, s13, s15
+ 392 047e 37EE277A 		fadds	s14, s14, s15
+ 393 0482 D7ED346A 		flds	s13, [r7, #208]
+ 394 0486 D7ED197A 		flds	s15, [r7, #100]
+ 395 048a 66EEA77A 		fmuls	s15, s13, s15
+ 396 048e 37EE677A 		fsubs	s14, s14, s15
+ 397 0492 D7ED346A 		flds	s13, [r7, #208]
+ 398 0496 D7ED177A 		flds	s15, [r7, #92]
+ 399 049a 66EEA77A 		fmuls	s15, s13, s15
+ 400 049e 77EE277A 		fadds	s15, s14, s15
+ 401 04a2 C7ED0E7A 		fsts	s15, [r7, #56]
+  75:../QuaternionFilters.c **** 	_4bx = 2.0f * _2bx;
+ 402              		.loc 1 75 0
+ 403 04a6 D7ED0F7A 		flds	s15, [r7, #60]
+ 404 04aa 77EEA77A 		fadds	s15, s15, s15
+ 405 04ae C7ED0D7A 		fsts	s15, [r7, #52]
+  76:../QuaternionFilters.c **** 	_4bz = 2.0f * _2bz;
+ 406              		.loc 1 76 0
+ 407 04b2 D7ED0E7A 		flds	s15, [r7, #56]
+ 408 04b6 77EEA77A 		fadds	s15, s15, s15
+ 409 04ba C7ED0C7A 		fsts	s15, [r7, #48]
+  77:../QuaternionFilters.c **** 
+  78:../QuaternionFilters.c **** 	// Gradient decent algorithm corrective step
+  79:../QuaternionFilters.c **** 	s1 = -_2q3 * (2.0f * q2q4 - _2q1q3 - ax) + _2q2 * (2.0f * q1q2 + _2q3q4 - ay) - _2bz * q3 * (_2bx 
+ 410              		.loc 1 79 0
+ 411 04be D7ED247A 		flds	s15, [r7, #144]
+ 412 04c2 B1EE677A 		fnegs	s14, s15
+ 413 04c6 D7ED1A7A 		flds	s15, [r7, #104]
+ 414 04ca 77EEA76A 		fadds	s13, s15, s15
+ 415 04ce D7ED227A 		flds	s15, [r7, #136]
+ 416 04d2 76EEE76A 		fsubs	s13, s13, s15
+ 417 04d6 D7ED017A 		flds	s15, [r7, #4]
+ 418 04da 76EEE77A 		fsubs	s15, s13, s15
+ 419 04de 27EE277A 		fmuls	s14, s14, s15
+ 420 04e2 D7ED1F7A 		flds	s15, [r7, #124]
+ 421 04e6 77EEA76A 		fadds	s13, s15, s15
+ 422 04ea D7ED217A 		flds	s15, [r7, #132]
+ 423 04ee 76EEA76A 		fadds	s13, s13, s15
+ 424 04f2 D7ED007A 		flds	s15, [r7, #0]
+ 425 04f6 76EEE76A 		fsubs	s13, s13, s15
+ 426 04fa D7ED257A 		flds	s15, [r7, #148]
+ 427 04fe 66EEA77A 		fmuls	s15, s13, s15
+ 428 0502 37EE277A 		fadds	s14, s14, s15
+ 429 0506 D7ED0E6A 		flds	s13, [r7, #56]
+ 430 050a D7ED297A 		flds	s15, [r7, #164]
+ 431 050e 66EEA76A 		fmuls	s13, s13, s15
+ 432 0512 B6EE006A 		fconsts	s12, #96
+ 433 0516 D7ED197A 		flds	s15, [r7, #100]
+ 434 051a 36EE676A 		fsubs	s12, s12, s15
+ 435 051e D7ED177A 		flds	s15, [r7, #92]
+ 436 0522 36EE676A 		fsubs	s12, s12, s15
+ 437 0526 D7ED0F7A 		flds	s15, [r7, #60]
+ 438 052a 26EE276A 		fmuls	s12, s12, s15
+ 439 052e D7ED1A5A 		flds	s11, [r7, #104]
+ 440 0532 D7ED1E7A 		flds	s15, [r7, #120]
+ 441 0536 75EEE75A 		fsubs	s11, s11, s15
+ 442 053a D7ED0E7A 		flds	s15, [r7, #56]
+ 443 053e 65EEA77A 		fmuls	s15, s11, s15
+ 444 0542 36EE276A 		fadds	s12, s12, s15
+ 445 0546 D7ED327A 		flds	s15, [r7, #200]
+ 446 054a 76EE677A 		fsubs	s15, s12, s15
+ 447 054e 66EEA77A 		fmuls	s15, s13, s15
+ 448 0552 37EE677A 		fsubs	s14, s14, s15
+ 449 0556 D7ED0F7A 		flds	s15, [r7, #60]
+ 450 055a F1EE676A 		fnegs	s13, s15
+ 451 055e D7ED287A 		flds	s15, [r7, #160]
+ 452 0562 66EEA76A 		fmuls	s13, s13, s15
+ 453 0566 97ED0E6A 		flds	s12, [r7, #56]
+ 454 056a D7ED2A7A 		flds	s15, [r7, #168]
+ 455 056e 66EE277A 		fmuls	s15, s12, s15
+ 456 0572 76EEA76A 		fadds	s13, s13, s15
+ 457 0576 97ED1B6A 		flds	s12, [r7, #108]
+ 458 057a D7ED1D7A 		flds	s15, [r7, #116]
+ 459 057e 36EE676A 		fsubs	s12, s12, s15
+ 460 0582 D7ED0F7A 		flds	s15, [r7, #60]
+ 461 0586 26EE276A 		fmuls	s12, s12, s15
+ 462 058a D7ED1F5A 		flds	s11, [r7, #124]
+ 463 058e D7ED187A 		flds	s15, [r7, #96]
+ 464 0592 75EEA75A 		fadds	s11, s11, s15
+ 465 0596 D7ED0E7A 		flds	s15, [r7, #56]
+ 466 059a 65EEA77A 		fmuls	s15, s11, s15
+ 467 059e 36EE276A 		fadds	s12, s12, s15
+ 468 05a2 D7ED337A 		flds	s15, [r7, #204]
+ 469 05a6 76EE677A 		fsubs	s15, s12, s15
+ 470 05aa 66EEA77A 		fmuls	s15, s13, s15
+ 471 05ae 37EE277A 		fadds	s14, s14, s15
+ 472 05b2 D7ED0F6A 		flds	s13, [r7, #60]
+ 473 05b6 D7ED297A 		flds	s15, [r7, #164]
+ 474 05ba 66EEA76A 		fmuls	s13, s13, s15
+ 475 05be 97ED1E6A 		flds	s12, [r7, #120]
+ 476 05c2 D7ED1A7A 		flds	s15, [r7, #104]
+ 477 05c6 36EE276A 		fadds	s12, s12, s15
+ 478 05ca D7ED0F7A 		flds	s15, [r7, #60]
+ 479 05ce 26EE276A 		fmuls	s12, s12, s15
+ 480 05d2 F6EE005A 		fconsts	s11, #96
+ 481 05d6 D7ED1C7A 		flds	s15, [r7, #112]
+ 482 05da 75EEE75A 		fsubs	s11, s11, s15
+ 483 05de D7ED197A 		flds	s15, [r7, #100]
+ 484 05e2 75EEE75A 		fsubs	s11, s11, s15
+ 485 05e6 D7ED0E7A 		flds	s15, [r7, #56]
+ 486 05ea 65EEA77A 		fmuls	s15, s11, s15
+ 487 05ee 36EE276A 		fadds	s12, s12, s15
+ 488 05f2 D7ED347A 		flds	s15, [r7, #208]
+ 489 05f6 76EE677A 		fsubs	s15, s12, s15
+ 490 05fa 66EEA77A 		fmuls	s15, s13, s15
+ 491 05fe 77EE277A 		fadds	s15, s14, s15
+ 492 0602 C7ED0B7A 		fsts	s15, [r7, #44]
+  80:../QuaternionFilters.c **** 	s2 = _2q4 * (2.0f * q2q4 - _2q1q3 - ax) + _2q1 * (2.0f * q1q2 + _2q3q4 - ay) - 4.0f * q2 * (1.0f -
+ 493              		.loc 1 80 0
+ 494 0606 D7ED1A7A 		flds	s15, [r7, #104]
+ 495 060a 37EEA77A 		fadds	s14, s15, s15
+ 496 060e D7ED227A 		flds	s15, [r7, #136]
+ 497 0612 37EE677A 		fsubs	s14, s14, s15
+ 498 0616 D7ED017A 		flds	s15, [r7, #4]
+ 499 061a 37EE677A 		fsubs	s14, s14, s15
+ 500 061e D7ED237A 		flds	s15, [r7, #140]
+ 501 0622 27EE277A 		fmuls	s14, s14, s15
+ 502 0626 D7ED1F7A 		flds	s15, [r7, #124]
+ 503 062a 77EEA76A 		fadds	s13, s15, s15
+ 504 062e D7ED217A 		flds	s15, [r7, #132]
+ 505 0632 76EEA76A 		fadds	s13, s13, s15
+ 506 0636 D7ED007A 		flds	s15, [r7, #0]
+ 507 063a 76EEE76A 		fsubs	s13, s13, s15
+ 508 063e D7ED267A 		flds	s15, [r7, #152]
+ 509 0642 66EEA77A 		fmuls	s15, s13, s15
+ 510 0646 37EE277A 		fadds	s14, s14, s15
+ 511 064a D7ED2A6A 		flds	s13, [r7, #168]
+ 512 064e F1EE007A 		fconsts	s15, #16
+ 513 0652 66EEA76A 		fmuls	s13, s13, s15
+ 514 0656 D7ED1C7A 		flds	s15, [r7, #112]
+ 515 065a 77EEA77A 		fadds	s15, s15, s15
+ 516 065e B7EE006A 		fconsts	s12, #112
+ 517 0662 36EE676A 		fsubs	s12, s12, s15
+ 518 0666 D7ED197A 		flds	s15, [r7, #100]
+ 519 066a 77EEA77A 		fadds	s15, s15, s15
+ 520 066e 36EE676A 		fsubs	s12, s12, s15
+ 521 0672 D7ED2E7A 		flds	s15, [r7, #184]
+ 522 0676 76EE677A 		fsubs	s15, s12, s15
+ 523 067a 66EEA77A 		fmuls	s15, s13, s15
+ 524 067e 37EE677A 		fsubs	s14, s14, s15
+ 525 0682 D7ED0E6A 		flds	s13, [r7, #56]
+ 526 0686 D7ED287A 		flds	s15, [r7, #160]
+ 527 068a 66EEA76A 		fmuls	s13, s13, s15
+ 528 068e B6EE006A 		fconsts	s12, #96
+ 529 0692 D7ED197A 		flds	s15, [r7, #100]
+ 530 0696 36EE676A 		fsubs	s12, s12, s15
+ 531 069a D7ED177A 		flds	s15, [r7, #92]
+ 532 069e 36EE676A 		fsubs	s12, s12, s15
+ 533 06a2 D7ED0F7A 		flds	s15, [r7, #60]
+ 534 06a6 26EE276A 		fmuls	s12, s12, s15
+ 535 06aa D7ED1A5A 		flds	s11, [r7, #104]
+ 536 06ae D7ED1E7A 		flds	s15, [r7, #120]
+ 537 06b2 75EEE75A 		fsubs	s11, s11, s15
+ 538 06b6 D7ED0E7A 		flds	s15, [r7, #56]
+ 539 06ba 65EEA77A 		fmuls	s15, s11, s15
+ 540 06be 36EE276A 		fadds	s12, s12, s15
+ 541 06c2 D7ED327A 		flds	s15, [r7, #200]
+ 542 06c6 76EE677A 		fsubs	s15, s12, s15
+ 543 06ca 66EEA77A 		fmuls	s15, s13, s15
+ 544 06ce 37EE277A 		fadds	s14, s14, s15
+ 545 06d2 D7ED0F6A 		flds	s13, [r7, #60]
+ 546 06d6 D7ED297A 		flds	s15, [r7, #164]
+ 547 06da 66EEA76A 		fmuls	s13, s13, s15
+ 548 06de 97ED0E6A 		flds	s12, [r7, #56]
+ 549 06e2 D7ED2B7A 		flds	s15, [r7, #172]
+ 550 06e6 66EE277A 		fmuls	s15, s12, s15
+ 551 06ea 76EEA76A 		fadds	s13, s13, s15
+ 552 06ee 97ED1B6A 		flds	s12, [r7, #108]
+ 553 06f2 D7ED1D7A 		flds	s15, [r7, #116]
+ 554 06f6 36EE676A 		fsubs	s12, s12, s15
+ 555 06fa D7ED0F7A 		flds	s15, [r7, #60]
+ 556 06fe 26EE276A 		fmuls	s12, s12, s15
+ 557 0702 D7ED1F5A 		flds	s11, [r7, #124]
+ 558 0706 D7ED187A 		flds	s15, [r7, #96]
+ 559 070a 75EEA75A 		fadds	s11, s11, s15
+ 560 070e D7ED0E7A 		flds	s15, [r7, #56]
+ 561 0712 65EEA77A 		fmuls	s15, s11, s15
+ 562 0716 36EE276A 		fadds	s12, s12, s15
+ 563 071a D7ED337A 		flds	s15, [r7, #204]
+ 564 071e 76EE677A 		fsubs	s15, s12, s15
+ 565 0722 66EEA77A 		fmuls	s15, s13, s15
+ 566 0726 37EE277A 		fadds	s14, s14, s15
+ 567 072a D7ED0F6A 		flds	s13, [r7, #60]
+ 568 072e D7ED287A 		flds	s15, [r7, #160]
+ 569 0732 66EEA76A 		fmuls	s13, s13, s15
+ 570 0736 97ED0C6A 		flds	s12, [r7, #48]
+ 571 073a D7ED2A7A 		flds	s15, [r7, #168]
+ 572 073e 66EE277A 		fmuls	s15, s12, s15
+ 573 0742 76EEE76A 		fsubs	s13, s13, s15
+ 574 0746 97ED1E6A 		flds	s12, [r7, #120]
+ 575 074a D7ED1A7A 		flds	s15, [r7, #104]
+ 576 074e 36EE276A 		fadds	s12, s12, s15
+ 577 0752 D7ED0F7A 		flds	s15, [r7, #60]
+ 578 0756 26EE276A 		fmuls	s12, s12, s15
+ 579 075a F6EE005A 		fconsts	s11, #96
+ 580 075e D7ED1C7A 		flds	s15, [r7, #112]
+ 581 0762 75EEE75A 		fsubs	s11, s11, s15
+ 582 0766 D7ED197A 		flds	s15, [r7, #100]
+ 583 076a 75EEE75A 		fsubs	s11, s11, s15
+ 584 076e D7ED0E7A 		flds	s15, [r7, #56]
+ 585 0772 65EEA77A 		fmuls	s15, s11, s15
+ 586 0776 36EE276A 		fadds	s12, s12, s15
+ 587 077a D7ED347A 		flds	s15, [r7, #208]
+ 588 077e 76EE677A 		fsubs	s15, s12, s15
+ 589 0782 66EEA77A 		fmuls	s15, s13, s15
+ 590 0786 77EE277A 		fadds	s15, s14, s15
+ 591 078a C7ED0A7A 		fsts	s15, [r7, #40]
+  81:../QuaternionFilters.c **** 	s3 = -_2q1 * (2.0f * q2q4 - _2q1q3 - ax) + _2q4 * (2.0f * q1q2 + _2q3q4 - ay) - 4.0f * q3 * (1.0f 
+ 592              		.loc 1 81 0
+ 593 078e D7ED267A 		flds	s15, [r7, #152]
+ 594 0792 B1EE677A 		fnegs	s14, s15
+ 595 0796 D7ED1A7A 		flds	s15, [r7, #104]
+ 596 079a 77EEA76A 		fadds	s13, s15, s15
+ 597 079e D7ED227A 		flds	s15, [r7, #136]
+ 598 07a2 76EEE76A 		fsubs	s13, s13, s15
+ 599 07a6 D7ED017A 		flds	s15, [r7, #4]
+ 600 07aa 76EEE77A 		fsubs	s15, s13, s15
+ 601 07ae 27EE277A 		fmuls	s14, s14, s15
+ 602 07b2 D7ED1F7A 		flds	s15, [r7, #124]
+ 603 07b6 77EEA76A 		fadds	s13, s15, s15
+ 604 07ba D7ED217A 		flds	s15, [r7, #132]
+ 605 07be 76EEA76A 		fadds	s13, s13, s15
+ 606 07c2 D7ED007A 		flds	s15, [r7, #0]
+ 607 07c6 76EEE76A 		fsubs	s13, s13, s15
+ 608 07ca D7ED237A 		flds	s15, [r7, #140]
+ 609 07ce 66EEA77A 		fmuls	s15, s13, s15
+ 610 07d2 37EE277A 		fadds	s14, s14, s15
+ 611 07d6 D7ED296A 		flds	s13, [r7, #164]
+ 612 07da F1EE007A 		fconsts	s15, #16
+ 613 07de 66EEA76A 		fmuls	s13, s13, s15
+ 614 07e2 D7ED1C7A 		flds	s15, [r7, #112]
+ 615 07e6 77EEA77A 		fadds	s15, s15, s15
+ 616 07ea B7EE006A 		fconsts	s12, #112
+ 617 07ee 36EE676A 		fsubs	s12, s12, s15
+ 618 07f2 D7ED197A 		flds	s15, [r7, #100]
+ 619 07f6 77EEA77A 		fadds	s15, s15, s15
+ 620 07fa 36EE676A 		fsubs	s12, s12, s15
+ 621 07fe D7ED2E7A 		flds	s15, [r7, #184]
+ 622 0802 76EE677A 		fsubs	s15, s12, s15
+ 623 0806 66EEA77A 		fmuls	s15, s13, s15
+ 624 080a 37EE677A 		fsubs	s14, s14, s15
+ 625 080e D7ED0D7A 		flds	s15, [r7, #52]
+ 626 0812 F1EE676A 		fnegs	s13, s15
+ 627 0816 D7ED297A 		flds	s15, [r7, #164]
+ 628 081a 66EEA76A 		fmuls	s13, s13, s15
+ 629 081e 97ED0E6A 		flds	s12, [r7, #56]
+ 630 0822 D7ED2B7A 		flds	s15, [r7, #172]
+ 631 0826 66EE277A 		fmuls	s15, s12, s15
+ 632 082a 76EEE76A 		fsubs	s13, s13, s15
+ 633 082e B6EE006A 		fconsts	s12, #96
+ 634 0832 D7ED197A 		flds	s15, [r7, #100]
+ 635 0836 36EE676A 		fsubs	s12, s12, s15
+ 636 083a D7ED177A 		flds	s15, [r7, #92]
+ 637 083e 36EE676A 		fsubs	s12, s12, s15
+ 638 0842 D7ED0F7A 		flds	s15, [r7, #60]
+ 639 0846 26EE276A 		fmuls	s12, s12, s15
+ 640 084a D7ED1A5A 		flds	s11, [r7, #104]
+ 641 084e D7ED1E7A 		flds	s15, [r7, #120]
+ 642 0852 75EEE75A 		fsubs	s11, s11, s15
+ 643 0856 D7ED0E7A 		flds	s15, [r7, #56]
+ 644 085a 65EEA77A 		fmuls	s15, s11, s15
+ 645 085e 36EE276A 		fadds	s12, s12, s15
+ 646 0862 D7ED327A 		flds	s15, [r7, #200]
+ 647 0866 76EE677A 		fsubs	s15, s12, s15
+ 648 086a 66EEA77A 		fmuls	s15, s13, s15
+ 649 086e 37EE277A 		fadds	s14, s14, s15
+ 650 0872 D7ED0F6A 		flds	s13, [r7, #60]
+ 651 0876 D7ED2A7A 		flds	s15, [r7, #168]
+ 652 087a 66EEA76A 		fmuls	s13, s13, s15
+ 653 087e 97ED0E6A 		flds	s12, [r7, #56]
+ 654 0882 D7ED287A 		flds	s15, [r7, #160]
+ 655 0886 66EE277A 		fmuls	s15, s12, s15
+ 656 088a 76EEA76A 		fadds	s13, s13, s15
+ 657 088e 97ED1B6A 		flds	s12, [r7, #108]
+ 658 0892 D7ED1D7A 		flds	s15, [r7, #116]
+ 659 0896 36EE676A 		fsubs	s12, s12, s15
+ 660 089a D7ED0F7A 		flds	s15, [r7, #60]
+ 661 089e 26EE276A 		fmuls	s12, s12, s15
+ 662 08a2 D7ED1F5A 		flds	s11, [r7, #124]
+ 663 08a6 D7ED187A 		flds	s15, [r7, #96]
+ 664 08aa 75EEA75A 		fadds	s11, s11, s15
+ 665 08ae D7ED0E7A 		flds	s15, [r7, #56]
+ 666 08b2 65EEA77A 		fmuls	s15, s11, s15
+ 667 08b6 36EE276A 		fadds	s12, s12, s15
+ 668 08ba D7ED337A 		flds	s15, [r7, #204]
+ 669 08be 76EE677A 		fsubs	s15, s12, s15
+ 670 08c2 66EEA77A 		fmuls	s15, s13, s15
+ 671 08c6 37EE277A 		fadds	s14, s14, s15
+ 672 08ca D7ED0F6A 		flds	s13, [r7, #60]
+ 673 08ce D7ED2B7A 		flds	s15, [r7, #172]
+ 674 08d2 66EEA76A 		fmuls	s13, s13, s15
+ 675 08d6 97ED0C6A 		flds	s12, [r7, #48]
+ 676 08da D7ED297A 		flds	s15, [r7, #164]
+ 677 08de 66EE277A 		fmuls	s15, s12, s15
+ 678 08e2 76EEE76A 		fsubs	s13, s13, s15
+ 679 08e6 97ED1E6A 		flds	s12, [r7, #120]
+ 680 08ea D7ED1A7A 		flds	s15, [r7, #104]
+ 681 08ee 36EE276A 		fadds	s12, s12, s15
+ 682 08f2 D7ED0F7A 		flds	s15, [r7, #60]
+ 683 08f6 26EE276A 		fmuls	s12, s12, s15
+ 684 08fa F6EE005A 		fconsts	s11, #96
+ 685 08fe D7ED1C7A 		flds	s15, [r7, #112]
+ 686 0902 75EEE75A 		fsubs	s11, s11, s15
+ 687 0906 D7ED197A 		flds	s15, [r7, #100]
+ 688 090a 75EEE75A 		fsubs	s11, s11, s15
+ 689 090e D7ED0E7A 		flds	s15, [r7, #56]
+ 690 0912 65EEA77A 		fmuls	s15, s11, s15
+ 691 0916 36EE276A 		fadds	s12, s12, s15
+ 692 091a D7ED347A 		flds	s15, [r7, #208]
+ 693 091e 76EE677A 		fsubs	s15, s12, s15
+ 694 0922 66EEA77A 		fmuls	s15, s13, s15
+ 695 0926 77EE277A 		fadds	s15, s14, s15
+ 696 092a C7ED097A 		fsts	s15, [r7, #36]
+  82:../QuaternionFilters.c **** 	s4 = _2q2 * (2.0f * q2q4 - _2q1q3 - ax) + _2q3 * (2.0f * q1q2 + _2q3q4 - ay) + (-_4bx * q4 + _2bz 
+ 697              		.loc 1 82 0
+ 698 092e D7ED1A7A 		flds	s15, [r7, #104]
+ 699 0932 37EEA77A 		fadds	s14, s15, s15
+ 700 0936 D7ED227A 		flds	s15, [r7, #136]
+ 701 093a 37EE677A 		fsubs	s14, s14, s15
+ 702 093e D7ED017A 		flds	s15, [r7, #4]
+ 703 0942 37EE677A 		fsubs	s14, s14, s15
+ 704 0946 D7ED257A 		flds	s15, [r7, #148]
+ 705 094a 27EE277A 		fmuls	s14, s14, s15
+ 706 094e D7ED1F7A 		flds	s15, [r7, #124]
+ 707 0952 77EEA76A 		fadds	s13, s15, s15
+ 708 0956 D7ED217A 		flds	s15, [r7, #132]
+ 709 095a 76EEA76A 		fadds	s13, s13, s15
+ 710 095e D7ED007A 		flds	s15, [r7, #0]
+ 711 0962 76EEE76A 		fsubs	s13, s13, s15
+ 712 0966 D7ED247A 		flds	s15, [r7, #144]
+ 713 096a 66EEA77A 		fmuls	s15, s13, s15
+ 714 096e 37EE277A 		fadds	s14, s14, s15
+ 715 0972 D7ED0D7A 		flds	s15, [r7, #52]
+ 716 0976 F1EE676A 		fnegs	s13, s15
+ 717 097a D7ED287A 		flds	s15, [r7, #160]
+ 718 097e 66EEA76A 		fmuls	s13, s13, s15
+ 719 0982 97ED0E6A 		flds	s12, [r7, #56]
+ 720 0986 D7ED2A7A 		flds	s15, [r7, #168]
+ 721 098a 66EE277A 		fmuls	s15, s12, s15
+ 722 098e 76EEA76A 		fadds	s13, s13, s15
+ 723 0992 B6EE006A 		fconsts	s12, #96
+ 724 0996 D7ED197A 		flds	s15, [r7, #100]
+ 725 099a 36EE676A 		fsubs	s12, s12, s15
+ 726 099e D7ED177A 		flds	s15, [r7, #92]
+ 727 09a2 36EE676A 		fsubs	s12, s12, s15
+ 728 09a6 D7ED0F7A 		flds	s15, [r7, #60]
+ 729 09aa 26EE276A 		fmuls	s12, s12, s15
+ 730 09ae D7ED1A5A 		flds	s11, [r7, #104]
+ 731 09b2 D7ED1E7A 		flds	s15, [r7, #120]
+ 732 09b6 75EEE75A 		fsubs	s11, s11, s15
+ 733 09ba D7ED0E7A 		flds	s15, [r7, #56]
+ 734 09be 65EEA77A 		fmuls	s15, s11, s15
+ 735 09c2 36EE276A 		fadds	s12, s12, s15
+ 736 09c6 D7ED327A 		flds	s15, [r7, #200]
+ 737 09ca 76EE677A 		fsubs	s15, s12, s15
+ 738 09ce 66EEA77A 		fmuls	s15, s13, s15
+ 739 09d2 37EE277A 		fadds	s14, s14, s15
+ 740 09d6 D7ED0F7A 		flds	s15, [r7, #60]
+ 741 09da F1EE676A 		fnegs	s13, s15
+ 742 09de D7ED2B7A 		flds	s15, [r7, #172]
+ 743 09e2 66EEA76A 		fmuls	s13, s13, s15
+ 744 09e6 97ED0E6A 		flds	s12, [r7, #56]
+ 745 09ea D7ED297A 		flds	s15, [r7, #164]
+ 746 09ee 66EE277A 		fmuls	s15, s12, s15
+ 747 09f2 76EEA76A 		fadds	s13, s13, s15
+ 748 09f6 97ED1B6A 		flds	s12, [r7, #108]
+ 749 09fa D7ED1D7A 		flds	s15, [r7, #116]
+ 750 09fe 36EE676A 		fsubs	s12, s12, s15
+ 751 0a02 D7ED0F7A 		flds	s15, [r7, #60]
+ 752 0a06 26EE276A 		fmuls	s12, s12, s15
+ 753 0a0a D7ED1F5A 		flds	s11, [r7, #124]
+ 754 0a0e D7ED187A 		flds	s15, [r7, #96]
+ 755 0a12 75EEA75A 		fadds	s11, s11, s15
+ 756 0a16 D7ED0E7A 		flds	s15, [r7, #56]
+ 757 0a1a 65EEA77A 		fmuls	s15, s11, s15
+ 758 0a1e 36EE276A 		fadds	s12, s12, s15
+ 759 0a22 D7ED337A 		flds	s15, [r7, #204]
+ 760 0a26 76EE677A 		fsubs	s15, s12, s15
+ 761 0a2a 66EEA77A 		fmuls	s15, s13, s15
+ 762 0a2e 37EE277A 		fadds	s14, s14, s15
+ 763 0a32 D7ED0F6A 		flds	s13, [r7, #60]
+ 764 0a36 D7ED2A7A 		flds	s15, [r7, #168]
+ 765 0a3a 66EEA76A 		fmuls	s13, s13, s15
+ 766 0a3e 97ED1E6A 		flds	s12, [r7, #120]
+ 767 0a42 D7ED1A7A 		flds	s15, [r7, #104]
+ 768 0a46 36EE276A 		fadds	s12, s12, s15
+ 769 0a4a D7ED0F7A 		flds	s15, [r7, #60]
+ 770 0a4e 26EE276A 		fmuls	s12, s12, s15
+ 771 0a52 F6EE005A 		fconsts	s11, #96
+ 772 0a56 D7ED1C7A 		flds	s15, [r7, #112]
+ 773 0a5a 75EEE75A 		fsubs	s11, s11, s15
+ 774 0a5e D7ED197A 		flds	s15, [r7, #100]
+ 775 0a62 75EEE75A 		fsubs	s11, s11, s15
+ 776 0a66 D7ED0E7A 		flds	s15, [r7, #56]
+ 777 0a6a 65EEA77A 		fmuls	s15, s11, s15
+ 778 0a6e 36EE276A 		fadds	s12, s12, s15
+ 779 0a72 D7ED347A 		flds	s15, [r7, #208]
+ 780 0a76 76EE677A 		fsubs	s15, s12, s15
+ 781 0a7a 66EEA77A 		fmuls	s15, s13, s15
+ 782 0a7e 77EE277A 		fadds	s15, s14, s15
+ 783 0a82 C7ED087A 		fsts	s15, [r7, #32]
+  83:../QuaternionFilters.c **** 	norm = sqrt(s1 * s1 + s2 * s2 + s3 * s3 + s4 * s4);    // normalise step magnitude
+ 784              		.loc 1 83 0
+ 785 0a86 97ED0B7A 		flds	s14, [r7, #44]
+ 786 0a8a D7ED0B7A 		flds	s15, [r7, #44]
+ 787 0a8e 27EE277A 		fmuls	s14, s14, s15
+ 788 0a92 D7ED0A6A 		flds	s13, [r7, #40]
+ 789 0a96 D7ED0A7A 		flds	s15, [r7, #40]
+ 790 0a9a 66EEA77A 		fmuls	s15, s13, s15
+ 791 0a9e 37EE277A 		fadds	s14, s14, s15
+ 792 0aa2 D7ED096A 		flds	s13, [r7, #36]
+ 793 0aa6 D7ED097A 		flds	s15, [r7, #36]
+ 794 0aaa 66EEA77A 		fmuls	s15, s13, s15
+ 795 0aae 37EE277A 		fadds	s14, s14, s15
+ 796 0ab2 D7ED086A 		flds	s13, [r7, #32]
+ 797 0ab6 D7ED087A 		flds	s15, [r7, #32]
+ 798 0aba 66EEA77A 		fmuls	s15, s13, s15
+ 799 0abe 77EE277A 		fadds	s15, s14, s15
+ 800 0ac2 17EE900A 		fmrs	r0, s15
+ 801 0ac6 FFF7FEFF 		bl	__aeabi_f2d
+ 802 0aca 0246     		mov	r2, r0
+ 803 0acc 0B46     		mov	r3, r1
+ 804 0ace 1046     		mov	r0, r2
+ 805 0ad0 1946     		mov	r1, r3
+ 806 0ad2 FFF7FEFF 		bl	sqrt
+ 807 0ad6 0246     		mov	r2, r0
+ 808 0ad8 0B46     		mov	r3, r1
+ 809 0ada 1046     		mov	r0, r2
+ 810 0adc 1946     		mov	r1, r3
+ 811 0ade FFF7FEFF 		bl	__aeabi_d2f
+ 812 0ae2 0346     		mov	r3, r0	@ float
+ 813 0ae4 BB65     		str	r3, [r7, #88]	@ float
+  84:../QuaternionFilters.c **** 	norm = 1.0f/norm;
+ 814              		.loc 1 84 0
+ 815 0ae6 B7EE007A 		fconsts	s14, #112
+ 816 0aea D7ED167A 		flds	s15, [r7, #88]
+ 817 0aee C7EE277A 		fdivs	s15, s14, s15
+ 818 0af2 C7ED167A 		fsts	s15, [r7, #88]
+  85:../QuaternionFilters.c **** 	s1 *= norm;
+ 819              		.loc 1 85 0
+ 820 0af6 97ED0B7A 		flds	s14, [r7, #44]
+ 821 0afa D7ED167A 		flds	s15, [r7, #88]
+ 822 0afe 67EE277A 		fmuls	s15, s14, s15
+ 823 0b02 C7ED0B7A 		fsts	s15, [r7, #44]
+  86:../QuaternionFilters.c **** 	s2 *= norm;
+ 824              		.loc 1 86 0
+ 825 0b06 97ED0A7A 		flds	s14, [r7, #40]
+ 826 0b0a D7ED167A 		flds	s15, [r7, #88]
+ 827 0b0e 67EE277A 		fmuls	s15, s14, s15
+ 828 0b12 C7ED0A7A 		fsts	s15, [r7, #40]
+  87:../QuaternionFilters.c **** 	s3 *= norm;
+ 829              		.loc 1 87 0
+ 830 0b16 97ED097A 		flds	s14, [r7, #36]
+ 831 0b1a D7ED167A 		flds	s15, [r7, #88]
+ 832 0b1e 67EE277A 		fmuls	s15, s14, s15
+ 833 0b22 C7ED097A 		fsts	s15, [r7, #36]
+  88:../QuaternionFilters.c **** 	s4 *= norm;
+ 834              		.loc 1 88 0
+ 835 0b26 97ED087A 		flds	s14, [r7, #32]
+ 836 0b2a D7ED167A 		flds	s15, [r7, #88]
+ 837 0b2e 67EE277A 		fmuls	s15, s14, s15
+ 838 0b32 C7ED087A 		fsts	s15, [r7, #32]
+  89:../QuaternionFilters.c **** 
+  90:../QuaternionFilters.c **** 	// Compute rate of change of quaternion
+  91:../QuaternionFilters.c **** 	qDot1 = 0.5f * (-q2 * gx - q3 * gy - q4 * gz) - beta * s1;
+ 839              		.loc 1 91 0
+ 840 0b36 D7ED2A7A 		flds	s15, [r7, #168]
+ 841 0b3a B1EE677A 		fnegs	s14, s15
+ 842 0b3e D7ED2F7A 		flds	s15, [r7, #188]
+ 843 0b42 27EE277A 		fmuls	s14, s14, s15
+ 844 0b46 D7ED296A 		flds	s13, [r7, #164]
+ 845 0b4a D7ED307A 		flds	s15, [r7, #192]
+ 846 0b4e 66EEA77A 		fmuls	s15, s13, s15
+ 847 0b52 37EE677A 		fsubs	s14, s14, s15
+ 848 0b56 D7ED286A 		flds	s13, [r7, #160]
+ 849 0b5a D7ED317A 		flds	s15, [r7, #196]
+ 850 0b5e 66EEA77A 		fmuls	s15, s13, s15
+ 851 0b62 37EE677A 		fsubs	s14, s14, s15
+ 852 0b66 F6EE007A 		fconsts	s15, #96
+ 853 0b6a 27EE277A 		fmuls	s14, s14, s15
+ 854 0b6e D7ED276A 		flds	s13, [r7, #156]
+ 855 0b72 D7ED0B7A 		flds	s15, [r7, #44]
+ 856 0b76 66EEA77A 		fmuls	s15, s13, s15
+ 857 0b7a 77EE677A 		fsubs	s15, s14, s15
+ 858 0b7e C7ED077A 		fsts	s15, [r7, #28]
+  92:../QuaternionFilters.c **** 	qDot2 = 0.5f * ( q1 * gx + q3 * gz - q4 * gy) - beta * s2;
+ 859              		.loc 1 92 0
+ 860 0b82 97ED2B7A 		flds	s14, [r7, #172]
+ 861 0b86 D7ED2F7A 		flds	s15, [r7, #188]
+ 862 0b8a 27EE277A 		fmuls	s14, s14, s15
+ 863 0b8e D7ED296A 		flds	s13, [r7, #164]
+ 864 0b92 D7ED317A 		flds	s15, [r7, #196]
+ 865 0b96 66EEA77A 		fmuls	s15, s13, s15
+ 866 0b9a 37EE277A 		fadds	s14, s14, s15
+ 867 0b9e D7ED286A 		flds	s13, [r7, #160]
+ 868 0ba2 D7ED307A 		flds	s15, [r7, #192]
+ 869 0ba6 66EEA77A 		fmuls	s15, s13, s15
+ 870 0baa 37EE677A 		fsubs	s14, s14, s15
+ 871 0bae F6EE007A 		fconsts	s15, #96
+ 872 0bb2 27EE277A 		fmuls	s14, s14, s15
+ 873 0bb6 D7ED276A 		flds	s13, [r7, #156]
+ 874 0bba D7ED0A7A 		flds	s15, [r7, #40]
+ 875 0bbe 66EEA77A 		fmuls	s15, s13, s15
+ 876 0bc2 77EE677A 		fsubs	s15, s14, s15
+ 877 0bc6 C7ED067A 		fsts	s15, [r7, #24]
+  93:../QuaternionFilters.c **** 	qDot3 = 0.5f * ( q1 * gy - q2 * gz + q4 * gx) - beta * s3;
+ 878              		.loc 1 93 0
+ 879 0bca 97ED2B7A 		flds	s14, [r7, #172]
+ 880 0bce D7ED307A 		flds	s15, [r7, #192]
+ 881 0bd2 27EE277A 		fmuls	s14, s14, s15
+ 882 0bd6 D7ED2A6A 		flds	s13, [r7, #168]
+ 883 0bda D7ED317A 		flds	s15, [r7, #196]
+ 884 0bde 66EEA77A 		fmuls	s15, s13, s15
+ 885 0be2 37EE677A 		fsubs	s14, s14, s15
+ 886 0be6 D7ED286A 		flds	s13, [r7, #160]
+ 887 0bea D7ED2F7A 		flds	s15, [r7, #188]
+ 888 0bee 66EEA77A 		fmuls	s15, s13, s15
+ 889 0bf2 37EE277A 		fadds	s14, s14, s15
+ 890 0bf6 F6EE007A 		fconsts	s15, #96
+ 891 0bfa 27EE277A 		fmuls	s14, s14, s15
+ 892 0bfe D7ED276A 		flds	s13, [r7, #156]
+ 893 0c02 D7ED097A 		flds	s15, [r7, #36]
+ 894 0c06 66EEA77A 		fmuls	s15, s13, s15
+ 895 0c0a 77EE677A 		fsubs	s15, s14, s15
+ 896 0c0e C7ED057A 		fsts	s15, [r7, #20]
+  94:../QuaternionFilters.c **** 	qDot4 = 0.5f * ( q1 * gz + q2 * gy - q3 * gx) - beta * s4;
+ 897              		.loc 1 94 0
+ 898 0c12 97ED2B7A 		flds	s14, [r7, #172]
+ 899 0c16 D7ED317A 		flds	s15, [r7, #196]
+ 900 0c1a 27EE277A 		fmuls	s14, s14, s15
+ 901 0c1e D7ED2A6A 		flds	s13, [r7, #168]
+ 902 0c22 D7ED307A 		flds	s15, [r7, #192]
+ 903 0c26 66EEA77A 		fmuls	s15, s13, s15
+ 904 0c2a 37EE277A 		fadds	s14, s14, s15
+ 905 0c2e D7ED296A 		flds	s13, [r7, #164]
+ 906 0c32 D7ED2F7A 		flds	s15, [r7, #188]
+ 907 0c36 66EEA77A 		fmuls	s15, s13, s15
+ 908 0c3a 37EE677A 		fsubs	s14, s14, s15
+ 909 0c3e F6EE007A 		fconsts	s15, #96
+ 910 0c42 27EE277A 		fmuls	s14, s14, s15
+ 911 0c46 D7ED276A 		flds	s13, [r7, #156]
+ 912 0c4a D7ED087A 		flds	s15, [r7, #32]
+ 913 0c4e 66EEA77A 		fmuls	s15, s13, s15
+ 914 0c52 77EE677A 		fsubs	s15, s14, s15
+ 915 0c56 C7ED047A 		fsts	s15, [r7, #16]
+  95:../QuaternionFilters.c **** 
+  96:../QuaternionFilters.c **** 	// Integrate to yield quaternion
+  97:../QuaternionFilters.c **** 	q1 += qDot1 * deltat;
+ 916              		.loc 1 97 0
+ 917 0c5a 97ED077A 		flds	s14, [r7, #28]
+ 918 0c5e D7ED027A 		flds	s15, [r7, #8]
+ 919 0c62 67EE277A 		fmuls	s15, s14, s15
+ 920 0c66 97ED2B7A 		flds	s14, [r7, #172]
+ 921 0c6a 77EE277A 		fadds	s15, s14, s15
+ 922 0c6e C7ED2B7A 		fsts	s15, [r7, #172]
+  98:../QuaternionFilters.c **** 	q2 += qDot2 * deltat;
+ 923              		.loc 1 98 0
+ 924 0c72 97ED067A 		flds	s14, [r7, #24]
+ 925 0c76 D7ED027A 		flds	s15, [r7, #8]
+ 926 0c7a 67EE277A 		fmuls	s15, s14, s15
+ 927 0c7e 97ED2A7A 		flds	s14, [r7, #168]
+ 928 0c82 77EE277A 		fadds	s15, s14, s15
+ 929 0c86 C7ED2A7A 		fsts	s15, [r7, #168]
+  99:../QuaternionFilters.c **** 	q3 += qDot3 * deltat;
+ 930              		.loc 1 99 0
+ 931 0c8a 97ED057A 		flds	s14, [r7, #20]
+ 932 0c8e D7ED027A 		flds	s15, [r7, #8]
+ 933 0c92 67EE277A 		fmuls	s15, s14, s15
+ 934 0c96 97ED297A 		flds	s14, [r7, #164]
+ 935 0c9a 77EE277A 		fadds	s15, s14, s15
+ 936 0c9e C7ED297A 		fsts	s15, [r7, #164]
+ 100:../QuaternionFilters.c **** 	q4 += qDot4 * deltat;
+ 937              		.loc 1 100 0
+ 938 0ca2 97ED047A 		flds	s14, [r7, #16]
+ 939 0ca6 D7ED027A 		flds	s15, [r7, #8]
+ 940 0caa 67EE277A 		fmuls	s15, s14, s15
+ 941 0cae 97ED287A 		flds	s14, [r7, #160]
+ 942 0cb2 77EE277A 		fadds	s15, s14, s15
+ 943 0cb6 C7ED287A 		fsts	s15, [r7, #160]
+ 101:../QuaternionFilters.c **** 	norm = sqrt(q1 * q1 + q2 * q2 + q3 * q3 + q4 * q4);    // normalise quaternion
+ 944              		.loc 1 101 0
+ 945 0cba 97ED2B7A 		flds	s14, [r7, #172]
+ 946 0cbe D7ED2B7A 		flds	s15, [r7, #172]
+ 947 0cc2 27EE277A 		fmuls	s14, s14, s15
+ 948 0cc6 D7ED2A6A 		flds	s13, [r7, #168]
+ 949 0cca D7ED2A7A 		flds	s15, [r7, #168]
+ 950 0cce 66EEA77A 		fmuls	s15, s13, s15
+ 951 0cd2 37EE277A 		fadds	s14, s14, s15
+ 952 0cd6 D7ED296A 		flds	s13, [r7, #164]
+ 953 0cda D7ED297A 		flds	s15, [r7, #164]
+ 954 0cde 66EEA77A 		fmuls	s15, s13, s15
+ 955 0ce2 37EE277A 		fadds	s14, s14, s15
+ 956 0ce6 D7ED286A 		flds	s13, [r7, #160]
+ 957 0cea D7ED287A 		flds	s15, [r7, #160]
+ 958 0cee 66EEA77A 		fmuls	s15, s13, s15
+ 959 0cf2 77EE277A 		fadds	s15, s14, s15
+ 960 0cf6 17EE900A 		fmrs	r0, s15
+ 961 0cfa FFF7FEFF 		bl	__aeabi_f2d
+ 962 0cfe 0246     		mov	r2, r0
+ 963 0d00 0B46     		mov	r3, r1
+ 964 0d02 1046     		mov	r0, r2
+ 965 0d04 1946     		mov	r1, r3
+ 966 0d06 FFF7FEFF 		bl	sqrt
+ 967 0d0a 0246     		mov	r2, r0
+ 968 0d0c 0B46     		mov	r3, r1
+ 969 0d0e 1046     		mov	r0, r2
+ 970 0d10 1946     		mov	r1, r3
+ 971 0d12 FFF7FEFF 		bl	__aeabi_d2f
+ 972 0d16 0346     		mov	r3, r0	@ float
+ 973 0d18 BB65     		str	r3, [r7, #88]	@ float
+ 102:../QuaternionFilters.c **** 	norm = 1.0f/norm;
+ 974              		.loc 1 102 0
+ 975 0d1a B7EE007A 		fconsts	s14, #112
+ 976 0d1e D7ED167A 		flds	s15, [r7, #88]
+ 977 0d22 C7EE277A 		fdivs	s15, s14, s15
+ 978 0d26 C7ED167A 		fsts	s15, [r7, #88]
+ 103:../QuaternionFilters.c **** 	q[0] = q1 * norm;
+ 979              		.loc 1 103 0
+ 980 0d2a 97ED2B7A 		flds	s14, [r7, #172]
+ 981 0d2e D7ED167A 		flds	s15, [r7, #88]
+ 982 0d32 67EE277A 		fmuls	s15, s14, s15
+ 983 0d36 FB68     		ldr	r3, [r7, #12]
+ 984 0d38 C3ED007A 		fsts	s15, [r3, #0]
+ 104:../QuaternionFilters.c **** 	q[1] = q2 * norm;
+ 985              		.loc 1 104 0
+ 986 0d3c FB68     		ldr	r3, [r7, #12]
+ 987 0d3e 03F10403 		add	r3, r3, #4
+ 988 0d42 97ED2A7A 		flds	s14, [r7, #168]
+ 989 0d46 D7ED167A 		flds	s15, [r7, #88]
+ 990 0d4a 67EE277A 		fmuls	s15, s14, s15
+ 991 0d4e C3ED007A 		fsts	s15, [r3, #0]
+ 105:../QuaternionFilters.c **** 	q[2] = q3 * norm;
+ 992              		.loc 1 105 0
+ 993 0d52 FB68     		ldr	r3, [r7, #12]
+ 994 0d54 03F10803 		add	r3, r3, #8
+ 995 0d58 97ED297A 		flds	s14, [r7, #164]
+ 996 0d5c D7ED167A 		flds	s15, [r7, #88]
+ 997 0d60 67EE277A 		fmuls	s15, s14, s15
+ 998 0d64 C3ED007A 		fsts	s15, [r3, #0]
+ 106:../QuaternionFilters.c **** 	q[3] = q4 * norm;
+ 999              		.loc 1 106 0
+ 1000 0d68 FB68     		ldr	r3, [r7, #12]
+ 1001 0d6a 03F10C03 		add	r3, r3, #12
+ 1002 0d6e 97ED287A 		flds	s14, [r7, #160]
+ 1003 0d72 D7ED167A 		flds	s15, [r7, #88]
+ 1004 0d76 67EE277A 		fmuls	s15, s14, s15
+ 1005 0d7a C3ED007A 		fsts	s15, [r3, #0]
+ 1006 0d7e 02E0     		b	.L1
+ 1007              	.L5:
+  52:../QuaternionFilters.c **** 	if (norm == 0.0f) return; // handle NaN
+ 1008              		.loc 1 52 0
+ 1009 0d80 00BF     		nop
+ 1010 0d82 00E0     		b	.L1
+ 1011              	.L6:
+  60:../QuaternionFilters.c **** 	if (norm == 0.0f) return; // handle NaN
+ 1012              		.loc 1 60 0
+ 1013 0d84 00BF     		nop
+ 1014              	.L1:
+ 107:../QuaternionFilters.c **** }
+ 1015              		.loc 1 107 0
+ 1016 0d86 07F1B007 		add	r7, r7, #176
+ 1017 0d8a BD46     		mov	sp, r7
+ 1018 0d8c 80BD     		pop	{r7, pc}
+ 1019              		.cfi_endproc
+ 1020              	.LFE153:
+ 1022 0d8e 00BF     		.section	.text.MahonyQuaternionUpdate,"ax",%progbits
+ 1023              		.align	2
+ 1024              		.global	MahonyQuaternionUpdate
+ 1025              		.thumb
+ 1026              		.thumb_func
+ 1028              	MahonyQuaternionUpdate:
+ 1029              	.LFB154:
+ 108:../QuaternionFilters.c **** 
+ 109:../QuaternionFilters.c ****  // Similar to Madgwick scheme but uses proportional and integral filtering on the error between es
+ 110:../QuaternionFilters.c ****  // measured ones.
+ 111:../QuaternionFilters.c **** void MahonyQuaternionUpdate(float* q, float* eInt, float deltat, float ax, float ay, float az, floa
+ 112:../QuaternionFilters.c **** {
+ 1030              		.loc 1 112 0
+ 1031              		.cfi_startproc
+ 1032              		@ args = 32, pretend = 0, frame = 144
+ 1033              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1034 0000 80B5     		push	{r7, lr}
+ 1035              	.LCFI3:
+ 1036              		.cfi_def_cfa_offset 8
+ 1037              		.cfi_offset 7, -8
+ 1038              		.cfi_offset 14, -4
+ 1039 0002 A4B0     		sub	sp, sp, #144
+ 1040              	.LCFI4:
+ 1041              		.cfi_def_cfa_offset 152
+ 1042 0004 00AF     		add	r7, sp, #0
+ 1043              	.LCFI5:
+ 1044              		.cfi_def_cfa_register 7
+ 1045 0006 F860     		str	r0, [r7, #12]
+ 1046 0008 B960     		str	r1, [r7, #8]
+ 1047 000a 7A60     		str	r2, [r7, #4]	@ float
+ 1048 000c 3B60     		str	r3, [r7, #0]	@ float
+ 113:../QuaternionFilters.c **** 	float q1 = q[0], q2 = q[1], q3 = q[2], q4 = q[3];   // short name local variable for readability
+ 1049              		.loc 1 113 0
+ 1050 000e FB68     		ldr	r3, [r7, #12]
+ 1051 0010 1B68     		ldr	r3, [r3, #0]	@ float
+ 1052 0012 C7F88C30 		str	r3, [r7, #140]	@ float
+ 1053 0016 FB68     		ldr	r3, [r7, #12]
+ 1054 0018 5B68     		ldr	r3, [r3, #4]	@ float
+ 1055 001a C7F88830 		str	r3, [r7, #136]	@ float
+ 1056 001e FB68     		ldr	r3, [r7, #12]
+ 1057 0020 9B68     		ldr	r3, [r3, #8]	@ float
+ 1058 0022 C7F88430 		str	r3, [r7, #132]	@ float
+ 1059 0026 FB68     		ldr	r3, [r7, #12]
+ 1060 0028 DB68     		ldr	r3, [r3, #12]	@ float
+ 1061 002a C7F88030 		str	r3, [r7, #128]	@ float
+ 114:../QuaternionFilters.c **** 	float norm;
+ 115:../QuaternionFilters.c **** 	float hx, hy, bx, bz;
+ 116:../QuaternionFilters.c **** 	float vx, vy, vz, wx, wy, wz;
+ 117:../QuaternionFilters.c **** 	float ex, ey, ez;
+ 118:../QuaternionFilters.c **** 	float pa, pb, pc;
+ 119:../QuaternionFilters.c **** 
+ 120:../QuaternionFilters.c **** 	// Auxiliary variables to avoid repeated arithmetic
+ 121:../QuaternionFilters.c **** 	float q1q1 = q1 * q1;
+ 1062              		.loc 1 121 0
+ 1063 002e 97ED237A 		flds	s14, [r7, #140]
+ 1064 0032 D7ED237A 		flds	s15, [r7, #140]
+ 1065 0036 67EE277A 		fmuls	s15, s14, s15
+ 1066 003a C7ED1F7A 		fsts	s15, [r7, #124]
+ 122:../QuaternionFilters.c **** 	float q1q2 = q1 * q2;
+ 1067              		.loc 1 122 0
+ 1068 003e 97ED237A 		flds	s14, [r7, #140]
+ 1069 0042 D7ED227A 		flds	s15, [r7, #136]
+ 1070 0046 67EE277A 		fmuls	s15, s14, s15
+ 1071 004a C7ED1E7A 		fsts	s15, [r7, #120]
+ 123:../QuaternionFilters.c **** 	float q1q3 = q1 * q3;
+ 1072              		.loc 1 123 0
+ 1073 004e 97ED237A 		flds	s14, [r7, #140]
+ 1074 0052 D7ED217A 		flds	s15, [r7, #132]
+ 1075 0056 67EE277A 		fmuls	s15, s14, s15
+ 1076 005a C7ED1D7A 		fsts	s15, [r7, #116]
+ 124:../QuaternionFilters.c **** 	float q1q4 = q1 * q4;
+ 1077              		.loc 1 124 0
+ 1078 005e 97ED237A 		flds	s14, [r7, #140]
+ 1079 0062 D7ED207A 		flds	s15, [r7, #128]
+ 1080 0066 67EE277A 		fmuls	s15, s14, s15
+ 1081 006a C7ED1C7A 		fsts	s15, [r7, #112]
+ 125:../QuaternionFilters.c **** 	float q2q2 = q2 * q2;
+ 1082              		.loc 1 125 0
+ 1083 006e 97ED227A 		flds	s14, [r7, #136]
+ 1084 0072 D7ED227A 		flds	s15, [r7, #136]
+ 1085 0076 67EE277A 		fmuls	s15, s14, s15
+ 1086 007a C7ED1B7A 		fsts	s15, [r7, #108]
+ 126:../QuaternionFilters.c **** 	float q2q3 = q2 * q3;
+ 1087              		.loc 1 126 0
+ 1088 007e 97ED227A 		flds	s14, [r7, #136]
+ 1089 0082 D7ED217A 		flds	s15, [r7, #132]
+ 1090 0086 67EE277A 		fmuls	s15, s14, s15
+ 1091 008a C7ED1A7A 		fsts	s15, [r7, #104]
+ 127:../QuaternionFilters.c **** 	float q2q4 = q2 * q4;
+ 1092              		.loc 1 127 0
+ 1093 008e 97ED227A 		flds	s14, [r7, #136]
+ 1094 0092 D7ED207A 		flds	s15, [r7, #128]
+ 1095 0096 67EE277A 		fmuls	s15, s14, s15
+ 1096 009a C7ED197A 		fsts	s15, [r7, #100]
+ 128:../QuaternionFilters.c **** 	float q3q3 = q3 * q3;
+ 1097              		.loc 1 128 0
+ 1098 009e 97ED217A 		flds	s14, [r7, #132]
+ 1099 00a2 D7ED217A 		flds	s15, [r7, #132]
+ 1100 00a6 67EE277A 		fmuls	s15, s14, s15
+ 1101 00aa C7ED187A 		fsts	s15, [r7, #96]
+ 129:../QuaternionFilters.c **** 	float q3q4 = q3 * q4;
+ 1102              		.loc 1 129 0
+ 1103 00ae 97ED217A 		flds	s14, [r7, #132]
+ 1104 00b2 D7ED207A 		flds	s15, [r7, #128]
+ 1105 00b6 67EE277A 		fmuls	s15, s14, s15
+ 1106 00ba C7ED177A 		fsts	s15, [r7, #92]
+ 130:../QuaternionFilters.c **** 	float q4q4 = q4 * q4;
+ 1107              		.loc 1 130 0
+ 1108 00be 97ED207A 		flds	s14, [r7, #128]
+ 1109 00c2 D7ED207A 		flds	s15, [r7, #128]
+ 1110 00c6 67EE277A 		fmuls	s15, s14, s15
+ 1111 00ca C7ED167A 		fsts	s15, [r7, #88]
+ 131:../QuaternionFilters.c **** 
+ 132:../QuaternionFilters.c **** 	// Normalise accelerometer measurement
+ 133:../QuaternionFilters.c **** 	norm = sqrt(ax * ax + ay * ay + az * az);
+ 1112              		.loc 1 133 0
+ 1113 00ce 97ED007A 		flds	s14, [r7, #0]
+ 1114 00d2 D7ED007A 		flds	s15, [r7, #0]
+ 1115 00d6 27EE277A 		fmuls	s14, s14, s15
+ 1116 00da D7ED266A 		flds	s13, [r7, #152]
+ 1117 00de D7ED267A 		flds	s15, [r7, #152]
+ 1118 00e2 66EEA77A 		fmuls	s15, s13, s15
+ 1119 00e6 37EE277A 		fadds	s14, s14, s15
+ 1120 00ea D7ED276A 		flds	s13, [r7, #156]
+ 1121 00ee D7ED277A 		flds	s15, [r7, #156]
+ 1122 00f2 66EEA77A 		fmuls	s15, s13, s15
+ 1123 00f6 77EE277A 		fadds	s15, s14, s15
+ 1124 00fa 17EE900A 		fmrs	r0, s15
+ 1125 00fe FFF7FEFF 		bl	__aeabi_f2d
+ 1126 0102 0246     		mov	r2, r0
+ 1127 0104 0B46     		mov	r3, r1
+ 1128 0106 1046     		mov	r0, r2
+ 1129 0108 1946     		mov	r1, r3
+ 1130 010a FFF7FEFF 		bl	sqrt
+ 1131 010e 0246     		mov	r2, r0
+ 1132 0110 0B46     		mov	r3, r1
+ 1133 0112 1046     		mov	r0, r2
+ 1134 0114 1946     		mov	r1, r3
+ 1135 0116 FFF7FEFF 		bl	__aeabi_d2f
+ 1136 011a 0346     		mov	r3, r0	@ float
+ 1137 011c 7B65     		str	r3, [r7, #84]	@ float
+ 134:../QuaternionFilters.c **** 	if (norm == 0.0f) return; // handle NaN
+ 1138              		.loc 1 134 0
+ 1139 011e D7ED157A 		flds	s15, [r7, #84]
+ 1140 0122 F5EE407A 		fcmpzs	s15
+ 1141 0126 F1EE10FA 		fmstat
+ 1142 012a 00F04B83 		beq	.L11
+ 1143              	.L8:
+ 135:../QuaternionFilters.c **** 	norm = 1.0f / norm;        // use reciprocal for division
+ 1144              		.loc 1 135 0
+ 1145 012e B7EE007A 		fconsts	s14, #112
+ 1146 0132 D7ED157A 		flds	s15, [r7, #84]
+ 1147 0136 C7EE277A 		fdivs	s15, s14, s15
+ 1148 013a C7ED157A 		fsts	s15, [r7, #84]
+ 136:../QuaternionFilters.c **** 	ax *= norm;
+ 1149              		.loc 1 136 0
+ 1150 013e 97ED007A 		flds	s14, [r7, #0]
+ 1151 0142 D7ED157A 		flds	s15, [r7, #84]
+ 1152 0146 67EE277A 		fmuls	s15, s14, s15
+ 1153 014a C7ED007A 		fsts	s15, [r7, #0]
+ 137:../QuaternionFilters.c **** 	ay *= norm;
+ 1154              		.loc 1 137 0
+ 1155 014e 97ED267A 		flds	s14, [r7, #152]
+ 1156 0152 D7ED157A 		flds	s15, [r7, #84]
+ 1157 0156 67EE277A 		fmuls	s15, s14, s15
+ 1158 015a C7ED267A 		fsts	s15, [r7, #152]
+ 138:../QuaternionFilters.c **** 	az *= norm;
+ 1159              		.loc 1 138 0
+ 1160 015e 97ED277A 		flds	s14, [r7, #156]
+ 1161 0162 D7ED157A 		flds	s15, [r7, #84]
+ 1162 0166 67EE277A 		fmuls	s15, s14, s15
+ 1163 016a C7ED277A 		fsts	s15, [r7, #156]
+ 139:../QuaternionFilters.c **** 
+ 140:../QuaternionFilters.c **** 	// Normalise magnetometer measurement
+ 141:../QuaternionFilters.c **** 	norm = sqrt(mx * mx + my * my + mz * mz);
+ 1164              		.loc 1 141 0
+ 1165 016e 97ED2B7A 		flds	s14, [r7, #172]
+ 1166 0172 D7ED2B7A 		flds	s15, [r7, #172]
+ 1167 0176 27EE277A 		fmuls	s14, s14, s15
+ 1168 017a D7ED2C6A 		flds	s13, [r7, #176]
+ 1169 017e D7ED2C7A 		flds	s15, [r7, #176]
+ 1170 0182 66EEA77A 		fmuls	s15, s13, s15
+ 1171 0186 37EE277A 		fadds	s14, s14, s15
+ 1172 018a D7ED2D6A 		flds	s13, [r7, #180]
+ 1173 018e D7ED2D7A 		flds	s15, [r7, #180]
+ 1174 0192 66EEA77A 		fmuls	s15, s13, s15
+ 1175 0196 77EE277A 		fadds	s15, s14, s15
+ 1176 019a 17EE900A 		fmrs	r0, s15
+ 1177 019e FFF7FEFF 		bl	__aeabi_f2d
+ 1178 01a2 0246     		mov	r2, r0
+ 1179 01a4 0B46     		mov	r3, r1
+ 1180 01a6 1046     		mov	r0, r2
+ 1181 01a8 1946     		mov	r1, r3
+ 1182 01aa FFF7FEFF 		bl	sqrt
+ 1183 01ae 0246     		mov	r2, r0
+ 1184 01b0 0B46     		mov	r3, r1
+ 1185 01b2 1046     		mov	r0, r2
+ 1186 01b4 1946     		mov	r1, r3
+ 1187 01b6 FFF7FEFF 		bl	__aeabi_d2f
+ 1188 01ba 0346     		mov	r3, r0	@ float
+ 1189 01bc 7B65     		str	r3, [r7, #84]	@ float
+ 142:../QuaternionFilters.c **** 	if (norm == 0.0f) return; // handle NaN
+ 1190              		.loc 1 142 0
+ 1191 01be D7ED157A 		flds	s15, [r7, #84]
+ 1192 01c2 F5EE407A 		fcmpzs	s15
+ 1193 01c6 F1EE10FA 		fmstat
+ 1194 01ca 00F0FD82 		beq	.L12
+ 1195              	.L10:
+ 143:../QuaternionFilters.c **** 	norm = 1.0f / norm;        // use reciprocal for division
+ 1196              		.loc 1 143 0
+ 1197 01ce B7EE007A 		fconsts	s14, #112
+ 1198 01d2 D7ED157A 		flds	s15, [r7, #84]
+ 1199 01d6 C7EE277A 		fdivs	s15, s14, s15
+ 1200 01da C7ED157A 		fsts	s15, [r7, #84]
+ 144:../QuaternionFilters.c **** 	mx *= norm;
+ 1201              		.loc 1 144 0
+ 1202 01de 97ED2B7A 		flds	s14, [r7, #172]
+ 1203 01e2 D7ED157A 		flds	s15, [r7, #84]
+ 1204 01e6 67EE277A 		fmuls	s15, s14, s15
+ 1205 01ea C7ED2B7A 		fsts	s15, [r7, #172]
+ 145:../QuaternionFilters.c **** 	my *= norm;
+ 1206              		.loc 1 145 0
+ 1207 01ee 97ED2C7A 		flds	s14, [r7, #176]
+ 1208 01f2 D7ED157A 		flds	s15, [r7, #84]
+ 1209 01f6 67EE277A 		fmuls	s15, s14, s15
+ 1210 01fa C7ED2C7A 		fsts	s15, [r7, #176]
+ 146:../QuaternionFilters.c **** 	mz *= norm;
+ 1211              		.loc 1 146 0
+ 1212 01fe 97ED2D7A 		flds	s14, [r7, #180]
+ 1213 0202 D7ED157A 		flds	s15, [r7, #84]
+ 1214 0206 67EE277A 		fmuls	s15, s14, s15
+ 1215 020a C7ED2D7A 		fsts	s15, [r7, #180]
+ 147:../QuaternionFilters.c **** 
+ 148:../QuaternionFilters.c **** 	// Reference direction of Earth's magnetic field
+ 149:../QuaternionFilters.c **** 	hx = 2.0f * mx * (0.5f - q3q3 - q4q4) + 2.0f * my * (q2q3 - q1q4) + 2.0f * mz * (q2q4 + q1q3);
+ 1216              		.loc 1 149 0
+ 1217 020e D7ED2B7A 		flds	s15, [r7, #172]
+ 1218 0212 37EEA77A 		fadds	s14, s15, s15
+ 1219 0216 F6EE006A 		fconsts	s13, #96
+ 1220 021a D7ED187A 		flds	s15, [r7, #96]
+ 1221 021e 76EEE76A 		fsubs	s13, s13, s15
+ 1222 0222 D7ED167A 		flds	s15, [r7, #88]
+ 1223 0226 76EEE77A 		fsubs	s15, s13, s15
+ 1224 022a 27EE277A 		fmuls	s14, s14, s15
+ 1225 022e D7ED2C7A 		flds	s15, [r7, #176]
+ 1226 0232 77EEA76A 		fadds	s13, s15, s15
+ 1227 0236 97ED1A6A 		flds	s12, [r7, #104]
+ 1228 023a D7ED1C7A 		flds	s15, [r7, #112]
+ 1229 023e 76EE677A 		fsubs	s15, s12, s15
+ 1230 0242 66EEA77A 		fmuls	s15, s13, s15
+ 1231 0246 37EE277A 		fadds	s14, s14, s15
+ 1232 024a D7ED2D7A 		flds	s15, [r7, #180]
+ 1233 024e 77EEA76A 		fadds	s13, s15, s15
+ 1234 0252 97ED196A 		flds	s12, [r7, #100]
+ 1235 0256 D7ED1D7A 		flds	s15, [r7, #116]
+ 1236 025a 76EE277A 		fadds	s15, s12, s15
+ 1237 025e 66EEA77A 		fmuls	s15, s13, s15
+ 1238 0262 77EE277A 		fadds	s15, s14, s15
+ 1239 0266 C7ED147A 		fsts	s15, [r7, #80]
+ 150:../QuaternionFilters.c **** 	hy = 2.0f * mx * (q2q3 + q1q4) + 2.0f * my * (0.5f - q2q2 - q4q4) + 2.0f * mz * (q3q4 - q1q2);
+ 1240              		.loc 1 150 0
+ 1241 026a D7ED2B7A 		flds	s15, [r7, #172]
+ 1242 026e 37EEA77A 		fadds	s14, s15, s15
+ 1243 0272 D7ED1A6A 		flds	s13, [r7, #104]
+ 1244 0276 D7ED1C7A 		flds	s15, [r7, #112]
+ 1245 027a 76EEA77A 		fadds	s15, s13, s15
+ 1246 027e 27EE277A 		fmuls	s14, s14, s15
+ 1247 0282 D7ED2C7A 		flds	s15, [r7, #176]
+ 1248 0286 77EEA76A 		fadds	s13, s15, s15
+ 1249 028a B6EE006A 		fconsts	s12, #96
+ 1250 028e D7ED1B7A 		flds	s15, [r7, #108]
+ 1251 0292 36EE676A 		fsubs	s12, s12, s15
+ 1252 0296 D7ED167A 		flds	s15, [r7, #88]
+ 1253 029a 76EE677A 		fsubs	s15, s12, s15
+ 1254 029e 66EEA77A 		fmuls	s15, s13, s15
+ 1255 02a2 37EE277A 		fadds	s14, s14, s15
+ 1256 02a6 D7ED2D7A 		flds	s15, [r7, #180]
+ 1257 02aa 77EEA76A 		fadds	s13, s15, s15
+ 1258 02ae 97ED176A 		flds	s12, [r7, #92]
+ 1259 02b2 D7ED1E7A 		flds	s15, [r7, #120]
+ 1260 02b6 76EE677A 		fsubs	s15, s12, s15
+ 1261 02ba 66EEA77A 		fmuls	s15, s13, s15
+ 1262 02be 77EE277A 		fadds	s15, s14, s15
+ 1263 02c2 C7ED137A 		fsts	s15, [r7, #76]
+ 151:../QuaternionFilters.c **** 	bx = sqrt((hx * hx) + (hy * hy));
+ 1264              		.loc 1 151 0
+ 1265 02c6 97ED147A 		flds	s14, [r7, #80]
+ 1266 02ca D7ED147A 		flds	s15, [r7, #80]
+ 1267 02ce 27EE277A 		fmuls	s14, s14, s15
+ 1268 02d2 D7ED136A 		flds	s13, [r7, #76]
+ 1269 02d6 D7ED137A 		flds	s15, [r7, #76]
+ 1270 02da 66EEA77A 		fmuls	s15, s13, s15
+ 1271 02de 77EE277A 		fadds	s15, s14, s15
+ 1272 02e2 17EE900A 		fmrs	r0, s15
+ 1273 02e6 FFF7FEFF 		bl	__aeabi_f2d
+ 1274 02ea 0246     		mov	r2, r0
+ 1275 02ec 0B46     		mov	r3, r1
+ 1276 02ee 1046     		mov	r0, r2
+ 1277 02f0 1946     		mov	r1, r3
+ 1278 02f2 FFF7FEFF 		bl	sqrt
+ 1279 02f6 0246     		mov	r2, r0
+ 1280 02f8 0B46     		mov	r3, r1
+ 1281 02fa 1046     		mov	r0, r2
+ 1282 02fc 1946     		mov	r1, r3
+ 1283 02fe FFF7FEFF 		bl	__aeabi_d2f
+ 1284 0302 0346     		mov	r3, r0	@ float
+ 1285 0304 BB64     		str	r3, [r7, #72]	@ float
+ 152:../QuaternionFilters.c **** 	bz = 2.0f * mx * (q2q4 - q1q3) + 2.0f * my * (q3q4 + q1q2) + 2.0f * mz * (0.5f - q2q2 - q3q3);
+ 1286              		.loc 1 152 0
+ 1287 0306 D7ED2B7A 		flds	s15, [r7, #172]
+ 1288 030a 37EEA77A 		fadds	s14, s15, s15
+ 1289 030e D7ED196A 		flds	s13, [r7, #100]
+ 1290 0312 D7ED1D7A 		flds	s15, [r7, #116]
+ 1291 0316 76EEE77A 		fsubs	s15, s13, s15
+ 1292 031a 27EE277A 		fmuls	s14, s14, s15
+ 1293 031e D7ED2C7A 		flds	s15, [r7, #176]
+ 1294 0322 77EEA76A 		fadds	s13, s15, s15
+ 1295 0326 97ED176A 		flds	s12, [r7, #92]
+ 1296 032a D7ED1E7A 		flds	s15, [r7, #120]
+ 1297 032e 76EE277A 		fadds	s15, s12, s15
+ 1298 0332 66EEA77A 		fmuls	s15, s13, s15
+ 1299 0336 37EE277A 		fadds	s14, s14, s15
+ 1300 033a D7ED2D7A 		flds	s15, [r7, #180]
+ 1301 033e 77EEA76A 		fadds	s13, s15, s15
+ 1302 0342 B6EE006A 		fconsts	s12, #96
+ 1303 0346 D7ED1B7A 		flds	s15, [r7, #108]
+ 1304 034a 36EE676A 		fsubs	s12, s12, s15
+ 1305 034e D7ED187A 		flds	s15, [r7, #96]
+ 1306 0352 76EE677A 		fsubs	s15, s12, s15
+ 1307 0356 66EEA77A 		fmuls	s15, s13, s15
+ 1308 035a 77EE277A 		fadds	s15, s14, s15
+ 1309 035e C7ED117A 		fsts	s15, [r7, #68]
+ 153:../QuaternionFilters.c **** 
+ 154:../QuaternionFilters.c **** 	// Estimated direction of gravity and magnetic field
+ 155:../QuaternionFilters.c **** 	vx = 2.0f * (q2q4 - q1q3);
+ 1310              		.loc 1 155 0
+ 1311 0362 97ED197A 		flds	s14, [r7, #100]
+ 1312 0366 D7ED1D7A 		flds	s15, [r7, #116]
+ 1313 036a 77EE677A 		fsubs	s15, s14, s15
+ 1314 036e 77EEA77A 		fadds	s15, s15, s15
+ 1315 0372 C7ED107A 		fsts	s15, [r7, #64]
+ 156:../QuaternionFilters.c **** 	vy = 2.0f * (q1q2 + q3q4);
+ 1316              		.loc 1 156 0
+ 1317 0376 97ED1E7A 		flds	s14, [r7, #120]
+ 1318 037a D7ED177A 		flds	s15, [r7, #92]
+ 1319 037e 77EE277A 		fadds	s15, s14, s15
+ 1320 0382 77EEA77A 		fadds	s15, s15, s15
+ 1321 0386 C7ED0F7A 		fsts	s15, [r7, #60]
+ 157:../QuaternionFilters.c **** 	vz = q1q1 - q2q2 - q3q3 + q4q4;
+ 1322              		.loc 1 157 0
+ 1323 038a 97ED1F7A 		flds	s14, [r7, #124]
+ 1324 038e D7ED1B7A 		flds	s15, [r7, #108]
+ 1325 0392 37EE677A 		fsubs	s14, s14, s15
+ 1326 0396 D7ED187A 		flds	s15, [r7, #96]
+ 1327 039a 37EE677A 		fsubs	s14, s14, s15
+ 1328 039e D7ED167A 		flds	s15, [r7, #88]
+ 1329 03a2 77EE277A 		fadds	s15, s14, s15
+ 1330 03a6 C7ED0E7A 		fsts	s15, [r7, #56]
+ 158:../QuaternionFilters.c **** 	wx = 2.0f * bx * (0.5f - q3q3 - q4q4) + 2.0f * bz * (q2q4 - q1q3);
+ 1331              		.loc 1 158 0
+ 1332 03aa D7ED127A 		flds	s15, [r7, #72]
+ 1333 03ae 37EEA77A 		fadds	s14, s15, s15
+ 1334 03b2 F6EE006A 		fconsts	s13, #96
+ 1335 03b6 D7ED187A 		flds	s15, [r7, #96]
+ 1336 03ba 76EEE76A 		fsubs	s13, s13, s15
+ 1337 03be D7ED167A 		flds	s15, [r7, #88]
+ 1338 03c2 76EEE77A 		fsubs	s15, s13, s15
+ 1339 03c6 27EE277A 		fmuls	s14, s14, s15
+ 1340 03ca D7ED117A 		flds	s15, [r7, #68]
+ 1341 03ce 77EEA76A 		fadds	s13, s15, s15
+ 1342 03d2 97ED196A 		flds	s12, [r7, #100]
+ 1343 03d6 D7ED1D7A 		flds	s15, [r7, #116]
+ 1344 03da 76EE677A 		fsubs	s15, s12, s15
+ 1345 03de 66EEA77A 		fmuls	s15, s13, s15
+ 1346 03e2 77EE277A 		fadds	s15, s14, s15
+ 1347 03e6 C7ED0D7A 		fsts	s15, [r7, #52]
+ 159:../QuaternionFilters.c **** 	wy = 2.0f * bx * (q2q3 - q1q4) + 2.0f * bz * (q1q2 + q3q4);
+ 1348              		.loc 1 159 0
+ 1349 03ea D7ED127A 		flds	s15, [r7, #72]
+ 1350 03ee 37EEA77A 		fadds	s14, s15, s15
+ 1351 03f2 D7ED1A6A 		flds	s13, [r7, #104]
+ 1352 03f6 D7ED1C7A 		flds	s15, [r7, #112]
+ 1353 03fa 76EEE77A 		fsubs	s15, s13, s15
+ 1354 03fe 27EE277A 		fmuls	s14, s14, s15
+ 1355 0402 D7ED117A 		flds	s15, [r7, #68]
+ 1356 0406 77EEA76A 		fadds	s13, s15, s15
+ 1357 040a 97ED1E6A 		flds	s12, [r7, #120]
+ 1358 040e D7ED177A 		flds	s15, [r7, #92]
+ 1359 0412 76EE277A 		fadds	s15, s12, s15
+ 1360 0416 66EEA77A 		fmuls	s15, s13, s15
+ 1361 041a 77EE277A 		fadds	s15, s14, s15
+ 1362 041e C7ED0C7A 		fsts	s15, [r7, #48]
+ 160:../QuaternionFilters.c **** 	wz = 2.0f * bx * (q1q3 + q2q4) + 2.0f * bz * (0.5f - q2q2 - q3q3);
+ 1363              		.loc 1 160 0
+ 1364 0422 D7ED127A 		flds	s15, [r7, #72]
+ 1365 0426 37EEA77A 		fadds	s14, s15, s15
+ 1366 042a D7ED1D6A 		flds	s13, [r7, #116]
+ 1367 042e D7ED197A 		flds	s15, [r7, #100]
+ 1368 0432 76EEA77A 		fadds	s15, s13, s15
+ 1369 0436 27EE277A 		fmuls	s14, s14, s15
+ 1370 043a D7ED117A 		flds	s15, [r7, #68]
+ 1371 043e 77EEA76A 		fadds	s13, s15, s15
+ 1372 0442 B6EE006A 		fconsts	s12, #96
+ 1373 0446 D7ED1B7A 		flds	s15, [r7, #108]
+ 1374 044a 36EE676A 		fsubs	s12, s12, s15
+ 1375 044e D7ED187A 		flds	s15, [r7, #96]
+ 1376 0452 76EE677A 		fsubs	s15, s12, s15
+ 1377 0456 66EEA77A 		fmuls	s15, s13, s15
+ 1378 045a 77EE277A 		fadds	s15, s14, s15
+ 1379 045e C7ED0B7A 		fsts	s15, [r7, #44]
+ 161:../QuaternionFilters.c **** 
+ 162:../QuaternionFilters.c **** 	// Error is cross product between estimated direction and measured direction of gravity
+ 163:../QuaternionFilters.c **** 	ex = (ay * vz - az * vy) + (my * wz - mz * wy);
+ 1380              		.loc 1 163 0
+ 1381 0462 97ED267A 		flds	s14, [r7, #152]
+ 1382 0466 D7ED0E7A 		flds	s15, [r7, #56]
+ 1383 046a 27EE277A 		fmuls	s14, s14, s15
+ 1384 046e D7ED276A 		flds	s13, [r7, #156]
+ 1385 0472 D7ED0F7A 		flds	s15, [r7, #60]
+ 1386 0476 66EEA77A 		fmuls	s15, s13, s15
+ 1387 047a 37EE677A 		fsubs	s14, s14, s15
+ 1388 047e D7ED2C6A 		flds	s13, [r7, #176]
+ 1389 0482 D7ED0B7A 		flds	s15, [r7, #44]
+ 1390 0486 66EEA76A 		fmuls	s13, s13, s15
+ 1391 048a 97ED2D6A 		flds	s12, [r7, #180]
+ 1392 048e D7ED0C7A 		flds	s15, [r7, #48]
+ 1393 0492 66EE277A 		fmuls	s15, s12, s15
+ 1394 0496 76EEE77A 		fsubs	s15, s13, s15
+ 1395 049a 77EE277A 		fadds	s15, s14, s15
+ 1396 049e C7ED0A7A 		fsts	s15, [r7, #40]
+ 164:../QuaternionFilters.c **** 	ey = (az * vx - ax * vz) + (mz * wx - mx * wz);
+ 1397              		.loc 1 164 0
+ 1398 04a2 97ED277A 		flds	s14, [r7, #156]
+ 1399 04a6 D7ED107A 		flds	s15, [r7, #64]
+ 1400 04aa 27EE277A 		fmuls	s14, s14, s15
+ 1401 04ae D7ED006A 		flds	s13, [r7, #0]
+ 1402 04b2 D7ED0E7A 		flds	s15, [r7, #56]
+ 1403 04b6 66EEA77A 		fmuls	s15, s13, s15
+ 1404 04ba 37EE677A 		fsubs	s14, s14, s15
+ 1405 04be D7ED2D6A 		flds	s13, [r7, #180]
+ 1406 04c2 D7ED0D7A 		flds	s15, [r7, #52]
+ 1407 04c6 66EEA76A 		fmuls	s13, s13, s15
+ 1408 04ca 97ED2B6A 		flds	s12, [r7, #172]
+ 1409 04ce D7ED0B7A 		flds	s15, [r7, #44]
+ 1410 04d2 66EE277A 		fmuls	s15, s12, s15
+ 1411 04d6 76EEE77A 		fsubs	s15, s13, s15
+ 1412 04da 77EE277A 		fadds	s15, s14, s15
+ 1413 04de C7ED097A 		fsts	s15, [r7, #36]
+ 165:../QuaternionFilters.c **** 	ez = (ax * vy - ay * vx) + (mx * wy - my * wx);
+ 1414              		.loc 1 165 0
+ 1415 04e2 97ED007A 		flds	s14, [r7, #0]
+ 1416 04e6 D7ED0F7A 		flds	s15, [r7, #60]
+ 1417 04ea 27EE277A 		fmuls	s14, s14, s15
+ 1418 04ee D7ED266A 		flds	s13, [r7, #152]
+ 1419 04f2 D7ED107A 		flds	s15, [r7, #64]
+ 1420 04f6 66EEA77A 		fmuls	s15, s13, s15
+ 1421 04fa 37EE677A 		fsubs	s14, s14, s15
+ 1422 04fe D7ED2B6A 		flds	s13, [r7, #172]
+ 1423 0502 D7ED0C7A 		flds	s15, [r7, #48]
+ 1424 0506 66EEA76A 		fmuls	s13, s13, s15
+ 1425 050a 97ED2C6A 		flds	s12, [r7, #176]
+ 1426 050e D7ED0D7A 		flds	s15, [r7, #52]
+ 1427 0512 66EE277A 		fmuls	s15, s12, s15
+ 1428 0516 76EEE77A 		fsubs	s15, s13, s15
+ 1429 051a 77EE277A 		fadds	s15, s14, s15
+ 1430 051e C7ED087A 		fsts	s15, [r7, #32]
+ 166:../QuaternionFilters.c **** 	if (Ki > 0.0f)
+ 167:../QuaternionFilters.c **** 	{
+ 168:../QuaternionFilters.c **** 		eInt[0] += ex;      // accumulate integral error
+ 169:../QuaternionFilters.c **** 		eInt[1] += ey;
+ 170:../QuaternionFilters.c **** 		eInt[2] += ez;
+ 171:../QuaternionFilters.c **** 	}
+ 172:../QuaternionFilters.c **** 	else
+ 173:../QuaternionFilters.c **** 	{
+ 174:../QuaternionFilters.c **** 		eInt[0] = 0.0f;     // prevent integral wind up
+ 1431              		.loc 1 174 0
+ 1432 0522 BB68     		ldr	r3, [r7, #8]
+ 1433 0524 4FF00002 		mov	r2, #0
+ 1434 0528 1A60     		str	r2, [r3, #0]	@ float
+ 175:../QuaternionFilters.c **** 		eInt[1] = 0.0f;
+ 1435              		.loc 1 175 0
+ 1436 052a BB68     		ldr	r3, [r7, #8]
+ 1437 052c 03F10403 		add	r3, r3, #4
+ 1438 0530 4FF00002 		mov	r2, #0
+ 1439 0534 1A60     		str	r2, [r3, #0]	@ float
+ 176:../QuaternionFilters.c **** 		eInt[2] = 0.0f;
+ 1440              		.loc 1 176 0
+ 1441 0536 BB68     		ldr	r3, [r7, #8]
+ 1442 0538 03F10803 		add	r3, r3, #8
+ 1443 053c 4FF00002 		mov	r2, #0
+ 1444 0540 1A60     		str	r2, [r3, #0]	@ float
+ 177:../QuaternionFilters.c **** 	}
+ 178:../QuaternionFilters.c **** 
+ 179:../QuaternionFilters.c **** 	// Apply feedback terms
+ 180:../QuaternionFilters.c **** 	gx = gx + Kp * ex + Ki * eInt[0];
+ 1445              		.loc 1 180 0
+ 1446 0542 97ED0A7A 		flds	s14, [r7, #40]
+ 1447 0546 F2EE047A 		fconsts	s15, #36
+ 1448 054a 27EE277A 		fmuls	s14, s14, s15
+ 1449 054e D7ED287A 		flds	s15, [r7, #160]
+ 1450 0552 37EE277A 		fadds	s14, s14, s15
+ 1451 0556 BB68     		ldr	r3, [r7, #8]
+ 1452 0558 D3ED006A 		flds	s13, [r3, #0]
+ 1453 055c DFED9D7A 		flds	s15, .L13
+ 1454 0560 66EEA77A 		fmuls	s15, s13, s15
+ 1455 0564 77EE277A 		fadds	s15, s14, s15
+ 1456 0568 C7ED287A 		fsts	s15, [r7, #160]
+ 181:../QuaternionFilters.c **** 	gy = gy + Kp * ey + Ki * eInt[1];
+ 1457              		.loc 1 181 0
+ 1458 056c 97ED097A 		flds	s14, [r7, #36]
+ 1459 0570 F2EE047A 		fconsts	s15, #36
+ 1460 0574 27EE277A 		fmuls	s14, s14, s15
+ 1461 0578 D7ED297A 		flds	s15, [r7, #164]
+ 1462 057c 37EE277A 		fadds	s14, s14, s15
+ 1463 0580 BB68     		ldr	r3, [r7, #8]
+ 1464 0582 03F10403 		add	r3, r3, #4
+ 1465 0586 D3ED006A 		flds	s13, [r3, #0]
+ 1466 058a DFED927A 		flds	s15, .L13
+ 1467 058e 66EEA77A 		fmuls	s15, s13, s15
+ 1468 0592 77EE277A 		fadds	s15, s14, s15
+ 1469 0596 C7ED297A 		fsts	s15, [r7, #164]
+ 182:../QuaternionFilters.c **** 	gz = gz + Kp * ez + Ki * eInt[2];
+ 1470              		.loc 1 182 0
+ 1471 059a 97ED087A 		flds	s14, [r7, #32]
+ 1472 059e F2EE047A 		fconsts	s15, #36
+ 1473 05a2 27EE277A 		fmuls	s14, s14, s15
+ 1474 05a6 D7ED2A7A 		flds	s15, [r7, #168]
+ 1475 05aa 37EE277A 		fadds	s14, s14, s15
+ 1476 05ae BB68     		ldr	r3, [r7, #8]
+ 1477 05b0 03F10803 		add	r3, r3, #8
+ 1478 05b4 D3ED006A 		flds	s13, [r3, #0]
+ 1479 05b8 DFED867A 		flds	s15, .L13
+ 1480 05bc 66EEA77A 		fmuls	s15, s13, s15
+ 1481 05c0 77EE277A 		fadds	s15, s14, s15
+ 1482 05c4 C7ED2A7A 		fsts	s15, [r7, #168]
+ 183:../QuaternionFilters.c **** 
+ 184:../QuaternionFilters.c **** 	// Integrate rate of change of quaternion
+ 185:../QuaternionFilters.c **** 	pa = q2;
+ 1483              		.loc 1 185 0
+ 1484 05c8 D7F88830 		ldr	r3, [r7, #136]	@ float
+ 1485 05cc FB61     		str	r3, [r7, #28]	@ float
+ 186:../QuaternionFilters.c **** 	pb = q3;
+ 1486              		.loc 1 186 0
+ 1487 05ce D7F88430 		ldr	r3, [r7, #132]	@ float
+ 1488 05d2 BB61     		str	r3, [r7, #24]	@ float
+ 187:../QuaternionFilters.c **** 	pc = q4;
+ 1489              		.loc 1 187 0
+ 1490 05d4 D7F88030 		ldr	r3, [r7, #128]	@ float
+ 1491 05d8 7B61     		str	r3, [r7, #20]	@ float
+ 188:../QuaternionFilters.c **** 	q1 = q1 + (-q2 * gx - q3 * gy - q4 * gz) * (0.5f * deltat);
+ 1492              		.loc 1 188 0
+ 1493 05da D7ED227A 		flds	s15, [r7, #136]
+ 1494 05de B1EE677A 		fnegs	s14, s15
+ 1495 05e2 D7ED287A 		flds	s15, [r7, #160]
+ 1496 05e6 27EE277A 		fmuls	s14, s14, s15
+ 1497 05ea D7ED216A 		flds	s13, [r7, #132]
+ 1498 05ee D7ED297A 		flds	s15, [r7, #164]
+ 1499 05f2 66EEA77A 		fmuls	s15, s13, s15
+ 1500 05f6 37EE677A 		fsubs	s14, s14, s15
+ 1501 05fa D7ED206A 		flds	s13, [r7, #128]
+ 1502 05fe D7ED2A7A 		flds	s15, [r7, #168]
+ 1503 0602 66EEA77A 		fmuls	s15, s13, s15
+ 1504 0606 37EE677A 		fsubs	s14, s14, s15
+ 1505 060a D7ED016A 		flds	s13, [r7, #4]
+ 1506 060e F6EE007A 		fconsts	s15, #96
+ 1507 0612 66EEA77A 		fmuls	s15, s13, s15
+ 1508 0616 67EE277A 		fmuls	s15, s14, s15
+ 1509 061a 97ED237A 		flds	s14, [r7, #140]
+ 1510 061e 77EE277A 		fadds	s15, s14, s15
+ 1511 0622 C7ED237A 		fsts	s15, [r7, #140]
+ 189:../QuaternionFilters.c **** 	q2 = pa + (q1 * gx + pb * gz - pc * gy) * (0.5f * deltat);
+ 1512              		.loc 1 189 0
+ 1513 0626 97ED237A 		flds	s14, [r7, #140]
+ 1514 062a D7ED287A 		flds	s15, [r7, #160]
+ 1515 062e 27EE277A 		fmuls	s14, s14, s15
+ 1516 0632 D7ED066A 		flds	s13, [r7, #24]
+ 1517 0636 D7ED2A7A 		flds	s15, [r7, #168]
+ 1518 063a 66EEA77A 		fmuls	s15, s13, s15
+ 1519 063e 37EE277A 		fadds	s14, s14, s15
+ 1520 0642 D7ED056A 		flds	s13, [r7, #20]
+ 1521 0646 D7ED297A 		flds	s15, [r7, #164]
+ 1522 064a 66EEA77A 		fmuls	s15, s13, s15
+ 1523 064e 37EE677A 		fsubs	s14, s14, s15
+ 1524 0652 D7ED016A 		flds	s13, [r7, #4]
+ 1525 0656 F6EE007A 		fconsts	s15, #96
+ 1526 065a 66EEA77A 		fmuls	s15, s13, s15
+ 1527 065e 27EE277A 		fmuls	s14, s14, s15
+ 1528 0662 D7ED077A 		flds	s15, [r7, #28]
+ 1529 0666 77EE277A 		fadds	s15, s14, s15
+ 1530 066a C7ED227A 		fsts	s15, [r7, #136]
+ 190:../QuaternionFilters.c **** 	q3 = pb + (q1 * gy - pa * gz + pc * gx) * (0.5f * deltat);
+ 1531              		.loc 1 190 0
+ 1532 066e 97ED237A 		flds	s14, [r7, #140]
+ 1533 0672 D7ED297A 		flds	s15, [r7, #164]
+ 1534 0676 27EE277A 		fmuls	s14, s14, s15
+ 1535 067a D7ED076A 		flds	s13, [r7, #28]
+ 1536 067e D7ED2A7A 		flds	s15, [r7, #168]
+ 1537 0682 66EEA77A 		fmuls	s15, s13, s15
+ 1538 0686 37EE677A 		fsubs	s14, s14, s15
+ 1539 068a D7ED056A 		flds	s13, [r7, #20]
+ 1540 068e D7ED287A 		flds	s15, [r7, #160]
+ 1541 0692 66EEA77A 		fmuls	s15, s13, s15
+ 1542 0696 37EE277A 		fadds	s14, s14, s15
+ 1543 069a D7ED016A 		flds	s13, [r7, #4]
+ 1544 069e F6EE007A 		fconsts	s15, #96
+ 1545 06a2 66EEA77A 		fmuls	s15, s13, s15
+ 1546 06a6 27EE277A 		fmuls	s14, s14, s15
+ 1547 06aa D7ED067A 		flds	s15, [r7, #24]
+ 1548 06ae 77EE277A 		fadds	s15, s14, s15
+ 1549 06b2 C7ED217A 		fsts	s15, [r7, #132]
+ 191:../QuaternionFilters.c **** 	q4 = pc + (q1 * gz + pa * gy - pb * gx) * (0.5f * deltat);
+ 1550              		.loc 1 191 0
+ 1551 06b6 97ED237A 		flds	s14, [r7, #140]
+ 1552 06ba D7ED2A7A 		flds	s15, [r7, #168]
+ 1553 06be 27EE277A 		fmuls	s14, s14, s15
+ 1554 06c2 D7ED076A 		flds	s13, [r7, #28]
+ 1555 06c6 D7ED297A 		flds	s15, [r7, #164]
+ 1556 06ca 66EEA77A 		fmuls	s15, s13, s15
+ 1557 06ce 37EE277A 		fadds	s14, s14, s15
+ 1558 06d2 D7ED066A 		flds	s13, [r7, #24]
+ 1559 06d6 D7ED287A 		flds	s15, [r7, #160]
+ 1560 06da 66EEA77A 		fmuls	s15, s13, s15
+ 1561 06de 37EE677A 		fsubs	s14, s14, s15
+ 1562 06e2 D7ED016A 		flds	s13, [r7, #4]
+ 1563 06e6 F6EE007A 		fconsts	s15, #96
+ 1564 06ea 66EEA77A 		fmuls	s15, s13, s15
+ 1565 06ee 27EE277A 		fmuls	s14, s14, s15
+ 1566 06f2 D7ED057A 		flds	s15, [r7, #20]
+ 1567 06f6 77EE277A 		fadds	s15, s14, s15
+ 1568 06fa C7ED207A 		fsts	s15, [r7, #128]
+ 192:../QuaternionFilters.c **** 
+ 193:../QuaternionFilters.c **** 	// Normalise quaternion
+ 194:../QuaternionFilters.c **** 	norm = sqrt(q1 * q1 + q2 * q2 + q3 * q3 + q4 * q4);
+ 1569              		.loc 1 194 0
+ 1570 06fe 97ED237A 		flds	s14, [r7, #140]
+ 1571 0702 D7ED237A 		flds	s15, [r7, #140]
+ 1572 0706 27EE277A 		fmuls	s14, s14, s15
+ 1573 070a D7ED226A 		flds	s13, [r7, #136]
+ 1574 070e D7ED227A 		flds	s15, [r7, #136]
+ 1575 0712 66EEA77A 		fmuls	s15, s13, s15
+ 1576 0716 37EE277A 		fadds	s14, s14, s15
+ 1577 071a D7ED216A 		flds	s13, [r7, #132]
+ 1578 071e D7ED217A 		flds	s15, [r7, #132]
+ 1579 0722 66EEA77A 		fmuls	s15, s13, s15
+ 1580 0726 37EE277A 		fadds	s14, s14, s15
+ 1581 072a D7ED206A 		flds	s13, [r7, #128]
+ 1582 072e D7ED207A 		flds	s15, [r7, #128]
+ 1583 0732 66EEA77A 		fmuls	s15, s13, s15
+ 1584 0736 77EE277A 		fadds	s15, s14, s15
+ 1585 073a 17EE900A 		fmrs	r0, s15
+ 1586 073e FFF7FEFF 		bl	__aeabi_f2d
+ 1587 0742 0246     		mov	r2, r0
+ 1588 0744 0B46     		mov	r3, r1
+ 1589 0746 1046     		mov	r0, r2
+ 1590 0748 1946     		mov	r1, r3
+ 1591 074a FFF7FEFF 		bl	sqrt
+ 1592 074e 0246     		mov	r2, r0
+ 1593 0750 0B46     		mov	r3, r1
+ 1594 0752 1046     		mov	r0, r2
+ 1595 0754 1946     		mov	r1, r3
+ 1596 0756 FFF7FEFF 		bl	__aeabi_d2f
+ 1597 075a 0346     		mov	r3, r0	@ float
+ 1598 075c 7B65     		str	r3, [r7, #84]	@ float
+ 195:../QuaternionFilters.c **** 	norm = 1.0f / norm;
+ 1599              		.loc 1 195 0
+ 1600 075e B7EE007A 		fconsts	s14, #112
+ 1601 0762 D7ED157A 		flds	s15, [r7, #84]
+ 1602 0766 C7EE277A 		fdivs	s15, s14, s15
+ 1603 076a C7ED157A 		fsts	s15, [r7, #84]
+ 196:../QuaternionFilters.c **** 	q[0] = q1 * norm;
+ 1604              		.loc 1 196 0
+ 1605 076e 97ED237A 		flds	s14, [r7, #140]
+ 1606 0772 D7ED157A 		flds	s15, [r7, #84]
+ 1607 0776 67EE277A 		fmuls	s15, s14, s15
+ 1608 077a FB68     		ldr	r3, [r7, #12]
+ 1609 077c C3ED007A 		fsts	s15, [r3, #0]
+ 197:../QuaternionFilters.c **** 	q[1] = q2 * norm;
+ 1610              		.loc 1 197 0
+ 1611 0780 FB68     		ldr	r3, [r7, #12]
+ 1612 0782 03F10403 		add	r3, r3, #4
+ 1613 0786 97ED227A 		flds	s14, [r7, #136]
+ 1614 078a D7ED157A 		flds	s15, [r7, #84]
+ 1615 078e 67EE277A 		fmuls	s15, s14, s15
+ 1616 0792 C3ED007A 		fsts	s15, [r3, #0]
+ 198:../QuaternionFilters.c **** 	q[2] = q3 * norm;
+ 1617              		.loc 1 198 0
+ 1618 0796 FB68     		ldr	r3, [r7, #12]
+ 1619 0798 03F10803 		add	r3, r3, #8
+ 1620 079c 97ED217A 		flds	s14, [r7, #132]
+ 1621 07a0 D7ED157A 		flds	s15, [r7, #84]
+ 1622 07a4 67EE277A 		fmuls	s15, s14, s15
+ 1623 07a8 C3ED007A 		fsts	s15, [r3, #0]
+ 199:../QuaternionFilters.c **** 	q[3] = q4 * norm;
+ 1624              		.loc 1 199 0
+ 1625 07ac FB68     		ldr	r3, [r7, #12]
+ 1626 07ae 03F10C03 		add	r3, r3, #12
+ 1627 07b2 97ED207A 		flds	s14, [r7, #128]
+ 1628 07b6 D7ED157A 		flds	s15, [r7, #84]
+ 1629 07ba 67EE277A 		fmuls	s15, s14, s15
+ 1630 07be C3ED007A 		fsts	s15, [r3, #0]
+ 1631 07c2 02E0     		b	.L7
+ 1632              	.L11:
+ 134:../QuaternionFilters.c **** 	if (norm == 0.0f) return; // handle NaN
+ 1633              		.loc 1 134 0
+ 1634 07c4 00BF     		nop
+ 1635 07c6 00E0     		b	.L7
+ 1636              	.L12:
+ 142:../QuaternionFilters.c **** 	if (norm == 0.0f) return; // handle NaN
+ 1637              		.loc 1 142 0
+ 1638 07c8 00BF     		nop
+ 1639              	.L7:
+ 200:../QuaternionFilters.c **** }
+ 1640              		.loc 1 200 0
+ 1641 07ca 07F19007 		add	r7, r7, #144
+ 1642 07ce BD46     		mov	sp, r7
+ 1643 07d0 80BD     		pop	{r7, pc}
+ 1644              	.L14:
+ 1645 07d2 00BF     		.align	2
+ 1646              	.L13:
+ 1647 07d4 00000000 		.word	0
+ 1648              		.cfi_endproc
+ 1649              	.LFE154:
+ 1651              		.text
+ 1652              	.Letext0:
+ 1653              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1654              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 QuaternionFilters.c
+C:\Users\maan\AppData\Local\Temp\cc6XpUHk.s:22     .text.MadgwickQuaternionUpdate:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc6XpUHk.s:27     .text.MadgwickQuaternionUpdate:00000000 MadgwickQuaternionUpdate
+C:\Users\maan\AppData\Local\Temp\cc6XpUHk.s:1023   .text.MahonyQuaternionUpdate:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc6XpUHk.s:1028   .text.MahonyQuaternionUpdate:00000000 MahonyQuaternionUpdate
+C:\Users\maan\AppData\Local\Temp\cc6XpUHk.s:1647   .text.MahonyQuaternionUpdate:000007d4 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.RTC001.h.113.715d6fcab1863c6656b238bddd304166
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.reent.h.11.a39e4126dcf3c6afd3054e0622577bae
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.LMM001.h.45.fa2df8bae969f45df5071221ac433ffa
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.104.05371e300b30617373255b3cdb4765a2
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.stdarg.h.31.fa591a4b1df9e413e9f5b8097f9ae89d
+                           .group:00000000 wm4.Type_CM.h.61.3660c940695d7d5fef91de9c4081d0f0
+                           .group:00000000 wm4.dwc_os.h.82.db2ca40c41e2f648d146b8942e5157d9
+                           .group:00000000 wm4.dwc_otg_core_if.h.95.37e41eee47e9a4502e4044edf60ea92d
+                           .group:00000000 wm4.usbcore001_device.h.107.6c032c9c28ac6c3f4e5e24a068720cd7
+                           .group:00000000 wm4.USB.h.399.44a2bec94122294f06c4d854450494d3
+                           .group:00000000 wm4.Common.h.102.bc881ac788d1d7ce84e651cbaa40f2c2
+                           .group:00000000 wm4.Common.h.134.5069b632a0407201156f18fde915b80c
+                           .group:00000000 wm4.USBMode.h.234.0cc9e23131c025605bb7c0db3ebb8ac9
+                           .group:00000000 wm4.StdRequestType.h.93.4e19c7c655f990c2abedbb76a546fcde
+                           .group:00000000 wm4.Endpoint.h.116.4ef46b127c9047ed49fe1e0df19e09b8
+                           .group:00000000 wm4.StdDescriptors.h.120.0ce817e16dcc91b8cf4a79ba0e0e19b6
+                           .group:00000000 wm4.CDC.h.103.7ce3e4692dde29e827f8736493eef7ef
+                           .group:00000000 wm4.CDC.h.115.c83a7d6c5b6c8644b3dec6212d4ced09
+                           .group:00000000 wm4.Descriptors.h.91.5cf84c2489ee54d154cabfe9e14b5c19
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.2bb5ea9bb71ee763bf6e76b6ab83e6b4
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.a52fac0daa39b5f58343578312b4eb54
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.1c36d067cc7a6ac3b9658ba6083fe89f
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.e471e519f7471a50493b6f4fe912ee0d
+                           .group:00000000 wm4.ERU001_Conf.h.69.6d7c31a774e428b1dc8770c7c31047dd
+                           .group:00000000 wm4.ERU002_Conf.h.49.47045c766c6d22ab1185285e9d568758
+                           .group:00000000 wm4.IO002_Conf.h.51.be0baad511cf66771895fab0bf90f390
+                           .group:00000000 wm4.arm_math.h.258.4f811f2034dd4ca295ea6f28c00c3d1e
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.290.40597f98fb862d9752cedcde2b37d26a
+                           .group:00000000 wm4.QuaternionFilters.h.14.05bc7d774d3e2c020d8d603ffa53b52d
+
+UNDEFINED SYMBOLS
+__aeabi_f2d
+__aeabi_d2f
+sqrt

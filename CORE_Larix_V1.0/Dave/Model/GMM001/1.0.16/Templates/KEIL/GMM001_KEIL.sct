@@ -1,0 +1,77 @@
+; ***************************************************************
+; *** Scatter file to demonstrate GMM001 App requirements     *** 
+; ***************************************************************
+
+; This file demonstrates the linker scatter file requirements for 
+; GMM001 App.
+;
+; The GMM001 App uses three memory banks for dynamic memory allocation.
+; Three memory banks are used due to three non-contiguos RAMs in XMC45xx 
+; devices. GMM001 App needs the start address and size of these banks.
+; These values shall be provided by the linker script.
+;
+; We will attempt to use the avaialble free memory from each of DSRAM1,
+; DSRAM2 and PSRAM for these 3 banks.
+; Seems like Scatter file logic does not allow dynamic size for heap.
+; Hence we use the following logic to get the boundaries of the Banks.
+; 1. Define an empty section of zero size at end of other allocations.
+; This allows dynamic shifting of the start of the Bank.
+; 2. Define another empty section of zero size at possible end of 
+; the Banks. This is a fixed address and normally equal to the 
+; end of the RAM. If there are other allocations after this space,
+; then the fixed end address may be advanced by editing the same.
+; 3. use the Image$$<section>$$Base symbols to get the boundaries.
+; 
+; As per the above logic the below symbols will be available for 
+; GMM001 App. The start and size of the Banks can be derived from them.
+;
+; Image$$Heap_Bank1_Start$$Base, Image$$Heap_Bank1_End$$Base 
+; Image$$Heap_Bank2_Start$$Base, Image$$Heap_Bank2_End$$Base 
+; Image$$Heap_Bank3_Start$$Base, Image$$Heap_Bank3_End$$Base 
+; 
+ 
+; IMPORTANT: Please always check the map file to ensure all memory
+; allocations are as intended and appropriate for your application.
+;
+; Note: in the startup_XMC4500.s file some amount of heap is defined
+; by default. This may be set to zero.
+; 
+
+
+LR_ROM1 0x0C000000 0x00100000  {    ; load region size_region
+  ER_ROM1 0x0C000000 0x00100000  {  ; load address = execution address
+   *.o (RESET, +First)
+   *(InRoot$$Sections)
+   .ANY (+RO)
+  }
+  ;Allocate the all RW section in DSRAM1
+  RW_RAM1 0x20000000 0x000010000  {  ; RW data
+   .ANY (+RW +ZI)
+  } 
+  ;Find the boundaries of the remaining free space
+  ;Please read the file header for the logic used here.
+  Heap_Bank1_Start +0 EMPTY 0x0 {}
+  Heap_Bank1_End (0x20010000) EMPTY 0x0 {}
+  
+  ;Allocations for DSRAM2
+  RW_RAM2 0x30000000 0x00008000  {
+    ; if any RW/ZI section to be allocated in DSRAM2,
+	;please add here.
+  }
+  ;Find the boundaries of the remaining free space in DSRAM2
+  ;Please read the file header for the logic used here.
+  Heap_Bank2_Start +0 EMPTY 0x0 {}
+  Heap_Bank2_End (0x30008000) EMPTY 0x0 {}
+  
+  ;Allocations for PSRAM
+  RW_RAM3 0x10000000 0x00010000  {
+     ;if any RW/ZI section to be allocated in PSRAM,
+	 ;please add here.
+  }
+  
+  ;Find the boundaries of the remaining free space in PSRAM
+  ;Please read the file header for the logic used here.
+  Heap_Bank3_Start +0 EMPTY 0x0 {}
+  Heap_Bank3_End (0x10010000) EMPTY 0x0 {}
+}
+

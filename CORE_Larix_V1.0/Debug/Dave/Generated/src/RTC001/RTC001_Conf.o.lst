@@ -1,0 +1,149 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"RTC001_Conf.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	RTC001_Handle
+  20              		.section	.rodata
+  21              		.align	2
+  24              	RTC001_Handle:
+  25 0000 01       		.byte	1
+  26 0001 00       		.byte	0
+  27 0002 FF7F     		.short	32767
+  28 0004 00       		.byte	0
+  29 0005 00       		.byte	0
+  30 0006 00       		.byte	0
+  31 0007 00       		.byte	0
+  32 0008 00       		.byte	0
+  33 0009 00       		.byte	0
+  34 000a 00       		.byte	0
+  35 000b 00       		.byte	0
+  36 000c 00       		.byte	0
+  37 000d 00       		.byte	0
+  38 000e 00       		.byte	0
+  39 000f 00       		.byte	0
+  40 0010 00       		.byte	0
+  41 0011 00       		.byte	0
+  42 0012 00       		.byte	0
+  43 0013 00       		.byte	0
+  44 0014 00000000 		.space	8
+  44      00000000 
+  45              		.global	timeptr1
+  46              		.data
+  47              		.align	2
+  50              	timeptr1:
+  51 0000 00       		.byte	0
+  52 0001 00       		.byte	0
+  53 0002 00       		.byte	0
+  54 0003 01       		.byte	1
+  55 0004 00       		.space	1
+  56 0005 01       		.byte	1
+  57 0006 B207     		.short	1970
+  58              		.text
+  59              	.Letext0:
+  60              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+  61              		.file 2 "C:\\DAVE3_workspace\\ws3.1.10\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVESupport/../../i
+  62              		.file 3 "../Dave/Generated/src/RTC001/../../inc/RTC001/../../inc/NVIC_SCU001/NVIC_SCU001.h"
+  63              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+  64              		.file 5 "../Dave/Generated/src/RTC001/RTC001_Conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 RTC001_Conf.c
+C:\Users\maan\AppData\Local\Temp\ccDnIYCM.s:24     .rodata:00000000 RTC001_Handle
+C:\Users\maan\AppData\Local\Temp\ccDnIYCM.s:21     .rodata:00000000 $d
+C:\Users\maan\AppData\Local\Temp\ccDnIYCM.s:50     .data:00000000 timeptr1
+C:\Users\maan\AppData\Local\Temp\ccDnIYCM.s:47     .data:00000000 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.RTC001.h.113.715d6fcab1863c6656b238bddd304166
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.reent.h.11.a39e4126dcf3c6afd3054e0622577bae
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.LMM001.h.45.fa2df8bae969f45df5071221ac433ffa
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.104.05371e300b30617373255b3cdb4765a2
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.stdarg.h.31.fa591a4b1df9e413e9f5b8097f9ae89d
+                           .group:00000000 wm4.Type_CM.h.61.3660c940695d7d5fef91de9c4081d0f0
+                           .group:00000000 wm4.dwc_os.h.82.db2ca40c41e2f648d146b8942e5157d9
+                           .group:00000000 wm4.dwc_otg_core_if.h.95.37e41eee47e9a4502e4044edf60ea92d
+                           .group:00000000 wm4.usbcore001_device.h.107.6c032c9c28ac6c3f4e5e24a068720cd7
+                           .group:00000000 wm4.USB.h.399.44a2bec94122294f06c4d854450494d3
+                           .group:00000000 wm4.Common.h.102.bc881ac788d1d7ce84e651cbaa40f2c2
+                           .group:00000000 wm4.Common.h.134.5069b632a0407201156f18fde915b80c
+                           .group:00000000 wm4.USBMode.h.234.0cc9e23131c025605bb7c0db3ebb8ac9
+                           .group:00000000 wm4.StdRequestType.h.93.4e19c7c655f990c2abedbb76a546fcde
+                           .group:00000000 wm4.Endpoint.h.116.4ef46b127c9047ed49fe1e0df19e09b8
+                           .group:00000000 wm4.StdDescriptors.h.120.0ce817e16dcc91b8cf4a79ba0e0e19b6
+                           .group:00000000 wm4.CDC.h.103.7ce3e4692dde29e827f8736493eef7ef
+                           .group:00000000 wm4.CDC.h.115.c83a7d6c5b6c8644b3dec6212d4ced09
+                           .group:00000000 wm4.Descriptors.h.91.5cf84c2489ee54d154cabfe9e14b5c19
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.fce01a2aa073e958cae0b1cc894db26c
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.a52fac0daa39b5f58343578312b4eb54
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.2cf6f4b7cf62c0c8f8d5baa4db880def
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.e471e519f7471a50493b6f4fe912ee0d
+                           .group:00000000 wm4.ERU001_Conf.h.69.6d7c31a774e428b1dc8770c7c31047dd
+                           .group:00000000 wm4.ERU002_Conf.h.49.47045c766c6d22ab1185285e9d568758
+                           .group:00000000 wm4.IO002_Conf.h.51.be0baad511cf66771895fab0bf90f390
+                           .group:00000000 wm4.RTC001_Conf.h.104.b6522967f566c43aad1edd57a7a63c2d
+
+NO UNDEFINED SYMBOLS

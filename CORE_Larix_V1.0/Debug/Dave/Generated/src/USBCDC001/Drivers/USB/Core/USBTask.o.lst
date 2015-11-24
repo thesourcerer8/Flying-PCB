@@ -1,0 +1,285 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"USBTask.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	USB_IsInitialized,1,1
+  20              		.comm	USB_ControlRequest,8,4
+  21              		.comm	USB_DeviceState,1,1
+  22              		.section	.text.USB_USBTask,"ax",%progbits
+  23              		.align	2
+  24              		.global	USB_USBTask
+  25              		.thumb
+  26              		.thumb_func
+  28              	USB_USBTask:
+  29              	.LFB0:
+  30              		.file 1 "../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c"
+   1:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** /*
+   2:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****              LUFA Library
+   3:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****      Copyright (C) Dean Camera, 2011.
+   4:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+   5:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   dean [at] fourwalledcubicle [dot] com
+   6:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****            www.lufa-lib.org
+   7:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** */
+   8:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+   9:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** /*
+  10:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  11:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+  12:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   Permission to use, copy, modify, distribute, and sell this
+  13:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   software and its documentation for any purpose is hereby granted
+  14:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   without fee, provided that the above copyright notice appear in
+  15:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   all copies and that both that the copyright notice and this
+  16:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   permission notice and warranty disclaimer appear in supporting
+  17:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   documentation, and that the name of the author not be used in
+  18:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   advertising or publicity pertaining to distribution of the
+  19:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   software without specific, written prior permission.
+  20:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+  21:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   The author disclaim all warranties with regard to this
+  22:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   software, including all implied warranties of merchantability
+  23:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   and fitness.  In no event shall the author be liable for any
+  24:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   special, indirect or consequential damages or any damages
+  25:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   whatsoever resulting from loss of use, data or profits, whether
+  26:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   in an action of contract, negligence or other tortious action,
+  27:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   arising out of or in connection with the use or performance of
+  28:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****   this software.
+  29:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** */
+  30:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+  31:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** /*******************************************************************************
+  32:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  Copyright (c) 2011, Infineon Technologies AG                                 **
+  33:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  All rights reserved.                                                         **
+  34:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****                                                                               **
+  35:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  Redistribution and use in source and binary forms, with or without           **
+  36:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  modification,are permitted provided that the following conditions are met:   **
+  37:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****                                                                               **
+  38:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  *Redistributions of source code must retain the above copyright notice,      **
+  39:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  this list of conditions and the following disclaimer.                        **
+  40:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  41:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  this list of conditions and the following disclaimer in the documentation    **
+  42:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  and/or other materials provided with the distribution.                       **
+  43:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  44:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  may be used to endorse or promote products derived from this software without**
+  45:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  specific prior written permission.                                           **
+  46:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****                                                                               **
+  47:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  48:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  49:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  50:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  51:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  52:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  53:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  54:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  55:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  56:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  57:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  58:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****                                                                               **
+  59:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  To improve the quality of the software, users are encouraged to share        **
+  60:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  61:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****  dave@infineon.com).                                                          **
+  62:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c ****                                                                               **
+  63:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** ********************************************************************************
+  64:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** **                                                                            **
+  65:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** **                                                                            **
+  66:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  67:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** **                                                                            **
+  68:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** ** COMPILER : Compiler Independent                                            **
+  69:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** **                                                                            **
+  70:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** ** AUTHOR : App Developer                                                     **
+  71:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** **                                                                            **
+  72:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** ** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+  73:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** **                                                                            **
+  74:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** ** MODIFICATION DATE : Nov 19, 2012                                           **
+  75:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** **                                                                            **
+  76:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** *******************************************************************************/
+  77:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+  78:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** /*******************************************************************************
+  79:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** **                       Author(s) Identity                                   **
+  80:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** ********************************************************************************
+  81:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** **                                                                            **
+  82:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** ** Initials    Name                                                           **
+  83:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** ** ---------------------------------------------------------------------------**
+  84:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** ** CM          App Developer                                                  **
+  85:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** *******************************************************************************/
+  86:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+  87:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** #define  __INCLUDE_FROM_USBTASK_C
+  88:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** #define  __INCLUDE_FROM_USB_DRIVER
+  89:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** #include "USBTask.h"
+  90:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+  91:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** volatile bool        USB_IsInitialized;
+  92:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** USB_Request_Header_t USB_ControlRequest;
+  93:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+  94:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** #if defined(USB_CAN_BE_HOST) && !defined(HOST_STATE_AS_GPIOR)
+  95:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** volatile uint8_t     USB_HostState;
+  96:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** #endif
+  97:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+  98:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** #if defined(USB_CAN_BE_DEVICE) && !defined(DEVICE_STATE_AS_GPIOR)
+  99:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** volatile uint8_t     USB_DeviceState;
+ 100:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** #endif
+ 101:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+ 102:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** void USB_USBTask(void)
+ 103:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** {
+  31              		.loc 1 103 0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 0
+  34              		@ frame_needed = 1, uses_anonymous_args = 0
+  35 0000 80B5     		push	{r7, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 00AF     		add	r7, sp, #0
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_register 7
+ 104:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 	#if defined(USB_HOST_ONLY)
+ 105:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		USB_HostTask();
+ 106:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 	#elif defined(USB_DEVICE_ONLY)
+ 107:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		USB_DeviceTask();
+  43              		.loc 1 107 0
+  44 0004 FFF7FEFF 		bl	USB_DeviceTask
+ 108:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 	#else
+ 109:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		if (USB_CurrentMode == USB_MODE_Device)
+ 110:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		  USB_DeviceTask();
+ 111:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		else if (USB_CurrentMode == USB_MODE_Host)
+ 112:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		  USB_HostTask();
+ 113:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 	#endif
+ 114:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** }
+  45              		.loc 1 114 0
+  46 0008 80BD     		pop	{r7, pc}
+  47              		.cfi_endproc
+  48              	.LFE0:
+  50 000a 00BF     		.section	.text.USB_DeviceTask,"ax",%progbits
+  51              		.align	2
+  52              		.thumb
+  53              		.thumb_func
+  55              	USB_DeviceTask:
+  56              	.LFB1:
+ 115:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+ 116:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** #if defined(USB_CAN_BE_DEVICE)
+ 117:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** static void USB_DeviceTask(void)
+ 118:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** {
+  57              		.loc 1 118 0
+  58              		.cfi_startproc
+  59              		@ args = 0, pretend = 0, frame = 8
+  60              		@ frame_needed = 1, uses_anonymous_args = 0
+  61 0000 80B5     		push	{r7, lr}
+  62              	.LCFI2:
+  63              		.cfi_def_cfa_offset 8
+  64              		.cfi_offset 7, -8
+  65              		.cfi_offset 14, -4
+  66 0002 82B0     		sub	sp, sp, #8
+  67              	.LCFI3:
+  68              		.cfi_def_cfa_offset 16
+  69 0004 00AF     		add	r7, sp, #0
+  70              	.LCFI4:
+  71              		.cfi_def_cfa_register 7
+ 119:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 	if (USB_DeviceState != DEVICE_STATE_Unattached)
+  72              		.loc 1 119 0
+  73 0006 40F20003 		movw	r3, #:lower16:USB_DeviceState
+  74 000a C0F20003 		movt	r3, #:upper16:USB_DeviceState
+  75 000e 1B78     		ldrb	r3, [r3, #0]
+  76 0010 DBB2     		uxtb	r3, r3
+  77 0012 002B     		cmp	r3, #0
+  78 0014 1AD0     		beq	.L2
+  79              	.LBB2:
+ 120:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 	{
+ 121:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		uint8_t PrevEndpoint;
+ 122:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		uint8_t PrevEndpointDir;
+ 123:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		Endpoint_GetCurrentEndpoint(&PrevEndpoint, &PrevEndpointDir);
+  80              		.loc 1 123 0
+  81 0016 07F10702 		add	r2, r7, #7
+  82 001a 07F10603 		add	r3, r7, #6
+  83 001e 1046     		mov	r0, r2
+  84 0020 1946     		mov	r1, r3
+  85 0022 FFF7FEFF 		bl	Endpoint_GetCurrentEndpoint
+ 124:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+ 125:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		Endpoint_SelectEndpoint(ENDPOINT_CONTROLEP, ENDPOINT_DIR_IN);
+  86              		.loc 1 125 0
+  87 0026 4FF00000 		mov	r0, #0
+  88 002a 4FF08001 		mov	r1, #128
+  89 002e FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 126:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+ 127:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		if (Endpoint_IsSETUPReceived())
+  90              		.loc 1 127 0
+  91 0032 FFF7FEFF 		bl	Endpoint_IsSETUPReceived
+  92 0036 0346     		mov	r3, r0
+  93 0038 002B     		cmp	r3, #0
+  94 003a 01D0     		beq	.L4
+ 128:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		  USB_Device_ProcessControlRequest();
+  95              		.loc 1 128 0
+  96 003c FFF7FEFF 		bl	USB_Device_ProcessControlRequest
+  97              	.L4:
+ 129:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 
+ 130:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 		Endpoint_SelectEndpoint(PrevEndpoint, PrevEndpointDir);
+  98              		.loc 1 130 0
+  99 0040 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 100 0042 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 101 0044 1046     		mov	r0, r2
+ 102 0046 1946     		mov	r1, r3
+ 103 0048 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 104              	.L2:
+ 105              	.LBE2:
+ 131:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** 	}
+ 132:../Dave/Generated/src/USBCDC001/Drivers/USB/Core/USBTask.c **** }
+ 106              		.loc 1 132 0
+ 107 004c 07F10807 		add	r7, r7, #8
+ 108 0050 BD46     		mov	sp, r7
+ 109 0052 80BD     		pop	{r7, pc}
+ 110              		.cfi_endproc
+ 111              	.LFE1:
+ 113              		.text
+ 114              	.Letext0:
+ 115              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 116              		.file 3 "C:\\DAVE3_workspace\\ws3.1.10\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\LIBS/types.h"
+ 117              		.file 4 "../Dave/Generated/src/USBCDC001/Drivers/USB/Core/StdRequestType.h"
+ 118              		.file 5 "../Dave/Generated/src/USBCDC001/Drivers/USB/Core/Device.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 USBTask.c
+                            *COM*:00000001 USB_IsInitialized
+                            *COM*:00000008 USB_ControlRequest
+                            *COM*:00000001 USB_DeviceState
+C:\Users\maan\AppData\Local\Temp\ccmo3NUc.s:23     .text.USB_USBTask:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccmo3NUc.s:28     .text.USB_USBTask:00000000 USB_USBTask
+C:\Users\maan\AppData\Local\Temp\ccmo3NUc.s:55     .text.USB_DeviceTask:00000000 USB_DeviceTask
+C:\Users\maan\AppData\Local\Temp\ccmo3NUc.s:51     .text.USB_DeviceTask:00000000 $t
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.stdarg.h.31.b70f21342353634f7b44d85f85f13832
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.Type_CM.h.61.3660c940695d7d5fef91de9c4081d0f0
+                           .group:00000000 wm4.USBMode.h.234.0cc9e23131c025605bb7c0db3ebb8ac9
+                           .group:00000000 wm4.StdRequestType.h.93.4e19c7c655f990c2abedbb76a546fcde
+                           .group:00000000 wm4.Endpoint.h.116.4ef46b127c9047ed49fe1e0df19e09b8
+                           .group:00000000 wm4.StdDescriptors.h.120.0ce817e16dcc91b8cf4a79ba0e0e19b6
+                           .group:00000000 wm4.dwc_os.h.82.db2ca40c41e2f648d146b8942e5157d9
+                           .group:00000000 wm4.dwc_otg_core_if.h.95.37e41eee47e9a4502e4044edf60ea92d
+                           .group:00000000 wm4.usbcore001_device.h.107.6c032c9c28ac6c3f4e5e24a068720cd7
+
+UNDEFINED SYMBOLS
+Endpoint_GetCurrentEndpoint
+Endpoint_SelectEndpoint
+Endpoint_IsSETUPReceived
+USB_Device_ProcessControlRequest
