@@ -13,10 +13,10 @@ Jzz=0.020576095;
  
 %proportional coefficient blade thrust
 bT=7.90261e-06;
-%proportional coefficient blade moment
+%proportional coefficient blade torque
 bH=1.66057e-7;
  
-%Attitude Controller design
+%system gains
 k_phi=l*bT*kPWM*sqrt(m*g/bT)/Jxx;
 k_theta=l*bT*kPWM*sqrt(m*g/bT)/Jyy;
 k_psi=bH*kPWM*sqrt(m*g/bT)/Jzz;
