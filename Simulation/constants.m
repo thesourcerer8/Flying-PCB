@@ -17,6 +17,6 @@ bT=7.90261e-06;
 bH=1.66057e-7;
  
 %system gains
-k_phi=l*bT*kPWM*sqrt(m*g/bT)/Jxx;
-k_theta=l*bT*kPWM*sqrt(m*g/bT)/Jyy;
-k_psi=bH*kPWM*sqrt(m*g/bT)/Jzz;
+k_phi=l*bT*kPWM*sqrt(m*g*bT)/Jxx;
+k_theta=l*bT*kPWM*sqrt(m*g*bT)/Jyy;
+k_psi=bH*kPWM*sqrt(m*g*bT)/Jzz;
