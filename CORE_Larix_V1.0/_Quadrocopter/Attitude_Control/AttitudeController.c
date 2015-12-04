@@ -22,7 +22,6 @@ void AngleController(float *r, float *y, int n, const float *a, const float *b, 
 
 	x[0]=b[0]*e-a[0]*(*u);
 
-	//division by 4
 	*u/=4.0;
 }
 
