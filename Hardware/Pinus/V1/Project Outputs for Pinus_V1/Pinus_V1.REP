@@ -1,0 +1,260 @@
+*************************************************************
+FileName = Pinus_V1.GBR
+AutoAperture = True
+*************************************************************
+Generating : Top Layer
+      File : Pinus_V1.GTL
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : Pinus_V1.GBL
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D15
+    D20
+    D21
+    D22
+    D24
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+*************************************************************
+
+*************************************************************
+Generating : Bottom Pad Master
+      File : Pinus_V1.GPB
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D15
+    D32
+    D33
+    D34
+    D35
+    D37
+    D38
+*************************************************************
+
+*************************************************************
+Generating : Top Pad Master
+      File : Pinus_V1.GPT
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+    D19
+    D32
+    D33
+    D34
+    D35
+*************************************************************
+
+*************************************************************
+Generating : Top Overlay
+      File : Pinus_V1.GTO
+
+    Adding Layer      : Top Overlay
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D32
+    D46
+    D47
+    D48
+*************************************************************
+
+*************************************************************
+Generating : Top Paste
+      File : Pinus_V1.GTP
+
+    Adding Layer      : Top Paste
+
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+    D16
+    D17
+    D18
+    D19
+    D32
+*************************************************************
+
+*************************************************************
+Generating : Top Solder
+      File : Pinus_V1.GTS
+
+    Adding Layer      : Top Solder
+
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D32
+    D49
+    D50
+    D51
+    D52
+    D53
+    D54
+    D55
+    D56
+    D57
+    D58
+    D59
+    D60
+    D61
+    D62
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : Pinus_V1.GBS
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D32
+    D54
+    D59
+    D60
+    D61
+    D62
+    D63
+    D64
+*************************************************************
+
+*************************************************************
+Generating : Bottom Paste
+      File : Pinus_V1.GBP
+
+    Adding Layer      : Bottom Paste
+
+    Adding Layer      : Mechanical 1
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D15
+    D32
+    D37
+    D38
+*************************************************************
+
+*************************************************************
+Generating : Bottom Overlay
+      File : Pinus_V1.GBO
+
+    Adding Layer      : Bottom Overlay
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+    D32
+    D47
+    D48
+    D65
+*************************************************************
+
