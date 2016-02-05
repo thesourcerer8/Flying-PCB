@@ -1,0 +1,95 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"NVIC002.c"
+  14              		.section	.text.NVIC002_Init,"ax",%progbits
+  15              		.align	1
+  16              		.global	NVIC002_Init
+  17              		.code	16
+  18              		.thumb_func
+  20              	NVIC002_Init:
+  21 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  22 0002 1C4B     		ldr	r3, .L6
+  23 0004 1B68     		ldr	r3, [r3]
+  24 0006 1A78     		ldrb	r2, [r3]
+  25 0008 5D78     		ldrb	r5, [r3, #1]
+  26 000a 50B2     		sxtb	r0, r2
+  27 000c AD01     		lsl	r5, r5, #6
+  28 000e 0028     		cmp	r0, #0
+  29 0010 14DA     		bge	.L2
+  30 0012 0F21     		mov	r1, #15
+  31 0014 1140     		and	r1, r2
+  32 0016 0839     		sub	r1, r1, #8
+  33 0018 8808     		lsr	r0, r1, #2
+  34 001a 174C     		ldr	r4, .L6+4
+  35 001c 8600     		lsl	r6, r0, #2
+  36 001e 0320     		mov	r0, #3
+  37 0020 3719     		add	r7, r6, r4
+  38 0022 0240     		and	r2, r0
+  39 0024 FF24     		mov	r4, #255
+  40 0026 7968     		ldr	r1, [r7, #4]
+  41 0028 8240     		lsl	r2, r2, r0
+  42 002a 261C     		mov	r6, r4
+  43 002c 9640     		lsl	r6, r6, r2
+  44 002e 2C40     		and	r4, r5
+  45 0030 B143     		bic	r1, r6
+  46 0032 9440     		lsl	r4, r4, r2
+  47 0034 0D1C     		mov	r5, r1
+  48 0036 2543     		orr	r5, r4
+  49 0038 7D60     		str	r5, [r7, #4]
+  50 003a 10E0     		b	.L3
+  51              	.L2:
+  52 003c 8408     		lsr	r4, r0, #2
+  53 003e 0327     		mov	r7, #3
+  54 0040 0E49     		ldr	r1, .L6+8
+  55 0042 C034     		add	r4, r4, #192
+  56 0044 A000     		lsl	r0, r4, #2
+  57 0046 3A40     		and	r2, r7
+  58 0048 FF24     		mov	r4, #255
+  59 004a BA40     		lsl	r2, r2, r7
+  60 004c 4658     		ldr	r6, [r0, r1]
+  61 004e 271C     		mov	r7, r4
+  62 0050 9740     		lsl	r7, r7, r2
+  63 0052 BE43     		bic	r6, r7
+  64 0054 2C40     		and	r4, r5
+  65 0056 9440     		lsl	r4, r4, r2
+  66 0058 321C     		mov	r2, r6
+  67 005a 2243     		orr	r2, r4
+  68 005c 4250     		str	r2, [r0, r1]
+  69              	.L3:
+  70 005e DA78     		ldrb	r2, [r3, #3]
+  71 0060 012A     		cmp	r2, #1
+  72 0062 05D1     		bne	.L1
+  73 0064 1F78     		ldrb	r7, [r3]
+  74 0066 1F23     		mov	r3, #31
+  75 0068 3B40     		and	r3, r7
+  76 006a 0449     		ldr	r1, .L6+8
+  77 006c 9A40     		lsl	r2, r2, r3
+  78 006e 0A60     		str	r2, [r1]
+  79              	.L1:
+  80              		@ sp needed for prologue
+  81 0070 F0BD     		pop	{r4, r5, r6, r7, pc}
+  82              	.L7:
+  83 0072 C046     		.align	2
+  84              	.L6:
+  85 0074 00000000 		.word	NVIC002_HandleArray
+  86 0078 18ED00E0 		.word	-536810216
+  87 007c 00E100E0 		.word	-536813312
+  89              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 NVIC002.c
+C:\Users\maan\AppData\Local\Temp\ccphJYRh.s:15     .text.NVIC002_Init:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccphJYRh.s:20     .text.NVIC002_Init:00000000 NVIC002_Init
+C:\Users\maan\AppData\Local\Temp\ccphJYRh.s:85     .text.NVIC002_Init:00000074 $d
+
+UNDEFINED SYMBOLS
+NVIC002_HandleArray

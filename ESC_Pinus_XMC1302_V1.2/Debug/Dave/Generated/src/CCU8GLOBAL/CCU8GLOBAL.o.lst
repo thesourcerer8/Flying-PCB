@@ -1,0 +1,418 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"CCU8GLOBAL.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.CCU8GLOBAL_Init,"ax",%progbits
+  18              		.align	2
+  19              		.global	CCU8GLOBAL_Init
+  20              		.code	16
+  21              		.thumb_func
+  23              	CCU8GLOBAL_Init:
+  24              	.LFB38:
+  25              		.file 1 "../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c"
+   1:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /*CODE_BLOCK_BEGIN[CCU8GLOBAL.c]*/
+   2:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /*******************************************************************************
+   3:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  Copyright (c) 2014, Infineon Technologies AG                                 **
+   4:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  All rights reserved.                                                         **
+   5:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****                                                                               **
+   6:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  Redistribution and use in source and binary forms, with or without           **
+   7:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  modification,are permitted provided that the following conditions are met:   **
+   8:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****                                                                               **
+   9:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  *Redistributions of source code must retain the above copyright notice,      **
+  10:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  this list of conditions and the following disclaimer.                        **
+  11:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  12:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  this list of conditions and the following disclaimer in the documentation    **
+  13:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  and/or other materials provided with the distribution.                       **
+  14:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  15:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  may be used to endorse or promote products derived from this software without**
+  16:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  specific prior written permission.                                           **
+  17:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****                                                                               **
+  18:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  19:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  20:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  21:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  22:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  23:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  24:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  25:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  26:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  27:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  28:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  29:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****                                                                               **
+  30:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  To improve the quality of the software, users are encouraged to share        **
+  31:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  32:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  dave@infineon.com).                                                          **
+  33:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****                                                                               **
+  34:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ********************************************************************************
+  35:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ********************************************************************************
+  36:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Filename : CCU8GLOBAL.c                                                    **
+  37:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+  38:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** PLATFORM : Infineon XMC4000 / XMC1300 Series                               **
+  39:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+  40:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** COMPILER : Compiler Independent                                            **
+  41:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+  42:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** AUTHOR   : App Developer                                                   **
+  43:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+  44:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** MAY BE CHANGED BY USER [Yes/No]: No                                        **
+  45:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+  46:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** MODIFICATION DATE : Aug  12, 2014                                          **
+  47:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+  48:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** *******************************************************************************/
+  49:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /**********************   Version History   ************************************
+  50:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Date      Version      Dev   Remarks
+  51:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **
+  52:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** V1.0.12   12-08-2014   JAI   Redundant call to CLK001_Init(); CLK002_Init();
+  53:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                              is removed in CCU8GLOBAL_Init() api.
+  54:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **
+  55:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** V1.0.10   26-11-2013   JBT   Updated after for fixed static file changes.
+  56:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                              Coding guidelines followed, MISRA checks done 
+  57:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                              New documentation template related  changes done
+  58:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** V1.0.8    22-01-2013   BKB   Disabling of Clock gating added for XMC1xxx 
+  59:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                              devices
+  60:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** V1.0.4    17-09-2012   BKB   Removed the function like macro to abide coding
+  61:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                              rules. Disabling of Clock gating added for 
+  62:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                              XMC44 devices
+  63:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** V1.0.0    22-03-2012   BKB   Initial Version
+  64:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** *******************************************************************************/
+  65:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /*******************************************************************************
+  66:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **  Developer     Name
+  67:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **----------------------------------------------------------------------------
+  68:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **  JBT           Jubin Thomas
+  69:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **  BKB           Balaji Kurra Bala 
+  70:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** *******************************************************************************/
+  71:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /**
+  72:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  * @file CCU8GLOBAL.c
+  73:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  *
+  74:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  * @brief  CCU8GLOBAL  App implementation source file.
+  75:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  *
+  76:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****  **/
+  77:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 
+  78:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /*******************************************************************************
+  79:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                      Include Files                                         **
+  80:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** *******************************************************************************/
+  81:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** #include "../../inc/CCU8GLOBAL/CCU8GLOBAL.h"
+  82:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 
+  83:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /*******************************************************************************
+  84:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                 Public Macro declarations                                  **
+  85:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** *******************************************************************************/
+  86:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 
+  87:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** #define CCU8GLOBAL_PASSWORD1 0x000000C0
+  88:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** #define CCU8GLOBAL_PASSWORD2 0x000000C3
+  89:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 
+  90:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /*******************************************************************************
+  91:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                 Public Function declarations                              **
+  92:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** *******************************************************************************/
+  93:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 
+  94:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** static void CCU8GLOBAL_lInit(const CCU8GLOBAL_HandleType* Handle);
+  95:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 
+  96:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /*******************************************************************************
+  97:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                 Public Function declarations                              **
+  98:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** *******************************************************************************/
+  99:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 
+ 100:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /*******************************************************************************
+ 101:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Syntax          : void CCU8GLOBAL_Init(void)                               **
+ 102:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 103:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Requirement ID  :                                                          **
+ 104:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 105:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Sync /Async     : Synchronous                                              **
+ 106:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 107:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Reentrant       : Reentrant                                                **
+ 108:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 109:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Parameters(IN)  : None                                                     **
+ 110:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 111:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Parameters(OUT) : None                                                     **
+ 112:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 113:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Return value    : None                                                     **
+ 114:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 115:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Description     : Driver Module Initialization function                    **
+ 116:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                   This service shall initialize the configured CCU slice   **
+ 117:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                   and provide the clock signal for the upper layer apps.   **
+ 118:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** *******************************************************************************/
+ 119:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** void CCU8GLOBAL_Init(void)
+ 120:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** {
+  26              		.loc 1 120 0
+  27              		.cfi_startproc
+  28 0000 80B5     		push	{r7, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 7, -8
+  32              		.cfi_offset 14, -4
+  33 0002 82B0     		sub	sp, sp, #8
+  34              	.LCFI1:
+  35              		.cfi_def_cfa_offset 16
+  36 0004 00AF     		add	r7, sp, #0
+  37              	.LCFI2:
+  38              		.cfi_def_cfa_register 7
+ 121:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****   uint32_t Inst;
+ 122:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****   static uint32_t isInitialized = (uint32_t)0U;
+ 123:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     
+ 124:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****   if(!isInitialized)
+  39              		.loc 1 124 0
+  40 0006 0D4B     		ldr	r3, .L5
+  41 0008 1B68     		ldr	r3, [r3]
+  42 000a 002B     		cmp	r3, #0
+  43 000c 12D1     		bne	.L1
+ 125:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****   {   
+ 126:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	for(Inst = 0U; Inst < CCU8GLOBAL_INSTANCES; Inst++)
+  44              		.loc 1 126 0
+  45 000e 0023     		mov	r3, #0
+  46 0010 7B60     		str	r3, [r7, #4]
+  47 0012 09E0     		b	.L3
+  48              	.L4:
+ 127:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     {
+ 128:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	    /* Call CCU8 local Init function with all handles configured*/
+ 129:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	    CCU8GLOBAL_lInit(CCU8GLOBAL_HandleArray[Inst]);
+  49              		.loc 1 129 0 discriminator 2
+  50 0014 0A4B     		ldr	r3, .L5+4
+  51 0016 7A68     		ldr	r2, [r7, #4]
+  52 0018 9200     		lsl	r2, r2, #2
+  53 001a D358     		ldr	r3, [r2, r3]
+  54 001c 181C     		mov	r0, r3
+  55 001e FFF7FEFF 		bl	CCU8GLOBAL_lInit
+ 126:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	for(Inst = 0U; Inst < CCU8GLOBAL_INSTANCES; Inst++)
+  56              		.loc 1 126 0 discriminator 2
+  57 0022 7B68     		ldr	r3, [r7, #4]
+  58 0024 0133     		add	r3, r3, #1
+  59 0026 7B60     		str	r3, [r7, #4]
+  60              	.L3:
+ 126:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	for(Inst = 0U; Inst < CCU8GLOBAL_INSTANCES; Inst++)
+  61              		.loc 1 126 0 is_stmt 0 discriminator 1
+  62 0028 7B68     		ldr	r3, [r7, #4]
+  63 002a 002B     		cmp	r3, #0
+  64 002c F2D0     		beq	.L4
+ 130:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     }
+ 131:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****      
+ 132:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     /* Update the initialization count variable for restricting multiple
+ 133:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****      * initialization by the user*/ 
+ 134:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	isInitialized = (uint32_t)1U;  
+  65              		.loc 1 134 0 is_stmt 1
+  66 002e 034B     		ldr	r3, .L5
+  67 0030 0122     		mov	r2, #1
+  68 0032 1A60     		str	r2, [r3]
+  69              	.L1:
+ 135:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****   }  
+ 136:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** }
+  70              		.loc 1 136 0
+  71 0034 BD46     		mov	sp, r7
+  72 0036 02B0     		add	sp, sp, #8
+  73              		@ sp needed for prologue
+  74 0038 80BD     		pop	{r7, pc}
+  75              	.L6:
+  76 003a C046     		.align	2
+  77              	.L5:
+  78 003c 00000000 		.word	isInitialized.5542
+  79 0040 00000000 		.word	CCU8GLOBAL_HandleArray
+  80              		.cfi_endproc
+  81              	.LFE38:
+  83              		.section	.text.CCU8GLOBAL_lInit,"ax",%progbits
+  84              		.align	2
+  85              		.code	16
+  86              		.thumb_func
+  88              	CCU8GLOBAL_lInit:
+  89              	.LFB39:
+ 137:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 
+ 138:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** /*******************************************************************************
+ 139:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Syntax          : void CCU8GLOBAL_lInit(const CCU8GLOBAL_HandleType*       **
+ 140:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                 Handle)    **
+ 141:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 142:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Requirement ID  :                                                          **
+ 143:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 144:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Sync /Async     : Synchronous                                              **
+ 145:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 146:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Reentrant       : Reentrant                                                **
+ 147:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 148:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Parameters(IN)  : None                                                     **
+ 149:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 150:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Parameters(OUT) : None                                                     **
+ 151:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 152:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Return value    : None                                                     **
+ 153:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** **                                                                            **
+ 154:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** ** Description     : Local function which does the actual intialization       **
+ 155:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** *******************************************************************************/
+ 156:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** static void CCU8GLOBAL_lInit(const CCU8GLOBAL_HandleType* Handle)
+ 157:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** {   
+  90              		.loc 1 157 0
+  91              		.cfi_startproc
+  92 0000 90B5     		push	{r4, r7, lr}
+  93              	.LCFI3:
+  94              		.cfi_def_cfa_offset 12
+  95              		.cfi_offset 4, -12
+  96              		.cfi_offset 7, -8
+  97              		.cfi_offset 14, -4
+  98 0002 83B0     		sub	sp, sp, #12
+  99              	.LCFI4:
+ 100              		.cfi_def_cfa_offset 24
+ 101 0004 00AF     		add	r7, sp, #0
+ 102              	.LCFI5:
+ 103              		.cfi_def_cfa_register 7
+ 104 0006 7860     		str	r0, [r7, #4]
+ 158:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	
+ 159:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     #if (UC_FAMILY == XMC4)      
+ 160:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	/* Enable clock gating for XMC44 and XMC42 devices */
+ 161:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	#if((__TARGET_DEVICE__ == XMC44)||(__TARGET_DEVICE__ == XMC42) \
+ 162:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	                                ||(__TARGET_DEVICE__ == XMC41))
+ 163:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     SET_BIT(SCU_CLK->CGATCLR0, Handle->ClockGating_Pos);
+ 164:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     #endif 
+ 165:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****    
+ 166:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     /* De-Assert the peripheral reset for XMC4x devices*/
+ 167:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     RESET001_DeassertReset(Handle->PeriphResetNum);    
+ 168:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     #endif
+ 169:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     
+ 170:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     
+ 171:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     #if ( __TARGET_DEVICE__ == XMC13 )
+ 172:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     /* Wait until the clock gating is not set*/
+ 173:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     if(!( (uint32_t)SCU_CLK->CGATCLR0 & 
+ 105              		.loc 1 173 0
+ 106 0008 174B     		ldr	r3, .L10
+ 107 000a 1A69     		ldr	r2, [r3, #16]
+ 174:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     	   (uint32_t)Handle->ClockGating_Pos))
+ 108              		.loc 1 174 0
+ 109 000c 7B68     		ldr	r3, [r7, #4]
+ 110 000e 5B68     		ldr	r3, [r3, #4]
+ 173:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     if(!( (uint32_t)SCU_CLK->CGATCLR0 & 
+ 111              		.loc 1 173 0
+ 112 0010 1340     		and	r3, r2
+ 113 0012 1DD1     		bne	.L8
+ 175:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     { 
+ 176:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****        /* Set mode field in Password register to remove bit protection*/
+ 177:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****        SCU_GENERAL->PASSWD = (uint32_t)CCU8GLOBAL_PASSWORD1;
+ 114              		.loc 1 177 0
+ 115 0014 154B     		ldr	r3, .L10+4
+ 116 0016 C022     		mov	r2, #192
+ 117 0018 5A62     		str	r2, [r3, #36]
+ 178:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****        /* */
+ 179:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****        WR_REG(SCU_CLK->CLKCR, SCU_CLK_CLKCR_CNTADJ_Msk, 
+ 118              		.loc 1 179 0
+ 119 001a 134B     		ldr	r3, .L10
+ 120 001c 124A     		ldr	r2, .L10
+ 121 001e 1268     		ldr	r2, [r2]
+ 122 0020 1349     		ldr	r1, .L10+8
+ 123 0022 0A43     		orr	r2, r1
+ 124 0024 1A60     		str	r2, [r3]
+ 180:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 			                   SCU_CLK_CLKCR_CNTADJ_Pos,CLK002_DELAYCNT);
+ 181:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****        /* Enable clock gating for XMC13 based devices */
+ 182:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****        SET_BIT(SCU_CLK->CGATCLR0, Handle->ClockGating_Pos);
+ 125              		.loc 1 182 0
+ 126 0026 104B     		ldr	r3, .L10
+ 127 0028 0F4A     		ldr	r2, .L10
+ 128 002a 1169     		ldr	r1, [r2, #16]
+ 129 002c 7A68     		ldr	r2, [r7, #4]
+ 130 002e 5268     		ldr	r2, [r2, #4]
+ 131 0030 0120     		mov	r0, #1
+ 132 0032 041C     		mov	r4, r0
+ 133 0034 9440     		lsl	r4, r4, r2
+ 134 0036 221C     		mov	r2, r4
+ 135 0038 0A43     		orr	r2, r1
+ 136 003a 1A61     		str	r2, [r3, #16]
+ 183:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****        /* Wait until VDDC is not too low and the fractional divider
+ 184:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****          input clock is running at the targeted frequency */
+ 185:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****        while ((uint32_t)SCU_CLK->CLKCR & (uint32_t)SCU_CLK_CLKCR_VDDC2LOW_Msk)
+ 137              		.loc 1 185 0
+ 138 003c C046     		mov	r8, r8
+ 139              	.L9:
+ 140              		.loc 1 185 0 is_stmt 0 discriminator 1
+ 141 003e 0A4B     		ldr	r3, .L10
+ 142 0040 1A68     		ldr	r2, [r3]
+ 143 0042 8023     		mov	r3, #128
+ 144 0044 DB05     		lsl	r3, r3, #23
+ 145 0046 1340     		and	r3, r2
+ 146 0048 F9D1     		bne	.L9
+ 186:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	   {}
+ 187:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****        /* Set mode field in Password register to disable protected access*/
+ 188:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	   SCU_GENERAL->PASSWD = (uint32_t)CCU8GLOBAL_PASSWORD2;
+ 147              		.loc 1 188 0 is_stmt 1
+ 148 004a 084B     		ldr	r3, .L10+4
+ 149 004c C322     		mov	r2, #195
+ 150 004e 5A62     		str	r2, [r3, #36]
+ 151              	.L8:
+ 189:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** 	}
+ 190:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     /* */
+ 191:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     #endif
+ 192:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     
+ 193:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     /* Set the Pre-scalar run bit */
+ 194:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c ****     SET_BIT(Handle->CC8yKernRegsPtr->GIDLC,CCU8_GIDLC_SPRB_Pos);
+ 152              		.loc 1 194 0
+ 153 0050 7B68     		ldr	r3, [r7, #4]
+ 154 0052 1B68     		ldr	r3, [r3]
+ 155 0054 7A68     		ldr	r2, [r7, #4]
+ 156 0056 1268     		ldr	r2, [r2]
+ 157 0058 D268     		ldr	r2, [r2, #12]
+ 158 005a 8021     		mov	r1, #128
+ 159 005c 4900     		lsl	r1, r1, #1
+ 160 005e 0A43     		orr	r2, r1
+ 161 0060 DA60     		str	r2, [r3, #12]
+ 195:../Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c **** }
+ 162              		.loc 1 195 0
+ 163 0062 BD46     		mov	sp, r7
+ 164 0064 03B0     		add	sp, sp, #12
+ 165              		@ sp needed for prologue
+ 166 0066 90BD     		pop	{r4, r7, pc}
+ 167              	.L11:
+ 168              		.align	2
+ 169              	.L10:
+ 170 0068 00030140 		.word	1073808128
+ 171 006c 00000140 		.word	1073807360
+ 172 0070 0000F03F 		.word	1072693248
+ 173              		.cfi_endproc
+ 174              	.LFE39:
+ 176              		.bss
+ 177              		.align	2
+ 178              	isInitialized.5542:
+ 179 0000 00000000 		.space	4
+ 180              		.text
+ 181              	.Letext0:
+ 182              		.file 2 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC1300_series/Include/XMC1300.h"
+ 183              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 184              		.file 4 "../Dave/Generated/src/CCU8GLOBAL/../../inc/CCU8GLOBAL/CCU8GLOBAL.h"
+ 185              		.file 5 "../Dave/Generated/src/CCU8GLOBAL/../../inc/CCU8GLOBAL/../../inc/CCU8GLOBAL/CCU8GLOBAL_Ext
+DEFINED SYMBOLS
+                            *ABS*:00000000 CCU8GLOBAL.c
+C:\Users\maan\AppData\Local\Temp\ccS0D0Wf.s:18     .text.CCU8GLOBAL_Init:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccS0D0Wf.s:23     .text.CCU8GLOBAL_Init:00000000 CCU8GLOBAL_Init
+C:\Users\maan\AppData\Local\Temp\ccS0D0Wf.s:88     .text.CCU8GLOBAL_lInit:00000000 CCU8GLOBAL_lInit
+C:\Users\maan\AppData\Local\Temp\ccS0D0Wf.s:78     .text.CCU8GLOBAL_Init:0000003c $d
+C:\Users\maan\AppData\Local\Temp\ccS0D0Wf.s:178    .bss:00000000 isInitialized.5542
+C:\Users\maan\AppData\Local\Temp\ccS0D0Wf.s:84     .text.CCU8GLOBAL_lInit:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccS0D0Wf.s:170    .text.CCU8GLOBAL_lInit:00000068 $d
+C:\Users\maan\AppData\Local\Temp\ccS0D0Wf.s:177    .bss:00000000 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.665d63c3c957c91c5ed795826dcbc088
+                           .group:00000000 wm4.uc_id.h.35.f852fba3565a132d8ed947977fab9fbc
+                           .group:00000000 wm4.XMC1300.h.45.4ee692c6c98aa9fc42e2abbc732052b9
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.core_cm0.h.135.ca70469f87e143609670bb393bfa6518
+                           .group:00000000 wm4.XMC1000_RomFunctionTable.h.31.6d9a94465618f31b040dc9cea9a47ad7
+                           .group:00000000 wm4.XMC1300.h.126.871a37eeeb3f6a078f5ddf5efd64103f
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.383e3edbb9cbf6e538f7c1532ef623c1
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.1aa717522e337383e1234be386036b7c
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.a52fac0daa39b5f58343578312b4eb54
+                           .group:00000000 wm4.IO004.h.53.442ea5eb47ad9eedc675253aa35f3107
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.f334402b2e237110b77f625dfc27af0e
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.00b91c10e79f81ab4aec2120d8519584
+                           .group:00000000 wm4.CCU8GLOBAL_Conf.h.82.76c6b1bf357180d1e8ea1f462a66deb8
+
+UNDEFINED SYMBOLS
+CCU8GLOBAL_HandleArray

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ProjectConfig>
+    <CodeGenerate>
+        <JETFileMap/>
+    </CodeGenerate>
+    <ResourceReserve/>
+    <Solver>
+        <SolverBndMap>
+            <BindMap MUri="peripheral/usic/0/channel/0" Proxy="app/uart001/0/channel"/>
+            <BindMap MUri="peripheral/scu/0/ccu/clkgating/vadcshs" Proxy="app/clk002/0/clkgating_vadcshs"/>
+            <BindMap MUri="peripheral/scu/0/ccu/clkgating/usic/0" Proxy="app/clk002/0/clkgating_usic"/>
+            <BindMap MUri="peripheral/vadc/0/global" Proxy="app/adcglob001/0/global"/>
+            <BindMap MUri="peripheral/ccu4/0/global" Proxy="app/ccu4global/0/global"/>
+            <BindMap MUri="peripheral/scu/0/dco/2" Proxy="app/clk002/0/dco_uri"/>
+            <BindMap MUri="peripheral/scu/0/ccu/clkgating/ccu8/0" Proxy="app/clk002/0/clkgating_ccu8"/>
+            <BindMap MUri="peripheral/scu/0/ccu/clkgating/wdt" Proxy="app/clk002/0/clkgating_wdt"/>
+            <BindMap MUri="peripheral/scu/0/ccu/clkgating/rtc" Proxy="app/clk002/0/clkgating_rtc"/>
+            <BindMap MUri="peripheral/scu/0/ccu/clkgating/ccu4/0" Proxy="app/clk002/0/clkgating_ccu4"/>
+            <BindMap MUri="peripheral/scu/0/ccu/config" Proxy="app/clk002/0/clk_uri"/>
+            <BindMap MUri="port/p/1/pad/5" Proxy="app/uart001/0/uart_txpin"/>
+            <BindMap MUri="peripheral/ccu8/0/global" Proxy="app/ccu8global/0/global"/>
+            <BindMap MUri="peripheral/scu/0/ccu/clkgating/math" Proxy="app/clk002/0/clkgating_math"/>
+            <BindMap MUri="port/p/1/pad/4" Proxy="app/uart001/0/uart_rxpin"/>
+            <BindMap MUri="peripheral/scu/0/ccu/clkgating/bccu/0" Proxy="app/clk002/0/clkgating_bccu"/>
+            <BindMap MUri="port/p/1/pad/1" Proxy="app/io004/1/pin"/>
+            <BindMap MUri="peripheral/cpu/0/nvic/interrupt/9" Proxy="app/nvic002/0/nvicnode"/>
+            <BindMap MUri="peripheral/vadc/0/global_limits" Proxy="app/adcglob001/0/limit"/>
+            <BindMap MUri="port/p/1/pad/0" Proxy="app/io004/0/pin"/>
+        </SolverBndMap>
+    </Solver>
+</ProjectConfig>

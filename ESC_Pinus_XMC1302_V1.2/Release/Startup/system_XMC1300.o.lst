@@ -1,0 +1,72 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"system_XMC1300.c"
+  14              		.global	__aeabi_uidiv
+  15              		.section	.text.SystemCoreClockUpdate,"ax",%progbits
+  16              		.align	1
+  17              		.global	SystemCoreClockUpdate
+  18              		.code	16
+  19              		.thumb_func
+  21              	SystemCoreClockUpdate:
+  22 0000 094A     		ldr	r2, .L5
+  23 0002 10B5     		push	{r4, lr}
+  24 0004 1368     		ldr	r3, [r2]
+  25 0006 094C     		ldr	r4, .L5+4
+  26 0008 1804     		lsl	r0, r3, #16
+  27 000a 030E     		lsr	r3, r0, #24
+  28 000c 1168     		ldr	r1, [r2]
+  29 000e 08D0     		beq	.L2
+  30 0010 1802     		lsl	r0, r3, #8
+  31 0012 CBB2     		uxtb	r3, r1
+  32 0014 C118     		add	r1, r0, r3
+  33 0016 0648     		ldr	r0, .L5+8
+  34 0018 FFF7FEFF 		bl	__aeabi_uidiv
+  35 001c 4100     		lsl	r1, r0, #1
+  36 001e 2160     		str	r1, [r4]
+  37 0020 01E0     		b	.L1
+  38              	.L2:
+  39 0022 044A     		ldr	r2, .L5+12
+  40 0024 2260     		str	r2, [r4]
+  41              	.L1:
+  42              		@ sp needed for prologue
+  43 0026 10BD     		pop	{r4, pc}
+  44              	.L6:
+  45              		.align	2
+  46              	.L5:
+  47 0028 00030140 		.word	1073808128
+  48 002c 00000000 		.word	SystemCoreClock
+  49 0030 000024F4 		.word	-198967296
+  50 0034 0048E801 		.word	32000000
+  52              		.section	.text.SystemInit,"ax",%progbits
+  53              		.align	1
+  54              		.global	SystemInit
+  55              		.code	16
+  56              		.thumb_func
+  58              	SystemInit:
+  59 0000 08B5     		push	{r3, lr}
+  60 0002 FFF7FEFF 		bl	SystemCoreClockUpdate
+  61              		@ sp needed for prologue
+  62 0006 08BD     		pop	{r3, pc}
+  64              		.comm	SystemCoreClock,4,4
+  65              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 system_XMC1300.c
+C:\Users\maan\AppData\Local\Temp\ccNAACLl.s:16     .text.SystemCoreClockUpdate:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccNAACLl.s:21     .text.SystemCoreClockUpdate:00000000 SystemCoreClockUpdate
+C:\Users\maan\AppData\Local\Temp\ccNAACLl.s:47     .text.SystemCoreClockUpdate:00000028 $d
+                            *COM*:00000004 SystemCoreClock
+C:\Users\maan\AppData\Local\Temp\ccNAACLl.s:53     .text.SystemInit:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccNAACLl.s:58     .text.SystemInit:00000000 SystemInit
+
+UNDEFINED SYMBOLS
+__aeabi_uidiv

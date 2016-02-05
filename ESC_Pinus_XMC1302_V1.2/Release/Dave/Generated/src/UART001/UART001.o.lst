@@ -1,0 +1,908 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"UART001.c"
+  14              		.section	.text.UART001_lInit,"ax",%progbits
+  15              		.align	1
+  16              		.global	UART001_lInit
+  17              		.code	16
+  18              		.thumb_func
+  20              	UART001_lInit:
+  21 0000 0368     		ldr	r3, [r0]
+  22 0002 0222     		mov	r2, #2
+  23 0004 196C     		ldr	r1, [r3, #64]
+  24 0006 70B5     		push	{r4, r5, r6, lr}
+  25 0008 9143     		bic	r1, r2
+  26 000a 1964     		str	r1, [r3, #64]
+  27 000c DD68     		ldr	r5, [r3, #12]
+  28 000e 0324     		mov	r4, #3
+  29 0010 2543     		orr	r5, r4
+  30 0012 DD60     		str	r5, [r3, #12]
+  31 0014 1E69     		ldr	r6, [r3, #16]
+  32 0016 8021     		mov	r1, #128
+  33 0018 0D02     		lsl	r5, r1, #8
+  34 001a 3543     		orr	r5, r6
+  35 001c 1D61     		str	r5, [r3, #16]
+  36 001e 068D     		ldrh	r6, [r0, #40]
+  37 0020 1C69     		ldr	r4, [r3, #16]
+  38 0022 B105     		lsl	r1, r6, #22
+  39 0024 8D0D     		lsr	r5, r1, #22
+  40 0026 2543     		orr	r5, r4
+  41 0028 061C     		mov	r6, r0
+  42 002a 1D61     		str	r5, [r3, #16]
+  43 002c 3036     		add	r6, r6, #48
+  44 002e 3178     		ldrb	r1, [r6]
+  45 0030 C026     		mov	r6, #192
+  46 0032 0D02     		lsl	r5, r1, #8
+  47 0034 818D     		ldrh	r1, [r0, #44]
+  48 0036 9640     		lsl	r6, r6, r2
+  49 0038 3540     		and	r5, r6
+  50 003a 8E02     		lsl	r6, r1, #10
+  51 003c F821     		mov	r1, #248
+  52 003e C901     		lsl	r1, r1, #7
+  53 0040 5C69     		ldr	r4, [r3, #20]
+  54 0042 3140     		and	r1, r6
+  55 0044 2943     		orr	r1, r5
+  56 0046 2143     		orr	r1, r4
+  57 0048 448D     		ldrh	r4, [r0, #42]
+  58 004a 394D     		ldr	r5, .L21
+  59 004c 2604     		lsl	r6, r4, #16
+  60 004e 2E40     		and	r6, r5
+  61 0050 3143     		orr	r1, r6
+  62 0052 5961     		str	r1, [r3, #20]
+  63 0054 5C6B     		ldr	r4, [r3, #52]
+  64 0056 8121     		mov	r1, #129
+  65 0058 4E00     		lsl	r6, r1, #1
+  66 005a 2643     		orr	r6, r4
+  67 005c 5E63     		str	r6, [r3, #52]
+  68 005e 818B     		ldrh	r1, [r0, #28]
+  69 0060 FC25     		mov	r5, #252
+  70 0062 0E04     		lsl	r6, r1, #16
+  71 0064 AD03     		lsl	r5, r5, #14
+  72 0066 3540     		and	r5, r6
+  73 0068 F026     		mov	r6, #240
+  74 006a 3605     		lsl	r6, r6, #20
+  75 006c 0906     		lsl	r1, r1, #24
+  76 006e 5C6B     		ldr	r4, [r3, #52]
+  77 0070 3140     		and	r1, r6
+  78 0072 2943     		orr	r1, r5
+  79 0074 2143     		orr	r1, r4
+  80 0076 5963     		str	r1, [r3, #52]
+  81 0078 9C6B     		ldr	r4, [r3, #56]
+  82 007a A025     		mov	r5, #160
+  83 007c E900     		lsl	r1, r5, #3
+  84 007e 2143     		orr	r1, r4
+  85 0080 9963     		str	r1, [r3, #56]
+  86 0082 457D     		ldrb	r5, [r0, #21]
+  87 0084 DE6B     		ldr	r6, [r3, #60]
+  88 0086 6900     		lsl	r1, r5, #1
+  89 0088 0124     		mov	r4, #1
+  90 008a 2643     		orr	r6, r4
+  91 008c 0A40     		and	r2, r1
+  92 008e 3243     		orr	r2, r6
+  93 0090 C68D     		ldrh	r6, [r0, #46]
+  94 0092 F825     		mov	r5, #248
+  95 0094 3402     		lsl	r4, r6, #8
+  96 0096 6901     		lsl	r1, r5, #5
+  97 0098 2140     		and	r1, r4
+  98 009a 0A43     		orr	r2, r1
+  99 009c DA63     		str	r2, [r3, #60]
+ 100 009e 421D     		add	r2, r0, #5
+ 101 00a0 D67F     		ldrb	r6, [r2, #31]
+ 102 00a2 002E     		cmp	r6, #0
+ 103 00a4 03D0     		beq	.L2
+ 104 00a6 DC6B     		ldr	r4, [r3, #60]
+ 105 00a8 2025     		mov	r5, #32
+ 106 00aa 2C43     		orr	r4, r5
+ 107 00ac DC63     		str	r4, [r3, #60]
+ 108              	.L2:
+ 109 00ae 811D     		add	r1, r0, #6
+ 110 00b0 CA7F     		ldrb	r2, [r1, #31]
+ 111 00b2 002A     		cmp	r2, #0
+ 112 00b4 03D0     		beq	.L3
+ 113 00b6 DE6B     		ldr	r6, [r3, #60]
+ 114 00b8 4024     		mov	r4, #64
+ 115 00ba 2643     		orr	r6, r4
+ 116 00bc DE63     		str	r6, [r3, #60]
+ 117              	.L3:
+ 118 00be C51D     		add	r5, r0, #7
+ 119 00c0 E97F     		ldrb	r1, [r5, #31]
+ 120 00c2 0029     		cmp	r1, #0
+ 121 00c4 03D0     		beq	.L4
+ 122 00c6 DA6B     		ldr	r2, [r3, #60]
+ 123 00c8 8026     		mov	r6, #128
+ 124 00ca 3243     		orr	r2, r6
+ 125 00cc DA63     		str	r2, [r3, #60]
+ 126              	.L4:
+ 127 00ce 847F     		ldrb	r4, [r0, #30]
+ 128 00d0 002C     		cmp	r4, #0
+ 129 00d2 0BD0     		beq	.L5
+ 130 00d4 451C     		add	r5, r0, #1
+ 131 00d6 E97F     		ldrb	r1, [r5, #31]
+ 132 00d8 1E1C     		mov	r6, r3
+ 133 00da FC36     		add	r6, r6, #252
+ 134 00dc FC25     		mov	r5, #252
+ 135 00de F468     		ldr	r4, [r6, #12]
+ 136 00e0 0A02     		lsl	r2, r1, #8
+ 137 00e2 A901     		lsl	r1, r5, #6
+ 138 00e4 1140     		and	r1, r2
+ 139 00e6 2143     		orr	r1, r4
+ 140 00e8 F160     		str	r1, [r6, #12]
+ 141 00ea 04E0     		b	.L6
+ 142              	.L5:
+ 143 00ec 9D6C     		ldr	r5, [r3, #72]
+ 144 00ee 8021     		mov	r1, #128
+ 145 00f0 8A01     		lsl	r2, r1, #6
+ 146 00f2 2A43     		orr	r2, r5
+ 147 00f4 9A64     		str	r2, [r3, #72]
+ 148              	.L6:
+ 149 00f6 C67F     		ldrb	r6, [r0, #31]
+ 150 00f8 002E     		cmp	r6, #0
+ 151 00fa 0DD0     		beq	.L7
+ 152 00fc 1A1C     		mov	r2, r3
+ 153 00fe FC32     		add	r2, r2, #252
+ 154 0100 1569     		ldr	r5, [r2, #16]
+ 155 0102 8024     		mov	r4, #128
+ 156 0104 6605     		lsl	r6, r4, #21
+ 157 0106 811C     		add	r1, r0, #2
+ 158 0108 2E43     		orr	r6, r5
+ 159 010a CD7F     		ldrb	r5, [r1, #31]
+ 160 010c FC21     		mov	r1, #252
+ 161 010e 2C02     		lsl	r4, r5, #8
+ 162 0110 8D01     		lsl	r5, r1, #6
+ 163 0112 2540     		and	r5, r4
+ 164 0114 3543     		orr	r5, r6
+ 165 0116 1561     		str	r5, [r2, #16]
+ 166              	.L7:
+ 167 0118 807D     		ldrb	r0, [r0, #22]
+ 168 011a 1A6C     		ldr	r2, [r3, #64]
+ 169 011c C021     		mov	r1, #192
+ 170 011e 0402     		lsl	r4, r0, #8
+ 171 0120 8D00     		lsl	r5, r1, #2
+ 172 0122 0226     		mov	r6, #2
+ 173 0124 1643     		orr	r6, r2
+ 174 0126 2540     		and	r5, r4
+ 175 0128 3543     		orr	r5, r6
+ 176 012a 1D64     		str	r5, [r3, #64]
+ 177              		@ sp needed for prologue
+ 178 012c 70BD     		pop	{r4, r5, r6, pc}
+ 179              	.L22:
+ 180 012e C046     		.align	2
+ 181              	.L21:
+ 182 0130 0000FF03 		.word	67043328
+ 184              		.section	.text.UART001_lConfigTXPin,"ax",%progbits
+ 185              		.align	1
+ 186              		.global	UART001_lConfigTXPin
+ 187              		.code	16
+ 188              		.thumb_func
+ 190              	UART001_lConfigTXPin:
+ 191 0000 10B5     		push	{r4, lr}
+ 192 0002 4368     		ldr	r3, [r0, #4]
+ 193 0004 027A     		ldrb	r2, [r0, #8]
+ 194 0006 0124     		mov	r4, #1
+ 195 0008 5968     		ldr	r1, [r3, #4]
+ 196 000a 9440     		lsl	r4, r4, r2
+ 197 000c 221C     		mov	r2, r4
+ 198 000e 0A43     		orr	r2, r1
+ 199 0010 5A60     		str	r2, [r3, #4]
+ 200 0012 007A     		ldrb	r0, [r0, #8]
+ 201 0014 0328     		cmp	r0, #3
+ 202 0016 08D8     		bhi	.L24
+ 203 0018 C200     		lsl	r2, r0, #3
+ 204 001a 0332     		add	r2, r2, #3
+ 205 001c 1820     		mov	r0, #24
+ 206 001e 1969     		ldr	r1, [r3, #16]
+ 207 0020 9040     		lsl	r0, r0, r2
+ 208 0022 041C     		mov	r4, r0
+ 209 0024 0C43     		orr	r4, r1
+ 210 0026 1C61     		str	r4, [r3, #16]
+ 211 0028 23E0     		b	.L23
+ 212              	.L24:
+ 213 002a 011F     		sub	r1, r0, #4
+ 214 002c 0329     		cmp	r1, #3
+ 215 002e 08D8     		bhi	.L26
+ 216 0030 C900     		lsl	r1, r1, #3
+ 217 0032 0331     		add	r1, r1, #3
+ 218 0034 1820     		mov	r0, #24
+ 219 0036 5A69     		ldr	r2, [r3, #20]
+ 220 0038 8840     		lsl	r0, r0, r1
+ 221 003a 041C     		mov	r4, r0
+ 222 003c 1443     		orr	r4, r2
+ 223 003e 5C61     		str	r4, [r3, #20]
+ 224 0040 17E0     		b	.L23
+ 225              	.L26:
+ 226 0042 041C     		mov	r4, r0
+ 227 0044 083C     		sub	r4, r4, #8
+ 228 0046 032C     		cmp	r4, #3
+ 229 0048 08D8     		bhi	.L27
+ 230 004a E100     		lsl	r1, r4, #3
+ 231 004c 0331     		add	r1, r1, #3
+ 232 004e 1820     		mov	r0, #24
+ 233 0050 9A69     		ldr	r2, [r3, #24]
+ 234 0052 8840     		lsl	r0, r0, r1
+ 235 0054 041C     		mov	r4, r0
+ 236 0056 1443     		orr	r4, r2
+ 237 0058 9C61     		str	r4, [r3, #24]
+ 238 005a 0AE0     		b	.L23
+ 239              	.L27:
+ 240 005c 0C38     		sub	r0, r0, #12
+ 241 005e 0328     		cmp	r0, #3
+ 242 0060 07D8     		bhi	.L23
+ 243 0062 C200     		lsl	r2, r0, #3
+ 244 0064 0332     		add	r2, r2, #3
+ 245 0066 1820     		mov	r0, #24
+ 246 0068 D969     		ldr	r1, [r3, #28]
+ 247 006a 9040     		lsl	r0, r0, r2
+ 248 006c 041C     		mov	r4, r0
+ 249 006e 0C43     		orr	r4, r1
+ 250 0070 DC61     		str	r4, [r3, #28]
+ 251              	.L23:
+ 252              		@ sp needed for prologue
+ 253 0072 10BD     		pop	{r4, pc}
+ 255              		.global	__aeabi_fcmplt
+ 256              		.section	.text.UART001_labsRealType,"ax",%progbits
+ 257              		.align	1
+ 258              		.global	UART001_labsRealType
+ 259              		.code	16
+ 260              		.thumb_func
+ 262              	UART001_labsRealType:
+ 263 0000 10B5     		push	{r4, lr}
+ 264 0002 0021     		mov	r1, #0
+ 265 0004 041C     		add	r4, r0, #0
+ 266 0006 FFF7FEFF 		bl	__aeabi_fcmplt
+ 267 000a 0028     		cmp	r0, #0
+ 268 000c 03D0     		beq	.L33
+ 269 000e 8023     		mov	r3, #128
+ 270 0010 1806     		lsl	r0, r3, #24
+ 271 0012 2018     		add	r0, r4, r0
+ 272 0014 00E0     		b	.L29
+ 273              	.L33:
+ 274 0016 201C     		add	r0, r4, #0
+ 275              	.L29:
+ 276              		@ sp needed for prologue
+ 277 0018 10BD     		pop	{r4, pc}
+ 279              		.global	__aeabi_ui2f
+ 280              		.global	__aeabi_fdiv
+ 281              		.global	__aeabi_fcmpgt
+ 282              		.global	__aeabi_uidiv
+ 283              		.global	__aeabi_uidivmod
+ 284              		.global	__aeabi_fsub
+ 285              		.section	.text.UART001_lConfigureBaudRate,"ax",%progbits
+ 286              		.align	1
+ 287              		.global	UART001_lConfigureBaudRate
+ 288              		.code	16
+ 289              		.thumb_func
+ 291              	UART001_lConfigureBaudRate:
+ 292 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 293 0002 9FB0     		sub	sp, sp, #124
+ 294 0004 0891     		str	r1, [sp, #32]
+ 295 0006 0992     		str	r2, [sp, #36]
+ 296 0008 041C     		mov	r4, r0
+ 297 000a FFF7FEFF 		bl	__aeabi_ui2f
+ 298 000e 6F49     		ldr	r1, .L62
+ 299 0010 FFF7FEFF 		bl	__aeabi_fdiv
+ 300 0014 FE21     		mov	r1, #254
+ 301 0016 8905     		lsl	r1, r1, #22
+ 302 0018 0690     		str	r0, [sp, #24]
+ 303 001a FFF7FEFF 		bl	__aeabi_fcmpgt
+ 304 001e 0028     		cmp	r0, #0
+ 305 0020 02D1     		bne	.L48
+ 306 0022 0590     		str	r0, [sp, #20]
+ 307 0024 6A4B     		ldr	r3, .L62+4
+ 308 0026 03E0     		b	.L35
+ 309              	.L48:
+ 310 0028 231C     		mov	r3, r4
+ 311 002a 0120     		mov	r0, #1
+ 312 002c 684C     		ldr	r4, .L62+4
+ 313 002e 0590     		str	r0, [sp, #20]
+ 314              	.L35:
+ 315 0030 0025     		mov	r5, #0
+ 316 0032 0122     		mov	r2, #1
+ 317 0034 0A94     		str	r4, [sp, #40]
+ 318 0036 0E93     		str	r3, [sp, #56]
+ 319 0038 1292     		str	r2, [sp, #72]
+ 320 003a 1695     		str	r5, [sp, #88]
+ 321 003c 0095     		str	r5, [sp]
+ 322 003e 0495     		str	r5, [sp, #16]
+ 323 0040 0195     		str	r5, [sp, #4]
+ 324              	.L46:
+ 325 0042 009E     		ldr	r6, [sp]
+ 326 0044 0327     		mov	r7, #3
+ 327 0046 0136     		add	r6, r6, #1
+ 328 0048 0096     		str	r6, [sp]
+ 329 004a 0099     		ldr	r1, [sp]
+ 330 004c 019B     		ldr	r3, [sp, #4]
+ 331 004e 3940     		and	r1, r7
+ 332 0050 0391     		str	r1, [sp, #12]
+ 333 0052 9D00     		lsl	r5, r3, #2
+ 334 0054 2820     		mov	r0, #40
+ 335 0056 3826     		mov	r6, #56
+ 336 0058 6F46     		mov	r7, sp
+ 337 005a 4419     		add	r4, r0, r5
+ 338 005c 7119     		add	r1, r6, r5
+ 339 005e 0398     		ldr	r0, [sp, #12]
+ 340 0060 CB59     		ldr	r3, [r1, r7]
+ 341 0062 E259     		ldr	r2, [r4, r7]
+ 342 0064 8600     		lsl	r6, r0, #2
+ 343 0066 2824     		mov	r4, #40
+ 344 0068 0293     		str	r3, [sp, #8]
+ 345 006a 0792     		str	r2, [sp, #28]
+ 346 006c A219     		add	r2, r4, r6
+ 347 006e D351     		str	r3, [r2, r7]
+ 348 0070 0299     		ldr	r1, [sp, #8]
+ 349 0072 0798     		ldr	r0, [sp, #28]
+ 350 0074 FFF7FEFF 		bl	__aeabi_uidiv
+ 351 0078 1AAC     		add	r4, sp, #104
+ 352 007a 3051     		str	r0, [r6, r4]
+ 353 007c 071C     		mov	r7, r0
+ 354 007e 0299     		ldr	r1, [sp, #8]
+ 355 0080 0798     		ldr	r0, [sp, #28]
+ 356 0082 FFF7FEFF 		bl	__aeabi_uidivmod
+ 357 0086 3823     		mov	r3, #56
+ 358 0088 9A19     		add	r2, r3, r6
+ 359 008a 6846     		mov	r0, sp
+ 360 008c 1150     		str	r1, [r2, r0]
+ 361 008e 0099     		ldr	r1, [sp]
+ 362 0090 12AB     		add	r3, sp, #72
+ 363 0092 0129     		cmp	r1, #1
+ 364 0094 03D1     		bne	.L36
+ 365 0096 6668     		ldr	r6, [r4, #4]
+ 366 0098 1791     		str	r1, [sp, #92]
+ 367 009a 5E60     		str	r6, [r3, #4]
+ 368 009c 0CE0     		b	.L37
+ 369              	.L36:
+ 370 009e 5C59     		ldr	r4, [r3, r5]
+ 371 00a0 049A     		ldr	r2, [sp, #16]
+ 372 00a2 7C43     		mul	r4, r7
+ 373 00a4 9200     		lsl	r2, r2, #2
+ 374 00a6 9858     		ldr	r0, [r3, r2]
+ 375 00a8 2118     		add	r1, r4, r0
+ 376 00aa 9951     		str	r1, [r3, r6]
+ 377 00ac 16AB     		add	r3, sp, #88
+ 378 00ae EC58     		ldr	r4, [r5, r3]
+ 379 00b0 7C43     		mul	r4, r7
+ 380 00b2 D758     		ldr	r7, [r2, r3]
+ 381 00b4 E219     		add	r2, r4, r7
+ 382 00b6 F250     		str	r2, [r6, r3]
+ 383              	.L37:
+ 384 00b8 0398     		ldr	r0, [sp, #12]
+ 385 00ba 16AF     		add	r7, sp, #88
+ 386 00bc 8300     		lsl	r3, r0, #2
+ 387 00be DC59     		ldr	r4, [r3, r7]
+ 388 00c0 8021     		mov	r1, #128
+ 389 00c2 C800     		lsl	r0, r1, #3
+ 390 00c4 12AE     		add	r6, sp, #72
+ 391 00c6 8442     		cmp	r4, r0
+ 392 00c8 62D9     		bls	.L38
+ 393 00ca 049C     		ldr	r4, [sp, #16]
+ 394 00cc 7259     		ldr	r2, [r6, r5]
+ 395 00ce 7D59     		ldr	r5, [r7, r5]
+ 396 00d0 A300     		lsl	r3, r4, #2
+ 397 00d2 0095     		str	r5, [sp]
+ 398 00d4 DD59     		ldr	r5, [r3, r7]
+ 399 00d6 0099     		ldr	r1, [sp]
+ 400 00d8 401B     		sub	r0, r0, r5
+ 401 00da 0192     		str	r2, [sp, #4]
+ 402 00dc FFF7FEFF 		bl	__aeabi_uidiv
+ 403 00e0 0399     		ldr	r1, [sp, #12]
+ 404 00e2 039A     		ldr	r2, [sp, #12]
+ 405 00e4 0139     		sub	r1, r1, #1
+ 406 00e6 8B00     		lsl	r3, r1, #2
+ 407 00e8 F458     		ldr	r4, [r6, r3]
+ 408 00ea DF59     		ldr	r7, [r3, r7]
+ 409 00ec 4443     		mul	r4, r0
+ 410 00ee 7843     		mul	r0, r7
+ 411 00f0 023A     		sub	r2, r2, #2
+ 412 00f2 9100     		lsl	r1, r2, #2
+ 413 00f4 7658     		ldr	r6, [r6, r1]
+ 414 00f6 4519     		add	r5, r0, r5
+ 415 00f8 0598     		ldr	r0, [sp, #20]
+ 416 00fa A419     		add	r4, r4, r6
+ 417 00fc 0028     		cmp	r0, #0
+ 418 00fe 06D0     		beq	.L39
+ 419 0100 019A     		ldr	r2, [sp, #4]
+ 420 0102 0099     		ldr	r1, [sp]
+ 421 0104 231C     		mov	r3, r4
+ 422 0106 0191     		str	r1, [sp, #4]
+ 423 0108 2C1C     		mov	r4, r5
+ 424 010a 0092     		str	r2, [sp]
+ 425 010c 1D1C     		mov	r5, r3
+ 426              	.L39:
+ 427 010e 009E     		ldr	r6, [sp]
+ 428 0110 002E     		cmp	r6, #0
+ 429 0112 50D0     		beq	.L40
+ 430 0114 019F     		ldr	r7, [sp, #4]
+ 431 0116 002F     		cmp	r7, #0
+ 432 0118 4DD0     		beq	.L40
+ 433 011a 002D     		cmp	r5, #0
+ 434 011c 49D0     		beq	.L60
+ 435 011e 002C     		cmp	r4, #0
+ 436 0120 47D0     		beq	.L60
+ 437 0122 381C     		mov	r0, r7
+ 438 0124 FFF7FEFF 		bl	__aeabi_ui2f
+ 439 0128 061C     		add	r6, r0, #0
+ 440 012a 0098     		ldr	r0, [sp]
+ 441 012c FFF7FEFF 		bl	__aeabi_ui2f
+ 442 0130 011C     		add	r1, r0, #0
+ 443 0132 301C     		add	r0, r6, #0
+ 444 0134 FFF7FEFF 		bl	__aeabi_fdiv
+ 445 0138 011C     		add	r1, r0, #0
+ 446 013a 0698     		ldr	r0, [sp, #24]
+ 447 013c FFF7FEFF 		bl	__aeabi_fsub
+ 448 0140 0021     		mov	r1, #0
+ 449 0142 071C     		add	r7, r0, #0
+ 450 0144 FFF7FEFF 		bl	__aeabi_fcmplt
+ 451 0148 0028     		cmp	r0, #0
+ 452 014a 02D0     		beq	.L41
+ 453 014c 8020     		mov	r0, #128
+ 454 014e 0306     		lsl	r3, r0, #24
+ 455 0150 FF18     		add	r7, r7, r3
+ 456              	.L41:
+ 457 0152 201C     		mov	r0, r4
+ 458 0154 FFF7FEFF 		bl	__aeabi_ui2f
+ 459 0158 061C     		add	r6, r0, #0
+ 460 015a 281C     		mov	r0, r5
+ 461 015c FFF7FEFF 		bl	__aeabi_ui2f
+ 462 0160 011C     		add	r1, r0, #0
+ 463 0162 301C     		add	r0, r6, #0
+ 464 0164 FFF7FEFF 		bl	__aeabi_fdiv
+ 465 0168 011C     		add	r1, r0, #0
+ 466 016a 0698     		ldr	r0, [sp, #24]
+ 467 016c FFF7FEFF 		bl	__aeabi_fsub
+ 468 0170 0021     		mov	r1, #0
+ 469 0172 061C     		add	r6, r0, #0
+ 470 0174 FFF7FEFF 		bl	__aeabi_fcmplt
+ 471 0178 0028     		cmp	r0, #0
+ 472 017a 02D0     		beq	.L43
+ 473 017c 8022     		mov	r2, #128
+ 474 017e 1106     		lsl	r1, r2, #24
+ 475 0180 7618     		add	r6, r6, r1
+ 476              	.L43:
+ 477 0182 381C     		add	r0, r7, #0
+ 478 0184 311C     		add	r1, r6, #0
+ 479 0186 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 480 018a 0028     		cmp	r0, #0
+ 481 018c 11D0     		beq	.L60
+ 482 018e 12E0     		b	.L40
+ 483              	.L38:
+ 484 0190 0EAD     		add	r5, sp, #56
+ 485 0192 019F     		ldr	r7, [sp, #4]
+ 486 0194 5A59     		ldr	r2, [r3, r5]
+ 487 0196 0497     		str	r7, [sp, #16]
+ 488 0198 002A     		cmp	r2, #0
+ 489 019a 02D0     		beq	.L61
+ 490              	.L55:
+ 491 019c 039C     		ldr	r4, [sp, #12]
+ 492 019e 0194     		str	r4, [sp, #4]
+ 493 01a0 4FE7     		b	.L46
+ 494              	.L61:
+ 495 01a2 F558     		ldr	r5, [r6, r3]
+ 496 01a4 0599     		ldr	r1, [sp, #20]
+ 497 01a6 2B1C     		mov	r3, r5
+ 498 01a8 0029     		cmp	r1, #0
+ 499 01aa 04D1     		bne	.L40
+ 500 01ac 251C     		mov	r5, r4
+ 501 01ae 1C1C     		mov	r4, r3
+ 502 01b0 01E0     		b	.L40
+ 503              	.L60:
+ 504 01b2 009D     		ldr	r5, [sp]
+ 505 01b4 019C     		ldr	r4, [sp, #4]
+ 506              	.L40:
+ 507 01b6 0748     		ldr	r0, .L62+8
+ 508 01b8 8442     		cmp	r4, r0
+ 509 01ba 00D9     		bls	.L47
+ 510 01bc 041C     		mov	r4, r0
+ 511              	.L47:
+ 512 01be 099B     		ldr	r3, [sp, #36]
+ 513 01c0 089F     		ldr	r7, [sp, #32]
+ 514 01c2 013D     		sub	r5, r5, #1
+ 515 01c4 1C60     		str	r4, [r3]
+ 516 01c6 3D60     		str	r5, [r7]
+ 517 01c8 1FB0     		add	sp, sp, #124
+ 518              		@ sp needed for prologue
+ 519 01ca F0BD     		pop	{r4, r5, r6, r7, pc}
+ 520              	.L63:
+ 521              		.align	2
+ 522              	.L62:
+ 523 01cc 00504345 		.word	1162039296
+ 524 01d0 350C0000 		.word	3125
+ 525 01d4 FF030000 		.word	1023
+ 527              		.section	.text.UART001_Init,"ax",%progbits
+ 528              		.align	1
+ 529              		.global	UART001_Init
+ 530              		.code	16
+ 531              		.thumb_func
+ 533              	UART001_Init:
+ 534 0000 0E4A     		ldr	r2, .L68
+ 535 0002 10B5     		push	{r4, lr}
+ 536 0004 C023     		mov	r3, #192
+ 537 0006 0E4C     		ldr	r4, .L68+4
+ 538 0008 5362     		str	r3, [r2, #36]
+ 539 000a 2168     		ldr	r1, [r4]
+ 540 000c 0D48     		ldr	r0, .L68+8
+ 541 000e 0143     		orr	r1, r0
+ 542 0010 2160     		str	r1, [r4]
+ 543 0012 2369     		ldr	r3, [r4, #16]
+ 544 0014 0821     		mov	r1, #8
+ 545 0016 0B43     		orr	r3, r1
+ 546 0018 2361     		str	r3, [r4, #16]
+ 547              	.L65:
+ 548 001a 2068     		ldr	r0, [r4]
+ 549 001c 4000     		lsl	r0, r0, #1
+ 550 001e FCD4     		bmi	.L65
+ 551 0020 094B     		ldr	r3, .L68+12
+ 552 0022 C324     		mov	r4, #195
+ 553 0024 1868     		ldr	r0, [r3]
+ 554 0026 5462     		str	r4, [r2, #36]
+ 555 0028 027D     		ldrb	r2, [r0, #20]
+ 556 002a 1C1C     		mov	r4, r3
+ 557 002c 012A     		cmp	r2, #1
+ 558 002e 01D1     		bne	.L66
+ 559 0030 FFF7FEFF 		bl	UART001_lConfigTXPin
+ 560              	.L66:
+ 561 0034 2068     		ldr	r0, [r4]
+ 562 0036 FFF7FEFF 		bl	UART001_lInit
+ 563              		@ sp needed for prologue
+ 564 003a 10BD     		pop	{r4, pc}
+ 565              	.L69:
+ 566              		.align	2
+ 567              	.L68:
+ 568 003c 00000140 		.word	1073807360
+ 569 0040 00030140 		.word	1073808128
+ 570 0044 0000F03F 		.word	1072693248
+ 571 0048 00000000 		.word	UART001_HandleArray
+ 573              		.section	.text.UART001_DeInit,"ax",%progbits
+ 574              		.align	1
+ 575              		.global	UART001_DeInit
+ 576              		.code	16
+ 577              		.thumb_func
+ 579              	UART001_DeInit:
+ 580              		@ sp needed for prologue
+ 581 0000 7047     		bx	lr
+ 583              		.section	.text.UART001_Configure,"ax",%progbits
+ 584              		.align	1
+ 585              		.global	UART001_Configure
+ 586              		.code	16
+ 587              		.thumb_func
+ 589              	UART001_Configure:
+ 590 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 591 0002 0468     		ldr	r4, [r0]
+ 592 0004 171C     		mov	r7, r2
+ 593 0006 A06C     		ldr	r0, [r4, #72]
+ 594 0008 A26C     		ldr	r2, [r4, #72]
+ 595 000a 0225     		mov	r5, #2
+ 596 000c 2A40     		and	r2, r5
+ 597 000e 85B0     		sub	sp, sp, #20
+ 598 0010 0026     		mov	r6, #0
+ 599 0012 5208     		lsr	r2, r2, #1
+ 600 0014 0193     		str	r3, [sp, #4]
+ 601 0016 0296     		str	r6, [sp, #8]
+ 602 0018 0396     		str	r6, [sp, #12]
+ 603 001a 0323     		mov	r3, #3
+ 604 001c 1042     		tst	r0, r2
+ 605 001e 32D0     		beq	.L72
+ 606 0020 236C     		ldr	r3, [r4, #64]
+ 607 0022 081C     		mov	r0, r1
+ 608 0024 AB43     		bic	r3, r5
+ 609 0026 2364     		str	r3, [r4, #64]
+ 610 0028 02A9     		add	r1, sp, #8
+ 611 002a 03AA     		add	r2, sp, #12
+ 612 002c FFF7FEFF 		bl	UART001_lConfigureBaudRate
+ 613 0030 2169     		ldr	r1, [r4, #16]
+ 614 0032 039B     		ldr	r3, [sp, #12]
+ 615 0034 880A     		lsr	r0, r1, #10
+ 616 0036 8202     		lsl	r2, r0, #10
+ 617 0038 2261     		str	r2, [r4, #16]
+ 618 003a 2069     		ldr	r0, [r4, #16]
+ 619 003c 9905     		lsl	r1, r3, #22
+ 620 003e 8A0D     		lsr	r2, r1, #22
+ 621 0040 0243     		orr	r2, r0
+ 622 0042 2261     		str	r2, [r4, #16]
+ 623 0044 6069     		ldr	r0, [r4, #20]
+ 624 0046 114B     		ldr	r3, .L74
+ 625 0048 0299     		ldr	r1, [sp, #8]
+ 626 004a 0340     		and	r3, r0
+ 627 004c 6361     		str	r3, [r4, #20]
+ 628 004e 104B     		ldr	r3, .L74+4
+ 629 0050 6269     		ldr	r2, [r4, #20]
+ 630 0052 0804     		lsl	r0, r1, #16
+ 631 0054 0340     		and	r3, r0
+ 632 0056 1343     		orr	r3, r2
+ 633 0058 6361     		str	r3, [r4, #20]
+ 634 005a E26B     		ldr	r2, [r4, #60]
+ 635 005c 0199     		ldr	r1, [sp, #4]
+ 636 005e AA43     		bic	r2, r5
+ 637 0060 E263     		str	r2, [r4, #60]
+ 638 0062 E06B     		ldr	r0, [r4, #60]
+ 639 0064 4B00     		lsl	r3, r1, #1
+ 640 0066 2B40     		and	r3, r5
+ 641 0068 0343     		orr	r3, r0
+ 642 006a E363     		str	r3, [r4, #60]
+ 643 006c 226C     		ldr	r2, [r4, #64]
+ 644 006e 0948     		ldr	r0, .L74+8
+ 645 0070 C023     		mov	r3, #192
+ 646 0072 1040     		and	r0, r2
+ 647 0074 2064     		str	r0, [r4, #64]
+ 648 0076 216C     		ldr	r1, [r4, #64]
+ 649 0078 9A00     		lsl	r2, r3, #2
+ 650 007a 3F02     		lsl	r7, r7, #8
+ 651 007c 0D43     		orr	r5, r1
+ 652 007e 1740     		and	r7, r2
+ 653 0080 3D43     		orr	r5, r7
+ 654 0082 2564     		str	r5, [r4, #64]
+ 655 0084 331C     		mov	r3, r6
+ 656              	.L72:
+ 657 0086 181C     		mov	r0, r3
+ 658 0088 05B0     		add	sp, sp, #20
+ 659              		@ sp needed for prologue
+ 660 008a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 661              	.L75:
+ 662              		.align	2
+ 663              	.L74:
+ 664 008c FFFF00FC 		.word	-67043329
+ 665 0090 0000FF03 		.word	67043328
+ 666 0094 FFFCFFFF 		.word	-769
+ 668              		.section	.text.UART001_ReadDataMultiple,"ax",%progbits
+ 669              		.align	1
+ 670              		.global	UART001_ReadDataMultiple
+ 671              		.code	16
+ 672              		.thumb_func
+ 674              	UART001_ReadDataMultiple:
+ 675 0000 70B5     		push	{r4, r5, r6, lr}
+ 676 0002 0368     		ldr	r3, [r0]
+ 677 0004 C07F     		ldrb	r0, [r0, #31]
+ 678 0006 0028     		cmp	r0, #0
+ 679 0008 0CD0     		beq	.L83
+ 680              	.L81:
+ 681 000a 0020     		mov	r0, #0
+ 682              	.L77:
+ 683 000c 1C1C     		mov	r4, r3
+ 684 000e FC34     		add	r4, r4, #252
+ 685 0010 A569     		ldr	r5, [r4, #24]
+ 686 0012 2E07     		lsl	r6, r5, #28
+ 687 0014 09D4     		bmi	.L79
+ 688 0016 9042     		cmp	r0, r2
+ 689 0018 07D0     		beq	.L79
+ 690              	.L80:
+ 691 001a 266A     		ldr	r6, [r4, #32]
+ 692 001c 4400     		lsl	r4, r0, #1
+ 693 001e 0E53     		strh	r6, [r1, r4]
+ 694 0020 0130     		add	r0, r0, #1
+ 695 0022 F3E7     		b	.L77
+ 696              	.L83:
+ 697 0024 5A6D     		ldr	r2, [r3, #84]
+ 698 0026 0120     		mov	r0, #1
+ 699 0028 0A80     		strh	r2, [r1]
+ 700              	.L79:
+ 701              		@ sp needed for prologue
+ 702 002a 70BD     		pop	{r4, r5, r6, pc}
+ 704              		.section	.text.UART001_ReadDataBytes,"ax",%progbits
+ 705              		.align	1
+ 706              		.global	UART001_ReadDataBytes
+ 707              		.code	16
+ 708              		.thumb_func
+ 710              	UART001_ReadDataBytes:
+ 711 0000 70B5     		push	{r4, r5, r6, lr}
+ 712 0002 0368     		ldr	r3, [r0]
+ 713 0004 C07F     		ldrb	r0, [r0, #31]
+ 714 0006 0028     		cmp	r0, #0
+ 715 0008 0BD0     		beq	.L91
+ 716              	.L89:
+ 717 000a 0020     		mov	r0, #0
+ 718              	.L85:
+ 719 000c 1C1C     		mov	r4, r3
+ 720 000e FC34     		add	r4, r4, #252
+ 721 0010 A569     		ldr	r5, [r4, #24]
+ 722 0012 2E07     		lsl	r6, r5, #28
+ 723 0014 08D4     		bmi	.L87
+ 724 0016 9042     		cmp	r0, r2
+ 725 0018 06D0     		beq	.L87
+ 726              	.L88:
+ 727 001a 266A     		ldr	r6, [r4, #32]
+ 728 001c 0E54     		strb	r6, [r1, r0]
+ 729 001e 0130     		add	r0, r0, #1
+ 730 0020 F4E7     		b	.L85
+ 731              	.L91:
+ 732 0022 5A6D     		ldr	r2, [r3, #84]
+ 733 0024 0120     		mov	r0, #1
+ 734 0026 0A70     		strb	r2, [r1]
+ 735              	.L87:
+ 736              		@ sp needed for prologue
+ 737 0028 70BD     		pop	{r4, r5, r6, pc}
+ 739              		.section	.text.UART001_WriteDataMultiple,"ax",%progbits
+ 740              		.align	1
+ 741              		.global	UART001_WriteDataMultiple
+ 742              		.code	16
+ 743              		.thumb_func
+ 745              	UART001_WriteDataMultiple:
+ 746 0000 30B5     		push	{r4, r5, lr}
+ 747 0002 0368     		ldr	r3, [r0]
+ 748 0004 807F     		ldrb	r0, [r0, #30]
+ 749 0006 0028     		cmp	r0, #0
+ 750 0008 0ED0     		beq	.L100
+ 751              	.L97:
+ 752 000a 0020     		mov	r0, #0
+ 753              	.L93:
+ 754 000c 1C1C     		mov	r4, r3
+ 755 000e FC34     		add	r4, r4, #252
+ 756 0010 A569     		ldr	r5, [r4, #24]
+ 757 0012 ED04     		lsl	r5, r5, #19
+ 758 0014 0FD4     		bmi	.L95
+ 759 0016 9042     		cmp	r0, r2
+ 760 0018 0DD0     		beq	.L95
+ 761              	.L96:
+ 762 001a 4400     		lsl	r4, r0, #1
+ 763 001c 0D5B     		ldrh	r5, [r1, r4]
+ 764 001e C024     		mov	r4, #192
+ 765 0020 6400     		lsl	r4, r4, #1
+ 766 0022 1D51     		str	r5, [r3, r4]
+ 767 0024 0130     		add	r0, r0, #1
+ 768 0026 F1E7     		b	.L93
+ 769              	.L100:
+ 770 0028 9A6B     		ldr	r2, [r3, #56]
+ 771 002a 1406     		lsl	r4, r2, #24
+ 772 002c 03D4     		bmi	.L95
+ 773 002e 0888     		ldrh	r0, [r1]
+ 774 0030 0433     		add	r3, r3, #4
+ 775 0032 D867     		str	r0, [r3, #124]
+ 776 0034 0120     		mov	r0, #1
+ 777              	.L95:
+ 778              		@ sp needed for prologue
+ 779 0036 30BD     		pop	{r4, r5, pc}
+ 781              		.section	.text.UART001_WriteDataBytes,"ax",%progbits
+ 782              		.align	1
+ 783              		.global	UART001_WriteDataBytes
+ 784              		.code	16
+ 785              		.thumb_func
+ 787              	UART001_WriteDataBytes:
+ 788 0000 30B5     		push	{r4, r5, lr}
+ 789 0002 0368     		ldr	r3, [r0]
+ 790 0004 807F     		ldrb	r0, [r0, #30]
+ 791 0006 0028     		cmp	r0, #0
+ 792 0008 0DD0     		beq	.L109
+ 793              	.L106:
+ 794 000a 0020     		mov	r0, #0
+ 795              	.L102:
+ 796 000c 1C1C     		mov	r4, r3
+ 797 000e FC34     		add	r4, r4, #252
+ 798 0010 A569     		ldr	r5, [r4, #24]
+ 799 0012 ED04     		lsl	r5, r5, #19
+ 800 0014 0ED4     		bmi	.L104
+ 801 0016 9042     		cmp	r0, r2
+ 802 0018 0CD0     		beq	.L104
+ 803              	.L105:
+ 804 001a 0D5C     		ldrb	r5, [r1, r0]
+ 805 001c C024     		mov	r4, #192
+ 806 001e 6400     		lsl	r4, r4, #1
+ 807 0020 1D51     		str	r5, [r3, r4]
+ 808 0022 0130     		add	r0, r0, #1
+ 809 0024 F2E7     		b	.L102
+ 810              	.L109:
+ 811 0026 9A6B     		ldr	r2, [r3, #56]
+ 812 0028 1406     		lsl	r4, r2, #24
+ 813 002a 03D4     		bmi	.L104
+ 814 002c 0878     		ldrb	r0, [r1]
+ 815 002e 0433     		add	r3, r3, #4
+ 816 0030 D867     		str	r0, [r3, #124]
+ 817 0032 0120     		mov	r0, #1
+ 818              	.L104:
+ 819              		@ sp needed for prologue
+ 820 0034 30BD     		pop	{r4, r5, pc}
+ 822              		.section	.text.UART001_GetFlagStatus,"ax",%progbits
+ 823              		.align	1
+ 824              		.global	UART001_GetFlagStatus
+ 825              		.code	16
+ 826              		.thumb_func
+ 828              	UART001_GetFlagStatus:
+ 829 0000 0268     		ldr	r2, [r0]
+ 830 0002 0F29     		cmp	r1, #15
+ 831 0004 03D8     		bhi	.L111
+ 832 0006 0120     		mov	r0, #1
+ 833 0008 936C     		ldr	r3, [r2, #72]
+ 834 000a 8840     		lsl	r0, r0, r1
+ 835 000c 08E0     		b	.L116
+ 836              	.L111:
+ 837 000e FC32     		add	r2, r2, #252
+ 838 0010 0123     		mov	r3, #1
+ 839 0012 9069     		ldr	r0, [r2, #24]
+ 840 0014 1229     		cmp	r1, #18
+ 841 0016 01D8     		bhi	.L113
+ 842 0018 1039     		sub	r1, r1, #16
+ 843 001a 00E0     		b	.L117
+ 844              	.L113:
+ 845 001c 0B39     		sub	r1, r1, #11
+ 846              	.L117:
+ 847 001e 8B40     		lsl	r3, r3, r1
+ 848              	.L116:
+ 849 0020 011C     		mov	r1, r0
+ 850 0022 1940     		and	r1, r3
+ 851 0024 4B1E     		sub	r3, r1, #1
+ 852 0026 9941     		sbc	r1, r1, r3
+ 853 0028 481C     		add	r0, r1, #1
+ 854              		@ sp needed for prologue
+ 855 002a 7047     		bx	lr
+ 857              		.section	.text.UART001_ClearFlag,"ax",%progbits
+ 858              		.align	1
+ 859              		.global	UART001_ClearFlag
+ 860              		.code	16
+ 861              		.thumb_func
+ 863              	UART001_ClearFlag:
+ 864 0000 0368     		ldr	r3, [r0]
+ 865 0002 0F29     		cmp	r1, #15
+ 866 0004 06D8     		bhi	.L119
+ 867 0006 0120     		mov	r0, #1
+ 868 0008 DA6C     		ldr	r2, [r3, #76]
+ 869 000a 8840     		lsl	r0, r0, r1
+ 870 000c 011C     		mov	r1, r0
+ 871 000e 1143     		orr	r1, r2
+ 872 0010 D964     		str	r1, [r3, #76]
+ 873 0012 0AE0     		b	.L118
+ 874              	.L119:
+ 875 0014 FC33     		add	r3, r3, #252
+ 876 0016 0122     		mov	r2, #1
+ 877 0018 D869     		ldr	r0, [r3, #28]
+ 878 001a 1229     		cmp	r1, #18
+ 879 001c 01D8     		bhi	.L121
+ 880 001e 1039     		sub	r1, r1, #16
+ 881 0020 00E0     		b	.L122
+ 882              	.L121:
+ 883 0022 0B39     		sub	r1, r1, #11
+ 884              	.L122:
+ 885 0024 8A40     		lsl	r2, r2, r1
+ 886 0026 0243     		orr	r2, r0
+ 887 0028 DA61     		str	r2, [r3, #28]
+ 888              	.L118:
+ 889              		@ sp needed for prologue
+ 890 002a 7047     		bx	lr
+ 892              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 UART001.c
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:15     .text.UART001_lInit:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:20     .text.UART001_lInit:00000000 UART001_lInit
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:182    .text.UART001_lInit:00000130 $d
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:185    .text.UART001_lConfigTXPin:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:190    .text.UART001_lConfigTXPin:00000000 UART001_lConfigTXPin
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:257    .text.UART001_labsRealType:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:262    .text.UART001_labsRealType:00000000 UART001_labsRealType
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:286    .text.UART001_lConfigureBaudRate:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:291    .text.UART001_lConfigureBaudRate:00000000 UART001_lConfigureBaudRate
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:523    .text.UART001_lConfigureBaudRate:000001cc $d
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:528    .text.UART001_Init:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:533    .text.UART001_Init:00000000 UART001_Init
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:568    .text.UART001_Init:0000003c $d
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:574    .text.UART001_DeInit:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:579    .text.UART001_DeInit:00000000 UART001_DeInit
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:584    .text.UART001_Configure:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:589    .text.UART001_Configure:00000000 UART001_Configure
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:664    .text.UART001_Configure:0000008c $d
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:669    .text.UART001_ReadDataMultiple:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:674    .text.UART001_ReadDataMultiple:00000000 UART001_ReadDataMultiple
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:705    .text.UART001_ReadDataBytes:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:710    .text.UART001_ReadDataBytes:00000000 UART001_ReadDataBytes
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:740    .text.UART001_WriteDataMultiple:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:745    .text.UART001_WriteDataMultiple:00000000 UART001_WriteDataMultiple
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:782    .text.UART001_WriteDataBytes:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:787    .text.UART001_WriteDataBytes:00000000 UART001_WriteDataBytes
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:823    .text.UART001_GetFlagStatus:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:828    .text.UART001_GetFlagStatus:00000000 UART001_GetFlagStatus
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:858    .text.UART001_ClearFlag:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccdNUUfd.s:863    .text.UART001_ClearFlag:00000000 UART001_ClearFlag
+
+UNDEFINED SYMBOLS
+__aeabi_fcmplt
+__aeabi_ui2f
+__aeabi_fdiv
+__aeabi_fcmpgt
+__aeabi_uidiv
+__aeabi_uidivmod
+__aeabi_fsub
+UART001_HandleArray

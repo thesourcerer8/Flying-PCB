@@ -1,0 +1,47 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"DAVE3.c"
+  14              		.section	.text.DAVE_Init,"ax",%progbits
+  15              		.align	1
+  16              		.global	DAVE_Init
+  17              		.code	16
+  18              		.thumb_func
+  20              	DAVE_Init:
+  21 0000 08B5     		push	{r3, lr}
+  22 0002 FFF7FEFF 		bl	DAVE_MUX_PreInit
+  23              		@ sp needed for prologue
+  24 0006 FFF7FEFF 		bl	CLK002_Init
+  25 000a FFF7FEFF 		bl	CCU4GLOBAL_Init
+  26 000e FFF7FEFF 		bl	CCU8GLOBAL_Init
+  27 0012 FFF7FEFF 		bl	IO004_Init
+  28 0016 FFF7FEFF 		bl	UART001_Init
+  29 001a FFF7FEFF 		bl	NVIC002_Init
+  30 001e FFF7FEFF 		bl	ADCGLOB001_Init
+  31 0022 FFF7FEFF 		bl	DAVE_MUX_Init
+  32 0026 08BD     		pop	{r3, pc}
+  34              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 DAVE3.c
+C:\Users\maan\AppData\Local\Temp\ccHWBFKR.s:15     .text.DAVE_Init:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccHWBFKR.s:20     .text.DAVE_Init:00000000 DAVE_Init
+
+UNDEFINED SYMBOLS
+DAVE_MUX_PreInit
+CLK002_Init
+CCU4GLOBAL_Init
+CCU8GLOBAL_Init
+IO004_Init
+UART001_Init
+NVIC002_Init
+ADCGLOB001_Init
+DAVE_MUX_Init

@@ -1,0 +1,35 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"IO004_Conf.c"
+  14              		.global	IO004_Handle1
+  15              		.global	IO004_Handle0
+  16              		.section	.rodata
+  17              		.align	2
+  20              	IO004_Handle1:
+  21 0000 01       		.byte	1
+  22 0001 01       		.byte	1
+  23 0002 0000     		.space	2
+  24 0004 00010440 		.word	1074004224
+  27              	IO004_Handle0:
+  28 0008 01       		.byte	1
+  29 0009 00       		.byte	0
+  30 000a 0000     		.space	2
+  31 000c 00010440 		.word	1074004224
+  32              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO004_Conf.c
+C:\Users\maan\AppData\Local\Temp\cccO4wRb.s:20     .rodata:00000000 IO004_Handle1
+C:\Users\maan\AppData\Local\Temp\cccO4wRb.s:27     .rodata:00000008 IO004_Handle0
+C:\Users\maan\AppData\Local\Temp\cccO4wRb.s:17     .rodata:00000000 $d
+
+NO UNDEFINED SYMBOLS

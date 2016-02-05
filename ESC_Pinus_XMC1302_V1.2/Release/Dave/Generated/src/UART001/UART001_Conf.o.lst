@@ -1,0 +1,60 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"UART001_Conf.c"
+  14              		.global	UART001_HandleArray
+  15              		.global	UART001_Handle0
+  16              		.section	.rodata
+  17              		.align	2
+  20              	UART001_Handle0:
+  21 0000 00000048 		.word	1207959552
+  22 0004 00010440 		.word	1074004224
+  23 0008 05       		.byte	5
+  24 0009 000000   		.space	3
+  25 000c 00010440 		.word	1074004224
+  26 0010 04       		.byte	4
+  27 0011 000000   		.space	3
+  28 0014 00       		.byte	0
+  29 0015 00       		.byte	0
+  30 0016 00       		.byte	0
+  31 0017 00       		.space	1
+  32 0018 00C20100 		.word	115200
+  33 001c 0700     		.short	7
+  34 001e 01       		.byte	1
+  35 001f 01       		.byte	1
+  36 0020 1F       		.byte	31
+  37 0021 1F       		.byte	31
+  38 0022 05       		.byte	5
+  39 0023 05       		.byte	5
+  40 0024 01       		.byte	1
+  41 0025 01       		.byte	1
+  42 0026 00       		.byte	0
+  43 0027 00       		.space	1
+  44 0028 2B03     		.short	811
+  45 002a 1500     		.short	21
+  46 002c 0900     		.short	9
+  47 002e 0600     		.short	6
+  48 0030 00       		.byte	0
+  49 0031 000000   		.space	3
+  50              		.data
+  51              		.align	2
+  54              	UART001_HandleArray:
+  55 0000 00000000 		.word	UART001_Handle0
+  56              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 UART001_Conf.c
+C:\Users\maan\AppData\Local\Temp\ccHeTUfd.s:54     .data:00000000 UART001_HandleArray
+C:\Users\maan\AppData\Local\Temp\ccHeTUfd.s:20     .rodata:00000000 UART001_Handle0
+C:\Users\maan\AppData\Local\Temp\ccHeTUfd.s:17     .rodata:00000000 $d
+C:\Users\maan\AppData\Local\Temp\ccHeTUfd.s:51     .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

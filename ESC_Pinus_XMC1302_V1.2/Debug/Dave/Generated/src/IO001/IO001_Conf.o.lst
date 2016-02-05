@@ -1,0 +1,79 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"IO001_Conf.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	IO001_Handle1
+  18              		.section	.rodata
+  19              		.align	2
+  22              	IO001_Handle1:
+  23 0000 02       		.byte	2
+  24 0001 06       		.byte	6
+  25 0002 0000     		.space	2
+  26 0004 00020440 		.word	1074004480
+  27              		.global	IO001_Handle2
+  28              		.align	2
+  31              	IO001_Handle2:
+  32 0008 02       		.byte	2
+  33 0009 08       		.byte	8
+  34 000a 0000     		.space	2
+  35 000c 00020440 		.word	1074004480
+  36              		.global	IO001_Handle3
+  37              		.align	2
+  40              	IO001_Handle3:
+  41 0010 02       		.byte	2
+  42 0011 09       		.byte	9
+  43 0012 0000     		.space	2
+  44 0014 00020440 		.word	1074004480
+  45              		.text
+  46              	.Letext0:
+  47              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+  48              		.file 2 "C:\\DAVE3_workspace\\ws3.1.10\\ESC_Pinus_XMC1302_V1.2\\Dave\\Generated\\inc\\DAVESupport/
+  49              		.file 3 "../Dave/Generated/src/IO001/IO001_Conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO001_Conf.c
+C:\Users\maan\AppData\Local\Temp\ccRiy0m8.s:22     .rodata:00000000 IO001_Handle1
+C:\Users\maan\AppData\Local\Temp\ccRiy0m8.s:19     .rodata:00000000 $d
+C:\Users\maan\AppData\Local\Temp\ccRiy0m8.s:31     .rodata:00000008 IO001_Handle2
+C:\Users\maan\AppData\Local\Temp\ccRiy0m8.s:40     .rodata:00000010 IO001_Handle3
+                           .group:00000000 wm4.1.665d63c3c957c91c5ed795826dcbc088
+                           .group:00000000 wm4.XMC1300.h.45.4ee692c6c98aa9fc42e2abbc732052b9
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.core_cm0.h.135.ca70469f87e143609670bb393bfa6518
+                           .group:00000000 wm4.XMC1000_RomFunctionTable.h.31.6d9a94465618f31b040dc9cea9a47ad7
+                           .group:00000000 wm4.XMC1300.h.126.871a37eeeb3f6a078f5ddf5efd64103f
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.383e3edbb9cbf6e538f7c1532ef623c1
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.1aa717522e337383e1234be386036b7c
+                           .group:00000000 wm4.CLK002.h.56.d2936f957892acc36e594c5138aee657
+                           .group:00000000 wm4.uc_id.h.35.f852fba3565a132d8ed947977fab9fbc
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.a52fac0daa39b5f58343578312b4eb54
+                           .group:00000000 wm4.CCU8GLOBAL_Conf.h.82.76c6b1bf357180d1e8ea1f462a66deb8
+                           .group:00000000 wm4.IO004.h.53.442ea5eb47ad9eedc675253aa35f3107
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.f334402b2e237110b77f625dfc27af0e
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.311363d77acc1b28b7e28dd840e9cd60
+                           .group:00000000 wm4.ADCGROUP001.h.66.3ee81aba16709c201614af7d67499bdb
+                           .group:00000000 wm4.IO001.h.49.4efcabb368feaef60c65bd7504b48505
+
+NO UNDEFINED SYMBOLS
