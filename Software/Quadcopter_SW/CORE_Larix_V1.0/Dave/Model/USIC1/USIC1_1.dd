@@ -1,0 +1,1192 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="USIC1" description="Universal Serial Interface Channel 1" URI="http://www.infineon.com/0.1.30/peripheral/usic/1">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.2"/>
+    <resourcesList name="ccfg" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_ccfg" isResolved="true"/>
+    <resourcesList name="kscfg" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_kscfg" isResolved="true"/>
+    <resourcesList name="fdr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_fdr" isResolved="true"/>
+    <resourcesList name="brg" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_brg" isResolved="true"/>
+    <resourcesList name="dx0cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx0cr" isResolved="true"/>
+    <resourcesList name="dx0cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx0cr/dsel" isResolved="true"/>
+    <resourcesList name="dx1cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx1cr" isResolved="true"/>
+    <resourcesList name="dx1cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx1cr/dsel" isResolved="true"/>
+    <resourcesList name="dx2cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx2cr" isResolved="true"/>
+    <resourcesList name="dx2cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx2cr/dsel" isResolved="true"/>
+    <resourcesList name="dx3cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx3cr" isResolved="true"/>
+    <resourcesList name="dx3cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx3cr/dsel" isResolved="true"/>
+    <resourcesList name="dx4cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx4cr" isResolved="true"/>
+    <resourcesList name="dx4cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx4cr/dsel" isResolved="true"/>
+    <resourcesList name="dx5cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx5cr" isResolved="true"/>
+    <resourcesList name="dx5cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx5cr/dsel" isResolved="true"/>
+    <resourcesList name="sctr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_sctr" isResolved="true"/>
+    <resourcesList name="tcsr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tcsr" isResolved="true"/>
+    <resourcesList name="pcr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_pcr" isResolved="true"/>
+    <resourcesList name="ccr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_ccr" isResolved="true"/>
+    <resourcesList name="ccr_hpcen" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_ccr/hpcen" isResolved="true"/>
+    <resourcesList name="ccr_tsien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_ccr/tsien" isResolved="true"/>
+    <resourcesList name="ccr_tbien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_ccr/tbien" isResolved="true"/>
+    <resourcesList name="ccr_rsien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_ccr/rsien" isResolved="true"/>
+    <resourcesList name="ccr_rien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_ccr/rien" isResolved="true"/>
+    <resourcesList name="ccr_aien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_ccr/aien" isResolved="true"/>
+    <resourcesList name="ccr_dlien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_ccr/dlien" isResolved="true"/>
+    <resourcesList name="ccr_brgien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_ccr/brgien" isResolved="true"/>
+    <resourcesList name="inpr_tsinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_inpr/tsinp" isResolved="true"/>
+    <resourcesList name="inpr_tbinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_inpr/tbinp" isResolved="true"/>
+    <resourcesList name="inpr_rinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_inpr/rinp" isResolved="true"/>
+    <resourcesList name="inpr_ainp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_inpr/ainp" isResolved="true"/>
+    <resourcesList name="inpr_pinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_inpr/pinp" isResolved="true"/>
+    <resourcesList name="cmtr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_cmtr" isResolved="true"/>
+    <resourcesList name="psr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_psr" isResolved="true"/>
+    <resourcesList name="pscr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_pscr" isResolved="true"/>
+    <resourcesList name="rbufsr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbufsr" isResolved="true"/>
+    <resourcesList name="rbuf" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbuf" isResolved="true"/>
+    <resourcesList name="rbufd" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbufd" isResolved="true"/>
+    <resourcesList name="rbuf0" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbuf0" isResolved="true"/>
+    <resourcesList name="rbuf1" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbuf1" isResolved="true"/>
+    <resourcesList name="rbuf01sr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbuf01sr" isResolved="true"/>
+    <resourcesList name="fmr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_fmr" isResolved="true"/>
+    <resourcesList name="tbuf00" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf00" isResolved="true"/>
+    <resourcesList name="tbuf01" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf01" isResolved="true"/>
+    <resourcesList name="tbuf02" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf02" isResolved="true"/>
+    <resourcesList name="tbuf03" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf03" isResolved="true"/>
+    <resourcesList name="tbuf04" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf04" isResolved="true"/>
+    <resourcesList name="tbuf05" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf05" isResolved="true"/>
+    <resourcesList name="tbuf06" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf06" isResolved="true"/>
+    <resourcesList name="tbuf07" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf07" isResolved="true"/>
+    <resourcesList name="tbuf08" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf08" isResolved="true"/>
+    <resourcesList name="tbuf09" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf09" isResolved="true"/>
+    <resourcesList name="tbuf10" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf10" isResolved="true"/>
+    <resourcesList name="tbuf11" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf11" isResolved="true"/>
+    <resourcesList name="tbuf12" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf12" isResolved="true"/>
+    <resourcesList name="tbuf13" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf13" isResolved="true"/>
+    <resourcesList name="tbuf14" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf14" isResolved="true"/>
+    <resourcesList name="tbuf15" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf15" isResolved="true"/>
+    <resourcesList name="tbuf16" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf16" isResolved="true"/>
+    <resourcesList name="tbuf17" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf17" isResolved="true"/>
+    <resourcesList name="tbuf18" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf18" isResolved="true"/>
+    <resourcesList name="tbuf19" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf19" isResolved="true"/>
+    <resourcesList name="tbuf20" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf20" isResolved="true"/>
+    <resourcesList name="tbuf21" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf21" isResolved="true"/>
+    <resourcesList name="tbuf22" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf22" isResolved="true"/>
+    <resourcesList name="tbuf23" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf23" isResolved="true"/>
+    <resourcesList name="tbuf24" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf24" isResolved="true"/>
+    <resourcesList name="tbuf25" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf25" isResolved="true"/>
+    <resourcesList name="tbuf26" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf26" isResolved="true"/>
+    <resourcesList name="tbuf27" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf27" isResolved="true"/>
+    <resourcesList name="tbuf28" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf28" isResolved="true"/>
+    <resourcesList name="tbuf29" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf29" isResolved="true"/>
+    <resourcesList name="tbuf30" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf30" isResolved="true"/>
+    <resourcesList name="tbuf31" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbuf31" isResolved="true"/>
+    <resourcesList name="byp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_byp" isResolved="true"/>
+    <resourcesList name="bypcr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_bypcr" isResolved="true"/>
+    <resourcesList name="tbctr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbctr" isResolved="true"/>
+    <resourcesList name="tbctr_stbien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbctr/stbien" isResolved="true"/>
+    <resourcesList name="tbctr_tberien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbctr/tberien" isResolved="true"/>
+    <resourcesList name="tbctr_stbinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbctr/stbinp" isResolved="true"/>
+    <resourcesList name="tbctr_atbinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbctr/atbinp" isResolved="true"/>
+    <resourcesList name="rbctr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbctr" isResolved="true"/>
+    <resourcesList name="rbctr_srbien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbctr/srbien" isResolved="true"/>
+    <resourcesList name="rbctr_rberien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbctr/rberien" isResolved="true"/>
+    <resourcesList name="rbctr_arbien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbctr/arbien" isResolved="true"/>
+    <resourcesList name="rbctr_srbinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbctr/srbinp" isResolved="true"/>
+    <resourcesList name="rbctr_arbinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbctr/arbinp" isResolved="true"/>
+    <resourcesList name="rbctr_size" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbctr/size" isResolved="true"/>
+    <resourcesList name="rbctr_dptr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_rbctr/dptr" isResolved="true"/>
+    <resourcesList name="tbctr_dptr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbctr/dptr" isResolved="true"/>
+    <resourcesList name="tbctr_size" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_tbctr/size" isResolved="true"/>
+    <resourcesList name="trbptr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_trbptr" isResolved="true"/>
+    <resourcesList name="trbsr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_trbsr" isResolved="true"/>
+    <resourcesList name="trbscr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_trbscr" isResolved="true"/>
+    <resourcesList name="outr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_outr" isResolved="true"/>
+    <resourcesList name="outdr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_outdr" isResolved="true"/>
+    <resourcesList name="in00" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in00" isResolved="true"/>
+    <resourcesList name="in01" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in01" isResolved="true"/>
+    <resourcesList name="in02" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in02" isResolved="true"/>
+    <resourcesList name="in03" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in03" isResolved="true"/>
+    <resourcesList name="in04" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in04" isResolved="true"/>
+    <resourcesList name="in05" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in05" isResolved="true"/>
+    <resourcesList name="in06" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in06" isResolved="true"/>
+    <resourcesList name="in07" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in07" isResolved="true"/>
+    <resourcesList name="in08" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in08" isResolved="true"/>
+    <resourcesList name="in09" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in09" isResolved="true"/>
+    <resourcesList name="in10" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in10" isResolved="true"/>
+    <resourcesList name="in11" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in11" isResolved="true"/>
+    <resourcesList name="in12" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in12" isResolved="true"/>
+    <resourcesList name="in13" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in13" isResolved="true"/>
+    <resourcesList name="in14" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in14" isResolved="true"/>
+    <resourcesList name="in15" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in15" isResolved="true"/>
+    <resourcesList name="in16" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in16" isResolved="true"/>
+    <resourcesList name="in17" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in17" isResolved="true"/>
+    <resourcesList name="in18" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in18" isResolved="true"/>
+    <resourcesList name="in19" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in19" isResolved="true"/>
+    <resourcesList name="in20" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in20" isResolved="true"/>
+    <resourcesList name="in21" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in21" isResolved="true"/>
+    <resourcesList name="in22" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in22" isResolved="true"/>
+    <resourcesList name="in23" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in23" isResolved="true"/>
+    <resourcesList name="in24" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in24" isResolved="true"/>
+    <resourcesList name="in25" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in25" isResolved="true"/>
+    <resourcesList name="in26" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in26" isResolved="true"/>
+    <resourcesList name="in27" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in27" isResolved="true"/>
+    <resourcesList name="in28" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in28" isResolved="true"/>
+    <resourcesList name="in29" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in29" isResolved="true"/>
+    <resourcesList name="in30" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in30" isResolved="true"/>
+    <resourcesList name="in31" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_in31" isResolved="true"/>
+    <resourcesList name="dx0ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx0ins" isResolved="true"/>
+    <resourcesList name="dx3ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx3ins" isResolved="true"/>
+    <resourcesList name="dx4ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx4ins" isResolved="true"/>
+    <resourcesList name="dx5ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx5ins" isResolved="true"/>
+    <resourcesList name="dx1ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx1ins" isResolved="true"/>
+    <resourcesList name="dx2ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dx2ins" isResolved="true"/>
+    <resourcesList name="selo0" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_selo0" isResolved="true"/>
+    <resourcesList name="selo1" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_selo1" isResolved="true"/>
+    <resourcesList name="selo2" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_selo2" isResolved="true"/>
+    <resourcesList name="selo3" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_selo3" isResolved="true"/>
+    <resourcesList name="selo4" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_selo4" isResolved="true"/>
+    <resourcesList name="selo5" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_selo5" isResolved="true"/>
+    <resourcesList name="selo6" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_selo6" isResolved="true"/>
+    <resourcesList name="selo7" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_selo7" isResolved="true"/>
+    <resourcesList name="mclkout" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_mclkout" isResolved="true"/>
+    <resourcesList name="sclkout" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_sclkout" isResolved="true"/>
+    <resourcesList name="dout0" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dout0" isResolved="true"/>
+    <resourcesList name="dout1" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dout1" isResolved="true"/>
+    <resourcesList name="dout2" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dout2" isResolved="true"/>
+    <resourcesList name="dout3" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_dout3" isResolved="true"/>
+    <resourcesList name="transmit_shift_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_transmit_shift_int" isResolved="true"/>
+    <resourcesList name="transmit_buffer_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_transmit_buffer_int" isResolved="true"/>
+    <resourcesList name="receive_start_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_receive_start_int" isResolved="true"/>
+    <resourcesList name="standard_receive_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_standard_receive_int" isResolved="true"/>
+    <resourcesList name="alternate_receive_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_alternate_receive_int" isResolved="true"/>
+    <resourcesList name="data_lost_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_data_lost_int" isResolved="true"/>
+    <resourcesList name="baud_rate_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_baud_rate_int" isResolved="true"/>
+    <resourcesList name="protocol_specific_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_protocol_specific_int" isResolved="true"/>
+    <resourcesList name="standard_transmit_buffer_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_standard_transmit_buffer_int" isResolved="true"/>
+    <resourcesList name="transmit_buffer_error_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_transmit_buffer_error_int" isResolved="true"/>
+    <resourcesList name="standard_receive_buffer_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_standard_receive_buffer_int" isResolved="true"/>
+    <resourcesList name="receive_buffer_error_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_receive_buffer_error_int" isResolved="true"/>
+    <resourcesList name="alternate_receive_buffer_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c0_alternate_receive_buffer_int" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_data_lost_int" description="Data Lost Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/data_lost_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.19"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_receive_start_int" description="Receive Start Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/receive_start_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.20"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_standard_transmit_buffer_int" description="Standard Transmit Buffer Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/standard_transmit_buffer_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.21"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_receive_buffer_error_int" description="Receive Buffer Error Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/receive_buffer_error_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.22"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_transmit_shift_int" description="Transmit Shift Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/transmit_shift_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.23"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_transmit_buffer_int" description="Transmit Buffer Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/transmit_buffer_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.24"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_transmit_buffer_error_int" description="Transmit Buffer Error Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/transmit_buffer_error_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.25"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_dx3ins" description="Selected input signal of DX3 " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/dx3ins" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.26"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PM" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/ccr/pm" maxValue="3" minValue="0" startPos="8" stopPos="9" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.27"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Parity Mode</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="The parity generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Reserved"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Even parity is selected (parity bit = 1 on odd number of 1s in data, parity bit = 0 on even number of 1s in data)."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Odd parity is selected (parity bit = 0 on odd number of 1s in data, parity bit = 1 on even number of 1s in data)."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="BRGIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/ccr/brgien" maxValue="1" minValue="0" startPos="16" stopPos="16" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.29"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Baud Rate Generator Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The baud rate generator interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The baud rate generator interrupt is enabled. In case of a baud rate generator event, the service request output SRx indicated by INPR.PINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="LIMIT" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/rbctr/limit" maxValue="63" minValue="0" startPos="8" stopPos="13" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.30"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1f"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1f"/>
+    <toolTipHelpDescription>Limit For Interrupt Generation</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="SIZE" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/rbctr_size" maxValue="7" minValue="0" startPos="24" stopPos="26" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.31"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="5"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="5"/>
+    <toolTipHelpDescription>Buffer Size</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The FIFO mechanism is disabled. The buffer does not accept any request for data."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The FIFO buffer contains 2 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The FIFO buffer contains 4 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The FIFO buffer contains 8 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The FIFO buffer contains 16 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The FIFO buffer contains 32 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The FIFO buffer contains 64 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="Reserved"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="LIMIT" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/tbctr/limit" maxValue="63" minValue="0" startPos="8" stopPos="13" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.32"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Limit For Interrupt Generation</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="SIZE" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/tbctr_size" maxValue="7" minValue="0" startPos="24" stopPos="26" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.33"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Buffer Size</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The FIFO mechanism is disabled. The buffer does not accept any request for data."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The FIFO buffer contains 2 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The FIFO buffer contains 4 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The FIFO buffer contains 8 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The FIFO buffer contains 16 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The FIFO buffer contains 32 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The FIFO buffer contains 64 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="Reserved"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="WLE" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/sctr/wle" maxValue="15" minValue="0" startPos="24" stopPos="27" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.34"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="7"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="7"/>
+    <toolTipHelpDescription>Word Length</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0" description="The data word contains 1 data bit located at bit position 0."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="1" description="The data word contains 2 data bits located at bit positions [1:0]."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="E" description="The data word contains 15 data bits located at bit positions [14:0]."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="F" description="The data word contains 16 data bits located at bit positions [15:0]."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PDIV" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/brg/pdiv" maxValue="1023" minValue="0" startPos="16" stopPos="25" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.35"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1fc"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1fc"/>
+    <toolTipHelpDescription>Divider Mode: Divider Factor to Generate fPDIV</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="STEP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/fdr/step" maxValue="1023" minValue="0" startPos="0" stopPos="9" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.36"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="342"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="342"/>
+    <toolTipHelpDescription>Step Value</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_standard_receive_buffer_int" description="Standard Receive Buffer Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/standard_receive_buffer_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.37"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_standard_receive_int" description="Standard Receive Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/standard_receive_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.38"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_alternate_receive_int" description="Alternate Receive Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/alternate_receive_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.39"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_baud_rate_int" description="Baud Rate Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/baud_rate_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.40"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_protocol_specific_int" description="Protocol Specific Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/protocol_specific_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.41"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_alternate_receive_buffer_int" description="Alternate Receive Buffer Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/alternate_receive_buffer_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.42"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_dx0ins" description="Selected input signal of DX0 " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/dx0ins" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.43"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c0_dout0" description="Shift data output sclkout dout0  " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/dout0" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.44"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="1" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.2"/>
+    <resourcesList name="ccfg" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_ccfg" isResolved="true"/>
+    <resourcesList name="kscfg" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_kscfg" isResolved="true"/>
+    <resourcesList name="fdr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_fdr" isResolved="true"/>
+    <resourcesList name="brg" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_brg" isResolved="true"/>
+    <resourcesList name="dx0cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx0cr" isResolved="true"/>
+    <resourcesList name="dx0cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx0cr/dsel" isResolved="true"/>
+    <resourcesList name="dx1cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx1cr" isResolved="true"/>
+    <resourcesList name="dx1cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx1cr/dsel" isResolved="true"/>
+    <resourcesList name="dx2cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx2cr" isResolved="true"/>
+    <resourcesList name="dx2cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx2cr/dsel" isResolved="true"/>
+    <resourcesList name="dx3cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx3cr" isResolved="true"/>
+    <resourcesList name="dx3cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx3cr/dsel" isResolved="true"/>
+    <resourcesList name="dx4cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx4cr" isResolved="true"/>
+    <resourcesList name="dx4cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx4cr/dsel" isResolved="true"/>
+    <resourcesList name="dx5cr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx5cr" isResolved="true"/>
+    <resourcesList name="dx5cr_dsel" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx5cr/dsel" isResolved="true"/>
+    <resourcesList name="sctr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_sctr" isResolved="true"/>
+    <resourcesList name="tcsr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tcsr" isResolved="true"/>
+    <resourcesList name="pcr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_pcr" isResolved="true"/>
+    <resourcesList name="ccr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_ccr" isResolved="true"/>
+    <resourcesList name="ccr_hpcen" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_ccr/hpcen" isResolved="true"/>
+    <resourcesList name="ccr_tsien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_ccr/tsien" isResolved="true"/>
+    <resourcesList name="ccr_tbien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_ccr/tbien" isResolved="true"/>
+    <resourcesList name="ccr_rsien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_ccr/rsien" isResolved="true"/>
+    <resourcesList name="ccr_rien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_ccr/rien" isResolved="true"/>
+    <resourcesList name="ccr_aien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_ccr/aien" isResolved="true"/>
+    <resourcesList name="ccr_dlien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_ccr/dlien" isResolved="true"/>
+    <resourcesList name="ccr_brgien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_ccr/brgien" isResolved="true"/>
+    <resourcesList name="inpr_tsinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_inpr/tsinp" isResolved="true"/>
+    <resourcesList name="inpr_tbinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_inpr/tbinp" isResolved="true"/>
+    <resourcesList name="inpr_rinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_inpr/rinp" isResolved="true"/>
+    <resourcesList name="inpr_ainp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_inpr/ainp" isResolved="true"/>
+    <resourcesList name="inpr_pinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_inpr/pinp" isResolved="true"/>
+    <resourcesList name="cmtr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_cmtr" isResolved="true"/>
+    <resourcesList name="psr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_psr" isResolved="true"/>
+    <resourcesList name="pscr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_pscr" isResolved="true"/>
+    <resourcesList name="rbufsr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbufsr" isResolved="true"/>
+    <resourcesList name="rbuf" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbuf" isResolved="true"/>
+    <resourcesList name="rbufd" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbufd" isResolved="true"/>
+    <resourcesList name="rbuf0" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbuf0" isResolved="true"/>
+    <resourcesList name="rbuf1" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbuf1" isResolved="true"/>
+    <resourcesList name="rbuf01sr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbuf01sr" isResolved="true"/>
+    <resourcesList name="fmr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_fmr" isResolved="true"/>
+    <resourcesList name="tbuf00" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf00" isResolved="true"/>
+    <resourcesList name="tbuf01" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf01" isResolved="true"/>
+    <resourcesList name="tbuf02" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf02" isResolved="true"/>
+    <resourcesList name="tbuf03" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf03" isResolved="true"/>
+    <resourcesList name="tbuf04" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf04" isResolved="true"/>
+    <resourcesList name="tbuf05" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf05" isResolved="true"/>
+    <resourcesList name="tbuf06" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf06" isResolved="true"/>
+    <resourcesList name="tbuf07" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf07" isResolved="true"/>
+    <resourcesList name="tbuf08" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf08" isResolved="true"/>
+    <resourcesList name="tbuf09" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf09" isResolved="true"/>
+    <resourcesList name="tbuf10" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf10" isResolved="true"/>
+    <resourcesList name="tbuf11" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf11" isResolved="true"/>
+    <resourcesList name="tbuf12" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf12" isResolved="true"/>
+    <resourcesList name="tbuf13" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf13" isResolved="true"/>
+    <resourcesList name="tbuf14" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf14" isResolved="true"/>
+    <resourcesList name="tbuf15" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf15" isResolved="true"/>
+    <resourcesList name="tbuf16" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf16" isResolved="true"/>
+    <resourcesList name="tbuf17" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf17" isResolved="true"/>
+    <resourcesList name="tbuf18" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf18" isResolved="true"/>
+    <resourcesList name="tbuf19" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf19" isResolved="true"/>
+    <resourcesList name="tbuf20" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf20" isResolved="true"/>
+    <resourcesList name="tbuf21" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf21" isResolved="true"/>
+    <resourcesList name="tbuf22" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf22" isResolved="true"/>
+    <resourcesList name="tbuf23" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf23" isResolved="true"/>
+    <resourcesList name="tbuf24" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf24" isResolved="true"/>
+    <resourcesList name="tbuf25" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf25" isResolved="true"/>
+    <resourcesList name="tbuf26" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf26" isResolved="true"/>
+    <resourcesList name="tbuf27" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf27" isResolved="true"/>
+    <resourcesList name="tbuf28" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf28" isResolved="true"/>
+    <resourcesList name="tbuf29" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf29" isResolved="true"/>
+    <resourcesList name="tbuf30" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf30" isResolved="true"/>
+    <resourcesList name="tbuf31" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbuf31" isResolved="true"/>
+    <resourcesList name="byp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_byp" isResolved="true"/>
+    <resourcesList name="bypcr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_bypcr" isResolved="true"/>
+    <resourcesList name="tbctr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbctr" isResolved="true"/>
+    <resourcesList name="tbctr_stbien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbctr/stbien" isResolved="true"/>
+    <resourcesList name="tbctr_tberien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbctr/tberien" isResolved="true"/>
+    <resourcesList name="tbctr_stbinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbctr/stbinp" isResolved="true"/>
+    <resourcesList name="tbctr_atbinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbctr/atbinp" isResolved="true"/>
+    <resourcesList name="rbctr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbctr" isResolved="true"/>
+    <resourcesList name="rbctr_srbien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbctr/srbien" isResolved="true"/>
+    <resourcesList name="rbctr_rberien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbctr/rberien" isResolved="true"/>
+    <resourcesList name="rbctr_arbien" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbctr/arbien" isResolved="true"/>
+    <resourcesList name="rbctr_srbinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbctr/srbinp" isResolved="true"/>
+    <resourcesList name="rbctr_arbinp" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbctr/arbinp" isResolved="true"/>
+    <resourcesList name="rbctr_size" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbctr/size" isResolved="true"/>
+    <resourcesList name="rbctr_dptr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_rbctr/dptr" isResolved="true"/>
+    <resourcesList name="tbctr_dptr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbctr/dptr" isResolved="true"/>
+    <resourcesList name="tbctr_size" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_tbctr/size" isResolved="true"/>
+    <resourcesList name="trbptr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_trbptr" isResolved="true"/>
+    <resourcesList name="trbsr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_trbsr" isResolved="true"/>
+    <resourcesList name="trbscr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_trbscr" isResolved="true"/>
+    <resourcesList name="outr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_outr" isResolved="true"/>
+    <resourcesList name="outdr" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_outdr" isResolved="true"/>
+    <resourcesList name="in00" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in00" isResolved="true"/>
+    <resourcesList name="in01" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in01" isResolved="true"/>
+    <resourcesList name="in02" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in02" isResolved="true"/>
+    <resourcesList name="in03" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in03" isResolved="true"/>
+    <resourcesList name="in04" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in04" isResolved="true"/>
+    <resourcesList name="in05" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in05" isResolved="true"/>
+    <resourcesList name="in06" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in06" isResolved="true"/>
+    <resourcesList name="in07" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in07" isResolved="true"/>
+    <resourcesList name="in08" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in08" isResolved="true"/>
+    <resourcesList name="in09" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in09" isResolved="true"/>
+    <resourcesList name="in10" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in10" isResolved="true"/>
+    <resourcesList name="in11" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in11" isResolved="true"/>
+    <resourcesList name="in12" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in12" isResolved="true"/>
+    <resourcesList name="in13" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in13" isResolved="true"/>
+    <resourcesList name="in14" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in14" isResolved="true"/>
+    <resourcesList name="in15" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in15" isResolved="true"/>
+    <resourcesList name="in16" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in16" isResolved="true"/>
+    <resourcesList name="in17" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in17" isResolved="true"/>
+    <resourcesList name="in18" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in18" isResolved="true"/>
+    <resourcesList name="in19" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in19" isResolved="true"/>
+    <resourcesList name="in20" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in20" isResolved="true"/>
+    <resourcesList name="in21" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in21" isResolved="true"/>
+    <resourcesList name="in22" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in22" isResolved="true"/>
+    <resourcesList name="in23" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in23" isResolved="true"/>
+    <resourcesList name="in24" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in24" isResolved="true"/>
+    <resourcesList name="in25" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in25" isResolved="true"/>
+    <resourcesList name="in26" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in26" isResolved="true"/>
+    <resourcesList name="in27" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in27" isResolved="true"/>
+    <resourcesList name="in28" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in28" isResolved="true"/>
+    <resourcesList name="in29" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in29" isResolved="true"/>
+    <resourcesList name="in30" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in30" isResolved="true"/>
+    <resourcesList name="in31" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_in31" isResolved="true"/>
+    <resourcesList name="dx0ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx0ins" isResolved="true"/>
+    <resourcesList name="dx3ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx3ins" isResolved="true"/>
+    <resourcesList name="dx4ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx4ins" isResolved="true"/>
+    <resourcesList name="dx5ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx5ins" isResolved="true"/>
+    <resourcesList name="dx1ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx1ins" isResolved="true"/>
+    <resourcesList name="dx2ins" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dx2ins" isResolved="true"/>
+    <resourcesList name="selo0" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_selo0" isResolved="true"/>
+    <resourcesList name="selo1" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_selo1" isResolved="true"/>
+    <resourcesList name="selo2" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_selo2" isResolved="true"/>
+    <resourcesList name="selo3" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_selo3" isResolved="true"/>
+    <resourcesList name="selo4" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_selo4" isResolved="true"/>
+    <resourcesList name="selo5" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_selo5" isResolved="true"/>
+    <resourcesList name="selo6" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_selo6" isResolved="true"/>
+    <resourcesList name="selo7" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_selo7" isResolved="true"/>
+    <resourcesList name="mclkout" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_mclkout" isResolved="true"/>
+    <resourcesList name="sclkout" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_sclkout" isResolved="true"/>
+    <resourcesList name="dout0" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dout0" isResolved="true"/>
+    <resourcesList name="dout1" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dout1" isResolved="true"/>
+    <resourcesList name="dout2" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dout2" isResolved="true"/>
+    <resourcesList name="dout3" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_dout3" isResolved="true"/>
+    <resourcesList name="transmit_shift_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_transmit_shift_int" isResolved="true"/>
+    <resourcesList name="transmit_buffer_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_transmit_buffer_int" isResolved="true"/>
+    <resourcesList name="receive_start_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_receive_start_int" isResolved="true"/>
+    <resourcesList name="standard_receive_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_standard_receive_int" isResolved="true"/>
+    <resourcesList name="alternate_receive_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_alternate_receive_int" isResolved="true"/>
+    <resourcesList name="data_lost_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_data_lost_int" isResolved="true"/>
+    <resourcesList name="baud_rate_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_baud_rate_int" isResolved="true"/>
+    <resourcesList name="protocol_specific_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_protocol_specific_int" isResolved="true"/>
+    <resourcesList name="standard_transmit_buffer_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_standard_transmit_buffer_int" isResolved="true"/>
+    <resourcesList name="transmit_buffer_error_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_transmit_buffer_error_int" isResolved="true"/>
+    <resourcesList name="standard_receive_buffer_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_standard_receive_buffer_int" isResolved="true"/>
+    <resourcesList name="receive_buffer_error_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_receive_buffer_error_int" isResolved="true"/>
+    <resourcesList name="alternate_receive_buffer_int" requiredResourceUri="http://www.infineon.com/0.1.30/peripheral/usic/1/c1_alternate_receive_buffer_int" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_data_lost_int" description="Data Lost Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/data_lost_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.19"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_receive_start_int" description="Receive Start Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/receive_start_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.20"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_standard_transmit_buffer_int" description="Standard Transmit Buffer Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/standard_transmit_buffer_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.21"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_receive_buffer_error_int" description="Receive Buffer Error Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/receive_buffer_error_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.22"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_transmit_shift_int" description="Transmit Shift Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/transmit_shift_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.23"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_transmit_buffer_int" description="Transmit Buffer Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/transmit_buffer_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.24"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_transmit_buffer_error_int" description="Transmit Buffer Error Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/transmit_buffer_error_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.25"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_dx3ins" description="Selected input signal of DX3 " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/dx3ins" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.26"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PM" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/ccr/pm" maxValue="3" minValue="0" startPos="8" stopPos="9" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.27"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Parity Mode</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="The parity generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Reserved"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Even parity is selected (parity bit = 1 on odd number of 1s in data, parity bit = 0 on even number of 1s in data)."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Odd parity is selected (parity bit = 0 on odd number of 1s in data, parity bit = 1 on even number of 1s in data)."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="BRGIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/ccr/brgien" maxValue="1" minValue="0" startPos="16" stopPos="16" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.29"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Baud Rate Generator Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The baud rate generator interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The baud rate generator interrupt is enabled. In case of a baud rate generator event, the service request output SRx indicated by INPR.PINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="LIMIT" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/rbctr/limit" maxValue="63" minValue="0" startPos="8" stopPos="13" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.30"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="b"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="b"/>
+    <toolTipHelpDescription>Limit For Interrupt Generation</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="SIZE" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/rbctr_size" maxValue="7" minValue="0" startPos="24" stopPos="26" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.31"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="4"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="4"/>
+    <toolTipHelpDescription>Buffer Size</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The FIFO mechanism is disabled. The buffer does not accept any request for data."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The FIFO buffer contains 2 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The FIFO buffer contains 4 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The FIFO buffer contains 8 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The FIFO buffer contains 16 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The FIFO buffer contains 32 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The FIFO buffer contains 64 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="Reserved"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="LIMIT" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/tbctr/limit" maxValue="63" minValue="0" startPos="8" stopPos="13" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.32"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="b"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="b"/>
+    <toolTipHelpDescription>Limit For Interrupt Generation</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="SIZE" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/tbctr_size" maxValue="7" minValue="0" startPos="24" stopPos="26" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.33"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="4"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="4"/>
+    <toolTipHelpDescription>Buffer Size</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The FIFO mechanism is disabled. The buffer does not accept any request for data."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The FIFO buffer contains 2 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The FIFO buffer contains 4 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The FIFO buffer contains 8 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The FIFO buffer contains 16 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The FIFO buffer contains 32 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The FIFO buffer contains 64 entries."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="Reserved"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="WLE" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/sctr/wle" maxValue="15" minValue="0" startPos="24" stopPos="27" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.34"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="7"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="7"/>
+    <toolTipHelpDescription>Word Length</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0" description="The data word contains 1 data bit located at bit position 0."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="1" description="The data word contains 2 data bits located at bit positions [1:0]."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="E" description="The data word contains 15 data bits located at bit positions [14:0]."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="F" description="The data word contains 16 data bits located at bit positions [15:0]."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PDIV" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/brg/pdiv" maxValue="1023" minValue="0" startPos="16" stopPos="25" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.35"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1fc"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1fc"/>
+    <toolTipHelpDescription>Divider Mode: Divider Factor to Generate fPDIV</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="STEP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/fdr/step" maxValue="1023" minValue="0" startPos="0" stopPos="9" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.36"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="342"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="342"/>
+    <toolTipHelpDescription>Step Value</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_standard_receive_buffer_int" description="Standard Receive Buffer Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/standard_receive_buffer_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.37"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_standard_receive_int" description="Standard Receive Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/standard_receive_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.38"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_alternate_receive_int" description="Alternate Receive Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/alternate_receive_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.39"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_baud_rate_int" description="Baud Rate Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/baud_rate_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.40"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_protocol_specific_int" description="Protocol Specific Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/protocol_specific_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.41"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_alternate_receive_buffer_int" description="Alternate Receive Buffer Interrupt " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/alternate_receive_buffer_int" signalType="INTERRUPT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.42"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_dx0ins" description="Selected input signal of DX0 " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/dx0ins" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.43"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="c1_dout0" description="Shift data output sclkout dout0  " URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/dout0" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_1.app#//@consumed.44"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/dx2cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DXnA is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DXnB is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DXnC is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DXnD is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DXnE is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DXnF is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DXnG is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/dx4cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DXnA is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DXnB is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DXnC is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DXnD is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DXnE is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DXnF is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DXnG is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="HPCEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/ccr_hpcen" maxValue="3" minValue="0" startPos="6" stopPos="7" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Hardware Port Control Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="The hardware port control is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="The hardware port control is enabled for DIN0 and DOUT0."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="The hardware port control is enabled for DIN[1:0] and DOUT[1:0]."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="The hardware port control is enabled for DIN[3:0] and DOUT[3:0]."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/dx3cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DXnA is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DXnB is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DXnC is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DXnD is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DXnE is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DXnF is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DXnG is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/dx1cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DX1A is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DX1B is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DX1C is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DX1D is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DX1E is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DX1F is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DX1G is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/dx0cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DXnA is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DXnB is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DXnC is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DXnD is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DXnE is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DXnF is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DXnG is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/dx5cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DXnA is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DXnB is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DXnC is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DXnD is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DXnE is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DXnF is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DXnG is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="SRBIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/rbctr_srbien" maxValue="1" minValue="0" startPos="30" stopPos="30" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>Standard Receive Buffer Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The standard receive buffer interrupt generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The standard receive buffer interrupt generation is enabled."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="SRBINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/rbctr_srbinp" maxValue="7" minValue="0" startPos="16" stopPos="18" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Standard Receive Buffer Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="AIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/ccr_aien" maxValue="1" minValue="0" startPos="15" stopPos="15" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Alternative Receive Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The alternative receive interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The alternative receive interrupt is enabled. In case of an alternative receive event, the service request output SRx indicated by INPR.AINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="AINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/inpr_ainp" maxValue="7" minValue="0" startPos="12" stopPos="14" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Alternative Receive Interrupt Node Pointer</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="BRGIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/ccr_brgien" maxValue="1" minValue="0" startPos="16" stopPos="16" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Baud Rate Generator Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The baud rate generator interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The baud rate generator interrupt is enabled. In case of a baud rate generator event, the service request output SRx indicated by INPR.PINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/inpr_pinp" maxValue="7" minValue="0" startPos="16" stopPos="18" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Shift Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RBERIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/rbctr_rberien" maxValue="1" minValue="0" startPos="31" stopPos="31" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Receive Buffer Error Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The receive buffer error interrupt generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The receive buffer error interrupt generation is enabled."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="ARBINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/rbctr_arbinp" maxValue="7" minValue="0" startPos="19" stopPos="21" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Alternative Receive Buffer Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TSIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/ccr_tsien" maxValue="1" minValue="0" startPos="12" stopPos="12" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Shift Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The transmit shift interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The transmit shift interrupt is enabled. In case of a transmit shift interrupt event, the service request output SRx indicated by INPR.TSINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TSINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/inpr_tsinp" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Shift Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="ARBIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/rbctr_arbien" maxValue="1" minValue="0" startPos="29" stopPos="29" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Alternative Receive Buffer Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The alternative receive buffer interrupt generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The alternative receive buffer interrupt generation is enabled."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TBERIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/tbctr_tberien" maxValue="1" minValue="0" startPos="31" stopPos="31" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Buffer Error Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The transmit buffer error interrupt generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The transmit buffer error interrupt generation is enabled."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="ATBINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/tbctr_atbinp" maxValue="7" minValue="0" startPos="19" stopPos="21" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Alternative Transmit Buffer Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TBIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/ccr_tbien" maxValue="1" minValue="0" startPos="13" stopPos="13" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Buffer Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The transmit buffer interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The transmit buffer interrupt is enabled. In case of a transmit buffer event, the service request output SRx indicated by INPR.TBINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TBINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/inpr_tbinp" maxValue="7" minValue="0" startPos="4" stopPos="6" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Buffer Interrupt Node Pointer</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RSIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/ccr_rsien" maxValue="1" minValue="0" startPos="10" stopPos="10" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Receiver Start Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The receiver start interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The receiver start interrupt is enabled. In case of a receiver start event, the service request output SRx indicated by INPR.TBINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DLIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/ccr_dlien" maxValue="1" minValue="0" startPos="11" stopPos="11" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Lost Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The data lost interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The data lost interrupt is enabled. In case of a data lost event, the service request output SRx indicated by INPR.PINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="STBIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/tbctr_stbien" maxValue="1" minValue="0" startPos="30" stopPos="30" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Standard Transmit Buffer Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The standard transmit buffer interrupt generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The standard transmit buffer interrupt generation is enabled."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="STBINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/tbctr_stbinp" maxValue="7" minValue="0" startPos="16" stopPos="18" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Standard Transmit Buffer Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/ccr_rien" maxValue="1" minValue="0" startPos="14" stopPos="14" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Receive Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The receive interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The receive interrupt is enabled. In case of a receive event, the service request output SRx indicated by INPR.RINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/inpr_rinp" maxValue="7" minValue="0" startPos="8" stopPos="10" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Receive Interrupt Node Pointer</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DPTR" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/rbctr_dptr" maxValue="63" minValue="0" startPos="0" stopPos="5" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Pointer</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DPTR" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/0/tbctr_dptr" maxValue="63" minValue="0" startPos="0" stopPos="5" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Pointer</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/dx2cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DXnA is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DXnB is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DXnC is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DXnD is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DXnE is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DXnF is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DXnG is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/dx4cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DXnA is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DXnB is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DXnC is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DXnD is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DXnE is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DXnF is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DXnG is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="HPCEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/ccr_hpcen" maxValue="3" minValue="0" startPos="6" stopPos="7" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Hardware Port Control Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="The hardware port control is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="The hardware port control is enabled for DIN0 and DOUT0."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="The hardware port control is enabled for DIN[1:0] and DOUT[1:0]."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="The hardware port control is enabled for DIN[3:0] and DOUT[3:0]."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/dx3cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DXnA is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DXnB is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DXnC is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DXnD is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DXnE is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DXnF is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DXnG is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/dx1cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DX1A is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DX1B is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DX1C is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DX1D is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DX1E is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DX1F is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DX1G is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/dx0cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="3"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="3"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DXnA is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DXnB is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DXnC is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DXnD is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DXnE is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DXnF is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DXnG is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DSEL" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/dx5cr_dsel" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Selection for Input Signal</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="The data input DXnA is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="The data input DXnB is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="The data input DXnC is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="The data input DXnD is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="The data input DXnE is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="The data input DXnF is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="The data input DXnG is selected."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="The data input is always 1."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="SRBIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/rbctr_srbien" maxValue="1" minValue="0" startPos="30" stopPos="30" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Standard Receive Buffer Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The standard receive buffer interrupt generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The standard receive buffer interrupt generation is enabled."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="SRBINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/rbctr_srbinp" maxValue="7" minValue="0" startPos="16" stopPos="18" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Standard Receive Buffer Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="AIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/ccr_aien" maxValue="1" minValue="0" startPos="15" stopPos="15" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Alternative Receive Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The alternative receive interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The alternative receive interrupt is enabled. In case of an alternative receive event, the service request output SRx indicated by INPR.AINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="AINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/inpr_ainp" maxValue="7" minValue="0" startPos="12" stopPos="14" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Alternative Receive Interrupt Node Pointer</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="BRGIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/ccr_brgien" maxValue="1" minValue="0" startPos="16" stopPos="16" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Baud Rate Generator Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The baud rate generator interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The baud rate generator interrupt is enabled. In case of a baud rate generator event, the service request output SRx indicated by INPR.PINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/inpr_pinp" maxValue="7" minValue="0" startPos="16" stopPos="18" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Shift Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RBERIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/rbctr_rberien" maxValue="1" minValue="0" startPos="31" stopPos="31" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Receive Buffer Error Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The receive buffer error interrupt generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The receive buffer error interrupt generation is enabled."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="ARBINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/rbctr_arbinp" maxValue="7" minValue="0" startPos="19" stopPos="21" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Alternative Receive Buffer Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TSIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/ccr_tsien" maxValue="1" minValue="0" startPos="12" stopPos="12" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Shift Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The transmit shift interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The transmit shift interrupt is enabled. In case of a transmit shift interrupt event, the service request output SRx indicated by INPR.TSINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TSINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/inpr_tsinp" maxValue="7" minValue="0" startPos="0" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Shift Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="ARBIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/rbctr_arbien" maxValue="1" minValue="0" startPos="29" stopPos="29" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Alternative Receive Buffer Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The alternative receive buffer interrupt generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The alternative receive buffer interrupt generation is enabled."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TBERIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/tbctr_tberien" maxValue="1" minValue="0" startPos="31" stopPos="31" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Buffer Error Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The transmit buffer error interrupt generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The transmit buffer error interrupt generation is enabled."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="ATBINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/tbctr_atbinp" maxValue="7" minValue="0" startPos="19" stopPos="21" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Alternative Transmit Buffer Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TBIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/ccr_tbien" maxValue="1" minValue="0" startPos="13" stopPos="13" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Buffer Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The transmit buffer interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The transmit buffer interrupt is enabled. In case of a transmit buffer event, the service request output SRx indicated by INPR.TBINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TBINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/inpr_tbinp" maxValue="7" minValue="0" startPos="4" stopPos="6" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Transmit Buffer Interrupt Node Pointer</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RSIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/ccr_rsien" maxValue="1" minValue="0" startPos="10" stopPos="10" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Receiver Start Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The receiver start interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The receiver start interrupt is enabled. In case of a receiver start event, the service request output SRx indicated by INPR.TBINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DLIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/ccr_dlien" maxValue="1" minValue="0" startPos="11" stopPos="11" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Data Lost Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The data lost interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The data lost interrupt is enabled. In case of a data lost event, the service request output SRx indicated by INPR.PINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="STBIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/tbctr_stbien" maxValue="1" minValue="0" startPos="30" stopPos="30" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Standard Transmit Buffer Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The standard transmit buffer interrupt generation is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The standard transmit buffer interrupt generation is enabled."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="STBINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/tbctr_stbinp" maxValue="7" minValue="0" startPos="16" stopPos="18" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Standard Transmit Buffer Interrupt Node Pointer</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="Output SR0 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="Output SR1 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="Output SR2 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="Output SR3 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="Output SR4 becomes activated."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="Output SR5 becomes activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RIEN" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/ccr_rien" maxValue="1" minValue="0" startPos="14" stopPos="14" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Receive Interrupt Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The receive interrupt is disabled."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The receive interrupt is enabled. In case of a receive event, the service request output SRx indicated by INPR.RINP is activated."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RINP" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/inpr_rinp" maxValue="7" minValue="0" startPos="8" stopPos="10" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Receive Interrupt Node Pointer</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DPTR" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/rbctr_dptr" maxValue="63" minValue="0" startPos="0" stopPos="5" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="32"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="32"/>
+    <toolTipHelpDescription>Data Pointer</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DPTR" URI="http://www.infineon.com/0.1.30/peripheral/usic/1/channel/1/tbctr_dptr" maxValue="63" minValue="0" startPos="0" stopPos="5" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="48"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="48"/>
+    <toolTipHelpDescription>Data Pointer</toolTipHelpDescription>
+  </provided>
+  <categoryDescription description="USIC 1 Device Description" name="USIC 1"/>
+</ResourceModel:Peripheral>

@@ -1,0 +1,1380 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"DaisyChain.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.NVIC_EnableIRQ,"ax",%progbits
+  18              		.align	2
+  19              		.code	16
+  20              		.thumb_func
+  22              	NVIC_EnableIRQ:
+  23              	.LFB24:
+  24              		.file 1 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm0.h"
+   1:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /**************************************************************************//**
+   2:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  * @file     core_cm0.h
+   3:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  * @brief    CMSIS Cortex-M0 Core Peripheral Access Layer Header File
+   4:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  * @version  V3.20
+   5:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  * @date     25. February 2013
+   6:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  *
+   7:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  * @note
+   8:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  *
+   9:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  ******************************************************************************/
+  10:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* Copyright (c) 2009 - 2013 ARM LIMITED
+  11:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  12:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    All rights reserved.
+  13:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    Redistribution and use in source and binary forms, with or without
+  14:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    modification, are permitted provided that the following conditions are met:
+  15:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    - Redistributions of source code must retain the above copyright
+  16:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****      notice, this list of conditions and the following disclaimer.
+  17:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    - Redistributions in binary form must reproduce the above copyright
+  18:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****      notice, this list of conditions and the following disclaimer in the
+  19:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****      documentation and/or other materials provided with the distribution.
+  20:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    - Neither the name of ARM nor the names of its contributors may be used
+  21:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****      to endorse or promote products derived from this software without
+  22:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****      specific prior written permission.
+  23:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    *
+  24:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  25:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  26:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  27:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+  28:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  29:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  30:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  31:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  32:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  33:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  34:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    POSSIBILITY OF SUCH DAMAGE.
+  35:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    ---------------------------------------------------------------------------*/
+  36:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  37:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  38:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #if defined ( __ICCARM__ )
+  39:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  #pragma system_include  /* treat file as system include file for MISRA check */
+  40:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #endif
+  41:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  42:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #ifdef __cplusplus
+  43:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  extern "C" {
+  44:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #endif
+  45:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  46:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #ifndef __CORE_CM0_H_GENERIC
+  47:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define __CORE_CM0_H_GENERIC
+  48:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  49:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \page CMSIS_MISRA_Exceptions  MISRA-C:2004 Compliance Exceptions
+  50:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   CMSIS violates the following MISRA-C:2004 rules:
+  51:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  52:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    \li Required Rule 8.5, object/function definition in header file.<br>
+  53:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****      Function definitions in header files are used to allow 'inlining'.
+  54:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  55:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    \li Required Rule 18.4, declaration of union type or object of union type: '{...}'.<br>
+  56:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****      Unions are used for effective representation of core registers.
+  57:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  58:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****    \li Advisory Rule 19.7, Function-like macro defined.<br>
+  59:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****      Function-like macros are used to allow more efficient code.
+  60:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+  61:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  62:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  63:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*******************************************************************************
+  64:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  *                 CMSIS definitions
+  65:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  ******************************************************************************/
+  66:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \ingroup Cortex_M0
+  67:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   @{
+  68:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+  69:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  70:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*  CMSIS CM0 definitions */
+  71:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define __CM0_CMSIS_VERSION_MAIN  (0x03)                                   /*!< [31:16] CMSIS HAL m
+  72:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define __CM0_CMSIS_VERSION_SUB   (0x20)                                   /*!< [15:0]  CMSIS HAL s
+  73:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define __CM0_CMSIS_VERSION       ((__CM0_CMSIS_VERSION_MAIN << 16) | \
+  74:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****                                     __CM0_CMSIS_VERSION_SUB          )     /*!< CMSIS HAL version n
+  75:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  76:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define __CORTEX_M                (0x00)                                   /*!< Cortex-M Core      
+  77:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  78:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  79:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #if   defined ( __CC_ARM )
+  80:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __ASM            __asm                                      /*!< asm keyword for ARM Comp
+  81:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __INLINE         __inline                                   /*!< inline keyword for ARM C
+  82:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __STATIC_INLINE  static __inline
+  83:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  84:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #elif defined ( __ICCARM__ )
+  85:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __ASM            __asm                                      /*!< asm keyword for IAR Comp
+  86:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __INLINE         inline                                     /*!< inline keyword for IAR C
+  87:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __STATIC_INLINE  static inline
+  88:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  89:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #elif defined ( __GNUC__ )
+  90:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __ASM            __asm                                      /*!< asm keyword for GNU Comp
+  91:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __INLINE         inline                                     /*!< inline keyword for GNU C
+  92:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __STATIC_INLINE  static inline
+  93:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  94:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #elif defined ( __TASKING__ )
+  95:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __ASM            __asm                                      /*!< asm keyword for TASKING 
+  96:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __INLINE         inline                                     /*!< inline keyword for TASKI
+  97:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define __STATIC_INLINE  static inline
+  98:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+  99:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #endif
+ 100:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 101:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** __FPU_USED indicates whether an FPU is used or not. This core does not support an FPU at all
+ 102:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** */
+ 103:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define __FPU_USED       0
+ 104:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 105:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #if defined ( __CC_ARM )
+ 106:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #if defined __TARGET_FPU_VFP
+ 107:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     #warning "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)
+ 108:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #endif
+ 109:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 110:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #elif defined ( __ICCARM__ )
+ 111:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #if defined __ARMVFP__
+ 112:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     #warning "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)
+ 113:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #endif
+ 114:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 115:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #elif defined ( __GNUC__ )
+ 116:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #if defined (__VFP_FP__) && !defined(__SOFTFP__)
+ 117:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     #warning "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)
+ 118:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #endif
+ 119:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 120:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #elif defined ( __TASKING__ )
+ 121:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #if defined __FPU_VFP__
+ 122:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     #error "Compiler generates FPU instructions for a device without an FPU (check __FPU_PRESENT)"
+ 123:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #endif
+ 124:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #endif
+ 125:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 126:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #include <stdint.h>                      /* standard types definitions                      */
+ 127:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #include <core_cmInstr.h>                /* Core Instruction Access                         */
+ 128:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #include <core_cmFunc.h>                 /* Core Function Access                            */
+ 129:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 130:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #endif /* __CORE_CM0_H_GENERIC */
+ 131:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 132:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #ifndef __CMSIS_GENERIC
+ 133:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 134:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #ifndef __CORE_CM0_H_DEPENDANT
+ 135:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define __CORE_CM0_H_DEPENDANT
+ 136:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 137:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* check device defines and use defaults */
+ 138:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #if defined __CHECK_DEVICE_DEFINES
+ 139:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #ifndef __CM0_REV
+ 140:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     #define __CM0_REV               0x0000
+ 141:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     #warning "__CM0_REV not defined in device header file; using default!"
+ 142:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #endif
+ 143:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 144:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #ifndef __NVIC_PRIO_BITS
+ 145:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     #define __NVIC_PRIO_BITS          2
+ 146:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     #warning "__NVIC_PRIO_BITS not defined in device header file; using default!"
+ 147:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #endif
+ 148:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 149:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #ifndef __Vendor_SysTickConfig
+ 150:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     #define __Vendor_SysTickConfig    0
+ 151:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     #warning "__Vendor_SysTickConfig not defined in device header file; using default!"
+ 152:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #endif
+ 153:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #endif
+ 154:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 155:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* IO definitions (access restrictions to peripheral registers) */
+ 156:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /**
+ 157:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \defgroup CMSIS_glob_defs CMSIS Global Defines
+ 158:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 159:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     <strong>IO Type Qualifiers</strong> are used
+ 160:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \li to specify the access to peripheral variables.
+ 161:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \li for automatic generation of peripheral register debug information.
+ 162:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** */
+ 163:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #ifdef __cplusplus
+ 164:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define   __I     volatile             /*!< Defines 'read only' permissions                 */
+ 165:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #else
+ 166:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   #define   __I     volatile const       /*!< Defines 'read only' permissions                 */
+ 167:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #endif
+ 168:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define     __O     volatile             /*!< Defines 'write only' permissions                */
+ 169:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define     __IO    volatile             /*!< Defines 'read / write' permissions              */
+ 170:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 171:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*@} end of group Cortex_M0 */
+ 172:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 173:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 174:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 175:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*******************************************************************************
+ 176:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  *                 Register Abstraction
+ 177:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   Core Register contain:
+ 178:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   - Core Register
+ 179:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   - Core NVIC Register
+ 180:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   - Core SCB Register
+ 181:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   - Core SysTick Register
+ 182:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  ******************************************************************************/
+ 183:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \defgroup CMSIS_core_register Defines and Type Definitions
+ 184:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \brief Type definitions and defines for Cortex-M processor based devices.
+ 185:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** */
+ 186:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 187:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \ingroup    CMSIS_core_register
+ 188:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \defgroup   CMSIS_CORE  Status and Control Registers
+ 189:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \brief  Core Register type definitions.
+ 190:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   @{
+ 191:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 192:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 193:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Union type to access the Application Program Status Register (APSR).
+ 194:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 195:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** typedef union
+ 196:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 197:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   struct
+ 198:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   {
+ 199:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #if (__CORTEX_M != 0x04)
+ 200:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t _reserved0:27;              /*!< bit:  0..26  Reserved                           */
+ 201:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #else
+ 202:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t _reserved0:16;              /*!< bit:  0..15  Reserved                           */
+ 203:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t GE:4;                       /*!< bit: 16..19  Greater than or Equal flags        */
+ 204:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t _reserved1:7;               /*!< bit: 20..26  Reserved                           */
+ 205:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #endif
+ 206:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t Q:1;                        /*!< bit:     27  Saturation condition flag          */
+ 207:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t V:1;                        /*!< bit:     28  Overflow condition code flag       */
+ 208:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t C:1;                        /*!< bit:     29  Carry condition code flag          */
+ 209:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t Z:1;                        /*!< bit:     30  Zero condition code flag           */
+ 210:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t N:1;                        /*!< bit:     31  Negative condition code flag       */
+ 211:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   } b;                                   /*!< Structure used for bit  access                  */
+ 212:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   uint32_t w;                            /*!< Type      used for word access                  */
+ 213:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** } APSR_Type;
+ 214:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 215:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 216:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Union type to access the Interrupt Program Status Register (IPSR).
+ 217:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 218:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** typedef union
+ 219:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 220:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   struct
+ 221:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   {
+ 222:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t ISR:9;                      /*!< bit:  0.. 8  Exception number                   */
+ 223:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t _reserved0:23;              /*!< bit:  9..31  Reserved                           */
+ 224:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   } b;                                   /*!< Structure used for bit  access                  */
+ 225:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   uint32_t w;                            /*!< Type      used for word access                  */
+ 226:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** } IPSR_Type;
+ 227:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 228:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 229:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Union type to access the Special-Purpose Program Status Registers (xPSR).
+ 230:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 231:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** typedef union
+ 232:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 233:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   struct
+ 234:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   {
+ 235:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t ISR:9;                      /*!< bit:  0.. 8  Exception number                   */
+ 236:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #if (__CORTEX_M != 0x04)
+ 237:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t _reserved0:15;              /*!< bit:  9..23  Reserved                           */
+ 238:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #else
+ 239:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t _reserved0:7;               /*!< bit:  9..15  Reserved                           */
+ 240:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t GE:4;                       /*!< bit: 16..19  Greater than or Equal flags        */
+ 241:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t _reserved1:4;               /*!< bit: 20..23  Reserved                           */
+ 242:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #endif
+ 243:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t T:1;                        /*!< bit:     24  Thumb bit        (read 0)          */
+ 244:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t IT:2;                       /*!< bit: 25..26  saved IT state   (read 0)          */
+ 245:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t Q:1;                        /*!< bit:     27  Saturation condition flag          */
+ 246:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t V:1;                        /*!< bit:     28  Overflow condition code flag       */
+ 247:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t C:1;                        /*!< bit:     29  Carry condition code flag          */
+ 248:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t Z:1;                        /*!< bit:     30  Zero condition code flag           */
+ 249:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t N:1;                        /*!< bit:     31  Negative condition code flag       */
+ 250:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   } b;                                   /*!< Structure used for bit  access                  */
+ 251:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   uint32_t w;                            /*!< Type      used for word access                  */
+ 252:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** } xPSR_Type;
+ 253:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 254:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 255:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Union type to access the Control Registers (CONTROL).
+ 256:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 257:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** typedef union
+ 258:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 259:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   struct
+ 260:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   {
+ 261:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t nPRIV:1;                    /*!< bit:      0  Execution privilege in Thread mode */
+ 262:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t SPSEL:1;                    /*!< bit:      1  Stack to be used                   */
+ 263:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t FPCA:1;                     /*!< bit:      2  FP extension active flag           */
+ 264:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     uint32_t _reserved0:29;              /*!< bit:  3..31  Reserved                           */
+ 265:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   } b;                                   /*!< Structure used for bit  access                  */
+ 266:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   uint32_t w;                            /*!< Type      used for word access                  */
+ 267:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** } CONTROL_Type;
+ 268:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 269:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*@} end of group CMSIS_CORE */
+ 270:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 271:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 272:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \ingroup    CMSIS_core_register
+ 273:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \defgroup   CMSIS_NVIC  Nested Vectored Interrupt Controller (NVIC)
+ 274:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \brief      Type definitions for the NVIC Registers
+ 275:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   @{
+ 276:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 277:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 278:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Structure type to access the Nested Vectored Interrupt Controller (NVIC).
+ 279:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 280:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** typedef struct
+ 281:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 282:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t ISER[1];                 /*!< Offset: 0x000 (R/W)  Interrupt Set Enable Register   
+ 283:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****        uint32_t RESERVED0[31];
+ 284:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t ICER[1];                 /*!< Offset: 0x080 (R/W)  Interrupt Clear Enable Register 
+ 285:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****        uint32_t RSERVED1[31];
+ 286:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t ISPR[1];                 /*!< Offset: 0x100 (R/W)  Interrupt Set Pending Register  
+ 287:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****        uint32_t RESERVED2[31];
+ 288:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t ICPR[1];                 /*!< Offset: 0x180 (R/W)  Interrupt Clear Pending Register
+ 289:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****        uint32_t RESERVED3[31];
+ 290:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****        uint32_t RESERVED4[64];
+ 291:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t IP[8];                   /*!< Offset: 0x300 (R/W)  Interrupt Priority Register     
+ 292:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** }  NVIC_Type;
+ 293:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 294:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*@} end of group CMSIS_NVIC */
+ 295:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 296:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 297:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \ingroup  CMSIS_core_register
+ 298:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \defgroup CMSIS_SCB     System Control Block (SCB)
+ 299:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \brief      Type definitions for the System Control Block Registers
+ 300:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   @{
+ 301:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 302:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 303:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Structure type to access the System Control Block (SCB).
+ 304:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 305:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** typedef struct
+ 306:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 307:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __I  uint32_t CPUID;                   /*!< Offset: 0x000 (R/ )  CPUID Base Register             
+ 308:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t ICSR;                    /*!< Offset: 0x004 (R/W)  Interrupt Control and State Regi
+ 309:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****        uint32_t RESERVED0;
+ 310:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t AIRCR;                   /*!< Offset: 0x00C (R/W)  Application Interrupt and Reset 
+ 311:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t SCR;                     /*!< Offset: 0x010 (R/W)  System Control Register         
+ 312:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t CCR;                     /*!< Offset: 0x014 (R/W)  Configuration Control Register  
+ 313:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****        uint32_t RESERVED1;
+ 314:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t SHP[2];                  /*!< Offset: 0x01C (R/W)  System Handlers Priority Registe
+ 315:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t SHCSR;                   /*!< Offset: 0x024 (R/W)  System Handler Control and State
+ 316:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** } SCB_Type;
+ 317:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 318:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* SCB CPUID Register Definitions */
+ 319:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CPUID_IMPLEMENTER_Pos          24                                             /*!< SCB 
+ 320:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CPUID_IMPLEMENTER_Msk          (0xFFUL << SCB_CPUID_IMPLEMENTER_Pos)          /*!< SCB 
+ 321:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 322:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CPUID_VARIANT_Pos              20                                             /*!< SCB 
+ 323:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CPUID_VARIANT_Msk              (0xFUL << SCB_CPUID_VARIANT_Pos)               /*!< SCB 
+ 324:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 325:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CPUID_ARCHITECTURE_Pos         16                                             /*!< SCB 
+ 326:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CPUID_ARCHITECTURE_Msk         (0xFUL << SCB_CPUID_ARCHITECTURE_Pos)          /*!< SCB 
+ 327:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 328:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CPUID_PARTNO_Pos                4                                             /*!< SCB 
+ 329:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CPUID_PARTNO_Msk               (0xFFFUL << SCB_CPUID_PARTNO_Pos)              /*!< SCB 
+ 330:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 331:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CPUID_REVISION_Pos              0                                             /*!< SCB 
+ 332:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CPUID_REVISION_Msk             (0xFUL << SCB_CPUID_REVISION_Pos)              /*!< SCB 
+ 333:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 334:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* SCB Interrupt Control State Register Definitions */
+ 335:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_NMIPENDSET_Pos            31                                             /*!< SCB 
+ 336:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_NMIPENDSET_Msk            (1UL << SCB_ICSR_NMIPENDSET_Pos)               /*!< SCB 
+ 337:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 338:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_PENDSVSET_Pos             28                                             /*!< SCB 
+ 339:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_PENDSVSET_Msk             (1UL << SCB_ICSR_PENDSVSET_Pos)                /*!< SCB 
+ 340:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 341:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_PENDSVCLR_Pos             27                                             /*!< SCB 
+ 342:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_PENDSVCLR_Msk             (1UL << SCB_ICSR_PENDSVCLR_Pos)                /*!< SCB 
+ 343:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 344:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_PENDSTSET_Pos             26                                             /*!< SCB 
+ 345:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_PENDSTSET_Msk             (1UL << SCB_ICSR_PENDSTSET_Pos)                /*!< SCB 
+ 346:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 347:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_PENDSTCLR_Pos             25                                             /*!< SCB 
+ 348:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_PENDSTCLR_Msk             (1UL << SCB_ICSR_PENDSTCLR_Pos)                /*!< SCB 
+ 349:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 350:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_ISRPREEMPT_Pos            23                                             /*!< SCB 
+ 351:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_ISRPREEMPT_Msk            (1UL << SCB_ICSR_ISRPREEMPT_Pos)               /*!< SCB 
+ 352:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 353:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_ISRPENDING_Pos            22                                             /*!< SCB 
+ 354:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_ISRPENDING_Msk            (1UL << SCB_ICSR_ISRPENDING_Pos)               /*!< SCB 
+ 355:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 356:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_VECTPENDING_Pos           12                                             /*!< SCB 
+ 357:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_VECTPENDING_Msk           (0x1FFUL << SCB_ICSR_VECTPENDING_Pos)          /*!< SCB 
+ 358:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 359:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_VECTACTIVE_Pos             0                                             /*!< SCB 
+ 360:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_ICSR_VECTACTIVE_Msk            (0x1FFUL << SCB_ICSR_VECTACTIVE_Pos)           /*!< SCB 
+ 361:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 362:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* SCB Application Interrupt and Reset Control Register Definitions */
+ 363:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_AIRCR_VECTKEY_Pos              16                                             /*!< SCB 
+ 364:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_AIRCR_VECTKEY_Msk              (0xFFFFUL << SCB_AIRCR_VECTKEY_Pos)            /*!< SCB 
+ 365:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 366:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_AIRCR_VECTKEYSTAT_Pos          16                                             /*!< SCB 
+ 367:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_AIRCR_VECTKEYSTAT_Msk          (0xFFFFUL << SCB_AIRCR_VECTKEYSTAT_Pos)        /*!< SCB 
+ 368:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 369:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_AIRCR_ENDIANESS_Pos            15                                             /*!< SCB 
+ 370:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_AIRCR_ENDIANESS_Msk            (1UL << SCB_AIRCR_ENDIANESS_Pos)               /*!< SCB 
+ 371:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 372:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_AIRCR_SYSRESETREQ_Pos           2                                             /*!< SCB 
+ 373:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_AIRCR_SYSRESETREQ_Msk          (1UL << SCB_AIRCR_SYSRESETREQ_Pos)             /*!< SCB 
+ 374:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 375:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_AIRCR_VECTCLRACTIVE_Pos         1                                             /*!< SCB 
+ 376:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_AIRCR_VECTCLRACTIVE_Msk        (1UL << SCB_AIRCR_VECTCLRACTIVE_Pos)           /*!< SCB 
+ 377:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 378:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* SCB System Control Register Definitions */
+ 379:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_SCR_SEVONPEND_Pos               4                                             /*!< SCB 
+ 380:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_SCR_SEVONPEND_Msk              (1UL << SCB_SCR_SEVONPEND_Pos)                 /*!< SCB 
+ 381:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 382:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_SCR_SLEEPDEEP_Pos               2                                             /*!< SCB 
+ 383:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_SCR_SLEEPDEEP_Msk              (1UL << SCB_SCR_SLEEPDEEP_Pos)                 /*!< SCB 
+ 384:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 385:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_SCR_SLEEPONEXIT_Pos             1                                             /*!< SCB 
+ 386:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_SCR_SLEEPONEXIT_Msk            (1UL << SCB_SCR_SLEEPONEXIT_Pos)               /*!< SCB 
+ 387:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 388:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* SCB Configuration Control Register Definitions */
+ 389:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CCR_STKALIGN_Pos                9                                             /*!< SCB 
+ 390:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CCR_STKALIGN_Msk               (1UL << SCB_CCR_STKALIGN_Pos)                  /*!< SCB 
+ 391:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 392:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CCR_UNALIGN_TRP_Pos             3                                             /*!< SCB 
+ 393:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_CCR_UNALIGN_TRP_Msk            (1UL << SCB_CCR_UNALIGN_TRP_Pos)               /*!< SCB 
+ 394:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 395:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* SCB System Handler Control and State Register Definitions */
+ 396:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_SHCSR_SVCALLPENDED_Pos         15                                             /*!< SCB 
+ 397:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_SHCSR_SVCALLPENDED_Msk         (1UL << SCB_SHCSR_SVCALLPENDED_Pos)            /*!< SCB 
+ 398:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 399:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*@} end of group CMSIS_SCB */
+ 400:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 401:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 402:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \ingroup  CMSIS_core_register
+ 403:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \defgroup CMSIS_SysTick     System Tick Timer (SysTick)
+ 404:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \brief      Type definitions for the System Timer Registers.
+ 405:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   @{
+ 406:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 407:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 408:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Structure type to access the System Timer (SysTick).
+ 409:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 410:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** typedef struct
+ 411:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 412:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t CTRL;                    /*!< Offset: 0x000 (R/W)  SysTick Control and Status Regis
+ 413:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t LOAD;                    /*!< Offset: 0x004 (R/W)  SysTick Reload Value Register   
+ 414:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __IO uint32_t VAL;                     /*!< Offset: 0x008 (R/W)  SysTick Current Value Register  
+ 415:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   __I  uint32_t CALIB;                   /*!< Offset: 0x00C (R/ )  SysTick Calibration Register    
+ 416:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** } SysTick_Type;
+ 417:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 418:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* SysTick Control / Status Register Definitions */
+ 419:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CTRL_COUNTFLAG_Pos         16                                             /*!< SysT
+ 420:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CTRL_COUNTFLAG_Msk         (1UL << SysTick_CTRL_COUNTFLAG_Pos)            /*!< SysT
+ 421:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 422:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CTRL_CLKSOURCE_Pos          2                                             /*!< SysT
+ 423:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CTRL_CLKSOURCE_Msk         (1UL << SysTick_CTRL_CLKSOURCE_Pos)            /*!< SysT
+ 424:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 425:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CTRL_TICKINT_Pos            1                                             /*!< SysT
+ 426:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CTRL_TICKINT_Msk           (1UL << SysTick_CTRL_TICKINT_Pos)              /*!< SysT
+ 427:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 428:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CTRL_ENABLE_Pos             0                                             /*!< SysT
+ 429:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CTRL_ENABLE_Msk            (1UL << SysTick_CTRL_ENABLE_Pos)               /*!< SysT
+ 430:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 431:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* SysTick Reload Register Definitions */
+ 432:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_LOAD_RELOAD_Pos             0                                             /*!< SysT
+ 433:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_LOAD_RELOAD_Msk            (0xFFFFFFUL << SysTick_LOAD_RELOAD_Pos)        /*!< SysT
+ 434:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 435:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* SysTick Current Register Definitions */
+ 436:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_VAL_CURRENT_Pos             0                                             /*!< SysT
+ 437:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_VAL_CURRENT_Msk            (0xFFFFFFUL << SysTick_VAL_CURRENT_Pos)        /*!< SysT
+ 438:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 439:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* SysTick Calibration Register Definitions */
+ 440:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CALIB_NOREF_Pos            31                                             /*!< SysT
+ 441:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CALIB_NOREF_Msk            (1UL << SysTick_CALIB_NOREF_Pos)               /*!< SysT
+ 442:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 443:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CALIB_SKEW_Pos             30                                             /*!< SysT
+ 444:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CALIB_SKEW_Msk             (1UL << SysTick_CALIB_SKEW_Pos)                /*!< SysT
+ 445:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 446:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CALIB_TENMS_Pos             0                                             /*!< SysT
+ 447:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_CALIB_TENMS_Msk            (0xFFFFFFUL << SysTick_VAL_CURRENT_Pos)        /*!< SysT
+ 448:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 449:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*@} end of group CMSIS_SysTick */
+ 450:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 451:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 452:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \ingroup  CMSIS_core_register
+ 453:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \defgroup CMSIS_CoreDebug       Core Debug Registers (CoreDebug)
+ 454:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \brief      Cortex-M0 Core Debug Registers (DCB registers, SHCSR, and DFSR)
+ 455:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****                 are only accessible over DAP and not via processor. Therefore
+ 456:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****                 they are not covered by the Cortex-M0 header file.
+ 457:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   @{
+ 458:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 459:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*@} end of group CMSIS_CoreDebug */
+ 460:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 461:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 462:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \ingroup    CMSIS_core_register
+ 463:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \defgroup   CMSIS_core_base     Core Definitions
+ 464:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \brief      Definitions for base addresses, unions, and structures.
+ 465:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   @{
+ 466:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 467:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 468:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* Memory mapping of Cortex-M0 Hardware */
+ 469:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCS_BASE            (0xE000E000UL)                            /*!< System Control Space Bas
+ 470:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick_BASE        (SCS_BASE +  0x0010UL)                    /*!< SysTick Base Address    
+ 471:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define NVIC_BASE           (SCS_BASE +  0x0100UL)                    /*!< NVIC Base Address       
+ 472:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB_BASE            (SCS_BASE +  0x0D00UL)                    /*!< System Control Block Bas
+ 473:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 474:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SCB                 ((SCB_Type       *)     SCB_BASE      )   /*!< SCB configuration struct
+ 475:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define SysTick             ((SysTick_Type   *)     SysTick_BASE  )   /*!< SysTick configuration st
+ 476:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define NVIC                ((NVIC_Type      *)     NVIC_BASE     )   /*!< NVIC configuration struc
+ 477:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 478:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 479:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*@} */
+ 480:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 481:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 482:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 483:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /*******************************************************************************
+ 484:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  *                Hardware Abstraction Layer
+ 485:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   Core Function Interface contains:
+ 486:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   - Core NVIC Functions
+ 487:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   - Core SysTick Functions
+ 488:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   - Core Register Access Functions
+ 489:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  ******************************************************************************/
+ 490:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \defgroup CMSIS_Core_FunctionInterface Functions and Instructions Reference
+ 491:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** */
+ 492:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 493:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 494:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 495:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* ##########################   NVIC functions  #################################### */
+ 496:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \ingroup  CMSIS_Core_FunctionInterface
+ 497:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \defgroup CMSIS_Core_NVICFunctions NVIC Functions
+ 498:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \brief      Functions that manage interrupts and exceptions via the NVIC.
+ 499:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     @{
+ 500:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 501:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 502:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* Interrupt Priorities are WORD accessible only under ARMv6M                   */
+ 503:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /* The following MACROS handle generation of the register offset and byte masks */
+ 504:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define _BIT_SHIFT(IRQn)         (  (((uint32_t)(IRQn)       )    &  0x03) * 8 )
+ 505:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define _SHP_IDX(IRQn)           ( ((((uint32_t)(IRQn) & 0x0F)-8) >>    2)     )
+ 506:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** #define _IP_IDX(IRQn)            (   ((uint32_t)(IRQn)            >>    2)     )
+ 507:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 508:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 509:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Enable External Interrupt
+ 510:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 511:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     The function enables a device-specific interrupt in the NVIC interrupt controller.
+ 512:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 513:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \param [in]      IRQn  External interrupt number. Value cannot be negative.
+ 514:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 515:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** __STATIC_INLINE void NVIC_EnableIRQ(IRQn_Type IRQn)
+ 516:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+  25              		.loc 1 516 0
+  26              		.cfi_startproc
+  27 0000 80B5     		push	{r7, lr}
+  28              	.LCFI0:
+  29              		.cfi_def_cfa_offset 8
+  30              		.cfi_offset 7, -8
+  31              		.cfi_offset 14, -4
+  32 0002 82B0     		sub	sp, sp, #8
+  33              	.LCFI1:
+  34              		.cfi_def_cfa_offset 16
+  35 0004 00AF     		add	r7, sp, #0
+  36              	.LCFI2:
+  37              		.cfi_def_cfa_register 7
+  38 0006 021C     		mov	r2, r0
+  39 0008 FB1D     		add	r3, r7, #7
+  40 000a 1A70     		strb	r2, [r3]
+ 517:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   NVIC->ISER[0] = (1 << ((uint32_t)(IRQn) & 0x1F));
+  41              		.loc 1 517 0
+  42 000c 064B     		ldr	r3, .L2
+  43 000e FA1D     		add	r2, r7, #7
+  44 0010 1278     		ldrb	r2, [r2]
+  45 0012 111C     		mov	r1, r2
+  46 0014 1F22     		mov	r2, #31
+  47 0016 0A40     		and	r2, r1
+  48 0018 0121     		mov	r1, #1
+  49 001a 081C     		mov	r0, r1
+  50 001c 9040     		lsl	r0, r0, r2
+  51 001e 021C     		mov	r2, r0
+  52 0020 1A60     		str	r2, [r3]
+ 518:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** }
+  53              		.loc 1 518 0
+  54 0022 BD46     		mov	sp, r7
+  55 0024 02B0     		add	sp, sp, #8
+  56              		@ sp needed for prologue
+  57 0026 80BD     		pop	{r7, pc}
+  58              	.L3:
+  59              		.align	2
+  60              	.L2:
+  61 0028 00E100E0 		.word	-536813312
+  62              		.cfi_endproc
+  63              	.LFE24:
+  65              		.section	.text.NVIC_SetPriority,"ax",%progbits
+  66              		.align	2
+  67              		.code	16
+  68              		.thumb_func
+  70              	NVIC_SetPriority:
+  71              	.LFB29:
+ 519:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 520:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 521:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Disable External Interrupt
+ 522:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 523:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     The function disables a device-specific interrupt in the NVIC interrupt controller.
+ 524:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 525:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \param [in]      IRQn  External interrupt number. Value cannot be negative.
+ 526:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 527:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** __STATIC_INLINE void NVIC_DisableIRQ(IRQn_Type IRQn)
+ 528:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 529:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   NVIC->ICER[0] = (1 << ((uint32_t)(IRQn) & 0x1F));
+ 530:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** }
+ 531:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 532:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 533:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Get Pending Interrupt
+ 534:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 535:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     The function reads the pending register in the NVIC and returns the pending bit
+ 536:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     for the specified interrupt.
+ 537:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 538:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \param [in]      IRQn  Interrupt number.
+ 539:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 540:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \return             0  Interrupt status is not pending.
+ 541:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \return             1  Interrupt status is pending.
+ 542:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 543:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** __STATIC_INLINE uint32_t NVIC_GetPendingIRQ(IRQn_Type IRQn)
+ 544:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 545:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   return((uint32_t) ((NVIC->ISPR[0] & (1 << ((uint32_t)(IRQn) & 0x1F)))?1:0));
+ 546:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** }
+ 547:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 548:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 549:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Set Pending Interrupt
+ 550:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 551:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     The function sets the pending bit of an external interrupt.
+ 552:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 553:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \param [in]      IRQn  Interrupt number. Value cannot be negative.
+ 554:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 555:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** __STATIC_INLINE void NVIC_SetPendingIRQ(IRQn_Type IRQn)
+ 556:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 557:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   NVIC->ISPR[0] = (1 << ((uint32_t)(IRQn) & 0x1F));
+ 558:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** }
+ 559:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 560:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 561:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Clear Pending Interrupt
+ 562:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 563:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     The function clears the pending bit of an external interrupt.
+ 564:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 565:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \param [in]      IRQn  External interrupt number. Value cannot be negative.
+ 566:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 567:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** __STATIC_INLINE void NVIC_ClearPendingIRQ(IRQn_Type IRQn)
+ 568:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+ 569:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   NVIC->ICPR[0] = (1 << ((uint32_t)(IRQn) & 0x1F)); /* Clear pending interrupt */
+ 570:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** }
+ 571:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 572:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 573:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** /** \brief  Set Interrupt Priority
+ 574:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 575:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     The function sets the priority of an interrupt.
+ 576:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 577:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \note The priority cannot be set for every core interrupt.
+ 578:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** 
+ 579:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \param [in]      IRQn  Interrupt number.
+ 580:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     \param [in]  priority  Priority to set.
+ 581:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****  */
+ 582:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** __STATIC_INLINE void NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
+ 583:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** {
+  72              		.loc 1 583 0
+  73              		.cfi_startproc
+  74 0000 B0B5     		push	{r4, r5, r7, lr}
+  75              	.LCFI3:
+  76              		.cfi_def_cfa_offset 16
+  77              		.cfi_offset 4, -16
+  78              		.cfi_offset 5, -12
+  79              		.cfi_offset 7, -8
+  80              		.cfi_offset 14, -4
+  81 0002 82B0     		sub	sp, sp, #8
+  82              	.LCFI4:
+  83              		.cfi_def_cfa_offset 24
+  84 0004 00AF     		add	r7, sp, #0
+  85              	.LCFI5:
+  86              		.cfi_def_cfa_register 7
+  87 0006 021C     		mov	r2, r0
+  88 0008 3960     		str	r1, [r7]
+  89 000a FB1D     		add	r3, r7, #7
+  90 000c 1A70     		strb	r2, [r3]
+ 584:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   if(IRQn < 0) {
+  91              		.loc 1 584 0
+  92 000e FB1D     		add	r3, r7, #7
+  93 0010 1B78     		ldrb	r3, [r3]
+  94 0012 7F2B     		cmp	r3, #127
+  95 0014 32D9     		bls	.L5
+ 585:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     SCB->SHP[_SHP_IDX(IRQn)] = (SCB->SHP[_SHP_IDX(IRQn)] & ~(0xFF << _BIT_SHIFT(IRQn))) |
+  96              		.loc 1 585 0
+  97 0016 3049     		ldr	r1, .L7
+  98 0018 FB1D     		add	r3, r7, #7
+  99 001a 1B78     		ldrb	r3, [r3]
+ 100 001c 1A1C     		mov	r2, r3
+ 101 001e 0F23     		mov	r3, #15
+ 102 0020 1340     		and	r3, r2
+ 103 0022 083B     		sub	r3, r3, #8
+ 104 0024 9808     		lsr	r0, r3, #2
+ 105 0026 2C4A     		ldr	r2, .L7
+ 106 0028 FB1D     		add	r3, r7, #7
+ 107 002a 1B78     		ldrb	r3, [r3]
+ 108 002c 1C1C     		mov	r4, r3
+ 109 002e 0F23     		mov	r3, #15
+ 110 0030 2340     		and	r3, r4
+ 111 0032 083B     		sub	r3, r3, #8
+ 112 0034 9B08     		lsr	r3, r3, #2
+ 113 0036 0633     		add	r3, r3, #6
+ 114 0038 9B00     		lsl	r3, r3, #2
+ 115 003a D318     		add	r3, r2, r3
+ 116 003c 5B68     		ldr	r3, [r3, #4]
+ 117 003e FA1D     		add	r2, r7, #7
+ 118 0040 1278     		ldrb	r2, [r2]
+ 119 0042 141C     		mov	r4, r2
+ 120 0044 0322     		mov	r2, #3
+ 121 0046 2240     		and	r2, r4
+ 122 0048 D200     		lsl	r2, r2, #3
+ 123 004a FF24     		mov	r4, #255
+ 124 004c 251C     		mov	r5, r4
+ 125 004e 9540     		lsl	r5, r5, r2
+ 126 0050 2A1C     		mov	r2, r5
+ 127 0052 D243     		mvn	r2, r2
+ 128 0054 1A40     		and	r2, r3
+ 586:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****         (((priority << (8 - __NVIC_PRIO_BITS)) & 0xFF) << _BIT_SHIFT(IRQn)); }
+ 129              		.loc 1 586 0
+ 130 0056 3B68     		ldr	r3, [r7]
+ 131 0058 9C01     		lsl	r4, r3, #6
+ 132 005a FF23     		mov	r3, #255
+ 133 005c 1C40     		and	r4, r3
+ 134 005e FB1D     		add	r3, r7, #7
+ 135 0060 1B78     		ldrb	r3, [r3]
+ 136 0062 1D1C     		mov	r5, r3
+ 137 0064 0323     		mov	r3, #3
+ 138 0066 2B40     		and	r3, r5
+ 139 0068 DB00     		lsl	r3, r3, #3
+ 140 006a 251C     		mov	r5, r4
+ 141 006c 9D40     		lsl	r5, r5, r3
+ 142 006e 2B1C     		mov	r3, r5
+ 585:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     SCB->SHP[_SHP_IDX(IRQn)] = (SCB->SHP[_SHP_IDX(IRQn)] & ~(0xFF << _BIT_SHIFT(IRQn))) |
+ 143              		.loc 1 585 0
+ 144 0070 1A43     		orr	r2, r3
+ 145 0072 831D     		add	r3, r0, #6
+ 146 0074 9B00     		lsl	r3, r3, #2
+ 147 0076 CB18     		add	r3, r1, r3
+ 148 0078 5A60     		str	r2, [r3, #4]
+ 149 007a 29E0     		b	.L4
+ 150              	.L5:
+ 587:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****   else {
+ 588:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     NVIC->IP[_IP_IDX(IRQn)] = (NVIC->IP[_IP_IDX(IRQn)] & ~(0xFF << _BIT_SHIFT(IRQn))) |
+ 151              		.loc 1 588 0
+ 152 007c 174B     		ldr	r3, .L7+4
+ 153 007e FA1D     		add	r2, r7, #7
+ 154 0080 1278     		ldrb	r2, [r2]
+ 155 0082 52B2     		sxtb	r2, r2
+ 156 0084 9208     		lsr	r2, r2, #2
+ 157 0086 1549     		ldr	r1, .L7+4
+ 158 0088 F81D     		add	r0, r7, #7
+ 159 008a 0078     		ldrb	r0, [r0]
+ 160 008c 40B2     		sxtb	r0, r0
+ 161 008e 8008     		lsr	r0, r0, #2
+ 162 0090 C030     		add	r0, r0, #192
+ 163 0092 8000     		lsl	r0, r0, #2
+ 164 0094 4158     		ldr	r1, [r0, r1]
+ 165 0096 F81D     		add	r0, r7, #7
+ 166 0098 0078     		ldrb	r0, [r0]
+ 167 009a 041C     		mov	r4, r0
+ 168 009c 0320     		mov	r0, #3
+ 169 009e 2040     		and	r0, r4
+ 170 00a0 C000     		lsl	r0, r0, #3
+ 171 00a2 FF24     		mov	r4, #255
+ 172 00a4 251C     		mov	r5, r4
+ 173 00a6 8540     		lsl	r5, r5, r0
+ 174 00a8 281C     		mov	r0, r5
+ 175 00aa C043     		mvn	r0, r0
+ 176 00ac 0840     		and	r0, r1
+ 589:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****         (((priority << (8 - __NVIC_PRIO_BITS)) & 0xFF) << _BIT_SHIFT(IRQn)); }
+ 177              		.loc 1 589 0
+ 178 00ae 3968     		ldr	r1, [r7]
+ 179 00b0 8C01     		lsl	r4, r1, #6
+ 180 00b2 FF21     		mov	r1, #255
+ 181 00b4 0C40     		and	r4, r1
+ 182 00b6 F91D     		add	r1, r7, #7
+ 183 00b8 0978     		ldrb	r1, [r1]
+ 184 00ba 0D1C     		mov	r5, r1
+ 185 00bc 0321     		mov	r1, #3
+ 186 00be 2940     		and	r1, r5
+ 187 00c0 C900     		lsl	r1, r1, #3
+ 188 00c2 251C     		mov	r5, r4
+ 189 00c4 8D40     		lsl	r5, r5, r1
+ 190 00c6 291C     		mov	r1, r5
+ 588:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h ****     NVIC->IP[_IP_IDX(IRQn)] = (NVIC->IP[_IP_IDX(IRQn)] & ~(0xFF << _BIT_SHIFT(IRQn))) |
+ 191              		.loc 1 588 0
+ 192 00c8 0143     		orr	r1, r0
+ 193 00ca C032     		add	r2, r2, #192
+ 194 00cc 9200     		lsl	r2, r2, #2
+ 195 00ce D150     		str	r1, [r2, r3]
+ 196              	.L4:
+ 590:C:\DAVE-3.1.10\eclipse\/../CMSIS/Include\core_cm0.h **** }
+ 197              		.loc 1 590 0
+ 198 00d0 BD46     		mov	sp, r7
+ 199 00d2 02B0     		add	sp, sp, #8
+ 200              		@ sp needed for prologue
+ 201 00d4 B0BD     		pop	{r4, r5, r7, pc}
+ 202              	.L8:
+ 203 00d6 C046     		.align	2
+ 204              	.L7:
+ 205 00d8 00ED00E0 		.word	-536810240
+ 206 00dc 00E100E0 		.word	-536813312
+ 207              		.cfi_endproc
+ 208              	.LFE29:
+ 210              		.global	FifoRecBuffer
+ 211              		.bss
+ 212              		.align	2
+ 215              	FifoRecBuffer:
+ 216 0000 00000000 		.space	13
+ 216      00000000 
+ 216      00000000 
+ 216      00
+ 217              		.global	FifoTransBuffer
+ 218 000d 000000   		.align	2
+ 221              	FifoTransBuffer:
+ 222 0010 00000000 		.space	13
+ 222      00000000 
+ 222      00000000 
+ 222      00
+ 223              		.global	DaisyTimeOut
+ 224              		.data
+ 227              	DaisyTimeOut:
+ 228 0000 01       		.byte	1
+ 229              		.global	DaisyCount
+ 230              		.bss
+ 233              	DaisyCount:
+ 234 001d 00       		.space	1
+ 235              		.section	.text.DaisyChain,"ax",%progbits
+ 236              		.align	2
+ 237              		.global	DaisyChain
+ 238              		.code	16
+ 239              		.thumb_func
+ 241              	DaisyChain:
+ 242              	.LFB38:
+ 243              		.file 2 "../DaisyChain.c"
+   1:../DaisyChain.c **** /*
+   2:../DaisyChain.c ****  * DaisyChain.c
+   3:../DaisyChain.c ****  *
+   4:../DaisyChain.c ****  *  Created on: 02.05.2015
+   5:../DaisyChain.c ****  *      Author: Andreas
+   6:../DaisyChain.c ****  */
+   7:../DaisyChain.c **** 
+   8:../DaisyChain.c **** #include <DAVE3.h>
+   9:../DaisyChain.c **** #include "DaisyChain.h"
+  10:../DaisyChain.c **** 
+  11:../DaisyChain.c **** uint8_t FifoRecBuffer[DAISY_BUFFER_SIZE] = {0};
+  12:../DaisyChain.c **** uint8_t FifoTransBuffer[DAISY_BUFFER_SIZE] = {0};
+  13:../DaisyChain.c **** 
+  14:../DaisyChain.c **** uint8_t DaisyTimeOut = 1;
+  15:../DaisyChain.c **** uint8_t DaisyCount = 0;
+  16:../DaisyChain.c **** 
+  17:../DaisyChain.c **** void DaisyChain(void)
+  18:../DaisyChain.c **** {
+ 244              		.loc 2 18 0
+ 245              		.cfi_startproc
+ 246 0000 80B5     		push	{r7, lr}
+ 247              	.LCFI6:
+ 248              		.cfi_def_cfa_offset 8
+ 249              		.cfi_offset 7, -8
+ 250              		.cfi_offset 14, -4
+ 251 0002 84B0     		sub	sp, sp, #16
+ 252              	.LCFI7:
+ 253              		.cfi_def_cfa_offset 24
+ 254 0004 00AF     		add	r7, sp, #0
+ 255              	.LCFI8:
+ 256              		.cfi_def_cfa_register 7
+  19:../DaisyChain.c **** 	uint8_t i=0;
+ 257              		.loc 2 19 0
+ 258 0006 3B1C     		mov	r3, r7
+ 259 0008 0F33     		add	r3, r3, #15
+ 260 000a 0022     		mov	r2, #0
+ 261 000c 1A70     		strb	r2, [r3]
+  20:../DaisyChain.c **** 	status_t status=0;
+ 262              		.loc 2 20 0
+ 263 000e 0023     		mov	r3, #0
+ 264 0010 BB60     		str	r3, [r7, #8]
+  21:../DaisyChain.c **** 	uint32_t data=0;
+ 265              		.loc 2 21 0
+ 266 0012 0023     		mov	r3, #0
+ 267 0014 7B60     		str	r3, [r7, #4]
+  22:../DaisyChain.c **** 
+  23:../DaisyChain.c **** 	if (DaisyTimeOut)
+ 268              		.loc 2 23 0
+ 269 0016 584B     		ldr	r3, .L17
+ 270 0018 1B78     		ldrb	r3, [r3]
+ 271 001a 002B     		cmp	r3, #0
+ 272 001c 01D0     		beq	.L10
+  24:../DaisyChain.c **** 		StopMotor();
+ 273              		.loc 2 24 0
+ 274 001e FFF7FEFF 		bl	StopMotor
+ 275              	.L10:
+  25:../DaisyChain.c **** 
+  26:../DaisyChain.c **** 	if(USIC_GetRxFIFOFillingLevel(UART001_Handle0.UartRegs) >= DAISY_BUFFER_SIZE)
+ 276              		.loc 2 26 0
+ 277 0022 564B     		ldr	r3, .L17+4
+ 278 0024 1A68     		ldr	r2, [r3]
+ 279 0026 8A23     		mov	r3, #138
+ 280 0028 5B00     		lsl	r3, r3, #1
+ 281 002a D258     		ldr	r2, [r2, r3]
+ 282 002c FE23     		mov	r3, #254
+ 283 002e DB03     		lsl	r3, r3, #15
+ 284 0030 1340     		and	r3, r2
+ 285 0032 1B0C     		lsr	r3, r3, #16
+ 286 0034 0C2B     		cmp	r3, #12
+ 287 0036 00D8     		bhi	.LCB227
+ 288 0038 9AE0     		b	.L9	@long jump
+ 289              	.LCB227:
+ 290              	.LBB2:
+  27:../DaisyChain.c **** 	{
+  28:../DaisyChain.c **** 		//Read data from UART buffer
+  29:../DaisyChain.c **** 		UART001_ReadDataBytes(&UART001_Handle0,FifoRecBuffer,DAISY_BUFFER_SIZE);
+ 291              		.loc 2 29 0
+ 292 003a 504A     		ldr	r2, .L17+4
+ 293 003c 504B     		ldr	r3, .L17+8
+ 294 003e 101C     		mov	r0, r2
+ 295 0040 191C     		mov	r1, r3
+ 296 0042 0D22     		mov	r2, #13
+ 297 0044 FFF7FEFF 		bl	UART001_ReadDataBytes
+  30:../DaisyChain.c **** 
+  31:../DaisyChain.c **** 		//Assumption that communication is lost --> emtpy Receive Buffer
+  32:../DaisyChain.c **** 		if (FifoRecBuffer[DAISY_BUFFER_SIZE-1] != DAISY_STOP_BYTE)
+ 298              		.loc 2 32 0
+ 299 0048 4D4B     		ldr	r3, .L17+8
+ 300 004a 1B7B     		ldrb	r3, [r3, #12]
+ 301 004c 042B     		cmp	r3, #4
+ 302 004e 16D0     		beq	.L12
+  33:../DaisyChain.c **** 		{
+  34:../DaisyChain.c **** 			IO004_TogglePin(IO004_Handle1);
+ 303              		.loc 2 34 0
+ 304 0050 4C4B     		ldr	r3, .L17+12
+ 305 0052 5B68     		ldr	r3, [r3, #4]
+ 306 0054 4B4A     		ldr	r2, .L17+12
+ 307 0056 5278     		ldrb	r2, [r2, #1]
+ 308 0058 4B49     		ldr	r1, .L17+16
+ 309 005a 081C     		mov	r0, r1
+ 310 005c 9040     		lsl	r0, r0, r2
+ 311 005e 021C     		mov	r2, r0
+ 312 0060 5A60     		str	r2, [r3, #4]
+  35:../DaisyChain.c **** 			USIC_FlushRxFIFO(UART001_Handle0.UartRegs);
+ 313              		.loc 2 35 0
+ 314 0062 464B     		ldr	r3, .L17+4
+ 315 0064 1A68     		ldr	r2, [r3]
+ 316 0066 454B     		ldr	r3, .L17+4
+ 317 0068 1968     		ldr	r1, [r3]
+ 318 006a 8C23     		mov	r3, #140
+ 319 006c 5B00     		lsl	r3, r3, #1
+ 320 006e CB58     		ldr	r3, [r1, r3]
+ 321 0070 8021     		mov	r1, #128
+ 322 0072 C901     		lsl	r1, r1, #7
+ 323 0074 1943     		orr	r1, r3
+ 324 0076 8C23     		mov	r3, #140
+ 325 0078 5B00     		lsl	r3, r3, #1
+ 326 007a D150     		str	r1, [r2, r3]
+  36:../DaisyChain.c **** 			return;
+ 327              		.loc 2 36 0
+ 328 007c 78E0     		b	.L9
+ 329              	.L12:
+  37:../DaisyChain.c **** 		}
+  38:../DaisyChain.c **** 
+  39:../DaisyChain.c **** 		uint8_t cmd = FifoRecBuffer[0];
+ 330              		.loc 2 39 0
+ 331 007e FB1C     		add	r3, r7, #3
+ 332 0080 3F4A     		ldr	r2, .L17+8
+ 333 0082 1278     		ldrb	r2, [r2]
+ 334 0084 1A70     		strb	r2, [r3]
+  40:../DaisyChain.c **** 		uint16_t params =  (FifoRecBuffer[1] << 8 | FifoRecBuffer[2]);
+ 335              		.loc 2 40 0
+ 336 0086 3E4B     		ldr	r3, .L17+8
+ 337 0088 5B78     		ldrb	r3, [r3, #1]
+ 338 008a 1B02     		lsl	r3, r3, #8
+ 339 008c 9AB2     		uxth	r2, r3
+ 340 008e 3C4B     		ldr	r3, .L17+8
+ 341 0090 9B78     		ldrb	r3, [r3, #2]
+ 342 0092 1343     		orr	r3, r2
+ 343 0094 9AB2     		uxth	r2, r3
+ 344 0096 3B1C     		mov	r3, r7
+ 345 0098 1A80     		strh	r2, [r3]
+  41:../DaisyChain.c **** 
+  42:../DaisyChain.c **** 		switch (cmd)
+ 346              		.loc 2 42 0
+ 347 009a FB1C     		add	r3, r7, #3
+ 348 009c 1B78     		ldrb	r3, [r3]
+ 349 009e 222B     		cmp	r3, #34
+ 350 00a0 05D1     		bne	.L13
+ 351              	.L14:
+  43:../DaisyChain.c **** 		{
+  44:../DaisyChain.c **** 			case SET_REF_CURRENT:
+  45:../DaisyChain.c **** 				SetReferenceCurrent(params);
+ 352              		.loc 2 45 0
+ 353 00a2 3B1C     		mov	r3, r7
+ 354 00a4 1B88     		ldrh	r3, [r3]
+ 355 00a6 181C     		mov	r0, r3
+ 356 00a8 FFF7FEFF 		bl	SetReferenceCurrent
+  46:../DaisyChain.c **** 				break;
+ 357              		.loc 2 46 0
+ 358 00ac C046     		mov	r8, r8
+ 359              	.L13:
+  47:../DaisyChain.c **** 		}
+  48:../DaisyChain.c **** 
+  49:../DaisyChain.c **** 		for(i=DAISY_MESSAGE_LENGTH; i<DAISY_BUFFER_SIZE-1; i++)
+ 360              		.loc 2 49 0
+ 361 00ae 3B1C     		mov	r3, r7
+ 362 00b0 0F33     		add	r3, r3, #15
+ 363 00b2 0322     		mov	r2, #3
+ 364 00b4 1A70     		strb	r2, [r3]
+ 365 00b6 11E0     		b	.L15
+ 366              	.L16:
+  50:../DaisyChain.c **** 			FifoTransBuffer[i-DAISY_MESSAGE_LENGTH]=FifoRecBuffer[i];
+ 367              		.loc 2 50 0 discriminator 2
+ 368 00b8 3B1C     		mov	r3, r7
+ 369 00ba 0F33     		add	r3, r3, #15
+ 370 00bc 1B78     		ldrb	r3, [r3]
+ 371 00be 033B     		sub	r3, r3, #3
+ 372 00c0 3A1C     		mov	r2, r7
+ 373 00c2 0F32     		add	r2, r2, #15
+ 374 00c4 1278     		ldrb	r2, [r2]
+ 375 00c6 2E49     		ldr	r1, .L17+8
+ 376 00c8 895C     		ldrb	r1, [r1, r2]
+ 377 00ca 304A     		ldr	r2, .L17+20
+ 378 00cc D154     		strb	r1, [r2, r3]
+  49:../DaisyChain.c **** 		for(i=DAISY_MESSAGE_LENGTH; i<DAISY_BUFFER_SIZE-1; i++)
+ 379              		.loc 2 49 0 discriminator 2
+ 380 00ce 3B1C     		mov	r3, r7
+ 381 00d0 0F33     		add	r3, r3, #15
+ 382 00d2 3A1C     		mov	r2, r7
+ 383 00d4 0F32     		add	r2, r2, #15
+ 384 00d6 1278     		ldrb	r2, [r2]
+ 385 00d8 0132     		add	r2, r2, #1
+ 386 00da 1A70     		strb	r2, [r3]
+ 387              	.L15:
+  49:../DaisyChain.c **** 		for(i=DAISY_MESSAGE_LENGTH; i<DAISY_BUFFER_SIZE-1; i++)
+ 388              		.loc 2 49 0 is_stmt 0 discriminator 1
+ 389 00dc 3B1C     		mov	r3, r7
+ 390 00de 0F33     		add	r3, r3, #15
+ 391 00e0 1B78     		ldrb	r3, [r3]
+ 392 00e2 0B2B     		cmp	r3, #11
+ 393 00e4 E8D9     		bls	.L16
+  51:../DaisyChain.c **** 
+  52:../DaisyChain.c **** 		//Status-Code
+  53:../DaisyChain.c **** 		FifoTransBuffer[i-DAISY_MESSAGE_LENGTH]=status;
+ 394              		.loc 2 53 0 is_stmt 1
+ 395 00e6 3B1C     		mov	r3, r7
+ 396 00e8 0F33     		add	r3, r3, #15
+ 397 00ea 1B78     		ldrb	r3, [r3]
+ 398 00ec 033B     		sub	r3, r3, #3
+ 399 00ee BA68     		ldr	r2, [r7, #8]
+ 400 00f0 D1B2     		uxtb	r1, r2
+ 401 00f2 264A     		ldr	r2, .L17+20
+ 402 00f4 D154     		strb	r1, [r2, r3]
+  54:../DaisyChain.c **** 		i++;
+ 403              		.loc 2 54 0
+ 404 00f6 3B1C     		mov	r3, r7
+ 405 00f8 0F33     		add	r3, r3, #15
+ 406 00fa 3A1C     		mov	r2, r7
+ 407 00fc 0F32     		add	r2, r2, #15
+ 408 00fe 1278     		ldrb	r2, [r2]
+ 409 0100 0132     		add	r2, r2, #1
+ 410 0102 1A70     		strb	r2, [r3]
+  55:../DaisyChain.c **** 		//Data
+  56:../DaisyChain.c **** 		FifoTransBuffer[i-DAISY_MESSAGE_LENGTH]=(uint8_t)(data >> 8);
+ 411              		.loc 2 56 0
+ 412 0104 3B1C     		mov	r3, r7
+ 413 0106 0F33     		add	r3, r3, #15
+ 414 0108 1B78     		ldrb	r3, [r3]
+ 415 010a 033B     		sub	r3, r3, #3
+ 416 010c 7A68     		ldr	r2, [r7, #4]
+ 417 010e 120A     		lsr	r2, r2, #8
+ 418 0110 D1B2     		uxtb	r1, r2
+ 419 0112 1E4A     		ldr	r2, .L17+20
+ 420 0114 D154     		strb	r1, [r2, r3]
+  57:../DaisyChain.c **** 		i++;
+ 421              		.loc 2 57 0
+ 422 0116 3B1C     		mov	r3, r7
+ 423 0118 0F33     		add	r3, r3, #15
+ 424 011a 3A1C     		mov	r2, r7
+ 425 011c 0F32     		add	r2, r2, #15
+ 426 011e 1278     		ldrb	r2, [r2]
+ 427 0120 0132     		add	r2, r2, #1
+ 428 0122 1A70     		strb	r2, [r3]
+  58:../DaisyChain.c **** 		FifoTransBuffer[i-DAISY_MESSAGE_LENGTH]=(uint8_t)data;
+ 429              		.loc 2 58 0
+ 430 0124 3B1C     		mov	r3, r7
+ 431 0126 0F33     		add	r3, r3, #15
+ 432 0128 1B78     		ldrb	r3, [r3]
+ 433 012a 033B     		sub	r3, r3, #3
+ 434 012c 7A68     		ldr	r2, [r7, #4]
+ 435 012e D1B2     		uxtb	r1, r2
+ 436 0130 164A     		ldr	r2, .L17+20
+ 437 0132 D154     		strb	r1, [r2, r3]
+  59:../DaisyChain.c **** 		i++;
+ 438              		.loc 2 59 0
+ 439 0134 3B1C     		mov	r3, r7
+ 440 0136 0F33     		add	r3, r3, #15
+ 441 0138 3A1C     		mov	r2, r7
+ 442 013a 0F32     		add	r2, r2, #15
+ 443 013c 1278     		ldrb	r2, [r2]
+ 444 013e 0132     		add	r2, r2, #1
+ 445 0140 1A70     		strb	r2, [r3]
+  60:../DaisyChain.c **** 		FifoTransBuffer[i-DAISY_MESSAGE_LENGTH]=DAISY_STOP_BYTE;
+ 446              		.loc 2 60 0
+ 447 0142 3B1C     		mov	r3, r7
+ 448 0144 0F33     		add	r3, r3, #15
+ 449 0146 1B78     		ldrb	r3, [r3]
+ 450 0148 033B     		sub	r3, r3, #3
+ 451 014a 104A     		ldr	r2, .L17+20
+ 452 014c 0421     		mov	r1, #4
+ 453 014e D154     		strb	r1, [r2, r3]
+  61:../DaisyChain.c **** 
+  62:../DaisyChain.c **** 		UART001_WriteDataBytes(&UART001_Handle0, FifoTransBuffer, DAISY_BUFFER_SIZE);
+ 454              		.loc 2 62 0
+ 455 0150 0A4A     		ldr	r2, .L17+4
+ 456 0152 0E4B     		ldr	r3, .L17+20
+ 457 0154 101C     		mov	r0, r2
+ 458 0156 191C     		mov	r1, r3
+ 459 0158 0D22     		mov	r2, #13
+ 460 015a FFF7FEFF 		bl	UART001_WriteDataBytes
+  63:../DaisyChain.c **** 
+  64:../DaisyChain.c **** 		DaisyTimeOut = 0;
+ 461              		.loc 2 64 0
+ 462 015e 064B     		ldr	r3, .L17
+ 463 0160 0022     		mov	r2, #0
+ 464 0162 1A70     		strb	r2, [r3]
+  65:../DaisyChain.c **** 		DaisyCount++;
+ 465              		.loc 2 65 0
+ 466 0164 0A4B     		ldr	r3, .L17+24
+ 467 0166 1B78     		ldrb	r3, [r3]
+ 468 0168 0133     		add	r3, r3, #1
+ 469 016a DAB2     		uxtb	r2, r3
+ 470 016c 084B     		ldr	r3, .L17+24
+ 471 016e 1A70     		strb	r2, [r3]
+ 472              	.L9:
+ 473              	.LBE2:
+  66:../DaisyChain.c **** 	}
+  67:../DaisyChain.c **** }
+ 474              		.loc 2 67 0
+ 475 0170 BD46     		mov	sp, r7
+ 476 0172 04B0     		add	sp, sp, #16
+ 477              		@ sp needed for prologue
+ 478 0174 80BD     		pop	{r7, pc}
+ 479              	.L18:
+ 480 0176 C046     		.align	2
+ 481              	.L17:
+ 482 0178 00000000 		.word	DaisyTimeOut
+ 483 017c 00000000 		.word	UART001_Handle0
+ 484 0180 00000000 		.word	FifoRecBuffer
+ 485 0184 00000000 		.word	IO004_Handle1
+ 486 0188 01000100 		.word	65537
+ 487 018c 00000000 		.word	FifoTransBuffer
+ 488 0190 00000000 		.word	DaisyCount
+ 489              		.cfi_endproc
+ 490              	.LFE38:
+ 492              		.section	.text.InitDaisyWatchDog,"ax",%progbits
+ 493              		.align	2
+ 494              		.global	InitDaisyWatchDog
+ 495              		.code	16
+ 496              		.thumb_func
+ 498              	InitDaisyWatchDog:
+ 499              	.LFB39:
+  68:../DaisyChain.c **** 
+  69:../DaisyChain.c **** void InitDaisyWatchDog()
+  70:../DaisyChain.c **** {
+ 500              		.loc 2 70 0
+ 501              		.cfi_startproc
+ 502 0000 80B5     		push	{r7, lr}
+ 503              	.LCFI9:
+ 504              		.cfi_def_cfa_offset 8
+ 505              		.cfi_offset 7, -8
+ 506              		.cfi_offset 14, -4
+ 507 0002 00AF     		add	r7, sp, #0
+ 508              	.LCFI10:
+ 509              		.cfi_def_cfa_register 7
+  71:../DaisyChain.c **** 	//Watchdog
+  72:../DaisyChain.c **** 	CCU40_CC41->PSC |= 0x03;
+ 510              		.loc 2 72 0
+ 511 0004 1B4B     		ldr	r3, .L20
+ 512 0006 1B4A     		ldr	r2, .L20
+ 513 0008 526A     		ldr	r2, [r2, #36]
+ 514 000a 0321     		mov	r1, #3
+ 515 000c 0A43     		orr	r2, r1
+ 516 000e 5A62     		str	r2, [r3, #36]
+  73:../DaisyChain.c **** 	CCU40_CC41->PRS = 0xFFFF;
+ 517              		.loc 2 73 0
+ 518 0010 184B     		ldr	r3, .L20
+ 519 0012 194A     		ldr	r2, .L20+4
+ 520 0014 5A63     		str	r2, [r3, #52]
+  74:../DaisyChain.c **** 	CCU40_CC41->CRS = 0;
+ 521              		.loc 2 74 0
+ 522 0016 174B     		ldr	r3, .L20
+ 523 0018 0022     		mov	r2, #0
+ 524 001a DA63     		str	r2, [r3, #60]
+  75:../DaisyChain.c **** 	CCU40->GCSS |= (0x01UL << 4);
+ 525              		.loc 2 75 0
+ 526 001c 174B     		ldr	r3, .L20+8
+ 527 001e 174A     		ldr	r2, .L20+8
+ 528 0020 1269     		ldr	r2, [r2, #16]
+ 529 0022 1021     		mov	r1, #16
+ 530 0024 0A43     		orr	r2, r1
+ 531 0026 1A61     		str	r2, [r3, #16]
+  76:../DaisyChain.c **** 
+  77:../DaisyChain.c **** 	//Interrupt Compare Match Slice 1
+  78:../DaisyChain.c **** 	CCU40_CC41->INTE |= 0x04UL;
+ 532              		.loc 2 78 0
+ 533 0028 124A     		ldr	r2, .L20
+ 534 002a 1249     		ldr	r1, .L20
+ 535 002c A423     		mov	r3, #164
+ 536 002e CB58     		ldr	r3, [r1, r3]
+ 537 0030 0421     		mov	r1, #4
+ 538 0032 1943     		orr	r1, r3
+ 539 0034 A423     		mov	r3, #164
+ 540 0036 D150     		str	r1, [r2, r3]
+  79:../DaisyChain.c **** 	CCU40_CC41->SRS |= 0x04UL;
+ 541              		.loc 2 79 0
+ 542 0038 0E4A     		ldr	r2, .L20
+ 543 003a 0E49     		ldr	r1, .L20
+ 544 003c A823     		mov	r3, #168
+ 545 003e CB58     		ldr	r3, [r1, r3]
+ 546 0040 0421     		mov	r1, #4
+ 547 0042 1943     		orr	r1, r3
+ 548 0044 A823     		mov	r3, #168
+ 549 0046 D150     		str	r1, [r2, r3]
+  80:../DaisyChain.c **** 	NVIC_SetPriority((IRQn_Type)22, 1);
+ 550              		.loc 2 80 0
+ 551 0048 1620     		mov	r0, #22
+ 552 004a 0121     		mov	r1, #1
+ 553 004c FFF7FEFF 		bl	NVIC_SetPriority
+  81:../DaisyChain.c **** 	NVIC_EnableIRQ((IRQn_Type)22);
+ 554              		.loc 2 81 0
+ 555 0050 1620     		mov	r0, #22
+ 556 0052 FFF7FEFF 		bl	NVIC_EnableIRQ
+  82:../DaisyChain.c **** 
+  83:../DaisyChain.c **** 	//Enable slice
+  84:../DaisyChain.c **** 	CCU40->GIDLC |= 0x01UL << 1;
+ 557              		.loc 2 84 0
+ 558 0056 094B     		ldr	r3, .L20+8
+ 559 0058 084A     		ldr	r2, .L20+8
+ 560 005a D268     		ldr	r2, [r2, #12]
+ 561 005c 0221     		mov	r1, #2
+ 562 005e 0A43     		orr	r2, r1
+ 563 0060 DA60     		str	r2, [r3, #12]
+  85:../DaisyChain.c **** 	CCU40_CC41->TCSET |= 0x01UL;
+ 564              		.loc 2 85 0
+ 565 0062 044B     		ldr	r3, .L20
+ 566 0064 034A     		ldr	r2, .L20
+ 567 0066 D268     		ldr	r2, [r2, #12]
+ 568 0068 0121     		mov	r1, #1
+ 569 006a 0A43     		orr	r2, r1
+ 570 006c DA60     		str	r2, [r3, #12]
+  86:../DaisyChain.c **** }
+ 571              		.loc 2 86 0
+ 572 006e BD46     		mov	sp, r7
+ 573              		@ sp needed for prologue
+ 574 0070 80BD     		pop	{r7, pc}
+ 575              	.L21:
+ 576 0072 C046     		.align	2
+ 577              	.L20:
+ 578 0074 00020448 		.word	1208222208
+ 579 0078 FFFF0000 		.word	65535
+ 580 007c 00000448 		.word	1208221696
+ 581              		.cfi_endproc
+ 582              	.LFE39:
+ 584              		.section	.text.CCU40_1_IRQHandler,"ax",%progbits
+ 585              		.align	2
+ 586              		.global	CCU40_1_IRQHandler
+ 587              		.code	16
+ 588              		.thumb_func
+ 590              	CCU40_1_IRQHandler:
+ 591              	.LFB40:
+  87:../DaisyChain.c **** 
+  88:../DaisyChain.c **** void DaisyWatchDog_ISR()
+  89:../DaisyChain.c **** {
+ 592              		.loc 2 89 0
+ 593              		.cfi_startproc
+ 594 0000 80B5     		push	{r7, lr}
+ 595              	.LCFI11:
+ 596              		.cfi_def_cfa_offset 8
+ 597              		.cfi_offset 7, -8
+ 598              		.cfi_offset 14, -4
+ 599 0002 00AF     		add	r7, sp, #0
+ 600              	.LCFI12:
+ 601              		.cfi_def_cfa_register 7
+  90:../DaisyChain.c **** 	static uint8_t lastCount;
+  91:../DaisyChain.c **** 
+  92:../DaisyChain.c **** 	if (lastCount == DaisyCount) DaisyTimeOut = 1;
+ 602              		.loc 2 92 0
+ 603 0004 074B     		ldr	r3, .L24
+ 604 0006 1A78     		ldrb	r2, [r3]
+ 605 0008 074B     		ldr	r3, .L24+4
+ 606 000a 1B78     		ldrb	r3, [r3]
+ 607 000c 9A42     		cmp	r2, r3
+ 608 000e 02D1     		bne	.L23
+ 609              		.loc 2 92 0 is_stmt 0 discriminator 1
+ 610 0010 064B     		ldr	r3, .L24+8
+ 611 0012 0122     		mov	r2, #1
+ 612 0014 1A70     		strb	r2, [r3]
+ 613              	.L23:
+  93:../DaisyChain.c **** 	lastCount = DaisyCount;
+ 614              		.loc 2 93 0 is_stmt 1
+ 615 0016 044B     		ldr	r3, .L24+4
+ 616 0018 1A78     		ldrb	r2, [r3]
+ 617 001a 024B     		ldr	r3, .L24
+ 618 001c 1A70     		strb	r2, [r3]
+  94:../DaisyChain.c **** }
+ 619              		.loc 2 94 0
+ 620 001e BD46     		mov	sp, r7
+ 621              		@ sp needed for prologue
+ 622 0020 80BD     		pop	{r7, pc}
+ 623              	.L25:
+ 624 0022 C046     		.align	2
+ 625              	.L24:
+ 626 0024 1E000000 		.word	lastCount.5569
+ 627 0028 00000000 		.word	DaisyCount
+ 628 002c 00000000 		.word	DaisyTimeOut
+ 629              		.cfi_endproc
+ 630              	.LFE40:
+ 632              		.bss
+ 633              	lastCount.5569:
+ 634 001e 00       		.space	1
+ 635 001f 00       		.text
+ 636              	.Letext0:
+ 637              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC1300_series/Include/XMC1300.h"
+ 638              		.file 4 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 639              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\ESC_Pinus_XMC1302_V1.2\\Dave\\Generated\\inc\\DAVESupport/
+ 640              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\ESC_Pinus_XMC1302_V1.2\\Dave\\Generated\\inc\\DAVESupport/
+ 641              		.file 7 "C:\\DAVE3_workspace\\ws3.1.10\\ESC_Pinus_XMC1302_V1.2\\Dave\\Generated\\inc\\DAVESupport/
+ 642              		.file 8 "C:\\DAVE3_workspace\\ws3.1.10\\ESC_Pinus_XMC1302_V1.2\\Dave\\Generated\\inc\\DAVESupport/
+ 643              		.file 9 "C:\\DAVE3_workspace\\ws3.1.10\\ESC_Pinus_XMC1302_V1.2\\Dave\\Generated\\inc\\DAVESupport/
+ 644              		.file 10 "C:\\DAVE3_workspace\\ws3.1.10\\ESC_Pinus_XMC1302_V1.2\\Dave\\Generated\\inc\\DAVESupport
+DEFINED SYMBOLS
+                            *ABS*:00000000 DaisyChain.c
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:18     .text.NVIC_EnableIRQ:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:22     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:61     .text.NVIC_EnableIRQ:00000028 $d
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:66     .text.NVIC_SetPriority:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:70     .text.NVIC_SetPriority:00000000 NVIC_SetPriority
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:205    .text.NVIC_SetPriority:000000d8 $d
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:215    .bss:00000000 FifoRecBuffer
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:212    .bss:00000000 $d
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:221    .bss:00000010 FifoTransBuffer
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:227    .data:00000000 DaisyTimeOut
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:233    .bss:0000001d DaisyCount
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:236    .text.DaisyChain:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:241    .text.DaisyChain:00000000 DaisyChain
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:482    .text.DaisyChain:00000178 $d
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:493    .text.InitDaisyWatchDog:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:498    .text.InitDaisyWatchDog:00000000 InitDaisyWatchDog
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:578    .text.InitDaisyWatchDog:00000074 $d
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:585    .text.CCU40_1_IRQHandler:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:590    .text.CCU40_1_IRQHandler:00000000 CCU40_1_IRQHandler
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:626    .text.CCU40_1_IRQHandler:00000024 $d
+C:\Users\maan\AppData\Local\Temp\ccyx13TE.s:633    .bss:0000001e lastCount.5569
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.665d63c3c957c91c5ed795826dcbc088
+                           .group:00000000 wm4.XMC1300.h.45.4ee692c6c98aa9fc42e2abbc732052b9
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.core_cm0.h.135.ca70469f87e143609670bb393bfa6518
+                           .group:00000000 wm4.XMC1000_RomFunctionTable.h.31.6d9a94465618f31b040dc9cea9a47ad7
+                           .group:00000000 wm4.XMC1300.h.126.871a37eeeb3f6a078f5ddf5efd64103f
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.383e3edbb9cbf6e538f7c1532ef623c1
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.1aa717522e337383e1234be386036b7c
+                           .group:00000000 wm4.CLK002.h.56.d2936f957892acc36e594c5138aee657
+                           .group:00000000 wm4.uc_id.h.35.f852fba3565a132d8ed947977fab9fbc
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.a52fac0daa39b5f58343578312b4eb54
+                           .group:00000000 wm4.CCU8GLOBAL_Conf.h.82.76c6b1bf357180d1e8ea1f462a66deb8
+                           .group:00000000 wm4.IO004.h.53.442ea5eb47ad9eedc675253aa35f3107
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.f334402b2e237110b77f625dfc27af0e
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.NVIC002_Conf.h.63.00b91c10e79f81ab4aec2120d8519584
+                           .group:00000000 wm4.DaisyCodes.h.9.f6bc76db8d572a87ace112152fb173e2
+                           .group:00000000 wm4.BlockCommutation.h.9.09df5d1c29ae6c6e4e741202c42fad1e
+
+UNDEFINED SYMBOLS
+StopMotor
+UART001_ReadDataBytes
+SetReferenceCurrent
+UART001_WriteDataBytes
+UART001_Handle0
+IO004_Handle1

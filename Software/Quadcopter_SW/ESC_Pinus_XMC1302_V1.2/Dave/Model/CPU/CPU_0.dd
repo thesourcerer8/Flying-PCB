@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="CPU" description="Central Processing Unit" URI="http://www.infineon.com/0.13.40/peripheral/cpu/0">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="&#x9;USIC0_0_IRQHandler" URI="http://www.infineon.com/0.13.40/peripheral/cpu/0/nvic/interrupt/9">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../NVIC002/1.0.28/nvic002_0.app#//@consumed.0"/>
+    <resourcesList name="iser_setena" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/iser/setena8" isResolved="true"/>
+    <resourcesList name="icer_clrena" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/icer/clrena8" isResolved="true"/>
+    <resourcesList name="ispr_setpend" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/ispr/setpend8" isResolved="true"/>
+    <resourcesList name="icpr_clrpend" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/icpr/clrpend8" isResolved="true"/>
+    <resourcesList name="ipr_pri" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/ipr2/pri_1" isResolved="true"/>
+    <resourcesList name="signal_in" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/usic0_0_irqhandler" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="USIC0_0_IRQ" description="USIC0_0_IRQ" URI="http://www.infineon.com/0.13.40/peripheral/cpu/0/nvic/interrupt/9/signal_in" signalType="INTERRUPT" interruptVectorAddress="23" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../NVIC002/1.0.28/nvic002_0.app#//@consumed.1"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PRI_1" URI="http://www.infineon.com/0.13.40/peripheral/cpu/0/nvic/interrupt/9/ipr_pri" maxValue="255" minValue="0" startPos="8" stopPos="15" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../NVIC002/1.0.28/nvic002_0.app#//@consumed.2"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
+    <toolTipHelpDescription>Priority, Byte Offset 1</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="VADC0_G0_1_IRQHandler" URI="http://www.infineon.com/0.13.40/peripheral/cpu/0/nvic/interrupt/18">
+    <resourcesList name="iser_setena" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/iser/setena19" isResolved="true"/>
+    <resourcesList name="icer_clrena" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/icer/clrena19" isResolved="true"/>
+    <resourcesList name="ispr_setpend" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/ispr/setpend19" isResolved="true"/>
+    <resourcesList name="icpr_clrpend" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/icpr/clrpend19" isResolved="true"/>
+    <resourcesList name="ipr_pri" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/ipr4/pri_2" isResolved="true"/>
+    <resourcesList name="signal_in" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/cpu/0/vadc0_g0_1_irqhandler" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="VADC0_G0_1_IRQ" description="VADC0_G0_1_IRQ" URI="http://www.infineon.com/0.13.40/peripheral/cpu/0/nvic/interrupt/18/signal_in" signalType="INTERRUPT" interruptVectorAddress="32" isVisible="true"/>
+  <provided xsi:type="ResourceModel:BitField" name="PRI_2" URI="http://www.infineon.com/0.13.40/peripheral/cpu/0/nvic/interrupt/18/ipr_pri" maxValue="255" minValue="0" startPos="16" stopPos="23" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
+    <toolTipHelpDescription>Priority, Byte Offset 2</toolTipHelpDescription>
+  </provided>
+  <categoryDescription description="Central Processing Unit (CPU)" name="cpu"/>
+</ResourceModel:Peripheral>

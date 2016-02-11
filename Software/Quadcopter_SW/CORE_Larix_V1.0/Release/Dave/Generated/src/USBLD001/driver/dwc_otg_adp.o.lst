@@ -1,0 +1,981 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"dwc_otg_adp.c"
+  16              		.section	.text.cil_hcd_start,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	cil_hcd_start:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 08B5     		push	{r3, lr}
+  25 0002 836E     		ldr	r3, [r0, #104]
+  26 0004 1BB1     		cbz	r3, .L1
+  27 0006 1A68     		ldr	r2, [r3, #0]
+  28 0008 0AB1     		cbz	r2, .L1
+  29 000a 9869     		ldr	r0, [r3, #24]
+  30 000c 9047     		blx	r2
+  31              	.L1:
+  32 000e 08BD     		pop	{r3, pc}
+  34              		.section	.text.cil_pcd_start,"ax",%progbits
+  35              		.align	1
+  36              		.thumb
+  37              		.thumb_func
+  39              	cil_pcd_start:
+  40              		@ args = 0, pretend = 0, frame = 0
+  41              		@ frame_needed = 0, uses_anonymous_args = 0
+  42 0000 08B5     		push	{r3, lr}
+  43 0002 C36E     		ldr	r3, [r0, #108]
+  44 0004 1BB1     		cbz	r3, .L10
+  45 0006 1A68     		ldr	r2, [r3, #0]
+  46 0008 0AB1     		cbz	r2, .L10
+  47 000a 9869     		ldr	r0, [r3, #24]
+  48 000c 9047     		blx	r2
+  49              	.L10:
+  50 000e 08BD     		pop	{r3, pc}
+  52              		.section	.text.dwc_otg_adp_write_reg,"ax",%progbits
+  53              		.align	1
+  54              		.global	dwc_otg_adp_write_reg
+  55              		.thumb
+  56              		.thumb_func
+  58              	dwc_otg_adp_write_reg:
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+  61 0000 38B5     		push	{r3, r4, r5, lr}
+  62 0002 0C46     		mov	r4, r1
+  63 0004 0546     		mov	r5, r0
+  64 0006 0223     		movs	r3, #2
+  65 0008 4068     		ldr	r0, [r0, #4]
+  66 000a 63F3DC64 		bfi	r4, r3, #27, #2
+  67 000e 6030     		adds	r0, r0, #96
+  68 0010 2146     		mov	r1, r4
+  69 0012 FFF7FEFF 		bl	DWC_WRITE_REG32
+  70              	.L19:
+  71 0016 C4F30764 		ubfx	r4, r4, #24, #8
+  72 001a 04F01804 		and	r4, r4, #24
+  73 001e 2CB1     		cbz	r4, .L21
+  74              	.L20:
+  75 0020 6868     		ldr	r0, [r5, #4]
+  76 0022 6030     		adds	r0, r0, #96
+  77 0024 FFF7FEFF 		bl	DWC_READ_REG32
+  78 0028 0446     		mov	r4, r0
+  79 002a F4E7     		b	.L19
+  80              	.L21:
+  81 002c 38BD     		pop	{r3, r4, r5, pc}
+  83              		.section	.text.dwc_otg_adp_read_reg,"ax",%progbits
+  84              		.align	1
+  85              		.global	dwc_otg_adp_read_reg
+  86              		.thumb
+  87              		.thumb_func
+  89              	dwc_otg_adp_read_reg:
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92 0000 38B5     		push	{r3, r4, r5, lr}
+  93 0002 0546     		mov	r5, r0
+  94 0004 0024     		movs	r4, #0
+  95 0006 0123     		movs	r3, #1
+  96 0008 4068     		ldr	r0, [r0, #4]
+  97 000a 63F3DC64 		bfi	r4, r3, #27, #2
+  98 000e 6030     		adds	r0, r0, #96
+  99 0010 2146     		mov	r1, r4
+ 100 0012 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 101              	.L23:
+ 102 0016 C4F30760 		ubfx	r0, r4, #24, #8
+ 103 001a 00F01801 		and	r1, r0, #24
+ 104 001e 29B1     		cbz	r1, .L25
+ 105              	.L24:
+ 106 0020 6868     		ldr	r0, [r5, #4]
+ 107 0022 6030     		adds	r0, r0, #96
+ 108 0024 FFF7FEFF 		bl	DWC_READ_REG32
+ 109 0028 0446     		mov	r4, r0
+ 110 002a F4E7     		b	.L23
+ 111              	.L25:
+ 112 002c 2046     		mov	r0, r4
+ 113 002e 38BD     		pop	{r3, r4, r5, pc}
+ 115              		.section	.text.dwc_otg_adp_modify_reg,"ax",%progbits
+ 116              		.align	1
+ 117              		.global	dwc_otg_adp_modify_reg
+ 118              		.thumb
+ 119              		.thumb_func
+ 121              	dwc_otg_adp_modify_reg:
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+ 124 0000 70B5     		push	{r4, r5, r6, lr}
+ 125 0002 0446     		mov	r4, r0
+ 126 0004 0D46     		mov	r5, r1
+ 127 0006 1646     		mov	r6, r2
+ 128 0008 FFF7FEFF 		bl	dwc_otg_adp_read_reg
+ 129 000c 20EA0501 		bic	r1, r0, r5
+ 130 0010 3143     		orrs	r1, r1, r6
+ 131 0012 2046     		mov	r0, r4
+ 132 0014 BDE87040 		pop	{r4, r5, r6, lr}
+ 133 0018 FFF7FEBF 		b	dwc_otg_adp_write_reg
+ 135              		.section	.text.dwc_otg_adp_vbuson_timer_start,"ax",%progbits
+ 136              		.align	1
+ 137              		.global	dwc_otg_adp_vbuson_timer_start
+ 138              		.thumb
+ 139              		.thumb_func
+ 141              	dwc_otg_adp_vbuson_timer_start:
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144              		@ link register save eliminated.
+ 145 0000 0123     		movs	r3, #1
+ 146 0002 C0F8B830 		str	r3, [r0, #184]
+ 147 0006 D0F8B400 		ldr	r0, [r0, #180]
+ 148 000a 40F24C41 		movw	r1, #1100
+ 149 000e FFF7FEBF 		b	DWC_TIMER_SCHEDULE
+ 151              		.section	.text.dwc_otg_adp_probe_start,"ax",%progbits
+ 152              		.align	1
+ 153              		.global	dwc_otg_adp_probe_start
+ 154              		.thumb
+ 155              		.thumb_func
+ 157              	dwc_otg_adp_probe_start:
+ 158              		@ args = 0, pretend = 0, frame = 0
+ 159              		@ frame_needed = 0, uses_anonymous_args = 0
+ 160 0000 70B5     		push	{r4, r5, r6, lr}
+ 161 0002 0446     		mov	r4, r0
+ 162 0004 FFF7FEFF 		bl	dwc_otg_disable_global_interrupts
+ 163 0008 0025     		movs	r5, #0
+ 164              	.L29:
+ 165 000a 2368     		ldr	r3, [r4, #0]
+ 166 000c E168     		ldr	r1, [r4, #12]
+ 167 000e D3F88000 		ldr	r0, [r3, #128]
+ 168 0012 8542     		cmp	r5, r0
+ 169 0014 10DA     		bge	.L48
+ 170              	.L30:
+ 171 0016 AE1C     		adds	r6, r5, #2
+ 172 0018 0135     		adds	r5, r5, #1
+ 173 001a 51F82600 		ldr	r0, [r1, r6, lsl #2]
+ 174 001e 0021     		movs	r1, #0
+ 175 0020 0C30     		adds	r0, r0, #12
+ 176 0022 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 177 0026 E168     		ldr	r1, [r4, #12]
+ 178 0028 51F82600 		ldr	r0, [r1, r6, lsl #2]
+ 179 002c 4FF0FF31 		mov	r1, #-1
+ 180 0030 0830     		adds	r0, r0, #8
+ 181 0032 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 182 0036 E8E7     		b	.L29
+ 183              	.L48:
+ 184 0038 0868     		ldr	r0, [r1, #0]
+ 185 003a 0021     		movs	r1, #0
+ 186 003c 1830     		adds	r0, r0, #24
+ 187 003e FFF7FEFF 		bl	DWC_WRITE_REG32
+ 188 0042 E268     		ldr	r2, [r4, #12]
+ 189 0044 1068     		ldr	r0, [r2, #0]
+ 190 0046 4FF0FF31 		mov	r1, #-1
+ 191 004a 1430     		adds	r0, r0, #20
+ 192 004c FFF7FEFF 		bl	DWC_WRITE_REG32
+ 193 0050 94F84950 		ldrb	r5, [r4, #73]	@ zero_extendqisi2
+ 194 0054 A5BB     		cbnz	r5, .L43
+ 195 0056 A068     		ldr	r0, [r4, #8]
+ 196 0058 0068     		ldr	r0, [r0, #0]
+ 197 005a 2946     		mov	r1, r5
+ 198 005c 1030     		adds	r0, r0, #16
+ 199 005e FFF7FEFF 		bl	DWC_WRITE_REG32
+ 200              	.L32:
+ 201 0062 A368     		ldr	r3, [r4, #8]
+ 202 0064 93F84510 		ldrb	r1, [r3, #69]	@ zero_extendqisi2
+ 203 0068 8D42     		cmp	r5, r1
+ 204 006a 09DC     		bgt	.L49
+ 205              	.L33:
+ 206 006c 03EB8502 		add	r2, r3, r5, lsl #2
+ 207 0070 4FF0FF31 		mov	r1, #-1
+ 208 0074 5068     		ldr	r0, [r2, #4]
+ 209 0076 0830     		adds	r0, r0, #8
+ 210 0078 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 211 007c 0135     		adds	r5, r5, #1
+ 212 007e F0E7     		b	.L32
+ 213              	.L49:
+ 214 0080 1868     		ldr	r0, [r3, #0]
+ 215 0082 0021     		movs	r1, #0
+ 216 0084 1430     		adds	r0, r0, #20
+ 217 0086 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 218 008a 0025     		movs	r5, #0
+ 219              	.L34:
+ 220 008c A068     		ldr	r0, [r4, #8]
+ 221 008e 90F84620 		ldrb	r2, [r0, #70]	@ zero_extendqisi2
+ 222 0092 9542     		cmp	r5, r2
+ 223 0094 09DC     		bgt	.L50
+ 224              	.L35:
+ 225 0096 00EB8500 		add	r0, r0, r5, lsl #2
+ 226 009a 4FF0FF31 		mov	r1, #-1
+ 227 009e 406A     		ldr	r0, [r0, #36]
+ 228 00a0 0830     		adds	r0, r0, #8
+ 229 00a2 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 230 00a6 0135     		adds	r5, r5, #1
+ 231 00a8 F0E7     		b	.L34
+ 232              	.L50:
+ 233 00aa 0068     		ldr	r0, [r0, #0]
+ 234 00ac 4FF0FF31 		mov	r1, #-1
+ 235 00b0 1830     		adds	r0, r0, #24
+ 236 00b2 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 237 00b6 A568     		ldr	r5, [r4, #8]
+ 238 00b8 2868     		ldr	r0, [r5, #0]
+ 239 00ba 0021     		movs	r1, #0
+ 240 00bc 1C30     		adds	r0, r0, #28
+ 241 00be 3BE0     		b	.L47
+ 242              	.L43:
+ 243 00c0 0025     		movs	r5, #0
+ 244              	.L31:
+ 245 00c2 A368     		ldr	r3, [r4, #8]
+ 246 00c4 93F84500 		ldrb	r0, [r3, #69]	@ zero_extendqisi2
+ 247 00c8 8542     		cmp	r5, r0
+ 248 00ca 12DA     		bge	.L51
+ 249              	.L37:
+ 250 00cc 1B68     		ldr	r3, [r3, #0]
+ 251 00ce 05F11000 		add	r0, r5, #16
+ 252 00d2 03EB8000 		add	r0, r3, r0, lsl #2
+ 253 00d6 0021     		movs	r1, #0
+ 254 00d8 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 255 00dc A168     		ldr	r1, [r4, #8]
+ 256 00de 01EB8502 		add	r2, r1, r5, lsl #2
+ 257 00e2 4FF0FF31 		mov	r1, #-1
+ 258 00e6 5068     		ldr	r0, [r2, #4]
+ 259 00e8 0830     		adds	r0, r0, #8
+ 260 00ea FFF7FEFF 		bl	DWC_WRITE_REG32
+ 261 00ee 0135     		adds	r5, r5, #1
+ 262 00f0 E7E7     		b	.L31
+ 263              	.L51:
+ 264 00f2 0025     		movs	r5, #0
+ 265              	.L38:
+ 266 00f4 A168     		ldr	r1, [r4, #8]
+ 267 00f6 91F84620 		ldrb	r2, [r1, #70]	@ zero_extendqisi2
+ 268 00fa 9542     		cmp	r5, r2
+ 269 00fc 12DA     		bge	.L52
+ 270              	.L39:
+ 271 00fe 0B68     		ldr	r3, [r1, #0]
+ 272 0100 05F11800 		add	r0, r5, #24
+ 273 0104 03EB8000 		add	r0, r3, r0, lsl #2
+ 274 0108 0021     		movs	r1, #0
+ 275 010a FFF7FEFF 		bl	DWC_WRITE_REG32
+ 276 010e A168     		ldr	r1, [r4, #8]
+ 277 0110 01EB8502 		add	r2, r1, r5, lsl #2
+ 278 0114 4FF0FF31 		mov	r1, #-1
+ 279 0118 506A     		ldr	r0, [r2, #36]
+ 280 011a 0830     		adds	r0, r0, #8
+ 281 011c FFF7FEFF 		bl	DWC_WRITE_REG32
+ 282 0120 0135     		adds	r5, r5, #1
+ 283 0122 E7E7     		b	.L38
+ 284              	.L52:
+ 285 0124 0868     		ldr	r0, [r1, #0]
+ 286 0126 0021     		movs	r1, #0
+ 287 0128 3C30     		adds	r0, r0, #60
+ 288 012a FFF7FEFF 		bl	DWC_WRITE_REG32
+ 289 012e A568     		ldr	r5, [r4, #8]
+ 290 0130 2868     		ldr	r0, [r5, #0]
+ 291 0132 4FF0FF31 		mov	r1, #-1
+ 292 0136 3830     		adds	r0, r0, #56
+ 293              	.L47:
+ 294 0138 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 295 013c 6068     		ldr	r0, [r4, #4]
+ 296 013e 0022     		movs	r2, #0
+ 297 0140 0830     		adds	r0, r0, #8
+ 298 0142 0121     		movs	r1, #1
+ 299 0144 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 300 0148 6068     		ldr	r0, [r4, #4]
+ 301 014a 0021     		movs	r1, #0
+ 302 014c 1830     		adds	r0, r0, #24
+ 303 014e FFF7FEFF 		bl	DWC_WRITE_REG32
+ 304 0152 6068     		ldr	r0, [r4, #4]
+ 305 0154 4FF0FF31 		mov	r1, #-1
+ 306 0158 1430     		adds	r0, r0, #20
+ 307 015a FFF7FEFF 		bl	DWC_WRITE_REG32
+ 308 015e 6368     		ldr	r3, [r4, #4]
+ 309 0160 4FF0FF31 		mov	r1, #-1
+ 310 0164 181D     		adds	r0, r3, #4
+ 311 0166 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 312 016a 2046     		mov	r0, r4
+ 313 016c FFF7FEFF 		bl	dwc_otg_is_host_mode
+ 314 0170 28B1     		cbz	r0, .L40
+ 315 0172 6068     		ldr	r0, [r4, #4]
+ 316 0174 4FF08041 		mov	r1, #1073741824
+ 317 0178 1830     		adds	r0, r0, #24
+ 318 017a FFF7FEFF 		bl	DWC_WRITE_REG32
+ 319              	.L40:
+ 320 017e 2046     		mov	r0, r4
+ 321 0180 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 322 0184 4FF40025 		mov	r5, #524288
+ 323 0188 0121     		movs	r1, #1
+ 324 018a C4F8A410 		str	r1, [r4, #164]
+ 325 018e 2046     		mov	r0, r4
+ 326 0190 2946     		mov	r1, r5
+ 327 0192 FFF7FEFF 		bl	dwc_otg_adp_write_reg
+ 328              	.L41:
+ 329 0196 C5F30740 		ubfx	r0, r5, #16, #8
+ 330 019a 00F00802 		and	r2, r0, #8
+ 331 019e D5B2     		uxtb	r5, r2
+ 332 01a0 25B1     		cbz	r5, .L53
+ 333              	.L42:
+ 334 01a2 2046     		mov	r0, r4
+ 335 01a4 FFF7FEFF 		bl	dwc_otg_adp_read_reg
+ 336 01a8 0546     		mov	r5, r0
+ 337 01aa F4E7     		b	.L41
+ 338              	.L53:
+ 339 01ac 0123     		movs	r3, #1
+ 340 01ae 4FF0A061 		mov	r1, #83886080
+ 341 01b2 63F30101 		bfi	r1, r3, #0, #2
+ 342 01b6 63F38301 		bfi	r1, r3, #2, #2
+ 343 01ba 63F30511 		bfi	r1, r3, #4, #2
+ 344 01be 2046     		mov	r0, r4
+ 345 01c0 41F49011 		orr	r1, r1, #1179648
+ 346 01c4 FFF7FEFF 		bl	dwc_otg_adp_write_reg
+ 347 01c8 2846     		mov	r0, r5
+ 348 01ca 70BD     		pop	{r4, r5, r6, pc}
+ 350              		.section	.text.adp_vbuson_timeout,"ax",%progbits
+ 351              		.align	1
+ 352              		.thumb
+ 353              		.thumb_func
+ 355              	adp_vbuson_timeout:
+ 356              		@ args = 0, pretend = 0, frame = 0
+ 357              		@ frame_needed = 0, uses_anonymous_args = 0
+ 358 0000 C368     		ldr	r3, [r0, #12]
+ 359 0002 70B5     		push	{r4, r5, r6, lr}
+ 360 0004 0025     		movs	r5, #0
+ 361 0006 0446     		mov	r4, r0
+ 362 0008 C0F8B850 		str	r5, [r0, #184]
+ 363 000c 2946     		mov	r1, r5
+ 364 000e 5868     		ldr	r0, [r3, #4]
+ 365 0010 4FF48052 		mov	r2, #4096
+ 366 0014 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 367 0018 D4F89000 		ldr	r0, [r4, #144]
+ 368 001c 0228     		cmp	r0, #2
+ 369 001e 2E46     		mov	r6, r5
+ 370 0020 6068     		ldr	r0, [r4, #4]
+ 371 0022 12D1     		bne	.L55
+ 372 0024 65F34106 		bfi	r6, r5, #1, #1
+ 373 0028 5830     		adds	r0, r0, #88
+ 374 002a 2946     		mov	r1, r5
+ 375 002c 46F01802 		orr	r2, r6, #24
+ 376 0030 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 377 0034 E069     		ldr	r0, [r4, #28]
+ 378 0036 2946     		mov	r1, r5
+ 379 0038 0122     		movs	r2, #1
+ 380 003a FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 381 003e 6068     		ldr	r0, [r4, #4]
+ 382 0040 2946     		mov	r1, r5
+ 383 0042 5830     		adds	r0, r0, #88
+ 384 0044 46F01A02 		orr	r2, r6, #26
+ 385 0048 02E0     		b	.L58
+ 386              	.L55:
+ 387 004a 5830     		adds	r0, r0, #88
+ 388 004c 2946     		mov	r1, r5
+ 389 004e 0222     		movs	r2, #2
+ 390              	.L58:
+ 391 0050 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 392 0054 D4F89010 		ldr	r1, [r4, #144]
+ 393 0058 0229     		cmp	r1, #2
+ 394 005a 05D1     		bne	.L57
+ 395 005c 6068     		ldr	r0, [r4, #4]
+ 396 005e 2021     		movs	r1, #32
+ 397 0060 5830     		adds	r0, r0, #88
+ 398 0062 0022     		movs	r2, #0
+ 399 0064 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 400              	.L57:
+ 401 0068 6068     		ldr	r0, [r4, #4]
+ 402 006a 0021     		movs	r1, #0
+ 403 006c 5830     		adds	r0, r0, #88
+ 404 006e 4FF48032 		mov	r2, #65536
+ 405 0072 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 406 0076 2046     		mov	r0, r4
+ 407 0078 BDE87040 		pop	{r4, r5, r6, lr}
+ 408 007c FFF7FEBF 		b	dwc_otg_adp_probe_start
+ 410              		.section	.text.dwc_otg_adp_sense_timer_start,"ax",%progbits
+ 411              		.align	1
+ 412              		.global	dwc_otg_adp_sense_timer_start
+ 413              		.thumb
+ 414              		.thumb_func
+ 416              	dwc_otg_adp_sense_timer_start:
+ 417              		@ args = 0, pretend = 0, frame = 0
+ 418              		@ frame_needed = 0, uses_anonymous_args = 0
+ 419              		@ link register save eliminated.
+ 420 0000 0123     		movs	r3, #1
+ 421 0002 C0F8B030 		str	r3, [r0, #176]
+ 422 0006 D0F8AC00 		ldr	r0, [r0, #172]
+ 423 000a 40F6B831 		movw	r1, #3000
+ 424 000e FFF7FEBF 		b	DWC_TIMER_SCHEDULE
+ 426              		.section	.text.dwc_otg_adp_sense_start,"ax",%progbits
+ 427              		.align	1
+ 428              		.global	dwc_otg_adp_sense_start
+ 429              		.thumb
+ 430              		.thumb_func
+ 432              	dwc_otg_adp_sense_start:
+ 433              		@ args = 0, pretend = 0, frame = 0
+ 434              		@ frame_needed = 0, uses_anonymous_args = 0
+ 435 0000 70B5     		push	{r4, r5, r6, lr}
+ 436 0002 0446     		mov	r4, r0
+ 437 0004 4FF40025 		mov	r5, #524288
+ 438 0008 FFF7FEFF 		bl	dwc_otg_disable_global_interrupts
+ 439 000c 0123     		movs	r3, #1
+ 440 000e C4F8A830 		str	r3, [r4, #168]
+ 441 0012 2046     		mov	r0, r4
+ 442 0014 2946     		mov	r1, r5
+ 443 0016 FFF7FEFF 		bl	dwc_otg_adp_write_reg
+ 444              	.L61:
+ 445 001a C5F30746 		ubfx	r6, r5, #16, #8
+ 446 001e 06F00800 		and	r0, r6, #8
+ 447 0022 C6B2     		uxtb	r6, r0
+ 448 0024 2046     		mov	r0, r4
+ 449 0026 1EB1     		cbz	r6, .L63
+ 450              	.L62:
+ 451 0028 FFF7FEFF 		bl	dwc_otg_adp_read_reg
+ 452 002c 0546     		mov	r5, r0
+ 453 002e F4E7     		b	.L61
+ 454              	.L63:
+ 455 0030 45F00571 		orr	r1, r5, #34865152
+ 456 0034 FFF7FEFF 		bl	dwc_otg_adp_write_reg
+ 457 0038 2046     		mov	r0, r4
+ 458 003a FFF7FEFF 		bl	dwc_otg_adp_sense_timer_start
+ 459 003e 3046     		mov	r0, r6
+ 460 0040 70BD     		pop	{r4, r5, r6, pc}
+ 462              		.section	.text.dwc_otg_adp_probe_stop,"ax",%progbits
+ 463              		.align	1
+ 464              		.global	dwc_otg_adp_probe_stop
+ 465              		.thumb
+ 466              		.thumb_func
+ 468              	dwc_otg_adp_probe_stop:
+ 469              		@ args = 0, pretend = 0, frame = 0
+ 470              		@ frame_needed = 0, uses_anonymous_args = 0
+ 471 0000 38B5     		push	{r3, r4, r5, lr}
+ 472 0002 0023     		movs	r3, #0
+ 473 0004 4FF40025 		mov	r5, #524288
+ 474 0008 C0F8A430 		str	r3, [r0, #164]
+ 475 000c 2946     		mov	r1, r5
+ 476 000e 0446     		mov	r4, r0
+ 477 0010 FFF7FEFF 		bl	dwc_otg_adp_write_reg
+ 478              	.L65:
+ 479 0014 C5F30745 		ubfx	r5, r5, #16, #8
+ 480 0018 05F00800 		and	r0, r5, #8
+ 481 001c C5B2     		uxtb	r5, r0
+ 482 001e 2046     		mov	r0, r4
+ 483 0020 1DB1     		cbz	r5, .L67
+ 484              	.L66:
+ 485 0022 FFF7FEFF 		bl	dwc_otg_adp_read_reg
+ 486 0026 0546     		mov	r5, r0
+ 487 0028 F4E7     		b	.L65
+ 488              	.L67:
+ 489 002a 2946     		mov	r1, r5
+ 490 002c FFF7FEFF 		bl	dwc_otg_adp_write_reg
+ 491 0030 2046     		mov	r0, r4
+ 492 0032 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 493 0036 2846     		mov	r0, r5
+ 494 0038 38BD     		pop	{r3, r4, r5, pc}
+ 496              		.section	.text.dwc_otg_adp_sense_stop,"ax",%progbits
+ 497              		.align	1
+ 498              		.global	dwc_otg_adp_sense_stop
+ 499              		.thumb
+ 500              		.thumb_func
+ 502              	dwc_otg_adp_sense_stop:
+ 503              		@ args = 0, pretend = 0, frame = 0
+ 504              		@ frame_needed = 0, uses_anonymous_args = 0
+ 505 0000 38B5     		push	{r3, r4, r5, lr}
+ 506 0002 0023     		movs	r3, #0
+ 507 0004 4FF40025 		mov	r5, #524288
+ 508 0008 C0F8A830 		str	r3, [r0, #168]
+ 509 000c 2946     		mov	r1, r5
+ 510 000e 0446     		mov	r4, r0
+ 511 0010 FFF7FEFF 		bl	dwc_otg_adp_write_reg
+ 512              	.L69:
+ 513 0014 C5F30745 		ubfx	r5, r5, #16, #8
+ 514 0018 05F00800 		and	r0, r5, #8
+ 515 001c C5B2     		uxtb	r5, r0
+ 516 001e 2046     		mov	r0, r4
+ 517 0020 1DB1     		cbz	r5, .L71
+ 518              	.L70:
+ 519 0022 FFF7FEFF 		bl	dwc_otg_adp_read_reg
+ 520 0026 0546     		mov	r5, r0
+ 521 0028 F4E7     		b	.L69
+ 522              	.L71:
+ 523 002a 2946     		mov	r1, r5
+ 524 002c FFF7FEFF 		bl	dwc_otg_adp_write_reg
+ 525 0030 2046     		mov	r0, r4
+ 526 0032 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 527 0036 2846     		mov	r0, r5
+ 528 0038 38BD     		pop	{r3, r4, r5, pc}
+ 530              		.section	.text.adp_sense_timeout,"ax",%progbits
+ 531              		.align	1
+ 532              		.thumb
+ 533              		.thumb_func
+ 535              	adp_sense_timeout:
+ 536              		@ args = 0, pretend = 0, frame = 0
+ 537              		@ frame_needed = 0, uses_anonymous_args = 0
+ 538 0000 D0F89410 		ldr	r1, [r0, #148]
+ 539 0004 0023     		movs	r3, #0
+ 540 0006 10B5     		push	{r4, lr}
+ 541 0008 0446     		mov	r4, r0
+ 542 000a C0F8B030 		str	r3, [r0, #176]
+ 543 000e 31B1     		cbz	r1, .L72
+ 544 0010 FFF7FEFF 		bl	dwc_otg_adp_sense_stop
+ 545 0014 2046     		mov	r0, r4
+ 546 0016 BDE81040 		pop	{r4, lr}
+ 547 001a FFF7FEBF 		b	dwc_otg_adp_probe_start
+ 548              	.L72:
+ 549 001e 10BD     		pop	{r4, pc}
+ 551              		.section	.text.dwc_otg_adp_turnon_vbus,"ax",%progbits
+ 552              		.align	1
+ 553              		.global	dwc_otg_adp_turnon_vbus
+ 554              		.thumb
+ 555              		.thumb_func
+ 557              	dwc_otg_adp_turnon_vbus:
+ 558              		@ args = 0, pretend = 0, frame = 0
+ 559              		@ frame_needed = 0, uses_anonymous_args = 0
+ 560 0000 C368     		ldr	r3, [r0, #12]
+ 561 0002 10B5     		push	{r4, lr}
+ 562 0004 0021     		movs	r1, #0
+ 563 0006 0446     		mov	r4, r0
+ 564 0008 4FF48052 		mov	r2, #4096
+ 565 000c 5868     		ldr	r0, [r3, #4]
+ 566 000e FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 567 0012 2046     		mov	r0, r4
+ 568 0014 BDE81040 		pop	{r4, lr}
+ 569 0018 FFF7FEBF 		b	dwc_otg_adp_vbuson_timer_start
+ 571              		.section	.text.dwc_otg_adp_start,"ax",%progbits
+ 572              		.align	1
+ 573              		.global	dwc_otg_adp_start
+ 574              		.thumb
+ 575              		.thumb_func
+ 577              	dwc_otg_adp_start:
+ 578              		@ args = 0, pretend = 0, frame = 0
+ 579              		@ frame_needed = 0, uses_anonymous_args = 0
+ 580 0000 D0F89430 		ldr	r3, [r0, #148]
+ 581 0004 10B5     		push	{r4, lr}
+ 582 0006 0446     		mov	r4, r0
+ 583 0008 002B     		cmp	r3, #0
+ 584 000a 35D0     		beq	.L75
+ 585 000c 4068     		ldr	r0, [r0, #4]
+ 586 000e 0021     		movs	r1, #0
+ 587 0010 5830     		adds	r0, r0, #88
+ 588 0012 0222     		movs	r2, #2
+ 589 0014 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 590 0018 6068     		ldr	r0, [r4, #4]
+ 591 001a 0021     		movs	r1, #0
+ 592 001c 4FF48032 		mov	r2, #65536
+ 593 0020 5830     		adds	r0, r0, #88
+ 594 0022 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 595 0026 6068     		ldr	r0, [r4, #4]
+ 596 0028 5830     		adds	r0, r0, #88
+ 597 002a FFF7FEFF 		bl	DWC_READ_REG32
+ 598 002e C0F30740 		ubfx	r0, r0, #16, #8
+ 599 0032 00F02001 		and	r1, r0, #32
+ 600 0036 CAB2     		uxtb	r2, r1
+ 601 0038 42B9     		cbnz	r2, .L79
+ 602              	.L77:
+ 603 003a 6068     		ldr	r0, [r4, #4]
+ 604 003c FFF7FEFF 		bl	DWC_READ_REG32
+ 605 0040 C0F30743 		ubfx	r3, r0, #16, #8
+ 606 0044 03F00800 		and	r0, r3, #8
+ 607 0048 C1B2     		uxtb	r1, r0
+ 608 004a 39B9     		cbnz	r1, .L78
+ 609              	.L79:
+ 610 004c 0123     		movs	r3, #1
+ 611 004e 2046     		mov	r0, r4
+ 612 0050 C4F89830 		str	r3, [r4, #152]
+ 613 0054 BDE81040 		pop	{r4, lr}
+ 614 0058 FFF7FEBF 		b	dwc_otg_adp_probe_start
+ 615              	.L78:
+ 616 005c 0422     		movs	r2, #4
+ 617 005e 84F86420 		strb	r2, [r4, #100]
+ 618 0062 2046     		mov	r0, r4
+ 619 0064 FFF7FEFF 		bl	dwc_otg_core_init
+ 620 0068 2046     		mov	r0, r4
+ 621 006a FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 622 006e 2046     		mov	r0, r4
+ 623 0070 BDE81040 		pop	{r4, lr}
+ 624 0074 FFF7FEBF 		b	cil_pcd_start
+ 625              	.L75:
+ 626 0078 10BD     		pop	{r4, pc}
+ 628              		.section	.text.dwc_otg_adp_init,"ax",%progbits
+ 629              		.align	1
+ 630              		.global	dwc_otg_adp_init
+ 631              		.thumb
+ 632              		.thumb_func
+ 634              	dwc_otg_adp_init:
+ 635              		@ args = 0, pretend = 0, frame = 0
+ 636              		@ frame_needed = 0, uses_anonymous_args = 0
+ 637 0000 10B5     		push	{r4, lr}
+ 638 0002 0023     		movs	r3, #0
+ 639 0004 0446     		mov	r4, r0
+ 640 0006 4FF0FF32 		mov	r2, #-1
+ 641 000a C0F89830 		str	r3, [r0, #152]
+ 642 000e C0F89C20 		str	r2, [r0, #156]
+ 643 0012 C0F8A020 		str	r2, [r0, #160]
+ 644 0016 C0F8A430 		str	r3, [r0, #164]
+ 645 001a C0F8A830 		str	r3, [r0, #168]
+ 646 001e C0F8B030 		str	r3, [r0, #176]
+ 647 0022 C0F8B830 		str	r3, [r0, #184]
+ 648 0026 0220     		movs	r0, #2
+ 649 0028 C4F8BC00 		str	r0, [r4, #188]
+ 650 002c 0749     		ldr	r1, .L81
+ 651 002e 0848     		ldr	r0, .L81+4
+ 652 0030 2246     		mov	r2, r4
+ 653 0032 FFF7FEFF 		bl	DWC_TIMER_ALLOC
+ 654 0036 0749     		ldr	r1, .L81+8
+ 655 0038 C4F8AC00 		str	r0, [r4, #172]
+ 656 003c 2246     		mov	r2, r4
+ 657 003e 0648     		ldr	r0, .L81+12
+ 658 0040 FFF7FEFF 		bl	DWC_TIMER_ALLOC
+ 659 0044 C4F8B400 		str	r0, [r4, #180]
+ 660 0048 10BD     		pop	{r4, pc}
+ 661              	.L82:
+ 662 004a 00BF     		.align	2
+ 663              	.L81:
+ 664 004c 00000000 		.word	adp_sense_timeout
+ 665 0050 00000000 		.word	.LC0
+ 666 0054 00000000 		.word	adp_vbuson_timeout
+ 667 0058 10000000 		.word	.LC1
+ 669              		.section	.text.dwc_otg_adp_remove,"ax",%progbits
+ 670              		.align	1
+ 671              		.global	dwc_otg_adp_remove
+ 672              		.thumb
+ 673              		.thumb_func
+ 675              	dwc_otg_adp_remove:
+ 676              		@ args = 0, pretend = 0, frame = 0
+ 677              		@ frame_needed = 0, uses_anonymous_args = 0
+ 678 0000 10B5     		push	{r4, lr}
+ 679 0002 0446     		mov	r4, r0
+ 680 0004 D0F8AC00 		ldr	r0, [r0, #172]
+ 681 0008 FFF7FEFF 		bl	DWC_TIMER_FREE
+ 682 000c D4F8B400 		ldr	r0, [r4, #180]
+ 683 0010 BDE81040 		pop	{r4, lr}
+ 684 0014 FFF7FEBF 		b	DWC_TIMER_FREE
+ 686              		.section	.text.dwc_otg_adp_handle_intr,"ax",%progbits
+ 687              		.align	1
+ 688              		.global	dwc_otg_adp_handle_intr
+ 689              		.thumb
+ 690              		.thumb_func
+ 692              	dwc_otg_adp_handle_intr:
+ 693              		@ args = 0, pretend = 0, frame = 0
+ 694              		@ frame_needed = 0, uses_anonymous_args = 0
+ 695 0000 70B5     		push	{r4, r5, r6, lr}
+ 696 0002 0446     		mov	r4, r0
+ 697 0004 FFF7FEFF 		bl	dwc_otg_adp_read_reg
+ 698 0008 C0F38053 		ubfx	r3, r0, #22, #1
+ 699 000c 13EA5063 		ands	r3, r3, r0, lsr #25
+ 700 0010 0546     		mov	r5, r0
+ 701 0012 06D0     		beq	.L85
+ 702 0014 D4F8AC00 		ldr	r0, [r4, #172]
+ 703 0018 FFF7FEFF 		bl	DWC_TIMER_CANCEL
+ 704 001c 2046     		mov	r0, r4
+ 705 001e FFF7FEFF 		bl	dwc_otg_adp_sense_timer_start
+ 706              	.L85:
+ 707 0022 C5F34050 		ubfx	r0, r5, #21, #1
+ 708 0026 10EA1563 		ands	r3, r0, r5, lsr #24
+ 709 002a 05D1     		bne	.L86
+ 710 002c C5F3C051 		ubfx	r1, r5, #23, #1
+ 711 0030 11EA9563 		ands	r3, r1, r5, lsr #26
+ 712 0034 00F0BA80 		beq	.L87
+ 713              	.L86:
+ 714 0038 D4F89C30 		ldr	r3, [r4, #156]
+ 715 003c 5A1C     		adds	r2, r3, #1
+ 716 003e C5F38A15 		ubfx	r5, r5, #6, #11
+ 717 0042 04D1     		bne	.L88
+ 718 0044 C4F89C50 		str	r5, [r4, #156]
+ 719 0048 C4F8A030 		str	r3, [r4, #160]
+ 720 004c 3DE0     		b	.L89
+ 721              	.L88:
+ 722 004e D4F89820 		ldr	r2, [r4, #152]
+ 723 0052 C4F8A030 		str	r3, [r4, #160]
+ 724 0056 C4F89C50 		str	r5, [r4, #156]
+ 725 005a 002A     		cmp	r2, #0
+ 726 005c 35D0     		beq	.L89
+ 727 005e 0025     		movs	r5, #0
+ 728 0060 C4F89850 		str	r5, [r4, #152]
+ 729 0064 2046     		mov	r0, r4
+ 730 0066 FFF7FEFF 		bl	dwc_otg_adp_probe_stop
+ 731 006a 6068     		ldr	r0, [r4, #4]
+ 732 006c 2946     		mov	r1, r5
+ 733 006e 5830     		adds	r0, r0, #88
+ 734 0070 2A46     		mov	r2, r5
+ 735 0072 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 736 0076 6068     		ldr	r0, [r4, #4]
+ 737 0078 5830     		adds	r0, r0, #88
+ 738 007a FFF7FEFF 		bl	DWC_READ_REG32
+ 739 007e C0F30740 		ubfx	r0, r0, #16, #8
+ 740 0082 00F02001 		and	r1, r0, #32
+ 741 0086 CBB2     		uxtb	r3, r1
+ 742 0088 7BB1     		cbz	r3, .L90
+ 743 008a 0120     		movs	r0, #1
+ 744 008c 84F86400 		strb	r0, [r4, #100]
+ 745 0090 2046     		mov	r0, r4
+ 746 0092 FFF7FEFF 		bl	dwc_otg_core_init
+ 747 0096 2046     		mov	r0, r4
+ 748 0098 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 749 009c 2046     		mov	r0, r4
+ 750 009e FFF7FEFF 		bl	cil_hcd_start
+ 751 00a2 2046     		mov	r0, r4
+ 752 00a4 FFF7FEFF 		bl	dwc_otg_adp_turnon_vbus
+ 753 00a8 80E0     		b	.L87
+ 754              	.L90:
+ 755 00aa 0422     		movs	r2, #4
+ 756 00ac 84F86420 		strb	r2, [r4, #100]
+ 757 00b0 2046     		mov	r0, r4
+ 758 00b2 FFF7FEFF 		bl	dwc_otg_core_init
+ 759 00b6 2046     		mov	r0, r4
+ 760 00b8 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 761 00bc 2046     		mov	r0, r4
+ 762 00be FFF7FEFF 		bl	cil_pcd_start
+ 763 00c2 2046     		mov	r0, r4
+ 764 00c4 FFF7FEFF 		bl	dwc_otg_initiate_srp
+ 765 00c8 70E0     		b	.L87
+ 766              	.L89:
+ 767 00ca 6068     		ldr	r0, [r4, #4]
+ 768 00cc 5830     		adds	r0, r0, #88
+ 769 00ce FFF7FEFF 		bl	DWC_READ_REG32
+ 770 00d2 D4F89C10 		ldr	r1, [r4, #156]
+ 771 00d6 D4F8A030 		ldr	r3, [r4, #160]
+ 772 00da 9942     		cmp	r1, r3
+ 773 00dc 0546     		mov	r5, r0
+ 774 00de 27D0     		beq	.L92
+ 775              	.L109:
+ 776 00e0 2046     		mov	r0, r4
+ 777 00e2 FFF7FEFF 		bl	dwc_otg_adp_probe_stop
+ 778 00e6 D4F89060 		ldr	r6, [r4, #144]
+ 779 00ea 022E     		cmp	r6, #2
+ 780 00ec 07D1     		bne	.L96
+ 781 00ee 6068     		ldr	r0, [r4, #4]
+ 782 00f0 45F02005 		orr	r5, r5, #32
+ 783 00f4 5830     		adds	r0, r0, #88
+ 784 00f6 0021     		movs	r1, #0
+ 785 00f8 2A46     		mov	r2, r5
+ 786 00fa FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 787              	.L96:
+ 788 00fe C5F30745 		ubfx	r5, r5, #16, #8
+ 789 0102 05F02002 		and	r2, r5, #32
+ 790 0106 D6B2     		uxtb	r6, r2
+ 791 0108 6068     		ldr	r0, [r4, #4]
+ 792 010a 96B3     		cbz	r6, .L94
+ 793 010c 0225     		movs	r5, #2
+ 794 010e 0022     		movs	r2, #0
+ 795 0110 5830     		adds	r0, r0, #88
+ 796 0112 2946     		mov	r1, r5
+ 797 0114 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 798 0118 0121     		movs	r1, #1
+ 799 011a 84F86410 		strb	r1, [r4, #100]
+ 800 011e 2046     		mov	r0, r4
+ 801 0120 FFF7FEFF 		bl	dwc_otg_core_init
+ 802 0124 2046     		mov	r0, r4
+ 803 0126 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 804 012a 2046     		mov	r0, r4
+ 805 012c FFF7FEFF 		bl	cil_hcd_start
+ 806              	.L92:
+ 807 0130 C5F30743 		ubfx	r3, r5, #16, #8
+ 808 0134 03F04002 		and	r2, r3, #64
+ 809 0138 D5B2     		uxtb	r5, r2
+ 810 013a 002D     		cmp	r5, #0
+ 811 013c 36D0     		beq	.L87
+ 812 013e 6068     		ldr	r0, [r4, #4]
+ 813 0140 0022     		movs	r2, #0
+ 814 0142 5830     		adds	r0, r0, #88
+ 815 0144 4FF48031 		mov	r1, #65536
+ 816 0148 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 817 014c 6068     		ldr	r0, [r4, #4]
+ 818 014e 0221     		movs	r1, #2
+ 819 0150 0022     		movs	r2, #0
+ 820 0152 5830     		adds	r0, r0, #88
+ 821 0154 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 822 0158 0420     		movs	r0, #4
+ 823 015a 84F86400 		strb	r0, [r4, #100]
+ 824 015e 2046     		mov	r0, r4
+ 825 0160 FFF7FEFF 		bl	dwc_otg_core_init
+ 826 0164 2046     		mov	r0, r4
+ 827 0166 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 828 016a 2046     		mov	r0, r4
+ 829 016c FFF7FEFF 		bl	cil_pcd_start
+ 830 0170 1CE0     		b	.L87
+ 831              	.L94:
+ 832 0172 5830     		adds	r0, r0, #88
+ 833 0174 3246     		mov	r2, r6
+ 834 0176 4FF48031 		mov	r1, #65536
+ 835 017a FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 836 017e 6068     		ldr	r0, [r4, #4]
+ 837 0180 0225     		movs	r5, #2
+ 838 0182 2946     		mov	r1, r5
+ 839 0184 3246     		mov	r2, r6
+ 840 0186 5830     		adds	r0, r0, #88
+ 841 0188 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 842 018c 0420     		movs	r0, #4
+ 843 018e 84F86400 		strb	r0, [r4, #100]
+ 844 0192 2046     		mov	r0, r4
+ 845 0194 FFF7FEFF 		bl	dwc_otg_core_init
+ 846 0198 2046     		mov	r0, r4
+ 847 019a FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 848 019e 2046     		mov	r0, r4
+ 849 01a0 FFF7FEFF 		bl	cil_pcd_start
+ 850 01a4 2046     		mov	r0, r4
+ 851 01a6 FFF7FEFF 		bl	dwc_otg_initiate_srp
+ 852 01aa C1E7     		b	.L92
+ 853              	.L87:
+ 854 01ac 2046     		mov	r0, r4
+ 855 01ae 4FF46001 		mov	r1, #14680064
+ 856 01b2 0022     		movs	r2, #0
+ 857 01b4 FFF7FEFF 		bl	dwc_otg_adp_modify_reg
+ 858 01b8 0020     		movs	r0, #0
+ 859 01ba 70BD     		pop	{r4, r5, r6, pc}
+ 861              		.section	.text.dwc_otg_adp_handle_srp_intr,"ax",%progbits
+ 862              		.align	1
+ 863              		.global	dwc_otg_adp_handle_srp_intr
+ 864              		.thumb
+ 865              		.thumb_func
+ 867              	dwc_otg_adp_handle_srp_intr:
+ 868              		@ args = 0, pretend = 0, frame = 0
+ 869              		@ frame_needed = 0, uses_anonymous_args = 0
+ 870 0000 70B5     		push	{r4, r5, r6, lr}
+ 871 0002 0446     		mov	r4, r0
+ 872 0004 4068     		ldr	r0, [r0, #4]
+ 873 0006 5830     		adds	r0, r0, #88
+ 874 0008 FFF7FEFF 		bl	DWC_READ_REG32
+ 875 000c C0F30746 		ubfx	r6, r0, #16, #8
+ 876 0010 0546     		mov	r5, r0
+ 877 0012 06F02000 		and	r0, r6, #32
+ 878 0016 C6B2     		uxtb	r6, r0
+ 879 0018 D4F89430 		ldr	r3, [r4, #148]
+ 880 001c 002E     		cmp	r6, #0
+ 881 001e 34D0     		beq	.L112
+ 882 0020 CBB1     		cbz	r3, .L113
+ 883 0022 2046     		mov	r0, r4
+ 884 0024 FFF7FEFF 		bl	dwc_otg_adp_probe_stop
+ 885 0028 D4F89000 		ldr	r0, [r4, #144]
+ 886 002c 0228     		cmp	r0, #2
+ 887 002e 06D1     		bne	.L114
+ 888 0030 6068     		ldr	r0, [r4, #4]
+ 889 0032 0021     		movs	r1, #0
+ 890 0034 5830     		adds	r0, r0, #88
+ 891 0036 45F02002 		orr	r2, r5, #32
+ 892 003a FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 893              	.L114:
+ 894 003e 0123     		movs	r3, #1
+ 895 0040 84F86430 		strb	r3, [r4, #100]
+ 896 0044 2046     		mov	r0, r4
+ 897 0046 FFF7FEFF 		bl	dwc_otg_core_init
+ 898 004a 2046     		mov	r0, r4
+ 899 004c FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 900 0050 2046     		mov	r0, r4
+ 901 0052 FFF7FEFF 		bl	cil_hcd_start
+ 902              	.L113:
+ 903 0056 E168     		ldr	r1, [r4, #12]
+ 904 0058 4868     		ldr	r0, [r1, #4]
+ 905 005a FFF7FEFF 		bl	DWC_READ_REG32
+ 906 005e 0246     		mov	r2, r0
+ 907 0060 6FF38202 		bfc	r2, #2, #1
+ 908 0064 6FF34102 		bfc	r2, #1, #1
+ 909 0068 E068     		ldr	r0, [r4, #12]
+ 910 006a 6FF3C302 		bfc	r2, #3, #1
+ 911 006e 6FF34512 		bfc	r2, #5, #1
+ 912 0072 4068     		ldr	r0, [r0, #4]
+ 913 0074 42F48051 		orr	r1, r2, #4096
+ 914 0078 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 915 007c A36E     		ldr	r3, [r4, #104]
+ 916 007e 2BB3     		cbz	r3, .L116
+ 917 0080 5969     		ldr	r1, [r3, #20]
+ 918 0082 19B3     		cbz	r1, .L116
+ 919 0084 9869     		ldr	r0, [r3, #24]
+ 920 0086 8847     		blx	r1
+ 921 0088 20E0     		b	.L116
+ 922              	.L112:
+ 923 008a FBB1     		cbz	r3, .L116
+ 924 008c 2046     		mov	r0, r4
+ 925 008e FFF7FEFF 		bl	dwc_otg_adp_probe_stop
+ 926 0092 D4F89010 		ldr	r1, [r4, #144]
+ 927 0096 0229     		cmp	r1, #2
+ 928 0098 06D1     		bne	.L118
+ 929 009a 6068     		ldr	r0, [r4, #4]
+ 930 009c 3146     		mov	r1, r6
+ 931 009e 5830     		adds	r0, r0, #88
+ 932 00a0 45F02002 		orr	r2, r5, #32
+ 933 00a4 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 934              	.L118:
+ 935 00a8 6068     		ldr	r0, [r4, #4]
+ 936 00aa 0021     		movs	r1, #0
+ 937 00ac 0A46     		mov	r2, r1
+ 938 00ae 5830     		adds	r0, r0, #88
+ 939 00b0 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 940 00b4 0422     		movs	r2, #4
+ 941 00b6 84F86420 		strb	r2, [r4, #100]
+ 942 00ba 2046     		mov	r0, r4
+ 943 00bc FFF7FEFF 		bl	dwc_otg_core_init
+ 944 00c0 2046     		mov	r0, r4
+ 945 00c2 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 946 00c6 2046     		mov	r0, r4
+ 947 00c8 FFF7FEFF 		bl	cil_pcd_start
+ 948              	.L116:
+ 949 00cc 0120     		movs	r0, #1
+ 950 00ce 70BD     		pop	{r4, r5, r6, pc}
+ 952              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 953              	.LC0:
+ 954 0000 41445020 		.ascii	"ADP SENSE TIMER\000"
+ 954      53454E53 
+ 954      45205449 
+ 954      4D455200 
+ 955              	.LC1:
+ 956 0010 41445020 		.ascii	"ADP VBUS ON TIMER\000"
+ 956      56425553 
+ 956      204F4E20 
+ 956      54494D45 
+ 956      5200
+ 957              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 dwc_otg_adp.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:17     .text.cil_hcd_start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:21     .text.cil_hcd_start:00000000 cil_hcd_start
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:35     .text.cil_pcd_start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:39     .text.cil_pcd_start:00000000 cil_pcd_start
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:53     .text.dwc_otg_adp_write_reg:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:58     .text.dwc_otg_adp_write_reg:00000000 dwc_otg_adp_write_reg
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:84     .text.dwc_otg_adp_read_reg:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:89     .text.dwc_otg_adp_read_reg:00000000 dwc_otg_adp_read_reg
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:116    .text.dwc_otg_adp_modify_reg:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:121    .text.dwc_otg_adp_modify_reg:00000000 dwc_otg_adp_modify_reg
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:136    .text.dwc_otg_adp_vbuson_timer_start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:141    .text.dwc_otg_adp_vbuson_timer_start:00000000 dwc_otg_adp_vbuson_timer_start
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:152    .text.dwc_otg_adp_probe_start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:157    .text.dwc_otg_adp_probe_start:00000000 dwc_otg_adp_probe_start
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:351    .text.adp_vbuson_timeout:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:355    .text.adp_vbuson_timeout:00000000 adp_vbuson_timeout
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:411    .text.dwc_otg_adp_sense_timer_start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:416    .text.dwc_otg_adp_sense_timer_start:00000000 dwc_otg_adp_sense_timer_start
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:427    .text.dwc_otg_adp_sense_start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:432    .text.dwc_otg_adp_sense_start:00000000 dwc_otg_adp_sense_start
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:463    .text.dwc_otg_adp_probe_stop:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:468    .text.dwc_otg_adp_probe_stop:00000000 dwc_otg_adp_probe_stop
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:497    .text.dwc_otg_adp_sense_stop:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:502    .text.dwc_otg_adp_sense_stop:00000000 dwc_otg_adp_sense_stop
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:531    .text.adp_sense_timeout:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:535    .text.adp_sense_timeout:00000000 adp_sense_timeout
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:552    .text.dwc_otg_adp_turnon_vbus:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:557    .text.dwc_otg_adp_turnon_vbus:00000000 dwc_otg_adp_turnon_vbus
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:572    .text.dwc_otg_adp_start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:577    .text.dwc_otg_adp_start:00000000 dwc_otg_adp_start
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:629    .text.dwc_otg_adp_init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:634    .text.dwc_otg_adp_init:00000000 dwc_otg_adp_init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:664    .text.dwc_otg_adp_init:0000004c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:670    .text.dwc_otg_adp_remove:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:675    .text.dwc_otg_adp_remove:00000000 dwc_otg_adp_remove
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:687    .text.dwc_otg_adp_handle_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:692    .text.dwc_otg_adp_handle_intr:00000000 dwc_otg_adp_handle_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:862    .text.dwc_otg_adp_handle_srp_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn1Uw9A.s:867    .text.dwc_otg_adp_handle_srp_intr:00000000 dwc_otg_adp_handle_srp_intr
+
+UNDEFINED SYMBOLS
+DWC_WRITE_REG32
+DWC_READ_REG32
+DWC_TIMER_SCHEDULE
+dwc_otg_disable_global_interrupts
+DWC_MODIFY_REG32
+dwc_otg_is_host_mode
+dwc_otg_enable_global_interrupts
+dwc_otg_core_init
+DWC_TIMER_ALLOC
+DWC_TIMER_FREE
+DWC_TIMER_CANCEL
+dwc_otg_initiate_srp

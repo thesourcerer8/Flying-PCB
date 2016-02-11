@@ -1,0 +1,2971 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"UART001.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.UART001_lInit,"ax",%progbits
+  20              		.align	2
+  21              		.global	UART001_lInit
+  22              		.thumb
+  23              		.thumb_func
+  25              	UART001_lInit:
+  26              	.LFB112:
+  27              		.file 1 "../Dave/Generated/src/UART001/UART001.c"
+   1:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+   2:../Dave/Generated/src/UART001/UART001.c ****  Copyright (c) 2014, Infineon Technologies AG                                 **
+   3:../Dave/Generated/src/UART001/UART001.c ****  All rights reserved.                                                         **
+   4:../Dave/Generated/src/UART001/UART001.c ****                                                                               **
+   5:../Dave/Generated/src/UART001/UART001.c ****  Redistribution and use in source and binary forms, with or without           **
+   6:../Dave/Generated/src/UART001/UART001.c ****  modification,are permitted provided that the following conditions are met:   **
+   7:../Dave/Generated/src/UART001/UART001.c ****                                                                               **
+   8:../Dave/Generated/src/UART001/UART001.c ****  *Redistributions of source code must retain the above copyright notice,      **
+   9:../Dave/Generated/src/UART001/UART001.c ****  this list of conditions and the following disclaimer.                        **
+  10:../Dave/Generated/src/UART001/UART001.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  11:../Dave/Generated/src/UART001/UART001.c ****  this list of conditions and the following disclaimer in the documentation    **
+  12:../Dave/Generated/src/UART001/UART001.c ****  and/or other materials provided with the distribution.                       **
+  13:../Dave/Generated/src/UART001/UART001.c ****  *Neither the name of the copyright holders nor the names of its              **
+  14:../Dave/Generated/src/UART001/UART001.c ****  contributors may be used to endorse or promote products derived from this    **
+  15:../Dave/Generated/src/UART001/UART001.c ****  software without specific prior written permission.                          **
+  16:../Dave/Generated/src/UART001/UART001.c ****                                                                               **
+  17:../Dave/Generated/src/UART001/UART001.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  18:../Dave/Generated/src/UART001/UART001.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  19:../Dave/Generated/src/UART001/UART001.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  20:../Dave/Generated/src/UART001/UART001.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  21:../Dave/Generated/src/UART001/UART001.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  22:../Dave/Generated/src/UART001/UART001.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  23:../Dave/Generated/src/UART001/UART001.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  24:../Dave/Generated/src/UART001/UART001.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  25:../Dave/Generated/src/UART001/UART001.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  26:../Dave/Generated/src/UART001/UART001.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  27:../Dave/Generated/src/UART001/UART001.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  28:../Dave/Generated/src/UART001/UART001.c ****                                                                               **
+  29:../Dave/Generated/src/UART001/UART001.c ****  To improve the quality of the software, users are encouraged to share        **
+  30:../Dave/Generated/src/UART001/UART001.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  31:../Dave/Generated/src/UART001/UART001.c ****  dave@infineon.com).                                                          **
+  32:../Dave/Generated/src/UART001/UART001.c ****                                                                               **
+  33:../Dave/Generated/src/UART001/UART001.c **** ********************************************************************************
+  34:../Dave/Generated/src/UART001/UART001.c **** **                                                                            **
+  35:../Dave/Generated/src/UART001/UART001.c **** **                                                                            **
+  36:../Dave/Generated/src/UART001/UART001.c **** ** PLATFORM : Infineon XMC4000/ XMC1000 Series                                **
+  37:../Dave/Generated/src/UART001/UART001.c **** **                                                                            **
+  38:../Dave/Generated/src/UART001/UART001.c **** ** COMPILER : Compiler Independent                                            **
+  39:../Dave/Generated/src/UART001/UART001.c **** **                                                                            **
+  40:../Dave/Generated/src/UART001/UART001.c **** ** AUTHOR   : App Developer                                                   **
+  41:../Dave/Generated/src/UART001/UART001.c **** **                                                                            **
+  42:../Dave/Generated/src/UART001/UART001.c **** ** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+  43:../Dave/Generated/src/UART001/UART001.c **** **                                                                            **
+  44:../Dave/Generated/src/UART001/UART001.c **** ** MODIFICATION DATE : Apr 11, 2014                                           **
+  45:../Dave/Generated/src/UART001/UART001.c **** **                                                                            **
+  46:../Dave/Generated/src/UART001/UART001.c **** ********************************************************************************
+  47:../Dave/Generated/src/UART001/UART001.c **** ** VERSION HISTORY:
+  48:../Dave/Generated/src/UART001/UART001.c **** ********************************************************************************
+  49:../Dave/Generated/src/UART001/UART001.c **** ** 04 Dec 2012 v1.0.4  Changes from 1.0.2 are
+  50:../Dave/Generated/src/UART001/UART001.c **** **                     1. Modified for baud calculation during initialisation.
+  51:../Dave/Generated/src/UART001/UART001.c **** **                     2. Modified the macros FUNCTION_ENTRY, FUNCTION_EXIT and
+  52:../Dave/Generated/src/UART001/UART001.c **** **                     ERROR
+  53:../Dave/Generated/src/UART001/UART001.c **** **                     3. The hard coded values are replaced with macros in
+  54:../Dave/Generated/src/UART001/UART001.c **** **                     UART001_lConfigureBaudRate() function.
+  55:../Dave/Generated/src/UART001/UART001.c **** **                     4. The PCTQ value update in BRG register is removed as
+  56:../Dave/Generated/src/UART001/UART001.c **** **                     the value is taken as zero.
+  57:../Dave/Generated/src/UART001/UART001.c **** **                     5. Modified as per coding guidelines and MISRA checks
+  58:../Dave/Generated/src/UART001/UART001.c **** ** 26 Mar 2013 v1.0.10 1. Updated for the baud calculation in UART001_lInit()
+  59:../Dave/Generated/src/UART001/UART001.c **** **                     function.
+  60:../Dave/Generated/src/UART001/UART001.c **** **                     2. Updated for the alignment in revision history.
+  61:../Dave/Generated/src/UART001/UART001.c **** **                     3. Updated the UART001_Init() function for disabling the
+  62:../Dave/Generated/src/UART001/UART001.c **** **                     clock gating signal for XMC1000 devices.
+  63:../Dave/Generated/src/UART001/UART001.c **** **                     4. Updated function UART001_lConfigureBaudRate() for the
+  64:../Dave/Generated/src/UART001/UART001.c **** **                     Baud rate calculation.
+  65:../Dave/Generated/src/UART001/UART001.c **** ** 25 Jul 2013 v1.0.16 1. Removed TBIF bit configuration from UART001_lInit as 
+  66:../Dave/Generated/src/UART001/UART001.c **** **                     polling is not used in the UART001 App. 
+  67:../Dave/Generated/src/UART001/UART001.c **** **                     2. Added open-drain output configuration for Half duplex 
+  68:../Dave/Generated/src/UART001/UART001.c **** **                     operation mode to allow the wired-AND connection in
+  69:../Dave/Generated/src/UART001/UART001.c **** **                     multiple transmitter communication.
+  70:../Dave/Generated/src/UART001/UART001.c **** **                     3. Added CCR.MODE configurations in UART001_lInit() 
+  71:../Dave/Generated/src/UART001/UART001.c **** **                     & UART001_Configure to disable the UART mode before 
+  72:../Dave/Generated/src/UART001/UART001.c **** **                     configuring USIC registers & to enable the UART mode 
+  73:../Dave/Generated/src/UART001/UART001.c **** **                     after configurations to avoid unintended edges.
+  74:../Dave/Generated/src/UART001/UART001.c **** **                     4. Modified the input parameter of 
+  75:../Dave/Generated/src/UART001/UART001.c **** **                     UART001_WriteDataMultiple() from const uint16_t* to 
+  76:../Dave/Generated/src/UART001/UART001.c **** **                     uint16_t* to maintain backward compatibility.
+  77:../Dave/Generated/src/UART001/UART001.c **** **                     5. TX pin set logic high (1) before configuring Open 
+  78:../Dave/Generated/src/UART001/UART001.c **** **                     Drain mode for Half Duplex operation mode. 
+  79:../Dave/Generated/src/UART001/UART001.c **** ** 04 Feb 2014 V1.0.20 1. Added definitions for "UART001_ReadDataBytes" & 
+  80:../Dave/Generated/src/UART001/UART001.c **** **                     "UART001_WriteDataBytes" new APIs.
+  81:../Dave/Generated/src/UART001/UART001.c **** **                     2. Created "UART001_lConfigTXPin" local API to configure
+  82:../Dave/Generated/src/UART001/UART001.c **** **                     Tx pin as Open-drain General-purpose output to allow 
+  83:../Dave/Generated/src/UART001/UART001.c **** **                     wired anding connection in the Half Duplex mode.
+  84:../Dave/Generated/src/UART001/UART001.c **** **                     3. Modified UART001_Init Api to handle the target device
+  85:../Dave/Generated/src/UART001/UART001.c **** **                     based initialisations. 
+  86:../Dave/Generated/src/UART001/UART001.c **** **                     4. Added TBIF configuration in the UART001_lInit Api if 
+  87:../Dave/Generated/src/UART001/UART001.c **** **                     Transmit FIFO buffer is disabled.
+  88:../Dave/Generated/src/UART001/UART001.c **** **                     5. Modified as per coding guidelines and MISRA 
+  89:../Dave/Generated/src/UART001/UART001.c **** **                     compliance.
+  90:../Dave/Generated/src/UART001/UART001.c **** **                     6. Removed DAVE3.h inclusion to fix the MISRA warning for
+  91:../Dave/Generated/src/UART001/UART001.c **** **                     multiple includes. 
+  92:../Dave/Generated/src/UART001/UART001.c **** **                     7. Error codes are added in various functions, that can 
+  93:../Dave/Generated/src/UART001/UART001.c **** **                     be logged with DBG002 App.
+  94:../Dave/Generated/src/UART001/UART001.c **** **                     8. Removed DBG002_FUNCTION_ENTRY & DBG002_FUNCTION_EXIT 
+  95:../Dave/Generated/src/UART001/UART001.c **** **                     calling from APIs as using these macros is highly 
+  96:../Dave/Generated/src/UART001/UART001.c **** **                     discouraged.
+  97:../Dave/Generated/src/UART001/UART001.c **** **                     9. Added standard buffer functionality into the    
+  98:../Dave/Generated/src/UART001/UART001.c **** **                     "UART001_ReadDataMultiple" & "UART001_WriteDataMultiple"
+  99:../Dave/Generated/src/UART001/UART001.c **** **                     Apis. 
+ 100:../Dave/Generated/src/UART001/UART001.c **** ** 11 Apr 2014 v1.0.24 1. API (UART001_ReadDataMultiple, UART001_ReadDataBytes, 
+ 101:../Dave/Generated/src/UART001/UART001.c **** **                     UART001_WriteDataMultiple & UART001_WriteDataBytes) 
+ 102:../Dave/Generated/src/UART001/UART001.c **** **                     document corrections.                                                       
+ 103:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 104:../Dave/Generated/src/UART001/UART001.c **** /**
+ 105:../Dave/Generated/src/UART001/UART001.c ****  * @file UART001.c
+ 106:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 107:../Dave/Generated/src/UART001/UART001.c ****  * @brief  UART001 App provides non reentrant APIs for higher level Apps 
+ 108:../Dave/Generated/src/UART001/UART001.c ****  *          which can be used in a Non -RTOS environment. 
+ 109:../Dave/Generated/src/UART001/UART001.c ****  *           Limitations of Simple UART App
+ 110:../Dave/Generated/src/UART001/UART001.c ****  *           a) Read/Write functions are non reentrant.
+ 111:../Dave/Generated/src/UART001/UART001.c ****  *           b) No support for DMA mode
+ 112:../Dave/Generated/src/UART001/UART001.c ****  *           
+ 113:../Dave/Generated/src/UART001/UART001.c ****  */
+ 114:../Dave/Generated/src/UART001/UART001.c **** 
+ 115:../Dave/Generated/src/UART001/UART001.c **** /**
+ 116:../Dave/Generated/src/UART001/UART001.c ****  * @cond INTERNAL_DOCS
+ 117:../Dave/Generated/src/UART001/UART001.c ****  */
+ 118:../Dave/Generated/src/UART001/UART001.c **** 
+ 119:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 120:../Dave/Generated/src/UART001/UART001.c ****  ** INCLUDE FILES                                                             **
+ 121:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+ 122:../Dave/Generated/src/UART001/UART001.c **** #ifndef UART001_H_
+ 123:../Dave/Generated/src/UART001/UART001.c **** #include "../../inc/UART001/UART001.h"
+ 124:../Dave/Generated/src/UART001/UART001.c **** #endif
+ 125:../Dave/Generated/src/UART001/UART001.c **** #if ((__TARGET_DEVICE__ == XMC45) || (__TARGET_DEVICE__ == XMC44) || \
+ 126:../Dave/Generated/src/UART001/UART001.c ****      (__TARGET_DEVICE__ == XMC42) || (__TARGET_DEVICE__ == XMC41)) 
+ 127:../Dave/Generated/src/UART001/UART001.c **** 	#include "../../inc/RESET001/RESET001.h"
+ 128:../Dave/Generated/src/UART001/UART001.c **** #else
+ 129:../Dave/Generated/src/UART001/UART001.c **** #ifndef CLK002_H_
+ 130:../Dave/Generated/src/UART001/UART001.c **** #include "../../inc/CLK002/CLK002.h"
+ 131:../Dave/Generated/src/UART001/UART001.c **** #endif
+ 132:../Dave/Generated/src/UART001/UART001.c **** #endif
+ 133:../Dave/Generated/src/UART001/UART001.c **** #ifdef _DBG002_H_
+ 134:../Dave/Generated/src/UART001/UART001.c **** #include "../../inc/DBG002/DBG002.h"
+ 135:../Dave/Generated/src/UART001/UART001.c **** #endif
+ 136:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 137:../Dave/Generated/src/UART001/UART001.c ****               DUMMY DEFINITIONS OF DEBUG LOG MACROS
+ 138:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 139:../Dave/Generated/src/UART001/UART001.c **** /*These definitions are included here to avoid compilation errors,
+ 140:../Dave/Generated/src/UART001/UART001.c ****  since the DBG002 app is not part of the project. All the macros are defined
+ 141:../Dave/Generated/src/UART001/UART001.c ****  as empty*/ 
+ 142:../Dave/Generated/src/UART001/UART001.c **** #ifndef _DBG002_H_
+ 143:../Dave/Generated/src/UART001/UART001.c **** 
+ 144:../Dave/Generated/src/UART001/UART001.c **** #define DBG002_MESSAGEID_LITERAL
+ 145:../Dave/Generated/src/UART001/UART001.c **** #define DBG002_ERROR(groupid,messageid,length,value)
+ 146:../Dave/Generated/src/UART001/UART001.c **** 
+ 147:../Dave/Generated/src/UART001/UART001.c **** #endif/* End of definitions of dummy Debug Log macros*/
+ 148:../Dave/Generated/src/UART001/UART001.c **** 
+ 149:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 150:../Dave/Generated/src/UART001/UART001.c **** **                      Private Macro Definitions                             **
+ 151:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 152:../Dave/Generated/src/UART001/UART001.c **** #define APP_GID DBG002_GID_UART001
+ 153:../Dave/Generated/src/UART001/UART001.c **** /*Flag Offset Transmit Receive Buffer */
+ 154:../Dave/Generated/src/UART001/UART001.c **** #define UART001_FLAG_OFFSET                        0x05U
+ 155:../Dave/Generated/src/UART001/UART001.c **** #define UART001_MAX_VALUE                          1024U
+ 156:../Dave/Generated/src/UART001/UART001.c **** /* (DCTQ + 1) DCTQ value is 9 */
+ 157:../Dave/Generated/src/UART001/UART001.c **** #define UART001_DCTQ_VALUE                         0x0AUL
+ 158:../Dave/Generated/src/UART001/UART001.c **** #define UART001_OPENDRAIN_OUT      				   0x18U
+ 159:../Dave/Generated/src/UART001/UART001.c **** 
+ 160:../Dave/Generated/src/UART001/UART001.c **** #define FIRST_NIBBLE                               4U
+ 161:../Dave/Generated/src/UART001/UART001.c **** #define SECOND_NIBBLE                              8U
+ 162:../Dave/Generated/src/UART001/UART001.c **** #define THIRD_NIBBLE                               12U
+ 163:../Dave/Generated/src/UART001/UART001.c **** #define FOURTH_NIBBLE                              16U
+ 164:../Dave/Generated/src/UART001/UART001.c **** #define SHIFT_ONE								   0x01U
+ 165:../Dave/Generated/src/UART001/UART001.c **** #define SHIFT_TWO								   0x02U
+ 166:../Dave/Generated/src/UART001/UART001.c **** #define MASK_ONE								   0x01U
+ 167:../Dave/Generated/src/UART001/UART001.c **** 
+ 168:../Dave/Generated/src/UART001/UART001.c **** 
+ 169:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 170:../Dave/Generated/src/UART001/UART001.c **** **                      Private Type Definitions                              **
+ 171:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 172:../Dave/Generated/src/UART001/UART001.c **** 
+ 173:../Dave/Generated/src/UART001/UART001.c **** 
+ 174:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 175:../Dave/Generated/src/UART001/UART001.c **** **                 Private Function Declarations:
+ 176:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 177:../Dave/Generated/src/UART001/UART001.c **** 
+ 178:../Dave/Generated/src/UART001/UART001.c **** /* Initialises the App based on User provide configuration. */
+ 179:../Dave/Generated/src/UART001/UART001.c **** void UART001_lInit (const UART001_HandleType* Handle);
+ 180:../Dave/Generated/src/UART001/UART001.c **** /* Configures TX pin as Open-drain with General-purpose output */
+ 181:../Dave/Generated/src/UART001/UART001.c **** void UART001_lConfigTXPin(const UART001_HandleType* Handle);
+ 182:../Dave/Generated/src/UART001/UART001.c **** /* Give optimised PDIV and STEP value for the given baud rate */ 
+ 183:../Dave/Generated/src/UART001/UART001.c **** void UART001_lConfigureBaudRate\
+ 184:../Dave/Generated/src/UART001/UART001.c ****                            (uint32_t BaudRate,uint32_t* Pdiv,uint32_t* Step);
+ 185:../Dave/Generated/src/UART001/UART001.c **** /* to find the real type */
+ 186:../Dave/Generated/src/UART001/UART001.c **** float UART001_labsRealType(float Number);                           
+ 187:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 188:../Dave/Generated/src/UART001/UART001.c **** **                      Global Constant Definitions                           **
+ 189:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 190:../Dave/Generated/src/UART001/UART001.c **** 
+ 191:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 192:../Dave/Generated/src/UART001/UART001.c **** **                      Global Variable Definitions                           **
+ 193:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 194:../Dave/Generated/src/UART001/UART001.c **** 
+ 195:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 196:../Dave/Generated/src/UART001/UART001.c **** **                      Private Constant Definitions                          **
+ 197:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 198:../Dave/Generated/src/UART001/UART001.c **** 
+ 199:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 200:../Dave/Generated/src/UART001/UART001.c **** **                 Function like macro definitions                            **
+ 201:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 202:../Dave/Generated/src/UART001/UART001.c **** 
+ 203:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 204:../Dave/Generated/src/UART001/UART001.c **** **                      Private Function Definitions                          **
+ 205:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 206:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 207:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function initialises the USIC Channel with GUI configured values.
+ 208:../Dave/Generated/src/UART001/UART001.c ****  *
+ 209:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Handle of type UART001_HandleType
+ 210:../Dave/Generated/src/UART001/UART001.c ****  *
+ 211:../Dave/Generated/src/UART001/UART001.c ****  * @return  None <BR>
+ 212:../Dave/Generated/src/UART001/UART001.c ****  *
+ 213:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: No </b><BR>
+ 214:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/ 
+ 215:../Dave/Generated/src/UART001/UART001.c **** void UART001_lInit (const UART001_HandleType* Handle)
+ 216:../Dave/Generated/src/UART001/UART001.c **** {
+  28              		.loc 1 216 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 85B0     		sub	sp, sp, #20
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+ 217:../Dave/Generated/src/UART001/UART001.c ****   USIC_CH_TypeDef* UartRegs = Handle->UartRegs;
+  44              		.loc 1 217 0
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 1B68     		ldr	r3, [r3, #0]
+  47 000c FB60     		str	r3, [r7, #12]
+ 218:../Dave/Generated/src/UART001/UART001.c ****   
+ 219:../Dave/Generated/src/UART001/UART001.c ****  /* <<<DD_UART001_API_1>>>*/
+ 220:../Dave/Generated/src/UART001/UART001.c ****  
+ 221:../Dave/Generated/src/UART001/UART001.c ****   /** UART initialisation  */
+ 222:../Dave/Generated/src/UART001/UART001.c **** 
+ 223:../Dave/Generated/src/UART001/UART001.c ****   /* Disable UART mode before configuring all USIC registers to avoid 
+ 224:../Dave/Generated/src/UART001/UART001.c ****    * unintended edges */ 
+ 225:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->CCR &= ~( ((uint32_t)(UART_MODE  & USIC_CH_CCR_MODE_Msk))); 
+  48              		.loc 1 225 0
+  49 000e FB68     		ldr	r3, [r7, #12]
+  50 0010 1B6C     		ldr	r3, [r3, #64]
+  51 0012 23F00202 		bic	r2, r3, #2
+  52 0016 FB68     		ldr	r3, [r7, #12]
+  53 0018 1A64     		str	r2, [r3, #64]
+ 226:../Dave/Generated/src/UART001/UART001.c **** 
+ 227:../Dave/Generated/src/UART001/UART001.c ****   /* Enable the USIC Channel */
+ 228:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->KSCFG |= ((((uint32_t)MASK_ONE  & USIC_CH_KSCFG_MODEN_Msk)) | \
+  54              		.loc 1 228 0
+  55 001a FB68     		ldr	r3, [r7, #12]
+  56 001c DB68     		ldr	r3, [r3, #12]
+  57 001e 43F00302 		orr	r2, r3, #3
+  58 0022 FB68     		ldr	r3, [r7, #12]
+  59 0024 DA60     		str	r2, [r3, #12]
+ 229:../Dave/Generated/src/UART001/UART001.c ****                        (((uint32_t)SHIFT_ONE << USIC_CH_KSCFG_BPMODEN_Pos) &  \
+ 230:../Dave/Generated/src/UART001/UART001.c ****                          USIC_CH_KSCFG_BPMODEN_Msk)); 
+ 231:../Dave/Generated/src/UART001/UART001.c ****    
+ 232:../Dave/Generated/src/UART001/UART001.c ****   /* Configuration of USIC Channel Fractional Divider */
+ 233:../Dave/Generated/src/UART001/UART001.c **** 
+ 234:../Dave/Generated/src/UART001/UART001.c ****   /* Fractional divider mode selected */
+ 235:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->FDR |= (((uint32_t)SHIFT_TWO << USIC_CH_FDR_DM_Pos) \
+  60              		.loc 1 235 0
+  61 0026 FB68     		ldr	r3, [r7, #12]
+  62 0028 1B69     		ldr	r3, [r3, #16]
+  63 002a 43F40042 		orr	r2, r3, #32768
+  64 002e FB68     		ldr	r3, [r7, #12]
+  65 0030 1A61     		str	r2, [r3, #16]
+ 236:../Dave/Generated/src/UART001/UART001.c ****                                                      & USIC_CH_FDR_DM_Msk);
+ 237:../Dave/Generated/src/UART001/UART001.c ****   
+ 238:../Dave/Generated/src/UART001/UART001.c ****   /* Step value */
+ 239:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->FDR |= ((Handle->BGR_STEP) & USIC_CH_FDR_STEP_Msk);
+  66              		.loc 1 239 0
+  67 0032 FB68     		ldr	r3, [r7, #12]
+  68 0034 1A69     		ldr	r2, [r3, #16]
+  69 0036 7B68     		ldr	r3, [r7, #4]
+  70 0038 1B8D     		ldrh	r3, [r3, #40]
+  71 003a 4FEA8353 		lsl	r3, r3, #22
+  72 003e 4FEA9353 		lsr	r3, r3, #22
+  73 0042 1A43     		orrs	r2, r2, r3
+  74 0044 FB68     		ldr	r3, [r7, #12]
+  75 0046 1A61     		str	r2, [r3, #16]
+ 240:../Dave/Generated/src/UART001/UART001.c ****           
+ 241:../Dave/Generated/src/UART001/UART001.c ****   /* The PreDivider for CTQ, PCTQ = 0  */
+ 242:../Dave/Generated/src/UART001/UART001.c ****   /* The Denominator for CTQ, DCTQ = 16 */
+ 243:../Dave/Generated/src/UART001/UART001.c ****     
+ 244:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->BRG |= \
+  76              		.loc 1 244 0
+  77 0048 FB68     		ldr	r3, [r7, #12]
+  78 004a 5A69     		ldr	r2, [r3, #20]
+ 245:../Dave/Generated/src/UART001/UART001.c **** 	  ((((uint32_t)(Handle->BGR_PCTQ) << USIC_CH_BRG_PCTQ_Pos) & \
+  79              		.loc 1 245 0
+  80 004c 7B68     		ldr	r3, [r7, #4]
+  81 004e 93F83030 		ldrb	r3, [r3, #48]	@ zero_extendqisi2
+  82 0052 4FEA0323 		lsl	r3, r3, #8
+  83 0056 03F44071 		and	r1, r3, #768
+ 246:../Dave/Generated/src/UART001/UART001.c **** 		  	     USIC_CH_BRG_PCTQ_Msk) | \
+ 247:../Dave/Generated/src/UART001/UART001.c ****       (((uint32_t)(Handle->BGR_DCTQ) << USIC_CH_BRG_DCTQ_Pos) & \
+  84              		.loc 1 247 0
+  85 005a 7B68     		ldr	r3, [r7, #4]
+  86 005c 9B8D     		ldrh	r3, [r3, #44]
+  87 005e 4FEA8323 		lsl	r3, r3, #10
+  88 0062 03F4F843 		and	r3, r3, #31744
+ 246:../Dave/Generated/src/UART001/UART001.c **** 		  	     USIC_CH_BRG_PCTQ_Msk) | \
+  89              		.loc 1 246 0
+  90 0066 1943     		orrs	r1, r1, r3
+ 248:../Dave/Generated/src/UART001/UART001.c **** 	     USIC_CH_BRG_DCTQ_Msk) | \
+ 249:../Dave/Generated/src/UART001/UART001.c ****       (((uint32_t)(Handle->BGR_PDIV) << USIC_CH_BRG_PDIV_Pos) &  \
+  91              		.loc 1 249 0
+  92 0068 7B68     		ldr	r3, [r7, #4]
+  93 006a 5B8D     		ldrh	r3, [r3, #42]
+  94 006c 4FEA0340 		lsl	r0, r3, #16
+  95 0070 4FF00003 		mov	r3, #0
+  96 0074 C0F2FF33 		movt	r3, 1023
+  97 0078 0340     		ands	r3, r3, r0
+ 248:../Dave/Generated/src/UART001/UART001.c **** 	     USIC_CH_BRG_DCTQ_Msk) | \
+  98              		.loc 1 248 0
+  99 007a 0B43     		orrs	r3, r3, r1
+ 244:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->BRG |= \
+ 100              		.loc 1 244 0
+ 101 007c 1A43     		orrs	r2, r2, r3
+ 102 007e FB68     		ldr	r3, [r7, #12]
+ 103 0080 5A61     		str	r2, [r3, #20]
+ 250:../Dave/Generated/src/UART001/UART001.c **** 	     USIC_CH_BRG_PDIV_Msk));
+ 251:../Dave/Generated/src/UART001/UART001.c ****  
+ 252:../Dave/Generated/src/UART001/UART001.c ****   /* Configuration of USIC Shift Control */
+ 253:../Dave/Generated/src/UART001/UART001.c ****   
+ 254:../Dave/Generated/src/UART001/UART001.c ****   /* Transmit/Receive LSB first is selected  */
+ 255:../Dave/Generated/src/UART001/UART001.c ****   /* Transmission Mode (TRM) = 1  */
+ 256:../Dave/Generated/src/UART001/UART001.c ****   /* Passive Data Level (PDL) = 1 */
+ 257:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->SCTR |= ((((uint32_t)SHIFT_ONE  << USIC_CH_SCTR_PDL_Pos) & \
+ 104              		.loc 1 257 0
+ 105 0082 FB68     		ldr	r3, [r7, #12]
+ 106 0084 5B6B     		ldr	r3, [r3, #52]
+ 107 0086 43F48172 		orr	r2, r3, #258
+ 108 008a FB68     		ldr	r3, [r7, #12]
+ 109 008c 5A63     		str	r2, [r3, #52]
+ 258:../Dave/Generated/src/UART001/UART001.c ****     USIC_CH_SCTR_PDL_Msk ) | \
+ 259:../Dave/Generated/src/UART001/UART001.c ****     (((uint32_t)SHIFT_ONE  <<  USIC_CH_SCTR_TRM_Pos ) & USIC_CH_SCTR_TRM_Msk ));
+ 260:../Dave/Generated/src/UART001/UART001.c ****   /* Set Word Length (WLE) & Frame Length (FLE) */
+ 261:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->SCTR |= ((((uint32_t)Handle->DataBits  << USIC_CH_SCTR_FLE_Pos) & \
+ 110              		.loc 1 261 0
+ 111 008e FB68     		ldr	r3, [r7, #12]
+ 112 0090 5A6B     		ldr	r2, [r3, #52]
+ 113 0092 7B68     		ldr	r3, [r7, #4]
+ 114 0094 9B8B     		ldrh	r3, [r3, #28]
+ 115 0096 4FEA0343 		lsl	r3, r3, #16
+ 116 009a 03F47C11 		and	r1, r3, #4128768
+ 262:../Dave/Generated/src/UART001/UART001.c ****                       USIC_CH_SCTR_FLE_Msk ) | \
+ 263:../Dave/Generated/src/UART001/UART001.c ****                      (((uint32_t)Handle->DataBits  << USIC_CH_SCTR_WLE_Pos) & \
+ 117              		.loc 1 263 0
+ 118 009e 7B68     		ldr	r3, [r7, #4]
+ 119 00a0 9B8B     		ldrh	r3, [r3, #28]
+ 120 00a2 4FEA0363 		lsl	r3, r3, #24
+ 121 00a6 03F07063 		and	r3, r3, #251658240
+ 262:../Dave/Generated/src/UART001/UART001.c ****                       USIC_CH_SCTR_FLE_Msk ) | \
+ 122              		.loc 1 262 0
+ 123 00aa 0B43     		orrs	r3, r3, r1
+ 261:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->SCTR |= ((((uint32_t)Handle->DataBits  << USIC_CH_SCTR_FLE_Pos) & \
+ 124              		.loc 1 261 0
+ 125 00ac 1A43     		orrs	r2, r2, r3
+ 126 00ae FB68     		ldr	r3, [r7, #12]
+ 127 00b0 5A63     		str	r2, [r3, #52]
+ 264:../Dave/Generated/src/UART001/UART001.c ****                         USIC_CH_SCTR_WLE_Msk));
+ 265:../Dave/Generated/src/UART001/UART001.c **** 
+ 266:../Dave/Generated/src/UART001/UART001.c ****        
+ 267:../Dave/Generated/src/UART001/UART001.c ****   /* Configuration of USIC Transmit Control/Status Register */ 
+ 268:../Dave/Generated/src/UART001/UART001.c ****   /* TBUF Data Enable (TDEN) = 1 */
+ 269:../Dave/Generated/src/UART001/UART001.c ****   /* TBUF Data Single Shot Mode (TDSSM) = 1 */
+ 270:../Dave/Generated/src/UART001/UART001.c **** 	
+ 271:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->TCSR |= ((((uint32_t)SHIFT_ONE  << USIC_CH_TCSR_TDEN_Pos) & \
+ 128              		.loc 1 271 0
+ 129 00b2 FB68     		ldr	r3, [r7, #12]
+ 130 00b4 9B6B     		ldr	r3, [r3, #56]
+ 131 00b6 43F4A062 		orr	r2, r3, #1280
+ 132 00ba FB68     		ldr	r3, [r7, #12]
+ 133 00bc 9A63     		str	r2, [r3, #56]
+ 272:../Dave/Generated/src/UART001/UART001.c ****     USIC_CH_TCSR_TDEN_Msk ) | \
+ 273:../Dave/Generated/src/UART001/UART001.c ****     (((uint32_t)0x01  << USIC_CH_TCSR_TDSSM_Pos) & USIC_CH_TCSR_TDSSM_Msk));
+ 274:../Dave/Generated/src/UART001/UART001.c **** 
+ 275:../Dave/Generated/src/UART001/UART001.c ****   /* Configuration of Protocol Control Register */ 
+ 276:../Dave/Generated/src/UART001/UART001.c ****   /* Sample Mode (SMD) = 1 */
+ 277:../Dave/Generated/src/UART001/UART001.c ****   /* 1 Stop bit is selected */   
+ 278:../Dave/Generated/src/UART001/UART001.c ****   /* Sample Point (SP) as configured */
+ 279:../Dave/Generated/src/UART001/UART001.c ****   /* Pulse Length (PL) = 0 */
+ 280:../Dave/Generated/src/UART001/UART001.c ****   
+ 281:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->PCR_ASCMode |= ((((uint32_t)MASK_ONE & USIC_CH_PCR_ASCMode_SMD_Msk)) |\
+ 134              		.loc 1 281 0
+ 135 00be FB68     		ldr	r3, [r7, #12]
+ 136 00c0 DA6B     		ldr	r2, [r3, #60]
+ 282:../Dave/Generated/src/UART001/UART001.c ****     (((uint32_t)Handle->StopBit  << USIC_CH_PCR_ASCMode_STPB_Pos) & \
+ 137              		.loc 1 282 0
+ 138 00c2 7B68     		ldr	r3, [r7, #4]
+ 139 00c4 5B7D     		ldrb	r3, [r3, #21]	@ zero_extendqisi2
+ 140 00c6 4FEA4303 		lsl	r3, r3, #1
+ 141 00ca 03F00201 		and	r1, r3, #2
+ 283:../Dave/Generated/src/UART001/UART001.c ****     USIC_CH_PCR_ASCMode_STPB_Msk) | \
+ 284:../Dave/Generated/src/UART001/UART001.c ****     (((uint32_t)(Handle->BGR_SP) << USIC_CH_PCR_ASCMode_SP_Pos) & \
+ 142              		.loc 1 284 0
+ 143 00ce 7B68     		ldr	r3, [r7, #4]
+ 144 00d0 DB8D     		ldrh	r3, [r3, #46]
+ 145 00d2 4FEA0323 		lsl	r3, r3, #8
+ 146 00d6 03F4F853 		and	r3, r3, #7936
+ 283:../Dave/Generated/src/UART001/UART001.c ****     USIC_CH_PCR_ASCMode_STPB_Msk) | \
+ 147              		.loc 1 283 0
+ 148 00da 0B43     		orrs	r3, r3, r1
+ 281:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->PCR_ASCMode |= ((((uint32_t)MASK_ONE & USIC_CH_PCR_ASCMode_SMD_Msk)) |\
+ 149              		.loc 1 281 0
+ 150 00dc 1343     		orrs	r3, r3, r2
+ 151 00de 43F00102 		orr	r2, r3, #1
+ 152 00e2 FB68     		ldr	r3, [r7, #12]
+ 153 00e4 DA63     		str	r2, [r3, #60]
+ 285:../Dave/Generated/src/UART001/UART001.c ****     USIC_CH_PCR_ASCMode_SP_Msk));
+ 286:../Dave/Generated/src/UART001/UART001.c ****       
+ 287:../Dave/Generated/src/UART001/UART001.c ****   if(Handle->RecvNoiseEn)
+ 154              		.loc 1 287 0
+ 155 00e6 7B68     		ldr	r3, [r7, #4]
+ 156 00e8 93F82430 		ldrb	r3, [r3, #36]	@ zero_extendqisi2
+ 157 00ec 002B     		cmp	r3, #0
+ 158 00ee 05D0     		beq	.L2
+ 288:../Dave/Generated/src/UART001/UART001.c ****   {
+ 289:../Dave/Generated/src/UART001/UART001.c ****    	/* Enable Receiver Noise Interrupt*/  
+ 290:../Dave/Generated/src/UART001/UART001.c ****     UartRegs->PCR_ASCMode |=(((uint32_t)SHIFT_ONE  << USIC_CH_PCR_CTR5_Pos) & \
+ 159              		.loc 1 290 0
+ 160 00f0 FB68     		ldr	r3, [r7, #12]
+ 161 00f2 DB6B     		ldr	r3, [r3, #60]
+ 162 00f4 43F02002 		orr	r2, r3, #32
+ 163 00f8 FB68     		ldr	r3, [r7, #12]
+ 164 00fa DA63     		str	r2, [r3, #60]
+ 165              	.L2:
+ 291:../Dave/Generated/src/UART001/UART001.c **** 		  	  	  	  	  USIC_CH_PCR_CTR5_Msk); 
+ 292:../Dave/Generated/src/UART001/UART001.c ****   }
+ 293:../Dave/Generated/src/UART001/UART001.c ****   
+ 294:../Dave/Generated/src/UART001/UART001.c ****   if(Handle->FormatErrEn)
+ 166              		.loc 1 294 0
+ 167 00fc 7B68     		ldr	r3, [r7, #4]
+ 168 00fe 93F82530 		ldrb	r3, [r3, #37]	@ zero_extendqisi2
+ 169 0102 002B     		cmp	r3, #0
+ 170 0104 05D0     		beq	.L3
+ 295:../Dave/Generated/src/UART001/UART001.c ****   {
+ 296:../Dave/Generated/src/UART001/UART001.c ****    	/* Enable Format Error Interrupt*/  
+ 297:../Dave/Generated/src/UART001/UART001.c ****     UartRegs->PCR_ASCMode |=(((uint32_t)SHIFT_ONE  << USIC_CH_PCR_CTR6_Pos) & \
+ 171              		.loc 1 297 0
+ 172 0106 FB68     		ldr	r3, [r7, #12]
+ 173 0108 DB6B     		ldr	r3, [r3, #60]
+ 174 010a 43F04002 		orr	r2, r3, #64
+ 175 010e FB68     		ldr	r3, [r7, #12]
+ 176 0110 DA63     		str	r2, [r3, #60]
+ 177              	.L3:
+ 298:../Dave/Generated/src/UART001/UART001.c **** 		  	  	  	  	                             USIC_CH_PCR_CTR6_Msk); 
+ 299:../Dave/Generated/src/UART001/UART001.c ****   }
+ 300:../Dave/Generated/src/UART001/UART001.c ****   
+ 301:../Dave/Generated/src/UART001/UART001.c ****   if(Handle->FrameFinEn)
+ 178              		.loc 1 301 0
+ 179 0112 7B68     		ldr	r3, [r7, #4]
+ 180 0114 93F82630 		ldrb	r3, [r3, #38]	@ zero_extendqisi2
+ 181 0118 002B     		cmp	r3, #0
+ 182 011a 05D0     		beq	.L4
+ 302:../Dave/Generated/src/UART001/UART001.c ****   {
+ 303:../Dave/Generated/src/UART001/UART001.c ****    	/* Enable Frame Finished Interrupt*/  
+ 304:../Dave/Generated/src/UART001/UART001.c ****     UartRegs->PCR_ASCMode |=(((uint32_t)SHIFT_ONE  << USIC_CH_PCR_CTR7_Pos) & \
+ 183              		.loc 1 304 0
+ 184 011c FB68     		ldr	r3, [r7, #12]
+ 185 011e DB6B     		ldr	r3, [r3, #60]
+ 186 0120 43F08002 		orr	r2, r3, #128
+ 187 0124 FB68     		ldr	r3, [r7, #12]
+ 188 0126 DA63     		str	r2, [r3, #60]
+ 189              	.L4:
+ 305:../Dave/Generated/src/UART001/UART001.c **** 		  	                                   	  	 USIC_CH_PCR_CTR7_Msk); 
+ 306:../Dave/Generated/src/UART001/UART001.c ****   } 
+ 307:../Dave/Generated/src/UART001/UART001.c ****   
+ 308:../Dave/Generated/src/UART001/UART001.c ****   if (Handle->TxFifoEn)
+ 190              		.loc 1 308 0
+ 191 0128 7B68     		ldr	r3, [r7, #4]
+ 192 012a 9B7F     		ldrb	r3, [r3, #30]	@ zero_extendqisi2
+ 193 012c 002B     		cmp	r3, #0
+ 194 012e 0ED0     		beq	.L5
+ 309:../Dave/Generated/src/UART001/UART001.c ****   {	
+ 310:../Dave/Generated/src/UART001/UART001.c **** 	  /* Configuration of Transmitter Buffer Control Register */ 
+ 311:../Dave/Generated/src/UART001/UART001.c **** 	  UartRegs->TBCTR |= ((((uint32_t)Handle->TxLimit  << \
+ 195              		.loc 1 311 0
+ 196 0130 FB68     		ldr	r3, [r7, #12]
+ 197 0132 D3F80821 		ldr	r2, [r3, #264]
+ 198 0136 7B68     		ldr	r3, [r7, #4]
+ 199 0138 93F82030 		ldrb	r3, [r3, #32]	@ zero_extendqisi2
+ 200 013c 4FEA0323 		lsl	r3, r3, #8
+ 312:../Dave/Generated/src/UART001/UART001.c **** 						USIC_CH_TBCTR_LIMIT_Pos ) & USIC_CH_TBCTR_LIMIT_Msk));
+ 201              		.loc 1 312 0
+ 202 0140 03F47C53 		and	r3, r3, #16128
+ 311:../Dave/Generated/src/UART001/UART001.c **** 	  UartRegs->TBCTR |= ((((uint32_t)Handle->TxLimit  << \
+ 203              		.loc 1 311 0
+ 204 0144 1A43     		orrs	r2, r2, r3
+ 205 0146 FB68     		ldr	r3, [r7, #12]
+ 206 0148 C3F80821 		str	r2, [r3, #264]
+ 207 014c 05E0     		b	.L6
+ 208              	.L5:
+ 313:../Dave/Generated/src/UART001/UART001.c ****   }
+ 314:../Dave/Generated/src/UART001/UART001.c ****   else
+ 315:../Dave/Generated/src/UART001/UART001.c ****   {
+ 316:../Dave/Generated/src/UART001/UART001.c **** 	  /* TBIF is set to simplify polling*/
+ 317:../Dave/Generated/src/UART001/UART001.c **** 	  UartRegs->PSR_ASCMode |= (((uint32_t)SHIFT_ONE  << USIC_CH_PSR_TBIF_Pos) & \
+ 209              		.loc 1 317 0
+ 210 014e FB68     		ldr	r3, [r7, #12]
+ 211 0150 9B6C     		ldr	r3, [r3, #72]
+ 212 0152 43F40052 		orr	r2, r3, #8192
+ 213 0156 FB68     		ldr	r3, [r7, #12]
+ 214 0158 9A64     		str	r2, [r3, #72]
+ 215              	.L6:
+ 318:../Dave/Generated/src/UART001/UART001.c **** 	 		  (uint32_t)USIC_CH_PSR_TBIF_Msk);
+ 319:../Dave/Generated/src/UART001/UART001.c ****   }
+ 320:../Dave/Generated/src/UART001/UART001.c ****   
+ 321:../Dave/Generated/src/UART001/UART001.c ****   if (Handle->RxFifoEn)
+ 216              		.loc 1 321 0
+ 217 015a 7B68     		ldr	r3, [r7, #4]
+ 218 015c DB7F     		ldrb	r3, [r3, #31]	@ zero_extendqisi2
+ 219 015e 002B     		cmp	r3, #0
+ 220 0160 0FD0     		beq	.L7
+ 322:../Dave/Generated/src/UART001/UART001.c ****   {
+ 323:../Dave/Generated/src/UART001/UART001.c **** 	  /* Configuration of Receiver Buffer Control Register */ 
+ 324:../Dave/Generated/src/UART001/UART001.c **** 	  UartRegs->RBCTR |= ((((uint32_t)Handle->RxLimit  << \
+ 221              		.loc 1 324 0
+ 222 0162 FB68     		ldr	r3, [r7, #12]
+ 223 0164 D3F80C21 		ldr	r2, [r3, #268]
+ 224 0168 7B68     		ldr	r3, [r7, #4]
+ 225 016a 93F82130 		ldrb	r3, [r3, #33]	@ zero_extendqisi2
+ 226 016e 4FEA0323 		lsl	r3, r3, #8
+ 325:../Dave/Generated/src/UART001/UART001.c **** 						   USIC_CH_RBCTR_LIMIT_Pos) & USIC_CH_RBCTR_LIMIT_Msk) | \
+ 227              		.loc 1 325 0
+ 228 0172 03F47C53 		and	r3, r3, #16128
+ 324:../Dave/Generated/src/UART001/UART001.c **** 	  UartRegs->RBCTR |= ((((uint32_t)Handle->RxLimit  << \
+ 229              		.loc 1 324 0
+ 230 0176 1343     		orrs	r3, r3, r2
+ 231 0178 43F08052 		orr	r2, r3, #268435456
+ 232 017c FB68     		ldr	r3, [r7, #12]
+ 233 017e C3F80C21 		str	r2, [r3, #268]
+ 234              	.L7:
+ 326:../Dave/Generated/src/UART001/UART001.c **** 							(((uint32_t)SHIFT_ONE << USIC_CH_RBCTR_LOF_Pos) & \
+ 327:../Dave/Generated/src/UART001/UART001.c **** 						   USIC_CH_RBCTR_LOF_Msk));
+ 328:../Dave/Generated/src/UART001/UART001.c ****   }else{}
+ 329:../Dave/Generated/src/UART001/UART001.c ****   
+ 330:../Dave/Generated/src/UART001/UART001.c ****   /* Configuration of Channel Control Register */ 
+ 331:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->CCR |= (((uint32_t)(UART_MODE  & USIC_CH_CCR_MODE_Msk)) | \
+ 235              		.loc 1 331 0
+ 236 0182 FB68     		ldr	r3, [r7, #12]
+ 237 0184 1A6C     		ldr	r2, [r3, #64]
+ 332:../Dave/Generated/src/UART001/UART001.c ****                     (((uint32_t)Handle->Parity  << USIC_CH_CCR_PM_Pos) & \
+ 238              		.loc 1 332 0
+ 239 0186 7B68     		ldr	r3, [r7, #4]
+ 240 0188 9B7D     		ldrb	r3, [r3, #22]	@ zero_extendqisi2
+ 241 018a 4FEA0323 		lsl	r3, r3, #8
+ 242 018e 03F44073 		and	r3, r3, #768
+ 331:../Dave/Generated/src/UART001/UART001.c ****   UartRegs->CCR |= (((uint32_t)(UART_MODE  & USIC_CH_CCR_MODE_Msk)) | \
+ 243              		.loc 1 331 0
+ 244 0192 1343     		orrs	r3, r3, r2
+ 245 0194 43F00202 		orr	r2, r3, #2
+ 246 0198 FB68     		ldr	r3, [r7, #12]
+ 247 019a 1A64     		str	r2, [r3, #64]
+ 333:../Dave/Generated/src/UART001/UART001.c ****                      USIC_CH_CCR_PM_Msk));
+ 334:../Dave/Generated/src/UART001/UART001.c **** 
+ 335:../Dave/Generated/src/UART001/UART001.c **** }
+ 248              		.loc 1 335 0
+ 249 019c 07F11407 		add	r7, r7, #20
+ 250 01a0 BD46     		mov	sp, r7
+ 251 01a2 80BC     		pop	{r7}
+ 252 01a4 7047     		bx	lr
+ 253              		.cfi_endproc
+ 254              	.LFE112:
+ 256 01a6 00BF     		.section	.text.UART001_lConfigTXPin,"ax",%progbits
+ 257              		.align	2
+ 258              		.global	UART001_lConfigTXPin
+ 259              		.thumb
+ 260              		.thumb_func
+ 262              	UART001_lConfigTXPin:
+ 263              	.LFB113:
+ 336:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 337:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function configures TX pin as Open-drain General-purpose
+ 338:../Dave/Generated/src/UART001/UART001.c ****  * output and sets to '1'. 
+ 339:../Dave/Generated/src/UART001/UART001.c ****  *
+ 340:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Handle of type UART001_HandleType
+ 341:../Dave/Generated/src/UART001/UART001.c ****  *
+ 342:../Dave/Generated/src/UART001/UART001.c ****  * @return  None <BR>
+ 343:../Dave/Generated/src/UART001/UART001.c ****  *
+ 344:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: No </b><BR>
+ 345:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/ 
+ 346:../Dave/Generated/src/UART001/UART001.c **** void UART001_lConfigTXPin(const UART001_HandleType* Handle)
+ 347:../Dave/Generated/src/UART001/UART001.c **** {
+ 264              		.loc 1 347 0
+ 265              		.cfi_startproc
+ 266              		@ args = 0, pretend = 0, frame = 16
+ 267              		@ frame_needed = 1, uses_anonymous_args = 0
+ 268              		@ link register save eliminated.
+ 269 0000 80B4     		push	{r7}
+ 270              	.LCFI3:
+ 271              		.cfi_def_cfa_offset 4
+ 272              		.cfi_offset 7, -4
+ 273 0002 85B0     		sub	sp, sp, #20
+ 274              	.LCFI4:
+ 275              		.cfi_def_cfa_offset 24
+ 276 0004 00AF     		add	r7, sp, #0
+ 277              	.LCFI5:
+ 278              		.cfi_def_cfa_register 7
+ 279 0006 7860     		str	r0, [r7, #4]
+ 348:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t TempPortPin;
+ 349:../Dave/Generated/src/UART001/UART001.c **** 
+ 350:../Dave/Generated/src/UART001/UART001.c ****     /* set the TX portpin to '1' */
+ 351:../Dave/Generated/src/UART001/UART001.c ****     Handle->PinHandle.TX_PortBase->OMR |= (uint32_t)SHIFT_ONE << \
+ 280              		.loc 1 351 0
+ 281 0008 7B68     		ldr	r3, [r7, #4]
+ 282 000a 5B68     		ldr	r3, [r3, #4]
+ 283 000c 7A68     		ldr	r2, [r7, #4]
+ 284 000e 5268     		ldr	r2, [r2, #4]
+ 285 0010 5168     		ldr	r1, [r2, #4]
+ 352:../Dave/Generated/src/UART001/UART001.c ****    		                                (uint32_t)Handle->PinHandle.TX_Pin;
+ 286              		.loc 1 352 0
+ 287 0012 7A68     		ldr	r2, [r7, #4]
+ 288 0014 127A     		ldrb	r2, [r2, #8]	@ zero_extendqisi2
+ 351:../Dave/Generated/src/UART001/UART001.c ****     Handle->PinHandle.TX_PortBase->OMR |= (uint32_t)SHIFT_ONE << \
+ 289              		.loc 1 351 0
+ 290 0016 4FF00100 		mov	r0, #1
+ 291 001a 00FA02F2 		lsl	r2, r0, r2
+ 292 001e 0A43     		orrs	r2, r2, r1
+ 293 0020 5A60     		str	r2, [r3, #4]
+ 353:../Dave/Generated/src/UART001/UART001.c ****      
+ 354:../Dave/Generated/src/UART001/UART001.c **** 	/* Configure TX portpin as Open-drain General-purpose output */
+ 355:../Dave/Generated/src/UART001/UART001.c ****     TempPortPin = (uint32_t)Handle->PinHandle.TX_Pin;
+ 294              		.loc 1 355 0
+ 295 0022 7B68     		ldr	r3, [r7, #4]
+ 296 0024 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ 297 0026 FB60     		str	r3, [r7, #12]
+ 356:../Dave/Generated/src/UART001/UART001.c **** 
+ 357:../Dave/Generated/src/UART001/UART001.c ****     if (FIRST_NIBBLE > TempPortPin)
+ 298              		.loc 1 357 0
+ 299 0028 FB68     		ldr	r3, [r7, #12]
+ 300 002a 032B     		cmp	r3, #3
+ 301 002c 10D8     		bhi	.L9
+ 358:../Dave/Generated/src/UART001/UART001.c ****     {
+ 359:../Dave/Generated/src/UART001/UART001.c ****    	  Handle->PinHandle.TX_PortBase->IOCR0 |= \
+ 302              		.loc 1 359 0
+ 303 002e 7B68     		ldr	r3, [r7, #4]
+ 304 0030 5B68     		ldr	r3, [r3, #4]
+ 305 0032 7A68     		ldr	r2, [r7, #4]
+ 306 0034 5268     		ldr	r2, [r2, #4]
+ 307 0036 1169     		ldr	r1, [r2, #16]
+ 360:../Dave/Generated/src/UART001/UART001.c ****    			                ((uint32_t)UART001_OPENDRAIN_OUT << (3U + \
+ 361:../Dave/Generated/src/UART001/UART001.c **** 							(TempPortPin * 8U)));
+ 308              		.loc 1 361 0
+ 309 0038 FA68     		ldr	r2, [r7, #12]
+ 310 003a 4FEAC202 		lsl	r2, r2, #3
+ 360:../Dave/Generated/src/UART001/UART001.c ****    			                ((uint32_t)UART001_OPENDRAIN_OUT << (3U + \
+ 311              		.loc 1 360 0
+ 312 003e 02F10302 		add	r2, r2, #3
+ 313 0042 4FF01800 		mov	r0, #24
+ 314 0046 00FA02F2 		lsl	r2, r0, r2
+ 359:../Dave/Generated/src/UART001/UART001.c ****    	  Handle->PinHandle.TX_PortBase->IOCR0 |= \
+ 315              		.loc 1 359 0
+ 316 004a 0A43     		orrs	r2, r2, r1
+ 317 004c 1A61     		str	r2, [r3, #16]
+ 318 004e 4FE0     		b	.L8
+ 319              	.L9:
+ 362:../Dave/Generated/src/UART001/UART001.c ****     }
+ 363:../Dave/Generated/src/UART001/UART001.c ****     else if ((FIRST_NIBBLE <= TempPortPin) && (SECOND_NIBBLE > TempPortPin))
+ 320              		.loc 1 363 0
+ 321 0050 FB68     		ldr	r3, [r7, #12]
+ 322 0052 032B     		cmp	r3, #3
+ 323 0054 17D9     		bls	.L11
+ 324              		.loc 1 363 0 is_stmt 0 discriminator 1
+ 325 0056 FB68     		ldr	r3, [r7, #12]
+ 326 0058 072B     		cmp	r3, #7
+ 327 005a 14D8     		bhi	.L11
+ 364:../Dave/Generated/src/UART001/UART001.c ****     {
+ 365:../Dave/Generated/src/UART001/UART001.c **** 	  TempPortPin = TempPortPin - FIRST_NIBBLE;
+ 328              		.loc 1 365 0 is_stmt 1
+ 329 005c FB68     		ldr	r3, [r7, #12]
+ 330 005e A3F10403 		sub	r3, r3, #4
+ 331 0062 FB60     		str	r3, [r7, #12]
+ 366:../Dave/Generated/src/UART001/UART001.c **** 	  Handle->PinHandle.TX_PortBase->IOCR4 |= \
+ 332              		.loc 1 366 0
+ 333 0064 7B68     		ldr	r3, [r7, #4]
+ 334 0066 5B68     		ldr	r3, [r3, #4]
+ 335 0068 7A68     		ldr	r2, [r7, #4]
+ 336 006a 5268     		ldr	r2, [r2, #4]
+ 337 006c 5169     		ldr	r1, [r2, #20]
+ 367:../Dave/Generated/src/UART001/UART001.c **** 			                ((uint32_t)UART001_OPENDRAIN_OUT << (3U + \
+ 368:../Dave/Generated/src/UART001/UART001.c **** 							(TempPortPin * 8U)));
+ 338              		.loc 1 368 0
+ 339 006e FA68     		ldr	r2, [r7, #12]
+ 340 0070 4FEAC202 		lsl	r2, r2, #3
+ 367:../Dave/Generated/src/UART001/UART001.c **** 			                ((uint32_t)UART001_OPENDRAIN_OUT << (3U + \
+ 341              		.loc 1 367 0
+ 342 0074 02F10302 		add	r2, r2, #3
+ 343 0078 4FF01800 		mov	r0, #24
+ 344 007c 00FA02F2 		lsl	r2, r0, r2
+ 366:../Dave/Generated/src/UART001/UART001.c **** 	  Handle->PinHandle.TX_PortBase->IOCR4 |= \
+ 345              		.loc 1 366 0
+ 346 0080 0A43     		orrs	r2, r2, r1
+ 347 0082 5A61     		str	r2, [r3, #20]
+ 348 0084 34E0     		b	.L8
+ 349              	.L11:
+ 369:../Dave/Generated/src/UART001/UART001.c ****     }
+ 370:../Dave/Generated/src/UART001/UART001.c ****     else if ((SECOND_NIBBLE <= TempPortPin) && (THIRD_NIBBLE > TempPortPin))
+ 350              		.loc 1 370 0
+ 351 0086 FB68     		ldr	r3, [r7, #12]
+ 352 0088 072B     		cmp	r3, #7
+ 353 008a 17D9     		bls	.L12
+ 354              		.loc 1 370 0 is_stmt 0 discriminator 1
+ 355 008c FB68     		ldr	r3, [r7, #12]
+ 356 008e 0B2B     		cmp	r3, #11
+ 357 0090 14D8     		bhi	.L12
+ 371:../Dave/Generated/src/UART001/UART001.c ****     {
+ 372:../Dave/Generated/src/UART001/UART001.c ****  	  TempPortPin = TempPortPin - SECOND_NIBBLE;
+ 358              		.loc 1 372 0 is_stmt 1
+ 359 0092 FB68     		ldr	r3, [r7, #12]
+ 360 0094 A3F10803 		sub	r3, r3, #8
+ 361 0098 FB60     		str	r3, [r7, #12]
+ 373:../Dave/Generated/src/UART001/UART001.c ****  	  Handle->PinHandle.TX_PortBase->IOCR8 |= \
+ 362              		.loc 1 373 0
+ 363 009a 7B68     		ldr	r3, [r7, #4]
+ 364 009c 5B68     		ldr	r3, [r3, #4]
+ 365 009e 7A68     		ldr	r2, [r7, #4]
+ 366 00a0 5268     		ldr	r2, [r2, #4]
+ 367 00a2 9169     		ldr	r1, [r2, #24]
+ 374:../Dave/Generated/src/UART001/UART001.c ****  			                ((uint32_t)UART001_OPENDRAIN_OUT << (3U + \
+ 375:../Dave/Generated/src/UART001/UART001.c **** 							(TempPortPin * 8U)));
+ 368              		.loc 1 375 0
+ 369 00a4 FA68     		ldr	r2, [r7, #12]
+ 370 00a6 4FEAC202 		lsl	r2, r2, #3
+ 374:../Dave/Generated/src/UART001/UART001.c ****  			                ((uint32_t)UART001_OPENDRAIN_OUT << (3U + \
+ 371              		.loc 1 374 0
+ 372 00aa 02F10302 		add	r2, r2, #3
+ 373 00ae 4FF01800 		mov	r0, #24
+ 374 00b2 00FA02F2 		lsl	r2, r0, r2
+ 373:../Dave/Generated/src/UART001/UART001.c ****  	  Handle->PinHandle.TX_PortBase->IOCR8 |= \
+ 375              		.loc 1 373 0
+ 376 00b6 0A43     		orrs	r2, r2, r1
+ 377 00b8 9A61     		str	r2, [r3, #24]
+ 378 00ba 19E0     		b	.L8
+ 379              	.L12:
+ 376:../Dave/Generated/src/UART001/UART001.c ****     }
+ 377:../Dave/Generated/src/UART001/UART001.c ****     else if ((THIRD_NIBBLE <= TempPortPin) && (FOURTH_NIBBLE > TempPortPin))
+ 380              		.loc 1 377 0
+ 381 00bc FB68     		ldr	r3, [r7, #12]
+ 382 00be 0B2B     		cmp	r3, #11
+ 383 00c0 16D9     		bls	.L8
+ 384              		.loc 1 377 0 is_stmt 0 discriminator 1
+ 385 00c2 FB68     		ldr	r3, [r7, #12]
+ 386 00c4 0F2B     		cmp	r3, #15
+ 387 00c6 13D8     		bhi	.L8
+ 378:../Dave/Generated/src/UART001/UART001.c ****     {
+ 379:../Dave/Generated/src/UART001/UART001.c **** 	  TempPortPin = TempPortPin - THIRD_NIBBLE;
+ 388              		.loc 1 379 0 is_stmt 1
+ 389 00c8 FB68     		ldr	r3, [r7, #12]
+ 390 00ca A3F10C03 		sub	r3, r3, #12
+ 391 00ce FB60     		str	r3, [r7, #12]
+ 380:../Dave/Generated/src/UART001/UART001.c **** 	  Handle->PinHandle.TX_PortBase->IOCR12 |= \
+ 392              		.loc 1 380 0
+ 393 00d0 7B68     		ldr	r3, [r7, #4]
+ 394 00d2 5B68     		ldr	r3, [r3, #4]
+ 395 00d4 7A68     		ldr	r2, [r7, #4]
+ 396 00d6 5268     		ldr	r2, [r2, #4]
+ 397 00d8 D169     		ldr	r1, [r2, #28]
+ 381:../Dave/Generated/src/UART001/UART001.c **** 			                ((uint32_t)UART001_OPENDRAIN_OUT << (3U + \
+ 382:../Dave/Generated/src/UART001/UART001.c **** 							(TempPortPin * 8U)));
+ 398              		.loc 1 382 0
+ 399 00da FA68     		ldr	r2, [r7, #12]
+ 400 00dc 4FEAC202 		lsl	r2, r2, #3
+ 381:../Dave/Generated/src/UART001/UART001.c **** 			                ((uint32_t)UART001_OPENDRAIN_OUT << (3U + \
+ 401              		.loc 1 381 0
+ 402 00e0 02F10302 		add	r2, r2, #3
+ 403 00e4 4FF01800 		mov	r0, #24
+ 404 00e8 00FA02F2 		lsl	r2, r0, r2
+ 380:../Dave/Generated/src/UART001/UART001.c **** 	  Handle->PinHandle.TX_PortBase->IOCR12 |= \
+ 405              		.loc 1 380 0
+ 406 00ec 0A43     		orrs	r2, r2, r1
+ 407 00ee DA61     		str	r2, [r3, #28]
+ 408              	.L8:
+ 383:../Dave/Generated/src/UART001/UART001.c ****     }
+ 384:../Dave/Generated/src/UART001/UART001.c **** 	else
+ 385:../Dave/Generated/src/UART001/UART001.c **** 	{}
+ 386:../Dave/Generated/src/UART001/UART001.c **** 
+ 387:../Dave/Generated/src/UART001/UART001.c **** }
+ 409              		.loc 1 387 0
+ 410 00f0 07F11407 		add	r7, r7, #20
+ 411 00f4 BD46     		mov	sp, r7
+ 412 00f6 80BC     		pop	{r7}
+ 413 00f8 7047     		bx	lr
+ 414              		.cfi_endproc
+ 415              	.LFE113:
+ 417 00fa 00BF     		.section	.text.UART001_labsRealType,"ax",%progbits
+ 418              		.align	2
+ 419              		.global	UART001_labsRealType
+ 420              		.thumb
+ 421              		.thumb_func
+ 423              	UART001_labsRealType:
+ 424              	.LFB114:
+ 388:../Dave/Generated/src/UART001/UART001.c **** 
+ 389:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 390:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function finds the real type of the float number
+ 391:../Dave/Generated/src/UART001/UART001.c ****  *
+ 392:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Number of type float
+ 393:../Dave/Generated/src/UART001/UART001.c ****  *
+ 394:../Dave/Generated/src/UART001/UART001.c ****  * @return  return_value <BR>
+ 395:../Dave/Generated/src/UART001/UART001.c ****  * 				 +ve float value if Number is < 0.0 <BR>
+ 396:../Dave/Generated/src/UART001/UART001.c ****  * 				 -ve float value if Number is >= 0.0 <BR>
+ 397:../Dave/Generated/src/UART001/UART001.c ****  *
+ 398:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: No </b><BR>
+ 399:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+ 400:../Dave/Generated/src/UART001/UART001.c **** float UART001_labsRealType(float Number)
+ 401:../Dave/Generated/src/UART001/UART001.c **** {
+ 425              		.loc 1 401 0
+ 426              		.cfi_startproc
+ 427              		@ args = 0, pretend = 0, frame = 16
+ 428              		@ frame_needed = 1, uses_anonymous_args = 0
+ 429              		@ link register save eliminated.
+ 430 0000 80B4     		push	{r7}
+ 431              	.LCFI6:
+ 432              		.cfi_def_cfa_offset 4
+ 433              		.cfi_offset 7, -4
+ 434 0002 85B0     		sub	sp, sp, #20
+ 435              	.LCFI7:
+ 436              		.cfi_def_cfa_offset 24
+ 437 0004 00AF     		add	r7, sp, #0
+ 438              	.LCFI8:
+ 439              		.cfi_def_cfa_register 7
+ 440 0006 7860     		str	r0, [r7, #4]	@ float
+ 402:../Dave/Generated/src/UART001/UART001.c ****    float return_value;
+ 403:../Dave/Generated/src/UART001/UART001.c **** 	if (Number < 0.0F){
+ 441              		.loc 1 403 0
+ 442 0008 D7ED017A 		flds	s15, [r7, #4]
+ 443 000c F5EEC07A 		fcmpezs	s15
+ 444 0010 F1EE10FA 		fmstat
+ 445 0014 06D5     		bpl	.L19
+ 446              	.L18:
+ 404:../Dave/Generated/src/UART001/UART001.c **** 		return_value = -Number;
+ 447              		.loc 1 404 0
+ 448 0016 D7ED017A 		flds	s15, [r7, #4]
+ 449 001a F1EE677A 		fnegs	s15, s15
+ 450 001e C7ED037A 		fsts	s15, [r7, #12]
+ 451 0022 01E0     		b	.L16
+ 452              	.L19:
+ 405:../Dave/Generated/src/UART001/UART001.c **** 	}
+ 406:../Dave/Generated/src/UART001/UART001.c **** 	else{
+ 407:../Dave/Generated/src/UART001/UART001.c **** 		return_value = Number;
+ 453              		.loc 1 407 0
+ 454 0024 7B68     		ldr	r3, [r7, #4]	@ float
+ 455 0026 FB60     		str	r3, [r7, #12]	@ float
+ 456              	.L16:
+ 408:../Dave/Generated/src/UART001/UART001.c **** 	}
+ 409:../Dave/Generated/src/UART001/UART001.c **** 	return return_value;
+ 457              		.loc 1 409 0
+ 458 0028 FB68     		ldr	r3, [r7, #12]	@ float
+ 410:../Dave/Generated/src/UART001/UART001.c **** }
+ 459              		.loc 1 410 0
+ 460 002a 1846     		mov	r0, r3	@ float
+ 461 002c 07F11407 		add	r7, r7, #20
+ 462 0030 BD46     		mov	sp, r7
+ 463 0032 80BC     		pop	{r7}
+ 464 0034 7047     		bx	lr
+ 465              		.cfi_endproc
+ 466              	.LFE114:
+ 468 0036 00BF     		.section	.text.UART001_lConfigureBaudRate,"ax",%progbits
+ 469              		.align	2
+ 470              		.global	UART001_lConfigureBaudRate
+ 471              		.thumb
+ 472              		.thumb_func
+ 474              	UART001_lConfigureBaudRate:
+ 475              	.LFB115:
+ 411:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 412:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function gives optimised PDIV and STEP value for the given 
+ 413:../Dave/Generated/src/UART001/UART001.c ****  * baud rate.  
+ 414:../Dave/Generated/src/UART001/UART001.c ****  *
+ 415:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  BaudRate of type uint32_t
+ 416:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Pdiv reference of type uint32_t
+ 417:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Step reference of type uint32_t
+ 418:../Dave/Generated/src/UART001/UART001.c ****  *
+ 419:../Dave/Generated/src/UART001/UART001.c ****  * @return  None <BR>
+ 420:../Dave/Generated/src/UART001/UART001.c ****  *
+ 421:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: No </b><BR>
+ 422:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+ 423:../Dave/Generated/src/UART001/UART001.c **** void UART001_lConfigureBaudRate\
+ 424:../Dave/Generated/src/UART001/UART001.c ****                               (uint32_t BaudRate,uint32_t* Pdiv,uint32_t* Step)
+ 425:../Dave/Generated/src/UART001/UART001.c **** {
+ 476              		.loc 1 425 0
+ 477              		.cfi_startproc
+ 478              		@ args = 0, pretend = 0, frame = 184
+ 479              		@ frame_needed = 1, uses_anonymous_args = 0
+ 480 0000 80B5     		push	{r7, lr}
+ 481              	.LCFI9:
+ 482              		.cfi_def_cfa_offset 8
+ 483              		.cfi_offset 7, -8
+ 484              		.cfi_offset 14, -4
+ 485 0002 2DED028B 		fstmfdd	sp!, {d8}
+ 486              	.LCFI10:
+ 487              		.cfi_def_cfa_offset 16
+ 488              		.cfi_offset 80, -16
+ 489 0006 AEB0     		sub	sp, sp, #184
+ 490              	.LCFI11:
+ 491              		.cfi_def_cfa_offset 200
+ 492 0008 00AF     		add	r7, sp, #0
+ 493              	.LCFI12:
+ 494              		.cfi_def_cfa_register 7
+ 495 000a F860     		str	r0, [r7, #12]
+ 496 000c B960     		str	r1, [r7, #8]
+ 497 000e 7A60     		str	r2, [r7, #4]
+ 426:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t fdr_step = 0x00U;
+ 498              		.loc 1 426 0
+ 499 0010 4FF00003 		mov	r3, #0
+ 500 0014 C7F8B430 		str	r3, [r7, #180]
+ 427:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t brg_pdiv = 0x00U;
+ 501              		.loc 1 427 0
+ 502 0018 4FF00003 		mov	r3, #0
+ 503 001c C7F8B030 		str	r3, [r7, #176]
+ 428:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t divisor_in = BaudRate ;
+ 504              		.loc 1 428 0
+ 505 0020 FB68     		ldr	r3, [r7, #12]
+ 506 0022 C7F8AC30 		str	r3, [r7, #172]
+ 429:../Dave/Generated/src/UART001/UART001.c **** 	/* fPB / 1024 * (Brg_dctq + 1) */
+ 430:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t dividend_in = 0U;
+ 507              		.loc 1 430 0
+ 508 0026 4FF00003 		mov	r3, #0
+ 509 002a C7F8A830 		str	r3, [r7, #168]
+ 431:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t divisor[4];
+ 432:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t dividend[4];
+ 433:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t remainder[4];
+ 434:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t divisor_array[4];
+ 435:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t dividend_array[4];
+ 436:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t div_array[4];
+ 437:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t max, frac,divisor1,divisor2,dividend1,dividend2;
+ 438:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t array_count,array_count_1,array_count_2;
+ 439:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t do_while_break = 0U;
+ 510              		.loc 1 439 0
+ 511 002e 4FF00003 		mov	r3, #0
+ 512 0032 C7F88830 		str	r3, [r7, #136]
+ 440:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t temp = 0U;
+ 513              		.loc 1 440 0
+ 514 0036 4FF00003 		mov	r3, #0
+ 515 003a FB67     		str	r3, [r7, #124]
+ 441:../Dave/Generated/src/UART001/UART001.c **** 	float div_factor;
+ 442:../Dave/Generated/src/UART001/UART001.c **** 	uint32_t loop_cnt;
+ 443:../Dave/Generated/src/UART001/UART001.c **** 	bool swapped;
+ 444:../Dave/Generated/src/UART001/UART001.c **** 	dividend_in = (uint32_t)((uint32_t)(UART001_CLOCK * 1000000)/ \
+ 516              		.loc 1 444 0
+ 517 003c 42F6C653 		movw	r3, #11718
+ 518 0040 C7F8A830 		str	r3, [r7, #168]
+ 445:../Dave/Generated/src/UART001/UART001.c ****                     	(UART001_MAX_VALUE * UART001_DCTQ_VALUE)); 
+ 446:../Dave/Generated/src/UART001/UART001.c **** 	/* swap if divisor_in/dividend_in > max_divisor/max_dividend */
+ 447:../Dave/Generated/src/UART001/UART001.c **** 	div_factor = (float) divisor_in/(float) dividend_in;
+ 519              		.loc 1 447 0
+ 520 0044 D7ED2B7A 		flds	s15, [r7, #172]	@ int
+ 521 0048 B8EE677A 		fuitos	s14, s15
+ 522 004c D7ED2A7A 		flds	s15, [r7, #168]	@ int
+ 523 0050 F8EE677A 		fuitos	s15, s15
+ 524 0054 C7EE277A 		fdivs	s15, s14, s15
+ 525 0058 C7ED1E7A 		fsts	s15, [r7, #120]
+ 448:../Dave/Generated/src/UART001/UART001.c **** 	if ( div_factor > 1.0F)
+ 526              		.loc 1 448 0
+ 527 005c 97ED1E7A 		flds	s14, [r7, #120]
+ 528 0060 F7EE007A 		fconsts	s15, #112
+ 529 0064 B4EEE77A 		fcmpes	s14, s15
+ 530 0068 F1EE10FA 		fmstat
+ 531 006c 12DD     		ble	.L41
+ 532              	.L39:
+ 449:../Dave/Generated/src/UART001/UART001.c **** 	{
+ 450:../Dave/Generated/src/UART001/UART001.c **** 		max = UART001_MAX_VALUE;
+ 533              		.loc 1 450 0
+ 534 006e 4FF48063 		mov	r3, #1024
+ 535 0072 C7F8A430 		str	r3, [r7, #164]
+ 451:../Dave/Generated/src/UART001/UART001.c **** 		swapped = 1U;
+ 536              		.loc 1 451 0
+ 537 0076 4FF00103 		mov	r3, #1
+ 538 007a 87F88330 		strb	r3, [r7, #131]
+ 452:../Dave/Generated/src/UART001/UART001.c **** 		temp = divisor_in;
+ 539              		.loc 1 452 0
+ 540 007e D7F8AC30 		ldr	r3, [r7, #172]
+ 541 0082 FB67     		str	r3, [r7, #124]
+ 453:../Dave/Generated/src/UART001/UART001.c **** 		divisor_in = dividend_in;
+ 542              		.loc 1 453 0
+ 543 0084 D7F8A830 		ldr	r3, [r7, #168]
+ 544 0088 C7F8AC30 		str	r3, [r7, #172]
+ 454:../Dave/Generated/src/UART001/UART001.c **** 		dividend_in = temp;
+ 545              		.loc 1 454 0
+ 546 008c FB6F     		ldr	r3, [r7, #124]
+ 547 008e C7F8A830 		str	r3, [r7, #168]
+ 548 0092 07E0     		b	.L23
+ 549              	.L41:
+ 455:../Dave/Generated/src/UART001/UART001.c **** 	}
+ 456:../Dave/Generated/src/UART001/UART001.c **** 	else
+ 457:../Dave/Generated/src/UART001/UART001.c **** 	{
+ 458:../Dave/Generated/src/UART001/UART001.c **** 		swapped = 0U;
+ 550              		.loc 1 458 0
+ 551 0094 4FF00003 		mov	r3, #0
+ 552 0098 87F88330 		strb	r3, [r7, #131]
+ 459:../Dave/Generated/src/UART001/UART001.c **** 		max = UART001_MAX_VALUE;
+ 553              		.loc 1 459 0
+ 554 009c 4FF48063 		mov	r3, #1024
+ 555 00a0 C7F8A430 		str	r3, [r7, #164]
+ 556              	.L23:
+ 460:../Dave/Generated/src/UART001/UART001.c **** 	}
+ 461:../Dave/Generated/src/UART001/UART001.c **** 	/*Init parameters*/
+ 462:../Dave/Generated/src/UART001/UART001.c **** 	loop_cnt = 0U;
+ 557              		.loc 1 462 0
+ 558 00a4 4FF00003 		mov	r3, #0
+ 559 00a8 C7F88430 		str	r3, [r7, #132]
+ 463:../Dave/Generated/src/UART001/UART001.c **** 	array_count = 0U;
+ 560              		.loc 1 463 0
+ 561 00ac 4FF00003 		mov	r3, #0
+ 562 00b0 C7F89030 		str	r3, [r7, #144]
+ 464:../Dave/Generated/src/UART001/UART001.c **** 	array_count_1 = 0U;
+ 563              		.loc 1 464 0
+ 564 00b4 4FF00003 		mov	r3, #0
+ 565 00b8 C7F88C30 		str	r3, [r7, #140]
+ 465:../Dave/Generated/src/UART001/UART001.c **** 	divisor[0] = divisor_in;
+ 566              		.loc 1 465 0
+ 567 00bc D7F8AC30 		ldr	r3, [r7, #172]
+ 568 00c0 3B66     		str	r3, [r7, #96]
+ 466:../Dave/Generated/src/UART001/UART001.c **** 	remainder[0] = dividend_in;
+ 569              		.loc 1 466 0
+ 570 00c2 D7F8A830 		ldr	r3, [r7, #168]
+ 571 00c6 3B64     		str	r3, [r7, #64]
+ 467:../Dave/Generated/src/UART001/UART001.c **** 	divisor_array[0] = 1U;
+ 572              		.loc 1 467 0
+ 573 00c8 4FF00103 		mov	r3, #1
+ 574 00cc 3B63     		str	r3, [r7, #48]
+ 468:../Dave/Generated/src/UART001/UART001.c **** 	dividend_array[0] = 0U;
+ 575              		.loc 1 468 0
+ 576 00ce 4FF00003 		mov	r3, #0
+ 577 00d2 3B62     		str	r3, [r7, #32]
+ 578              	.L37:
+ 469:../Dave/Generated/src/UART001/UART001.c **** 	do {
+ 470:../Dave/Generated/src/UART001/UART001.c **** 			++loop_cnt;
+ 579              		.loc 1 470 0
+ 580 00d4 D7F88430 		ldr	r3, [r7, #132]
+ 581 00d8 03F10103 		add	r3, r3, #1
+ 582 00dc C7F88430 		str	r3, [r7, #132]
+ 471:../Dave/Generated/src/UART001/UART001.c **** 			array_count_2 = array_count_1; /* on first loop is not used */
+ 583              		.loc 1 471 0
+ 584 00e0 D7F88C30 		ldr	r3, [r7, #140]
+ 585 00e4 7B67     		str	r3, [r7, #116]
+ 472:../Dave/Generated/src/UART001/UART001.c **** 			array_count_1 = array_count;
+ 586              		.loc 1 472 0
+ 587 00e6 D7F89030 		ldr	r3, [r7, #144]
+ 588 00ea C7F88C30 		str	r3, [r7, #140]
+ 473:../Dave/Generated/src/UART001/UART001.c **** 			array_count = loop_cnt % 4U;
+ 589              		.loc 1 473 0
+ 590 00ee D7F88430 		ldr	r3, [r7, #132]
+ 591 00f2 03F00303 		and	r3, r3, #3
+ 592 00f6 C7F89030 		str	r3, [r7, #144]
+ 474:../Dave/Generated/src/UART001/UART001.c **** 			dividend[array_count] = divisor[array_count_1];
+ 593              		.loc 1 474 0
+ 594 00fa D7F88C30 		ldr	r3, [r7, #140]
+ 595 00fe 4FEA8303 		lsl	r3, r3, #2
+ 596 0102 07F1B801 		add	r1, r7, #184
+ 597 0106 CB18     		adds	r3, r1, r3
+ 598 0108 53F8582C 		ldr	r2, [r3, #-88]
+ 599 010c D7F89030 		ldr	r3, [r7, #144]
+ 600 0110 4FEA8303 		lsl	r3, r3, #2
+ 601 0114 07F1B801 		add	r1, r7, #184
+ 602 0118 CB18     		adds	r3, r1, r3
+ 603 011a 43F8682C 		str	r2, [r3, #-104]
+ 475:../Dave/Generated/src/UART001/UART001.c **** 			
+ 476:../Dave/Generated/src/UART001/UART001.c **** 			divisor[array_count] = remainder[array_count_1];
+ 604              		.loc 1 476 0
+ 605 011e D7F88C30 		ldr	r3, [r7, #140]
+ 606 0122 4FEA8303 		lsl	r3, r3, #2
+ 607 0126 07F1B802 		add	r2, r7, #184
+ 608 012a D318     		adds	r3, r2, r3
+ 609 012c 53F8782C 		ldr	r2, [r3, #-120]
+ 610 0130 D7F89030 		ldr	r3, [r7, #144]
+ 611 0134 4FEA8303 		lsl	r3, r3, #2
+ 612 0138 07F1B801 		add	r1, r7, #184
+ 613 013c CB18     		adds	r3, r1, r3
+ 614 013e 43F8582C 		str	r2, [r3, #-88]
+ 477:../Dave/Generated/src/UART001/UART001.c **** 			
+ 478:../Dave/Generated/src/UART001/UART001.c **** 			div_array[array_count] = \
+ 479:../Dave/Generated/src/UART001/UART001.c **** 			                       dividend[array_count] / divisor[array_count];
+ 615              		.loc 1 479 0
+ 616 0142 D7F89030 		ldr	r3, [r7, #144]
+ 617 0146 4FEA8303 		lsl	r3, r3, #2
+ 618 014a 07F1B802 		add	r2, r7, #184
+ 619 014e D318     		adds	r3, r2, r3
+ 620 0150 53F8682C 		ldr	r2, [r3, #-104]
+ 621 0154 D7F89030 		ldr	r3, [r7, #144]
+ 622 0158 4FEA8303 		lsl	r3, r3, #2
+ 623 015c 07F1B801 		add	r1, r7, #184
+ 624 0160 CB18     		adds	r3, r1, r3
+ 625 0162 53F8583C 		ldr	r3, [r3, #-88]
+ 626 0166 B2FBF3F2 		udiv	r2, r2, r3
+ 478:../Dave/Generated/src/UART001/UART001.c **** 			div_array[array_count] = \
+ 627              		.loc 1 478 0
+ 628 016a D7F89030 		ldr	r3, [r7, #144]
+ 629 016e 4FEA8303 		lsl	r3, r3, #2
+ 630 0172 07F1B801 		add	r1, r7, #184
+ 631 0176 CB18     		adds	r3, r1, r3
+ 632 0178 43F8A82C 		str	r2, [r3, #-168]
+ 480:../Dave/Generated/src/UART001/UART001.c **** 			
+ 481:../Dave/Generated/src/UART001/UART001.c **** 			remainder[array_count] = \
+ 482:../Dave/Generated/src/UART001/UART001.c **** 			                       dividend[array_count] % divisor[array_count];
+ 633              		.loc 1 482 0
+ 634 017c D7F89030 		ldr	r3, [r7, #144]
+ 635 0180 4FEA8303 		lsl	r3, r3, #2
+ 636 0184 07F1B802 		add	r2, r7, #184
+ 637 0188 D318     		adds	r3, r2, r3
+ 638 018a 53F8682C 		ldr	r2, [r3, #-104]
+ 639 018e D7F89030 		ldr	r3, [r7, #144]
+ 640 0192 4FEA8303 		lsl	r3, r3, #2
+ 641 0196 07F1B801 		add	r1, r7, #184
+ 642 019a CB18     		adds	r3, r1, r3
+ 643 019c 53F8583C 		ldr	r3, [r3, #-88]
+ 644 01a0 B2FBF3F1 		udiv	r1, r2, r3
+ 645 01a4 03FB01F3 		mul	r3, r3, r1
+ 646 01a8 D21A     		subs	r2, r2, r3
+ 481:../Dave/Generated/src/UART001/UART001.c **** 			remainder[array_count] = \
+ 647              		.loc 1 481 0
+ 648 01aa D7F89030 		ldr	r3, [r7, #144]
+ 649 01ae 4FEA8303 		lsl	r3, r3, #2
+ 650 01b2 07F1B801 		add	r1, r7, #184
+ 651 01b6 CB18     		adds	r3, r1, r3
+ 652 01b8 43F8782C 		str	r2, [r3, #-120]
+ 483:../Dave/Generated/src/UART001/UART001.c **** 			
+ 484:../Dave/Generated/src/UART001/UART001.c **** 			/* This executed only on first loop */
+ 485:../Dave/Generated/src/UART001/UART001.c **** 			if (loop_cnt == 1U)
+ 653              		.loc 1 485 0
+ 654 01bc D7F88430 		ldr	r3, [r7, #132]
+ 655 01c0 012B     		cmp	r3, #1
+ 656 01c2 05D1     		bne	.L24
+ 486:../Dave/Generated/src/UART001/UART001.c **** 			{ 
+ 487:../Dave/Generated/src/UART001/UART001.c **** 				divisor_array[1] = div_array[1];
+ 657              		.loc 1 487 0
+ 658 01c4 7B69     		ldr	r3, [r7, #20]
+ 659 01c6 7B63     		str	r3, [r7, #52]
+ 488:../Dave/Generated/src/UART001/UART001.c **** 				dividend_array[1] = 1U;
+ 660              		.loc 1 488 0
+ 661 01c8 4FF00103 		mov	r3, #1
+ 662 01cc 7B62     		str	r3, [r7, #36]
+ 663 01ce 4BE0     		b	.L25
+ 664              	.L24:
+ 489:../Dave/Generated/src/UART001/UART001.c **** 			}
+ 490:../Dave/Generated/src/UART001/UART001.c **** 			else
+ 491:../Dave/Generated/src/UART001/UART001.c **** 			{
+ 492:../Dave/Generated/src/UART001/UART001.c **** 				divisor_array[array_count] = \
+ 493:../Dave/Generated/src/UART001/UART001.c **** 				      (div_array[array_count] * divisor_array[array_count_1]) + \
+ 665              		.loc 1 493 0
+ 666 01d0 D7F89030 		ldr	r3, [r7, #144]
+ 667 01d4 4FEA8303 		lsl	r3, r3, #2
+ 668 01d8 07F1B802 		add	r2, r7, #184
+ 669 01dc D318     		adds	r3, r2, r3
+ 670 01de 53F8A82C 		ldr	r2, [r3, #-168]
+ 671 01e2 D7F88C30 		ldr	r3, [r7, #140]
+ 672 01e6 4FEA8303 		lsl	r3, r3, #2
+ 673 01ea 07F1B801 		add	r1, r7, #184
+ 674 01ee CB18     		adds	r3, r1, r3
+ 675 01f0 53F8883C 		ldr	r3, [r3, #-136]
+ 676 01f4 03FB02F2 		mul	r2, r3, r2
+ 494:../Dave/Generated/src/UART001/UART001.c **** 				       divisor_array[array_count_2];
+ 677              		.loc 1 494 0
+ 678 01f8 7B6F     		ldr	r3, [r7, #116]
+ 679 01fa 4FEA8303 		lsl	r3, r3, #2
+ 680 01fe 07F1B801 		add	r1, r7, #184
+ 681 0202 CB18     		adds	r3, r1, r3
+ 682 0204 53F8883C 		ldr	r3, [r3, #-136]
+ 493:../Dave/Generated/src/UART001/UART001.c **** 				      (div_array[array_count] * divisor_array[array_count_1]) + \
+ 683              		.loc 1 493 0
+ 684 0208 D218     		adds	r2, r2, r3
+ 492:../Dave/Generated/src/UART001/UART001.c **** 				divisor_array[array_count] = \
+ 685              		.loc 1 492 0
+ 686 020a D7F89030 		ldr	r3, [r7, #144]
+ 687 020e 4FEA8303 		lsl	r3, r3, #2
+ 688 0212 07F1B801 		add	r1, r7, #184
+ 689 0216 CB18     		adds	r3, r1, r3
+ 690 0218 43F8882C 		str	r2, [r3, #-136]
+ 495:../Dave/Generated/src/UART001/UART001.c **** 				dividend_array[array_count] = \
+ 496:../Dave/Generated/src/UART001/UART001.c **** 				      (div_array[array_count] * dividend_array[array_count_1]) + \
+ 691              		.loc 1 496 0
+ 692 021c D7F89030 		ldr	r3, [r7, #144]
+ 693 0220 4FEA8303 		lsl	r3, r3, #2
+ 694 0224 07F1B802 		add	r2, r7, #184
+ 695 0228 D318     		adds	r3, r2, r3
+ 696 022a 53F8A82C 		ldr	r2, [r3, #-168]
+ 697 022e D7F88C30 		ldr	r3, [r7, #140]
+ 698 0232 4FEA8303 		lsl	r3, r3, #2
+ 699 0236 07F1B801 		add	r1, r7, #184
+ 700 023a CB18     		adds	r3, r1, r3
+ 701 023c 53F8983C 		ldr	r3, [r3, #-152]
+ 702 0240 03FB02F2 		mul	r2, r3, r2
+ 497:../Dave/Generated/src/UART001/UART001.c **** 				       dividend_array[array_count_2];
+ 703              		.loc 1 497 0
+ 704 0244 7B6F     		ldr	r3, [r7, #116]
+ 705 0246 4FEA8303 		lsl	r3, r3, #2
+ 706 024a 07F1B801 		add	r1, r7, #184
+ 707 024e CB18     		adds	r3, r1, r3
+ 708 0250 53F8983C 		ldr	r3, [r3, #-152]
+ 496:../Dave/Generated/src/UART001/UART001.c **** 				      (div_array[array_count] * dividend_array[array_count_1]) + \
+ 709              		.loc 1 496 0
+ 710 0254 D218     		adds	r2, r2, r3
+ 495:../Dave/Generated/src/UART001/UART001.c **** 				dividend_array[array_count] = \
+ 711              		.loc 1 495 0
+ 712 0256 D7F89030 		ldr	r3, [r7, #144]
+ 713 025a 4FEA8303 		lsl	r3, r3, #2
+ 714 025e 07F1B801 		add	r1, r7, #184
+ 715 0262 CB18     		adds	r3, r1, r3
+ 716 0264 43F8982C 		str	r2, [r3, #-152]
+ 717              	.L25:
+ 498:../Dave/Generated/src/UART001/UART001.c **** 			}
+ 499:../Dave/Generated/src/UART001/UART001.c **** 			if (dividend_array[array_count] > max) 
+ 718              		.loc 1 499 0
+ 719 0268 D7F89030 		ldr	r3, [r7, #144]
+ 720 026c 4FEA8303 		lsl	r3, r3, #2
+ 721 0270 07F1B802 		add	r2, r7, #184
+ 722 0274 D318     		adds	r3, r2, r3
+ 723 0276 53F8982C 		ldr	r2, [r3, #-152]
+ 724 027a D7F8A430 		ldr	r3, [r7, #164]
+ 725 027e 9A42     		cmp	r2, r3
+ 726 0280 40F2DF80 		bls	.L26
+ 500:../Dave/Generated/src/UART001/UART001.c **** 			{
+ 501:../Dave/Generated/src/UART001/UART001.c **** 				divisor1 = divisor_array[array_count_1];
+ 727              		.loc 1 501 0
+ 728 0284 D7F88C30 		ldr	r3, [r7, #140]
+ 729 0288 4FEA8303 		lsl	r3, r3, #2
+ 730 028c 07F1B801 		add	r1, r7, #184
+ 731 0290 CB18     		adds	r3, r1, r3
+ 732 0292 53F8883C 		ldr	r3, [r3, #-136]
+ 733 0296 C7F8A030 		str	r3, [r7, #160]
+ 502:../Dave/Generated/src/UART001/UART001.c **** 				dividend1 = dividend_array[array_count_1];
+ 734              		.loc 1 502 0
+ 735 029a D7F88C30 		ldr	r3, [r7, #140]
+ 736 029e 4FEA8303 		lsl	r3, r3, #2
+ 737 02a2 07F1B802 		add	r2, r7, #184
+ 738 02a6 D318     		adds	r3, r2, r3
+ 739 02a8 53F8983C 		ldr	r3, [r3, #-152]
+ 740 02ac C7F89830 		str	r3, [r7, #152]
+ 503:../Dave/Generated/src/UART001/UART001.c **** 				frac = (max - dividend_array[array_count_2]) / \
+ 741              		.loc 1 503 0
+ 742 02b0 7B6F     		ldr	r3, [r7, #116]
+ 743 02b2 4FEA8303 		lsl	r3, r3, #2
+ 744 02b6 07F1B801 		add	r1, r7, #184
+ 745 02ba CB18     		adds	r3, r1, r3
+ 746 02bc 53F8983C 		ldr	r3, [r3, #-152]
+ 747 02c0 D7F8A420 		ldr	r2, [r7, #164]
+ 748 02c4 D21A     		subs	r2, r2, r3
+ 504:../Dave/Generated/src/UART001/UART001.c **** 				                               dividend_array[array_count_1];
+ 749              		.loc 1 504 0
+ 750 02c6 D7F88C30 		ldr	r3, [r7, #140]
+ 751 02ca 4FEA8303 		lsl	r3, r3, #2
+ 752 02ce 07F1B801 		add	r1, r7, #184
+ 753 02d2 CB18     		adds	r3, r1, r3
+ 754 02d4 53F8983C 		ldr	r3, [r3, #-152]
+ 503:../Dave/Generated/src/UART001/UART001.c **** 				frac = (max - dividend_array[array_count_2]) / \
+ 755              		.loc 1 503 0
+ 756 02d8 B2FBF3F3 		udiv	r3, r2, r3
+ 757 02dc 3B67     		str	r3, [r7, #112]
+ 505:../Dave/Generated/src/UART001/UART001.c **** 				divisor2 = (frac * divisor_array[array_count-1U]) + \
+ 758              		.loc 1 505 0
+ 759 02de D7F89030 		ldr	r3, [r7, #144]
+ 760 02e2 03F1FF33 		add	r3, r3, #-1
+ 761 02e6 4FEA8303 		lsl	r3, r3, #2
+ 762 02ea 07F1B802 		add	r2, r7, #184
+ 763 02ee D318     		adds	r3, r2, r3
+ 764 02f0 53F8883C 		ldr	r3, [r3, #-136]
+ 765 02f4 3A6F     		ldr	r2, [r7, #112]
+ 766 02f6 02FB03F2 		mul	r2, r2, r3
+ 506:../Dave/Generated/src/UART001/UART001.c **** 				                                divisor_array[array_count-2U];
+ 767              		.loc 1 506 0
+ 768 02fa D7F89030 		ldr	r3, [r7, #144]
+ 769 02fe A3F10203 		sub	r3, r3, #2
+ 770 0302 4FEA8303 		lsl	r3, r3, #2
+ 771 0306 07F1B801 		add	r1, r7, #184
+ 772 030a CB18     		adds	r3, r1, r3
+ 773 030c 53F8883C 		ldr	r3, [r3, #-136]
+ 505:../Dave/Generated/src/UART001/UART001.c **** 				divisor2 = (frac * divisor_array[array_count-1U]) + \
+ 774              		.loc 1 505 0
+ 775 0310 D318     		adds	r3, r2, r3
+ 776 0312 C7F89C30 		str	r3, [r7, #156]
+ 507:../Dave/Generated/src/UART001/UART001.c **** 				dividend2 = (frac * dividend_array[array_count-1U]) + \
+ 777              		.loc 1 507 0
+ 778 0316 D7F89030 		ldr	r3, [r7, #144]
+ 779 031a 03F1FF33 		add	r3, r3, #-1
+ 780 031e 4FEA8303 		lsl	r3, r3, #2
+ 781 0322 07F1B802 		add	r2, r7, #184
+ 782 0326 D318     		adds	r3, r2, r3
+ 783 0328 53F8983C 		ldr	r3, [r3, #-152]
+ 784 032c 3A6F     		ldr	r2, [r7, #112]
+ 785 032e 02FB03F2 		mul	r2, r2, r3
+ 508:../Dave/Generated/src/UART001/UART001.c **** 				                               dividend_array[array_count_2];
+ 786              		.loc 1 508 0
+ 787 0332 7B6F     		ldr	r3, [r7, #116]
+ 788 0334 4FEA8303 		lsl	r3, r3, #2
+ 789 0338 07F1B801 		add	r1, r7, #184
+ 790 033c CB18     		adds	r3, r1, r3
+ 791 033e 53F8983C 		ldr	r3, [r3, #-152]
+ 507:../Dave/Generated/src/UART001/UART001.c **** 				dividend2 = (frac * dividend_array[array_count-1U]) + \
+ 792              		.loc 1 507 0
+ 793 0342 D318     		adds	r3, r2, r3
+ 794 0344 C7F89430 		str	r3, [r7, #148]
+ 509:../Dave/Generated/src/UART001/UART001.c **** 				/* Swap if required */
+ 510:../Dave/Generated/src/UART001/UART001.c **** 				if (swapped) {
+ 795              		.loc 1 510 0
+ 796 0348 97F88330 		ldrb	r3, [r7, #131]	@ zero_extendqisi2
+ 797 034c 002B     		cmp	r3, #0
+ 798 034e 13D0     		beq	.L27
+ 511:../Dave/Generated/src/UART001/UART001.c **** 						/* Swap divisor1 and dividend1 */
+ 512:../Dave/Generated/src/UART001/UART001.c **** 						temp = divisor1;
+ 799              		.loc 1 512 0
+ 800 0350 D7F8A030 		ldr	r3, [r7, #160]
+ 801 0354 FB67     		str	r3, [r7, #124]
+ 513:../Dave/Generated/src/UART001/UART001.c **** 						divisor1 = dividend1;
+ 802              		.loc 1 513 0
+ 803 0356 D7F89830 		ldr	r3, [r7, #152]
+ 804 035a C7F8A030 		str	r3, [r7, #160]
+ 514:../Dave/Generated/src/UART001/UART001.c **** 						dividend1 = temp;
+ 805              		.loc 1 514 0
+ 806 035e FB6F     		ldr	r3, [r7, #124]
+ 807 0360 C7F89830 		str	r3, [r7, #152]
+ 515:../Dave/Generated/src/UART001/UART001.c **** 						/* Swap divisor2 and dividend2 */
+ 516:../Dave/Generated/src/UART001/UART001.c **** 						temp = divisor2;
+ 808              		.loc 1 516 0
+ 809 0364 D7F89C30 		ldr	r3, [r7, #156]
+ 810 0368 FB67     		str	r3, [r7, #124]
+ 517:../Dave/Generated/src/UART001/UART001.c **** 						divisor2 = dividend2;
+ 811              		.loc 1 517 0
+ 812 036a D7F89430 		ldr	r3, [r7, #148]
+ 813 036e C7F89C30 		str	r3, [r7, #156]
+ 518:../Dave/Generated/src/UART001/UART001.c **** 						dividend2 = temp;
+ 814              		.loc 1 518 0
+ 815 0372 FB6F     		ldr	r3, [r7, #124]
+ 816 0374 C7F89430 		str	r3, [r7, #148]
+ 817              	.L27:
+ 519:../Dave/Generated/src/UART001/UART001.c **** 					}
+ 520:../Dave/Generated/src/UART001/UART001.c **** 				/* Remove if one of has divisor 0 */
+ 521:../Dave/Generated/src/UART001/UART001.c **** 				if ((dividend1 == 0U) || (divisor1 == 0U)) {
+ 818              		.loc 1 521 0
+ 819 0378 D7F89830 		ldr	r3, [r7, #152]
+ 820 037c 002B     		cmp	r3, #0
+ 821 037e 03D0     		beq	.L28
+ 822              		.loc 1 521 0 is_stmt 0 discriminator 1
+ 823 0380 D7F8A030 		ldr	r3, [r7, #160]
+ 824 0384 002B     		cmp	r3, #0
+ 825 0386 08D1     		bne	.L29
+ 826              	.L28:
+ 522:../Dave/Generated/src/UART001/UART001.c **** 					fdr_step = divisor2;
+ 827              		.loc 1 522 0 is_stmt 1
+ 828 0388 D7F89C30 		ldr	r3, [r7, #156]
+ 829 038c C7F8B430 		str	r3, [r7, #180]
+ 523:../Dave/Generated/src/UART001/UART001.c **** 					brg_pdiv = dividend2;
+ 830              		.loc 1 523 0
+ 831 0390 D7F89430 		ldr	r3, [r7, #148]
+ 832 0394 C7F8B030 		str	r3, [r7, #176]
+ 833 0398 4EE0     		b	.L30
+ 834              	.L29:
+ 524:../Dave/Generated/src/UART001/UART001.c **** 				}else if ((dividend2 == 0U) || (divisor2 == 0U)) {
+ 835              		.loc 1 524 0
+ 836 039a D7F89430 		ldr	r3, [r7, #148]
+ 837 039e 002B     		cmp	r3, #0
+ 838 03a0 03D0     		beq	.L31
+ 839              		.loc 1 524 0 is_stmt 0 discriminator 1
+ 840 03a2 D7F89C30 		ldr	r3, [r7, #156]
+ 841 03a6 002B     		cmp	r3, #0
+ 842 03a8 08D1     		bne	.L32
+ 843              	.L31:
+ 525:../Dave/Generated/src/UART001/UART001.c **** 					fdr_step = divisor1;
+ 844              		.loc 1 525 0 is_stmt 1
+ 845 03aa D7F8A030 		ldr	r3, [r7, #160]
+ 846 03ae C7F8B430 		str	r3, [r7, #180]
+ 526:../Dave/Generated/src/UART001/UART001.c **** 					brg_pdiv = dividend1;
+ 847              		.loc 1 526 0
+ 848 03b2 D7F89830 		ldr	r3, [r7, #152]
+ 849 03b6 C7F8B030 		str	r3, [r7, #176]
+ 850 03ba 3DE0     		b	.L30
+ 851              	.L32:
+ 527:../Dave/Generated/src/UART001/UART001.c **** 				}else { 
+ 528:../Dave/Generated/src/UART001/UART001.c **** 					/*  Find the most nearest to target division */
+ 529:../Dave/Generated/src/UART001/UART001.c **** 					if (UART001_labsRealType(div_factor - \
+ 530:../Dave/Generated/src/UART001/UART001.c **** 					    ((float) divisor1 / (float) dividend1 )) > \
+ 852              		.loc 1 530 0
+ 853 03bc D7ED287A 		flds	s15, [r7, #160]	@ int
+ 854 03c0 B8EE677A 		fuitos	s14, s15
+ 855 03c4 D7ED267A 		flds	s15, [r7, #152]	@ int
+ 856 03c8 F8EE677A 		fuitos	s15, s15
+ 857 03cc C7EE277A 		fdivs	s15, s14, s15
+ 529:../Dave/Generated/src/UART001/UART001.c **** 					if (UART001_labsRealType(div_factor - \
+ 858              		.loc 1 529 0
+ 859 03d0 97ED1E7A 		flds	s14, [r7, #120]
+ 860 03d4 77EE677A 		fsubs	s15, s14, s15
+ 861 03d8 17EE900A 		fmrs	r0, s15
+ 862 03dc FFF7FEFF 		bl	UART001_labsRealType
+ 863 03e0 08EE100A 		fmsr	s16, r0
+ 531:../Dave/Generated/src/UART001/UART001.c **** 					    UART001_labsRealType(div_factor - \
+ 532:../Dave/Generated/src/UART001/UART001.c **** 					    ((float) divisor2 / (float) dividend2 ))) 
+ 864              		.loc 1 532 0
+ 865 03e4 D7ED277A 		flds	s15, [r7, #156]	@ int
+ 866 03e8 B8EE677A 		fuitos	s14, s15
+ 867 03ec D7ED257A 		flds	s15, [r7, #148]	@ int
+ 868 03f0 F8EE677A 		fuitos	s15, s15
+ 869 03f4 C7EE277A 		fdivs	s15, s14, s15
+ 531:../Dave/Generated/src/UART001/UART001.c **** 					    UART001_labsRealType(div_factor - \
+ 870              		.loc 1 531 0
+ 871 03f8 97ED1E7A 		flds	s14, [r7, #120]
+ 872 03fc 77EE677A 		fsubs	s15, s14, s15
+ 873 0400 17EE900A 		fmrs	r0, s15
+ 874 0404 FFF7FEFF 		bl	UART001_labsRealType
+ 875 0408 07EE900A 		fmsr	s15, r0
+ 529:../Dave/Generated/src/UART001/UART001.c **** 					if (UART001_labsRealType(div_factor - \
+ 876              		.loc 1 529 0
+ 877 040c B4EEE78A 		fcmpes	s16, s15
+ 878 0410 F1EE10FA 		fmstat
+ 879 0414 08DD     		ble	.L42
+ 880              	.L40:
+ 533:../Dave/Generated/src/UART001/UART001.c **** 					{
+ 534:../Dave/Generated/src/UART001/UART001.c **** 						fdr_step = divisor2;
+ 881              		.loc 1 534 0
+ 882 0416 D7F89C30 		ldr	r3, [r7, #156]
+ 883 041a C7F8B430 		str	r3, [r7, #180]
+ 535:../Dave/Generated/src/UART001/UART001.c **** 						brg_pdiv = dividend2;
+ 884              		.loc 1 535 0
+ 885 041e D7F89430 		ldr	r3, [r7, #148]
+ 886 0422 C7F8B030 		str	r3, [r7, #176]
+ 887 0426 07E0     		b	.L30
+ 888              	.L42:
+ 536:../Dave/Generated/src/UART001/UART001.c **** 					}else {
+ 537:../Dave/Generated/src/UART001/UART001.c **** 						fdr_step = divisor1;
+ 889              		.loc 1 537 0
+ 890 0428 D7F8A030 		ldr	r3, [r7, #160]
+ 891 042c C7F8B430 		str	r3, [r7, #180]
+ 538:../Dave/Generated/src/UART001/UART001.c **** 						brg_pdiv = dividend1;
+ 892              		.loc 1 538 0
+ 893 0430 D7F89830 		ldr	r3, [r7, #152]
+ 894 0434 C7F8B030 		str	r3, [r7, #176]
+ 895              	.L30:
+ 539:../Dave/Generated/src/UART001/UART001.c **** 					}
+ 540:../Dave/Generated/src/UART001/UART001.c **** 				}
+ 541:../Dave/Generated/src/UART001/UART001.c **** 				do_while_break = 0x05U;
+ 896              		.loc 1 541 0
+ 897 0438 4FF00503 		mov	r3, #5
+ 898 043c C7F88830 		str	r3, [r7, #136]
+ 899 0440 32E0     		b	.L35
+ 900              	.L26:
+ 542:../Dave/Generated/src/UART001/UART001.c **** 			}
+ 543:../Dave/Generated/src/UART001/UART001.c **** 			else if (remainder[array_count]== 0U) 
+ 901              		.loc 1 543 0
+ 902 0442 D7F89030 		ldr	r3, [r7, #144]
+ 903 0446 4FEA8303 		lsl	r3, r3, #2
+ 904 044a 07F1B802 		add	r2, r7, #184
+ 905 044e D318     		adds	r3, r2, r3
+ 906 0450 53F8783C 		ldr	r3, [r3, #-120]
+ 907 0454 002B     		cmp	r3, #0
+ 908 0456 27D1     		bne	.L35
+ 544:../Dave/Generated/src/UART001/UART001.c **** 			{
+ 545:../Dave/Generated/src/UART001/UART001.c **** 				fdr_step = divisor_array[array_count];
+ 909              		.loc 1 545 0
+ 910 0458 D7F89030 		ldr	r3, [r7, #144]
+ 911 045c 4FEA8303 		lsl	r3, r3, #2
+ 912 0460 07F1B801 		add	r1, r7, #184
+ 913 0464 CB18     		adds	r3, r1, r3
+ 914 0466 53F8883C 		ldr	r3, [r3, #-136]
+ 915 046a C7F8B430 		str	r3, [r7, #180]
+ 546:../Dave/Generated/src/UART001/UART001.c **** 				brg_pdiv = dividend_array[array_count];
+ 916              		.loc 1 546 0
+ 917 046e D7F89030 		ldr	r3, [r7, #144]
+ 918 0472 4FEA8303 		lsl	r3, r3, #2
+ 919 0476 07F1B802 		add	r2, r7, #184
+ 920 047a D318     		adds	r3, r2, r3
+ 921 047c 53F8983C 		ldr	r3, [r3, #-152]
+ 922 0480 C7F8B030 		str	r3, [r7, #176]
+ 547:../Dave/Generated/src/UART001/UART001.c **** 				if (swapped)
+ 923              		.loc 1 547 0
+ 924 0484 97F88330 		ldrb	r3, [r7, #131]	@ zero_extendqisi2
+ 925 0488 002B     		cmp	r3, #0
+ 926 048a 09D0     		beq	.L36
+ 548:../Dave/Generated/src/UART001/UART001.c **** 				{
+ 549:../Dave/Generated/src/UART001/UART001.c **** 					/* Swap fdr_step and brg_pdiv */
+ 550:../Dave/Generated/src/UART001/UART001.c **** 					temp = fdr_step;
+ 927              		.loc 1 550 0
+ 928 048c D7F8B430 		ldr	r3, [r7, #180]
+ 929 0490 FB67     		str	r3, [r7, #124]
+ 551:../Dave/Generated/src/UART001/UART001.c **** 					fdr_step = brg_pdiv;
+ 930              		.loc 1 551 0
+ 931 0492 D7F8B030 		ldr	r3, [r7, #176]
+ 932 0496 C7F8B430 		str	r3, [r7, #180]
+ 552:../Dave/Generated/src/UART001/UART001.c **** 					brg_pdiv = temp;
+ 933              		.loc 1 552 0
+ 934 049a FB6F     		ldr	r3, [r7, #124]
+ 935 049c C7F8B030 		str	r3, [r7, #176]
+ 936              	.L36:
+ 553:../Dave/Generated/src/UART001/UART001.c **** 				}
+ 554:../Dave/Generated/src/UART001/UART001.c **** 				do_while_break = 0x05U;
+ 937              		.loc 1 554 0
+ 938 04a0 4FF00503 		mov	r3, #5
+ 939 04a4 C7F88830 		str	r3, [r7, #136]
+ 940              	.L35:
+ 555:../Dave/Generated/src/UART001/UART001.c **** 			}
+ 556:../Dave/Generated/src/UART001/UART001.c **** 			else {
+ 557:../Dave/Generated/src/UART001/UART001.c **** 			  /* Do Nothing */
+ 558:../Dave/Generated/src/UART001/UART001.c **** 			}
+ 559:../Dave/Generated/src/UART001/UART001.c **** 		} while (do_while_break != 0x05U);
+ 941              		.loc 1 559 0
+ 942 04a8 D7F88830 		ldr	r3, [r7, #136]
+ 943 04ac 052B     		cmp	r3, #5
+ 944 04ae 7FF411AE 		bne	.L37
+ 560:../Dave/Generated/src/UART001/UART001.c **** 
+ 561:../Dave/Generated/src/UART001/UART001.c **** 	if(fdr_step >= UART001_MAX_VALUE)
+ 945              		.loc 1 561 0
+ 946 04b2 D7F8B420 		ldr	r2, [r7, #180]
+ 947 04b6 40F2FF33 		movw	r3, #1023
+ 948 04ba 9A42     		cmp	r2, r3
+ 949 04bc 03D9     		bls	.L38
+ 562:../Dave/Generated/src/UART001/UART001.c **** 	{
+ 563:../Dave/Generated/src/UART001/UART001.c **** 	   fdr_step = 1023U;
+ 950              		.loc 1 563 0
+ 951 04be 40F2FF33 		movw	r3, #1023
+ 952 04c2 C7F8B430 		str	r3, [r7, #180]
+ 953              	.L38:
+ 564:../Dave/Generated/src/UART001/UART001.c **** 	}
+ 565:../Dave/Generated/src/UART001/UART001.c **** 
+ 566:../Dave/Generated/src/UART001/UART001.c **** 	*Step = fdr_step;
+ 954              		.loc 1 566 0
+ 955 04c6 7B68     		ldr	r3, [r7, #4]
+ 956 04c8 D7F8B420 		ldr	r2, [r7, #180]
+ 957 04cc 1A60     		str	r2, [r3, #0]
+ 567:../Dave/Generated/src/UART001/UART001.c **** 
+ 568:../Dave/Generated/src/UART001/UART001.c **** 	*Pdiv = brg_pdiv - 1U;
+ 958              		.loc 1 568 0
+ 959 04ce D7F8B030 		ldr	r3, [r7, #176]
+ 960 04d2 03F1FF32 		add	r2, r3, #-1
+ 961 04d6 BB68     		ldr	r3, [r7, #8]
+ 962 04d8 1A60     		str	r2, [r3, #0]
+ 569:../Dave/Generated/src/UART001/UART001.c **** }
+ 963              		.loc 1 569 0
+ 964 04da 07F1B807 		add	r7, r7, #184
+ 965 04de BD46     		mov	sp, r7
+ 966 04e0 BDEC028B 		fldmfdd	sp!, {d8}
+ 967 04e4 80BD     		pop	{r7, pc}
+ 968              		.cfi_endproc
+ 969              	.LFE115:
+ 971 04e6 00BF     		.section	.text.UART001_Init,"ax",%progbits
+ 972              		.align	2
+ 973              		.global	UART001_Init
+ 974              		.thumb
+ 975              		.thumb_func
+ 977              	UART001_Init:
+ 978              	.LFB116:
+ 570:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 571:../Dave/Generated/src/UART001/UART001.c **** **                      Public Function Definitions                           **
+ 572:../Dave/Generated/src/UART001/UART001.c **** *******************************************************************************/
+ 573:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 574:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function initialises the App, based on User provided
+ 575:../Dave/Generated/src/UART001/UART001.c ****  * configuration. 
+ 576:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 577:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  None
+ 578:../Dave/Generated/src/UART001/UART001.c ****  *
+ 579:../Dave/Generated/src/UART001/UART001.c ****  * @return  None <BR>
+ 580:../Dave/Generated/src/UART001/UART001.c ****  *
+ 581:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: No </b><BR>
+ 582:../Dave/Generated/src/UART001/UART001.c ****  *
+ 583:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+ 584:../Dave/Generated/src/UART001/UART001.c **** void UART001_Init(void)
+ 585:../Dave/Generated/src/UART001/UART001.c **** {
+ 979              		.loc 1 585 0
+ 980              		.cfi_startproc
+ 981              		@ args = 0, pretend = 0, frame = 8
+ 982              		@ frame_needed = 1, uses_anonymous_args = 0
+ 983 0000 80B5     		push	{r7, lr}
+ 984              	.LCFI13:
+ 985              		.cfi_def_cfa_offset 8
+ 986              		.cfi_offset 7, -8
+ 987              		.cfi_offset 14, -4
+ 988 0002 82B0     		sub	sp, sp, #8
+ 989              	.LCFI14:
+ 990              		.cfi_def_cfa_offset 16
+ 991 0004 00AF     		add	r7, sp, #0
+ 992              	.LCFI15:
+ 993              		.cfi_def_cfa_register 7
+ 586:../Dave/Generated/src/UART001/UART001.c **** 	/* <<<DD_UART001_API_1>>> */
+ 587:../Dave/Generated/src/UART001/UART001.c **** 	 uint32_t LoopIndex;
+ 588:../Dave/Generated/src/UART001/UART001.c **** 		
+ 589:../Dave/Generated/src/UART001/UART001.c ****     #if (__TARGET_DEVICE__ != XMC45)
+ 590:../Dave/Generated/src/UART001/UART001.c **** 	#if ((__TARGET_DEVICE__ == XMC13) || \
+ 591:../Dave/Generated/src/UART001/UART001.c **** 	     (__TARGET_DEVICE__ == XMC12) || \
+ 592:../Dave/Generated/src/UART001/UART001.c **** 	     (__TARGET_DEVICE__ == XMC11))
+ 593:../Dave/Generated/src/UART001/UART001.c **** 	  /* Disable the USIC0/USIC1 clock gating for XMC1000 devices */	     
+ 594:../Dave/Generated/src/UART001/UART001.c **** 	  SCU_GENERAL->PASSWD = 0x000000C0UL;
+ 595:../Dave/Generated/src/UART001/UART001.c **** 	  WR_REG(SCU_CLK->CLKCR, SCU_CLK_CLKCR_CNTADJ_Msk, \
+ 596:../Dave/Generated/src/UART001/UART001.c **** 	                                SCU_CLK_CLKCR_CNTADJ_Pos,CLK002_DELAYCNT);
+ 597:../Dave/Generated/src/UART001/UART001.c **** 
+ 598:../Dave/Generated/src/UART001/UART001.c **** 	  #if defined(UART001_PER0_USIC0_ENABLED)
+ 599:../Dave/Generated/src/UART001/UART001.c **** 	  SET_BIT(SCU_CLK->CGATCLR0, SCU_CLK_CGATCLR0_USIC0_Pos);
+ 600:../Dave/Generated/src/UART001/UART001.c ****       #endif
+ 601:../Dave/Generated/src/UART001/UART001.c ****       #if defined(UART001_PER1_USIC1_ENABLED)
+ 602:../Dave/Generated/src/UART001/UART001.c **** 	  SET_BIT(SCU_CLK->CGATCLR1, SCU_CLK_CGATCLR1_USIC1_Pos);
+ 603:../Dave/Generated/src/UART001/UART001.c **** 	  #endif
+ 604:../Dave/Generated/src/UART001/UART001.c **** 	  while ((SCU_CLK->CLKCR)&(SCU_CLK_CLKCR_VDDC2LOW_Msk))
+ 605:../Dave/Generated/src/UART001/UART001.c **** 	  {
+ 606:../Dave/Generated/src/UART001/UART001.c **** 	  	;
+ 607:../Dave/Generated/src/UART001/UART001.c **** 	  }
+ 608:../Dave/Generated/src/UART001/UART001.c **** 	  SCU_GENERAL->PASSWD = 0x000000C3UL;
+ 609:../Dave/Generated/src/UART001/UART001.c ****    #else
+ 610:../Dave/Generated/src/UART001/UART001.c **** 	/* Disable the USIC0/USIC1 clock gating for XMC4400 and XMC4200 devices*/
+ 611:../Dave/Generated/src/UART001/UART001.c ****    #if defined(UART001_PER0_USIC0_ENABLED)
+ 612:../Dave/Generated/src/UART001/UART001.c **** 	  SET_BIT(SCU_CLK->CGATCLR0, SCU_CLK_CGATCLR0_USIC0_Pos);
+ 613:../Dave/Generated/src/UART001/UART001.c ****    #endif
+ 614:../Dave/Generated/src/UART001/UART001.c ****    #if defined(UART001_PER1_USIC1_ENABLED)  
+ 615:../Dave/Generated/src/UART001/UART001.c **** 	  SET_BIT(SCU_CLK->CGATCLR1, SCU_CLK_CGATCLR1_USIC1_Pos);
+ 616:../Dave/Generated/src/UART001/UART001.c ****    #endif
+ 617:../Dave/Generated/src/UART001/UART001.c ****    #endif
+ 618:../Dave/Generated/src/UART001/UART001.c ****    #endif
+ 619:../Dave/Generated/src/UART001/UART001.c **** 
+ 620:../Dave/Generated/src/UART001/UART001.c ****    #if ((__TARGET_DEVICE__ == XMC45) || \
+ 621:../Dave/Generated/src/UART001/UART001.c **** 	    (__TARGET_DEVICE__ == XMC44) || \
+ 622:../Dave/Generated/src/UART001/UART001.c **** 	    (__TARGET_DEVICE__ == XMC42))
+ 623:../Dave/Generated/src/UART001/UART001.c **** 	  /* Reset the Peripheral*/
+ 624:../Dave/Generated/src/UART001/UART001.c ****    #if defined(UART001_PER0_USIC0_ENABLED)
+ 625:../Dave/Generated/src/UART001/UART001.c **** 	  RESET001_DeassertReset(PER0_USIC0);
+ 994              		.loc 1 625 0
+ 995 0006 4FF40060 		mov	r0, #2048
+ 996 000a FFF7FEFF 		bl	RESET001_DeassertReset
+ 626:../Dave/Generated/src/UART001/UART001.c ****    #endif
+ 627:../Dave/Generated/src/UART001/UART001.c ****    #if defined(UART001_PER1_USIC1_ENABLED)
+ 628:../Dave/Generated/src/UART001/UART001.c **** 	  RESET001_DeassertReset(PER1_USIC1); 
+ 997              		.loc 1 628 0
+ 998 000e 4FF08000 		mov	r0, #128
+ 999 0012 C1F20000 		movt	r0, 4096
+ 1000 0016 FFF7FEFF 		bl	RESET001_DeassertReset
+ 629:../Dave/Generated/src/UART001/UART001.c ****    #endif
+ 630:../Dave/Generated/src/UART001/UART001.c ****    #if defined(UART001_PER1_USIC2_ENABLED)
+ 631:../Dave/Generated/src/UART001/UART001.c **** 	  RESET001_DeassertReset(PER1_USIC2); 
+ 632:../Dave/Generated/src/UART001/UART001.c ****    #endif 
+ 633:../Dave/Generated/src/UART001/UART001.c ****    #endif  
+ 634:../Dave/Generated/src/UART001/UART001.c **** 	  
+ 635:../Dave/Generated/src/UART001/UART001.c ****    for (LoopIndex = (uint32_t)0; LoopIndex < (uint32_t)UART001_NUM_HANDLES; \
+ 1001              		.loc 1 635 0
+ 1002 001a 4FF00003 		mov	r3, #0
+ 1003 001e 7B60     		str	r3, [r7, #4]
+ 1004 0020 21E0     		b	.L44
+ 1005              	.L46:
+ 636:../Dave/Generated/src/UART001/UART001.c **** 	                           LoopIndex++)
+ 637:../Dave/Generated/src/UART001/UART001.c ****    {
+ 638:../Dave/Generated/src/UART001/UART001.c **** 	  if (UART001_HandleArray[LoopIndex]->Mode == UART_HALFDUPLEX)
+ 1006              		.loc 1 638 0
+ 1007 0022 40F20003 		movw	r3, #:lower16:UART001_HandleArray
+ 1008 0026 C0F20003 		movt	r3, #:upper16:UART001_HandleArray
+ 1009 002a 7A68     		ldr	r2, [r7, #4]
+ 1010 002c 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 1011 0030 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 1012 0032 012B     		cmp	r3, #1
+ 1013 0034 09D1     		bne	.L45
+ 639:../Dave/Generated/src/UART001/UART001.c **** 	  {
+ 640:../Dave/Generated/src/UART001/UART001.c **** 	   /*Configure TX Pin in Open-drain mode to allow the Wired-AND connection*/
+ 641:../Dave/Generated/src/UART001/UART001.c **** 		UART001_lConfigTXPin(UART001_HandleArray[LoopIndex]);
+ 1014              		.loc 1 641 0
+ 1015 0036 40F20003 		movw	r3, #:lower16:UART001_HandleArray
+ 1016 003a C0F20003 		movt	r3, #:upper16:UART001_HandleArray
+ 1017 003e 7A68     		ldr	r2, [r7, #4]
+ 1018 0040 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 1019 0044 1846     		mov	r0, r3
+ 1020 0046 FFF7FEFF 		bl	UART001_lConfigTXPin
+ 1021              	.L45:
+ 642:../Dave/Generated/src/UART001/UART001.c **** 	  }
+ 643:../Dave/Generated/src/UART001/UART001.c **** 	  
+ 644:../Dave/Generated/src/UART001/UART001.c **** 	  UART001_lInit(UART001_HandleArray[LoopIndex]);
+ 1022              		.loc 1 644 0
+ 1023 004a 40F20003 		movw	r3, #:lower16:UART001_HandleArray
+ 1024 004e C0F20003 		movt	r3, #:upper16:UART001_HandleArray
+ 1025 0052 7A68     		ldr	r2, [r7, #4]
+ 1026 0054 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 1027 0058 1846     		mov	r0, r3
+ 1028 005a FFF7FEFF 		bl	UART001_lInit
+ 636:../Dave/Generated/src/UART001/UART001.c **** 	                           LoopIndex++)
+ 1029              		.loc 1 636 0
+ 1030 005e 7B68     		ldr	r3, [r7, #4]
+ 1031 0060 03F10103 		add	r3, r3, #1
+ 1032 0064 7B60     		str	r3, [r7, #4]
+ 1033              	.L44:
+ 635:../Dave/Generated/src/UART001/UART001.c ****    for (LoopIndex = (uint32_t)0; LoopIndex < (uint32_t)UART001_NUM_HANDLES; \
+ 1034              		.loc 1 635 0 discriminator 1
+ 1035 0066 7B68     		ldr	r3, [r7, #4]
+ 1036 0068 022B     		cmp	r3, #2
+ 1037 006a DAD9     		bls	.L46
+ 645:../Dave/Generated/src/UART001/UART001.c ****    }
+ 646:../Dave/Generated/src/UART001/UART001.c ****    
+ 647:../Dave/Generated/src/UART001/UART001.c **** }
+ 1038              		.loc 1 647 0
+ 1039 006c 07F10807 		add	r7, r7, #8
+ 1040 0070 BD46     		mov	sp, r7
+ 1041 0072 80BD     		pop	{r7, pc}
+ 1042              		.cfi_endproc
+ 1043              	.LFE116:
+ 1045              		.section	.text.UART001_DeInit,"ax",%progbits
+ 1046              		.align	2
+ 1047              		.global	UART001_DeInit
+ 1048              		.thumb
+ 1049              		.thumb_func
+ 1051              	UART001_DeInit:
+ 1052              	.LFB117:
+ 648:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 649:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function de-initialises the USIC channel configurations.
+ 650:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 651:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Handle of type UART001_HandleType
+ 652:../Dave/Generated/src/UART001/UART001.c ****  *
+ 653:../Dave/Generated/src/UART001/UART001.c ****  * @return  None <BR>
+ 654:../Dave/Generated/src/UART001/UART001.c ****  *
+ 655:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: No </b><BR>
+ 656:../Dave/Generated/src/UART001/UART001.c ****  *
+ 657:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+ 658:../Dave/Generated/src/UART001/UART001.c ****  void  UART001_DeInit (const UART001_HandleType* Handle)
+ 659:../Dave/Generated/src/UART001/UART001.c **** {
+ 1053              		.loc 1 659 0
+ 1054              		.cfi_startproc
+ 1055              		@ args = 0, pretend = 0, frame = 8
+ 1056              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1057              		@ link register save eliminated.
+ 1058 0000 80B4     		push	{r7}
+ 1059              	.LCFI16:
+ 1060              		.cfi_def_cfa_offset 4
+ 1061              		.cfi_offset 7, -4
+ 1062 0002 83B0     		sub	sp, sp, #12
+ 1063              	.LCFI17:
+ 1064              		.cfi_def_cfa_offset 16
+ 1065 0004 00AF     		add	r7, sp, #0
+ 1066              	.LCFI18:
+ 1067              		.cfi_def_cfa_register 7
+ 1068 0006 7860     		str	r0, [r7, #4]
+ 660:../Dave/Generated/src/UART001/UART001.c ****   /* <<<DD_UART001_API_2>>> */
+ 661:../Dave/Generated/src/UART001/UART001.c ****   /* Place holder function */      
+ 662:../Dave/Generated/src/UART001/UART001.c **** }
+ 1069              		.loc 1 662 0
+ 1070 0008 07F10C07 		add	r7, r7, #12
+ 1071 000c BD46     		mov	sp, r7
+ 1072 000e 80BC     		pop	{r7}
+ 1073 0010 7047     		bx	lr
+ 1074              		.cfi_endproc
+ 1075              	.LFE117:
+ 1077 0012 00BF     		.section	.text.UART001_Configure,"ax",%progbits
+ 1078              		.align	2
+ 1079              		.global	UART001_Configure
+ 1080              		.thumb
+ 1081              		.thumb_func
+ 1083              	UART001_Configure:
+ 1084              	.LFB118:
+ 663:../Dave/Generated/src/UART001/UART001.c ****  /******************************************************************************
+ 664:../Dave/Generated/src/UART001/UART001.c ****   * @brief Function which allows changing of baud rate, parity & stop bit  
+ 665:../Dave/Generated/src/UART001/UART001.c ****   * configuration at run time.
+ 666:../Dave/Generated/src/UART001/UART001.c ****   *
+ 667:../Dave/Generated/src/UART001/UART001.c ****   *
+ 668:../Dave/Generated/src/UART001/UART001.c ****   * @param[in]  Handle USIC device handle
+ 669:../Dave/Generated/src/UART001/UART001.c ****   * @param[in]  BaudRate Desired Baud Rate in Bauds
+ 670:../Dave/Generated/src/UART001/UART001.c ****   * @param[in]  Parity Desired Parity
+ 671:../Dave/Generated/src/UART001/UART001.c ****   * @param[in]  Stopbit Desired no of Stop bit(s)
+ 672:../Dave/Generated/src/UART001/UART001.c ****   *
+ 673:../Dave/Generated/src/UART001/UART001.c ****   * @return     status <BR>
+ 674:../Dave/Generated/src/UART001/UART001.c ****   *             DAVEApp_SUCCESS	: for success.<BR>
+ 675:../Dave/Generated/src/UART001/UART001.c ****   *             UART001_ERROR  	: for failure case.<BR>
+ 676:../Dave/Generated/src/UART001/UART001.c ****   *             UART001_BUSY 	: UART channel is busy.<BR>
+ 677:../Dave/Generated/src/UART001/UART001.c ****   *
+ 678:../Dave/Generated/src/UART001/UART001.c ****   * <b>Reentrant: NO </b><BR>
+ 679:../Dave/Generated/src/UART001/UART001.c ****   *
+ 680:../Dave/Generated/src/UART001/UART001.c ****   *****************************************************************************/
+ 681:../Dave/Generated/src/UART001/UART001.c **** status_t  UART001_Configure
+ 682:../Dave/Generated/src/UART001/UART001.c **** ( 
+ 683:../Dave/Generated/src/UART001/UART001.c ****   const UART001_HandleType* Handle,
+ 684:../Dave/Generated/src/UART001/UART001.c ****   uint32_t BaudRate,
+ 685:../Dave/Generated/src/UART001/UART001.c ****   UART_ParityType Parity,
+ 686:../Dave/Generated/src/UART001/UART001.c ****   UART_StopBitType Stopbit
+ 687:../Dave/Generated/src/UART001/UART001.c **** )
+ 688:../Dave/Generated/src/UART001/UART001.c **** {
+ 1085              		.loc 1 688 0
+ 1086              		.cfi_startproc
+ 1087              		@ args = 0, pretend = 0, frame = 40
+ 1088              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1089 0000 80B5     		push	{r7, lr}
+ 1090              	.LCFI19:
+ 1091              		.cfi_def_cfa_offset 8
+ 1092              		.cfi_offset 7, -8
+ 1093              		.cfi_offset 14, -4
+ 1094 0002 8AB0     		sub	sp, sp, #40
+ 1095              	.LCFI20:
+ 1096              		.cfi_def_cfa_offset 48
+ 1097 0004 00AF     		add	r7, sp, #0
+ 1098              	.LCFI21:
+ 1099              		.cfi_def_cfa_register 7
+ 1100 0006 F860     		str	r0, [r7, #12]
+ 1101 0008 B960     		str	r1, [r7, #8]
+ 1102 000a FA71     		strb	r2, [r7, #7]
+ 1103 000c BB71     		strb	r3, [r7, #6]
+ 689:../Dave/Generated/src/UART001/UART001.c ****    uint32_t Brg_Pdiv = 0x00U;
+ 1104              		.loc 1 689 0
+ 1105 000e 4FF00003 		mov	r3, #0
+ 1106 0012 7B61     		str	r3, [r7, #20]
+ 690:../Dave/Generated/src/UART001/UART001.c ****    uint32_t Fdr_Step = 0x00U;
+ 1107              		.loc 1 690 0
+ 1108 0014 4FF00003 		mov	r3, #0
+ 1109 0018 3B61     		str	r3, [r7, #16]
+ 691:../Dave/Generated/src/UART001/UART001.c ****    uint32_t TXIDLE_status;
+ 692:../Dave/Generated/src/UART001/UART001.c ****    uint32_t RXIDLE_status;
+ 693:../Dave/Generated/src/UART001/UART001.c ****    USIC_CH_TypeDef* UartRegs = Handle->UartRegs;
+ 1110              		.loc 1 693 0
+ 1111 001a FB68     		ldr	r3, [r7, #12]
+ 1112 001c 1B68     		ldr	r3, [r3, #0]
+ 1113 001e 3B62     		str	r3, [r7, #32]
+ 694:../Dave/Generated/src/UART001/UART001.c ****    status_t Status = (status_t)UART001_ERROR;
+ 1114              		.loc 1 694 0
+ 1115 0020 4FF00503 		mov	r3, #5
+ 1116 0024 7B62     		str	r3, [r7, #36]
+ 695:../Dave/Generated/src/UART001/UART001.c ****    
+ 696:../Dave/Generated/src/UART001/UART001.c ****    /* <<<DD_UART001_API_3>>>*/
+ 697:../Dave/Generated/src/UART001/UART001.c **** 
+ 698:../Dave/Generated/src/UART001/UART001.c ****    TXIDLE_status = (uint32_t)\
+ 699:../Dave/Generated/src/UART001/UART001.c ****                  RD_REG(UartRegs->PSR_ASCMode,USIC_CH_PSR_ASCMode_TXIDLE_Msk, \
+ 1117              		.loc 1 699 0
+ 1118 0026 3B6A     		ldr	r3, [r7, #32]
+ 1119 0028 9B6C     		ldr	r3, [r3, #72]
+ 698:../Dave/Generated/src/UART001/UART001.c ****    TXIDLE_status = (uint32_t)\
+ 1120              		.loc 1 698 0
+ 1121 002a 03F00103 		and	r3, r3, #1
+ 1122 002e FB61     		str	r3, [r7, #28]
+ 700:../Dave/Generated/src/UART001/UART001.c **** 	                       USIC_CH_PSR_ASCMode_TXIDLE_Pos);
+ 701:../Dave/Generated/src/UART001/UART001.c **** 
+ 702:../Dave/Generated/src/UART001/UART001.c ****    RXIDLE_status = (uint32_t)\
+ 703:../Dave/Generated/src/UART001/UART001.c ****                  RD_REG(UartRegs->PSR_ASCMode,USIC_CH_PSR_ASCMode_RXIDLE_Msk, \
+ 1123              		.loc 1 703 0
+ 1124 0030 3B6A     		ldr	r3, [r7, #32]
+ 1125 0032 9B6C     		ldr	r3, [r3, #72]
+ 1126 0034 03F00203 		and	r3, r3, #2
+ 702:../Dave/Generated/src/UART001/UART001.c ****    RXIDLE_status = (uint32_t)\
+ 1127              		.loc 1 702 0
+ 1128 0038 4FEA5303 		lsr	r3, r3, #1
+ 1129 003c BB61     		str	r3, [r7, #24]
+ 704:../Dave/Generated/src/UART001/UART001.c **** 	                       USIC_CH_PSR_ASCMode_RXIDLE_Pos);
+ 705:../Dave/Generated/src/UART001/UART001.c ****    if(( TXIDLE_status & RXIDLE_status) == 0x01U)
+ 1130              		.loc 1 705 0
+ 1131 003e FA69     		ldr	r2, [r7, #28]
+ 1132 0040 BB69     		ldr	r3, [r7, #24]
+ 1133 0042 1340     		ands	r3, r3, r2
+ 1134 0044 012B     		cmp	r3, #1
+ 1135 0046 5BD1     		bne	.L49
+ 706:../Dave/Generated/src/UART001/UART001.c ****     {
+ 707:../Dave/Generated/src/UART001/UART001.c ****       /* Disable UART mode before configuring all USIC registers to avoid 
+ 708:../Dave/Generated/src/UART001/UART001.c ****        * unintended edges */ 
+ 709:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->CCR &= ~( ((uint32_t)(UART_MODE  & USIC_CH_CCR_MODE_Msk)));  
+ 1136              		.loc 1 709 0
+ 1137 0048 3B6A     		ldr	r3, [r7, #32]
+ 1138 004a 1B6C     		ldr	r3, [r3, #64]
+ 1139 004c 23F00202 		bic	r2, r3, #2
+ 1140 0050 3B6A     		ldr	r3, [r7, #32]
+ 1141 0052 1A64     		str	r2, [r3, #64]
+ 710:../Dave/Generated/src/UART001/UART001.c **** 	  
+ 711:../Dave/Generated/src/UART001/UART001.c ****       /* Configuration of USIC Channel Fractional Divider */
+ 712:../Dave/Generated/src/UART001/UART001.c ****       UART001_lConfigureBaudRate(BaudRate,&Brg_Pdiv,&Fdr_Step);
+ 1142              		.loc 1 712 0
+ 1143 0054 07F11402 		add	r2, r7, #20
+ 1144 0058 07F11003 		add	r3, r7, #16
+ 1145 005c B868     		ldr	r0, [r7, #8]
+ 1146 005e 1146     		mov	r1, r2
+ 1147 0060 1A46     		mov	r2, r3
+ 1148 0062 FFF7FEFF 		bl	UART001_lConfigureBaudRate
+ 713:../Dave/Generated/src/UART001/UART001.c **** 
+ 714:../Dave/Generated/src/UART001/UART001.c ****       /* Step value: 0x3FF */
+ 715:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->FDR &= ~(USIC_CH_FDR_STEP_Msk);
+ 1149              		.loc 1 715 0
+ 1150 0066 3B6A     		ldr	r3, [r7, #32]
+ 1151 0068 1B69     		ldr	r3, [r3, #16]
+ 1152 006a 23F47F73 		bic	r3, r3, #1020
+ 1153 006e 23F00303 		bic	r3, r3, #3
+ 1154 0072 3A6A     		ldr	r2, [r7, #32]
+ 1155 0074 1361     		str	r3, [r2, #16]
+ 716:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->FDR |= ( Fdr_Step & USIC_CH_FDR_STEP_Msk);
+ 1156              		.loc 1 716 0
+ 1157 0076 3B6A     		ldr	r3, [r7, #32]
+ 1158 0078 1A69     		ldr	r2, [r3, #16]
+ 1159 007a 3B69     		ldr	r3, [r7, #16]
+ 1160 007c 4FEA8353 		lsl	r3, r3, #22
+ 1161 0080 4FEA9353 		lsr	r3, r3, #22
+ 1162 0084 1A43     		orrs	r2, r2, r3
+ 1163 0086 3B6A     		ldr	r3, [r7, #32]
+ 1164 0088 1A61     		str	r2, [r3, #16]
+ 717:../Dave/Generated/src/UART001/UART001.c ****               
+ 718:../Dave/Generated/src/UART001/UART001.c ****       /* The PreDivider for CTQ, PCTQ = 0  */
+ 719:../Dave/Generated/src/UART001/UART001.c ****       /* The Denominator for CTQ, DCTQ = 16 */
+ 720:../Dave/Generated/src/UART001/UART001.c **** 
+ 721:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->BRG &= ~(USIC_CH_BRG_PDIV_Msk);
+ 1165              		.loc 1 721 0
+ 1166 008a 3B6A     		ldr	r3, [r7, #32]
+ 1167 008c 5B69     		ldr	r3, [r3, #20]
+ 1168 008e 23F07F73 		bic	r3, r3, #66846720
+ 1169 0092 23F44033 		bic	r3, r3, #196608
+ 1170 0096 3A6A     		ldr	r2, [r7, #32]
+ 1171 0098 5361     		str	r3, [r2, #20]
+ 722:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->BRG |= ((((uint32_t)Brg_Pdiv  << USIC_CH_BRG_PDIV_Pos) \
+ 1172              		.loc 1 722 0
+ 1173 009a 3B6A     		ldr	r3, [r7, #32]
+ 1174 009c 5A69     		ldr	r2, [r3, #20]
+ 1175 009e 7B69     		ldr	r3, [r7, #20]
+ 1176 00a0 4FEA0341 		lsl	r1, r3, #16
+ 723:../Dave/Generated/src/UART001/UART001.c ****     		                                          &  USIC_CH_BRG_PDIV_Msk));
+ 1177              		.loc 1 723 0
+ 1178 00a4 4FF00003 		mov	r3, #0
+ 1179 00a8 C0F2FF33 		movt	r3, 1023
+ 1180 00ac 0B40     		ands	r3, r3, r1
+ 722:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->BRG |= ((((uint32_t)Brg_Pdiv  << USIC_CH_BRG_PDIV_Pos) \
+ 1181              		.loc 1 722 0
+ 1182 00ae 1A43     		orrs	r2, r2, r3
+ 1183 00b0 3B6A     		ldr	r3, [r7, #32]
+ 1184 00b2 5A61     		str	r2, [r3, #20]
+ 724:../Dave/Generated/src/UART001/UART001.c **** 
+ 725:../Dave/Generated/src/UART001/UART001.c ****       /* Configure StopBit */
+ 726:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->PCR_ASCMode &= ~(USIC_CH_PCR_ASCMode_STPB_Msk);
+ 1185              		.loc 1 726 0
+ 1186 00b4 3B6A     		ldr	r3, [r7, #32]
+ 1187 00b6 DB6B     		ldr	r3, [r3, #60]
+ 1188 00b8 23F00202 		bic	r2, r3, #2
+ 1189 00bc 3B6A     		ldr	r3, [r7, #32]
+ 1190 00be DA63     		str	r2, [r3, #60]
+ 727:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->PCR_ASCMode |= \
+ 1191              		.loc 1 727 0
+ 1192 00c0 3B6A     		ldr	r3, [r7, #32]
+ 1193 00c2 DA6B     		ldr	r2, [r3, #60]
+ 728:../Dave/Generated/src/UART001/UART001.c ****                       (((uint32_t)Stopbit << USIC_CH_PCR_ASCMode_STPB_Pos) & \
+ 1194              		.loc 1 728 0
+ 1195 00c4 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 1196 00c6 4FEA4303 		lsl	r3, r3, #1
+ 1197 00ca 03F00203 		and	r3, r3, #2
+ 727:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->PCR_ASCMode |= \
+ 1198              		.loc 1 727 0
+ 1199 00ce 1A43     		orrs	r2, r2, r3
+ 1200 00d0 3B6A     		ldr	r3, [r7, #32]
+ 1201 00d2 DA63     		str	r2, [r3, #60]
+ 729:../Dave/Generated/src/UART001/UART001.c ****                        USIC_CH_PCR_ASCMode_STPB_Msk);
+ 730:../Dave/Generated/src/UART001/UART001.c ****           
+ 731:../Dave/Generated/src/UART001/UART001.c ****       /* Configure Parity*/
+ 732:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->CCR &= ~(USIC_CH_CCR_PM_Msk);
+ 1202              		.loc 1 732 0
+ 1203 00d4 3B6A     		ldr	r3, [r7, #32]
+ 1204 00d6 1B6C     		ldr	r3, [r3, #64]
+ 1205 00d8 23F44072 		bic	r2, r3, #768
+ 1206 00dc 3B6A     		ldr	r3, [r7, #32]
+ 1207 00de 1A64     		str	r2, [r3, #64]
+ 733:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->CCR |= (((UART_MODE  & USIC_CH_CCR_MODE_Msk)) | \
+ 1208              		.loc 1 733 0
+ 1209 00e0 3B6A     		ldr	r3, [r7, #32]
+ 1210 00e2 1A6C     		ldr	r2, [r3, #64]
+ 734:../Dave/Generated/src/UART001/UART001.c ****                         (((uint32_t)Parity  << USIC_CH_CCR_PM_Pos) & \
+ 1211              		.loc 1 734 0
+ 1212 00e4 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1213 00e6 4FEA0323 		lsl	r3, r3, #8
+ 1214 00ea 03F44073 		and	r3, r3, #768
+ 733:../Dave/Generated/src/UART001/UART001.c ****       UartRegs->CCR |= (((UART_MODE  & USIC_CH_CCR_MODE_Msk)) | \
+ 1215              		.loc 1 733 0
+ 1216 00ee 1343     		orrs	r3, r3, r2
+ 1217 00f0 43F00202 		orr	r2, r3, #2
+ 1218 00f4 3B6A     		ldr	r3, [r7, #32]
+ 1219 00f6 1A64     		str	r2, [r3, #64]
+ 735:../Dave/Generated/src/UART001/UART001.c ****                                                        USIC_CH_CCR_PM_Msk));
+ 736:../Dave/Generated/src/UART001/UART001.c **** 
+ 737:../Dave/Generated/src/UART001/UART001.c ****       Status = (status_t)DAVEApp_SUCCESS;
+ 1220              		.loc 1 737 0
+ 1221 00f8 4FF00003 		mov	r3, #0
+ 1222 00fc 7B62     		str	r3, [r7, #36]
+ 1223 00fe 02E0     		b	.L50
+ 1224              	.L49:
+ 738:../Dave/Generated/src/UART001/UART001.c ****     }
+ 739:../Dave/Generated/src/UART001/UART001.c ****     else
+ 740:../Dave/Generated/src/UART001/UART001.c ****     {
+ 741:../Dave/Generated/src/UART001/UART001.c ****       Status = (status_t)UART001_BUSY;
+ 1225              		.loc 1 741 0
+ 1226 0100 4FF00303 		mov	r3, #3
+ 1227 0104 7B62     		str	r3, [r7, #36]
+ 1228              	.L50:
+ 742:../Dave/Generated/src/UART001/UART001.c ****       DBG002_ERROR(APP_GID, DBG002_MESSAGEID_LITERAL, sizeof(Status), &Status);
+ 743:../Dave/Generated/src/UART001/UART001.c ****     }
+ 744:../Dave/Generated/src/UART001/UART001.c ****   
+ 745:../Dave/Generated/src/UART001/UART001.c ****   return Status;
+ 1229              		.loc 1 745 0
+ 1230 0106 7B6A     		ldr	r3, [r7, #36]
+ 746:../Dave/Generated/src/UART001/UART001.c **** }
+ 1231              		.loc 1 746 0
+ 1232 0108 1846     		mov	r0, r3
+ 1233 010a 07F12807 		add	r7, r7, #40
+ 1234 010e BD46     		mov	sp, r7
+ 1235 0110 80BD     		pop	{r7, pc}
+ 1236              		.cfi_endproc
+ 1237              	.LFE118:
+ 1239 0112 00BF     		.section	.text.UART001_ReadDataMultiple,"ax",%progbits
+ 1240              		.align	2
+ 1241              		.global	UART001_ReadDataMultiple
+ 1242              		.thumb
+ 1243              		.thumb_func
+ 1245              	UART001_ReadDataMultiple:
+ 1246              	.LFB119:
+ 747:../Dave/Generated/src/UART001/UART001.c **** 
+ 748:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 749:../Dave/Generated/src/UART001/UART001.c ****  * @brief When receive FIFO is enabled, this function reads the USIC receive
+ 750:../Dave/Generated/src/UART001/UART001.c ****  * FIFO Buffer, word by word, until there is no data in the FIFO buffer and 
+ 751:../Dave/Generated/src/UART001/UART001.c ****  * the "Count" value is greater than "0".
+ 752:../Dave/Generated/src/UART001/UART001.c ****  * But when receive FIFO buffer is disabled, it reads a word from standard 
+ 753:../Dave/Generated/src/UART001/UART001.c ****  * receive buffer 
+ 754:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 755:../Dave/Generated/src/UART001/UART001.c ****  * Note: Fifo trigger limit should be adjusted manually to read
+ 756:../Dave/Generated/src/UART001/UART001.c ****  * required amount of data from FIFO buffer.
+ 757:../Dave/Generated/src/UART001/UART001.c ****  *
+ 758:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Handle USIC device handle
+ 759:../Dave/Generated/src/UART001/UART001.c ****  * @param[out] DataPtr  Pointer to data
+ 760:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Count   Total no of words to be read.
+ 761:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 762:../Dave/Generated/src/UART001/UART001.c ****  * @return  uint32_t Number of data read from FIFO/standard receive buffer <BR>
+ 763:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 764:../Dave/Generated/src/UART001/UART001.c ****  * <i>Imp Note:</i> Return Count will be always '1', if datais read from the 
+ 765:../Dave/Generated/src/UART001/UART001.c ****  *              standard buffer. 
+ 766:../Dave/Generated/src/UART001/UART001.c ****  *
+ 767:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: NO </b><BR>
+ 768:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 769:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+ 770:../Dave/Generated/src/UART001/UART001.c **** uint32_t UART001_ReadDataMultiple
+ 771:../Dave/Generated/src/UART001/UART001.c **** (
+ 772:../Dave/Generated/src/UART001/UART001.c ****   const UART001_HandleType* Handle,
+ 773:../Dave/Generated/src/UART001/UART001.c ****   uint16_t* DataPtr,
+ 774:../Dave/Generated/src/UART001/UART001.c ****   uint32_t Count
+ 775:../Dave/Generated/src/UART001/UART001.c **** )
+ 776:../Dave/Generated/src/UART001/UART001.c **** { 
+ 1247              		.loc 1 776 0
+ 1248              		.cfi_startproc
+ 1249              		@ args = 0, pretend = 0, frame = 24
+ 1250              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1251              		@ link register save eliminated.
+ 1252 0000 80B4     		push	{r7}
+ 1253              	.LCFI22:
+ 1254              		.cfi_def_cfa_offset 4
+ 1255              		.cfi_offset 7, -4
+ 1256 0002 87B0     		sub	sp, sp, #28
+ 1257              	.LCFI23:
+ 1258              		.cfi_def_cfa_offset 32
+ 1259 0004 00AF     		add	r7, sp, #0
+ 1260              	.LCFI24:
+ 1261              		.cfi_def_cfa_register 7
+ 1262 0006 F860     		str	r0, [r7, #12]
+ 1263 0008 B960     		str	r1, [r7, #8]
+ 1264 000a 7A60     		str	r2, [r7, #4]
+ 777:../Dave/Generated/src/UART001/UART001.c ****   uint32_t ReadCount = 0x00U;
+ 1265              		.loc 1 777 0
+ 1266 000c 4FF00003 		mov	r3, #0
+ 1267 0010 7B61     		str	r3, [r7, #20]
+ 778:../Dave/Generated/src/UART001/UART001.c ****   USIC_CH_TypeDef* UartRegs = Handle->UartRegs;  
+ 1268              		.loc 1 778 0
+ 1269 0012 FB68     		ldr	r3, [r7, #12]
+ 1270 0014 1B68     		ldr	r3, [r3, #0]
+ 1271 0016 3B61     		str	r3, [r7, #16]
+ 779:../Dave/Generated/src/UART001/UART001.c ****   /* <<<DD_UART001_API_4>>>*/
+ 780:../Dave/Generated/src/UART001/UART001.c ****   /* If FIFO is enabled read data from receive FIFO buffer */
+ 781:../Dave/Generated/src/UART001/UART001.c ****   if(Handle->RxFifoEn) 
+ 1272              		.loc 1 781 0
+ 1273 0018 FB68     		ldr	r3, [r7, #12]
+ 1274 001a DB7F     		ldrb	r3, [r3, #31]	@ zero_extendqisi2
+ 1275 001c 002B     		cmp	r3, #0
+ 1276 001e 1FD0     		beq	.L53
+ 782:../Dave/Generated/src/UART001/UART001.c ****   {
+ 783:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_ubIsRxFIFOempty(UartRegs) && Count)
+ 1277              		.loc 1 783 0
+ 1278 0020 11E0     		b	.L54
+ 1279              	.L56:
+ 784:../Dave/Generated/src/UART001/UART001.c **** 	  {
+ 785:../Dave/Generated/src/UART001/UART001.c **** 		*DataPtr = (uint16_t)UartRegs->OUTR;
+ 1280              		.loc 1 785 0
+ 1281 0022 3B69     		ldr	r3, [r7, #16]
+ 1282 0024 D3F81C31 		ldr	r3, [r3, #284]
+ 1283 0028 9AB2     		uxth	r2, r3
+ 1284 002a BB68     		ldr	r3, [r7, #8]
+ 1285 002c 1A80     		strh	r2, [r3, #0]	@ movhi
+ 786:../Dave/Generated/src/UART001/UART001.c **** 		Count--;
+ 1286              		.loc 1 786 0
+ 1287 002e 7B68     		ldr	r3, [r7, #4]
+ 1288 0030 03F1FF33 		add	r3, r3, #-1
+ 1289 0034 7B60     		str	r3, [r7, #4]
+ 787:../Dave/Generated/src/UART001/UART001.c **** 		ReadCount++;
+ 1290              		.loc 1 787 0
+ 1291 0036 7B69     		ldr	r3, [r7, #20]
+ 1292 0038 03F10103 		add	r3, r3, #1
+ 1293 003c 7B61     		str	r3, [r7, #20]
+ 788:../Dave/Generated/src/UART001/UART001.c **** 		DataPtr++;
+ 1294              		.loc 1 788 0
+ 1295 003e BB68     		ldr	r3, [r7, #8]
+ 1296 0040 03F10203 		add	r3, r3, #2
+ 1297 0044 BB60     		str	r3, [r7, #8]
+ 1298              	.L54:
+ 783:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_ubIsRxFIFOempty(UartRegs) && Count)
+ 1299              		.loc 1 783 0 discriminator 1
+ 1300 0046 3B69     		ldr	r3, [r7, #16]
+ 1301 0048 D3F81431 		ldr	r3, [r3, #276]
+ 1302 004c 03F00803 		and	r3, r3, #8
+ 1303 0050 4FEAD303 		lsr	r3, r3, #3
+ 1304 0054 002B     		cmp	r3, #0
+ 1305 0056 0CD1     		bne	.L55
+ 783:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_ubIsRxFIFOempty(UartRegs) && Count)
+ 1306              		.loc 1 783 0 is_stmt 0 discriminator 2
+ 1307 0058 7B68     		ldr	r3, [r7, #4]
+ 1308 005a 002B     		cmp	r3, #0
+ 1309 005c E1D1     		bne	.L56
+ 783:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_ubIsRxFIFOempty(UartRegs) && Count)
+ 1310              		.loc 1 783 0
+ 1311 005e 08E0     		b	.L55
+ 1312              	.L53:
+ 789:../Dave/Generated/src/UART001/UART001.c **** 	  }
+ 790:../Dave/Generated/src/UART001/UART001.c ****   }
+ 791:../Dave/Generated/src/UART001/UART001.c ****   else
+ 792:../Dave/Generated/src/UART001/UART001.c ****   {
+ 793:../Dave/Generated/src/UART001/UART001.c **** 	  /* If FIFO is disabled read data from standard receive buffer */
+ 794:../Dave/Generated/src/UART001/UART001.c **** 	  *DataPtr = (uint16_t)UartRegs->RBUF;
+ 1313              		.loc 1 794 0 is_stmt 1
+ 1314 0060 3B69     		ldr	r3, [r7, #16]
+ 1315 0062 5B6D     		ldr	r3, [r3, #84]
+ 1316 0064 9AB2     		uxth	r2, r3
+ 1317 0066 BB68     		ldr	r3, [r7, #8]
+ 1318 0068 1A80     		strh	r2, [r3, #0]	@ movhi
+ 795:../Dave/Generated/src/UART001/UART001.c **** 	  ReadCount++;
+ 1319              		.loc 1 795 0
+ 1320 006a 7B69     		ldr	r3, [r7, #20]
+ 1321 006c 03F10103 		add	r3, r3, #1
+ 1322 0070 7B61     		str	r3, [r7, #20]
+ 1323              	.L55:
+ 796:../Dave/Generated/src/UART001/UART001.c ****   }
+ 797:../Dave/Generated/src/UART001/UART001.c ****   return ReadCount;
+ 1324              		.loc 1 797 0
+ 1325 0072 7B69     		ldr	r3, [r7, #20]
+ 798:../Dave/Generated/src/UART001/UART001.c **** }
+ 1326              		.loc 1 798 0
+ 1327 0074 1846     		mov	r0, r3
+ 1328 0076 07F11C07 		add	r7, r7, #28
+ 1329 007a BD46     		mov	sp, r7
+ 1330 007c 80BC     		pop	{r7}
+ 1331 007e 7047     		bx	lr
+ 1332              		.cfi_endproc
+ 1333              	.LFE119:
+ 1335              		.section	.text.UART001_ReadDataBytes,"ax",%progbits
+ 1336              		.align	2
+ 1337              		.global	UART001_ReadDataBytes
+ 1338              		.thumb
+ 1339              		.thumb_func
+ 1341              	UART001_ReadDataBytes:
+ 1342              	.LFB120:
+ 799:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 800:../Dave/Generated/src/UART001/UART001.c ****  * @brief When receive FIFO is enabled, this function reads the USIC receive
+ 801:../Dave/Generated/src/UART001/UART001.c ****  * FIFO Buffer, byte by byte, until there is no data in the FIFO buffer and 
+ 802:../Dave/Generated/src/UART001/UART001.c ****  * the "Count" value is greater than "0".
+ 803:../Dave/Generated/src/UART001/UART001.c ****  * But when receive FIFO buffer is disabled, it reads a byte from standard 
+ 804:../Dave/Generated/src/UART001/UART001.c ****  * receive buffer 
+ 805:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 806:../Dave/Generated/src/UART001/UART001.c ****  * Note: Fifo trigger limit should be adjusted manually to read
+ 807:../Dave/Generated/src/UART001/UART001.c ****  * required amount of data from FIFO buffer.
+ 808:../Dave/Generated/src/UART001/UART001.c ****  *
+ 809:../Dave/Generated/src/UART001/UART001.c ****  *
+ 810:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Handle USIC device handle
+ 811:../Dave/Generated/src/UART001/UART001.c ****  * @param[out] DataPtr  Pointer to data
+ 812:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Count   Total no of bytes to be read.
+ 813:../Dave/Generated/src/UART001/UART001.c ****  *
+ 814:../Dave/Generated/src/UART001/UART001.c ****  * @return  uint32_t Number of data read from FIFO/standard receive buffer <BR>
+ 815:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 816:../Dave/Generated/src/UART001/UART001.c ****  * <i>Imp Note:</i> Return Count will be always '1', if data is read from the 
+ 817:../Dave/Generated/src/UART001/UART001.c ****  *              standard buffer. 
+ 818:../Dave/Generated/src/UART001/UART001.c ****  *
+ 819:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: NO </b><BR>
+ 820:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 821:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+ 822:../Dave/Generated/src/UART001/UART001.c **** uint32_t UART001_ReadDataBytes
+ 823:../Dave/Generated/src/UART001/UART001.c **** (
+ 824:../Dave/Generated/src/UART001/UART001.c ****   const UART001_HandleType* Handle,
+ 825:../Dave/Generated/src/UART001/UART001.c ****   uint8_t* DataPtr,
+ 826:../Dave/Generated/src/UART001/UART001.c ****   uint32_t Count
+ 827:../Dave/Generated/src/UART001/UART001.c **** )
+ 828:../Dave/Generated/src/UART001/UART001.c **** { 
+ 1343              		.loc 1 828 0
+ 1344              		.cfi_startproc
+ 1345              		@ args = 0, pretend = 0, frame = 24
+ 1346              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1347              		@ link register save eliminated.
+ 1348 0000 80B4     		push	{r7}
+ 1349              	.LCFI25:
+ 1350              		.cfi_def_cfa_offset 4
+ 1351              		.cfi_offset 7, -4
+ 1352 0002 87B0     		sub	sp, sp, #28
+ 1353              	.LCFI26:
+ 1354              		.cfi_def_cfa_offset 32
+ 1355 0004 00AF     		add	r7, sp, #0
+ 1356              	.LCFI27:
+ 1357              		.cfi_def_cfa_register 7
+ 1358 0006 F860     		str	r0, [r7, #12]
+ 1359 0008 B960     		str	r1, [r7, #8]
+ 1360 000a 7A60     		str	r2, [r7, #4]
+ 829:../Dave/Generated/src/UART001/UART001.c ****   uint32_t ReadCount = 0x00U;
+ 1361              		.loc 1 829 0
+ 1362 000c 4FF00003 		mov	r3, #0
+ 1363 0010 7B61     		str	r3, [r7, #20]
+ 830:../Dave/Generated/src/UART001/UART001.c ****   USIC_CH_TypeDef* UartRegs = Handle->UartRegs;  
+ 1364              		.loc 1 830 0
+ 1365 0012 FB68     		ldr	r3, [r7, #12]
+ 1366 0014 1B68     		ldr	r3, [r3, #0]
+ 1367 0016 3B61     		str	r3, [r7, #16]
+ 831:../Dave/Generated/src/UART001/UART001.c ****   /* <<<DD_UART001_API_4>>>*/
+ 832:../Dave/Generated/src/UART001/UART001.c ****   /* If FIFO is enabled read data from receive FIFO buffer */
+ 833:../Dave/Generated/src/UART001/UART001.c ****   if(Handle->RxFifoEn) 
+ 1368              		.loc 1 833 0
+ 1369 0018 FB68     		ldr	r3, [r7, #12]
+ 1370 001a DB7F     		ldrb	r3, [r3, #31]	@ zero_extendqisi2
+ 1371 001c 002B     		cmp	r3, #0
+ 1372 001e 1FD0     		beq	.L59
+ 834:../Dave/Generated/src/UART001/UART001.c ****   {
+ 835:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_ubIsRxFIFOempty(UartRegs) && Count)
+ 1373              		.loc 1 835 0
+ 1374 0020 11E0     		b	.L60
+ 1375              	.L62:
+ 836:../Dave/Generated/src/UART001/UART001.c **** 	  {
+ 837:../Dave/Generated/src/UART001/UART001.c **** 		*DataPtr = (uint8_t)UartRegs->OUTR;
+ 1376              		.loc 1 837 0
+ 1377 0022 3B69     		ldr	r3, [r7, #16]
+ 1378 0024 D3F81C31 		ldr	r3, [r3, #284]
+ 1379 0028 DAB2     		uxtb	r2, r3
+ 1380 002a BB68     		ldr	r3, [r7, #8]
+ 1381 002c 1A70     		strb	r2, [r3, #0]
+ 838:../Dave/Generated/src/UART001/UART001.c **** 		Count--;
+ 1382              		.loc 1 838 0
+ 1383 002e 7B68     		ldr	r3, [r7, #4]
+ 1384 0030 03F1FF33 		add	r3, r3, #-1
+ 1385 0034 7B60     		str	r3, [r7, #4]
+ 839:../Dave/Generated/src/UART001/UART001.c **** 		ReadCount++;
+ 1386              		.loc 1 839 0
+ 1387 0036 7B69     		ldr	r3, [r7, #20]
+ 1388 0038 03F10103 		add	r3, r3, #1
+ 1389 003c 7B61     		str	r3, [r7, #20]
+ 840:../Dave/Generated/src/UART001/UART001.c **** 		DataPtr++;
+ 1390              		.loc 1 840 0
+ 1391 003e BB68     		ldr	r3, [r7, #8]
+ 1392 0040 03F10103 		add	r3, r3, #1
+ 1393 0044 BB60     		str	r3, [r7, #8]
+ 1394              	.L60:
+ 835:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_ubIsRxFIFOempty(UartRegs) && Count)
+ 1395              		.loc 1 835 0 discriminator 1
+ 1396 0046 3B69     		ldr	r3, [r7, #16]
+ 1397 0048 D3F81431 		ldr	r3, [r3, #276]
+ 1398 004c 03F00803 		and	r3, r3, #8
+ 1399 0050 4FEAD303 		lsr	r3, r3, #3
+ 1400 0054 002B     		cmp	r3, #0
+ 1401 0056 0CD1     		bne	.L61
+ 835:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_ubIsRxFIFOempty(UartRegs) && Count)
+ 1402              		.loc 1 835 0 is_stmt 0 discriminator 2
+ 1403 0058 7B68     		ldr	r3, [r7, #4]
+ 1404 005a 002B     		cmp	r3, #0
+ 1405 005c E1D1     		bne	.L62
+ 835:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_ubIsRxFIFOempty(UartRegs) && Count)
+ 1406              		.loc 1 835 0
+ 1407 005e 08E0     		b	.L61
+ 1408              	.L59:
+ 841:../Dave/Generated/src/UART001/UART001.c **** 	  }
+ 842:../Dave/Generated/src/UART001/UART001.c ****   }
+ 843:../Dave/Generated/src/UART001/UART001.c ****   else
+ 844:../Dave/Generated/src/UART001/UART001.c ****   {
+ 845:../Dave/Generated/src/UART001/UART001.c **** 	  /* If FIFO is disabled read data from standard receive buffer */
+ 846:../Dave/Generated/src/UART001/UART001.c **** 	  *DataPtr = (uint8_t)UartRegs->RBUF;
+ 1409              		.loc 1 846 0 is_stmt 1
+ 1410 0060 3B69     		ldr	r3, [r7, #16]
+ 1411 0062 5B6D     		ldr	r3, [r3, #84]
+ 1412 0064 DAB2     		uxtb	r2, r3
+ 1413 0066 BB68     		ldr	r3, [r7, #8]
+ 1414 0068 1A70     		strb	r2, [r3, #0]
+ 847:../Dave/Generated/src/UART001/UART001.c **** 	  ReadCount++;
+ 1415              		.loc 1 847 0
+ 1416 006a 7B69     		ldr	r3, [r7, #20]
+ 1417 006c 03F10103 		add	r3, r3, #1
+ 1418 0070 7B61     		str	r3, [r7, #20]
+ 1419              	.L61:
+ 848:../Dave/Generated/src/UART001/UART001.c ****   }  
+ 849:../Dave/Generated/src/UART001/UART001.c ****   return ReadCount;
+ 1420              		.loc 1 849 0
+ 1421 0072 7B69     		ldr	r3, [r7, #20]
+ 850:../Dave/Generated/src/UART001/UART001.c **** }
+ 1422              		.loc 1 850 0
+ 1423 0074 1846     		mov	r0, r3
+ 1424 0076 07F11C07 		add	r7, r7, #28
+ 1425 007a BD46     		mov	sp, r7
+ 1426 007c 80BC     		pop	{r7}
+ 1427 007e 7047     		bx	lr
+ 1428              		.cfi_endproc
+ 1429              	.LFE120:
+ 1431              		.section	.text.UART001_WriteDataMultiple,"ax",%progbits
+ 1432              		.align	2
+ 1433              		.global	UART001_WriteDataMultiple
+ 1434              		.thumb
+ 1435              		.thumb_func
+ 1437              	UART001_WriteDataMultiple:
+ 1438              	.LFB121:
+ 851:../Dave/Generated/src/UART001/UART001.c **** 
+ 852:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 853:../Dave/Generated/src/UART001/UART001.c ****  * @brief When FIFO is enabled, this function writes data to the USIC FIFO 
+ 854:../Dave/Generated/src/UART001/UART001.c ****  * transmit buffer register, word by word, until the FIFO buffer is full and 
+ 855:../Dave/Generated/src/UART001/UART001.c ****  * the "Count" value is greater than "0".
+ 856:../Dave/Generated/src/UART001/UART001.c ****  * But when transmit FIFO is disabled, it writes a word to the standard 
+ 857:../Dave/Generated/src/UART001/UART001.c ****  * transmit buffer.
+ 858:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 859:../Dave/Generated/src/UART001/UART001.c ****  * Note: Fifo trigger limit should be adjusted manually to transmit 
+ 860:../Dave/Generated/src/UART001/UART001.c ****  * to transmit required amount of data.
+ 861:../Dave/Generated/src/UART001/UART001.c ****  *
+ 862:../Dave/Generated/src/UART001/UART001.c ****  * Reentrant : No
+ 863:../Dave/Generated/src/UART001/UART001.c ****  *
+ 864:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Handle  USIC device handle
+ 865:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  DataPtr Pointer to data
+ 866:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Count   Total no of words to be transmitted.
+ 867:../Dave/Generated/src/UART001/UART001.c ****  *
+ 868:../Dave/Generated/src/UART001/UART001.c ****  * @return     uint32_t Number of data written to buffer <BR>
+ 869:../Dave/Generated/src/UART001/UART001.c ****  *
+ 870:../Dave/Generated/src/UART001/UART001.c ****  * <i>Imp Note:</i> Return Count will be always '1', if data is written to the 
+ 871:../Dave/Generated/src/UART001/UART001.c ****  *             standard buffer. 
+ 872:../Dave/Generated/src/UART001/UART001.c ****  *          
+ 873:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: NO </b><BR>
+ 874:../Dave/Generated/src/UART001/UART001.c ****  *
+ 875:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+ 876:../Dave/Generated/src/UART001/UART001.c **** uint32_t UART001_WriteDataMultiple
+ 877:../Dave/Generated/src/UART001/UART001.c **** (
+ 878:../Dave/Generated/src/UART001/UART001.c ****   const UART001_HandleType* Handle,
+ 879:../Dave/Generated/src/UART001/UART001.c ****   uint16_t* DataPtr,
+ 880:../Dave/Generated/src/UART001/UART001.c ****   uint32_t Count
+ 881:../Dave/Generated/src/UART001/UART001.c **** )
+ 882:../Dave/Generated/src/UART001/UART001.c **** {
+ 1439              		.loc 1 882 0
+ 1440              		.cfi_startproc
+ 1441              		@ args = 0, pretend = 0, frame = 24
+ 1442              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1443              		@ link register save eliminated.
+ 1444 0000 80B4     		push	{r7}
+ 1445              	.LCFI28:
+ 1446              		.cfi_def_cfa_offset 4
+ 1447              		.cfi_offset 7, -4
+ 1448 0002 87B0     		sub	sp, sp, #28
+ 1449              	.LCFI29:
+ 1450              		.cfi_def_cfa_offset 32
+ 1451 0004 00AF     		add	r7, sp, #0
+ 1452              	.LCFI30:
+ 1453              		.cfi_def_cfa_register 7
+ 1454 0006 F860     		str	r0, [r7, #12]
+ 1455 0008 B960     		str	r1, [r7, #8]
+ 1456 000a 7A60     		str	r2, [r7, #4]
+ 883:../Dave/Generated/src/UART001/UART001.c ****   uint32_t WriteCount = 0x00U;
+ 1457              		.loc 1 883 0
+ 1458 000c 4FF00003 		mov	r3, #0
+ 1459 0010 7B61     		str	r3, [r7, #20]
+ 884:../Dave/Generated/src/UART001/UART001.c ****   USIC_CH_TypeDef* UartRegs = Handle->UartRegs; 
+ 1460              		.loc 1 884 0
+ 1461 0012 FB68     		ldr	r3, [r7, #12]
+ 1462 0014 1B68     		ldr	r3, [r3, #0]
+ 1463 0016 3B61     		str	r3, [r7, #16]
+ 885:../Dave/Generated/src/UART001/UART001.c ****   /* <<<DD_UART001_API_5>>>*/
+ 886:../Dave/Generated/src/UART001/UART001.c ****   /* If FIFO is enabled write data to the transmit FIFO buffer */
+ 887:../Dave/Generated/src/UART001/UART001.c ****   if(Handle->TxFifoEn) 
+ 1464              		.loc 1 887 0
+ 1465 0018 FB68     		ldr	r3, [r7, #12]
+ 1466 001a 9B7F     		ldrb	r3, [r3, #30]	@ zero_extendqisi2
+ 1467 001c 002B     		cmp	r3, #0
+ 1468 001e 1FD0     		beq	.L65
+ 888:../Dave/Generated/src/UART001/UART001.c ****   {
+ 889:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_IsTxFIFOfull(UartRegs)&& Count)
+ 1469              		.loc 1 889 0
+ 1470 0020 11E0     		b	.L66
+ 1471              	.L68:
+ 890:../Dave/Generated/src/UART001/UART001.c **** 	  {
+ 891:../Dave/Generated/src/UART001/UART001.c **** 		UartRegs->IN[0] = *DataPtr;
+ 1472              		.loc 1 891 0
+ 1473 0022 BB68     		ldr	r3, [r7, #8]
+ 1474 0024 1B88     		ldrh	r3, [r3, #0]
+ 1475 0026 1A46     		mov	r2, r3
+ 1476 0028 3B69     		ldr	r3, [r7, #16]
+ 1477 002a C3F88021 		str	r2, [r3, #384]
+ 892:../Dave/Generated/src/UART001/UART001.c **** 		Count--;
+ 1478              		.loc 1 892 0
+ 1479 002e 7B68     		ldr	r3, [r7, #4]
+ 1480 0030 03F1FF33 		add	r3, r3, #-1
+ 1481 0034 7B60     		str	r3, [r7, #4]
+ 893:../Dave/Generated/src/UART001/UART001.c **** 		WriteCount++;
+ 1482              		.loc 1 893 0
+ 1483 0036 7B69     		ldr	r3, [r7, #20]
+ 1484 0038 03F10103 		add	r3, r3, #1
+ 1485 003c 7B61     		str	r3, [r7, #20]
+ 894:../Dave/Generated/src/UART001/UART001.c **** 		DataPtr++;
+ 1486              		.loc 1 894 0
+ 1487 003e BB68     		ldr	r3, [r7, #8]
+ 1488 0040 03F10203 		add	r3, r3, #2
+ 1489 0044 BB60     		str	r3, [r7, #8]
+ 1490              	.L66:
+ 889:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_IsTxFIFOfull(UartRegs)&& Count)
+ 1491              		.loc 1 889 0 discriminator 1
+ 1492 0046 3B69     		ldr	r3, [r7, #16]
+ 1493 0048 D3F81431 		ldr	r3, [r3, #276]
+ 1494 004c 03F48053 		and	r3, r3, #4096
+ 1495 0050 4FEA1333 		lsr	r3, r3, #12
+ 1496 0054 002B     		cmp	r3, #0
+ 1497 0056 13D1     		bne	.L67
+ 889:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_IsTxFIFOfull(UartRegs)&& Count)
+ 1498              		.loc 1 889 0 is_stmt 0 discriminator 2
+ 1499 0058 7B68     		ldr	r3, [r7, #4]
+ 1500 005a 002B     		cmp	r3, #0
+ 1501 005c E1D1     		bne	.L68
+ 889:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_IsTxFIFOfull(UartRegs)&& Count)
+ 1502              		.loc 1 889 0
+ 1503 005e 0FE0     		b	.L67
+ 1504              	.L65:
+ 895:../Dave/Generated/src/UART001/UART001.c **** 	  }
+ 896:../Dave/Generated/src/UART001/UART001.c ****   }
+ 897:../Dave/Generated/src/UART001/UART001.c ****   else
+ 898:../Dave/Generated/src/UART001/UART001.c ****   {	  
+ 899:../Dave/Generated/src/UART001/UART001.c **** 	  /* If FIFO is disabled write data to the standard transmit buffer */
+ 900:../Dave/Generated/src/UART001/UART001.c **** 	  if (!(USIC_CH_TCSR_TDV_Msk & UartRegs->TCSR))
+ 1505              		.loc 1 900 0 is_stmt 1
+ 1506 0060 3B69     		ldr	r3, [r7, #16]
+ 1507 0062 9B6B     		ldr	r3, [r3, #56]
+ 1508 0064 03F08003 		and	r3, r3, #128
+ 1509 0068 002B     		cmp	r3, #0
+ 1510 006a 09D1     		bne	.L67
+ 901:../Dave/Generated/src/UART001/UART001.c **** 	  {
+ 902:../Dave/Generated/src/UART001/UART001.c **** 		UartRegs->TBUF[0] = *DataPtr;	
+ 1511              		.loc 1 902 0
+ 1512 006c BB68     		ldr	r3, [r7, #8]
+ 1513 006e 1B88     		ldrh	r3, [r3, #0]
+ 1514 0070 1A46     		mov	r2, r3
+ 1515 0072 3B69     		ldr	r3, [r7, #16]
+ 1516 0074 C3F88020 		str	r2, [r3, #128]
+ 903:../Dave/Generated/src/UART001/UART001.c **** 		WriteCount++; 
+ 1517              		.loc 1 903 0
+ 1518 0078 7B69     		ldr	r3, [r7, #20]
+ 1519 007a 03F10103 		add	r3, r3, #1
+ 1520 007e 7B61     		str	r3, [r7, #20]
+ 1521              	.L67:
+ 904:../Dave/Generated/src/UART001/UART001.c **** 	  }
+ 905:../Dave/Generated/src/UART001/UART001.c ****   }
+ 906:../Dave/Generated/src/UART001/UART001.c ****   return WriteCount;
+ 1522              		.loc 1 906 0
+ 1523 0080 7B69     		ldr	r3, [r7, #20]
+ 907:../Dave/Generated/src/UART001/UART001.c **** }
+ 1524              		.loc 1 907 0
+ 1525 0082 1846     		mov	r0, r3
+ 1526 0084 07F11C07 		add	r7, r7, #28
+ 1527 0088 BD46     		mov	sp, r7
+ 1528 008a 80BC     		pop	{r7}
+ 1529 008c 7047     		bx	lr
+ 1530              		.cfi_endproc
+ 1531              	.LFE121:
+ 1533 008e 00BF     		.section	.text.UART001_WriteDataBytes,"ax",%progbits
+ 1534              		.align	2
+ 1535              		.global	UART001_WriteDataBytes
+ 1536              		.thumb
+ 1537              		.thumb_func
+ 1539              	UART001_WriteDataBytes:
+ 1540              	.LFB122:
+ 908:../Dave/Generated/src/UART001/UART001.c **** 
+ 909:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 910:../Dave/Generated/src/UART001/UART001.c ****  * @brief When FIFO is enabled, this function writes data to the USIC FIFO 
+ 911:../Dave/Generated/src/UART001/UART001.c ****  * transmit buffer register, byte by byte, until the FIFO buffer is full and 
+ 912:../Dave/Generated/src/UART001/UART001.c ****  * the "Count" value is greater than "0".
+ 913:../Dave/Generated/src/UART001/UART001.c ****  * But when transmit FIFO is disabled, it writes a byte to the standard 
+ 914:../Dave/Generated/src/UART001/UART001.c ****  * transmit buffer.
+ 915:../Dave/Generated/src/UART001/UART001.c ****  * 
+ 916:../Dave/Generated/src/UART001/UART001.c ****  * Note: Fifo trigger limit should be adjusted manually to transmit 
+ 917:../Dave/Generated/src/UART001/UART001.c ****  * to transmit required amount of data.
+ 918:../Dave/Generated/src/UART001/UART001.c ****  *
+ 919:../Dave/Generated/src/UART001/UART001.c ****  * Reentrant : No
+ 920:../Dave/Generated/src/UART001/UART001.c ****  *
+ 921:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Handle  USIC device handle
+ 922:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  DataPtr Pointer to data
+ 923:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Count   Total no of words to be transmitted.
+ 924:../Dave/Generated/src/UART001/UART001.c ****  *
+ 925:../Dave/Generated/src/UART001/UART001.c ****  * @return     uint32_t Number of data written to buffer <BR>
+ 926:../Dave/Generated/src/UART001/UART001.c ****  *
+ 927:../Dave/Generated/src/UART001/UART001.c ****  * <i>Imp Note:</i> Return Count will be always '1', if data is written to the 
+ 928:../Dave/Generated/src/UART001/UART001.c ****  *              standard buffer. 
+ 929:../Dave/Generated/src/UART001/UART001.c ****  *              
+ 930:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: NO </b><BR>
+ 931:../Dave/Generated/src/UART001/UART001.c ****  *
+ 932:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+ 933:../Dave/Generated/src/UART001/UART001.c **** uint32_t UART001_WriteDataBytes
+ 934:../Dave/Generated/src/UART001/UART001.c **** (
+ 935:../Dave/Generated/src/UART001/UART001.c ****   const UART001_HandleType* Handle,
+ 936:../Dave/Generated/src/UART001/UART001.c ****   const uint8_t* DataPtr,
+ 937:../Dave/Generated/src/UART001/UART001.c ****   uint32_t Count
+ 938:../Dave/Generated/src/UART001/UART001.c **** )
+ 939:../Dave/Generated/src/UART001/UART001.c **** {
+ 1541              		.loc 1 939 0
+ 1542              		.cfi_startproc
+ 1543              		@ args = 0, pretend = 0, frame = 24
+ 1544              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1545              		@ link register save eliminated.
+ 1546 0000 80B4     		push	{r7}
+ 1547              	.LCFI31:
+ 1548              		.cfi_def_cfa_offset 4
+ 1549              		.cfi_offset 7, -4
+ 1550 0002 87B0     		sub	sp, sp, #28
+ 1551              	.LCFI32:
+ 1552              		.cfi_def_cfa_offset 32
+ 1553 0004 00AF     		add	r7, sp, #0
+ 1554              	.LCFI33:
+ 1555              		.cfi_def_cfa_register 7
+ 1556 0006 F860     		str	r0, [r7, #12]
+ 1557 0008 B960     		str	r1, [r7, #8]
+ 1558 000a 7A60     		str	r2, [r7, #4]
+ 940:../Dave/Generated/src/UART001/UART001.c ****   uint32_t WriteCount = 0x00U;
+ 1559              		.loc 1 940 0
+ 1560 000c 4FF00003 		mov	r3, #0
+ 1561 0010 7B61     		str	r3, [r7, #20]
+ 941:../Dave/Generated/src/UART001/UART001.c ****   USIC_CH_TypeDef* UartRegs = Handle->UartRegs; 
+ 1562              		.loc 1 941 0
+ 1563 0012 FB68     		ldr	r3, [r7, #12]
+ 1564 0014 1B68     		ldr	r3, [r3, #0]
+ 1565 0016 3B61     		str	r3, [r7, #16]
+ 942:../Dave/Generated/src/UART001/UART001.c ****   /* <<<DD_UART001_API_6>>> */
+ 943:../Dave/Generated/src/UART001/UART001.c ****   
+ 944:../Dave/Generated/src/UART001/UART001.c ****   /* If FIFO is enabled write data to the transmit FIFO buffer */  
+ 945:../Dave/Generated/src/UART001/UART001.c ****   if(Handle->TxFifoEn) 
+ 1566              		.loc 1 945 0
+ 1567 0018 FB68     		ldr	r3, [r7, #12]
+ 1568 001a 9B7F     		ldrb	r3, [r3, #30]	@ zero_extendqisi2
+ 1569 001c 002B     		cmp	r3, #0
+ 1570 001e 1FD0     		beq	.L71
+ 946:../Dave/Generated/src/UART001/UART001.c ****   {
+ 947:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_IsTxFIFOfull(UartRegs)&& Count)
+ 1571              		.loc 1 947 0
+ 1572 0020 11E0     		b	.L72
+ 1573              	.L74:
+ 948:../Dave/Generated/src/UART001/UART001.c **** 	  {
+ 949:../Dave/Generated/src/UART001/UART001.c **** 		UartRegs->IN[0] = *DataPtr;
+ 1574              		.loc 1 949 0
+ 1575 0022 BB68     		ldr	r3, [r7, #8]
+ 1576 0024 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1577 0026 1A46     		mov	r2, r3
+ 1578 0028 3B69     		ldr	r3, [r7, #16]
+ 1579 002a C3F88021 		str	r2, [r3, #384]
+ 950:../Dave/Generated/src/UART001/UART001.c **** 		Count--;
+ 1580              		.loc 1 950 0
+ 1581 002e 7B68     		ldr	r3, [r7, #4]
+ 1582 0030 03F1FF33 		add	r3, r3, #-1
+ 1583 0034 7B60     		str	r3, [r7, #4]
+ 951:../Dave/Generated/src/UART001/UART001.c **** 		WriteCount++;
+ 1584              		.loc 1 951 0
+ 1585 0036 7B69     		ldr	r3, [r7, #20]
+ 1586 0038 03F10103 		add	r3, r3, #1
+ 1587 003c 7B61     		str	r3, [r7, #20]
+ 952:../Dave/Generated/src/UART001/UART001.c **** 		DataPtr++;
+ 1588              		.loc 1 952 0
+ 1589 003e BB68     		ldr	r3, [r7, #8]
+ 1590 0040 03F10103 		add	r3, r3, #1
+ 1591 0044 BB60     		str	r3, [r7, #8]
+ 1592              	.L72:
+ 947:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_IsTxFIFOfull(UartRegs)&& Count)
+ 1593              		.loc 1 947 0 discriminator 1
+ 1594 0046 3B69     		ldr	r3, [r7, #16]
+ 1595 0048 D3F81431 		ldr	r3, [r3, #276]
+ 1596 004c 03F48053 		and	r3, r3, #4096
+ 1597 0050 4FEA1333 		lsr	r3, r3, #12
+ 1598 0054 002B     		cmp	r3, #0
+ 1599 0056 13D1     		bne	.L73
+ 947:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_IsTxFIFOfull(UartRegs)&& Count)
+ 1600              		.loc 1 947 0 is_stmt 0 discriminator 2
+ 1601 0058 7B68     		ldr	r3, [r7, #4]
+ 1602 005a 002B     		cmp	r3, #0
+ 1603 005c E1D1     		bne	.L74
+ 947:../Dave/Generated/src/UART001/UART001.c **** 	  while(! USIC_IsTxFIFOfull(UartRegs)&& Count)
+ 1604              		.loc 1 947 0
+ 1605 005e 0FE0     		b	.L73
+ 1606              	.L71:
+ 953:../Dave/Generated/src/UART001/UART001.c **** 	  }
+ 954:../Dave/Generated/src/UART001/UART001.c ****   }
+ 955:../Dave/Generated/src/UART001/UART001.c ****   else
+ 956:../Dave/Generated/src/UART001/UART001.c ****   {	  
+ 957:../Dave/Generated/src/UART001/UART001.c **** 	  /* If FIFO is disabled write data to the standard transmit buffer */  
+ 958:../Dave/Generated/src/UART001/UART001.c **** 	  if (!(USIC_CH_TCSR_TDV_Msk & UartRegs->TCSR))
+ 1607              		.loc 1 958 0 is_stmt 1
+ 1608 0060 3B69     		ldr	r3, [r7, #16]
+ 1609 0062 9B6B     		ldr	r3, [r3, #56]
+ 1610 0064 03F08003 		and	r3, r3, #128
+ 1611 0068 002B     		cmp	r3, #0
+ 1612 006a 09D1     		bne	.L73
+ 959:../Dave/Generated/src/UART001/UART001.c **** 	  {
+ 960:../Dave/Generated/src/UART001/UART001.c **** 		UartRegs->TBUF[0] = *DataPtr;	
+ 1613              		.loc 1 960 0
+ 1614 006c BB68     		ldr	r3, [r7, #8]
+ 1615 006e 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1616 0070 1A46     		mov	r2, r3
+ 1617 0072 3B69     		ldr	r3, [r7, #16]
+ 1618 0074 C3F88020 		str	r2, [r3, #128]
+ 961:../Dave/Generated/src/UART001/UART001.c **** 		WriteCount++; 
+ 1619              		.loc 1 961 0
+ 1620 0078 7B69     		ldr	r3, [r7, #20]
+ 1621 007a 03F10103 		add	r3, r3, #1
+ 1622 007e 7B61     		str	r3, [r7, #20]
+ 1623              	.L73:
+ 962:../Dave/Generated/src/UART001/UART001.c **** 	  }
+ 963:../Dave/Generated/src/UART001/UART001.c ****   }
+ 964:../Dave/Generated/src/UART001/UART001.c ****   return WriteCount;
+ 1624              		.loc 1 964 0
+ 1625 0080 7B69     		ldr	r3, [r7, #20]
+ 965:../Dave/Generated/src/UART001/UART001.c **** }
+ 1626              		.loc 1 965 0
+ 1627 0082 1846     		mov	r0, r3
+ 1628 0084 07F11C07 		add	r7, r7, #28
+ 1629 0088 BD46     		mov	sp, r7
+ 1630 008a 80BC     		pop	{r7}
+ 1631 008c 7047     		bx	lr
+ 1632              		.cfi_endproc
+ 1633              	.LFE122:
+ 1635 008e 00BF     		.section	.text.UART001_GetFlagStatus,"ax",%progbits
+ 1636              		.align	2
+ 1637              		.global	UART001_GetFlagStatus
+ 1638              		.thumb
+ 1639              		.thumb_func
+ 1641              	UART001_GetFlagStatus:
+ 1642              	.LFB123:
+ 966:../Dave/Generated/src/UART001/UART001.c **** 
+ 967:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+ 968:../Dave/Generated/src/UART001/UART001.c ****  * @brief The function is used to get the event flag status specified.
+ 969:../Dave/Generated/src/UART001/UART001.c ****  * 			   It returns UART_SET if the corresponding flag
+ 970:../Dave/Generated/src/UART001/UART001.c ****  *			   is set else otherwise.
+ 971:../Dave/Generated/src/UART001/UART001.c ****  *
+ 972:../Dave/Generated/src/UART001/UART001.c ****  *
+ 973:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Handle USIC device handle
+ 974:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Flag   UART Flag which needs to be checked
+ 975:../Dave/Generated/src/UART001/UART001.c ****  *
+ 976:../Dave/Generated/src/UART001/UART001.c ****  * @return     status_t <BR>
+ 977:../Dave/Generated/src/UART001/UART001.c ****  *             UART_SET    : indicates Flag is set.<BR>
+ 978:../Dave/Generated/src/UART001/UART001.c ****  *             UART_RESET  : indicates Flag is reset.<BR>
+ 979:../Dave/Generated/src/UART001/UART001.c ****  *
+ 980:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: NO </b><BR>
+ 981:../Dave/Generated/src/UART001/UART001.c ****  *
+ 982:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+ 983:../Dave/Generated/src/UART001/UART001.c **** status_t UART001_GetFlagStatus 
+ 984:../Dave/Generated/src/UART001/UART001.c **** (
+ 985:../Dave/Generated/src/UART001/UART001.c ****   const UART001_HandleType* Handle,
+ 986:../Dave/Generated/src/UART001/UART001.c ****   UART001_FlagStatusType Flag
+ 987:../Dave/Generated/src/UART001/UART001.c **** )
+ 988:../Dave/Generated/src/UART001/UART001.c **** {
+ 1643              		.loc 1 988 0
+ 1644              		.cfi_startproc
+ 1645              		@ args = 0, pretend = 0, frame = 24
+ 1646              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1647              		@ link register save eliminated.
+ 1648 0000 80B4     		push	{r7}
+ 1649              	.LCFI34:
+ 1650              		.cfi_def_cfa_offset 4
+ 1651              		.cfi_offset 7, -4
+ 1652 0002 87B0     		sub	sp, sp, #28
+ 1653              	.LCFI35:
+ 1654              		.cfi_def_cfa_offset 32
+ 1655 0004 00AF     		add	r7, sp, #0
+ 1656              	.LCFI36:
+ 1657              		.cfi_def_cfa_register 7
+ 1658 0006 7860     		str	r0, [r7, #4]
+ 1659 0008 0B46     		mov	r3, r1
+ 1660 000a FB70     		strb	r3, [r7, #3]
+ 989:../Dave/Generated/src/UART001/UART001.c ****   status_t Status = (status_t)UART001_RESET;
+ 1661              		.loc 1 989 0
+ 1662 000c 4FF00103 		mov	r3, #1
+ 1663 0010 7B61     		str	r3, [r7, #20]
+ 990:../Dave/Generated/src/UART001/UART001.c ****   uint32_t TempValue = 0x00U;
+ 1664              		.loc 1 990 0
+ 1665 0012 4FF00003 		mov	r3, #0
+ 1666 0016 3B61     		str	r3, [r7, #16]
+ 991:../Dave/Generated/src/UART001/UART001.c ****   USIC_CH_TypeDef* UartRegs = Handle->UartRegs;
+ 1667              		.loc 1 991 0
+ 1668 0018 7B68     		ldr	r3, [r7, #4]
+ 1669 001a 1B68     		ldr	r3, [r3, #0]
+ 1670 001c FB60     		str	r3, [r7, #12]
+ 992:../Dave/Generated/src/UART001/UART001.c ****   
+ 993:../Dave/Generated/src/UART001/UART001.c ****   /* <<<DD_UART001_API_7>>>*/
+ 994:../Dave/Generated/src/UART001/UART001.c ****   if(Flag <= UART001_ALT_REC_IND_FLAG)
+ 1671              		.loc 1 994 0
+ 1672 001e FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1673 0020 0F2B     		cmp	r3, #15
+ 1674 0022 0BD8     		bhi	.L77
+ 995:../Dave/Generated/src/UART001/UART001.c ****   {
+ 996:../Dave/Generated/src/UART001/UART001.c ****     TempValue = UartRegs->PSR_ASCMode;
+ 1675              		.loc 1 996 0
+ 1676 0024 FB68     		ldr	r3, [r7, #12]
+ 1677 0026 9B6C     		ldr	r3, [r3, #72]
+ 1678 0028 3B61     		str	r3, [r7, #16]
+ 997:../Dave/Generated/src/UART001/UART001.c ****     TempValue  &= ((uint32_t)SHIFT_ONE << (uint32_t)Flag);    
+ 1679              		.loc 1 997 0
+ 1680 002a FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1681 002c 4FF00102 		mov	r2, #1
+ 1682 0030 02FA03F3 		lsl	r3, r2, r3
+ 1683 0034 3A69     		ldr	r2, [r7, #16]
+ 1684 0036 1340     		ands	r3, r3, r2
+ 1685 0038 3B61     		str	r3, [r7, #16]
+ 1686 003a 1FE0     		b	.L78
+ 1687              	.L77:
+ 998:../Dave/Generated/src/UART001/UART001.c ****   }
+ 999:../Dave/Generated/src/UART001/UART001.c ****   else if(Flag <= UART001_FIFO_ALTRECV_BUF_FLAG)
+ 1688              		.loc 1 999 0
+ 1689 003c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1690 003e 122B     		cmp	r3, #18
+ 1691 0040 0ED8     		bhi	.L79
+1000:../Dave/Generated/src/UART001/UART001.c ****   {
+1001:../Dave/Generated/src/UART001/UART001.c ****     TempValue = UartRegs->TRBSR;
+ 1692              		.loc 1 1001 0
+ 1693 0042 FB68     		ldr	r3, [r7, #12]
+ 1694 0044 D3F81431 		ldr	r3, [r3, #276]
+ 1695 0048 3B61     		str	r3, [r7, #16]
+1002:../Dave/Generated/src/UART001/UART001.c ****     TempValue  &= ((uint32_t)SHIFT_ONE << \
+1003:../Dave/Generated/src/UART001/UART001.c ****                   ((uint32_t)Flag - (uint32_t)UART001_FIFO_STD_RECV_BUF_FLAG));
+ 1696              		.loc 1 1003 0
+ 1697 004a FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1698 004c A3F11003 		sub	r3, r3, #16
+1002:../Dave/Generated/src/UART001/UART001.c ****     TempValue  &= ((uint32_t)SHIFT_ONE << \
+ 1699              		.loc 1 1002 0
+ 1700 0050 4FF00102 		mov	r2, #1
+ 1701 0054 02FA03F3 		lsl	r3, r2, r3
+ 1702 0058 3A69     		ldr	r2, [r7, #16]
+ 1703 005a 1340     		ands	r3, r3, r2
+ 1704 005c 3B61     		str	r3, [r7, #16]
+ 1705 005e 0DE0     		b	.L78
+ 1706              	.L79:
+1004:../Dave/Generated/src/UART001/UART001.c ****     
+1005:../Dave/Generated/src/UART001/UART001.c ****   }
+1006:../Dave/Generated/src/UART001/UART001.c ****   else
+1007:../Dave/Generated/src/UART001/UART001.c ****   {
+1008:../Dave/Generated/src/UART001/UART001.c ****     TempValue = UartRegs->TRBSR;
+ 1707              		.loc 1 1008 0
+ 1708 0060 FB68     		ldr	r3, [r7, #12]
+ 1709 0062 D3F81431 		ldr	r3, [r3, #276]
+ 1710 0066 3B61     		str	r3, [r7, #16]
+1009:../Dave/Generated/src/UART001/UART001.c ****     TempValue  &= ((uint32_t)SHIFT_ONE << \
+1010:../Dave/Generated/src/UART001/UART001.c ****        (((uint32_t)Flag - (uint32_t)UART001_FIFO_STD_RECV_BUF_FLAG) + 0x05U ));
+ 1711              		.loc 1 1010 0
+ 1712 0068 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1713 006a A3F10B03 		sub	r3, r3, #11
+1009:../Dave/Generated/src/UART001/UART001.c ****     TempValue  &= ((uint32_t)SHIFT_ONE << \
+ 1714              		.loc 1 1009 0
+ 1715 006e 4FF00102 		mov	r2, #1
+ 1716 0072 02FA03F3 		lsl	r3, r2, r3
+ 1717 0076 3A69     		ldr	r2, [r7, #16]
+ 1718 0078 1340     		ands	r3, r3, r2
+ 1719 007a 3B61     		str	r3, [r7, #16]
+ 1720              	.L78:
+1011:../Dave/Generated/src/UART001/UART001.c ****   } 
+1012:../Dave/Generated/src/UART001/UART001.c **** 
+1013:../Dave/Generated/src/UART001/UART001.c ****   if(TempValue)
+ 1721              		.loc 1 1013 0
+ 1722 007c 3B69     		ldr	r3, [r7, #16]
+ 1723 007e 002B     		cmp	r3, #0
+ 1724 0080 02D0     		beq	.L80
+1014:../Dave/Generated/src/UART001/UART001.c ****   {
+1015:../Dave/Generated/src/UART001/UART001.c ****     Status = (status_t)UART001_SET;
+ 1725              		.loc 1 1015 0
+ 1726 0082 4FF00203 		mov	r3, #2
+ 1727 0086 7B61     		str	r3, [r7, #20]
+ 1728              	.L80:
+1016:../Dave/Generated/src/UART001/UART001.c ****   }
+1017:../Dave/Generated/src/UART001/UART001.c ****   return Status;
+ 1729              		.loc 1 1017 0
+ 1730 0088 7B69     		ldr	r3, [r7, #20]
+1018:../Dave/Generated/src/UART001/UART001.c **** }
+ 1731              		.loc 1 1018 0
+ 1732 008a 1846     		mov	r0, r3
+ 1733 008c 07F11C07 		add	r7, r7, #28
+ 1734 0090 BD46     		mov	sp, r7
+ 1735 0092 80BC     		pop	{r7}
+ 1736 0094 7047     		bx	lr
+ 1737              		.cfi_endproc
+ 1738              	.LFE123:
+ 1740 0096 00BF     		.section	.text.UART001_ClearFlag,"ax",%progbits
+ 1741              		.align	2
+ 1742              		.global	UART001_ClearFlag
+ 1743              		.thumb
+ 1744              		.thumb_func
+ 1746              	UART001_ClearFlag:
+ 1747              	.LFB124:
+1019:../Dave/Generated/src/UART001/UART001.c **** 
+1020:../Dave/Generated/src/UART001/UART001.c **** /*******************************************************************************
+1021:../Dave/Generated/src/UART001/UART001.c ****  * @brief This function clears the specified event flag status.
+1022:../Dave/Generated/src/UART001/UART001.c ****  *
+1023:../Dave/Generated/src/UART001/UART001.c ****  *
+1024:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Handle USIC device handle
+1025:../Dave/Generated/src/UART001/UART001.c ****  * @param[in]  Flag   UART Flag which needs to be cleared
+1026:../Dave/Generated/src/UART001/UART001.c ****  *
+1027:../Dave/Generated/src/UART001/UART001.c ****  * @return    None
+1028:../Dave/Generated/src/UART001/UART001.c ****  *
+1029:../Dave/Generated/src/UART001/UART001.c ****  * <b>Reentrant: NO </b><BR>
+1030:../Dave/Generated/src/UART001/UART001.c ****  *
+1031:../Dave/Generated/src/UART001/UART001.c ****  ******************************************************************************/
+1032:../Dave/Generated/src/UART001/UART001.c **** void UART001_ClearFlag
+1033:../Dave/Generated/src/UART001/UART001.c **** (
+1034:../Dave/Generated/src/UART001/UART001.c ****   const UART001_HandleType* Handle,
+1035:../Dave/Generated/src/UART001/UART001.c ****   UART001_FlagStatusType Flag
+1036:../Dave/Generated/src/UART001/UART001.c **** )
+1037:../Dave/Generated/src/UART001/UART001.c **** {
+ 1748              		.loc 1 1037 0
+ 1749              		.cfi_startproc
+ 1750              		@ args = 0, pretend = 0, frame = 16
+ 1751              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1752              		@ link register save eliminated.
+ 1753 0000 80B4     		push	{r7}
+ 1754              	.LCFI37:
+ 1755              		.cfi_def_cfa_offset 4
+ 1756              		.cfi_offset 7, -4
+ 1757 0002 85B0     		sub	sp, sp, #20
+ 1758              	.LCFI38:
+ 1759              		.cfi_def_cfa_offset 24
+ 1760 0004 00AF     		add	r7, sp, #0
+ 1761              	.LCFI39:
+ 1762              		.cfi_def_cfa_register 7
+ 1763 0006 7860     		str	r0, [r7, #4]
+ 1764 0008 0B46     		mov	r3, r1
+ 1765 000a FB70     		strb	r3, [r7, #3]
+1038:../Dave/Generated/src/UART001/UART001.c **** 
+1039:../Dave/Generated/src/UART001/UART001.c ****   USIC_CH_TypeDef* UartRegs = Handle->UartRegs;
+ 1766              		.loc 1 1039 0
+ 1767 000c 7B68     		ldr	r3, [r7, #4]
+ 1768 000e 1B68     		ldr	r3, [r3, #0]
+ 1769 0010 FB60     		str	r3, [r7, #12]
+1040:../Dave/Generated/src/UART001/UART001.c ****   
+1041:../Dave/Generated/src/UART001/UART001.c ****   /* <<<DD_UART001_API_8>>>*/
+1042:../Dave/Generated/src/UART001/UART001.c ****   if(Flag <= UART001_ALT_REC_IND_FLAG)
+ 1770              		.loc 1 1042 0
+ 1771 0012 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1772 0014 0F2B     		cmp	r3, #15
+ 1773 0016 0AD8     		bhi	.L83
+1043:../Dave/Generated/src/UART001/UART001.c ****   {
+1044:../Dave/Generated/src/UART001/UART001.c ****     UartRegs->PSCR  |= ((uint32_t)SHIFT_ONE << (uint32_t)Flag);    
+ 1774              		.loc 1 1044 0
+ 1775 0018 FB68     		ldr	r3, [r7, #12]
+ 1776 001a DA6C     		ldr	r2, [r3, #76]
+ 1777 001c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1778 001e 4FF00101 		mov	r1, #1
+ 1779 0022 01FA03F3 		lsl	r3, r1, r3
+ 1780 0026 1A43     		orrs	r2, r2, r3
+ 1781 0028 FB68     		ldr	r3, [r7, #12]
+ 1782 002a DA64     		str	r2, [r3, #76]
+ 1783 002c 1FE0     		b	.L82
+ 1784              	.L83:
+1045:../Dave/Generated/src/UART001/UART001.c ****   }
+1046:../Dave/Generated/src/UART001/UART001.c ****   else if(Flag <= UART001_FIFO_ALTRECV_BUF_FLAG)
+ 1785              		.loc 1 1046 0
+ 1786 002e FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1787 0030 122B     		cmp	r3, #18
+ 1788 0032 0ED8     		bhi	.L85
+1047:../Dave/Generated/src/UART001/UART001.c ****   {
+1048:../Dave/Generated/src/UART001/UART001.c ****     UartRegs->TRBSCR  |= ((uint32_t)SHIFT_ONE << \
+ 1789              		.loc 1 1048 0
+ 1790 0034 FB68     		ldr	r3, [r7, #12]
+ 1791 0036 D3F81821 		ldr	r2, [r3, #280]
+1049:../Dave/Generated/src/UART001/UART001.c ****                  ((uint32_t)Flag - (uint32_t)UART001_FIFO_STD_RECV_BUF_FLAG)); 
+ 1792              		.loc 1 1049 0
+ 1793 003a FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1794 003c A3F11003 		sub	r3, r3, #16
+1048:../Dave/Generated/src/UART001/UART001.c ****     UartRegs->TRBSCR  |= ((uint32_t)SHIFT_ONE << \
+ 1795              		.loc 1 1048 0
+ 1796 0040 4FF00101 		mov	r1, #1
+ 1797 0044 01FA03F3 		lsl	r3, r1, r3
+ 1798 0048 1A43     		orrs	r2, r2, r3
+ 1799 004a FB68     		ldr	r3, [r7, #12]
+ 1800 004c C3F81821 		str	r2, [r3, #280]
+ 1801 0050 0DE0     		b	.L82
+ 1802              	.L85:
+1050:../Dave/Generated/src/UART001/UART001.c ****   }
+1051:../Dave/Generated/src/UART001/UART001.c ****   else
+1052:../Dave/Generated/src/UART001/UART001.c ****   {
+1053:../Dave/Generated/src/UART001/UART001.c ****     UartRegs->TRBSCR  |= ((uint32_t)SHIFT_ONE << \
+ 1803              		.loc 1 1053 0
+ 1804 0052 FB68     		ldr	r3, [r7, #12]
+ 1805 0054 D3F81821 		ldr	r2, [r3, #280]
+1054:../Dave/Generated/src/UART001/UART001.c ****                (((uint32_t)Flag - (uint32_t)UART001_FIFO_STD_RECV_BUF_FLAG) + \
+ 1806              		.loc 1 1054 0
+ 1807 0058 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1808 005a A3F10B03 		sub	r3, r3, #11
+1053:../Dave/Generated/src/UART001/UART001.c ****     UartRegs->TRBSCR  |= ((uint32_t)SHIFT_ONE << \
+ 1809              		.loc 1 1053 0
+ 1810 005e 4FF00101 		mov	r1, #1
+ 1811 0062 01FA03F3 		lsl	r3, r1, r3
+ 1812 0066 1A43     		orrs	r2, r2, r3
+ 1813 0068 FB68     		ldr	r3, [r7, #12]
+ 1814 006a C3F81821 		str	r2, [r3, #280]
+ 1815              	.L82:
+1055:../Dave/Generated/src/UART001/UART001.c ****                                                        UART001_FLAG_OFFSET ));
+1056:../Dave/Generated/src/UART001/UART001.c ****   }  
+1057:../Dave/Generated/src/UART001/UART001.c ****   
+1058:../Dave/Generated/src/UART001/UART001.c **** }
+ 1816              		.loc 1 1058 0
+ 1817 006e 07F11407 		add	r7, r7, #20
+ 1818 0072 BD46     		mov	sp, r7
+ 1819 0074 80BC     		pop	{r7}
+ 1820 0076 7047     		bx	lr
+ 1821              		.cfi_endproc
+ 1822              	.LFE124:
+ 1824              		.text
+ 1825              	.Letext0:
+ 1826              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1827              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 1828              		.file 4 "../Dave/Generated/src/UART001/../../inc/UART001/Usic.h"
+ 1829              		.file 5 "C:\\DAVE_WorkSpace\\20\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\LIBS/types.h"
+ 1830              		.file 6 "../Dave/Generated/src/UART001/../../inc/UART001/UART001.h"
+ 1831              		.file 7 "../Dave/Generated/src/UART001/../../inc/RESET001/RESET001.h"
+ 1832              		.file 8 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 1833              		.file 9 "../Dave/Generated/src/UART001/../../inc/UART001/UART001_Extern.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 UART001.c
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:20     .text.UART001_lInit:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:25     .text.UART001_lInit:00000000 UART001_lInit
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:257    .text.UART001_lConfigTXPin:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:262    .text.UART001_lConfigTXPin:00000000 UART001_lConfigTXPin
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:418    .text.UART001_labsRealType:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:423    .text.UART001_labsRealType:00000000 UART001_labsRealType
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:469    .text.UART001_lConfigureBaudRate:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:474    .text.UART001_lConfigureBaudRate:00000000 UART001_lConfigureBaudRate
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:972    .text.UART001_Init:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:977    .text.UART001_Init:00000000 UART001_Init
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1046   .text.UART001_DeInit:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1051   .text.UART001_DeInit:00000000 UART001_DeInit
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1078   .text.UART001_Configure:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1083   .text.UART001_Configure:00000000 UART001_Configure
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1240   .text.UART001_ReadDataMultiple:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1245   .text.UART001_ReadDataMultiple:00000000 UART001_ReadDataMultiple
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1336   .text.UART001_ReadDataBytes:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1341   .text.UART001_ReadDataBytes:00000000 UART001_ReadDataBytes
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1432   .text.UART001_WriteDataMultiple:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1437   .text.UART001_WriteDataMultiple:00000000 UART001_WriteDataMultiple
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1534   .text.UART001_WriteDataBytes:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1539   .text.UART001_WriteDataBytes:00000000 UART001_WriteDataBytes
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1636   .text.UART001_GetFlagStatus:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1641   .text.UART001_GetFlagStatus:00000000 UART001_GetFlagStatus
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1741   .text.UART001_ClearFlag:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\ccR5xDLL.s:1746   .text.UART001_ClearFlag:00000000 UART001_ClearFlag
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.UART001_Conf.h.53.fce01a2aa073e958cae0b1cc894db26c
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+
+UNDEFINED SYMBOLS
+RESET001_DeassertReset
+UART001_HandleArray

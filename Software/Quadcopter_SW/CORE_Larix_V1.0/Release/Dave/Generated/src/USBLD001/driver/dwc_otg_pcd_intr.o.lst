@@ -1,0 +1,2958 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"dwc_otg_pcd_intr.c"
+  16              		.section	.text.dwc_otg_pcd_update_otg,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	dwc_otg_pcd_update_otg:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 08B5     		push	{r3, lr}
+  25 0002 29B1     		cbz	r1, .L2
+  26 0004 437B     		ldrb	r3, [r0, #13]	@ zero_extendqisi2
+  27 0006 03F0E701 		and	r1, r3, #231
+  28 000a 6FF34511 		bfc	r1, #5, #1
+  29 000e 4173     		strb	r1, [r0, #13]
+  30              	.L2:
+  31 0010 0268     		ldr	r2, [r0, #0]
+  32 0012 536A     		ldr	r3, [r2, #36]
+  33 0014 03B1     		cbz	r3, .L1
+  34 0016 9847     		blx	r3
+  35              	.L1:
+  36 0018 08BD     		pop	{r3, pc}
+  38              		.section	.text.get_in_ep,"ax",%progbits
+  39              		.align	1
+  40              		.thumb
+  41              		.thumb_func
+  43              	get_in_ep:
+  44              		@ args = 0, pretend = 0, frame = 0
+  45              		@ frame_needed = 0, uses_anonymous_args = 0
+  46 0000 30B5     		push	{r4, r5, lr}
+  47 0002 8368     		ldr	r3, [r0, #8]
+  48 0004 9A68     		ldr	r2, [r3, #8]
+  49 0006 92F84540 		ldrb	r4, [r2, #69]	@ zero_extendqisi2
+  50 000a 11B1     		cbz	r1, .L12
+  51 000c 0246     		mov	r2, r0
+  52 000e 0023     		movs	r3, #0
+  53 0010 02E0     		b	.L13
+  54              	.L12:
+  55 0012 2430     		adds	r0, r0, #36
+  56 0014 30BD     		pop	{r4, r5, pc}
+  57              	.L15:
+  58 0016 0133     		adds	r3, r3, #1
+  59              	.L13:
+  60 0018 A342     		cmp	r3, r4
+  61 001a 09DA     		bge	.L17
+  62              	.L16:
+  63 001c 92F87850 		ldrb	r5, [r2, #120]	@ zero_extendqisi2
+  64 0020 4432     		adds	r2, r2, #68
+  65 0022 8D42     		cmp	r5, r1
+  66 0024 F7D1     		bne	.L15
+  67 0026 4421     		movs	r1, #68
+  68 0028 01FB0300 		mla	r0, r1, r3, r0
+  69 002c 6830     		adds	r0, r0, #104
+  70 002e 30BD     		pop	{r4, r5, pc}
+  71              	.L17:
+  72 0030 0020     		movs	r0, #0
+  73 0032 30BD     		pop	{r4, r5, pc}
+  75              		.section	.text.dwc_otg_pcd_handle_noniso_bna,"ax",%progbits
+  76              		.align	1
+  77              		.thumb
+  78              		.thumb_func
+  80              	dwc_otg_pcd_handle_noniso_bna:
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83 0000 10B5     		push	{r4, lr}
+  84 0002 036A     		ldr	r3, [r0, #32]
+  85 0004 C46B     		ldr	r4, [r0, #60]
+  86 0006 0022     		movs	r2, #0
+  87              	.L19:
+  88 0008 816B     		ldr	r1, [r0, #56]
+  89 000a 0833     		adds	r3, r3, #8
+  90 000c 8A42     		cmp	r2, r1
+  91 000e 07D2     		bcs	.L23
+  92              	.L20:
+  93 0010 53F8081C 		ldr	r1, [r3, #-8]
+  94 0014 6FF39F71 		bfc	r1, #30, #2
+  95 0018 43F8081C 		str	r1, [r3, #-8]
+  96 001c 0132     		adds	r2, r2, #1
+  97 001e F3E7     		b	.L19
+  98              	.L23:
+  99 0020 437C     		ldrb	r3, [r0, #17]	@ zero_extendqisi2
+ 100 0022 A268     		ldr	r2, [r4, #8]
+ 101 0024 017C     		ldrb	r1, [r0, #16]	@ zero_extendqisi2
+ 102 0026 13F0010F 		tst	r3, #1
+ 103 002a 9368     		ldr	r3, [r2, #8]
+ 104 002c 03EB8102 		add	r2, r3, r1, lsl #2
+ 105 0030 0CBF     		ite	eq
+ 106 0032 506A     		ldreq	r0, [r2, #36]
+ 107 0034 5068     		ldrne	r0, [r2, #4]
+ 108 0036 0021     		movs	r1, #0
+ 109 0038 4FF00042 		mov	r2, #-2147483648
+ 110 003c BDE81040 		pop	{r4, lr}
+ 111 0040 FFF7FEBF 		b	DWC_MODIFY_REG32
+ 113              		.section	.text.ep0_out_start,"ax",%progbits
+ 114              		.align	1
+ 115              		.thumb
+ 116              		.thumb_func
+ 118              	ep0_out_start:
+ 119              		@ args = 0, pretend = 0, frame = 8
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 122 0002 6023     		movs	r3, #96
+ 123 0004 0022     		movs	r2, #0
+ 124 0006 8468     		ldr	r4, [r0, #8]
+ 125 0008 0092     		str	r2, [sp, #0]
+ 126 000a 0D46     		mov	r5, r1
+ 127 000c 8DF80330 		strb	r3, [sp, #3]
+ 128 0010 0121     		movs	r1, #1
+ 129 0012 0023     		movs	r3, #0
+ 130 0014 61F3C403 		bfi	r3, r1, #3, #2
+ 131 0018 8DF80230 		strb	r3, [sp, #2]
+ 132 001c 1823     		movs	r3, #24
+ 133 001e 8DF80030 		strb	r3, [sp, #0]
+ 134 0022 90F84610 		ldrb	r1, [r0, #70]	@ zero_extendqisi2
+ 135 0026 0192     		str	r2, [sp, #4]
+ 136 0028 59B3     		cbz	r1, .L25
+ 137 002a 90F84700 		ldrb	r0, [r0, #71]	@ zero_extendqisi2
+ 138 002e 40B9     		cbnz	r0, .L26
+ 139 0030 606A     		ldr	r0, [r4, #36]
+ 140 0032 0099     		ldr	r1, [sp, #0]
+ 141 0034 1030     		adds	r0, r0, #16
+ 142 0036 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 143 003a 606A     		ldr	r0, [r4, #36]
+ 144 003c A969     		ldr	r1, [r5, #24]
+ 145 003e 1430     		adds	r0, r0, #20
+ 146 0040 22E0     		b	.L28
+ 147              	.L26:
+ 148 0042 D4F8A430 		ldr	r3, [r4, #164]
+ 149 0046 591C     		adds	r1, r3, #1
+ 150 0048 01F00100 		and	r0, r1, #1
+ 151 004c C4F8A400 		str	r0, [r4, #164]
+ 152 0050 2630     		adds	r0, r0, #38
+ 153 0052 54F82030 		ldr	r3, [r4, r0, lsl #2]
+ 154 0056 D978     		ldrb	r1, [r3, #3]	@ zero_extendqisi2
+ 155 0058 41F0CA00 		orr	r0, r1, #202
+ 156 005c D870     		strb	r0, [r3, #3]
+ 157 005e E98E     		ldrh	r1, [r5, #54]
+ 158 0060 C1F38A00 		ubfx	r0, r1, #2, #11
+ 159 0064 1880     		strh	r0, [r3, #0]	@ unaligned
+ 160 0066 D878     		ldrb	r0, [r3, #3]	@ zero_extendqisi2
+ 161 0068 A969     		ldr	r1, [r5, #24]
+ 162 006a 62F38710 		bfi	r0, r2, #6, #2
+ 163 006e D870     		strb	r0, [r3, #3]
+ 164 0070 D4F8A420 		ldr	r2, [r4, #164]
+ 165 0074 606A     		ldr	r0, [r4, #36]
+ 166 0076 5960     		str	r1, [r3, #4]
+ 167 0078 2432     		adds	r2, r2, #36
+ 168 007a 1430     		adds	r0, r0, #20
+ 169 007c 54F82210 		ldr	r1, [r4, r2, lsl #2]
+ 170 0080 02E0     		b	.L28
+ 171              	.L25:
+ 172 0082 606A     		ldr	r0, [r4, #36]
+ 173 0084 0099     		ldr	r1, [sp, #0]
+ 174 0086 1030     		adds	r0, r0, #16
+ 175              	.L28:
+ 176 0088 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 177 008c 606A     		ldr	r0, [r4, #36]
+ 178 008e 4FF00441 		mov	r1, #-2080374784
+ 179 0092 03B0     		add	sp, sp, #12
+ 180 0094 BDE83040 		pop	{r4, r5, lr}
+ 181 0098 FFF7FEBF 		b	DWC_WRITE_REG32
+ 183              		.section	.text.restart_transfer,"ax",%progbits
+ 184              		.align	1
+ 185              		.thumb
+ 186              		.thumb_func
+ 188              	restart_transfer:
+ 189              		@ args = 0, pretend = 0, frame = 0
+ 190              		@ frame_needed = 0, uses_anonymous_args = 0
+ 191 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 192 0002 0546     		mov	r5, r0
+ 193 0004 0F46     		mov	r7, r1
+ 194 0006 FFF7FEFF 		bl	get_in_ep
+ 195 000a AD68     		ldr	r5, [r5, #8]
+ 196 000c AB68     		ldr	r3, [r5, #8]
+ 197 000e 0446     		mov	r4, r0
+ 198 0010 03EB8700 		add	r0, r3, r7, lsl #2
+ 199 0014 4068     		ldr	r0, [r0, #4]
+ 200 0016 1030     		adds	r0, r0, #16
+ 201 0018 FFF7FEFF 		bl	DWC_READ_REG32
+ 202 001c C0F30F41 		ubfx	r1, r0, #16, #16
+ 203 0020 21F00702 		bic	r2, r1, #7
+ 204 0024 D304     		lsls	r3, r2, #19
+ 205 0026 D90C     		lsrs	r1, r3, #19
+ 206 0028 0029     		cmp	r1, #0
+ 207 002a 38D0     		beq	.L29
+ 208 002c 20F07F40 		bic	r0, r0, #-16777216
+ 209 0030 30F47800 		bics	r0, r0, #16252928
+ 210 0034 33D1     		bne	.L29
+ 211 0036 636A     		ldr	r3, [r4, #36]
+ 212 0038 002B     		cmp	r3, #0
+ 213 003a 30D0     		beq	.L29
+ 214 003c 668A     		ldrh	r6, [r4, #18]
+ 215 003e 616B     		ldr	r1, [r4, #52]
+ 216 0040 C6F38A02 		ubfx	r2, r6, #2, #11
+ 217 0044 C1F31206 		ubfx	r6, r1, #0, #19
+ 218 0048 9642     		cmp	r6, r2
+ 219 004a 266B     		ldr	r6, [r4, #48]
+ 220 004c 08DC     		bgt	.L31
+ 221 004e E16A     		ldr	r1, [r4, #44]
+ 222 0050 A362     		str	r3, [r4, #40]
+ 223 0052 60F31206 		bfi	r6, r0, #0, #19
+ 224 0056 60F31201 		bfi	r1, r0, #0, #19
+ 225 005a 2663     		str	r6, [r4, #48]
+ 226 005c E162     		str	r1, [r4, #44]
+ 227 005e 0EE0     		b	.L32
+ 228              	.L31:
+ 229 0060 B01A     		subs	r0, r6, r2
+ 230 0062 20F07F43 		bic	r3, r0, #-16777216
+ 231 0066 23F47800 		bic	r0, r3, #16252928
+ 232 006a A16A     		ldr	r1, [r4, #40]
+ 233 006c E36A     		ldr	r3, [r4, #44]
+ 234 006e 60F31206 		bfi	r6, r0, #0, #19
+ 235 0072 8A1A     		subs	r2, r1, r2
+ 236 0074 60F31203 		bfi	r3, r0, #0, #19
+ 237 0078 2663     		str	r6, [r4, #48]
+ 238 007a A262     		str	r2, [r4, #40]
+ 239 007c E362     		str	r3, [r4, #44]
+ 240              	.L32:
+ 241 007e 207B     		ldrb	r0, [r4, #12]	@ zero_extendqisi2
+ 242 0080 6FF30000 		bfc	r0, #0, #1
+ 243 0084 2073     		strb	r0, [r4, #12]
+ 244 0086 04F11001 		add	r1, r4, #16
+ 245 008a 2846     		mov	r0, r5
+ 246 008c 1FB9     		cbnz	r7, .L33
+ 247 008e BDE8F840 		pop	{r3, r4, r5, r6, r7, lr}
+ 248 0092 FFF7FEBF 		b	dwc_otg_ep0_start_transfer
+ 249              	.L33:
+ 250 0096 BDE8F840 		pop	{r3, r4, r5, r6, r7, lr}
+ 251 009a FFF7FEBF 		b	dwc_otg_ep_start_transfer
+ 252              	.L29:
+ 253 009e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 255              		.section	.text.do_setup_in_status_phase,"ax",%progbits
+ 256              		.align	1
+ 257              		.thumb
+ 258              		.thumb_func
+ 260              	do_setup_in_status_phase:
+ 261              		@ args = 0, pretend = 0, frame = 0
+ 262              		@ frame_needed = 0, uses_anonymous_args = 0
+ 263              		@ link register save eliminated.
+ 264 0000 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
+ 265 0002 062B     		cmp	r3, #6
+ 266 0004 0146     		mov	r1, r0
+ 267 0006 15D0     		beq	.L40
+ 268 0008 4B6D     		ldr	r3, [r1, #84]
+ 269 000a 0A6D     		ldr	r2, [r1, #80]
+ 270 000c 0420     		movs	r0, #4
+ 271 000e 0873     		strb	r0, [r1, #12]
+ 272 0010 6FF31203 		bfc	r3, #0, #19
+ 273 0014 91F83500 		ldrb	r0, [r1, #53]	@ zero_extendqisi2
+ 274 0018 4B65     		str	r3, [r1, #84]
+ 275 001a 6FF31202 		bfc	r2, #0, #19
+ 276 001e 8B69     		ldr	r3, [r1, #24]
+ 277 0020 0A65     		str	r2, [r1, #80]
+ 278 0022 40F00102 		orr	r2, r0, #1
+ 279 0026 8868     		ldr	r0, [r1, #8]
+ 280 0028 81F83520 		strb	r2, [r1, #53]
+ 281 002c CB63     		str	r3, [r1, #60]
+ 282 002e 3431     		adds	r1, r1, #52
+ 283 0030 FFF7FEBF 		b	dwc_otg_ep0_start_transfer
+ 284              	.L40:
+ 285 0034 7047     		bx	lr
+ 287              		.section	.text.do_setup_out_status_phase.part.4,"ax",%progbits
+ 288              		.align	1
+ 289              		.thumb
+ 290              		.thumb_func
+ 292              	do_setup_out_status_phase.part.4:
+ 293              		@ args = 0, pretend = 0, frame = 0
+ 294              		@ frame_needed = 0, uses_anonymous_args = 0
+ 295 0000 10B5     		push	{r4, lr}
+ 296 0002 0523     		movs	r3, #5
+ 297 0004 0446     		mov	r4, r0
+ 298 0006 0373     		strb	r3, [r0, #12]
+ 299 0008 616D     		ldr	r1, [r4, #84]
+ 300 000a 006D     		ldr	r0, [r0, #80]
+ 301 000c 94F83520 		ldrb	r2, [r4, #53]	@ zero_extendqisi2
+ 302 0010 A369     		ldr	r3, [r4, #24]
+ 303 0012 6FF31200 		bfc	r0, #0, #19
+ 304 0016 6FF31201 		bfc	r1, #0, #19
+ 305 001a 6FF30002 		bfc	r2, #0, #1
+ 306 001e 2065     		str	r0, [r4, #80]
+ 307 0020 6165     		str	r1, [r4, #84]
+ 308 0022 A068     		ldr	r0, [r4, #8]
+ 309 0024 84F83520 		strb	r2, [r4, #53]
+ 310 0028 04F13401 		add	r1, r4, #52
+ 311 002c E363     		str	r3, [r4, #60]
+ 312 002e FFF7FEFF 		bl	dwc_otg_ep0_start_transfer
+ 313 0032 A068     		ldr	r0, [r4, #8]
+ 314 0034 90F84610 		ldrb	r1, [r0, #70]	@ zero_extendqisi2
+ 315 0038 21B9     		cbnz	r1, .L42
+ 316 003a 2146     		mov	r1, r4
+ 317 003c BDE81040 		pop	{r4, lr}
+ 318 0040 FFF7FEBF 		b	ep0_out_start
+ 319              	.L42:
+ 320 0044 10BD     		pop	{r4, pc}
+ 322              		.section	.text.ep0_do_stall.isra.5,"ax",%progbits
+ 323              		.align	1
+ 324              		.thumb
+ 325              		.thumb_func
+ 327              	ep0_do_stall.isra.5:
+ 328              		@ args = 0, pretend = 0, frame = 0
+ 329              		@ frame_needed = 0, uses_anonymous_args = 0
+ 330 0000 10B5     		push	{r4, lr}
+ 331 0002 90F83530 		ldrb	r3, [r0, #53]	@ zero_extendqisi2
+ 332 0006 0446     		mov	r4, r0
+ 333 0008 43F00100 		orr	r0, r3, #1
+ 334 000c 84F83500 		strb	r0, [r4, #53]
+ 335 0010 04F13401 		add	r1, r4, #52
+ 336 0014 A068     		ldr	r0, [r4, #8]
+ 337 0016 FFF7FEFF 		bl	dwc_otg_ep_set_stall
+ 338 001a 94F83010 		ldrb	r1, [r4, #48]	@ zero_extendqisi2
+ 339 001e A068     		ldr	r0, [r4, #8]
+ 340 0020 41F00102 		orr	r2, r1, #1
+ 341 0024 0123     		movs	r3, #1
+ 342 0026 2146     		mov	r1, r4
+ 343 0028 84F83020 		strb	r2, [r4, #48]
+ 344 002c 2373     		strb	r3, [r4, #12]
+ 345 002e BDE81040 		pop	{r4, lr}
+ 346 0032 FFF7FEBF 		b	ep0_out_start
+ 348              		.section	.text.do_gadget_setup,"ax",%progbits
+ 349              		.align	1
+ 350              		.thumb
+ 351              		.thumb_func
+ 353              	do_gadget_setup:
+ 354              		@ args = 0, pretend = 0, frame = 0
+ 355              		@ frame_needed = 0, uses_anonymous_args = 0
+ 356 0000 38B5     		push	{r3, r4, r5, lr}
+ 357 0002 0446     		mov	r4, r0
+ 358 0004 D0F82004 		ldr	r0, [r0, #1056]
+ 359 0008 0D46     		mov	r5, r1
+ 360 000a FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 361 000e 2368     		ldr	r3, [r4, #0]
+ 362 0010 2946     		mov	r1, r5
+ 363 0012 9A68     		ldr	r2, [r3, #8]
+ 364 0014 2046     		mov	r0, r4
+ 365 0016 9047     		blx	r2
+ 366 0018 0546     		mov	r5, r0
+ 367 001a D4F82004 		ldr	r0, [r4, #1056]
+ 368 001e FFF7FEFF 		bl	DWC_SPINLOCK
+ 369 0022 002D     		cmp	r5, #0
+ 370 0024 04DA     		bge	.L46
+ 371 0026 2046     		mov	r0, r4
+ 372 0028 BDE83840 		pop	{r3, r4, r5, lr}
+ 373 002c FFF7FEBF 		b	ep0_do_stall.isra.5
+ 374              	.L46:
+ 375 0030 40F2E740 		movw	r0, #1255
+ 376 0034 8542     		cmp	r5, r0
+ 377 0036 03D1     		bne	.L45
+ 378 0038 617B     		ldrb	r1, [r4, #13]	@ zero_extendqisi2
+ 379 003a 41F00203 		orr	r3, r1, #2
+ 380 003e 6373     		strb	r3, [r4, #13]
+ 381              	.L45:
+ 382 0040 38BD     		pop	{r3, r4, r5, pc}
+ 384              		.section	.text.ep0_complete_request,"ax",%progbits
+ 385              		.align	1
+ 386              		.thumb
+ 387              		.thumb_func
+ 389              	ep0_complete_request:
+ 390              		@ args = 0, pretend = 0, frame = 8
+ 391              		@ frame_needed = 0, uses_anonymous_args = 0
+ 392 0000 2DE9F743 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, lr}
+ 393 0004 C56B     		ldr	r5, [r0, #60]
+ 394 0006 037C     		ldrb	r3, [r0, #16]	@ zero_extendqisi2
+ 395 0008 AF68     		ldr	r7, [r5, #8]
+ 396 000a D7F80880 		ldr	r8, [r7, #8]
+ 397 000e 08EB8302 		add	r2, r8, r3, lsl #2
+ 398 0012 6B7B     		ldrb	r3, [r5, #13]	@ zero_extendqisi2
+ 399 0014 DB07     		lsls	r3, r3, #31
+ 400 0016 0446     		mov	r4, r0
+ 401 0018 5068     		ldr	r0, [r2, #4]
+ 402 001a 526A     		ldr	r2, [r2, #36]
+ 403 001c 15D5     		bpl	.L49
+ 404 001e 6368     		ldr	r3, [r4, #4]
+ 405 0020 211D     		adds	r1, r4, #4
+ 406 0022 8B42     		cmp	r3, r1
+ 407 0024 11D1     		bne	.L49
+ 408 0026 607C     		ldrb	r0, [r4, #17]	@ zero_extendqisi2
+ 409 0028 C007     		lsls	r0, r0, #31
+ 410 002a 06D5     		bpl	.L50
+ 411 002c 297B     		ldrb	r1, [r5, #12]	@ zero_extendqisi2
+ 412 002e 0629     		cmp	r1, #6
+ 413 0030 06D0     		beq	.L51
+ 414 0032 2846     		mov	r0, r5
+ 415 0034 FFF7FEFF 		bl	do_setup_out_status_phase.part.4
+ 416 0038 02E0     		b	.L51
+ 417              	.L50:
+ 418 003a 2846     		mov	r0, r5
+ 419 003c FFF7FEFF 		bl	do_setup_in_status_phase
+ 420              	.L51:
+ 421 0040 6B7B     		ldrb	r3, [r5, #13]	@ zero_extendqisi2
+ 422 0042 6FF30003 		bfc	r3, #0, #1
+ 423 0046 6B73     		strb	r3, [r5, #13]
+ 424 0048 4DE0     		b	.L84
+ 425              	.L49:
+ 426 004a 2146     		mov	r1, r4
+ 427 004c 51F8046F 		ldr	r6, [r1, #4]!
+ 428 0050 8E42     		cmp	r6, r1
+ 429 0052 3AD0     		beq	.L57
+ 430 0054 2B7B     		ldrb	r3, [r5, #12]	@ zero_extendqisi2
+ 431 0056 191F     		subs	r1, r3, #4
+ 432 0058 0129     		cmp	r1, #1
+ 433 005a 38D9     		bls	.L53
+ 434 005c 637C     		ldrb	r3, [r4, #17]	@ zero_extendqisi2
+ 435 005e 13F00109 		ands	r9, r3, #1
+ 436 0062 1AD0     		beq	.L54
+ 437 0064 1030     		adds	r0, r0, #16
+ 438 0066 FFF7FEFF 		bl	DWC_READ_REG32
+ 439 006a 97F84720 		ldrb	r2, [r7, #71]	@ zero_extendqisi2
+ 440 006e 4AB3     		cbz	r2, .L55
+ 441 0070 D8F8AC00 		ldr	r0, [r8, #172]
+ 442 0074 0188     		ldrh	r1, [r0, #0]
+ 443 0076 41BB     		cbnz	r1, .L57
+ 444              	.L56:
+ 445 0078 307D     		ldrb	r0, [r6, #20]	@ zero_extendqisi2
+ 446 007a 236B     		ldr	r3, [r4, #48]
+ 447 007c C107     		lsls	r1, r0, #31
+ 448 007e 44BF     		itt	mi
+ 449 0080 6FF30000 		bfcmi	r0, #0, #1
+ 450 0084 3075     		strbmi	r0, [r6, #20]
+ 451 0086 297B     		ldrb	r1, [r5, #12]	@ zero_extendqisi2
+ 452 0088 C3F31202 		ubfx	r2, r3, #0, #19
+ 453 008c 0629     		cmp	r1, #6
+ 454 008e 3261     		str	r2, [r6, #16]
+ 455 0090 1BD0     		beq	.L57
+ 456 0092 2846     		mov	r0, r5
+ 457 0094 FFF7FEFF 		bl	do_setup_out_status_phase.part.4
+ 458 0098 17E0     		b	.L57
+ 459              	.L54:
+ 460 009a 02F11000 		add	r0, r2, #16
+ 461 009e FFF7FEFF 		bl	DWC_READ_REG32
+ 462 00a2 206B     		ldr	r0, [r4, #48]
+ 463 00a4 317D     		ldrb	r1, [r6, #20]	@ zero_extendqisi2
+ 464 00a6 C0F31202 		ubfx	r2, r0, #0, #19
+ 465 00aa 3261     		str	r2, [r6, #16]
+ 466 00ac CA07     		lsls	r2, r1, #31
+ 467 00ae 44BF     		itt	mi
+ 468 00b0 69F30001 		bfimi	r1, r9, #0, #1
+ 469 00b4 3175     		strbmi	r1, [r6, #20]
+ 470 00b6 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 471 00ba 33B9     		cbnz	r3, .L57
+ 472 00bc 2846     		mov	r0, r5
+ 473 00be FFF7FEFF 		bl	do_setup_in_status_phase
+ 474 00c2 02E0     		b	.L57
+ 475              	.L55:
+ 476 00c4 4306     		lsls	r3, r0, #25
+ 477 00c6 0090     		str	r0, [sp, #0]
+ 478 00c8 D6D0     		beq	.L56
+ 479              	.L57:
+ 480 00ca 0020     		movs	r0, #0
+ 481 00cc 0CE0     		b	.L83
+ 482              	.L53:
+ 483 00ce 0022     		movs	r2, #0
+ 484 00d0 2046     		mov	r0, r4
+ 485 00d2 3146     		mov	r1, r6
+ 486 00d4 FFF7FEFF 		bl	dwc_otg_request_done
+ 487 00d8 E26A     		ldr	r2, [r4, #44]
+ 488 00da 0023     		movs	r3, #0
+ 489 00dc 63F31202 		bfi	r2, r3, #0, #19
+ 490 00e0 6362     		str	r3, [r4, #36]
+ 491 00e2 A362     		str	r3, [r4, #40]
+ 492 00e4 E262     		str	r2, [r4, #44]
+ 493              	.L84:
+ 494 00e6 0120     		movs	r0, #1
+ 495              	.L83:
+ 496 00e8 BDE8FE83 		pop	{r1, r2, r3, r4, r5, r6, r7, r8, r9, pc}
+ 498              		.section	.text.get_ep_by_addr,"ax",%progbits
+ 499              		.align	1
+ 500              		.global	get_ep_by_addr
+ 501              		.thumb
+ 502              		.thumb_func
+ 504              	get_ep_by_addr:
+ 505              		@ args = 0, pretend = 0, frame = 0
+ 506              		@ frame_needed = 0, uses_anonymous_args = 0
+ 507              		@ link register save eliminated.
+ 508 0000 11F00F03 		ands	r3, r1, #15
+ 509 0004 01D1     		bne	.L86
+ 510 0006 2430     		adds	r0, r0, #36
+ 511 0008 7047     		bx	lr
+ 512              	.L86:
+ 513 000a 11F0800F 		tst	r1, #128
+ 514 000e 4FF04402 		mov	r2, #68
+ 515 0012 03F1FF31 		add	r1, r3, #-1
+ 516 0016 02FB0100 		mla	r0, r2, r1, r0
+ 517 001a 01D0     		beq	.L88
+ 518 001c 6830     		adds	r0, r0, #104
+ 519 001e 7047     		bx	lr
+ 520              	.L88:
+ 521 0020 00F51170 		add	r0, r0, #580
+ 522 0024 7047     		bx	lr
+ 524              		.section	.text.handle_ep0,"ax",%progbits
+ 525              		.align	1
+ 526              		.thumb
+ 527              		.thumb_func
+ 529              	handle_ep0:
+ 530              		@ args = 0, pretend = 0, frame = 24
+ 531              		@ frame_needed = 0, uses_anonymous_args = 0
+ 532 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 533 0002 037B     		ldrb	r3, [r0, #12]	@ zero_extendqisi2
+ 534 0004 8568     		ldr	r5, [r0, #8]
+ 535 0006 0446     		mov	r4, r0
+ 536 0008 00F12406 		add	r6, r0, #36
+ 537 000c 581E     		subs	r0, r3, #1
+ 538 000e 87B0     		sub	sp, sp, #28
+ 539 0010 0428     		cmp	r0, #4
+ 540 0012 00F2E681 		bhi	.L89
+ 541 0016 DFE810F0 		tbh	[pc, r0, lsl #1]
+ 542              	.L95:
+ 543 001a 0500     		.2byte	(.L91-.L95)/2
+ 544 001c 6401     		.2byte	(.L92-.L95)/2
+ 545 001e 7F01     		.2byte	(.L93-.L95)/2
+ 546 0020 CC01     		.2byte	(.L94-.L95)/2
+ 547 0022 CC01     		.2byte	(.L94-.L95)/2
+ 548              	.L91:
+ 549 0024 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 550 0026 6069     		ldr	r0, [r4, #20]
+ 551 0028 6FF34102 		bfc	r2, #1, #1
+ 552 002c 6273     		strb	r2, [r4, #13]
+ 553 002e 03C8     		ldmia	r0, {r0, r1}
+ 554 0030 AD68     		ldr	r5, [r5, #8]
+ 555 0032 02AB     		add	r3, sp, #8
+ 556 0034 83E80300 		stmia	r3, {r0, r1}
+ 557 0038 686A     		ldr	r0, [r5, #36]
+ 558 003a 1030     		adds	r0, r0, #16
+ 559 003c FFF7FEFF 		bl	DWC_READ_REG32
+ 560 0040 3046     		mov	r0, r6
+ 561 0042 FFF7FEFF 		bl	dwc_otg_request_nuke
+ 562 0046 94F83010 		ldrb	r1, [r4, #48]	@ zero_extendqisi2
+ 563 004a 9DF80800 		ldrb	r0, [sp, #8]	@ zero_extendqisi2
+ 564 004e 94F83520 		ldrb	r2, [r4, #53]	@ zero_extendqisi2
+ 565 0052 6FF30001 		bfc	r1, #0, #1
+ 566 0056 10F0800F 		tst	r0, #128
+ 567 005a 84F83010 		strb	r1, [r4, #48]
+ 568 005e 05D0     		beq	.L96
+ 569 0060 42F00101 		orr	r1, r2, #1
+ 570 0064 84F83510 		strb	r1, [r4, #53]
+ 571 0068 0223     		movs	r3, #2
+ 572 006a 04E0     		b	.L172
+ 573              	.L96:
+ 574 006c 6FF30002 		bfc	r2, #0, #1
+ 575 0070 84F83520 		strb	r2, [r4, #53]
+ 576 0074 0323     		movs	r3, #3
+ 577              	.L172:
+ 578 0076 2373     		strb	r3, [r4, #12]
+ 579 0078 9DF80E20 		ldrb	r2, [sp, #14]	@ zero_extendqisi2
+ 580 007c 9DF80F30 		ldrb	r3, [sp, #15]	@ zero_extendqisi2
+ 581 0080 52EA0322 		orrs	r2, r2, r3, lsl #8
+ 582 0084 07D1     		bne	.L98
+ 583 0086 94F83510 		ldrb	r1, [r4, #53]	@ zero_extendqisi2
+ 584 008a 0422     		movs	r2, #4
+ 585 008c 41F00103 		orr	r3, r1, #1
+ 586 0090 84F83530 		strb	r3, [r4, #53]
+ 587 0094 2273     		strb	r2, [r4, #12]
+ 588              	.L98:
+ 589 0096 10F0600F 		tst	r0, #96
+ 590 009a 40F01F81 		bne	.L100
+ 591              	.L99:
+ 592 009e 9DF80900 		ldrb	r0, [sp, #9]	@ zero_extendqisi2
+ 593 00a2 0C28     		cmp	r0, #12
+ 594 00a4 00F21A81 		bhi	.L100
+ 595 00a8 DFE810F0 		tbh	[pc, r0, lsl #1]
+ 596              	.L107:
+ 597 00ac 0D00     		.2byte	(.L101-.L107)/2
+ 598 00ae 5700     		.2byte	(.L102-.L107)/2
+ 599 00b0 1801     		.2byte	(.L100-.L107)/2
+ 600 00b2 9300     		.2byte	(.L103-.L107)/2
+ 601 00b4 1801     		.2byte	(.L100-.L107)/2
+ 602 00b6 0901     		.2byte	(.L104-.L107)/2
+ 603 00b8 1801     		.2byte	(.L100-.L107)/2
+ 604 00ba 1801     		.2byte	(.L100-.L107)/2
+ 605 00bc 1801     		.2byte	(.L100-.L107)/2
+ 606 00be 1501     		.2byte	(.L105-.L107)/2
+ 607 00c0 1801     		.2byte	(.L100-.L107)/2
+ 608 00c2 1501     		.2byte	(.L105-.L107)/2
+ 609 00c4 1801     		.2byte	(.L100-.L107)/2
+ 610              	.L101:
+ 611 00c6 6369     		ldr	r3, [r4, #20]
+ 612 00c8 E569     		ldr	r5, [r4, #28]
+ 613 00ca 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 614 00cc 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 615 00ce 5979     		ldrb	r1, [r3, #5]	@ zero_extendqisi2
+ 616 00d0 9E79     		ldrb	r6, [r3, #6]	@ zero_extendqisi2
+ 617 00d2 DF79     		ldrb	r7, [r3, #7]	@ zero_extendqisi2
+ 618 00d4 00F01F03 		and	r3, r0, #31
+ 619 00d8 012B     		cmp	r3, #1
+ 620 00da 0CD0     		beq	.L110
+ 621 00dc 02D3     		bcc	.L109
+ 622 00de 022B     		cmp	r3, #2
+ 623 00e0 1CD1     		bne	.L108
+ 624 00e2 0AE0     		b	.L184
+ 625              	.L109:
+ 626 00e4 0120     		movs	r0, #1
+ 627 00e6 2880     		strh	r0, [r5, #0]	@ movhi
+ 628 00e8 637B     		ldrb	r3, [r4, #13]	@ zero_extendqisi2
+ 629 00ea C3F38002 		ubfx	r2, r3, #2, #1
+ 630 00ee 5100     		lsls	r1, r2, #1
+ 631 00f0 41F00101 		orr	r1, r1, #1
+ 632 00f4 11E0     		b	.L173
+ 633              	.L110:
+ 634 00f6 0021     		movs	r1, #0
+ 635 00f8 0FE0     		b	.L173
+ 636              	.L184:
+ 637 00fa 2046     		mov	r0, r4
+ 638 00fc 42EA0121 		orr	r1, r2, r1, lsl #8
+ 639 0100 FFF7FEFF 		bl	get_ep_by_addr
+ 640 0104 0028     		cmp	r0, #0
+ 641 0106 00F0B180 		beq	.L126
+ 642 010a 46EA0726 		orr	r6, r6, r7, lsl #8
+ 643 010e 022E     		cmp	r6, #2
+ 644 0110 00F3AC80 		bgt	.L126
+ 645              	.L113:
+ 646 0114 027B     		ldrb	r2, [r0, #12]	@ zero_extendqisi2
+ 647 0116 02F00101 		and	r1, r2, #1
+ 648              	.L173:
+ 649 011a 2980     		strh	r1, [r5, #0]	@ movhi
+ 650              	.L108:
+ 651 011c 607B     		ldrb	r0, [r4, #13]	@ zero_extendqisi2
+ 652 011e 226A     		ldr	r2, [r4, #32]
+ 653 0120 216D     		ldr	r1, [r4, #80]
+ 654 0122 E263     		str	r2, [r4, #60]
+ 655 0124 40F00103 		orr	r3, r0, #1
+ 656 0128 94F85A20 		ldrb	r2, [r4, #90]	@ zero_extendqisi2
+ 657 012c 6373     		strb	r3, [r4, #13]
+ 658 012e 0220     		movs	r0, #2
+ 659 0130 636D     		ldr	r3, [r4, #84]
+ 660 0132 A4F85800 		strh	r0, [r4, #88]	@ movhi
+ 661 0136 60F31201 		bfi	r1, r0, #0, #19
+ 662 013a 2165     		str	r1, [r4, #80]
+ 663 013c 6FF31203 		bfc	r3, #0, #19
+ 664 0140 22F00701 		bic	r1, r2, #7
+ 665 0144 84F85A10 		strb	r1, [r4, #90]
+ 666 0148 A564     		str	r5, [r4, #72]
+ 667 014a E564     		str	r5, [r4, #76]
+ 668 014c 6365     		str	r3, [r4, #84]
+ 669 014e A068     		ldr	r0, [r4, #8]
+ 670 0150 04F13401 		add	r1, r4, #52
+ 671 0154 FFF7FEFF 		bl	dwc_otg_ep0_start_transfer
+ 672 0158 43E1     		b	.L89
+ 673              	.L102:
+ 674 015a 6369     		ldr	r3, [r4, #20]
+ 675 015c 9A78     		ldrb	r2, [r3, #2]	@ zero_extendqisi2
+ 676 015e D878     		ldrb	r0, [r3, #3]	@ zero_extendqisi2
+ 677 0160 1979     		ldrb	r1, [r3, #4]	@ zero_extendqisi2
+ 678 0162 5D79     		ldrb	r5, [r3, #5]	@ zero_extendqisi2
+ 679 0164 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 680 0166 13F01F03 		ands	r3, r3, #31
+ 681 016a 03D0     		beq	.L115
+ 682 016c 022B     		cmp	r3, #2
+ 683 016e 40F03881 		bne	.L89
+ 684 0172 0BE0     		b	.L185
+ 685              	.L115:
+ 686 0174 42EA0021 		orr	r1, r2, r0, lsl #8
+ 687 0178 0129     		cmp	r1, #1
+ 688 017a 02D0     		beq	.L118
+ 689 017c 0229     		cmp	r1, #2
+ 690 017e 75D1     		bne	.L126
+ 691 0180 7FE0     		b	.L133
+ 692              	.L118:
+ 693 0182 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 694 0184 63F38202 		bfi	r2, r3, #2, #1
+ 695 0188 6273     		strb	r2, [r4, #13]
+ 696 018a 7AE0     		b	.L133
+ 697              	.L185:
+ 698 018c 41EA0521 		orr	r1, r1, r5, lsl #8
+ 699 0190 2046     		mov	r0, r4
+ 700 0192 FFF7FEFF 		bl	get_ep_by_addr
+ 701 0196 0546     		mov	r5, r0
+ 702 0198 0028     		cmp	r0, #0
+ 703 019a 67D0     		beq	.L126
+ 704 019c 90F83620 		ldrb	r2, [r0, #54]	@ zero_extendqisi2
+ 705 01a0 02F00800 		and	r0, r2, #8
+ 706 01a4 C1B2     		uxtb	r1, r0
+ 707 01a6 21B9     		cbnz	r1, .L120
+ 708 01a8 A068     		ldr	r0, [r4, #8]
+ 709 01aa 05F11001 		add	r1, r5, #16
+ 710 01ae FFF7FEFF 		bl	dwc_otg_ep_clear_stall
+ 711              	.L120:
+ 712 01b2 A068     		ldr	r0, [r4, #8]
+ 713 01b4 05F11001 		add	r1, r5, #16
+ 714 01b8 FFF7FEFF 		bl	dwc_otg_ep_activate
+ 715 01bc 2B7B     		ldrb	r3, [r5, #12]	@ zero_extendqisi2
+ 716 01be DA07     		lsls	r2, r3, #31
+ 717 01c0 5FD5     		bpl	.L133
+ 718 01c2 03F0FE02 		and	r2, r3, #254
+ 719 01c6 42F00800 		orr	r0, r2, #8
+ 720 01ca 2873     		strb	r0, [r5, #12]
+ 721 01cc D4F82804 		ldr	r0, [r4, #1064]
+ 722 01d0 2DE0     		b	.L179
+ 723              	.L103:
+ 724 01d2 6269     		ldr	r2, [r4, #20]
+ 725 01d4 A568     		ldr	r5, [r4, #8]
+ 726 01d6 92E80300 		ldmia	r2, {r0, r1}
+ 727 01da 04AB     		add	r3, sp, #16
+ 728 01dc 6E68     		ldr	r6, [r5, #4]
+ 729 01de 83E80300 		stmia	r3, {r0, r1}
+ 730 01e2 2868     		ldr	r0, [r5, #0]
+ 731 01e4 9DF81020 		ldrb	r2, [sp, #16]	@ zero_extendqisi2
+ 732 01e8 4168     		ldr	r1, [r0, #4]
+ 733 01ea 02F01F00 		and	r0, r2, #31
+ 734 01ee 0128     		cmp	r0, #1
+ 735 01f0 4BD0     		beq	.L124
+ 736 01f2 03D3     		bcc	.L123
+ 737 01f4 0228     		cmp	r0, #2
+ 738 01f6 40F0F480 		bne	.L89
+ 739 01fa 3BE0     		b	.L186
+ 740              	.L123:
+ 741 01fc 9DF81200 		ldrb	r0, [sp, #18]	@ zero_extendqisi2
+ 742 0200 9DF81320 		ldrb	r2, [sp, #19]	@ zero_extendqisi2
+ 743 0204 40EA0223 		orr	r3, r0, r2, lsl #8
+ 744 0208 581E     		subs	r0, r3, #1
+ 745 020a 0428     		cmp	r0, #4
+ 746 020c 2ED8     		bhi	.L126
+ 747 020e DFE800F0 		tbb	[pc, r0]
+ 748              	.L132:
+ 749 0212 03       		.byte	(.L127-.L132)/2
+ 750 0213 08       		.byte	(.L128-.L132)/2
+ 751 0214 11       		.byte	(.L129-.L132)/2
+ 752 0215 1F       		.byte	(.L130-.L132)/2
+ 753 0216 24       		.byte	(.L131-.L132)/2
+ 754 0217 00       		.align	1
+ 755              	.L127:
+ 756 0218 607B     		ldrb	r0, [r4, #13]	@ zero_extendqisi2
+ 757 021a 40F00402 		orr	r2, r0, #4
+ 758 021e 6273     		strb	r2, [r4, #13]
+ 759 0220 2FE0     		b	.L133
+ 760              	.L128:
+ 761 0222 9DF81510 		ldrb	r1, [sp, #21]	@ zero_extendqisi2
+ 762 0226 D4F82404 		ldr	r0, [r4, #1060]
+ 763 022a C4F82C14 		str	r1, [r4, #1068]
+ 764              	.L179:
+ 765 022e FFF7FEFF 		bl	DWC_TASK_SCHEDULE
+ 766 0232 26E0     		b	.L133
+ 767              	.L129:
+ 768 0234 D1B9     		cbnz	r1, .L126
+ 769 0236 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 770 0238 42F00803 		orr	r3, r2, #8
+ 771 023c 2046     		mov	r0, r4
+ 772 023e 6373     		strb	r3, [r4, #13]
+ 773 0240 FFF7FEFF 		bl	dwc_otg_pcd_update_otg
+ 774 0244 3046     		mov	r0, r6
+ 775 0246 4FF42061 		mov	r1, #2560
+ 776 024a FFF7FEFF 		bl	DWC_WRITE_REG32
+ 777 024e 18E0     		b	.L133
+ 778              	.L130:
+ 779 0250 61B9     		cbnz	r1, .L126
+ 780 0252 607B     		ldrb	r0, [r4, #13]	@ zero_extendqisi2
+ 781 0254 40F01003 		orr	r3, r0, #16
+ 782 0258 03E0     		b	.L174
+ 783              	.L131:
+ 784 025a 39B9     		cbnz	r1, .L126
+ 785 025c 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 786 025e 42F02003 		orr	r3, r2, #32
+ 787              	.L174:
+ 788 0262 6373     		strb	r3, [r4, #13]
+ 789 0264 2046     		mov	r0, r4
+ 790 0266 FFF7FEFF 		bl	dwc_otg_pcd_update_otg
+ 791 026a 0AE0     		b	.L133
+ 792              	.L126:
+ 793 026c 2046     		mov	r0, r4
+ 794 026e FFF7FEFF 		bl	ep0_do_stall.isra.5
+ 795 0272 B6E0     		b	.L89
+ 796              	.L186:
+ 797 0274 9DF81310 		ldrb	r1, [sp, #19]	@ zero_extendqisi2
+ 798 0278 9DF81230 		ldrb	r3, [sp, #18]	@ zero_extendqisi2
+ 799 027c 53EA0123 		orrs	r3, r3, r1, lsl #8
+ 800 0280 08D0     		beq	.L187
+ 801              	.L133:
+ 802 0282 2046     		mov	r0, r4
+ 803 0284 FFF7FEFF 		bl	do_setup_in_status_phase
+ 804 0288 ABE0     		b	.L89
+ 805              	.L124:
+ 806 028a 2046     		mov	r0, r4
+ 807 028c 1946     		mov	r1, r3
+ 808              	.L176:
+ 809 028e FFF7FEFF 		bl	do_gadget_setup
+ 810 0292 A6E0     		b	.L89
+ 811              	.L187:
+ 812 0294 9DF81520 		ldrb	r2, [sp, #21]	@ zero_extendqisi2
+ 813 0298 9DF81410 		ldrb	r1, [sp, #20]	@ zero_extendqisi2
+ 814 029c 2046     		mov	r0, r4
+ 815 029e 41EA0221 		orr	r1, r1, r2, lsl #8
+ 816 02a2 FFF7FEFF 		bl	get_ep_by_addr
+ 817 02a6 0146     		mov	r1, r0
+ 818 02a8 0028     		cmp	r0, #0
+ 819 02aa DFD0     		beq	.L126
+ 820 02ac 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 821 02ae 40F00103 		orr	r3, r0, #1
+ 822 02b2 0B73     		strb	r3, [r1, #12]
+ 823 02b4 2846     		mov	r0, r5
+ 824 02b6 1031     		adds	r1, r1, #16
+ 825 02b8 FFF7FEFF 		bl	dwc_otg_ep_set_stall
+ 826 02bc E1E7     		b	.L133
+ 827              	.L104:
+ 828 02be A568     		ldr	r5, [r4, #8]
+ 829 02c0 6169     		ldr	r1, [r4, #20]
+ 830 02c2 A868     		ldr	r0, [r5, #8]
+ 831 02c4 8D78     		ldrb	r5, [r1, #2]	@ zero_extendqisi2
+ 832 02c6 0978     		ldrb	r1, [r1, #0]	@ zero_extendqisi2
+ 833 02c8 41B9     		cbnz	r1, .L100
+ 834 02ca 0A46     		mov	r2, r1
+ 835 02cc 65F30A12 		bfi	r2, r5, #4, #7
+ 836 02d0 0068     		ldr	r0, [r0, #0]
+ 837 02d2 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 838              	.L105:
+ 839 02d6 2046     		mov	r0, r4
+ 840 02d8 FFF7FEFF 		bl	do_setup_in_status_phase
+ 841              	.L100:
+ 842 02dc 2046     		mov	r0, r4
+ 843 02de 02A9     		add	r1, sp, #8
+ 844 02e0 D5E7     		b	.L176
+ 845              	.L92:
+ 846 02e2 95F84620 		ldrb	r2, [r5, #70]	@ zero_extendqisi2
+ 847 02e6 002A     		cmp	r2, #0
+ 848 02e8 3FD0     		beq	.L142
+ 849 02ea 95F84700 		ldrb	r0, [r5, #71]	@ zero_extendqisi2
+ 850 02ee A968     		ldr	r1, [r5, #8]
+ 851 02f0 60B9     		cbnz	r0, .L138
+ 852 02f2 4868     		ldr	r0, [r1, #4]
+ 853 02f4 1030     		adds	r0, r0, #16
+ 854 02f6 FFF7FEFF 		bl	DWC_READ_REG32
+ 855 02fa 0090     		str	r0, [sp, #0]
+ 856 02fc 9DF80010 		ldrb	r1, [sp, #0]	@ zero_extendqisi2
+ 857 0300 206D     		ldr	r0, [r4, #80]
+ 858 0302 01F07F02 		and	r2, r1, #127
+ 859 0306 C0F31203 		ubfx	r3, r0, #0, #19
+ 860 030a 20E0     		b	.L182
+ 861              	.L138:
+ 862 030c 236D     		ldr	r3, [r4, #80]
+ 863 030e D1F8AC00 		ldr	r0, [r1, #172]
+ 864 0312 C3F31203 		ubfx	r3, r3, #0, #19
+ 865 0316 19E0     		b	.L183
+ 866              	.L93:
+ 867 0318 95F84610 		ldrb	r1, [r5, #70]	@ zero_extendqisi2
+ 868 031c 29B3     		cbz	r1, .L142
+ 869 031e 95F84720 		ldrb	r2, [r5, #71]	@ zero_extendqisi2
+ 870 0322 AB68     		ldr	r3, [r5, #8]
+ 871 0324 6AB9     		cbnz	r2, .L143
+ 872 0326 586A     		ldr	r0, [r3, #36]
+ 873 0328 1030     		adds	r0, r0, #16
+ 874 032a FFF7FEFF 		bl	DWC_READ_REG32
+ 875 032e 0090     		str	r0, [sp, #0]
+ 876 0330 E28E     		ldrh	r2, [r4, #54]
+ 877 0332 9DF80010 		ldrb	r1, [sp, #0]	@ zero_extendqisi2
+ 878 0336 C2F38A00 		ubfx	r0, r2, #2, #11
+ 879 033a 01F07F03 		and	r3, r1, #127
+ 880 033e C31A     		subs	r3, r0, r3
+ 881 0340 06E0     		b	.L144
+ 882              	.L143:
+ 883 0342 E18E     		ldrh	r1, [r4, #54]
+ 884 0344 D3F8B400 		ldr	r0, [r3, #180]
+ 885 0348 C1F38A03 		ubfx	r3, r1, #2, #11
+ 886              	.L183:
+ 887 034c 0288     		ldrh	r2, [r0, #0]
+ 888              	.L182:
+ 889 034e 9B1A     		subs	r3, r3, r2
+ 890              	.L144:
+ 891 0350 626D     		ldr	r2, [r4, #84]
+ 892 0352 C2F31200 		ubfx	r0, r2, #0, #19
+ 893 0356 1918     		adds	r1, r3, r0
+ 894 0358 61F31202 		bfi	r2, r1, #0, #19
+ 895 035c 6265     		str	r2, [r4, #84]
+ 896 035e E16B     		ldr	r1, [r4, #60]
+ 897 0360 E26C     		ldr	r2, [r4, #76]
+ 898 0362 D018     		adds	r0, r2, r3
+ 899 0364 CB18     		adds	r3, r1, r3
+ 900 0366 E064     		str	r0, [r4, #76]
+ 901 0368 E363     		str	r3, [r4, #60]
+ 902              	.L142:
+ 903 036a 626D     		ldr	r2, [r4, #84]
+ 904 036c A16D     		ldr	r1, [r4, #88]
+ 905 036e C2F31200 		ubfx	r0, r2, #0, #19
+ 906 0372 C1F31203 		ubfx	r3, r1, #0, #19
+ 907 0376 9842     		cmp	r0, r3
+ 908 0378 05DA     		bge	.L145
+ 909 037a A068     		ldr	r0, [r4, #8]
+ 910 037c 04F13401 		add	r1, r4, #52
+ 911 0380 FFF7FEFF 		bl	dwc_otg_ep0_continue_transfer
+ 912 0384 2DE0     		b	.L89
+ 913              	.L145:
+ 914 0386 94F85620 		ldrb	r2, [r4, #86]	@ zero_extendqisi2
+ 915 038a 02F00800 		and	r0, r2, #8
+ 916 038e C1B2     		uxtb	r1, r0
+ 917 0390 59B1     		cbz	r1, .L146
+ 918 0392 A068     		ldr	r0, [r4, #8]
+ 919 0394 04F13401 		add	r1, r4, #52
+ 920 0398 FFF7FEFF 		bl	dwc_otg_ep0_continue_transfer
+ 921 039c 94F85630 		ldrb	r3, [r4, #86]	@ zero_extendqisi2
+ 922 03a0 6FF3C303 		bfc	r3, #3, #1
+ 923 03a4 84F85630 		strb	r3, [r4, #86]
+ 924 03a8 1BE0     		b	.L89
+ 925              	.L146:
+ 926 03aa 3046     		mov	r0, r6
+ 927 03ac FFF7FEFF 		bl	ep0_complete_request
+ 928 03b0 17E0     		b	.L89
+ 929              	.L94:
+ 930 03b2 3046     		mov	r0, r6
+ 931 03b4 FFF7FEFF 		bl	ep0_complete_request
+ 932 03b8 94F83030 		ldrb	r3, [r4, #48]	@ zero_extendqisi2
+ 933 03bc 94F83510 		ldrb	r1, [r4, #53]	@ zero_extendqisi2
+ 934 03c0 0120     		movs	r0, #1
+ 935 03c2 43F00102 		orr	r2, r3, #1
+ 936 03c6 6FF30001 		bfc	r1, #0, #1
+ 937 03ca 2073     		strb	r0, [r4, #12]
+ 938 03cc 84F83020 		strb	r2, [r4, #48]
+ 939 03d0 84F83510 		strb	r1, [r4, #53]
+ 940 03d4 95F84600 		ldrb	r0, [r5, #70]	@ zero_extendqisi2
+ 941 03d8 18B1     		cbz	r0, .L89
+ 942 03da 2846     		mov	r0, r5
+ 943 03dc 2146     		mov	r1, r4
+ 944 03de FFF7FEFF 		bl	ep0_out_start
+ 945              	.L89:
+ 946 03e2 07B0     		add	sp, sp, #28
+ 947 03e4 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 949              		.section	.text.start_next_request,"ax",%progbits
+ 950              		.align	1
+ 951              		.global	start_next_request
+ 952              		.thumb
+ 953              		.thumb_func
+ 955              	start_next_request:
+ 956              		@ args = 0, pretend = 0, frame = 0
+ 957              		@ frame_needed = 0, uses_anonymous_args = 0
+ 958 0000 0146     		mov	r1, r0
+ 959 0002 C06B     		ldr	r0, [r0, #60]
+ 960 0004 70B5     		push	{r4, r5, r6, lr}
+ 961 0006 8368     		ldr	r3, [r0, #8]
+ 962 0008 0C46     		mov	r4, r1
+ 963 000a 1A68     		ldr	r2, [r3, #0]
+ 964 000c 54F8043F 		ldr	r3, [r4, #4]!
+ 965 0010 926F     		ldr	r2, [r2, #120]
+ 966 0012 A342     		cmp	r3, r4
+ 967 0014 57D0     		beq	.L188
+ 968 0016 91F83260 		ldrb	r6, [r1, #50]	@ zero_extendqisi2
+ 969 001a 9C68     		ldr	r4, [r3, #8]
+ 970 001c 5D68     		ldr	r5, [r3, #4]
+ 971 001e 8C61     		str	r4, [r1, #24]
+ 972 0020 6FF3C306 		bfc	r6, #3, #1
+ 973 0024 81F83260 		strb	r6, [r1, #50]
+ 974 0028 DC68     		ldr	r4, [r3, #12]
+ 975 002a 4D62     		str	r5, [r1, #36]
+ 976 002c 8D62     		str	r5, [r1, #40]
+ 977 002e 91F83650 		ldrb	r5, [r1, #54]	@ zero_extendqisi2
+ 978 0032 8C86     		strh	r4, [r1, #52]	@ movhi
+ 979 0034 C4F30246 		ubfx	r6, r4, #16, #3
+ 980 0038 25F00705 		bic	r5, r5, #7
+ 981 003c 3543     		orrs	r5, r5, r6
+ 982 003e 81F83650 		strb	r5, [r1, #54]
+ 983 0042 CD6A     		ldr	r5, [r1, #44]
+ 984 0044 4A61     		str	r2, [r1, #20]
+ 985 0046 6FF31205 		bfc	r5, #0, #19
+ 986 004a CD62     		str	r5, [r1, #44]
+ 987 004c 0D6B     		ldr	r5, [r1, #48]
+ 988 004e 6FF31205 		bfc	r5, #0, #19
+ 989 0052 0D63     		str	r5, [r1, #48]
+ 990 0054 8568     		ldr	r5, [r0, #8]
+ 991 0056 95F84750 		ldrb	r5, [r5, #71]	@ zero_extendqisi2
+ 992 005a 4DB1     		cbz	r5, .L190
+ 993 005c 4D7C     		ldrb	r5, [r1, #17]	@ zero_extendqisi2
+ 994 005e ED07     		lsls	r5, r5, #31
+ 995 0060 4CBF     		ite	mi
+ 996 0062 4FF6FF75 		movwmi	r5, #65535
+ 997 0066 4FF6FC75 		movwpl	r5, #65532
+ 998 006a AA42     		cmp	r2, r5
+ 999 006c 88BF     		it	hi
+ 1000 006e 4D61     		strhi	r5, [r1, #20]
+ 1001              	.L190:
+ 1002 0070 4A69     		ldr	r2, [r1, #20]
+ 1003 0072 24F07F44 		bic	r4, r4, #-16777216
+ 1004 0076 24F47804 		bic	r4, r4, #16252928
+ 1005 007a A242     		cmp	r2, r4
+ 1006 007c 08D2     		bcs	.L192
+ 1007 007e 4E8A     		ldrh	r6, [r1, #18]
+ 1008 0080 C6F38A05 		ubfx	r5, r6, #2, #11
+ 1009 0084 B2FBF5F6 		udiv	r6, r2, r5
+ 1010 0088 05FB1625 		mls	r5, r5, r6, r2
+ 1011 008c 521B     		subs	r2, r2, r5
+ 1012 008e 4A61     		str	r2, [r1, #20]
+ 1013              	.L192:
+ 1014 0090 1B7D     		ldrb	r3, [r3, #20]	@ zero_extendqisi2
+ 1015 0092 DB07     		lsls	r3, r3, #31
+ 1016 0094 11D5     		bpl	.L193
+ 1017 0096 4A8A     		ldrh	r2, [r1, #18]
+ 1018 0098 C2F38A03 		ubfx	r3, r2, #2, #11
+ 1019 009c 94FBF3F2 		sdiv	r2, r4, r3
+ 1020 00a0 03FB1244 		mls	r4, r3, r2, r4
+ 1021 00a4 4CB9     		cbnz	r4, .L193
+ 1022 00a6 4B6B     		ldr	r3, [r1, #52]
+ 1023 00a8 C3F31202 		ubfx	r2, r3, #0, #19
+ 1024 00ac 2AB1     		cbz	r2, .L193
+ 1025 00ae 91F83230 		ldrb	r3, [r1, #50]	@ zero_extendqisi2
+ 1026 00b2 43F00802 		orr	r2, r3, #8
+ 1027 00b6 81F83220 		strb	r2, [r1, #50]
+ 1028              	.L193:
+ 1029 00ba 8068     		ldr	r0, [r0, #8]
+ 1030 00bc 1031     		adds	r1, r1, #16
+ 1031 00be BDE87040 		pop	{r4, r5, r6, lr}
+ 1032 00c2 FFF7FEBF 		b	dwc_otg_ep_start_transfer
+ 1033              	.L188:
+ 1034 00c6 70BD     		pop	{r4, r5, r6, pc}
+ 1036              		.section	.text.complete_ep,"ax",%progbits
+ 1037              		.align	1
+ 1038              		.thumb
+ 1039              		.thumb_func
+ 1041              	complete_ep:
+ 1042              		@ args = 0, pretend = 0, frame = 0
+ 1043              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1044 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1045 0004 C36B     		ldr	r3, [r0, #60]
+ 1046 0006 017C     		ldrb	r1, [r0, #16]	@ zero_extendqisi2
+ 1047 0008 9D68     		ldr	r5, [r3, #8]
+ 1048 000a 0446     		mov	r4, r0
+ 1049 000c 2346     		mov	r3, r4
+ 1050 000e AA68     		ldr	r2, [r5, #8]
+ 1051 0010 53F8046F 		ldr	r6, [r3, #4]!
+ 1052 0014 02EB8100 		add	r0, r2, r1, lsl #2
+ 1053 0018 9E42     		cmp	r6, r3
+ 1054 001a 4068     		ldr	r0, [r0, #4]
+ 1055 001c 00F0DB80 		beq	.L206
+ 1056 0020 002E     		cmp	r6, #0
+ 1057 0022 00F0D880 		beq	.L206
+ 1058 0026 637C     		ldrb	r3, [r4, #17]	@ zero_extendqisi2
+ 1059 0028 13F00103 		ands	r3, r3, #1
+ 1060 002c 50D0     		beq	.L208
+ 1061 002e 1030     		adds	r0, r0, #16
+ 1062 0030 FFF7FEFF 		bl	DWC_READ_REG32
+ 1063 0034 95F84610 		ldrb	r1, [r5, #70]	@ zero_extendqisi2
+ 1064 0038 A1B3     		cbz	r1, .L209
+ 1065 003a 95F84730 		ldrb	r3, [r5, #71]	@ zero_extendqisi2
+ 1066 003e DBB9     		cbnz	r3, .L210
+ 1067 0040 30F06040 		bics	r0, r0, #-536870912
+ 1068 0044 40F0C780 		bne	.L206
+ 1069 0048 D4F83080 		ldr	r8, [r4, #48]
+ 1070 004c E76A     		ldr	r7, [r4, #44]
+ 1071 004e A16A     		ldr	r1, [r4, #40]
+ 1072 0050 C7F31202 		ubfx	r2, r7, #0, #19
+ 1073 0054 C8F31207 		ubfx	r7, r8, #0, #19
+ 1074 0058 D31B     		subs	r3, r2, r7
+ 1075 005a 01EB030E 		add	lr, r1, r3
+ 1076 005e A169     		ldr	r1, [r4, #24]
+ 1077 0060 C4F828E0 		str	lr, [r4, #40]
+ 1078 0064 01EB030C 		add	ip, r1, r3
+ 1079 0068 DB19     		adds	r3, r3, r7
+ 1080 006a 4146     		mov	r1, r8
+ 1081 006c 63F31201 		bfi	r1, r3, #0, #19
+ 1082 0070 C4F818C0 		str	ip, [r4, #24]
+ 1083 0074 2163     		str	r1, [r4, #48]
+ 1084 0076 1CE0     		b	.L249
+ 1085              	.L210:
+ 1086 0078 94F83210 		ldrb	r1, [r4, #50]	@ zero_extendqisi2
+ 1087 007c 206A     		ldr	r0, [r4, #32]
+ 1088 007e 6FF3C301 		bfc	r1, #3, #1
+ 1089 0082 0023     		movs	r3, #0
+ 1090 0084 84F83210 		strb	r1, [r4, #50]
+ 1091 0088 1A46     		mov	r2, r3
+ 1092              	.L214:
+ 1093 008a A16B     		ldr	r1, [r4, #56]
+ 1094 008c 8B42     		cmp	r3, r1
+ 1095 008e 04D2     		bcs	.L250
+ 1096              	.L215:
+ 1097 0090 30F83310 		ldrh	r1, [r0, r3, lsl #3]
+ 1098 0094 0133     		adds	r3, r3, #1
+ 1099 0096 5218     		adds	r2, r2, r1
+ 1100 0098 F7E7     		b	.L214
+ 1101              	.L250:
+ 1102 009a 002A     		cmp	r2, #0
+ 1103 009c 40F09B80 		bne	.L206
+ 1104 00a0 626B     		ldr	r2, [r4, #52]
+ 1105 00a2 37E0     		b	.L241
+ 1106              	.L209:
+ 1107 00a4 30F06040 		bics	r0, r0, #-536870912
+ 1108 00a8 40F09580 		bne	.L206
+ 1109 00ac E26A     		ldr	r2, [r4, #44]
+ 1110 00ae C2F31202 		ubfx	r2, r2, #0, #19
+ 1111              	.L249:
+ 1112 00b2 636B     		ldr	r3, [r4, #52]
+ 1113 00b4 C3F31201 		ubfx	r1, r3, #0, #19
+ 1114 00b8 8A42     		cmp	r2, r1
+ 1115 00ba 5FDB     		blt	.L246
+ 1116              	.L217:
+ 1117 00bc 94F83230 		ldrb	r3, [r4, #50]	@ zero_extendqisi2
+ 1118 00c0 03F00802 		and	r2, r3, #8
+ 1119 00c4 D1B2     		uxtb	r1, r2
+ 1120 00c6 0029     		cmp	r1, #0
+ 1121 00c8 70D0     		beq	.L216
+ 1122 00ca 60F3C303 		bfi	r3, r0, #3, #1
+ 1123 00ce 64E0     		b	.L245
+ 1124              	.L208:
+ 1125 00d0 02EB8102 		add	r2, r2, r1, lsl #2
+ 1126 00d4 506A     		ldr	r0, [r2, #36]
+ 1127 00d6 95F84620 		ldrb	r2, [r5, #70]	@ zero_extendqisi2
+ 1128 00da 002A     		cmp	r2, #0
+ 1129 00dc 46D0     		beq	.L218
+ 1130 00de 95F84770 		ldrb	r7, [r5, #71]	@ zero_extendqisi2
+ 1131 00e2 E7B1     		cbz	r7, .L219
+ 1132 00e4 94F83210 		ldrb	r1, [r4, #50]	@ zero_extendqisi2
+ 1133 00e8 206A     		ldr	r0, [r4, #32]
+ 1134 00ea 63F3C301 		bfi	r1, r3, #3, #1
+ 1135 00ee 84F83210 		strb	r1, [r4, #50]
+ 1136 00f2 1A46     		mov	r2, r3
+ 1137              	.L220:
+ 1138 00f4 A16B     		ldr	r1, [r4, #56]
+ 1139 00f6 8B42     		cmp	r3, r1
+ 1140 00f8 04D2     		bcs	.L251
+ 1141              	.L221:
+ 1142 00fa 30F83310 		ldrh	r1, [r0, r3, lsl #3]
+ 1143 00fe 0133     		adds	r3, r3, #1
+ 1144 0100 5218     		adds	r2, r2, r1
+ 1145 0102 F7E7     		b	.L220
+ 1146              	.L251:
+ 1147 0104 636B     		ldr	r3, [r4, #52]
+ 1148 0106 C3F31200 		ubfx	r0, r3, #0, #19
+ 1149 010a 4142     		negs	r1, r0
+ 1150 010c 01F00303 		and	r3, r1, #3
+ 1151 0110 1818     		adds	r0, r3, r0
+ 1152 0112 821A     		subs	r2, r0, r2
+ 1153              	.L241:
+ 1154 0114 206B     		ldr	r0, [r4, #48]
+ 1155 0116 62F31200 		bfi	r0, r2, #0, #19
+ 1156 011a 2063     		str	r0, [r4, #48]
+ 1157 011c 46E0     		b	.L216
+ 1158              	.L219:
+ 1159 011e 1030     		adds	r0, r0, #16
+ 1160 0120 FFF7FEFF 		bl	DWC_READ_REG32
+ 1161 0124 E26A     		ldr	r2, [r4, #44]
+ 1162 0126 C2F31203 		ubfx	r3, r2, #0, #19
+ 1163 012a 226B     		ldr	r2, [r4, #48]
+ 1164 012c C2F3120C 		ubfx	ip, r2, #0, #19
+ 1165 0130 CCEB0301 		rsb	r1, ip, r3
+ 1166 0134 C0F31200 		ubfx	r0, r0, #0, #19
+ 1167 0138 081A     		subs	r0, r1, r0
+ 1168 013a A16A     		ldr	r1, [r4, #40]
+ 1169 013c 0918     		adds	r1, r1, r0
+ 1170 013e A162     		str	r1, [r4, #40]
+ 1171 0140 A169     		ldr	r1, [r4, #24]
+ 1172 0142 0918     		adds	r1, r1, r0
+ 1173 0144 6044     		add	r0, r0, ip
+ 1174 0146 60F31202 		bfi	r2, r0, #0, #19
+ 1175 014a 2263     		str	r2, [r4, #48]
+ 1176 014c 626B     		ldr	r2, [r4, #52]
+ 1177 014e A161     		str	r1, [r4, #24]
+ 1178 0150 C2F31201 		ubfx	r1, r2, #0, #19
+ 1179 0154 8B42     		cmp	r3, r1
+ 1180 0156 11DB     		blt	.L246
+ 1181              	.L222:
+ 1182 0158 94F83230 		ldrb	r3, [r4, #50]	@ zero_extendqisi2
+ 1183 015c 03F00800 		and	r0, r3, #8
+ 1184 0160 C2B2     		uxtb	r2, r0
+ 1185 0162 002A     		cmp	r2, #0
+ 1186 0164 22D0     		beq	.L216
+ 1187 0166 67F3C303 		bfi	r3, r7, #3, #1
+ 1188 016a 16E0     		b	.L245
+ 1189              	.L218:
+ 1190 016c E16A     		ldr	r1, [r4, #44]
+ 1191 016e 636B     		ldr	r3, [r4, #52]
+ 1192 0170 C1F31200 		ubfx	r0, r1, #0, #19
+ 1193 0174 C3F31201 		ubfx	r1, r3, #0, #19
+ 1194 0178 8842     		cmp	r0, r1
+ 1195 017a 06DA     		bge	.L223
+ 1196              	.L246:
+ 1197 017c 2846     		mov	r0, r5
+ 1198 017e 04F11001 		add	r1, r4, #16
+ 1199 0182 BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
+ 1200 0186 FFF7FEBF 		b	dwc_otg_ep_start_transfer
+ 1201              	.L223:
+ 1202 018a 94F83230 		ldrb	r3, [r4, #50]	@ zero_extendqisi2
+ 1203 018e 03F00800 		and	r0, r3, #8
+ 1204 0192 C1B2     		uxtb	r1, r0
+ 1205 0194 51B1     		cbz	r1, .L216
+ 1206 0196 62F3C303 		bfi	r3, r2, #3, #1
+ 1207              	.L245:
+ 1208 019a 2846     		mov	r0, r5
+ 1209 019c 04F11001 		add	r1, r4, #16
+ 1210 01a0 84F83230 		strb	r3, [r4, #50]
+ 1211 01a4 BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
+ 1212 01a8 FFF7FEBF 		b	dwc_otg_ep_start_zl_transfer
+ 1213              	.L216:
+ 1214 01ac 206B     		ldr	r0, [r4, #48]
+ 1215 01ae C0F31203 		ubfx	r3, r0, #0, #19
+ 1216 01b2 3146     		mov	r1, r6
+ 1217 01b4 2046     		mov	r0, r4
+ 1218 01b6 0022     		movs	r2, #0
+ 1219 01b8 3361     		str	r3, [r6, #16]
+ 1220 01ba FFF7FEFF 		bl	dwc_otg_request_done
+ 1221 01be E26A     		ldr	r2, [r4, #44]
+ 1222 01c0 0021     		movs	r1, #0
+ 1223 01c2 61F31202 		bfi	r2, r1, #0, #19
+ 1224 01c6 2046     		mov	r0, r4
+ 1225 01c8 6162     		str	r1, [r4, #36]
+ 1226 01ca A162     		str	r1, [r4, #40]
+ 1227 01cc E262     		str	r2, [r4, #44]
+ 1228 01ce BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
+ 1229 01d2 FFF7FEBF 		b	start_next_request
+ 1230              	.L206:
+ 1231 01d6 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1233              		.section	.text.dwc_otg_pcd_handle_in_ep_intr,"ax",%progbits
+ 1234              		.align	1
+ 1235              		.thumb
+ 1236              		.thumb_func
+ 1238              	dwc_otg_pcd_handle_in_ep_intr:
+ 1239              		@ args = 0, pretend = 0, frame = 32
+ 1240              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1241 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 1242 0004 8568     		ldr	r5, [r0, #8]
+ 1243 0006 89B0     		sub	sp, sp, #36
+ 1244 0008 AB68     		ldr	r3, [r5, #8]
+ 1245 000a 95F84920 		ldrb	r2, [r5, #73]	@ zero_extendqisi2
+ 1246 000e 0293     		str	r3, [sp, #8]
+ 1247 0010 0299     		ldr	r1, [sp, #8]
+ 1248 0012 0646     		mov	r6, r0
+ 1249 0014 0020     		movs	r0, #0
+ 1250 0016 0590     		str	r0, [sp, #20]
+ 1251 0018 0868     		ldr	r0, [r1, #0]
+ 1252 001a 3AB1     		cbz	r2, .L253
+ 1253 001c 3830     		adds	r0, r0, #56
+ 1254 001e FFF7FEFF 		bl	DWC_READ_REG32
+ 1255 0022 0446     		mov	r4, r0
+ 1256 0024 A868     		ldr	r0, [r5, #8]
+ 1257 0026 0068     		ldr	r0, [r0, #0]
+ 1258 0028 3C30     		adds	r0, r0, #60
+ 1259 002a 06E0     		b	.L339
+ 1260              	.L253:
+ 1261 002c 1830     		adds	r0, r0, #24
+ 1262 002e FFF7FEFF 		bl	DWC_READ_REG32
+ 1263 0032 AB68     		ldr	r3, [r5, #8]
+ 1264 0034 0446     		mov	r4, r0
+ 1265 0036 1868     		ldr	r0, [r3, #0]
+ 1266 0038 1C30     		adds	r0, r0, #28
+ 1267              	.L339:
+ 1268 003a FFF7FEFF 		bl	DWC_READ_REG32
+ 1269 003e 2040     		ands	r0, r0, r4
+ 1270 0040 82B2     		uxth	r2, r0
+ 1271 0042 0492     		str	r2, [sp, #16]
+ 1272 0044 0024     		movs	r4, #0
+ 1273              	.L255:
+ 1274 0046 0499     		ldr	r1, [sp, #16]
+ 1275 0048 0029     		cmp	r1, #0
+ 1276 004a 00F0C881 		beq	.L347
+ 1277              	.L293:
+ 1278 004e 049B     		ldr	r3, [sp, #16]
+ 1279 0050 DA07     		lsls	r2, r3, #31
+ 1280 0052 40F1BF81 		bpl	.L257
+ 1281 0056 2146     		mov	r1, r4
+ 1282 0058 3046     		mov	r0, r6
+ 1283 005a FFF7FEFF 		bl	get_in_ep
+ 1284 005e 0746     		mov	r7, r0
+ 1285 0060 0298     		ldr	r0, [sp, #8]
+ 1286 0062 00EB8402 		add	r2, r0, r4, lsl #2
+ 1287 0066 0692     		str	r2, [sp, #24]
+ 1288 0068 5068     		ldr	r0, [r2, #4]
+ 1289 006a FFF7FEFF 		bl	DWC_READ_REG32
+ 1290 006e D5F80890 		ldr	r9, [r5, #8]
+ 1291 0072 95F84910 		ldrb	r1, [r5, #73]	@ zero_extendqisi2
+ 1292 0076 D9F80000 		ldr	r0, [r9, #0]
+ 1293 007a 21B1     		cbz	r1, .L258
+ 1294 007c 3B7C     		ldrb	r3, [r7, #16]	@ zero_extendqisi2
+ 1295 007e 1033     		adds	r3, r3, #16
+ 1296 0080 00EB8300 		add	r0, r0, r3, lsl #2
+ 1297 0084 00E0     		b	.L340
+ 1298              	.L258:
+ 1299 0086 1030     		adds	r0, r0, #16
+ 1300              	.L340:
+ 1301 0088 FFF7FEFF 		bl	DWC_READ_REG32
+ 1302 008c 8246     		mov	sl, r0
+ 1303 008e D9F80000 		ldr	r0, [r9, #0]
+ 1304 0092 3430     		adds	r0, r0, #52
+ 1305 0094 FFF7FEFF 		bl	DWC_READ_REG32
+ 1306 0098 3A7C     		ldrb	r2, [r7, #16]	@ zero_extendqisi2
+ 1307 009a 20FA02F0 		lsr	r0, r0, r2
+ 1308 009e 4FEAC018 		lsl	r8, r0, #7
+ 1309 00a2 09EB8201 		add	r1, r9, r2, lsl #2
+ 1310 00a6 5FFA88F0 		uxtb	r0, r8
+ 1311 00aa 40EA0A08 		orr	r8, r0, sl
+ 1312 00ae 4868     		ldr	r0, [r1, #4]
+ 1313 00b0 0830     		adds	r0, r0, #8
+ 1314 00b2 FFF7FEFF 		bl	DWC_READ_REG32
+ 1315 00b6 08EA0008 		and	r8, r8, r0
+ 1316 00ba 18F0010F 		tst	r8, #1
+ 1317 00be 23D0     		beq	.L260
+ 1318 00c0 95F84A20 		ldrb	r2, [r5, #74]	@ zero_extendqisi2
+ 1319 00c4 32B9     		cbnz	r2, .L261
+ 1320 00c6 0598     		ldr	r0, [sp, #20]
+ 1321 00c8 40F02001 		orr	r1, r0, #32
+ 1322 00cc 6868     		ldr	r0, [r5, #4]
+ 1323 00ce 0591     		str	r1, [sp, #20]
+ 1324 00d0 1830     		adds	r0, r0, #24
+ 1325 00d2 07E0     		b	.L341
+ 1326              	.L261:
+ 1327 00d4 AB68     		ldr	r3, [r5, #8]
+ 1328 00d6 3A7C     		ldrb	r2, [r7, #16]	@ zero_extendqisi2
+ 1329 00d8 1868     		ldr	r0, [r3, #0]
+ 1330 00da 0121     		movs	r1, #1
+ 1331 00dc 01FA02F1 		lsl	r1, r1, r2
+ 1332 00e0 3430     		adds	r0, r0, #52
+ 1333 00e2 0022     		movs	r2, #0
+ 1334              	.L341:
+ 1335 00e4 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1336 00e8 AB68     		ldr	r3, [r5, #8]
+ 1337 00ea 03EB8402 		add	r2, r3, r4, lsl #2
+ 1338 00ee 0121     		movs	r1, #1
+ 1339 00f0 5068     		ldr	r0, [r2, #4]
+ 1340 00f2 0830     		adds	r0, r0, #8
+ 1341 00f4 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1342 00f8 1CB9     		cbnz	r4, .L263
+ 1343 00fa 3046     		mov	r0, r6
+ 1344 00fc FFF7FEFF 		bl	handle_ep0
+ 1345 0100 02E0     		b	.L260
+ 1346              	.L263:
+ 1347 0102 3846     		mov	r0, r7
+ 1348 0104 FFF7FEFF 		bl	complete_ep
+ 1349              	.L260:
+ 1350 0108 08F00200 		and	r0, r8, #2
+ 1351 010c C1B2     		uxtb	r1, r0
+ 1352 010e 0029     		cmp	r1, #0
+ 1353 0110 3CD0     		beq	.L264
+ 1354 0112 2146     		mov	r1, r4
+ 1355 0114 3046     		mov	r0, r6
+ 1356 0116 FFF7FEFF 		bl	get_in_ep
+ 1357 011a 417C     		ldrb	r1, [r0, #17]	@ zero_extendqisi2
+ 1358 011c D6F808A0 		ldr	sl, [r6, #8]
+ 1359 0120 01F0C003 		and	r3, r1, #192
+ 1360 0124 402B     		cmp	r3, #64
+ 1361 0126 DAF80890 		ldr	r9, [sl, #8]
+ 1362 012a 0246     		mov	r2, r0
+ 1363 012c 05D1     		bne	.L265
+ 1364 012e 5046     		mov	r0, sl
+ 1365 0130 C1F38301 		ubfx	r1, r1, #2, #4
+ 1366 0134 FFF7FEFF 		bl	dwc_otg_flush_tx_fifo
+ 1367 0138 20E0     		b	.L266
+ 1368              	.L265:
+ 1369 013a 09EB8400 		add	r0, r9, r4, lsl #2
+ 1370 013e 4068     		ldr	r0, [r0, #4]
+ 1371 0140 0192     		str	r2, [sp, #4]
+ 1372 0142 1030     		adds	r0, r0, #16
+ 1373 0144 FFF7FEFF 		bl	DWC_READ_REG32
+ 1374 0148 019A     		ldr	r2, [sp, #4]
+ 1375 014a 117B     		ldrb	r1, [r2, #12]	@ zero_extendqisi2
+ 1376 014c CB07     		lsls	r3, r1, #31
+ 1377 014e 8346     		mov	fp, r0
+ 1378 0150 0DD5     		bpl	.L267
+ 1379 0152 537C     		ldrb	r3, [r2, #17]	@ zero_extendqisi2
+ 1380 0154 5046     		mov	r0, sl
+ 1381 0156 C3F38301 		ubfx	r1, r3, #2, #4
+ 1382 015a FFF7FEFF 		bl	dwc_otg_flush_tx_fifo
+ 1383 015e D9F80000 		ldr	r0, [r9, #0]
+ 1384 0162 4FF48071 		mov	r1, #256
+ 1385 0166 0430     		adds	r0, r0, #4
+ 1386 0168 0022     		movs	r2, #0
+ 1387 016a FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1388              	.L267:
+ 1389 016e 2BF06042 		bic	r2, fp, #-536870912
+ 1390 0172 1AB1     		cbz	r2, .L266
+ 1391 0174 3046     		mov	r0, r6
+ 1392 0176 2146     		mov	r1, r4
+ 1393 0178 FFF7FEFF 		bl	restart_transfer
+ 1394              	.L266:
+ 1395 017c A968     		ldr	r1, [r5, #8]
+ 1396 017e 01EB8403 		add	r3, r1, r4, lsl #2
+ 1397 0182 0221     		movs	r1, #2
+ 1398 0184 5868     		ldr	r0, [r3, #4]
+ 1399 0186 0830     		adds	r0, r0, #8
+ 1400 0188 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1401              	.L264:
+ 1402 018c 5FFA88F9 		uxtb	r9, r8
+ 1403 0190 09F00400 		and	r0, r9, #4
+ 1404 0194 C2B2     		uxtb	r2, r0
+ 1405 0196 3AB1     		cbz	r2, .L271
+ 1406 0198 A968     		ldr	r1, [r5, #8]
+ 1407 019a 01EB8403 		add	r3, r1, r4, lsl #2
+ 1408 019e 0421     		movs	r1, #4
+ 1409 01a0 5868     		ldr	r0, [r3, #4]
+ 1410 01a2 0830     		adds	r0, r0, #8
+ 1411 01a4 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1412              	.L271:
+ 1413 01a8 09F00800 		and	r0, r9, #8
+ 1414 01ac C2B2     		uxtb	r2, r0
+ 1415 01ae 92B3     		cbz	r2, .L272
+ 1416 01b0 D6F808B0 		ldr	fp, [r6, #8]
+ 1417 01b4 DBF80810 		ldr	r1, [fp, #8]
+ 1418 01b8 3046     		mov	r0, r6
+ 1419 01ba 0791     		str	r1, [sp, #28]
+ 1420 01bc 2146     		mov	r1, r4
+ 1421 01be FFF7FEFF 		bl	get_in_ep
+ 1422 01c2 9BF84620 		ldrb	r2, [fp, #70]	@ zero_extendqisi2
+ 1423 01c6 0390     		str	r0, [sp, #12]
+ 1424 01c8 4FF0000A 		mov	sl, #0
+ 1425 01cc 3AB9     		cbnz	r2, .L273
+ 1426 01ce DBF80400 		ldr	r0, [fp, #4]
+ 1427 01d2 4FF0200A 		mov	sl, #32
+ 1428 01d6 1830     		adds	r0, r0, #24
+ 1429 01d8 5146     		mov	r1, sl
+ 1430 01da FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1431              	.L273:
+ 1432 01de DBF80400 		ldr	r0, [fp, #4]
+ 1433 01e2 0021     		movs	r1, #0
+ 1434 01e4 1830     		adds	r0, r0, #24
+ 1435 01e6 4AF04002 		orr	r2, sl, #64
+ 1436 01ea FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1437 01ee 079B     		ldr	r3, [sp, #28]
+ 1438 01f0 1868     		ldr	r0, [r3, #0]
+ 1439 01f2 8021     		movs	r1, #128
+ 1440 01f4 0A46     		mov	r2, r1
+ 1441 01f6 0430     		adds	r0, r0, #4
+ 1442 01f8 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1443 01fc 039A     		ldr	r2, [sp, #12]
+ 1444 01fe 117B     		ldrb	r1, [r2, #12]	@ zero_extendqisi2
+ 1445 0200 41F00103 		orr	r3, r1, #1
+ 1446 0204 1373     		strb	r3, [r2, #12]
+ 1447 0206 A868     		ldr	r0, [r5, #8]
+ 1448 0208 00EB8402 		add	r2, r0, r4, lsl #2
+ 1449 020c 0821     		movs	r1, #8
+ 1450 020e 5068     		ldr	r0, [r2, #4]
+ 1451 0210 0830     		adds	r0, r0, #8
+ 1452 0212 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1453              	.L272:
+ 1454 0216 09F01001 		and	r1, r9, #16
+ 1455 021a CBB2     		uxtb	r3, r1
+ 1456 021c 002B     		cmp	r3, #0
+ 1457 021e 37D0     		beq	.L274
+ 1458 0220 387B     		ldrb	r0, [r7, #12]	@ zero_extendqisi2
+ 1459 0222 10F00102 		ands	r2, r0, #1
+ 1460 0226 11D1     		bne	.L275
+ 1461 0228 84B1     		cbz	r4, .L275
+ 1462 022a 0299     		ldr	r1, [sp, #8]
+ 1463 022c 95F84930 		ldrb	r3, [r5, #73]	@ zero_extendqisi2
+ 1464 0230 0868     		ldr	r0, [r1, #0]
+ 1465 0232 2BB1     		cbz	r3, .L276
+ 1466 0234 04F11003 		add	r3, r4, #16
+ 1467 0238 00EB8300 		add	r0, r0, r3, lsl #2
+ 1468 023c 1021     		movs	r1, #16
+ 1469 023e 02E0     		b	.L343
+ 1470              	.L276:
+ 1471 0240 1030     		adds	r0, r0, #16
+ 1472 0242 1021     		movs	r1, #16
+ 1473 0244 1A46     		mov	r2, r3
+ 1474              	.L343:
+ 1475 0246 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1476 024a 19E0     		b	.L278
+ 1477              	.L275:
+ 1478 024c 95F84720 		ldrb	r2, [r5, #71]	@ zero_extendqisi2
+ 1479 0250 B2B1     		cbz	r2, .L278
+ 1480 0252 ACB9     		cbnz	r4, .L278
+ 1481 0254 317B     		ldrb	r1, [r6, #12]	@ zero_extendqisi2
+ 1482 0256 0529     		cmp	r1, #5
+ 1483 0258 12D1     		bne	.L278
+ 1484 025a 029B     		ldr	r3, [sp, #8]
+ 1485 025c 5868     		ldr	r0, [r3, #4]
+ 1486 025e FFF7FEFF 		bl	DWC_READ_REG32
+ 1487 0262 0146     		mov	r1, r0
+ 1488 0264 C0F30760 		ubfx	r0, r0, #24, #8
+ 1489 0268 00F08002 		and	r2, r0, #128
+ 1490 026c D3B2     		uxtb	r3, r2
+ 1491 026e 0BB1     		cbz	r3, .L279
+ 1492 0270 41F08041 		orr	r1, r1, #1073741824
+ 1493              	.L279:
+ 1494 0274 0298     		ldr	r0, [sp, #8]
+ 1495 0276 41F40011 		orr	r1, r1, #2097152
+ 1496 027a 4068     		ldr	r0, [r0, #4]
+ 1497 027c FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1498              	.L278:
+ 1499 0280 AA68     		ldr	r2, [r5, #8]
+ 1500 0282 02EB8400 		add	r0, r2, r4, lsl #2
+ 1501 0286 1021     		movs	r1, #16
+ 1502 0288 4068     		ldr	r0, [r0, #4]
+ 1503 028a 0830     		adds	r0, r0, #8
+ 1504 028c FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1505              	.L274:
+ 1506 0290 09F02001 		and	r1, r9, #32
+ 1507 0294 CBB2     		uxtb	r3, r1
+ 1508 0296 3BB1     		cbz	r3, .L280
+ 1509 0298 AA68     		ldr	r2, [r5, #8]
+ 1510 029a 02EB8400 		add	r0, r2, r4, lsl #2
+ 1511 029e 2021     		movs	r1, #32
+ 1512 02a0 4068     		ldr	r0, [r0, #4]
+ 1513 02a2 0830     		adds	r0, r0, #8
+ 1514 02a4 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1515              	.L280:
+ 1516 02a8 09F04001 		and	r1, r9, #64
+ 1517 02ac CBB2     		uxtb	r3, r1
+ 1518 02ae 9BB1     		cbz	r3, .L281
+ 1519 02b0 3A7B     		ldrb	r2, [r7, #12]	@ zero_extendqisi2
+ 1520 02b2 02F00200 		and	r0, r2, #2
+ 1521 02b6 C1B2     		uxtb	r1, r0
+ 1522 02b8 31B1     		cbz	r1, .L282
+ 1523 02ba 069B     		ldr	r3, [sp, #24]
+ 1524 02bc 4FF09041 		mov	r1, #1207959552
+ 1525 02c0 5868     		ldr	r0, [r3, #4]
+ 1526 02c2 0A46     		mov	r2, r1
+ 1527 02c4 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1528              	.L282:
+ 1529 02c8 AA68     		ldr	r2, [r5, #8]
+ 1530 02ca 02EB8400 		add	r0, r2, r4, lsl #2
+ 1531 02ce 4021     		movs	r1, #64
+ 1532 02d0 4068     		ldr	r0, [r0, #4]
+ 1533 02d2 0830     		adds	r0, r0, #8
+ 1534 02d4 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1535              	.L281:
+ 1536 02d8 09F08009 		and	r9, r9, #128
+ 1537 02dc 5FFA89F1 		uxtb	r1, r9
+ 1538 02e0 0029     		cmp	r1, #0
+ 1539 02e2 40D0     		beq	.L283
+ 1540 02e4 B368     		ldr	r3, [r6, #8]
+ 1541 02e6 3046     		mov	r0, r6
+ 1542 02e8 2146     		mov	r1, r4
+ 1543 02ea 0393     		str	r3, [sp, #12]
+ 1544 02ec D3F808A0 		ldr	sl, [r3, #8]
+ 1545 02f0 FFF7FEFF 		bl	get_in_ep
+ 1546 02f4 8146     		mov	r9, r0
+ 1547              	.L344:
+ 1548 02f6 D9F82C20 		ldr	r2, [r9, #44]
+ 1549 02fa D9F83000 		ldr	r0, [r9, #48]
+ 1550 02fe C2F3120B 		ubfx	fp, r2, #0, #19
+ 1551 0302 C0F31201 		ubfx	r1, r0, #0, #19
+ 1552 0306 B9F81220 		ldrh	r2, [r9, #18]
+ 1553 030a C1EB0B03 		rsb	r3, r1, fp
+ 1554 030e 0AEB8401 		add	r1, sl, r4, lsl #2
+ 1555 0312 C2F38A00 		ubfx	r0, r2, #2, #11
+ 1556 0316 8342     		cmp	r3, r0
+ 1557 0318 28BF     		it	cs
+ 1558 031a 0346     		movcs	r3, r0
+ 1559 031c 4868     		ldr	r0, [r1, #4]
+ 1560 031e 03F1030C 		add	ip, r3, #3
+ 1561 0322 1830     		adds	r0, r0, #24
+ 1562 0324 4FEA9C0B 		lsr	fp, ip, #2
+ 1563 0328 FFF7FEFF 		bl	DWC_READ_REG32
+ 1564 032c 83B2     		uxth	r3, r0
+ 1565 032e 5B45     		cmp	r3, fp
+ 1566 0330 11DB     		blt	.L285
+ 1567 0332 D9F83020 		ldr	r2, [r9, #48]
+ 1568 0336 D9F82C10 		ldr	r1, [r9, #44]
+ 1569 033a C2F31200 		ubfx	r0, r2, #0, #19
+ 1570 033e C1F31203 		ubfx	r3, r1, #0, #19
+ 1571 0342 9842     		cmp	r0, r3
+ 1572 0344 07DA     		bge	.L285
+ 1573 0346 33B1     		cbz	r3, .L285
+ 1574              	.L286:
+ 1575 0348 0398     		ldr	r0, [sp, #12]
+ 1576 034a 09F11001 		add	r1, r9, #16
+ 1577 034e 0022     		movs	r2, #0
+ 1578 0350 FFF7FEFF 		bl	dwc_otg_ep_write_packet
+ 1579 0354 CFE7     		b	.L344
+ 1580              	.L285:
+ 1581 0356 A868     		ldr	r0, [r5, #8]
+ 1582 0358 00EB8401 		add	r1, r0, r4, lsl #2
+ 1583 035c 4868     		ldr	r0, [r1, #4]
+ 1584 035e 8021     		movs	r1, #128
+ 1585 0360 0830     		adds	r0, r0, #8
+ 1586 0362 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1587              	.L283:
+ 1588 0366 C8F30728 		ubfx	r8, r8, #8, #8
+ 1589 036a 08F00203 		and	r3, r8, #2
+ 1590 036e DAB2     		uxtb	r2, r3
+ 1591 0370 72B1     		cbz	r2, .L288
+ 1592 0372 A868     		ldr	r0, [r5, #8]
+ 1593 0374 00EB8401 		add	r1, r0, r4, lsl #2
+ 1594 0378 4868     		ldr	r0, [r1, #4]
+ 1595 037a 4FF40071 		mov	r1, #512
+ 1596 037e 0830     		adds	r0, r0, #8
+ 1597 0380 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1598 0384 95F84730 		ldrb	r3, [r5, #71]	@ zero_extendqisi2
+ 1599 0388 13B1     		cbz	r3, .L288
+ 1600 038a 3846     		mov	r0, r7
+ 1601 038c FFF7FEFF 		bl	dwc_otg_pcd_handle_noniso_bna
+ 1602              	.L288:
+ 1603 0390 08F02008 		and	r8, r8, #32
+ 1604 0394 5FFA88F2 		uxtb	r2, r8
+ 1605 0398 E2B1     		cbz	r2, .L257
+ 1606 039a B068     		ldr	r0, [r6, #8]
+ 1607 039c 90F84920 		ldrb	r2, [r0, #73]	@ zero_extendqisi2
+ 1608 03a0 8168     		ldr	r1, [r0, #8]
+ 1609 03a2 42B1     		cbz	r2, .L291
+ 1610 03a4 0B68     		ldr	r3, [r1, #0]
+ 1611 03a6 04F11002 		add	r2, r4, #16
+ 1612 03aa 03EB8200 		add	r0, r3, r2, lsl #2
+ 1613 03ae 4FF40051 		mov	r1, #8192
+ 1614 03b2 0022     		movs	r2, #0
+ 1615 03b4 03E0     		b	.L345
+ 1616              	.L291:
+ 1617 03b6 0868     		ldr	r0, [r1, #0]
+ 1618 03b8 4FF40051 		mov	r1, #8192
+ 1619 03bc 1030     		adds	r0, r0, #16
+ 1620              	.L345:
+ 1621 03be FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1622 03c2 A868     		ldr	r0, [r5, #8]
+ 1623 03c4 00EB8401 		add	r1, r0, r4, lsl #2
+ 1624 03c8 4868     		ldr	r0, [r1, #4]
+ 1625 03ca 4FF40051 		mov	r1, #8192
+ 1626 03ce 0830     		adds	r0, r0, #8
+ 1627 03d0 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1628              	.L257:
+ 1629 03d4 049A     		ldr	r2, [sp, #16]
+ 1630 03d6 5308     		lsrs	r3, r2, #1
+ 1631 03d8 0134     		adds	r4, r4, #1
+ 1632 03da 0493     		str	r3, [sp, #16]
+ 1633 03dc 33E6     		b	.L255
+ 1634              	.L347:
+ 1635 03de 0120     		movs	r0, #1
+ 1636 03e0 09B0     		add	sp, sp, #36
+ 1637 03e2 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 1639              		.section	.text.dwc_otg_pcd_handle_out_ep_intr,"ax",%progbits
+ 1640              		.align	1
+ 1641              		.thumb
+ 1642              		.thumb_func
+ 1644              	dwc_otg_pcd_handle_out_ep_intr:
+ 1645              		@ args = 0, pretend = 0, frame = 0
+ 1646              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1647 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, sl, lr}
+ 1648 0004 8468     		ldr	r4, [r0, #8]
+ 1649 0006 A368     		ldr	r3, [r4, #8]
+ 1650 0008 94F84920 		ldrb	r2, [r4, #73]	@ zero_extendqisi2
+ 1651 000c 0646     		mov	r6, r0
+ 1652 000e 1868     		ldr	r0, [r3, #0]
+ 1653 0010 3AB1     		cbz	r2, .L349
+ 1654 0012 3830     		adds	r0, r0, #56
+ 1655 0014 FFF7FEFF 		bl	DWC_READ_REG32
+ 1656 0018 A168     		ldr	r1, [r4, #8]
+ 1657 001a 8146     		mov	r9, r0
+ 1658 001c 0868     		ldr	r0, [r1, #0]
+ 1659 001e 3C30     		adds	r0, r0, #60
+ 1660 0020 06E0     		b	.L423
+ 1661              	.L349:
+ 1662 0022 1830     		adds	r0, r0, #24
+ 1663 0024 FFF7FEFF 		bl	DWC_READ_REG32
+ 1664 0028 8146     		mov	r9, r0
+ 1665 002a A068     		ldr	r0, [r4, #8]
+ 1666 002c 0068     		ldr	r0, [r0, #0]
+ 1667 002e 1C30     		adds	r0, r0, #28
+ 1668              	.L423:
+ 1669 0030 FFF7FEFF 		bl	DWC_READ_REG32
+ 1670 0034 00EA0905 		and	r5, r0, r9
+ 1671 0038 4FEA1549 		lsr	r9, r5, #16
+ 1672 003c 0025     		movs	r5, #0
+ 1673              	.L351:
+ 1674 003e B9F1000F 		cmp	r9, #0
+ 1675 0042 00F01381 		beq	.L430
+ 1676              	.L386:
+ 1677 0046 19F0010F 		tst	r9, #1
+ 1678 004a 00F00B81 		beq	.L353
+ 1679 004e B768     		ldr	r7, [r6, #8]
+ 1680 0050 BA68     		ldr	r2, [r7, #8]
+ 1681 0052 92F84610 		ldrb	r1, [r2, #70]	@ zero_extendqisi2
+ 1682 0056 15B1     		cbz	r5, .L354
+ 1683 0058 3746     		mov	r7, r6
+ 1684 005a 0023     		movs	r3, #0
+ 1685 005c 03E0     		b	.L355
+ 1686              	.L354:
+ 1687 005e 06F12407 		add	r7, r6, #36
+ 1688 0062 0EE0     		b	.L356
+ 1689              	.L357:
+ 1690 0064 0133     		adds	r3, r3, #1
+ 1691              	.L355:
+ 1692 0066 8B42     		cmp	r3, r1
+ 1693 0068 0ADA     		bge	.L431
+ 1694              	.L358:
+ 1695 006a 97F85402 		ldrb	r0, [r7, #596]	@ zero_extendqisi2
+ 1696 006e 4437     		adds	r7, r7, #68
+ 1697 0070 A842     		cmp	r0, r5
+ 1698 0072 F7D1     		bne	.L357
+ 1699 0074 4422     		movs	r2, #68
+ 1700 0076 02FB0361 		mla	r1, r2, r3, r6
+ 1701 007a 01F51177 		add	r7, r1, #580
+ 1702 007e 00E0     		b	.L356
+ 1703              	.L431:
+ 1704 0080 0027     		movs	r7, #0
+ 1705              	.L356:
+ 1706 0082 D4F80880 		ldr	r8, [r4, #8]
+ 1707 0086 94F84930 		ldrb	r3, [r4, #73]	@ zero_extendqisi2
+ 1708 008a D8F80000 		ldr	r0, [r8, #0]
+ 1709 008e 23B1     		cbz	r3, .L359
+ 1710 0090 3A7C     		ldrb	r2, [r7, #16]	@ zero_extendqisi2
+ 1711 0092 1832     		adds	r2, r2, #24
+ 1712 0094 00EB8200 		add	r0, r0, r2, lsl #2
+ 1713 0098 00E0     		b	.L429
+ 1714              	.L359:
+ 1715 009a 1430     		adds	r0, r0, #20
+ 1716              	.L429:
+ 1717 009c FFF7FEFF 		bl	DWC_READ_REG32
+ 1718 00a0 8246     		mov	sl, r0
+ 1719 00a2 94F84800 		ldrb	r0, [r4, #72]	@ zero_extendqisi2
+ 1720 00a6 08B1     		cbz	r0, .L362
+ 1721 00a8 4AF4006A 		orr	sl, sl, #2048
+ 1722              	.L362:
+ 1723 00ac 397C     		ldrb	r1, [r7, #16]	@ zero_extendqisi2
+ 1724 00ae 08EB8103 		add	r3, r8, r1, lsl #2
+ 1725 00b2 586A     		ldr	r0, [r3, #36]
+ 1726 00b4 0830     		adds	r0, r0, #8
+ 1727 00b6 FFF7FEFF 		bl	DWC_READ_REG32
+ 1728 00ba 00EA0A0A 		and	sl, r0, sl
+ 1729 00be 5FFA8AF8 		uxtb	r8, sl
+ 1730 00c2 18F0010F 		tst	r8, #1
+ 1731 00c6 1AD0     		beq	.L364
+ 1732 00c8 A268     		ldr	r2, [r4, #8]
+ 1733 00ca 75B9     		cbnz	r5, .L365
+ 1734 00cc 506A     		ldr	r0, [r2, #36]
+ 1735 00ce 0121     		movs	r1, #1
+ 1736 00d0 0830     		adds	r0, r0, #8
+ 1737 00d2 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1738 00d6 94F84710 		ldrb	r1, [r4, #71]	@ zero_extendqisi2
+ 1739 00da 11B1     		cbz	r1, .L366
+ 1740 00dc 337B     		ldrb	r3, [r6, #12]	@ zero_extendqisi2
+ 1741 00de 012B     		cmp	r3, #1
+ 1742 00e0 0DD0     		beq	.L364
+ 1743              	.L366:
+ 1744 00e2 3046     		mov	r0, r6
+ 1745 00e4 FFF7FEFF 		bl	handle_ep0
+ 1746 00e8 09E0     		b	.L364
+ 1747              	.L365:
+ 1748 00ea 02EB8500 		add	r0, r2, r5, lsl #2
+ 1749 00ee 0121     		movs	r1, #1
+ 1750 00f0 406A     		ldr	r0, [r0, #36]
+ 1751 00f2 0830     		adds	r0, r0, #8
+ 1752 00f4 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1753 00f8 3846     		mov	r0, r7
+ 1754 00fa FFF7FEFF 		bl	complete_ep
+ 1755              	.L364:
+ 1756 00fe 08F00202 		and	r2, r8, #2
+ 1757 0102 D0B2     		uxtb	r0, r2
+ 1758 0104 38B1     		cbz	r0, .L368
+ 1759 0106 A168     		ldr	r1, [r4, #8]
+ 1760 0108 01EB8503 		add	r3, r1, r5, lsl #2
+ 1761 010c 0221     		movs	r1, #2
+ 1762 010e 586A     		ldr	r0, [r3, #36]
+ 1763 0110 0830     		adds	r0, r0, #8
+ 1764 0112 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1765              	.L368:
+ 1766 0116 08F00402 		and	r2, r8, #4
+ 1767 011a D0B2     		uxtb	r0, r2
+ 1768 011c 38B1     		cbz	r0, .L369
+ 1769 011e A168     		ldr	r1, [r4, #8]
+ 1770 0120 01EB8503 		add	r3, r1, r5, lsl #2
+ 1771 0124 0421     		movs	r1, #4
+ 1772 0126 586A     		ldr	r0, [r3, #36]
+ 1773 0128 0830     		adds	r0, r0, #8
+ 1774 012a FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1775              	.L369:
+ 1776 012e 08F00802 		and	r2, r8, #8
+ 1777 0132 D0B2     		uxtb	r0, r2
+ 1778 0134 50B1     		cbz	r0, .L370
+ 1779 0136 A168     		ldr	r1, [r4, #8]
+ 1780 0138 01EB8503 		add	r3, r1, r5, lsl #2
+ 1781 013c 0821     		movs	r1, #8
+ 1782 013e 586A     		ldr	r0, [r3, #36]
+ 1783 0140 0830     		adds	r0, r0, #8
+ 1784 0142 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1785 0146 3046     		mov	r0, r6
+ 1786 0148 FFF7FEFF 		bl	handle_ep0
+ 1787              	.L370:
+ 1788 014c CAF3072A 		ubfx	sl, sl, #8, #8
+ 1789 0150 0AF00202 		and	r2, sl, #2
+ 1790 0154 D0B2     		uxtb	r0, r2
+ 1791 0156 70B1     		cbz	r0, .L372
+ 1792 0158 A168     		ldr	r1, [r4, #8]
+ 1793 015a 01EB8503 		add	r3, r1, r5, lsl #2
+ 1794 015e 4FF40071 		mov	r1, #512
+ 1795 0162 586A     		ldr	r0, [r3, #36]
+ 1796 0164 0830     		adds	r0, r0, #8
+ 1797 0166 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1798 016a 94F84720 		ldrb	r2, [r4, #71]	@ zero_extendqisi2
+ 1799 016e 12B1     		cbz	r2, .L372
+ 1800 0170 3846     		mov	r0, r7
+ 1801 0172 FFF7FEFF 		bl	dwc_otg_pcd_handle_noniso_bna
+ 1802              	.L372:
+ 1803 0176 08F02008 		and	r8, r8, #32
+ 1804 017a 5FFA88F0 		uxtb	r0, r8
+ 1805 017e 68B1     		cbz	r0, .L375
+ 1806 0180 A168     		ldr	r1, [r4, #8]
+ 1807 0182 01EB8503 		add	r3, r1, r5, lsl #2
+ 1808 0186 2021     		movs	r1, #32
+ 1809 0188 586A     		ldr	r0, [r3, #36]
+ 1810 018a 0830     		adds	r0, r0, #8
+ 1811 018c FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1812 0190 94F84720 		ldrb	r2, [r4, #71]	@ zero_extendqisi2
+ 1813 0194 12B1     		cbz	r2, .L375
+ 1814 0196 3046     		mov	r0, r6
+ 1815 0198 FFF7FEFF 		bl	do_setup_in_status_phase
+ 1816              	.L375:
+ 1817 019c 0AF01000 		and	r0, sl, #16
+ 1818 01a0 C1B2     		uxtb	r1, r0
+ 1819 01a2 E1B1     		cbz	r1, .L377
+ 1820 01a4 B368     		ldr	r3, [r6, #8]
+ 1821 01a6 93F84920 		ldrb	r2, [r3, #73]	@ zero_extendqisi2
+ 1822 01aa 9968     		ldr	r1, [r3, #8]
+ 1823 01ac 42B1     		cbz	r2, .L378
+ 1824 01ae 0868     		ldr	r0, [r1, #0]
+ 1825 01b0 05F11802 		add	r2, r5, #24
+ 1826 01b4 00EB8200 		add	r0, r0, r2, lsl #2
+ 1827 01b8 4FF48051 		mov	r1, #4096
+ 1828 01bc 0022     		movs	r2, #0
+ 1829 01be 03E0     		b	.L424
+ 1830              	.L378:
+ 1831 01c0 0868     		ldr	r0, [r1, #0]
+ 1832 01c2 4FF48051 		mov	r1, #4096
+ 1833 01c6 1430     		adds	r0, r0, #20
+ 1834              	.L424:
+ 1835 01c8 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1836 01cc A368     		ldr	r3, [r4, #8]
+ 1837 01ce 03EB8501 		add	r1, r3, r5, lsl #2
+ 1838 01d2 486A     		ldr	r0, [r1, #36]
+ 1839 01d4 4FF48051 		mov	r1, #4096
+ 1840 01d8 0830     		adds	r0, r0, #8
+ 1841 01da FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1842              	.L377:
+ 1843 01de 0AF02002 		and	r2, sl, #32
+ 1844 01e2 D0B2     		uxtb	r0, r2
+ 1845 01e4 E0B1     		cbz	r0, .L380
+ 1846 01e6 B368     		ldr	r3, [r6, #8]
+ 1847 01e8 93F84920 		ldrb	r2, [r3, #73]	@ zero_extendqisi2
+ 1848 01ec 9968     		ldr	r1, [r3, #8]
+ 1849 01ee 42B1     		cbz	r2, .L381
+ 1850 01f0 0868     		ldr	r0, [r1, #0]
+ 1851 01f2 05F11802 		add	r2, r5, #24
+ 1852 01f6 00EB8200 		add	r0, r0, r2, lsl #2
+ 1853 01fa 4FF40051 		mov	r1, #8192
+ 1854 01fe 0022     		movs	r2, #0
+ 1855 0200 03E0     		b	.L425
+ 1856              	.L381:
+ 1857 0202 0868     		ldr	r0, [r1, #0]
+ 1858 0204 4FF40051 		mov	r1, #8192
+ 1859 0208 1430     		adds	r0, r0, #20
+ 1860              	.L425:
+ 1861 020a FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1862 020e A368     		ldr	r3, [r4, #8]
+ 1863 0210 03EB8501 		add	r1, r3, r5, lsl #2
+ 1864 0214 486A     		ldr	r0, [r1, #36]
+ 1865 0216 4FF40051 		mov	r1, #8192
+ 1866 021a 0830     		adds	r0, r0, #8
+ 1867 021c FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1868              	.L380:
+ 1869 0220 0AF0400A 		and	sl, sl, #64
+ 1870 0224 5FFA8AF2 		uxtb	r2, sl
+ 1871 0228 E2B1     		cbz	r2, .L353
+ 1872 022a B068     		ldr	r0, [r6, #8]
+ 1873 022c 90F84920 		ldrb	r2, [r0, #73]	@ zero_extendqisi2
+ 1874 0230 8368     		ldr	r3, [r0, #8]
+ 1875 0232 42B1     		cbz	r2, .L384
+ 1876 0234 1A68     		ldr	r2, [r3, #0]
+ 1877 0236 05F11801 		add	r1, r5, #24
+ 1878 023a 02EB8100 		add	r0, r2, r1, lsl #2
+ 1879 023e 4FF48041 		mov	r1, #16384
+ 1880 0242 0022     		movs	r2, #0
+ 1881 0244 03E0     		b	.L426
+ 1882              	.L384:
+ 1883 0246 1868     		ldr	r0, [r3, #0]
+ 1884 0248 4FF48041 		mov	r1, #16384
+ 1885 024c 1430     		adds	r0, r0, #20
+ 1886              	.L426:
+ 1887 024e FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1888 0252 A068     		ldr	r0, [r4, #8]
+ 1889 0254 00EB8503 		add	r3, r0, r5, lsl #2
+ 1890 0258 4FF48041 		mov	r1, #16384
+ 1891 025c 586A     		ldr	r0, [r3, #36]
+ 1892 025e 0830     		adds	r0, r0, #8
+ 1893 0260 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1894              	.L353:
+ 1895 0264 0135     		adds	r5, r5, #1
+ 1896 0266 4FEA5909 		lsr	r9, r9, #1
+ 1897 026a E8E6     		b	.L351
+ 1898              	.L430:
+ 1899 026c 0120     		movs	r0, #1
+ 1900 026e BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+ 1902              		.section	.text.dwc_otg_pcd_handle_sof_intr,"ax",%progbits
+ 1903              		.align	1
+ 1904              		.global	dwc_otg_pcd_handle_sof_intr
+ 1905              		.thumb
+ 1906              		.thumb_func
+ 1908              	dwc_otg_pcd_handle_sof_intr:
+ 1909              		@ args = 0, pretend = 0, frame = 0
+ 1910              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1911 0000 08B5     		push	{r3, lr}
+ 1912 0002 8368     		ldr	r3, [r0, #8]
+ 1913 0004 5868     		ldr	r0, [r3, #4]
+ 1914 0006 0821     		movs	r1, #8
+ 1915 0008 1430     		adds	r0, r0, #20
+ 1916 000a FFF7FEFF 		bl	DWC_WRITE_REG32
+ 1917 000e 0120     		movs	r0, #1
+ 1918 0010 08BD     		pop	{r3, pc}
+ 1920              		.section	.text.dwc_otg_pcd_handle_rx_status_q_level_intr,"ax",%progbits
+ 1921              		.align	1
+ 1922              		.global	dwc_otg_pcd_handle_rx_status_q_level_intr
+ 1923              		.thumb
+ 1924              		.thumb_func
+ 1926              	dwc_otg_pcd_handle_rx_status_q_level_intr:
+ 1927              		@ args = 0, pretend = 0, frame = 0
+ 1928              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1929 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1930 0004 D0F80880 		ldr	r8, [r0, #8]
+ 1931 0008 D8F80470 		ldr	r7, [r8, #4]
+ 1932 000c 1021     		movs	r1, #16
+ 1933 000e 0022     		movs	r2, #0
+ 1934 0010 0546     		mov	r5, r0
+ 1935 0012 07F11800 		add	r0, r7, #24
+ 1936 0016 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1937 001a 07F12000 		add	r0, r7, #32
+ 1938 001e FFF7FEFF 		bl	DWC_READ_REG32
+ 1939 0022 AB68     		ldr	r3, [r5, #8]
+ 1940 0024 0646     		mov	r6, r0
+ 1941 0026 9868     		ldr	r0, [r3, #8]
+ 1942 0028 90F84610 		ldrb	r1, [r0, #70]	@ zero_extendqisi2
+ 1943 002c 16F00F00 		ands	r0, r6, #15
+ 1944 0030 02D0     		beq	.L434
+ 1945 0032 2A46     		mov	r2, r5
+ 1946 0034 0023     		movs	r3, #0
+ 1947 0036 03E0     		b	.L435
+ 1948              	.L434:
+ 1949 0038 05F12404 		add	r4, r5, #36
+ 1950 003c 0EE0     		b	.L436
+ 1951              	.L437:
+ 1952 003e 0133     		adds	r3, r3, #1
+ 1953              	.L435:
+ 1954 0040 8B42     		cmp	r3, r1
+ 1955 0042 0ADA     		bge	.L448
+ 1956              	.L438:
+ 1957 0044 92F85442 		ldrb	r4, [r2, #596]	@ zero_extendqisi2
+ 1958 0048 4432     		adds	r2, r2, #68
+ 1959 004a 8442     		cmp	r4, r0
+ 1960 004c F7D1     		bne	.L437
+ 1961 004e 4420     		movs	r0, #68
+ 1962 0050 00FB0351 		mla	r1, r0, r3, r5
+ 1963 0054 01F51174 		add	r4, r1, #580
+ 1964 0058 00E0     		b	.L436
+ 1965              	.L448:
+ 1966 005a 0024     		movs	r4, #0
+ 1967              	.L436:
+ 1968 005c C6F34342 		ubfx	r2, r6, #17, #4
+ 1969 0060 022A     		cmp	r2, #2
+ 1970 0062 0FD0     		beq	.L440
+ 1971 0064 062A     		cmp	r2, #6
+ 1972 0066 23D1     		bne	.L439
+ 1973 0068 4046     		mov	r0, r8
+ 1974 006a 6969     		ldr	r1, [r5, #20]
+ 1975 006c FFF7FEFF 		bl	dwc_otg_read_setup_packet
+ 1976 0070 236B     		ldr	r3, [r4, #48]
+ 1977 0072 C6F30A16 		ubfx	r6, r6, #4, #11
+ 1978 0076 C3F31200 		ubfx	r0, r3, #0, #19
+ 1979 007a 8619     		adds	r6, r0, r6
+ 1980 007c 66F31203 		bfi	r3, r6, #0, #19
+ 1981 0080 2363     		str	r3, [r4, #48]
+ 1982 0082 15E0     		b	.L439
+ 1983              	.L440:
+ 1984 0084 47F6F071 		movw	r1, #32752
+ 1985 0088 3140     		ands	r1, r1, r6
+ 1986 008a 89B1     		cbz	r1, .L439
+ 1987 008c A16A     		ldr	r1, [r4, #40]
+ 1988 008e 79B1     		cbz	r1, .L439
+ 1989 0090 C6F30A16 		ubfx	r6, r6, #4, #11
+ 1990 0094 3246     		mov	r2, r6
+ 1991 0096 4046     		mov	r0, r8
+ 1992 0098 FFF7FEFF 		bl	dwc_otg_read_packet
+ 1993 009c 236B     		ldr	r3, [r4, #48]
+ 1994 009e A16A     		ldr	r1, [r4, #40]
+ 1995 00a0 C3F31202 		ubfx	r2, r3, #0, #19
+ 1996 00a4 9019     		adds	r0, r2, r6
+ 1997 00a6 60F31203 		bfi	r3, r0, #0, #19
+ 1998 00aa 8E19     		adds	r6, r1, r6
+ 1999 00ac 2363     		str	r3, [r4, #48]
+ 2000 00ae A662     		str	r6, [r4, #40]
+ 2001              	.L439:
+ 2002 00b0 07F11400 		add	r0, r7, #20
+ 2003 00b4 1021     		movs	r1, #16
+ 2004 00b6 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2005 00ba 07F11800 		add	r0, r7, #24
+ 2006 00be 0021     		movs	r1, #0
+ 2007 00c0 1022     		movs	r2, #16
+ 2008 00c2 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2009 00c6 0120     		movs	r0, #1
+ 2010 00c8 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 2012              		.section	.text.dwc_otg_pcd_handle_np_tx_fifo_empty_intr,"ax",%progbits
+ 2013              		.align	1
+ 2014              		.global	dwc_otg_pcd_handle_np_tx_fifo_empty_intr
+ 2015              		.thumb
+ 2016              		.thumb_func
+ 2018              	dwc_otg_pcd_handle_np_tx_fifo_empty_intr:
+ 2019              		@ args = 0, pretend = 0, frame = 16
+ 2020              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2021 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 2022 0004 8668     		ldr	r6, [r0, #8]
+ 2023 0006 B368     		ldr	r3, [r6, #8]
+ 2024 0008 96F85340 		ldrb	r4, [r6, #83]	@ zero_extendqisi2
+ 2025 000c D3F80090 		ldr	r9, [r3, #0]
+ 2026 0010 7768     		ldr	r7, [r6, #4]
+ 2027 0012 C4F38404 		ubfx	r4, r4, #2, #5
+ 2028 0016 04F1070B 		add	fp, r4, #7
+ 2029 001a 85B0     		sub	sp, sp, #20
+ 2030 001c 8246     		mov	sl, r0
+ 2031 001e 4FEADB0B 		lsr	fp, fp, #3
+ 2032 0022 09F12005 		add	r5, r9, #32
+ 2033 0026 4FF00008 		mov	r8, #0
+ 2034              	.L450:
+ 2035 002a D845     		cmp	r8, fp
+ 2036 002c 0FDA     		bge	.L473
+ 2037              	.L453:
+ 2038 002e 2846     		mov	r0, r5
+ 2039 0030 FFF7FEFF 		bl	DWC_READ_REG32
+ 2040 0034 09F12802 		add	r2, r9, #40
+ 2041 0038 9542     		cmp	r5, r2
+ 2042 003a 08BF     		it	eq
+ 2043 003c 09F13005 		addeq	r5, r9, #48
+ 2044 0040 4DF82800 		str	r0, [sp, r8, lsl #2]
+ 2045 0044 18BF     		it	ne
+ 2046 0046 0435     		addne	r5, r5, #4
+ 2047 0048 08F10108 		add	r8, r8, #1
+ 2048 004c EDE7     		b	.L450
+ 2049              	.L473:
+ 2050 004e 0099     		ldr	r1, [sp, #0]
+ 2051 0050 C1F31720 		ubfx	r0, r1, #8, #24
+ 2052 0054 01F01F05 		and	r5, r1, #31
+ 2053 0058 0090     		str	r0, [sp, #0]
+ 2054 005a 6A1E     		subs	r2, r5, #1
+ 2055 005c ADB9     		cbnz	r5, .L454
+ 2056 005e 062C     		cmp	r4, #6
+ 2057 0060 01D8     		bhi	.L455
+ 2058 0062 013C     		subs	r4, r4, #1
+ 2059 0064 08E0     		b	.L456
+ 2060              	.L455:
+ 2061 0066 0E2C     		cmp	r4, #14
+ 2062 0068 01D8     		bhi	.L457
+ 2063 006a 073C     		subs	r4, r4, #7
+ 2064 006c 04E0     		b	.L456
+ 2065              	.L457:
+ 2066 006e 162C     		cmp	r4, #22
+ 2067 0070 01D8     		bhi	.L458
+ 2068 0072 0F3C     		subs	r4, r4, #15
+ 2069 0074 00E0     		b	.L456
+ 2070              	.L458:
+ 2071 0076 173C     		subs	r4, r4, #23
+ 2072              	.L456:
+ 2073 0078 04A9     		add	r1, sp, #16
+ 2074 007a 01EB8B00 		add	r0, r1, fp, lsl #2
+ 2075 007e A400     		lsls	r4, r4, #2
+ 2076 0080 50F8142C 		ldr	r2, [r0, #-20]
+ 2077 0084 22FA04F2 		lsr	r2, r2, r4
+ 2078 0088 1AE0     		b	.L471
+ 2079              	.L454:
+ 2080 008a 052A     		cmp	r2, #5
+ 2081 008c 03DC     		bgt	.L460
+ 2082 008e 9300     		lsls	r3, r2, #2
+ 2083 0090 20FA03F2 		lsr	r2, r0, r3
+ 2084 0094 14E0     		b	.L471
+ 2085              	.L460:
+ 2086 0096 0D2A     		cmp	r2, #13
+ 2087 0098 03DC     		bgt	.L461
+ 2088 009a 073D     		subs	r5, r5, #7
+ 2089 009c AC00     		lsls	r4, r5, #2
+ 2090 009e 0199     		ldr	r1, [sp, #4]
+ 2091 00a0 0CE0     		b	.L470
+ 2092              	.L461:
+ 2093 00a2 152A     		cmp	r2, #21
+ 2094 00a4 04DC     		bgt	.L462
+ 2095 00a6 A5F10F00 		sub	r0, r5, #15
+ 2096 00aa 8400     		lsls	r4, r0, #2
+ 2097 00ac 0299     		ldr	r1, [sp, #8]
+ 2098 00ae 05E0     		b	.L470
+ 2099              	.L462:
+ 2100 00b0 1E2A     		cmp	r2, #30
+ 2101 00b2 08D0     		beq	.L466
+ 2102 00b4 A5F11703 		sub	r3, r5, #23
+ 2103 00b8 0399     		ldr	r1, [sp, #12]
+ 2104 00ba 9C00     		lsls	r4, r3, #2
+ 2105              	.L470:
+ 2106 00bc 21FA04F2 		lsr	r2, r1, r4
+ 2107              	.L471:
+ 2108 00c0 02F00F01 		and	r1, r2, #15
+ 2109 00c4 00E0     		b	.L459
+ 2110              	.L466:
+ 2111 00c6 0021     		movs	r1, #0
+ 2112              	.L459:
+ 2113 00c8 5046     		mov	r0, sl
+ 2114 00ca FFF7FEFF 		bl	get_in_ep
+ 2115 00ce 0446     		mov	r4, r0
+ 2116              	.L472:
+ 2117 00d0 E56A     		ldr	r5, [r4, #44]
+ 2118 00d2 236B     		ldr	r3, [r4, #48]
+ 2119 00d4 C5F31202 		ubfx	r2, r5, #0, #19
+ 2120 00d8 658A     		ldrh	r5, [r4, #18]
+ 2121 00da C3F31201 		ubfx	r1, r3, #0, #19
+ 2122 00de 501A     		subs	r0, r2, r1
+ 2123 00e0 C5F38A02 		ubfx	r2, r5, #2, #11
+ 2124 00e4 9042     		cmp	r0, r2
+ 2125 00e6 28BF     		it	cs
+ 2126 00e8 1046     		movcs	r0, r2
+ 2127 00ea C31C     		adds	r3, r0, #3
+ 2128 00ec 07F12C00 		add	r0, r7, #44
+ 2129 00f0 9D08     		lsrs	r5, r3, #2
+ 2130 00f2 FFF7FEFF 		bl	DWC_READ_REG32
+ 2131 00f6 C0F30741 		ubfx	r1, r0, #16, #8
+ 2132 00fa 89B1     		cbz	r1, .L464
+ 2133 00fc 80B2     		uxth	r0, r0
+ 2134 00fe A842     		cmp	r0, r5
+ 2135 0100 0EDD     		ble	.L464
+ 2136 0102 226B     		ldr	r2, [r4, #48]
+ 2137 0104 E36A     		ldr	r3, [r4, #44]
+ 2138 0106 C2F31201 		ubfx	r1, r2, #0, #19
+ 2139 010a C3F31200 		ubfx	r0, r3, #0, #19
+ 2140 010e 8142     		cmp	r1, r0
+ 2141 0110 06DA     		bge	.L464
+ 2142              	.L465:
+ 2143 0112 3046     		mov	r0, r6
+ 2144 0114 04F11001 		add	r1, r4, #16
+ 2145 0118 0022     		movs	r2, #0
+ 2146 011a FFF7FEFF 		bl	dwc_otg_ep_write_packet
+ 2147 011e D7E7     		b	.L472
+ 2148              	.L464:
+ 2149 0120 07F11400 		add	r0, r7, #20
+ 2150 0124 2021     		movs	r1, #32
+ 2151 0126 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2152 012a 0120     		movs	r0, #1
+ 2153 012c 05B0     		add	sp, sp, #20
+ 2154 012e BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 2156              		.section	.text.dwc_otg_pcd_stop,"ax",%progbits
+ 2157              		.align	1
+ 2158              		.global	dwc_otg_pcd_stop
+ 2159              		.thumb
+ 2160              		.thumb_func
+ 2162              	dwc_otg_pcd_stop:
+ 2163              		@ args = 0, pretend = 0, frame = 0
+ 2164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2165 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 2166 0002 0446     		mov	r4, r0
+ 2167 0004 D0F82004 		ldr	r0, [r0, #1056]
+ 2168 0008 FFF7FEFF 		bl	DWC_SPINLOCK
+ 2169 000c A368     		ldr	r3, [r4, #8]
+ 2170 000e 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+ 2171 0010 9868     		ldr	r0, [r3, #8]
+ 2172 0012 0025     		movs	r5, #0
+ 2173 0014 90F84570 		ldrb	r7, [r0, #69]	@ zero_extendqisi2
+ 2174 0018 90F84660 		ldrb	r6, [r0, #70]	@ zero_extendqisi2
+ 2175 001c 0029     		cmp	r1, #0
+ 2176 001e 3BD0     		beq	.L480
+ 2177              	.L475:
+ 2178 0020 2046     		mov	r0, r4
+ 2179 0022 0121     		movs	r1, #1
+ 2180 0024 2573     		strb	r5, [r4, #12]
+ 2181 0026 FFF7FEFF 		bl	dwc_otg_pcd_update_otg
+ 2182 002a A268     		ldr	r2, [r4, #8]
+ 2183 002c 5068     		ldr	r0, [r2, #4]
+ 2184 002e 2021     		movs	r1, #32
+ 2185 0030 2A46     		mov	r2, r5
+ 2186 0032 1830     		adds	r0, r0, #24
+ 2187 0034 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2188 0038 A068     		ldr	r0, [r4, #8]
+ 2189 003a 1021     		movs	r1, #16
+ 2190 003c FFF7FEFF 		bl	dwc_otg_flush_tx_fifo
+ 2191 0040 A068     		ldr	r0, [r4, #8]
+ 2192 0042 FFF7FEFF 		bl	dwc_otg_flush_rx_fifo
+ 2193 0046 04F12400 		add	r0, r4, #36
+ 2194 004a FFF7FEFF 		bl	dwc_otg_request_nuke
+ 2195              	.L476:
+ 2196 004e BD42     		cmp	r5, r7
+ 2197 0050 07DA     		bge	.L484
+ 2198              	.L477:
+ 2199 0052 4421     		movs	r1, #68
+ 2200 0054 01FB0540 		mla	r0, r1, r5, r4
+ 2201 0058 6830     		adds	r0, r0, #104
+ 2202 005a FFF7FEFF 		bl	dwc_otg_request_nuke
+ 2203 005e 0135     		adds	r5, r5, #1
+ 2204 0060 F5E7     		b	.L476
+ 2205              	.L484:
+ 2206 0062 0025     		movs	r5, #0
+ 2207              	.L478:
+ 2208 0064 B542     		cmp	r5, r6
+ 2209 0066 08DA     		bge	.L485
+ 2210              	.L479:
+ 2211 0068 4423     		movs	r3, #68
+ 2212 006a 03FB0540 		mla	r0, r3, r5, r4
+ 2213 006e 00F51170 		add	r0, r0, #580
+ 2214 0072 FFF7FEFF 		bl	dwc_otg_request_nuke
+ 2215 0076 0135     		adds	r5, r5, #1
+ 2216 0078 F4E7     		b	.L478
+ 2217              	.L485:
+ 2218 007a 2368     		ldr	r3, [r4, #0]
+ 2219 007c 5868     		ldr	r0, [r3, #4]
+ 2220 007e 58B1     		cbz	r0, .L480
+ 2221 0080 D4F82004 		ldr	r0, [r4, #1056]
+ 2222 0084 FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 2223 0088 2168     		ldr	r1, [r4, #0]
+ 2224 008a 2046     		mov	r0, r4
+ 2225 008c 4A68     		ldr	r2, [r1, #4]
+ 2226 008e 9047     		blx	r2
+ 2227 0090 D4F82004 		ldr	r0, [r4, #1056]
+ 2228 0094 FFF7FEFF 		bl	DWC_SPINLOCK
+ 2229              	.L480:
+ 2230 0098 D4F82004 		ldr	r0, [r4, #1056]
+ 2231 009c BDE8F840 		pop	{r3, r4, r5, r6, r7, lr}
+ 2232 00a0 FFF7FEBF 		b	DWC_SPINUNLOCK
+ 2234              		.section	.text.dwc_otg_pcd_handle_i2c_intr,"ax",%progbits
+ 2235              		.align	1
+ 2236              		.global	dwc_otg_pcd_handle_i2c_intr
+ 2237              		.thumb
+ 2238              		.thumb_func
+ 2240              	dwc_otg_pcd_handle_i2c_intr:
+ 2241              		@ args = 0, pretend = 0, frame = 0
+ 2242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2243 0000 38B5     		push	{r3, r4, r5, lr}
+ 2244 0002 8368     		ldr	r3, [r0, #8]
+ 2245 0004 0546     		mov	r5, r0
+ 2246 0006 5868     		ldr	r0, [r3, #4]
+ 2247 0008 4FF40074 		mov	r4, #512
+ 2248 000c 1830     		adds	r0, r0, #24
+ 2249 000e 2146     		mov	r1, r4
+ 2250 0010 0022     		movs	r2, #0
+ 2251 0012 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2252 0016 A868     		ldr	r0, [r5, #8]
+ 2253 0018 4068     		ldr	r0, [r0, #4]
+ 2254 001a 2146     		mov	r1, r4
+ 2255 001c 1430     		adds	r0, r0, #20
+ 2256 001e FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2257 0022 0120     		movs	r0, #1
+ 2258 0024 38BD     		pop	{r3, r4, r5, pc}
+ 2260              		.section	.text.dwc_otg_pcd_handle_early_suspend_intr,"ax",%progbits
+ 2261              		.align	1
+ 2262              		.global	dwc_otg_pcd_handle_early_suspend_intr
+ 2263              		.thumb
+ 2264              		.thumb_func
+ 2266              	dwc_otg_pcd_handle_early_suspend_intr:
+ 2267              		@ args = 0, pretend = 0, frame = 0
+ 2268              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2269 0000 08B5     		push	{r3, lr}
+ 2270 0002 8368     		ldr	r3, [r0, #8]
+ 2271 0004 5868     		ldr	r0, [r3, #4]
+ 2272 0006 4FF48061 		mov	r1, #1024
+ 2273 000a 1430     		adds	r0, r0, #20
+ 2274 000c FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2275 0010 0120     		movs	r0, #1
+ 2276 0012 08BD     		pop	{r3, pc}
+ 2278              		.section	.text.dwc_otg_pcd_handle_usb_reset_intr,"ax",%progbits
+ 2279              		.align	1
+ 2280              		.global	dwc_otg_pcd_handle_usb_reset_intr
+ 2281              		.thumb
+ 2282              		.thumb_func
+ 2284              	dwc_otg_pcd_handle_usb_reset_intr:
+ 2285              		@ args = 0, pretend = 0, frame = 0
+ 2286              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2287 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 2288 0002 8468     		ldr	r4, [r0, #8]
+ 2289 0004 0746     		mov	r7, r0
+ 2290 0006 E069     		ldr	r0, [r4, #28]
+ 2291 0008 A568     		ldr	r5, [r4, #8]
+ 2292 000a FFF7FEFF 		bl	DWC_READ_REG32
+ 2293 000e C107     		lsls	r1, r0, #31
+ 2294 0010 0ED5     		bpl	.L489
+ 2295 0012 E069     		ldr	r0, [r4, #28]
+ 2296 0014 0121     		movs	r1, #1
+ 2297 0016 0022     		movs	r2, #0
+ 2298 0018 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2299 001c E069     		ldr	r0, [r4, #28]
+ 2300 001e 0521     		movs	r1, #5
+ 2301 0020 0022     		movs	r2, #0
+ 2302 0022 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2303 0026 E069     		ldr	r0, [r4, #28]
+ 2304 0028 0D21     		movs	r1, #13
+ 2305 002a 0022     		movs	r2, #0
+ 2306 002c FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2307              	.L489:
+ 2308 0030 0026     		movs	r6, #0
+ 2309 0032 3846     		mov	r0, r7
+ 2310 0034 0121     		movs	r1, #1
+ 2311 0036 84F88060 		strb	r6, [r4, #128]
+ 2312 003a FFF7FEFF 		bl	dwc_otg_pcd_update_otg
+ 2313 003e A368     		ldr	r3, [r4, #8]
+ 2314 0040 1868     		ldr	r0, [r3, #0]
+ 2315 0042 0121     		movs	r1, #1
+ 2316 0044 0430     		adds	r0, r0, #4
+ 2317 0046 3246     		mov	r2, r6
+ 2318 0048 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2319              	.L490:
+ 2320 004c 95F84610 		ldrb	r1, [r5, #70]	@ zero_extendqisi2
+ 2321 0050 8E42     		cmp	r6, r1
+ 2322 0052 08DC     		bgt	.L504
+ 2323              	.L491:
+ 2324 0054 05EB8600 		add	r0, r5, r6, lsl #2
+ 2325 0058 4FF00061 		mov	r1, #134217728
+ 2326 005c 406A     		ldr	r0, [r0, #36]
+ 2327 005e FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2328 0062 0136     		adds	r6, r6, #1
+ 2329 0064 F2E7     		b	.L490
+ 2330              	.L504:
+ 2331 0066 2046     		mov	r0, r4
+ 2332 0068 1021     		movs	r1, #16
+ 2333 006a FFF7FEFF 		bl	dwc_otg_flush_tx_fifo
+ 2334 006e 6068     		ldr	r0, [r4, #4]
+ 2335 0070 0821     		movs	r1, #8
+ 2336 0072 1030     		adds	r0, r0, #16
+ 2337 0074 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2338 0078 94F84920 		ldrb	r2, [r4, #73]	@ zero_extendqisi2
+ 2339 007c 2868     		ldr	r0, [r5, #0]
+ 2340 007e 8AB1     		cbz	r2, .L492
+ 2341 0080 3C30     		adds	r0, r0, #60
+ 2342 0082 4FF00111 		mov	r1, #65537
+ 2343 0086 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2344 008a 94F84710 		ldrb	r1, [r4, #71]	@ zero_extendqisi2
+ 2345 008e 2868     		ldr	r0, [r5, #0]
+ 2346 0090 0029     		cmp	r1, #0
+ 2347 0092 0CBF     		ite	eq
+ 2348 0094 0F21     		moveq	r1, #15
+ 2349 0096 2F21     		movne	r1, #47
+ 2350 0098 6030     		adds	r0, r0, #96
+ 2351 009a FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2352 009e 2868     		ldr	r0, [r5, #0]
+ 2353 00a0 4030     		adds	r0, r0, #64
+ 2354 00a2 10E0     		b	.L503
+ 2355              	.L492:
+ 2356 00a4 1C30     		adds	r0, r0, #28
+ 2357 00a6 4FF00111 		mov	r1, #65537
+ 2358 00aa FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2359 00ae 94F84730 		ldrb	r3, [r4, #71]	@ zero_extendqisi2
+ 2360 00b2 2868     		ldr	r0, [r5, #0]
+ 2361 00b4 002B     		cmp	r3, #0
+ 2362 00b6 0CBF     		ite	eq
+ 2363 00b8 0F21     		moveq	r1, #15
+ 2364 00ba 2F21     		movne	r1, #47
+ 2365 00bc 1430     		adds	r0, r0, #20
+ 2366 00be FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2367 00c2 2868     		ldr	r0, [r5, #0]
+ 2368 00c4 1030     		adds	r0, r0, #16
+ 2369              	.L503:
+ 2370 00c6 2F21     		movs	r1, #47
+ 2371 00c8 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2372 00cc 2868     		ldr	r0, [r5, #0]
+ 2373 00ce FFF7FEFF 		bl	DWC_READ_REG32
+ 2374 00d2 0246     		mov	r2, r0
+ 2375 00d4 22F4FE61 		bic	r1, r2, #2032
+ 2376 00d8 2868     		ldr	r0, [r5, #0]
+ 2377 00da FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2378 00de 2046     		mov	r0, r4
+ 2379 00e0 3946     		mov	r1, r7
+ 2380 00e2 FFF7FEFF 		bl	ep0_out_start
+ 2381 00e6 6068     		ldr	r0, [r4, #4]
+ 2382 00e8 4FF48051 		mov	r1, #4096
+ 2383 00ec 1430     		adds	r0, r0, #20
+ 2384 00ee FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2385 00f2 0120     		movs	r0, #1
+ 2386 00f4 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 2388              		.section	.text.dwc_otg_pcd_handle_enum_done_intr,"ax",%progbits
+ 2389              		.align	1
+ 2390              		.global	dwc_otg_pcd_handle_enum_done_intr
+ 2391              		.thumb
+ 2392              		.thumb_func
+ 2394              	dwc_otg_pcd_handle_enum_done_intr:
+ 2395              		@ args = 0, pretend = 0, frame = 0
+ 2396              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2397 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 2398 0004 0446     		mov	r4, r0
+ 2399 0006 8068     		ldr	r0, [r0, #8]
+ 2400 0008 364A     		ldr	r2, .L521
+ 2401 000a 0369     		ldr	r3, [r0, #16]
+ 2402 000c D0F80480 		ldr	r8, [r0, #4]
+ 2403 0010 9342     		cmp	r3, r2
+ 2404 0012 04F13401 		add	r1, r4, #52
+ 2405 0016 94BF     		ite	ls
+ 2406 0018 0826     		movls	r6, #8
+ 2407 001a 0926     		movhi	r6, #9
+ 2408 001c 94BF     		ite	ls
+ 2409 001e 0425     		movls	r5, #4
+ 2410 0020 0625     		movhi	r5, #6
+ 2411 0022 FFF7FEFF 		bl	dwc_otg_ep0_activate
+ 2412 0026 94F83010 		ldrb	r1, [r4, #48]	@ zero_extendqisi2
+ 2413 002a A368     		ldr	r3, [r4, #8]
+ 2414 002c 6FF30001 		bfc	r1, #0, #1
+ 2415 0030 84F83010 		strb	r1, [r4, #48]
+ 2416 0034 9A68     		ldr	r2, [r3, #8]
+ 2417 0036 0120     		movs	r0, #1
+ 2418 0038 2073     		strb	r0, [r4, #12]
+ 2419 003a 1068     		ldr	r0, [r2, #0]
+ 2420 003c 0830     		adds	r0, r0, #8
+ 2421 003e FFF7FEFF 		bl	DWC_READ_REG32
+ 2422 0042 C0F34100 		ubfx	r0, r0, #1, #2
+ 2423 0046 411E     		subs	r1, r0, #1
+ 2424 0048 0229     		cmp	r1, #2
+ 2425 004a 98BF     		it	ls
+ 2426 004c 264B     		ldrls	r3, .L521+4
+ 2427 004e 2268     		ldr	r2, [r4, #0]
+ 2428 0050 98BF     		it	ls
+ 2429 0052 5F56     		ldrsbls	r7, [r3, r1]
+ 2430 0054 1368     		ldr	r3, [r2, #0]
+ 2431 0056 88BF     		it	hi
+ 2432 0058 0327     		movhi	r7, #3
+ 2433 005a 3946     		mov	r1, r7
+ 2434 005c 2046     		mov	r0, r4
+ 2435 005e 9847     		blx	r3
+ 2436 0060 08F10C00 		add	r0, r8, #12
+ 2437 0064 FFF7FEFF 		bl	DWC_READ_REG32
+ 2438 0068 032F     		cmp	r7, #3
+ 2439 006a 0146     		mov	r1, r0
+ 2440 006c 28D1     		bne	.L508
+ 2441 006e A068     		ldr	r0, [r4, #8]
+ 2442 0070 90F85020 		ldrb	r2, [r0, #80]	@ zero_extendqisi2
+ 2443 0074 02F0C003 		and	r3, r2, #192
+ 2444 0078 802B     		cmp	r3, #128
+ 2445 007a 21D0     		beq	.L508
+ 2446              	.L509:
+ 2447 007c 402B     		cmp	r3, #64
+ 2448 007e 10D1     		bne	.L511
+ 2449 0080 90F85930 		ldrb	r3, [r0, #89]	@ zero_extendqisi2
+ 2450 0084 13F0C002 		ands	r2, r3, #192
+ 2451 0088 02D1     		bne	.L512
+ 2452 008a 66F38D21 		bfi	r1, r6, #10, #4
+ 2453 008e 1AE0     		b	.L510
+ 2454              	.L512:
+ 2455 0090 402A     		cmp	r2, #64
+ 2456 0092 12D0     		beq	.L520
+ 2457              	.L514:
+ 2458 0094 0068     		ldr	r0, [r0, #0]
+ 2459 0096 D0F88C30 		ldr	r3, [r0, #140]
+ 2460 009a 082B     		cmp	r3, #8
+ 2461 009c 08BF     		it	eq
+ 2462 009e 3546     		moveq	r5, r6
+ 2463 00a0 0BE0     		b	.L520
+ 2464              	.L511:
+ 2465 00a2 C02B     		cmp	r3, #192
+ 2466 00a4 0FD1     		bne	.L510
+ 2467 00a6 01F01002 		and	r2, r1, #16
+ 2468 00aa D3B2     		uxtb	r3, r2
+ 2469 00ac 43B9     		cbnz	r3, .L508
+ 2470              	.L516:
+ 2471 00ae 0068     		ldr	r0, [r0, #0]
+ 2472 00b0 D0F88C20 		ldr	r2, [r0, #140]
+ 2473 00b4 102A     		cmp	r2, #16
+ 2474 00b6 18BF     		it	ne
+ 2475 00b8 3546     		movne	r5, r6
+ 2476              	.L520:
+ 2477 00ba 65F38D21 		bfi	r1, r5, #10, #4
+ 2478 00be 02E0     		b	.L510
+ 2479              	.L508:
+ 2480 00c0 0922     		movs	r2, #9
+ 2481 00c2 62F38D21 		bfi	r1, r2, #10, #4
+ 2482              	.L510:
+ 2483 00c6 08F10C00 		add	r0, r8, #12
+ 2484 00ca FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2485 00ce A168     		ldr	r1, [r4, #8]
+ 2486 00d0 4868     		ldr	r0, [r1, #4]
+ 2487 00d2 4FF40051 		mov	r1, #8192
+ 2488 00d6 1430     		adds	r0, r0, #20
+ 2489 00d8 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2490 00dc 0120     		movs	r0, #1
+ 2491 00de BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 2492              	.L522:
+ 2493 00e2 00BF     		.align	2
+ 2494              	.L521:
+ 2495 00e4 0926544F 		.word	1330914825
+ 2496 00e8 00000000 		.word	.LANCHOR0
+ 2498              		.section	.text.dwc_otg_pcd_handle_isoc_out_packet_dropped_intr,"ax",%progbits
+ 2499              		.align	1
+ 2500              		.global	dwc_otg_pcd_handle_isoc_out_packet_dropped_intr
+ 2501              		.thumb
+ 2502              		.thumb_func
+ 2504              	dwc_otg_pcd_handle_isoc_out_packet_dropped_intr:
+ 2505              		@ args = 0, pretend = 0, frame = 0
+ 2506              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2507 0000 38B5     		push	{r3, r4, r5, lr}
+ 2508 0002 8368     		ldr	r3, [r0, #8]
+ 2509 0004 0546     		mov	r5, r0
+ 2510 0006 5868     		ldr	r0, [r3, #4]
+ 2511 0008 4FF48044 		mov	r4, #16384
+ 2512 000c 1830     		adds	r0, r0, #24
+ 2513 000e 2146     		mov	r1, r4
+ 2514 0010 0022     		movs	r2, #0
+ 2515 0012 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2516 0016 A868     		ldr	r0, [r5, #8]
+ 2517 0018 4068     		ldr	r0, [r0, #4]
+ 2518 001a 2146     		mov	r1, r4
+ 2519 001c 1430     		adds	r0, r0, #20
+ 2520 001e FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2521 0022 0120     		movs	r0, #1
+ 2522 0024 38BD     		pop	{r3, r4, r5, pc}
+ 2524              		.section	.text.dwc_otg_pcd_handle_end_periodic_frame_intr,"ax",%progbits
+ 2525              		.align	1
+ 2526              		.global	dwc_otg_pcd_handle_end_periodic_frame_intr
+ 2527              		.thumb
+ 2528              		.thumb_func
+ 2530              	dwc_otg_pcd_handle_end_periodic_frame_intr:
+ 2531              		@ args = 0, pretend = 0, frame = 0
+ 2532              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2533 0000 38B5     		push	{r3, r4, r5, lr}
+ 2534 0002 8368     		ldr	r3, [r0, #8]
+ 2535 0004 0546     		mov	r5, r0
+ 2536 0006 5868     		ldr	r0, [r3, #4]
+ 2537 0008 4FF40044 		mov	r4, #32768
+ 2538 000c 1830     		adds	r0, r0, #24
+ 2539 000e 2146     		mov	r1, r4
+ 2540 0010 0022     		movs	r2, #0
+ 2541 0012 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2542 0016 A868     		ldr	r0, [r5, #8]
+ 2543 0018 4068     		ldr	r0, [r0, #4]
+ 2544 001a 2146     		mov	r1, r4
+ 2545 001c 1430     		adds	r0, r0, #20
+ 2546 001e FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2547 0022 0120     		movs	r0, #1
+ 2548 0024 38BD     		pop	{r3, r4, r5, pc}
+ 2550              		.section	.text.dwc_otg_pcd_handle_ep_mismatch_intr,"ax",%progbits
+ 2551              		.align	1
+ 2552              		.global	dwc_otg_pcd_handle_ep_mismatch_intr
+ 2553              		.thumb
+ 2554              		.thumb_func
+ 2556              	dwc_otg_pcd_handle_ep_mismatch_intr:
+ 2557              		@ args = 0, pretend = 0, frame = 0
+ 2558              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2559 0000 4068     		ldr	r0, [r0, #4]
+ 2560 0002 08B5     		push	{r3, lr}
+ 2561 0004 1430     		adds	r0, r0, #20
+ 2562 0006 4FF40031 		mov	r1, #131072
+ 2563 000a FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2564 000e 0120     		movs	r0, #1
+ 2565 0010 08BD     		pop	{r3, pc}
+ 2567              		.section	.text.do_test_mode,"ax",%progbits
+ 2568              		.align	1
+ 2569              		.global	do_test_mode
+ 2570              		.thumb
+ 2571              		.thumb_func
+ 2573              	do_test_mode:
+ 2574              		@ args = 0, pretend = 0, frame = 0
+ 2575              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2576 0000 38B5     		push	{r3, r4, r5, lr}
+ 2577 0002 8468     		ldr	r4, [r0, #8]
+ 2578 0004 D0F82C54 		ldr	r5, [r0, #1068]
+ 2579 0008 A268     		ldr	r2, [r4, #8]
+ 2580 000a 1068     		ldr	r0, [r2, #0]
+ 2581 000c 0430     		adds	r0, r0, #4
+ 2582 000e FFF7FEFF 		bl	DWC_READ_REG32
+ 2583 0012 6B1E     		subs	r3, r5, #1
+ 2584 0014 0146     		mov	r1, r0
+ 2585 0016 042B     		cmp	r3, #4
+ 2586 0018 0FD8     		bhi	.L527
+ 2587 001a DFE803F0 		tbb	[pc, r3]
+ 2588              	.L533:
+ 2589 001e 03       		.byte	(.L528-.L533)/2
+ 2590 001f 05       		.byte	(.L529-.L533)/2
+ 2591 0020 07       		.byte	(.L530-.L533)/2
+ 2592 0021 09       		.byte	(.L531-.L533)/2
+ 2593 0022 0B       		.byte	(.L532-.L533)/2
+ 2594 0023 00       		.align	1
+ 2595              	.L528:
+ 2596 0024 0122     		movs	r2, #1
+ 2597 0026 06E0     		b	.L534
+ 2598              	.L529:
+ 2599 0028 0222     		movs	r2, #2
+ 2600 002a 04E0     		b	.L534
+ 2601              	.L530:
+ 2602 002c 0322     		movs	r2, #3
+ 2603 002e 02E0     		b	.L534
+ 2604              	.L531:
+ 2605 0030 0422     		movs	r2, #4
+ 2606 0032 00E0     		b	.L534
+ 2607              	.L532:
+ 2608 0034 0522     		movs	r2, #5
+ 2609              	.L534:
+ 2610 0036 62F30611 		bfi	r1, r2, #4, #3
+ 2611              	.L527:
+ 2612 003a A068     		ldr	r0, [r4, #8]
+ 2613 003c 0368     		ldr	r3, [r0, #0]
+ 2614 003e 181D     		adds	r0, r3, #4
+ 2615 0040 BDE83840 		pop	{r3, r4, r5, lr}
+ 2616 0044 FFF7FEBF 		b	DWC_WRITE_REG32
+ 2618              		.section	.text.dwc_otg_pcd_handle_incomplete_isoc_in_intr,"ax",%progbits
+ 2619              		.align	1
+ 2620              		.global	dwc_otg_pcd_handle_incomplete_isoc_in_intr
+ 2621              		.thumb
+ 2622              		.thumb_func
+ 2624              	dwc_otg_pcd_handle_incomplete_isoc_in_intr:
+ 2625              		@ args = 0, pretend = 0, frame = 0
+ 2626              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2627 0000 38B5     		push	{r3, r4, r5, lr}
+ 2628 0002 8368     		ldr	r3, [r0, #8]
+ 2629 0004 0546     		mov	r5, r0
+ 2630 0006 5868     		ldr	r0, [r3, #4]
+ 2631 0008 4FF48014 		mov	r4, #1048576
+ 2632 000c 1830     		adds	r0, r0, #24
+ 2633 000e 2146     		mov	r1, r4
+ 2634 0010 0022     		movs	r2, #0
+ 2635 0012 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2636 0016 A868     		ldr	r0, [r5, #8]
+ 2637 0018 4068     		ldr	r0, [r0, #4]
+ 2638 001a 2146     		mov	r1, r4
+ 2639 001c 1430     		adds	r0, r0, #20
+ 2640 001e FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2641 0022 0120     		movs	r0, #1
+ 2642 0024 38BD     		pop	{r3, r4, r5, pc}
+ 2644              		.section	.text.dwc_otg_pcd_handle_incomplete_isoc_out_intr,"ax",%progbits
+ 2645              		.align	1
+ 2646              		.global	dwc_otg_pcd_handle_incomplete_isoc_out_intr
+ 2647              		.thumb
+ 2648              		.thumb_func
+ 2650              	dwc_otg_pcd_handle_incomplete_isoc_out_intr:
+ 2651              		@ args = 0, pretend = 0, frame = 0
+ 2652              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2653 0000 38B5     		push	{r3, r4, r5, lr}
+ 2654 0002 8368     		ldr	r3, [r0, #8]
+ 2655 0004 0546     		mov	r5, r0
+ 2656 0006 5868     		ldr	r0, [r3, #4]
+ 2657 0008 4FF40014 		mov	r4, #2097152
+ 2658 000c 1830     		adds	r0, r0, #24
+ 2659 000e 2146     		mov	r1, r4
+ 2660 0010 0022     		movs	r2, #0
+ 2661 0012 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2662 0016 A868     		ldr	r0, [r5, #8]
+ 2663 0018 4068     		ldr	r0, [r0, #4]
+ 2664 001a 2146     		mov	r1, r4
+ 2665 001c 1430     		adds	r0, r0, #20
+ 2666 001e FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2667 0022 0120     		movs	r0, #1
+ 2668 0024 38BD     		pop	{r3, r4, r5, pc}
+ 2670              		.section	.text.dwc_otg_pcd_handle_in_nak_effective,"ax",%progbits
+ 2671              		.align	1
+ 2672              		.global	dwc_otg_pcd_handle_in_nak_effective
+ 2673              		.thumb
+ 2674              		.thumb_func
+ 2676              	dwc_otg_pcd_handle_in_nak_effective:
+ 2677              		@ args = 0, pretend = 0, frame = 0
+ 2678              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2679 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 2680 0002 8368     		ldr	r3, [r0, #8]
+ 2681 0004 9F68     		ldr	r7, [r3, #8]
+ 2682 0006 0446     		mov	r4, r0
+ 2683 0008 3D46     		mov	r5, r7
+ 2684 000a 0026     		movs	r6, #0
+ 2685              	.L538:
+ 2686 000c 97F84500 		ldrb	r0, [r7, #69]	@ zero_extendqisi2
+ 2687 0010 8642     		cmp	r6, r0
+ 2688 0012 0FDC     		bgt	.L544
+ 2689              	.L540:
+ 2690 0014 55F8040F 		ldr	r0, [r5, #4]!
+ 2691 0018 FFF7FEFF 		bl	DWC_READ_REG32
+ 2692 001c 030E     		lsrs	r3, r0, #24
+ 2693 001e 03F08000 		and	r0, r3, #128
+ 2694 0022 C1B2     		uxtb	r1, r0
+ 2695 0024 21B1     		cbz	r1, .L539
+ 2696 0026 2868     		ldr	r0, [r5, #0]
+ 2697 0028 4FF09041 		mov	r1, #1207959552
+ 2698 002c FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2699              	.L539:
+ 2700 0030 0136     		adds	r6, r6, #1
+ 2701 0032 EBE7     		b	.L538
+ 2702              	.L544:
+ 2703 0034 A168     		ldr	r1, [r4, #8]
+ 2704 0036 4868     		ldr	r0, [r1, #4]
+ 2705 0038 0022     		movs	r2, #0
+ 2706 003a 1830     		adds	r0, r0, #24
+ 2707 003c 4021     		movs	r1, #64
+ 2708 003e FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2709 0042 A268     		ldr	r2, [r4, #8]
+ 2710 0044 5068     		ldr	r0, [r2, #4]
+ 2711 0046 4021     		movs	r1, #64
+ 2712 0048 1430     		adds	r0, r0, #20
+ 2713 004a FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2714 004e 0120     		movs	r0, #1
+ 2715 0050 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 2717              		.section	.text.dwc_otg_pcd_handle_out_nak_effective,"ax",%progbits
+ 2718              		.align	1
+ 2719              		.global	dwc_otg_pcd_handle_out_nak_effective
+ 2720              		.thumb
+ 2721              		.thumb_func
+ 2723              	dwc_otg_pcd_handle_out_nak_effective:
+ 2724              		@ args = 0, pretend = 0, frame = 0
+ 2725              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2726 0000 38B5     		push	{r3, r4, r5, lr}
+ 2727 0002 8368     		ldr	r3, [r0, #8]
+ 2728 0004 0546     		mov	r5, r0
+ 2729 0006 5868     		ldr	r0, [r3, #4]
+ 2730 0008 8024     		movs	r4, #128
+ 2731 000a 1830     		adds	r0, r0, #24
+ 2732 000c 2146     		mov	r1, r4
+ 2733 000e 0022     		movs	r2, #0
+ 2734 0010 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 2735 0014 A868     		ldr	r0, [r5, #8]
+ 2736 0016 4068     		ldr	r0, [r0, #4]
+ 2737 0018 2146     		mov	r1, r4
+ 2738 001a 1430     		adds	r0, r0, #20
+ 2739 001c FFF7FEFF 		bl	DWC_WRITE_REG32
+ 2740 0020 0120     		movs	r0, #1
+ 2741 0022 38BD     		pop	{r3, r4, r5, pc}
+ 2743              		.section	.text.dwc_otg_pcd_handle_intr,"ax",%progbits
+ 2744              		.align	1
+ 2745              		.global	dwc_otg_pcd_handle_intr
+ 2746              		.thumb
+ 2747              		.thumb_func
+ 2749              	dwc_otg_pcd_handle_intr:
+ 2750              		@ args = 0, pretend = 0, frame = 0
+ 2751              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2752 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 2753 0004 8668     		ldr	r6, [r0, #8]
+ 2754 0006 D6F8C030 		ldr	r3, [r6, #192]
+ 2755 000a 012B     		cmp	r3, #1
+ 2756 000c 0546     		mov	r5, r0
+ 2757 000e 01D1     		bne	.L547
+ 2758              	.L549:
+ 2759 0010 0024     		movs	r4, #0
+ 2760 0012 B3E0     		b	.L548
+ 2761              	.L547:
+ 2762 0014 3046     		mov	r0, r6
+ 2763 0016 FFF7FEFF 		bl	dwc_otg_is_device_mode
+ 2764 001a 0028     		cmp	r0, #0
+ 2765 001c F8D0     		beq	.L549
+ 2766 001e D5F82004 		ldr	r0, [r5, #1056]
+ 2767 0022 FFF7FEFF 		bl	DWC_SPINLOCK
+ 2768 0026 3046     		mov	r0, r6
+ 2769 0028 FFF7FEFF 		bl	dwc_otg_handle_common_intr
+ 2770 002c 7068     		ldr	r0, [r6, #4]
+ 2771 002e 1430     		adds	r0, r0, #20
+ 2772 0030 FFF7FEFF 		bl	DWC_READ_REG32
+ 2773 0034 8146     		mov	r9, r0
+ 2774 0036 7068     		ldr	r0, [r6, #4]
+ 2775 0038 1830     		adds	r0, r0, #24
+ 2776 003a FFF7FEFF 		bl	DWC_READ_REG32
+ 2777 003e 00EA0909 		and	r9, r0, r9
+ 2778 0042 5FFA89F8 		uxtb	r8, r9
+ 2779 0046 08F00804 		and	r4, r8, #8
+ 2780 004a E4B2     		uxtb	r4, r4
+ 2781 004c 1CB1     		cbz	r4, .L550
+ 2782 004e 2846     		mov	r0, r5
+ 2783 0050 FFF7FEFF 		bl	dwc_otg_pcd_handle_sof_intr
+ 2784 0054 0446     		mov	r4, r0
+ 2785              	.L550:
+ 2786 0056 08F01000 		and	r0, r8, #16
+ 2787 005a C1B2     		uxtb	r1, r0
+ 2788 005c 19B1     		cbz	r1, .L551
+ 2789 005e 2846     		mov	r0, r5
+ 2790 0060 FFF7FEFF 		bl	dwc_otg_pcd_handle_rx_status_q_level_intr
+ 2791 0064 0443     		orrs	r4, r4, r0
+ 2792              	.L551:
+ 2793 0066 08F02002 		and	r2, r8, #32
+ 2794 006a D7B2     		uxtb	r7, r2
+ 2795 006c 1FB1     		cbz	r7, .L552
+ 2796 006e 2846     		mov	r0, r5
+ 2797 0070 FFF7FEFF 		bl	dwc_otg_pcd_handle_np_tx_fifo_empty_intr
+ 2798 0074 0443     		orrs	r4, r4, r0
+ 2799              	.L552:
+ 2800 0076 08F04003 		and	r3, r8, #64
+ 2801 007a D8B2     		uxtb	r0, r3
+ 2802 007c 18B1     		cbz	r0, .L553
+ 2803 007e 2846     		mov	r0, r5
+ 2804 0080 FFF7FEFF 		bl	dwc_otg_pcd_handle_in_nak_effective
+ 2805 0084 0443     		orrs	r4, r4, r0
+ 2806              	.L553:
+ 2807 0086 08F08008 		and	r8, r8, #128
+ 2808 008a 5FFA88F1 		uxtb	r1, r8
+ 2809 008e 19B1     		cbz	r1, .L554
+ 2810 0090 2846     		mov	r0, r5
+ 2811 0092 FFF7FEFF 		bl	dwc_otg_pcd_handle_out_nak_effective
+ 2812 0096 0443     		orrs	r4, r4, r0
+ 2813              	.L554:
+ 2814 0098 C9F30727 		ubfx	r7, r9, #8, #8
+ 2815 009c 07F00202 		and	r2, r7, #2
+ 2816 00a0 D3B2     		uxtb	r3, r2
+ 2817 00a2 1BB1     		cbz	r3, .L555
+ 2818 00a4 2846     		mov	r0, r5
+ 2819 00a6 FFF7FEFF 		bl	dwc_otg_pcd_handle_i2c_intr
+ 2820 00aa 0443     		orrs	r4, r4, r0
+ 2821              	.L555:
+ 2822 00ac 07F00400 		and	r0, r7, #4
+ 2823 00b0 C1B2     		uxtb	r1, r0
+ 2824 00b2 19B1     		cbz	r1, .L556
+ 2825 00b4 2846     		mov	r0, r5
+ 2826 00b6 FFF7FEFF 		bl	dwc_otg_pcd_handle_early_suspend_intr
+ 2827 00ba 0443     		orrs	r4, r4, r0
+ 2828              	.L556:
+ 2829 00bc 07F01002 		and	r2, r7, #16
+ 2830 00c0 D3B2     		uxtb	r3, r2
+ 2831 00c2 1BB1     		cbz	r3, .L557
+ 2832 00c4 2846     		mov	r0, r5
+ 2833 00c6 FFF7FEFF 		bl	dwc_otg_pcd_handle_usb_reset_intr
+ 2834 00ca 0443     		orrs	r4, r4, r0
+ 2835              	.L557:
+ 2836 00cc 07F02000 		and	r0, r7, #32
+ 2837 00d0 C1B2     		uxtb	r1, r0
+ 2838 00d2 19B1     		cbz	r1, .L558
+ 2839 00d4 2846     		mov	r0, r5
+ 2840 00d6 FFF7FEFF 		bl	dwc_otg_pcd_handle_enum_done_intr
+ 2841 00da 0443     		orrs	r4, r4, r0
+ 2842              	.L558:
+ 2843 00dc 07F04002 		and	r2, r7, #64
+ 2844 00e0 D3B2     		uxtb	r3, r2
+ 2845 00e2 1BB1     		cbz	r3, .L559
+ 2846 00e4 2846     		mov	r0, r5
+ 2847 00e6 FFF7FEFF 		bl	dwc_otg_pcd_handle_isoc_out_packet_dropped_intr
+ 2848 00ea 0443     		orrs	r4, r4, r0
+ 2849              	.L559:
+ 2850 00ec 07F08007 		and	r7, r7, #128
+ 2851 00f0 F8B2     		uxtb	r0, r7
+ 2852 00f2 18B1     		cbz	r0, .L560
+ 2853 00f4 2846     		mov	r0, r5
+ 2854 00f6 FFF7FEFF 		bl	dwc_otg_pcd_handle_end_periodic_frame_intr
+ 2855 00fa 0443     		orrs	r4, r4, r0
+ 2856              	.L560:
+ 2857 00fc C9F30747 		ubfx	r7, r9, #16, #8
+ 2858 0100 07F00201 		and	r1, r7, #2
+ 2859 0104 CAB2     		uxtb	r2, r1
+ 2860 0106 1AB1     		cbz	r2, .L561
+ 2861 0108 3046     		mov	r0, r6
+ 2862 010a FFF7FEFF 		bl	dwc_otg_pcd_handle_ep_mismatch_intr
+ 2863 010e 0443     		orrs	r4, r4, r0
+ 2864              	.L561:
+ 2865 0110 07F00403 		and	r3, r7, #4
+ 2866 0114 D8B2     		uxtb	r0, r3
+ 2867 0116 30B1     		cbz	r0, .L562
+ 2868 0118 96F84910 		ldrb	r1, [r6, #73]	@ zero_extendqisi2
+ 2869 011c 19B9     		cbnz	r1, .L562
+ 2870 011e 2846     		mov	r0, r5
+ 2871 0120 FFF7FEFF 		bl	dwc_otg_pcd_handle_in_ep_intr
+ 2872 0124 0443     		orrs	r4, r4, r0
+ 2873              	.L562:
+ 2874 0126 07F00802 		and	r2, r7, #8
+ 2875 012a D3B2     		uxtb	r3, r2
+ 2876 012c 33B1     		cbz	r3, .L563
+ 2877 012e 96F84900 		ldrb	r0, [r6, #73]	@ zero_extendqisi2
+ 2878 0132 18B9     		cbnz	r0, .L563
+ 2879 0134 2846     		mov	r0, r5
+ 2880 0136 FFF7FEFF 		bl	dwc_otg_pcd_handle_out_ep_intr
+ 2881 013a 0443     		orrs	r4, r4, r0
+ 2882              	.L563:
+ 2883 013c 07F01001 		and	r1, r7, #16
+ 2884 0140 CAB2     		uxtb	r2, r1
+ 2885 0142 1AB1     		cbz	r2, .L564
+ 2886 0144 2846     		mov	r0, r5
+ 2887 0146 FFF7FEFF 		bl	dwc_otg_pcd_handle_incomplete_isoc_in_intr
+ 2888 014a 0443     		orrs	r4, r4, r0
+ 2889              	.L564:
+ 2890 014c 07F02007 		and	r7, r7, #32
+ 2891 0150 FFB2     		uxtb	r7, r7
+ 2892 0152 1FB1     		cbz	r7, .L565
+ 2893 0154 2846     		mov	r0, r5
+ 2894 0156 FFF7FEFF 		bl	dwc_otg_pcd_handle_incomplete_isoc_out_intr
+ 2895 015a 0443     		orrs	r4, r4, r0
+ 2896              	.L565:
+ 2897 015c 96F84930 		ldrb	r3, [r6, #73]	@ zero_extendqisi2
+ 2898 0160 43B1     		cbz	r3, .L566
+ 2899 0162 2846     		mov	r0, r5
+ 2900 0164 FFF7FEFF 		bl	dwc_otg_pcd_handle_in_ep_intr
+ 2901 0168 0646     		mov	r6, r0
+ 2902 016a 2846     		mov	r0, r5
+ 2903 016c FFF7FEFF 		bl	dwc_otg_pcd_handle_out_ep_intr
+ 2904 0170 3043     		orrs	r0, r0, r6
+ 2905 0172 0443     		orrs	r4, r4, r0
+ 2906              	.L566:
+ 2907 0174 D5F82004 		ldr	r0, [r5, #1056]
+ 2908 0178 FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 2909              	.L548:
+ 2910 017c 2046     		mov	r0, r4
+ 2911 017e BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 2913              		.section	.rodata
+ 2914              		.set	.LANCHOR0,. + 0
+ 2917              	CSWTCH.17:
+ 2918 0000 02       		.byte	2
+ 2919 0001 01       		.byte	1
+ 2920 0002 02       		.byte	2
+ 2921              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 dwc_otg_pcd_intr.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:17     .text.dwc_otg_pcd_update_otg:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:21     .text.dwc_otg_pcd_update_otg:00000000 dwc_otg_pcd_update_otg
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:39     .text.get_in_ep:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:43     .text.get_in_ep:00000000 get_in_ep
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:76     .text.dwc_otg_pcd_handle_noniso_bna:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:80     .text.dwc_otg_pcd_handle_noniso_bna:00000000 dwc_otg_pcd_handle_noniso_bna
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:114    .text.ep0_out_start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:118    .text.ep0_out_start:00000000 ep0_out_start
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:184    .text.restart_transfer:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:188    .text.restart_transfer:00000000 restart_transfer
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:256    .text.do_setup_in_status_phase:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:260    .text.do_setup_in_status_phase:00000000 do_setup_in_status_phase
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:288    .text.do_setup_out_status_phase.part.4:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:292    .text.do_setup_out_status_phase.part.4:00000000 do_setup_out_status_phase.part.4
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:323    .text.ep0_do_stall.isra.5:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:327    .text.ep0_do_stall.isra.5:00000000 ep0_do_stall.isra.5
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:349    .text.do_gadget_setup:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:353    .text.do_gadget_setup:00000000 do_gadget_setup
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:385    .text.ep0_complete_request:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:389    .text.ep0_complete_request:00000000 ep0_complete_request
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:499    .text.get_ep_by_addr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:504    .text.get_ep_by_addr:00000000 get_ep_by_addr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:525    .text.handle_ep0:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:529    .text.handle_ep0:00000000 handle_ep0
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:543    .text.handle_ep0:0000001a $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:549    .text.handle_ep0:00000024 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:597    .text.handle_ep0:000000ac $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:611    .text.handle_ep0:000000c6 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:749    .text.handle_ep0:00000212 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:950    .text.start_next_request:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:955    .text.start_next_request:00000000 start_next_request
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:1037   .text.complete_ep:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:1041   .text.complete_ep:00000000 complete_ep
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:1234   .text.dwc_otg_pcd_handle_in_ep_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:1238   .text.dwc_otg_pcd_handle_in_ep_intr:00000000 dwc_otg_pcd_handle_in_ep_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:1640   .text.dwc_otg_pcd_handle_out_ep_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:1644   .text.dwc_otg_pcd_handle_out_ep_intr:00000000 dwc_otg_pcd_handle_out_ep_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:1903   .text.dwc_otg_pcd_handle_sof_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:1908   .text.dwc_otg_pcd_handle_sof_intr:00000000 dwc_otg_pcd_handle_sof_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:1921   .text.dwc_otg_pcd_handle_rx_status_q_level_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:1926   .text.dwc_otg_pcd_handle_rx_status_q_level_intr:00000000 dwc_otg_pcd_handle_rx_status_q_level_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2013   .text.dwc_otg_pcd_handle_np_tx_fifo_empty_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2018   .text.dwc_otg_pcd_handle_np_tx_fifo_empty_intr:00000000 dwc_otg_pcd_handle_np_tx_fifo_empty_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2157   .text.dwc_otg_pcd_stop:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2162   .text.dwc_otg_pcd_stop:00000000 dwc_otg_pcd_stop
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2235   .text.dwc_otg_pcd_handle_i2c_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2240   .text.dwc_otg_pcd_handle_i2c_intr:00000000 dwc_otg_pcd_handle_i2c_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2261   .text.dwc_otg_pcd_handle_early_suspend_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2266   .text.dwc_otg_pcd_handle_early_suspend_intr:00000000 dwc_otg_pcd_handle_early_suspend_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2279   .text.dwc_otg_pcd_handle_usb_reset_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2284   .text.dwc_otg_pcd_handle_usb_reset_intr:00000000 dwc_otg_pcd_handle_usb_reset_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2389   .text.dwc_otg_pcd_handle_enum_done_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2394   .text.dwc_otg_pcd_handle_enum_done_intr:00000000 dwc_otg_pcd_handle_enum_done_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2495   .text.dwc_otg_pcd_handle_enum_done_intr:000000e4 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2499   .text.dwc_otg_pcd_handle_isoc_out_packet_dropped_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2504   .text.dwc_otg_pcd_handle_isoc_out_packet_dropped_intr:00000000 dwc_otg_pcd_handle_isoc_out_packet_dropped_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2525   .text.dwc_otg_pcd_handle_end_periodic_frame_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2530   .text.dwc_otg_pcd_handle_end_periodic_frame_intr:00000000 dwc_otg_pcd_handle_end_periodic_frame_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2551   .text.dwc_otg_pcd_handle_ep_mismatch_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2556   .text.dwc_otg_pcd_handle_ep_mismatch_intr:00000000 dwc_otg_pcd_handle_ep_mismatch_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2568   .text.do_test_mode:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2573   .text.do_test_mode:00000000 do_test_mode
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2589   .text.do_test_mode:0000001e $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2619   .text.dwc_otg_pcd_handle_incomplete_isoc_in_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2624   .text.dwc_otg_pcd_handle_incomplete_isoc_in_intr:00000000 dwc_otg_pcd_handle_incomplete_isoc_in_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2645   .text.dwc_otg_pcd_handle_incomplete_isoc_out_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2650   .text.dwc_otg_pcd_handle_incomplete_isoc_out_intr:00000000 dwc_otg_pcd_handle_incomplete_isoc_out_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2671   .text.dwc_otg_pcd_handle_in_nak_effective:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2676   .text.dwc_otg_pcd_handle_in_nak_effective:00000000 dwc_otg_pcd_handle_in_nak_effective
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2718   .text.dwc_otg_pcd_handle_out_nak_effective:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2723   .text.dwc_otg_pcd_handle_out_nak_effective:00000000 dwc_otg_pcd_handle_out_nak_effective
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2744   .text.dwc_otg_pcd_handle_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2749   .text.dwc_otg_pcd_handle_intr:00000000 dwc_otg_pcd_handle_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2917   .rodata:00000000 CSWTCH.17
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:754    .text.handle_ep0:00000217 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:754    .text.handle_ep0:00000218 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2594   .text.do_test_mode:00000023 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc5pfdkT.s:2594   .text.do_test_mode:00000024 $t
+
+UNDEFINED SYMBOLS
+DWC_MODIFY_REG32
+DWC_WRITE_REG32
+DWC_READ_REG32
+dwc_otg_ep0_start_transfer
+dwc_otg_ep_start_transfer
+dwc_otg_ep_set_stall
+DWC_SPINUNLOCK
+DWC_SPINLOCK
+dwc_otg_request_done
+dwc_otg_request_nuke
+dwc_otg_ep_clear_stall
+dwc_otg_ep_activate
+DWC_TASK_SCHEDULE
+dwc_otg_ep0_continue_transfer
+dwc_otg_ep_start_zl_transfer
+dwc_otg_flush_tx_fifo
+dwc_otg_ep_write_packet
+dwc_otg_read_setup_packet
+dwc_otg_read_packet
+dwc_otg_flush_rx_fifo
+dwc_otg_ep0_activate
+dwc_otg_is_device_mode
+dwc_otg_handle_common_intr

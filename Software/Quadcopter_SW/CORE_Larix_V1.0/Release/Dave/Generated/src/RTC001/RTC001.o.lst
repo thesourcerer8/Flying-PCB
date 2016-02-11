@@ -1,0 +1,740 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"RTC001.c"
+  16              		.section	.text.RTC001_lleapyear,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	RTC001_lleapyear:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              		@ link register save eliminated.
+  25 0000 4FF4C873 		mov	r3, #400
+  26 0004 B0FBF3F2 		udiv	r2, r0, r3
+  27 0008 03FB1201 		mls	r1, r3, r2, r0
+  28 000c 8BB2     		uxth	r3, r1
+  29 000e 63B1     		cbz	r3, .L3
+  30 0010 6421     		movs	r1, #100
+  31 0012 B0FBF1F2 		udiv	r2, r0, r1
+  32 0016 01FB1203 		mls	r3, r1, r2, r0
+  33 001a 99B2     		uxth	r1, r3
+  34 001c 39B1     		cbz	r1, .L4
+  35 001e 10F0030F 		tst	r0, #3
+  36 0022 14BF     		ite	ne
+  37 0024 0020     		movne	r0, #0
+  38 0026 0120     		moveq	r0, #1
+  39 0028 7047     		bx	lr
+  40              	.L3:
+  41 002a 0120     		movs	r0, #1
+  42 002c 7047     		bx	lr
+  43              	.L4:
+  44 002e 0846     		mov	r0, r1
+  45 0030 7047     		bx	lr
+  47              		.section	.text.RTC001_ldatevalid,"ax",%progbits
+  48              		.align	1
+  49              		.thumb
+  50              		.thumb_func
+  52              	RTC001_ldatevalid:
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 0, uses_anonymous_args = 0
+  55 0000 10B5     		push	{r4, lr}
+  56 0002 0C46     		mov	r4, r1
+  57 0004 411E     		subs	r1, r0, #1
+  58 0006 0B29     		cmp	r1, #11
+  59 0008 15D8     		bhi	.L12
+  60 000a 0228     		cmp	r0, #2
+  61 000c 01D1     		bne	.L8
+  62 000e 1C2C     		cmp	r4, #28
+  63 0010 08D8     		bhi	.L9
+  64              	.L8:
+  65 0012 0A4A     		ldr	r2, .L14
+  66 0014 52F82010 		ldr	r1, [r2, r0, lsl #2]
+  67 0018 8C42     		cmp	r4, r1
+  68 001a 0CD8     		bhi	.L12
+  69 001c 201C     		adds	r0, r4, #0
+  70 001e 18BF     		it	ne
+  71 0020 0120     		movne	r0, #1
+  72 0022 10BD     		pop	{r4, pc}
+  73              	.L9:
+  74 0024 1046     		mov	r0, r2
+  75 0026 FFF7FEFF 		bl	RTC001_lleapyear
+  76 002a 28B1     		cbz	r0, .L7
+  77 002c B4F11D03 		subs	r3, r4, #29
+  78 0030 5842     		rsbs	r0, r3, #0
+  79 0032 5841     		adcs	r0, r0, r3
+  80 0034 10BD     		pop	{r4, pc}
+  81              	.L12:
+  82 0036 0020     		movs	r0, #0
+  83              	.L7:
+  84 0038 10BD     		pop	{r4, pc}
+  85              	.L15:
+  86 003a 00BF     		.align	2
+  87              	.L14:
+  88 003c 00000000 		.word	.LANCHOR0
+  90              		.section	.text.RTC001_DeInit,"ax",%progbits
+  91              		.align	1
+  92              		.global	RTC001_DeInit
+  93              		.thumb
+  94              		.thumb_func
+  96              	RTC001_DeInit:
+  97              		@ args = 0, pretend = 0, frame = 0
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  99              		@ link register save eliminated.
+ 100              	.L17:
+ 101 0000 134B     		ldr	r3, .L23
+ 102 0002 D3F8C400 		ldr	r0, [r3, #196]
+ 103 0006 10F48071 		ands	r1, r0, #256
+ 104 000a F9D1     		bne	.L17
+ 105 000c 114B     		ldr	r3, .L23+4
+ 106 000e 5A68     		ldr	r2, [r3, #4]
+ 107 0010 100C     		lsrs	r0, r2, #16
+ 108 0012 0204     		lsls	r2, r0, #16
+ 109 0014 5A60     		str	r2, [r3, #4]
+ 110 0016 1961     		str	r1, [r3, #16]
+ 111 0018 5969     		ldr	r1, [r3, #20]
+ 112 001a 41F4B770 		orr	r0, r1, #366
+ 113 001e 40F00102 		orr	r2, r0, #1
+ 114 0022 5A61     		str	r2, [r3, #20]
+ 115              	.L18:
+ 116 0024 0A49     		ldr	r1, .L23
+ 117 0026 D1F8C400 		ldr	r0, [r1, #196]
+ 118 002a 10F4C052 		ands	r2, r0, #6144
+ 119 002e F9D1     		bne	.L18
+ 120 0030 1A62     		str	r2, [r3, #32]
+ 121 0032 5A62     		str	r2, [r3, #36]
+ 122              	.L19:
+ 123 0034 D1F8C430 		ldr	r3, [r1, #196]
+ 124 0038 13F4C060 		ands	r0, r3, #1536
+ 125 003c FAD1     		bne	.L19
+ 126 003e 0549     		ldr	r1, .L23+4
+ 127 0040 054B     		ldr	r3, .L23+8
+ 128 0042 8861     		str	r0, [r1, #24]
+ 129 0044 C861     		str	r0, [r1, #28]
+ 130 0046 DA68     		ldr	r2, [r3, #12]
+ 131 0048 42F0F850 		orr	r0, r2, #520093696
+ 132 004c D860     		str	r0, [r3, #12]
+ 133 004e 7047     		bx	lr
+ 134              	.L24:
+ 135              		.align	2
+ 136              	.L23:
+ 137 0050 00400050 		.word	1342193664
+ 138 0054 004A0050 		.word	1342196224
+ 139 0058 74400050 		.word	1342193780
+ 141              		.section	.text.RTC001_Enable,"ax",%progbits
+ 142              		.align	1
+ 143              		.global	RTC001_Enable
+ 144              		.thumb
+ 145              		.thumb_func
+ 147              	RTC001_Enable:
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150              		@ link register save eliminated.
+ 151 0000 084B     		ldr	r3, .L28
+ 152 0002 DA68     		ldr	r2, [r3, #12]
+ 153 0004 42F0F850 		orr	r0, r2, #520093696
+ 154 0008 D860     		str	r0, [r3, #12]
+ 155              	.L26:
+ 156 000a 0749     		ldr	r1, .L28+4
+ 157 000c D1F8C430 		ldr	r3, [r1, #196]
+ 158 0010 13F48070 		ands	r0, r3, #256
+ 159 0014 F9D1     		bne	.L26
+ 160 0016 D1F8042A 		ldr	r2, [r1, #2564]
+ 161 001a 42F00103 		orr	r3, r2, #1
+ 162 001e C1F8043A 		str	r3, [r1, #2564]
+ 163 0022 7047     		bx	lr
+ 164              	.L29:
+ 165              		.align	2
+ 166              	.L28:
+ 167 0024 74400050 		.word	1342193780
+ 168 0028 00400050 		.word	1342193664
+ 170              		.section	.text.RTC001_Disable,"ax",%progbits
+ 171              		.align	1
+ 172              		.global	RTC001_Disable
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	RTC001_Disable:
+ 177              		@ args = 0, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179              		@ link register save eliminated.
+ 180              	.L31:
+ 181 0000 114B     		ldr	r3, .L37
+ 182 0002 D3F8C420 		ldr	r2, [r3, #196]
+ 183 0006 12F4807F 		tst	r2, #256
+ 184 000a 1946     		mov	r1, r3
+ 185 000c F8D1     		bne	.L31
+ 186 000e 03F52060 		add	r0, r3, #2560
+ 187 0012 4368     		ldr	r3, [r0, #4]
+ 188 0014 23F00102 		bic	r2, r3, #1
+ 189 0018 4260     		str	r2, [r0, #4]
+ 190              	.L32:
+ 191 001a D1F8C430 		ldr	r3, [r1, #196]
+ 192 001e 13F4C052 		ands	r2, r3, #6144
+ 193 0022 FAD1     		bne	.L32
+ 194 0024 0262     		str	r2, [r0, #32]
+ 195 0026 4262     		str	r2, [r0, #36]
+ 196              	.L33:
+ 197 0028 0749     		ldr	r1, .L37
+ 198 002a D1F8C400 		ldr	r0, [r1, #196]
+ 199 002e 10F4C060 		ands	r0, r0, #1536
+ 200 0032 F9D1     		bne	.L33
+ 201 0034 054B     		ldr	r3, .L37+4
+ 202 0036 C1F8180A 		str	r0, [r1, #2584]
+ 203 003a C1F81C0A 		str	r0, [r1, #2588]
+ 204 003e DA68     		ldr	r2, [r3, #12]
+ 205 0040 42F0F851 		orr	r1, r2, #520093696
+ 206 0044 D960     		str	r1, [r3, #12]
+ 207 0046 7047     		bx	lr
+ 208              	.L38:
+ 209              		.align	2
+ 210              	.L37:
+ 211 0048 00400050 		.word	1342193664
+ 212 004c 74400050 		.word	1342193780
+ 214              		.section	.text.RTC001_GetFlagStatus,"ax",%progbits
+ 215              		.align	1
+ 216              		.global	RTC001_GetFlagStatus
+ 217              		.thumb
+ 218              		.thumb_func
+ 220              	RTC001_GetFlagStatus:
+ 221              		@ args = 0, pretend = 0, frame = 0
+ 222              		@ frame_needed = 0, uses_anonymous_args = 0
+ 223              		@ link register save eliminated.
+ 224 0000 034B     		ldr	r3, .L42
+ 225 0002 D968     		ldr	r1, [r3, #12]
+ 226 0004 0842     		tst	r0, r1
+ 227 0006 14BF     		ite	ne
+ 228 0008 0320     		movne	r0, #3
+ 229 000a 0420     		moveq	r0, #4
+ 230 000c 7047     		bx	lr
+ 231              	.L43:
+ 232 000e 00BF     		.align	2
+ 233              	.L42:
+ 234 0010 004A0050 		.word	1342196224
+ 236              		.section	.text.RTC001_ClearFlagStatus,"ax",%progbits
+ 237              		.align	1
+ 238              		.global	RTC001_ClearFlagStatus
+ 239              		.thumb
+ 240              		.thumb_func
+ 242              	RTC001_ClearFlagStatus:
+ 243              		@ args = 0, pretend = 0, frame = 0
+ 244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 245              		@ link register save eliminated.
+ 246 0000 024B     		ldr	r3, .L45
+ 247 0002 5A69     		ldr	r2, [r3, #20]
+ 248 0004 1043     		orrs	r0, r0, r2
+ 249 0006 5861     		str	r0, [r3, #20]
+ 250 0008 7047     		bx	lr
+ 251              	.L46:
+ 252 000a 00BF     		.align	2
+ 253              	.L45:
+ 254 000c 004A0050 		.word	1342196224
+ 256              		.section	.text.RTC001_ConfigAlarm,"ax",%progbits
+ 257              		.align	1
+ 258              		.global	RTC001_ConfigAlarm
+ 259              		.thumb
+ 260              		.thumb_func
+ 262              	RTC001_ConfigAlarm:
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 266 0004 C07A     		ldrb	r0, [r0, #11]	@ zero_extendqisi2
+ 267 0006 0C46     		mov	r4, r1
+ 268 0008 1146     		mov	r1, r2
+ 269 000a 234A     		ldr	r2, .L63
+ 270 000c 4FF0F855 		mov	r5, #520093696
+ 271 0010 D560     		str	r5, [r2, #12]
+ 272 0012 20B1     		cbz	r0, .L48
+ 273 0014 19B1     		cbz	r1, .L48
+ 274 0016 0220     		movs	r0, #2
+ 275 0018 1A46     		mov	r2, r3
+ 276 001a FFF7FEFF 		bl	NVIC_SCU001_RegisterCallback
+ 277              	.L48:
+ 278 001e E588     		ldrh	r5, [r4, #6]
+ 279 0020 E678     		ldrb	r6, [r4, #3]	@ zero_extendqisi2
+ 280 0022 6079     		ldrb	r0, [r4, #5]	@ zero_extendqisi2
+ 281 0024 94F80280 		ldrb	r8, [r4, #2]	@ zero_extendqisi2
+ 282 0028 94F80190 		ldrb	r9, [r4, #1]	@ zero_extendqisi2
+ 283 002c 2778     		ldrb	r7, [r4, #0]	@ zero_extendqisi2
+ 284 002e 3146     		mov	r1, r6
+ 285 0030 2A46     		mov	r2, r5
+ 286 0032 FFF7FEFF 		bl	RTC001_ldatevalid
+ 287 0036 58B3     		cbz	r0, .L54
+ 288 0038 3B2F     		cmp	r7, #59
+ 289 003a 29D8     		bhi	.L54
+ 290 003c B9F13B0F 		cmp	r9, #59
+ 291 0040 26D8     		bhi	.L54
+ 292 0042 B8F1170F 		cmp	r8, #23
+ 293 0046 23D8     		bhi	.L54
+ 294              	.L59:
+ 295 0048 144B     		ldr	r3, .L63+4
+ 296 004a D3F8C410 		ldr	r1, [r3, #196]
+ 297 004e 11F4C060 		ands	r0, r1, #1536
+ 298 0052 F9D1     		bne	.L59
+ 299 0054 4FEA0848 		lsl	r8, r8, #16
+ 300 0058 4FEA0929 		lsl	r9, r9, #8
+ 301 005c 013E     		subs	r6, r6, #1
+ 302 005e 09F47C59 		and	r9, r9, #16128
+ 303 0062 08F4F812 		and	r2, r8, #2031616
+ 304 0066 49EA0208 		orr	r8, r9, r2
+ 305 006a 3106     		lsls	r1, r6, #24
+ 306 006c 01F0F856 		and	r6, r1, #520093696
+ 307 0070 48EA0707 		orr	r7, r8, r7
+ 308 0074 3743     		orrs	r7, r7, r6
+ 309 0076 C3F8187A 		str	r7, [r3, #2584]
+ 310 007a 6279     		ldrb	r2, [r4, #5]	@ zero_extendqisi2
+ 311 007c 511E     		subs	r1, r2, #1
+ 312 007e 0A02     		lsls	r2, r1, #8
+ 313 0080 02F47061 		and	r1, r2, #3840
+ 314 0084 41EA0545 		orr	r5, r1, r5, lsl #16
+ 315 0088 C3F81C5A 		str	r5, [r3, #2588]
+ 316 008c BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 317              	.L54:
+ 318 0090 0120     		movs	r0, #1
+ 319 0092 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 320              	.L64:
+ 321 0096 00BF     		.align	2
+ 322              	.L63:
+ 323 0098 74400050 		.word	1342193780
+ 324 009c 00400050 		.word	1342193664
+ 326              		.section	.text.RTC001_Clock_GetTime,"ax",%progbits
+ 327              		.align	1
+ 328              		.global	RTC001_Clock_GetTime
+ 329              		.thumb
+ 330              		.thumb_func
+ 332              	RTC001_Clock_GetTime:
+ 333              		@ args = 0, pretend = 0, frame = 0
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335              		@ link register save eliminated.
+ 336 0000 0D4A     		ldr	r2, .L66
+ 337 0002 136A     		ldr	r3, [r2, #32]
+ 338 0004 526A     		ldr	r2, [r2, #36]
+ 339 0006 02F00701 		and	r1, r2, #7
+ 340 000a 0171     		strb	r1, [r0, #4]
+ 341 000c C2F30321 		ubfx	r1, r2, #8, #4
+ 342 0010 0131     		adds	r1, r1, #1
+ 343 0012 4171     		strb	r1, [r0, #5]
+ 344 0014 120C     		lsrs	r2, r2, #16
+ 345 0016 03F03F01 		and	r1, r3, #63
+ 346 001a C280     		strh	r2, [r0, #6]	@ movhi
+ 347 001c 0170     		strb	r1, [r0, #0]
+ 348 001e C3F30522 		ubfx	r2, r3, #8, #6
+ 349 0022 C3F30441 		ubfx	r1, r3, #16, #5
+ 350 0026 C3F30463 		ubfx	r3, r3, #24, #5
+ 351 002a 4270     		strb	r2, [r0, #1]
+ 352 002c 5A1C     		adds	r2, r3, #1
+ 353 002e 8170     		strb	r1, [r0, #2]
+ 354 0030 C270     		strb	r2, [r0, #3]
+ 355 0032 0020     		movs	r0, #0
+ 356 0034 7047     		bx	lr
+ 357              	.L67:
+ 358 0036 00BF     		.align	2
+ 359              	.L66:
+ 360 0038 004A0050 		.word	1342196224
+ 362              		.section	.text.RTC001_Clock_SetTime,"ax",%progbits
+ 363              		.align	1
+ 364              		.global	RTC001_Clock_SetTime
+ 365              		.thumb
+ 366              		.thumb_func
+ 368              	RTC001_Clock_SetTime:
+ 369              		@ args = 0, pretend = 0, frame = 16
+ 370              		@ frame_needed = 0, uses_anonymous_args = 0
+ 371 0000 2DE9FF47 		push	{r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+ 372 0004 3E4B     		ldr	r3, .L87
+ 373 0006 C588     		ldrh	r5, [r0, #6]
+ 374 0008 4FF0F852 		mov	r2, #520093696
+ 375 000c DA60     		str	r2, [r3, #12]
+ 376 000e C778     		ldrb	r7, [r0, #3]	@ zero_extendqisi2
+ 377 0010 4679     		ldrb	r6, [r0, #5]	@ zero_extendqisi2
+ 378 0012 90F80280 		ldrb	r8, [r0, #2]	@ zero_extendqisi2
+ 379 0016 90F80190 		ldrb	r9, [r0, #1]	@ zero_extendqisi2
+ 380 001a 90F800A0 		ldrb	sl, [r0, #0]	@ zero_extendqisi2
+ 381 001e 0446     		mov	r4, r0
+ 382 0020 3946     		mov	r1, r7
+ 383 0022 3046     		mov	r0, r6
+ 384 0024 2A46     		mov	r2, r5
+ 385 0026 FFF7FEFF 		bl	RTC001_ldatevalid
+ 386 002a 40B1     		cbz	r0, .L79
+ 387 002c BAF13B0F 		cmp	sl, #59
+ 388 0030 05D8     		bhi	.L79
+ 389 0032 B9F13B0F 		cmp	r9, #59
+ 390 0036 02D8     		bhi	.L79
+ 391 0038 B8F1170F 		cmp	r8, #23
+ 392 003c 01D9     		bls	.L84
+ 393              	.L79:
+ 394 003e 0120     		movs	r0, #1
+ 395 0040 5AE0     		b	.L85
+ 396              	.L84:
+ 397 0042 304A     		ldr	r2, .L87+4
+ 398 0044 5168     		ldr	r1, [r2, #4]	@ unaligned
+ 399 0046 1068     		ldr	r0, [r2, #0]	@ unaligned
+ 400 0048 6B46     		mov	r3, sp
+ 401 004a 03C3     		stmia	r3!, {r0, r1}
+ 402 004c 52F8080F 		ldr	r0, [r2, #8]!	@ unaligned
+ 403 0050 1179     		ldrb	r1, [r2, #4]	@ zero_extendqisi2
+ 404 0052 1860     		str	r0, [r3, #0]	@ unaligned
+ 405 0054 04AA     		add	r2, sp, #16
+ 406 0056 1971     		strb	r1, [r3, #4]
+ 407 0058 9319     		adds	r3, r2, r6
+ 408 005a 40F26C71 		movw	r1, #1900
+ 409 005e 8D42     		cmp	r5, r1
+ 410 0060 13F8100C 		ldrb	r0, [r3, #-16]	@ zero_extendqisi2
+ 411 0064 46D9     		bls	.L86
+ 412              	.L74:
+ 413 0066 A5F26C72 		subw	r2, r5, #1900
+ 414 006a 93B2     		uxth	r3, r2
+ 415              	.L75:
+ 416 006c 022E     		cmp	r6, #2
+ 417 006e 94BF     		ite	ls
+ 418 0070 0646     		movls	r6, r0
+ 419 0072 461C     		addhi	r6, r0, #1
+ 420 0074 153B     		subs	r3, r3, #21
+ 421 0076 1C20     		movs	r0, #28
+ 422 0078 B3FBF0F1 		udiv	r1, r3, r0
+ 423 007c 00FB1133 		mls	r3, r0, r1, r3
+ 424 0080 F218     		adds	r2, r6, r3
+ 425 0082 96B2     		uxth	r6, r2
+ 426 0084 0720     		movs	r0, #7
+ 427 0086 06EB9606 		add	r6, r6, r6, lsr #2
+ 428 008a B6FBF0F1 		udiv	r1, r6, r0
+ 429 008e 00FB1163 		mls	r3, r0, r1, r6
+ 430 0092 FA18     		adds	r2, r7, r3
+ 431 0094 93B2     		uxth	r3, r2
+ 432 0096 B3FBF0F1 		udiv	r1, r3, r0
+ 433 009a 00FB1130 		mls	r0, r0, r1, r3
+ 434 009e 82B2     		uxth	r2, r0
+ 435 00a0 062A     		cmp	r2, #6
+ 436 00a2 01D0     		beq	.L80
+ 437 00a4 531C     		adds	r3, r2, #1
+ 438 00a6 00E0     		b	.L81
+ 439              	.L80:
+ 440 00a8 0023     		movs	r3, #0
+ 441              	.L81:
+ 442 00aa 174A     		ldr	r2, .L87+8
+ 443 00ac D2F8C410 		ldr	r1, [r2, #196]
+ 444 00b0 11F4C050 		ands	r0, r1, #6144
+ 445 00b4 F9D1     		bne	.L81
+ 446 00b6 4FEA0848 		lsl	r8, r8, #16
+ 447 00ba 4FEA0929 		lsl	r9, r9, #8
+ 448 00be 08F4F811 		and	r1, r8, #2031616
+ 449 00c2 013F     		subs	r7, r7, #1
+ 450 00c4 09F47C59 		and	r9, r9, #16128
+ 451 00c8 49EA0108 		orr	r8, r9, r1
+ 452 00cc 3906     		lsls	r1, r7, #24
+ 453 00ce 01F0F857 		and	r7, r1, #520093696
+ 454 00d2 48EA0A0A 		orr	sl, r8, sl
+ 455 00d6 4AEA0707 		orr	r7, sl, r7
+ 456 00da C2F8207A 		str	r7, [r2, #2592]
+ 457 00de 6179     		ldrb	r1, [r4, #5]	@ zero_extendqisi2
+ 458 00e0 0139     		subs	r1, r1, #1
+ 459 00e2 0902     		lsls	r1, r1, #8
+ 460 00e4 01F47061 		and	r1, r1, #3840
+ 461 00e8 41EA0545 		orr	r5, r1, r5, lsl #16
+ 462 00ec 2B43     		orrs	r3, r3, r5
+ 463 00ee C2F8243A 		str	r3, [r2, #2596]
+ 464 00f2 01E0     		b	.L85
+ 465              	.L86:
+ 466 00f4 2B46     		mov	r3, r5
+ 467 00f6 B9E7     		b	.L75
+ 468              	.L85:
+ 469 00f8 04B0     		add	sp, sp, #16
+ 470 00fa BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+ 471              	.L88:
+ 472 00fe 00BF     		.align	2
+ 473              	.L87:
+ 474 0100 74400050 		.word	1342193780
+ 475 0104 34000000 		.word	.LANCHOR0+52
+ 476 0108 00400050 		.word	1342193664
+ 478              		.section	.text.RTC001_Init,"ax",%progbits
+ 479              		.align	1
+ 480              		.global	RTC001_Init
+ 481              		.thumb
+ 482              		.thumb_func
+ 484              	RTC001_Init:
+ 485              		@ args = 0, pretend = 0, frame = 0
+ 486              		@ frame_needed = 0, uses_anonymous_args = 0
+ 487 0000 3D4B     		ldr	r3, .L116
+ 488 0002 3E48     		ldr	r0, .L116+4
+ 489 0004 4FF0F852 		mov	r2, #520093696
+ 490 0008 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 491 000c DA60     		str	r2, [r3, #12]
+ 492 000e 4168     		ldr	r1, [r0, #4]
+ 493 0010 CA07     		lsls	r2, r1, #31
+ 494 0012 03D5     		bpl	.L90
+ 495 0014 3A4C     		ldr	r4, .L116+8
+ 496 0016 6578     		ldrb	r5, [r4, #1]	@ zero_extendqisi2
+ 497 0018 012D     		cmp	r5, #1
+ 498 001a 04D0     		beq	.L107
+ 499              	.L90:
+ 500 001c FFF7FEFF 		bl	RTC001_Disable
+ 501 0020 3848     		ldr	r0, .L116+12
+ 502 0022 FFF7FEFF 		bl	RTC001_Clock_SetTime
+ 503              	.L107:
+ 504 0026 384E     		ldr	r6, .L116+16
+ 505 0028 D6F8C470 		ldr	r7, [r6, #196]
+ 506 002c FB05     		lsls	r3, r7, #23
+ 507 002e FAD4     		bmi	.L107
+ 508 0030 334B     		ldr	r3, .L116+8
+ 509 0032 324A     		ldr	r2, .L116+4
+ 510 0034 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 511 0036 5168     		ldr	r1, [r2, #4]
+ 512 0038 DE7A     		ldrb	r6, [r3, #11]	@ zero_extendqisi2
+ 513 003a 93F80D80 		ldrb	r8, [r3, #13]	@ zero_extendqisi2
+ 514 003e 93F80EC0 		ldrb	ip, [r3, #14]	@ zero_extendqisi2
+ 515 0042 40EA0104 		orr	r4, r0, r1
+ 516 0046 5460     		str	r4, [r2, #4]
+ 517 0048 1569     		ldr	r5, [r2, #16]
+ 518 004a 2B49     		ldr	r1, .L116
+ 519 004c 45EA0627 		orr	r7, r5, r6, lsl #8
+ 520 0050 1761     		str	r7, [r2, #16]
+ 521 0052 8868     		ldr	r0, [r1, #8]
+ 522 0054 DD7B     		ldrb	r5, [r3, #15]	@ zero_extendqisi2
+ 523 0056 1F7C     		ldrb	r7, [r3, #16]	@ zero_extendqisi2
+ 524 0058 40EA8604 		orr	r4, r0, r6, lsl #2
+ 525 005c 8C60     		str	r4, [r1, #8]
+ 526 005e 987C     		ldrb	r0, [r3, #18]	@ zero_extendqisi2
+ 527 0060 597C     		ldrb	r1, [r3, #17]	@ zero_extendqisi2
+ 528 0062 DB7C     		ldrb	r3, [r3, #19]	@ zero_extendqisi2
+ 529 0064 6E02     		lsls	r6, r5, #9
+ 530 0066 CC02     		lsls	r4, r1, #11
+ 531 0068 4FEA8808 		lsl	r8, r8, #2
+ 532 006c 4FEA0C2C 		lsl	ip, ip, #8
+ 533 0070 BD02     		lsls	r5, r7, #10
+ 534 0072 4003     		lsls	r0, r0, #13
+ 535 0074 9903     		lsls	r1, r3, #14
+ 536              	.L93:
+ 537 0076 244F     		ldr	r7, .L116+16
+ 538 0078 D7F8C430 		ldr	r3, [r7, #196]
+ 539 007c DF05     		lsls	r7, r3, #23
+ 540 007e FAD4     		bmi	.L93
+ 541 0080 5768     		ldr	r7, [r2, #4]
+ 542 0082 48EA0C03 		orr	r3, r8, ip
+ 543 0086 3B43     		orrs	r3, r3, r7
+ 544 0088 3343     		orrs	r3, r3, r6
+ 545 008a 2B43     		orrs	r3, r3, r5
+ 546 008c 2343     		orrs	r3, r3, r4
+ 547 008e 0343     		orrs	r3, r3, r0
+ 548 0090 0B43     		orrs	r3, r3, r1
+ 549 0092 5360     		str	r3, [r2, #4]
+ 550              	.L94:
+ 551 0094 1C4A     		ldr	r2, .L116+16
+ 552 0096 D2F8C400 		ldr	r0, [r2, #196]
+ 553 009a C205     		lsls	r2, r0, #23
+ 554 009c FAD4     		bmi	.L94
+ 555 009e 174A     		ldr	r2, .L116+4
+ 556 00a0 174B     		ldr	r3, .L116+8
+ 557 00a2 5168     		ldr	r1, [r2, #4]
+ 558 00a4 5888     		ldrh	r0, [r3, #2]
+ 559 00a6 89B2     		uxth	r1, r1
+ 560 00a8 41EA0040 		orr	r0, r1, r0, lsl #16
+ 561 00ac 5060     		str	r0, [r2, #4]
+ 562 00ae D879     		ldrb	r0, [r3, #7]	@ zero_extendqisi2
+ 563 00b0 9979     		ldrb	r1, [r3, #6]	@ zero_extendqisi2
+ 564 00b2 8000     		lsls	r0, r0, #2
+ 565 00b4 40EA4100 		orr	r0, r0, r1, lsl #1
+ 566 00b8 5979     		ldrb	r1, [r3, #5]	@ zero_extendqisi2
+ 567 00ba 0843     		orrs	r0, r0, r1
+ 568 00bc 197A     		ldrb	r1, [r3, #8]	@ zero_extendqisi2
+ 569 00be 40EAC100 		orr	r0, r0, r1, lsl #3
+ 570 00c2 597A     		ldrb	r1, [r3, #9]	@ zero_extendqisi2
+ 571 00c4 40EA4110 		orr	r0, r0, r1, lsl #5
+ 572 00c8 997A     		ldrb	r1, [r3, #10]	@ zero_extendqisi2
+ 573 00ca 40EA8110 		orr	r0, r0, r1, lsl #6
+ 574 00ce 1169     		ldr	r1, [r2, #16]
+ 575 00d0 0143     		orrs	r1, r1, r0
+ 576 00d2 1161     		str	r1, [r2, #16]
+ 577 00d4 20B1     		cbz	r0, .L95
+ 578 00d6 084A     		ldr	r2, .L116
+ 579 00d8 9168     		ldr	r1, [r2, #8]
+ 580 00da 41F00201 		orr	r1, r1, #2
+ 581 00de 9160     		str	r1, [r2, #8]
+ 582              	.L95:
+ 583 00e0 5969     		ldr	r1, [r3, #20]
+ 584 00e2 31B1     		cbz	r1, .L89
+ 585 00e4 28B1     		cbz	r0, .L89
+ 586 00e6 0120     		movs	r0, #1
+ 587 00e8 0022     		movs	r2, #0
+ 588 00ea BDE8F041 		pop	{r4, r5, r6, r7, r8, lr}
+ 589 00ee FFF7FEBF 		b	NVIC_SCU001_RegisterCallback
+ 590              	.L89:
+ 591 00f2 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 592              	.L117:
+ 593 00f6 00BF     		.align	2
+ 594              	.L116:
+ 595 00f8 74400050 		.word	1342193780
+ 596 00fc 004A0050 		.word	1342196224
+ 597 0100 00000000 		.word	RTC001_Handle
+ 598 0104 00000000 		.word	timeptr1
+ 599 0108 00400050 		.word	1342193664
+ 601              		.section	.text.RTC001_Time,"ax",%progbits
+ 602              		.align	1
+ 603              		.global	RTC001_Time
+ 604              		.thumb
+ 605              		.thumb_func
+ 607              	RTC001_Time:
+ 608              		@ args = 0, pretend = 0, frame = 8
+ 609              		@ frame_needed = 0, uses_anonymous_args = 0
+ 610 0000 274B     		ldr	r3, .L137
+ 611 0002 2DE9F74F 		push	{r0, r1, r2, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 612 0006 5A68     		ldr	r2, [r3, #4]
+ 613 0008 D107     		lsls	r1, r2, #31
+ 614 000a 0746     		mov	r7, r0
+ 615 000c 45D5     		bpl	.L127
+ 616 000e 0028     		cmp	r0, #0
+ 617 0010 43D0     		beq	.L127
+ 618 0012 586A     		ldr	r0, [r3, #36]
+ 619 0014 5D6A     		ldr	r5, [r3, #36]
+ 620 0016 1C6A     		ldr	r4, [r3, #32]
+ 621 0018 196A     		ldr	r1, [r3, #32]
+ 622 001a 1E6A     		ldr	r6, [r3, #32]
+ 623 001c 1B6A     		ldr	r3, [r3, #32]
+ 624 001e 020C     		lsrs	r2, r0, #16
+ 625 0020 40F26D10 		movw	r0, #365
+ 626 0024 5043     		muls	r0, r2, r0
+ 627 0026 C4F3046A 		ubfx	sl, r4, #24, #5
+ 628 002a A0F52F24 		sub	r4, r0, #716800
+ 629 002e C6F30529 		ubfx	r9, r6, #8, #6
+ 630 0032 C5F30325 		ubfx	r5, r5, #8, #4
+ 631 0036 C1F30448 		ubfx	r8, r1, #16, #5
+ 632 003a 03F03F0B 		and	fp, r3, #63
+ 633 003e A4F6CA04 		subw	r4, r4, #2250
+ 634 0042 561E     		subs	r6, r2, #1
+ 635              	.L120:
+ 636 0044 40F2B171 		movw	r1, #1969
+ 637 0048 8E42     		cmp	r6, r1
+ 638 004a 08D9     		bls	.L135
+ 639              	.L122:
+ 640 004c B0B2     		uxth	r0, r6
+ 641 004e 0192     		str	r2, [sp, #4]
+ 642 0050 FFF7FEFF 		bl	RTC001_lleapyear
+ 643 0054 019A     		ldr	r2, [sp, #4]
+ 644 0056 00B1     		cbz	r0, .L121
+ 645 0058 0134     		adds	r4, r4, #1
+ 646              	.L121:
+ 647 005a 013E     		subs	r6, r6, #1
+ 648 005c F2E7     		b	.L120
+ 649              	.L135:
+ 650 005e 1046     		mov	r0, r2
+ 651 0060 FFF7FEFF 		bl	RTC001_lleapyear
+ 652 0064 18B1     		cbz	r0, .L132
+ 653 0066 6A1C     		adds	r2, r5, #1
+ 654 0068 022A     		cmp	r2, #2
+ 655 006a 00D9     		bls	.L132
+ 656 006c 0134     		adds	r4, r4, #1
+ 657              	.L132:
+ 658 006e 2DB1     		cbz	r5, .L136
+ 659              	.L125:
+ 660 0070 0C49     		ldr	r1, .L137+4
+ 661 0072 51F82520 		ldr	r2, [r1, r5, lsl #2]
+ 662 0076 013D     		subs	r5, r5, #1
+ 663 0078 A418     		adds	r4, r4, r2
+ 664 007a F8E7     		b	.L132
+ 665              	.L136:
+ 666 007c 3C23     		movs	r3, #60
+ 667 007e 4FF46160 		mov	r0, #3600
+ 668 0082 03FB09F9 		mul	r9, r3, r9
+ 669 0086 A244     		add	sl, r4, sl
+ 670 0088 00FB0898 		mla	r8, r0, r8, r9
+ 671 008c 064C     		ldr	r4, .L137+8
+ 672 008e C344     		add	fp, r8, fp
+ 673 0090 04FB0AB4 		mla	r4, r4, sl, fp
+ 674 0094 3C60     		str	r4, [r7, #0]
+ 675 0096 2846     		mov	r0, r5
+ 676 0098 00E0     		b	.L119
+ 677              	.L127:
+ 678 009a 0220     		movs	r0, #2
+ 679              	.L119:
+ 680 009c BDE8FE8F 		pop	{r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 681              	.L138:
+ 682              		.align	2
+ 683              	.L137:
+ 684 00a0 004A0050 		.word	1342196224
+ 685 00a4 00000000 		.word	.LANCHOR0
+ 686 00a8 80510100 		.word	86400
+ 688              		.global	RTC001_DAYS_IN_MONTH
+ 689              		.section	.rodata
+ 690              		.align	2
+ 691              		.set	.LANCHOR0,. + 0
+ 694              	RTC001_DAYS_IN_MONTH:
+ 695 0000 00000000 		.word	0
+ 696 0004 1F000000 		.word	31
+ 697 0008 1C000000 		.word	28
+ 698 000c 1F000000 		.word	31
+ 699 0010 1E000000 		.word	30
+ 700 0014 1F000000 		.word	31
+ 701 0018 1E000000 		.word	30
+ 702 001c 1F000000 		.word	31
+ 703 0020 1F000000 		.word	31
+ 704 0024 1E000000 		.word	30
+ 705 0028 1F000000 		.word	31
+ 706 002c 1E000000 		.word	30
+ 707 0030 1F000000 		.word	31
+ 708              	.LC0:
+ 709 0034 00       		.byte	0
+ 710 0035 14       		.byte	20
+ 711 0036 00       		.byte	0
+ 712 0037 10       		.byte	16
+ 713 0038 18       		.byte	24
+ 714 0039 14       		.byte	20
+ 715 003a 00       		.byte	0
+ 716 003b 18       		.byte	24
+ 717 003c 04       		.byte	4
+ 718 003d 0C       		.byte	12
+ 719 003e 08       		.byte	8
+ 720 003f 10       		.byte	16
+ 721 0040 0C       		.byte	12
+ 722 0041 000000   		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 RTC001.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:17     .text.RTC001_lleapyear:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:21     .text.RTC001_lleapyear:00000000 RTC001_lleapyear
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:48     .text.RTC001_ldatevalid:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:52     .text.RTC001_ldatevalid:00000000 RTC001_ldatevalid
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:88     .text.RTC001_ldatevalid:0000003c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:91     .text.RTC001_DeInit:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:96     .text.RTC001_DeInit:00000000 RTC001_DeInit
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:137    .text.RTC001_DeInit:00000050 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:142    .text.RTC001_Enable:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:147    .text.RTC001_Enable:00000000 RTC001_Enable
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:167    .text.RTC001_Enable:00000024 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:171    .text.RTC001_Disable:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:176    .text.RTC001_Disable:00000000 RTC001_Disable
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:211    .text.RTC001_Disable:00000048 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:215    .text.RTC001_GetFlagStatus:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:220    .text.RTC001_GetFlagStatus:00000000 RTC001_GetFlagStatus
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:234    .text.RTC001_GetFlagStatus:00000010 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:237    .text.RTC001_ClearFlagStatus:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:242    .text.RTC001_ClearFlagStatus:00000000 RTC001_ClearFlagStatus
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:254    .text.RTC001_ClearFlagStatus:0000000c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:257    .text.RTC001_ConfigAlarm:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:262    .text.RTC001_ConfigAlarm:00000000 RTC001_ConfigAlarm
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:323    .text.RTC001_ConfigAlarm:00000098 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:327    .text.RTC001_Clock_GetTime:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:332    .text.RTC001_Clock_GetTime:00000000 RTC001_Clock_GetTime
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:360    .text.RTC001_Clock_GetTime:00000038 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:363    .text.RTC001_Clock_SetTime:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:368    .text.RTC001_Clock_SetTime:00000000 RTC001_Clock_SetTime
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:474    .text.RTC001_Clock_SetTime:00000100 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:479    .text.RTC001_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:484    .text.RTC001_Init:00000000 RTC001_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:595    .text.RTC001_Init:000000f8 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:602    .text.RTC001_Time:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:607    .text.RTC001_Time:00000000 RTC001_Time
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:684    .text.RTC001_Time:000000a0 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:694    .rodata:00000000 RTC001_DAYS_IN_MONTH
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOGkwlj.s:690    .rodata:00000000 $d
+
+UNDEFINED SYMBOLS
+NVIC_SCU001_RegisterCallback
+RTC001_Handle
+timeptr1

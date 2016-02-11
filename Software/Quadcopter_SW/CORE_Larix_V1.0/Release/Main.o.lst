@@ -1,0 +1,662 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"Main.c"
+  16              		.global	__aeabi_f2d
+  17              		.global	__aeabi_ddiv
+  18              		.global	__aeabi_dmul
+  19              		.global	__aeabi_d2uiz
+  20              		.section	.text.CCU41_1_IRQHandler,"ax",%progbits
+  21              		.align	1
+  22              		.global	CCU41_1_IRQHandler
+  23              		.thumb
+  24              		.thumb_func
+  26              	CCU41_1_IRQHandler:
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 0, uses_anonymous_args = 0
+  29 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  30 0004 464C     		ldr	r4, .L2+8
+  31 0006 474D     		ldr	r5, .L2+12
+  32 0008 85B0     		sub	sp, sp, #20
+  33 000a 2846     		mov	r0, r5
+  34 000c 271D     		adds	r7, r4, #4
+  35 000e 04F10808 		add	r8, r4, #8
+  36 0012 04F10C09 		add	r9, r4, #12
+  37 0016 FFF7FEFF 		bl	GetAngles
+  38 001a 04F11006 		add	r6, r4, #16
+  39 001e 3946     		mov	r1, r7
+  40 0020 4246     		mov	r2, r8
+  41 0022 2046     		mov	r0, r4
+  42 0024 4B46     		mov	r3, r9
+  43 0026 FFF7FEFF 		bl	GetRCData
+  44 002a 3846     		mov	r0, r7
+  45 002c 2946     		mov	r1, r5
+  46 002e 3346     		mov	r3, r6
+  47 0030 3D4A     		ldr	r2, .L2+16
+  48 0032 FFF7FEFF 		bl	AngleRateController
+  49 0036 3D4B     		ldr	r3, .L2+20
+  50 0038 3D48     		ldr	r0, .L2+24
+  51 003a 0093     		str	r3, [sp, #0]
+  52 003c 04F11407 		add	r7, r4, #20
+  53 0040 291D     		adds	r1, r5, #4
+  54 0042 0190     		str	r0, [sp, #4]
+  55 0044 0297     		str	r7, [sp, #8]
+  56 0046 4046     		mov	r0, r8
+  57 0048 0222     		movs	r2, #2
+  58 004a 3A4B     		ldr	r3, .L2+28
+  59 004c FFF7FEFF 		bl	AngleController
+  60 0050 3949     		ldr	r1, .L2+32
+  61 0052 3A4A     		ldr	r2, .L2+36
+  62 0054 0091     		str	r1, [sp, #0]
+  63 0056 04F11808 		add	r8, r4, #24
+  64 005a 05F10801 		add	r1, r5, #8
+  65 005e 0192     		str	r2, [sp, #4]
+  66 0060 4846     		mov	r0, r9
+  67 0062 0222     		movs	r2, #2
+  68 0064 364B     		ldr	r3, .L2+40
+  69 0066 CDF80880 		str	r8, [sp, #8]
+  70 006a 04F11C05 		add	r5, r4, #28
+  71 006e FFF7FEFF 		bl	AngleController
+  72 0072 3246     		mov	r2, r6
+  73 0074 3946     		mov	r1, r7
+  74 0076 2346     		mov	r3, r4
+  75 0078 0095     		str	r5, [sp, #0]
+  76 007a 4046     		mov	r0, r8
+  77 007c FFF7FEFF 		bl	CreatePulseWidth
+  78 0080 E069     		ldr	r0, [r4, #28]	@ float
+  79 0082 FFF7FEFF 		bl	__aeabi_f2d
+  80 0086 0022     		movs	r2, #0
+  81 0088 2E4B     		ldr	r3, .L2+44
+  82 008a FFF7FEFF 		bl	__aeabi_ddiv
+  83 008e 22A3     		adr	r3, .L2
+  84 0090 D3E90023 		ldrd	r2, [r3]
+  85 0094 FFF7FEFF 		bl	__aeabi_dmul
+  86 0098 FFF7FEFF 		bl	__aeabi_d2uiz
+  87 009c 87B2     		uxth	r7, r0
+  88 009e 206A     		ldr	r0, [r4, #32]	@ float
+  89 00a0 FFF7FEFF 		bl	__aeabi_f2d
+  90 00a4 0022     		movs	r2, #0
+  91 00a6 274B     		ldr	r3, .L2+44
+  92 00a8 FFF7FEFF 		bl	__aeabi_ddiv
+  93 00ac 1AA3     		adr	r3, .L2
+  94 00ae D3E90023 		ldrd	r2, [r3]
+  95 00b2 FFF7FEFF 		bl	__aeabi_dmul
+  96 00b6 FFF7FEFF 		bl	__aeabi_d2uiz
+  97 00ba 86B2     		uxth	r6, r0
+  98 00bc A06A     		ldr	r0, [r4, #40]	@ float
+  99 00be FFF7FEFF 		bl	__aeabi_f2d
+ 100 00c2 0022     		movs	r2, #0
+ 101 00c4 1F4B     		ldr	r3, .L2+44
+ 102 00c6 FFF7FEFF 		bl	__aeabi_ddiv
+ 103 00ca 13A3     		adr	r3, .L2
+ 104 00cc D3E90023 		ldrd	r2, [r3]
+ 105 00d0 FFF7FEFF 		bl	__aeabi_dmul
+ 106 00d4 FFF7FEFF 		bl	__aeabi_d2uiz
+ 107 00d8 85B2     		uxth	r5, r0
+ 108 00da 606A     		ldr	r0, [r4, #36]	@ float
+ 109 00dc FFF7FEFF 		bl	__aeabi_f2d
+ 110 00e0 0022     		movs	r2, #0
+ 111 00e2 184B     		ldr	r3, .L2+44
+ 112 00e4 FFF7FEFF 		bl	__aeabi_ddiv
+ 113 00e8 0BA3     		adr	r3, .L2
+ 114 00ea D3E90023 		ldrd	r2, [r3]
+ 115 00ee FFF7FEFF 		bl	__aeabi_dmul
+ 116 00f2 FFF7FEFF 		bl	__aeabi_d2uiz
+ 117 00f6 83B2     		uxth	r3, r0
+ 118 00f8 0093     		str	r3, [sp, #0]
+ 119 00fa 2220     		movs	r0, #34
+ 120 00fc 3946     		mov	r1, r7
+ 121 00fe 3246     		mov	r2, r6
+ 122 0100 2B46     		mov	r3, r5
+ 123 0102 FFF7FEFF 		bl	SendDaisyData
+ 124 0106 A08D     		ldrh	r0, [r4, #44]
+ 125 0108 411C     		adds	r1, r0, #1
+ 126 010a A185     		strh	r1, [r4, #44]	@ movhi
+ 127 010c 05B0     		add	sp, sp, #20
+ 128 010e BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 129              	.L3:
+ 130 0112 00BFAFF3 		.align	3
+ 130      0080
+ 131              	.L2:
+ 132 0118 00000000 		.word	0
+ 133 011c 00FC9340 		.word	1083440128
+ 134 0120 00000000 		.word	.LANCHOR0
+ 135 0124 00000000 		.word	YPR
+ 136 0128 00000000 		.word	.LANCHOR1
+ 137 012c 00000000 		.word	b_pitch
+ 138 0130 00000000 		.word	x_pitch
+ 139 0134 00000000 		.word	a_pitch
+ 140 0138 00000000 		.word	b_roll
+ 141 013c 00000000 		.word	x_roll
+ 142 0140 00000000 		.word	a_roll
+ 143 0144 00005940 		.word	1079574528
+ 145              		.section	.text.Initialize,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	Initialize
+ 148              		.thumb
+ 149              		.thumb_func
+ 151              	Initialize:
+ 152              		@ args = 0, pretend = 0, frame = 0
+ 153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 154 0000 08B5     		push	{r3, lr}
+ 155 0002 4FF47A70 		mov	r0, #1000
+ 156 0006 FFF7FEFF 		bl	delay
+ 157 000a FFF7FEFF 		bl	MPU9150_Setup
+ 158 000e 104B     		ldr	r3, .L5
+ 159 0010 104A     		ldr	r2, .L5+4
+ 160 0012 1148     		ldr	r0, .L5+8
+ 161 0014 1149     		ldr	r1, .L5+12
+ 162 0016 1A60     		str	r2, [r3, #0]	@ float
+ 163 0018 5860     		str	r0, [r3, #4]	@ float
+ 164 001a 114A     		ldr	r2, .L5+16
+ 165 001c 9960     		str	r1, [r3, #8]	@ float
+ 166 001e 1149     		ldr	r1, .L5+20
+ 167 0020 114B     		ldr	r3, .L5+24
+ 168 0022 1248     		ldr	r0, .L5+28
+ 169 0024 1960     		str	r1, [r3, #0]	@ float
+ 170 0026 5A60     		str	r2, [r3, #4]	@ float
+ 171 0028 114B     		ldr	r3, .L5+32
+ 172 002a 1860     		str	r0, [r3, #0]	@ float
+ 173 002c 1148     		ldr	r0, .L5+36
+ 174 002e 5860     		str	r0, [r3, #4]	@ float
+ 175 0030 1148     		ldr	r0, .L5+40
+ 176 0032 9860     		str	r0, [r3, #8]	@ float
+ 177 0034 114B     		ldr	r3, .L5+44
+ 178 0036 1960     		str	r1, [r3, #0]	@ float
+ 179 0038 5A60     		str	r2, [r3, #4]	@ float
+ 180 003a FFF7FEFF 		bl	WatchRC_Init
+ 181 003e 4FF47A70 		mov	r0, #1000
+ 182 0042 FFF7FEFF 		bl	delay
+ 183 0046 0E48     		ldr	r0, .L5+48
+ 184 0048 BDE80840 		pop	{r3, lr}
+ 185 004c FFF7FEBF 		b	PWMSP001_Start
+ 186              	.L6:
+ 187              		.align	2
+ 188              	.L5:
+ 189 0050 00000000 		.word	b_roll
+ 190 0054 21EACD42 		.word	1120791073
+ 191 0058 944051C3 		.word	-1018085228
+ 192 005c 0797D442 		.word	1121228551
+ 193 0060 1C1BEFBF 		.word	-1074848996
+ 194 0064 38365E3F 		.word	1063138872
+ 195 0068 00000000 		.word	a_roll
+ 196 006c 90069E42 		.word	1117652624
+ 197 0070 00000000 		.word	b_pitch
+ 198 0074 630120C3 		.word	-1021312669
+ 199 0078 36FCA142 		.word	1117912118
+ 200 007c 00000000 		.word	a_pitch
+ 201 0080 00000000 		.word	PWMSP001_Handle0
+ 203              		.section	.text.startup.main,"ax",%progbits
+ 204              		.align	1
+ 205              		.global	main
+ 206              		.thumb
+ 207              		.thumb_func
+ 209              	main:
+ 210              		@ args = 0, pretend = 0, frame = 0
+ 211              		@ frame_needed = 0, uses_anonymous_args = 0
+ 212 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 213 0002 87B0     		sub	sp, sp, #28
+ 214 0004 FFF7FEFF 		bl	DAVE_Init
+ 215 0008 FFF7FEFF 		bl	USBVC001_Init
+ 216 000c FFF7FEFF 		bl	Initialize
+ 217              	.L21:
+ 218 0010 FFF7FEFF 		bl	USBVC001_BytesReceived
+ 219 0014 0546     		mov	r5, r0
+ 220 0016 0028     		cmp	r0, #0
+ 221 0018 00F0CC80 		beq	.L8
+ 222 001c 0027     		movs	r7, #0
+ 223              	.L9:
+ 224 001e 6C4E     		ldr	r6, .L32
+ 225 0020 7C1C     		adds	r4, r7, #1
+ 226 0022 06F12E00 		add	r0, r6, #46
+ 227 0026 A7B2     		uxth	r7, r4
+ 228 0028 FFF7FEFF 		bl	USBVC001_ReceiveByte
+ 229 002c AF42     		cmp	r7, r5
+ 230 002e F6D1     		bne	.L9
+ 231 0030 96F92E30 		ldrsb	r3, [r6, #46]
+ 232 0034 313B     		subs	r3, r3, #49
+ 233 0036 082B     		cmp	r3, #8
+ 234 0038 00F2B980 		bhi	.L10
+ 235 003c DFE813F0 		tbh	[pc, r3, lsl #1]
+ 236              	.L19:
+ 237 0040 0900     		.2byte	(.L11-.L19)/2
+ 238 0042 2000     		.2byte	(.L12-.L19)/2
+ 239 0044 2400     		.2byte	(.L13-.L19)/2
+ 240 0046 B700     		.2byte	(.L10-.L19)/2
+ 241 0048 3700     		.2byte	(.L14-.L19)/2
+ 242 004a 5200     		.2byte	(.L15-.L19)/2
+ 243 004c 7A00     		.2byte	(.L16-.L19)/2
+ 244 004e 8800     		.2byte	(.L17-.L19)/2
+ 245 0050 9E00     		.2byte	(.L18-.L19)/2
+ 246              	.L11:
+ 247 0052 3068     		ldr	r0, [r6, #0]	@ float
+ 248 0054 FFF7FEFF 		bl	__aeabi_f2d
+ 249 0058 0446     		mov	r4, r0
+ 250 005a 7068     		ldr	r0, [r6, #4]	@ float
+ 251 005c 0D46     		mov	r5, r1
+ 252 005e FFF7FEFF 		bl	__aeabi_f2d
+ 253 0062 CDE90001 		strd	r0, [sp]
+ 254 0066 B068     		ldr	r0, [r6, #8]	@ float
+ 255 0068 FFF7FEFF 		bl	__aeabi_f2d
+ 256 006c CDE90201 		strd	r0, [sp, #8]
+ 257 0070 F068     		ldr	r0, [r6, #12]	@ float
+ 258 0072 FFF7FEFF 		bl	__aeabi_f2d
+ 259 0076 CDE90401 		strd	r0, [sp, #16]
+ 260 007a 5648     		ldr	r0, .L32+4
+ 261 007c 5649     		ldr	r1, .L32+8
+ 262 007e 2CE0     		b	.L29
+ 263              	.L12:
+ 264 0080 5648     		ldr	r0, .L32+12
+ 265 0082 FFF7FEFF 		bl	PWMSP001_Start
+ 266 0086 92E0     		b	.L10
+ 267              	.L13:
+ 268 0088 554E     		ldr	r6, .L32+16
+ 269 008a 3068     		ldr	r0, [r6, #0]	@ float
+ 270 008c FFF7FEFF 		bl	__aeabi_f2d
+ 271 0090 0446     		mov	r4, r0
+ 272 0092 7068     		ldr	r0, [r6, #4]	@ float
+ 273 0094 0D46     		mov	r5, r1
+ 274 0096 FFF7FEFF 		bl	__aeabi_f2d
+ 275 009a CDE90001 		strd	r0, [sp]
+ 276 009e B068     		ldr	r0, [r6, #8]	@ float
+ 277 00a0 FFF7FEFF 		bl	__aeabi_f2d
+ 278 00a4 CDE90201 		strd	r0, [sp, #8]
+ 279 00a8 4A48     		ldr	r0, .L32+4
+ 280 00aa 4E49     		ldr	r1, .L32+20
+ 281 00ac 7BE0     		b	.L30
+ 282              	.L14:
+ 283 00ae F069     		ldr	r0, [r6, #28]	@ float
+ 284 00b0 FFF7FEFF 		bl	__aeabi_f2d
+ 285 00b4 0446     		mov	r4, r0
+ 286 00b6 306A     		ldr	r0, [r6, #32]	@ float
+ 287 00b8 0D46     		mov	r5, r1
+ 288 00ba FFF7FEFF 		bl	__aeabi_f2d
+ 289 00be CDE90001 		strd	r0, [sp]
+ 290 00c2 706A     		ldr	r0, [r6, #36]	@ float
+ 291 00c4 FFF7FEFF 		bl	__aeabi_f2d
+ 292 00c8 CDE90201 		strd	r0, [sp, #8]
+ 293 00cc B06A     		ldr	r0, [r6, #40]	@ float
+ 294 00ce FFF7FEFF 		bl	__aeabi_f2d
+ 295 00d2 CDE90401 		strd	r0, [sp, #16]
+ 296 00d6 3F48     		ldr	r0, .L32+4
+ 297 00d8 4349     		ldr	r1, .L32+24
+ 298              	.L29:
+ 299 00da 2246     		mov	r2, r4
+ 300 00dc 2B46     		mov	r3, r5
+ 301 00de FFF7FEFF 		bl	sprintf
+ 302 00e2 64E0     		b	.L10
+ 303              	.L15:
+ 304 00e4 3E4F     		ldr	r7, .L32+16
+ 305 00e6 96ED017A 		flds	s14, [r6, #4]
+ 306 00ea D7ED007A 		flds	s15, [r7, #0]
+ 307 00ee 37EE670A 		fsubs	s0, s14, s15
+ 308 00f2 10EE100A 		fmrs	r0, s0
+ 309 00f6 FFF7FEFF 		bl	__aeabi_f2d
+ 310 00fa D6ED020A 		flds	s1, [r6, #8]
+ 311 00fe 97ED011A 		flds	s2, [r7, #4]
+ 312 0102 70EEC11A 		fsubs	s3, s1, s2
+ 313 0106 0446     		mov	r4, r0
+ 314 0108 11EE900A 		fmrs	r0, s3
+ 315 010c 0D46     		mov	r5, r1
+ 316 010e FFF7FEFF 		bl	__aeabi_f2d
+ 317 0112 CDE90001 		strd	r0, [sp]
+ 318 0116 D7ED022A 		flds	s5, [r7, #8]
+ 319 011a 96ED032A 		flds	s4, [r6, #12]
+ 320 011e 32EE623A 		fsubs	s6, s4, s5
+ 321 0122 13EE100A 		fmrs	r0, s6
+ 322 0126 FFF7FEFF 		bl	__aeabi_f2d
+ 323 012a CDE90201 		strd	r0, [sp, #8]
+ 324 012e 2948     		ldr	r0, .L32+4
+ 325 0130 2E49     		ldr	r1, .L32+28
+ 326 0132 38E0     		b	.L30
+ 327              	.L16:
+ 328 0134 FFF7FEFF 		bl	GetSensorCount
+ 329 0138 B68D     		ldrh	r6, [r6, #44]
+ 330 013a 0546     		mov	r5, r0
+ 331 013c FFF7FEFF 		bl	GetRCCount
+ 332 0140 2B49     		ldr	r1, .L32+32
+ 333 0142 0090     		str	r0, [sp, #0]
+ 334 0144 2A46     		mov	r2, r5
+ 335 0146 3346     		mov	r3, r6
+ 336 0148 2248     		ldr	r0, .L32+4
+ 337 014a FFF7FEFF 		bl	sprintf
+ 338 014e 2EE0     		b	.L10
+ 339              	.L17:
+ 340 0150 284F     		ldr	r7, .L32+36
+ 341 0152 3846     		mov	r0, r7
+ 342 0154 FFF7FEFF 		bl	GetGyroData
+ 343 0158 3868     		ldr	r0, [r7, #0]	@ float
+ 344 015a FFF7FEFF 		bl	__aeabi_f2d
+ 345 015e 0446     		mov	r4, r0
+ 346 0160 7868     		ldr	r0, [r7, #4]	@ float
+ 347 0162 0D46     		mov	r5, r1
+ 348 0164 FFF7FEFF 		bl	__aeabi_f2d
+ 349 0168 CDE90001 		strd	r0, [sp]
+ 350 016c B868     		ldr	r0, [r7, #8]	@ float
+ 351 016e FFF7FEFF 		bl	__aeabi_f2d
+ 352 0172 CDE90201 		strd	r0, [sp, #8]
+ 353 0176 1748     		ldr	r0, .L32+4
+ 354 0178 1F49     		ldr	r1, .L32+40
+ 355 017a 14E0     		b	.L30
+ 356              	.L18:
+ 357 017c 1D4E     		ldr	r6, .L32+36
+ 358 017e 3046     		mov	r0, r6
+ 359 0180 FFF7FEFF 		bl	GetAccData
+ 360 0184 3068     		ldr	r0, [r6, #0]	@ float
+ 361 0186 FFF7FEFF 		bl	__aeabi_f2d
+ 362 018a 0446     		mov	r4, r0
+ 363 018c 7068     		ldr	r0, [r6, #4]	@ float
+ 364 018e 0D46     		mov	r5, r1
+ 365 0190 FFF7FEFF 		bl	__aeabi_f2d
+ 366 0194 CDE90001 		strd	r0, [sp]
+ 367 0198 B068     		ldr	r0, [r6, #8]	@ float
+ 368 019a FFF7FEFF 		bl	__aeabi_f2d
+ 369 019e CDE90201 		strd	r0, [sp, #8]
+ 370 01a2 0C48     		ldr	r0, .L32+4
+ 371 01a4 1549     		ldr	r1, .L32+44
+ 372              	.L30:
+ 373 01a6 2246     		mov	r2, r4
+ 374 01a8 2B46     		mov	r3, r5
+ 375 01aa FFF7FEFF 		bl	sprintf
+ 376              	.L10:
+ 377 01ae 0948     		ldr	r0, .L32+4
+ 378 01b0 FFF7FEFF 		bl	USBVC001_SendString
+ 379              	.L8:
+ 380 01b4 0648     		ldr	r0, .L32
+ 381 01b6 90F89220 		ldrb	r2, [r0, #146]	@ zero_extendqisi2
+ 382 01ba 2AB1     		cbz	r2, .L20
+ 383 01bc 0021     		movs	r1, #0
+ 384 01be 80F89210 		strb	r1, [r0, #146]
+ 385 01c2 0448     		ldr	r0, .L32+4
+ 386 01c4 FFF7FEFF 		bl	USBVC001_SendString
+ 387              	.L20:
+ 388 01c8 FFF7FEFF 		bl	USB_USBTask
+ 389 01cc 20E7     		b	.L21
+ 390              	.L33:
+ 391 01ce 00BF     		.align	2
+ 392              	.L32:
+ 393 01d0 00000000 		.word	.LANCHOR0
+ 394 01d4 00000000 		.word	c
+ 395 01d8 00000000 		.word	.LC0
+ 396 01dc 00000000 		.word	PWMSP001_Handle2
+ 397 01e0 00000000 		.word	YPR
+ 398 01e4 38000000 		.word	.LC1
+ 399 01e8 51000000 		.word	.LC2
+ 400 01ec 72000000 		.word	.LC3
+ 401 01f0 85000000 		.word	.LC4
+ 402 01f4 00000000 		.word	sensorData
+ 403 01f8 AD000000 		.word	.LC5
+ 404 01fc D2000000 		.word	.LC6
+ 406              		.section	.text.CCU41_3_IRQHandler,"ax",%progbits
+ 407              		.align	1
+ 408              		.global	CCU41_3_IRQHandler
+ 409              		.thumb
+ 410              		.thumb_func
+ 412              	CCU41_3_IRQHandler:
+ 413              		@ args = 0, pretend = 0, frame = 0
+ 414              		@ frame_needed = 0, uses_anonymous_args = 0
+ 415 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 416 0002 0F4E     		ldr	r6, .L35
+ 417 0004 3046     		mov	r0, r6
+ 418 0006 FFF7FEFF 		bl	GetMagData
+ 419 000a 3068     		ldr	r0, [r6, #0]	@ float
+ 420 000c FFF7FEFF 		bl	__aeabi_f2d
+ 421 0010 0446     		mov	r4, r0
+ 422 0012 7068     		ldr	r0, [r6, #4]	@ float
+ 423 0014 0D46     		mov	r5, r1
+ 424 0016 FFF7FEFF 		bl	__aeabi_f2d
+ 425 001a CDE90001 		strd	r0, [sp]
+ 426 001e B068     		ldr	r0, [r6, #8]	@ float
+ 427 0020 FFF7FEFF 		bl	__aeabi_f2d
+ 428 0024 2246     		mov	r2, r4
+ 429 0026 CDE90201 		strd	r0, [sp, #8]
+ 430 002a 2B46     		mov	r3, r5
+ 431 002c 0548     		ldr	r0, .L35+4
+ 432 002e 0649     		ldr	r1, .L35+8
+ 433 0030 FFF7FEFF 		bl	sprintf
+ 434 0034 054B     		ldr	r3, .L35+12
+ 435 0036 0122     		movs	r2, #1
+ 436 0038 83F89220 		strb	r2, [r3, #146]
+ 437 003c 7FBD     		pop	{r0, r1, r2, r3, r4, r5, r6, pc}
+ 438              	.L36:
+ 439 003e 00BF     		.align	2
+ 440              	.L35:
+ 441 0040 00000000 		.word	sensorData
+ 442 0044 00000000 		.word	c
+ 443 0048 EB000000 		.word	.LC7
+ 444 004c 00000000 		.word	.LANCHOR0
+ 446              		.global	MotorRunning
+ 447              		.global	MonitorBuffer
+ 448              		.global	counter_main
+ 449              		.global	sendMag
+ 450              		.comm	c,100,1
+ 451              		.global	TxBuffer
+ 452              		.comm	sensorData,12,4
+ 453              		.comm	YPR,12,4
+ 454              		.global	rollD
+ 455              		.global	pitchD
+ 456              		.global	yawD_dot
+ 457              		.global	powerD
+ 458              		.comm	b_pitch,12,4
+ 459              		.comm	b_roll,12,4
+ 460              		.comm	a_pitch,8,4
+ 461              		.comm	a_roll,8,4
+ 462              		.global	P_yaw
+ 463              		.global	N_pitch
+ 464              		.global	D_pitch
+ 465              		.global	I_pitch
+ 466              		.global	P_pitch
+ 467              		.global	N_roll
+ 468              		.global	D_roll
+ 469              		.global	I_roll
+ 470              		.global	P_roll
+ 471              		.global	T
+ 472              		.global	u_roll
+ 473              		.global	u_pitch
+ 474              		.global	u_yaw_dot
+ 475              		.comm	x_roll,8,4
+ 476              		.comm	x_pitch,8,4
+ 477              		.global	PWM_percent
+ 478              		.section	.rodata
+ 479              		.align	2
+ 480              		.set	.LANCHOR1,. + 0
+ 483              	P_yaw:
+ 484 0000 00004842 		.word	1112014848
+ 487              	N_pitch:
+ 488 0004 36FC8342 		.word	1115946038
+ 491              	D_pitch:
+ 492 0008 0000803F 		.word	1065353216
+ 495              	I_pitch:
+ 496 000c 00000000 		.space	4
+ 499              	P_pitch:
+ 500 0010 00007041 		.word	1097859072
+ 503              	N_roll:
+ 504 0014 36FC8342 		.word	1115946038
+ 507              	D_roll:
+ 508 0018 0C1F9D3F 		.word	1067261708
+ 511              	I_roll:
+ 512 001c 00000000 		.space	4
+ 515              	P_roll:
+ 516 0020 A54ECA41 		.word	1103777445
+ 519              	T:
+ 520 0024 6F12033B 		.word	990057071
+ 521              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 522              	.LC0:
+ 523 0000 5468726F 		.ascii	"Throttle: %f   Rudder: %f   Elevator: %f   Aileron:"
+ 523      74746C65 
+ 523      3A202566 
+ 523      20202052 
+ 523      75646465 
+ 524 0033 2025660A 		.ascii	" %f\012\000"
+ 524      00
+ 525              	.LC1:
+ 526 0038 593A2531 		.ascii	"Y:%1.2f P:%1.2f R:%1.2f\012\000"
+ 526      2E326620 
+ 526      503A2531 
+ 526      2E326620 
+ 526      523A2531 
+ 527              	.LC2:
+ 528 0051 50574D31 		.ascii	"PWM1:%f PWM2:%f PWM3:%f PWM4:%f\012\000"
+ 528      3A256620 
+ 528      50574D32 
+ 528      3A256620 
+ 528      50574D33 
+ 529              	.LC3:
+ 530 0072 65593A25 		.ascii	"eY:%f eP:%f eR:%f\012\000"
+ 530      66206550 
+ 530      3A256620 
+ 530      65523A25 
+ 530      660A00
+ 531              	.LC4:
+ 532 0085 54696D65 		.ascii	"TimerSensor:%d TimerMain:%d TimerRC:%d\012\000"
+ 532      7253656E 
+ 532      736F723A 
+ 532      25642054 
+ 532      696D6572 
+ 533              	.LC5:
+ 534 00ad 4779726F 		.ascii	"GyroX:%3.2f GyroY:%3.2f GyroZ:%3.2f\012\000"
+ 534      583A2533 
+ 534      2E326620 
+ 534      4779726F 
+ 534      593A2533 
+ 535              	.LC6:
+ 536 00d2 41636358 		.ascii	"AccX:%f AccY:%f AccZ:%f\012\000"
+ 536      3A256620 
+ 536      41636359 
+ 536      3A256620 
+ 536      4163635A 
+ 537              	.LC7:
+ 538 00eb 25662C25 		.ascii	"%f,%f,%f\015\012\000"
+ 538      662C2566 
+ 538      0D0A00
+ 539              		.bss
+ 540              		.align	2
+ 541              		.set	.LANCHOR0,. + 0
+ 544              	powerD:
+ 545 0000 00000000 		.space	4
+ 548              	yawD_dot:
+ 549 0004 00000000 		.space	4
+ 552              	pitchD:
+ 553 0008 00000000 		.space	4
+ 556              	rollD:
+ 557 000c 00000000 		.space	4
+ 560              	u_yaw_dot:
+ 561 0010 00000000 		.space	4
+ 564              	u_pitch:
+ 565 0014 00000000 		.space	4
+ 568              	u_roll:
+ 569 0018 00000000 		.space	4
+ 572              	PWM_percent:
+ 573 001c 00000000 		.space	16
+ 573      00000000 
+ 573      00000000 
+ 573      00000000 
+ 576              	counter_main:
+ 577 002c 0000     		.space	2
+ 580              	TxBuffer:
+ 581 002e 00000000 		.space	100
+ 581      00000000 
+ 581      00000000 
+ 581      00000000 
+ 581      00000000 
+ 584              	sendMag:
+ 585 0092 00       		.space	1
+ 588              	MotorRunning:
+ 589 0093 00       		.space	1
+ 592              	MonitorBuffer:
+ 593 0094 00000000 		.space	14
+ 593      00000000 
+ 593      00000000 
+ 593      0000
+ 594 00a2 0000     		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 Main.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:21     .text.CCU41_1_IRQHandler:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:26     .text.CCU41_1_IRQHandler:00000000 CCU41_1_IRQHandler
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:132    .text.CCU41_1_IRQHandler:00000118 $d
+                            *COM*:0000000c YPR
+                            *COM*:0000000c b_pitch
+                            *COM*:00000008 x_pitch
+                            *COM*:00000008 a_pitch
+                            *COM*:0000000c b_roll
+                            *COM*:00000008 x_roll
+                            *COM*:00000008 a_roll
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:146    .text.Initialize:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:151    .text.Initialize:00000000 Initialize
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:189    .text.Initialize:00000050 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:204    .text.startup.main:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:209    .text.startup.main:00000000 main
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:237    .text.startup.main:00000040 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:247    .text.startup.main:00000052 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:393    .text.startup.main:000001d0 $d
+                            *COM*:00000064 c
+                            *COM*:0000000c sensorData
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:407    .text.CCU41_3_IRQHandler:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:412    .text.CCU41_3_IRQHandler:00000000 CCU41_3_IRQHandler
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:441    .text.CCU41_3_IRQHandler:00000040 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:588    .bss:00000093 MotorRunning
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:592    .bss:00000094 MonitorBuffer
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:576    .bss:0000002c counter_main
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:584    .bss:00000092 sendMag
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:580    .bss:0000002e TxBuffer
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:556    .bss:0000000c rollD
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:552    .bss:00000008 pitchD
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:548    .bss:00000004 yawD_dot
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:544    .bss:00000000 powerD
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:483    .rodata:00000000 P_yaw
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:487    .rodata:00000004 N_pitch
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:491    .rodata:00000008 D_pitch
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:495    .rodata:0000000c I_pitch
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:499    .rodata:00000010 P_pitch
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:503    .rodata:00000014 N_roll
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:507    .rodata:00000018 D_roll
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:511    .rodata:0000001c I_roll
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:515    .rodata:00000020 P_roll
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:519    .rodata:00000024 T
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:568    .bss:00000018 u_roll
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:564    .bss:00000014 u_pitch
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:560    .bss:00000010 u_yaw_dot
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:572    .bss:0000001c PWM_percent
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:479    .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccc0GYmo.s:540    .bss:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_f2d
+__aeabi_ddiv
+__aeabi_dmul
+__aeabi_d2uiz
+GetAngles
+GetRCData
+AngleRateController
+AngleController
+CreatePulseWidth
+SendDaisyData
+delay
+MPU9150_Setup
+WatchRC_Init
+PWMSP001_Start
+PWMSP001_Handle0
+DAVE_Init
+USBVC001_Init
+USBVC001_BytesReceived
+USBVC001_ReceiveByte
+sprintf
+GetSensorCount
+GetRCCount
+GetGyroData
+GetAccData
+USBVC001_SendString
+USB_USBTask
+PWMSP001_Handle2
+GetMagData

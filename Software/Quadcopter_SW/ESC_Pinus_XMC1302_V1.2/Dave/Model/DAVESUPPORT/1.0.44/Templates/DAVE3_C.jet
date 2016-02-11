@@ -1,0 +1,159 @@
+<%@ jet package= "CodeGenerator" class="dave3_c_template"
+imports= "java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+<% int xmc4Device = -1;
+   xmc4Device = ((app.getSoftwareId().substring(0,1).compareTo("4")==0)?1:0); %>
+
+/*******************************************************************************
+ Copyright (c) 2011, Infineon Technologies AG                                 **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without**
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon <Microcontroller name, step>                           **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** MODIFICATION DATE : June 27, 2013                                       **
+**                                                                            **
+*******************************************************************************/
+/**
+ * @file  DAVE3.c
+ *
+ * @brief This file contains implementation of initialization functions calling sequence. 
+ *
+ * Revision History
+ * 27 June 2013 v1.0.33 Initial Version
+ */
+
+/*******************************************************************************
+**                      Include Files                                         **
+*******************************************************************************/
+#include "../../inc/DAVESupport/DAVE3.h"
+
+/*******************************************************************************
+**                 Function declarations                                     **
+*******************************************************************************/
+
+//****************************************************************************
+// @Function      void DAVE_Init(void) 
+//
+//----------------------------------------------------------------------------
+// @Description   This function initializes the Apps Init Functions.
+//
+//----------------------------------------------------------------------------
+// @Returnvalue   None
+//
+//----------------------------------------------------------------------------
+// @Parameters    None
+//
+//****************************************************************************
+
+void DAVE_Init(void)
+{
+<% String TempApps = null;
+   String MyAppName = null;
+   ArrayList<String> apps;
+   ArrayList<String> apps_sorted = new ArrayList<String>();
+   String TempLowerApps = null; 
+   boolean CLKApp = false;
+   boolean EBUApp = false;
+   apps=(ArrayList<String>)(app.getApps());
+ 	 for (int k = 0; k < apps.size(); k++) {
+		 TempApps = apps.get(k);
+		 if(app.isAppInitProvider(apps.get(k)) == true) {
+		 	MyAppName = TempApps.substring(TempApps.indexOf("/app/") + 5, TempApps.lastIndexOf("/"));
+		 	TempLowerApps = MyAppName.toLowerCase(); 
+		 
+			 if (TempLowerApps.equalsIgnoreCase("clk001")) {CLKApp = true;}
+			 if (TempLowerApps.equalsIgnoreCase("ebu001")) {EBUApp = true;}
+			 
+			 if(!apps_sorted.contains(TempLowerApps)) 
+			 {       
+				 apps_sorted.add(TempLowerApps);
+			 }     
+		 }  
+     } %>
+     
+<%if (xmc4Device==1){%>     
+    //  NVIC Priority Grouping
+    NVIC_SetPriorityGrouping(1);
+<%}%>
+
+//****************************************************************************
+// @Initialization of APPs Init Functions
+//****************************************************************************
+	//  MUX configurations
+	DAVE_MUX_PreInit();
+<% 
+ for (int k = 0; k < apps_sorted.size(); k++) 
+ {
+ TempLowerApps = apps_sorted.get(k);%>
+<%if (!(TempLowerApps.equalsIgnoreCase("canglobal"))){%> 
+	//  Initialization of app '<%=TempLowerApps.toUpperCase()%>'		     
+	<%= TempLowerApps.toUpperCase()%>_Init();
+	
+<%}%><%
+} 
+%>
+      
+	//  MUX configurations
+	DAVE_MUX_Init();	
+} //  End of function DAVE_Init
+
+
+<% if (CLKApp) { %>
+//****************************************************************************
+// @Function      void SystemInit_DAVE3(void) 
+//
+//----------------------------------------------------------------------------
+// @Description   This function initializes the Clock Init Functions.
+//
+//----------------------------------------------------------------------------
+// @Returnvalue   None
+//
+//----------------------------------------------------------------------------
+// @Parameters    None
+//
+//****************************************************************************
+
+void SystemInit_DAVE3(void)
+{
+	// CLK Initialisation
+	CLK001_Init();
+<% if (EBUApp) { %>	
+	// EBU Initialisation
+	EBU001_Init();
+<% } %>
+} //  End of function SystemInit_DAVE3
+
+<% } %>

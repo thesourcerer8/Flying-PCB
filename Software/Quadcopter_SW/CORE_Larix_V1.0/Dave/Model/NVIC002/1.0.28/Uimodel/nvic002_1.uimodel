@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="Interrupt Node Configuration" className="IfxGroupBox" controlId="1319204913031">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group35" displayName="Interrupt Configuration" className="IfxGroupBox" controlId="1319204919312">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group71" displayName="Interrupt Priority" className="IfxGroupBox" controlId="1319204956000">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic002/0/NVIC002_irwInterruptPriority" displayName="Preemption Priority" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;}&#xD;&#xA;else{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;}" paramName="app/nvic002/0/NVIC002_irwInterruptPriority:Preemption Priority" controlId="1332136807687">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+          <conversionType>dec</conversionType>
+          <conversionType>hex</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic002/0/NVIC002_TIMMirwInterruptPriority" displayName="Preemption Priority" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;}&#xD;&#xA;else{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;}" paramName="app/nvic002/0/NVIC002_TIMMirwInterruptPriority:Preemption Priority" controlId="1353251417911">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+          <conversionType>dec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/nvic002/0/NVIC002_irwInterruptSubPriority" displayName="Sub Priority" readonly="true" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;}&#xD;&#xA;else{&#xD;&#xA;CM.setVisible(true);&#xD;&#xA;}" paramName="app/nvic002/0/NVIC002_irwInterruptSubPriority:Sub Priority" controlId="1332136810843">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>dec</conversionType>
+          <conversionType>hex</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/NVIC002/0/NVIC002_erwEnableInt" displayName="Enable Interrupt" className="EnumerationType" paramName="app/NVIC002/0/NVIC002_erwEnableInt:Enable Interrupt" controlId="1319809740593">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/NVIC002/0/NVIC002_srwUserFunction" displayName="User defined interrupt handler" className="StringType" paramName="app/NVIC002/0/NVIC002_srwUserFunction:User defined interrupt handler" controlId="1319809744171">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

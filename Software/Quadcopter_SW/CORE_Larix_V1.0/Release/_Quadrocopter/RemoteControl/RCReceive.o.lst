@@ -1,0 +1,620 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"RCReceive.c"
+  16              		.section	.text.WatchRC,"ax",%progbits
+  17              		.align	1
+  18              		.global	WatchRC
+  19              		.thumb
+  20              		.thumb_func
+  22              	WatchRC:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 094B     		ldr	r3, .L5
+  27 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+  28 0004 5978     		ldrb	r1, [r3, #1]	@ zero_extendqisi2
+  29 0006 9142     		cmp	r1, r2
+  30 0008 02D1     		bne	.L2
+  31 000a 0849     		ldr	r1, .L5+4
+  32 000c 0120     		movs	r0, #1
+  33 000e 0870     		strb	r0, [r1, #0]
+  34              	.L2:
+  35 0010 5A70     		strb	r2, [r3, #1]
+  36 0012 9A78     		ldrb	r2, [r3, #2]	@ zero_extendqisi2
+  37 0014 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+  38 0016 9342     		cmp	r3, r2
+  39 0018 02D1     		bne	.L3
+  40 001a 0449     		ldr	r1, .L5+4
+  41 001c 0120     		movs	r0, #1
+  42 001e 4870     		strb	r0, [r1, #1]
+  43              	.L3:
+  44 0020 014B     		ldr	r3, .L5
+  45 0022 DA70     		strb	r2, [r3, #3]
+  46 0024 7047     		bx	lr
+  47              	.L6:
+  48 0026 00BF     		.align	2
+  49              	.L5:
+  50 0028 00000000 		.word	.LANCHOR0
+  51 002c 00000000 		.word	.LANCHOR1
+  53              		.section	.text.mergeBytes,"ax",%progbits
+  54              		.align	1
+  55              		.global	mergeBytes
+  56              		.thumb
+  57              		.thumb_func
+  59              	mergeBytes:
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62              		@ link register save eliminated.
+  63 0000 41EA0020 		orr	r0, r1, r0, lsl #8
+  64 0004 7047     		bx	lr
+  66              		.global	__aeabi_i2d
+  67              		.global	__aeabi_ddiv
+  68              		.global	__aeabi_d2f
+  69              		.section	.text.USIC1_0_IRQHandler,"ax",%progbits
+  70              		.align	1
+  71              		.global	USIC1_0_IRQHandler
+  72              		.thumb
+  73              		.thumb_func
+  75              	USIC1_0_IRQHandler:
+  76              		@ args = 0, pretend = 0, frame = 32
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  79 0004 1021     		movs	r1, #16
+  80 0006 88B0     		sub	sp, sp, #32
+  81 0008 5948     		ldr	r0, .L21+16
+  82 000a FFF7FEFF 		bl	UART001_GetFlagStatus
+  83 000e 0228     		cmp	r0, #2
+  84 0010 40F0A380 		bne	.L8
+  85 0014 6946     		mov	r1, sp
+  86 0016 2022     		movs	r2, #32
+  87 0018 5548     		ldr	r0, .L21+16
+  88 001a FFF7FEFF 		bl	UART001_ReadDataBytes
+  89 001e 5448     		ldr	r0, .L21+16
+  90 0020 1021     		movs	r1, #16
+  91 0022 FFF7FEFF 		bl	UART001_ClearFlag
+  92 0026 0024     		movs	r4, #0
+  93 0028 0DF1FF33 		add	r3, sp, #-1
+  94              	.L10:
+  95 002c 13F8012F 		ldrb	r2, [r3, #1]!	@ zero_extendqisi2
+  96 0030 302A     		cmp	r2, #48
+  97 0032 03D0     		beq	.L20
+  98              	.L12:
+  99 0034 0134     		adds	r4, r4, #1
+ 100 0036 122C     		cmp	r4, #18
+ 101 0038 F8D1     		bne	.L10
+ 102 003a 8EE0     		b	.L8
+ 103              	.L20:
+ 104 003c 93F80180 		ldrb	r8, [r3, #1]	@ zero_extendqisi2
+ 105 0040 B8F1000F 		cmp	r8, #0
+ 106 0044 F6D1     		bne	.L12
+ 107 0046 5879     		ldrb	r0, [r3, #5]	@ zero_extendqisi2
+ 108 0048 A228     		cmp	r0, #162
+ 109 004a F3D1     		bne	.L12
+ 110 004c 197A     		ldrb	r1, [r3, #8]	@ zero_extendqisi2
+ 111 004e 2B29     		cmp	r1, #43
+ 112 0050 F0D1     		bne	.L12
+ 113 0052 5A7A     		ldrb	r2, [r3, #9]	@ zero_extendqisi2
+ 114 0054 FE2A     		cmp	r2, #254
+ 115 0056 EDD1     		bne	.L12
+ 116 0058 08AB     		add	r3, sp, #32
+ 117 005a 1C19     		adds	r4, r3, r4
+ 118 005c 40F2C552 		movw	r2, #1477
+ 119 0060 14F81E6C 		ldrb	r6, [r4, #-30]	@ zero_extendqisi2
+ 120 0064 14F81D7C 		ldrb	r7, [r4, #-29]	@ zero_extendqisi2
+ 121 0068 424D     		ldr	r5, .L21+20
+ 122 006a 47EA0620 		orr	r0, r7, r6, lsl #8
+ 123 006e A0F59971 		sub	r1, r0, #306
+ 124 0072 4EF66026 		movw	r6, #60000
+ 125 0076 7143     		muls	r1, r6, r1
+ 126 0078 91FBF2F0 		sdiv	r0, r1, r2
+ 127 007c FFF7FEFF 		bl	__aeabi_i2d
+ 128 0080 37A3     		adr	r3, .L21
+ 129 0082 D3E90023 		ldrd	r2, [r3]
+ 130 0086 FFF7FEFF 		bl	__aeabi_ddiv
+ 131 008a FFF7FEFF 		bl	__aeabi_d2f
+ 132 008e 14F8193C 		ldrb	r3, [r4, #-25]	@ zero_extendqisi2
+ 133 0092 14F81A7C 		ldrb	r7, [r4, #-26]	@ zero_extendqisi2
+ 134 0096 6860     		str	r0, [r5, #4]	@ float
+ 135 0098 43EA0720 		orr	r0, r3, r7, lsl #8
+ 136 009c A0F63211 		subw	r1, r0, #2354
+ 137 00a0 7143     		muls	r1, r6, r1
+ 138 00a2 40F29A57 		movw	r7, #1434
+ 139 00a6 91FBF7F2 		sdiv	r2, r1, r7
+ 140 00aa A2F5EA40 		sub	r0, r2, #29952
+ 141 00ae 3038     		subs	r0, r0, #48
+ 142 00b0 FFF7FEFF 		bl	__aeabi_i2d
+ 143 00b4 2CA3     		adr	r3, .L21+8
+ 144 00b6 D3E90023 		ldrd	r2, [r3]
+ 145 00ba FFF7FEFF 		bl	__aeabi_ddiv
+ 146 00be FFF7FEFF 		bl	__aeabi_d2f
+ 147 00c2 14F8153C 		ldrb	r3, [r4, #-21]	@ zero_extendqisi2
+ 148 00c6 A860     		str	r0, [r5, #8]	@ float
+ 149 00c8 14F8160C 		ldrb	r0, [r4, #-22]	@ zero_extendqisi2
+ 150 00cc 43EA0021 		orr	r1, r3, r0, lsl #8
+ 151 00d0 A1F58952 		sub	r2, r1, #4384
+ 152 00d4 103A     		subs	r2, r2, #16
+ 153 00d6 7243     		muls	r2, r6, r2
+ 154 00d8 92FBF7F0 		sdiv	r0, r2, r7
+ 155 00dc A0F5EA40 		sub	r0, r0, #29952
+ 156 00e0 3038     		subs	r0, r0, #48
+ 157 00e2 FFF7FEFF 		bl	__aeabi_i2d
+ 158 00e6 20A3     		adr	r3, .L21+8
+ 159 00e8 D3E90023 		ldrd	r2, [r3]
+ 160 00ec FFF7FEFF 		bl	__aeabi_ddiv
+ 161 00f0 FFF7FEFF 		bl	__aeabi_d2f
+ 162 00f4 14F8113C 		ldrb	r3, [r4, #-17]	@ zero_extendqisi2
+ 163 00f8 14F8121C 		ldrb	r1, [r4, #-18]	@ zero_extendqisi2
+ 164 00fc E860     		str	r0, [r5, #12]	@ float
+ 165 00fe 43EA0122 		orr	r2, r3, r1, lsl #8
+ 166 0102 A2F5C950 		sub	r0, r2, #6432
+ 167 0106 1238     		subs	r0, r0, #18
+ 168 0108 4643     		muls	r6, r0, r6
+ 169 010a 96FBF7F1 		sdiv	r1, r6, r7
+ 170 010e A1F5EA40 		sub	r0, r1, #29952
+ 171 0112 3038     		subs	r0, r0, #48
+ 172 0114 FFF7FEFF 		bl	__aeabi_i2d
+ 173 0118 13A3     		adr	r3, .L21+8
+ 174 011a D3E90023 		ldrd	r2, [r3]
+ 175 011e FFF7FEFF 		bl	__aeabi_ddiv
+ 176 0122 FFF7FEFF 		bl	__aeabi_d2f
+ 177 0126 14F8142C 		ldrb	r2, [r4, #-20]	@ zero_extendqisi2
+ 178 012a 14F8133C 		ldrb	r3, [r4, #-19]	@ zero_extendqisi2
+ 179 012e 2861     		str	r0, [r5, #16]	@ float
+ 180 0130 42F23211 		movw	r1, #8498
+ 181 0134 43EA0220 		orr	r0, r3, r2, lsl #8
+ 182 0138 8842     		cmp	r0, r1
+ 183 013a 02D1     		bne	.L13
+ 184 013c 85F81480 		strb	r8, [r5, #20]
+ 185 0140 05E0     		b	.L14
+ 186              	.L13:
+ 187 0142 42F2CA62 		movw	r2, #9930
+ 188 0146 9042     		cmp	r0, r2
+ 189 0148 01D1     		bne	.L14
+ 190 014a 0123     		movs	r3, #1
+ 191 014c 2B75     		strb	r3, [r5, #20]
+ 192              	.L14:
+ 193 014e 2A78     		ldrb	r2, [r5, #0]	@ zero_extendqisi2
+ 194 0150 0949     		ldr	r1, .L21+24
+ 195 0152 0020     		movs	r0, #0
+ 196 0154 531C     		adds	r3, r2, #1
+ 197 0156 0870     		strb	r0, [r1, #0]
+ 198 0158 2B70     		strb	r3, [r5, #0]
+ 199              	.L8:
+ 200 015a 08B0     		add	sp, sp, #32
+ 201 015c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 202              	.L22:
+ 203              		.align	3
+ 204              	.L21:
+ 205 0160 00000000 		.word	0
+ 206 0164 004CED40 		.word	1089293312
+ 207 0168 00000000 		.word	0
+ 208 016c 004CDD40 		.word	1088244736
+ 209 0170 00000000 		.word	UART001_Handle0
+ 210 0174 00000000 		.word	.LANCHOR0
+ 211 0178 00000000 		.word	.LANCHOR1
+ 213 017c AFF30080 		.section	.text.USIC0_5_IRQHandler,"ax",%progbits
+ 214              		.align	1
+ 215              		.global	USIC0_5_IRQHandler
+ 216              		.thumb
+ 217              		.thumb_func
+ 219              	USIC0_5_IRQHandler:
+ 220              		@ args = 0, pretend = 0, frame = 24
+ 221              		@ frame_needed = 0, uses_anonymous_args = 0
+ 222 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 223 0002 0021     		movs	r1, #0
+ 224 0004 1422     		movs	r2, #20
+ 225 0006 01A8     		add	r0, sp, #4
+ 226 0008 FFF7FEFF 		bl	memset
+ 227 000c 1021     		movs	r1, #16
+ 228 000e 2048     		ldr	r0, .L34
+ 229 0010 FFF7FEFF 		bl	UART001_GetFlagStatus
+ 230 0014 0228     		cmp	r0, #2
+ 231 0016 39D1     		bne	.L23
+ 232 0018 01A9     		add	r1, sp, #4
+ 233 001a 1422     		movs	r2, #20
+ 234 001c 1C48     		ldr	r0, .L34
+ 235 001e FFF7FEFF 		bl	UART001_ReadDataBytes
+ 236 0022 1B48     		ldr	r0, .L34
+ 237 0024 1021     		movs	r1, #16
+ 238 0026 FFF7FEFF 		bl	UART001_ClearFlag
+ 239 002a 0023     		movs	r3, #0
+ 240              	.L25:
+ 241 002c 01AA     		add	r2, sp, #4
+ 242 002e 985C     		ldrb	r0, [r3, r2]	@ zero_extendqisi2
+ 243 0030 0228     		cmp	r0, #2
+ 244 0032 03D0     		beq	.L33
+ 245              	.L27:
+ 246 0034 0133     		adds	r3, r3, #1
+ 247 0036 082B     		cmp	r3, #8
+ 248 0038 F8D1     		bne	.L25
+ 249 003a 27E0     		b	.L23
+ 250              	.L33:
+ 251 003c 06A9     		add	r1, sp, #24
+ 252 003e CB18     		adds	r3, r1, r3
+ 253 0040 144A     		ldr	r2, .L34+4
+ 254 0042 13F8121C 		ldrb	r1, [r3, #-18]	@ zero_extendqisi2
+ 255 0046 13F8130C 		ldrb	r0, [r3, #-19]	@ zero_extendqisi2
+ 256 004a 41EA0020 		orr	r0, r1, r0, lsl #8
+ 257 004e D082     		strh	r0, [r2, #22]	@ movhi
+ 258 0050 13F8101C 		ldrb	r1, [r3, #-16]	@ zero_extendqisi2
+ 259 0054 13F8110C 		ldrb	r0, [r3, #-17]	@ zero_extendqisi2
+ 260 0058 41EA0020 		orr	r0, r1, r0, lsl #8
+ 261 005c 1083     		strh	r0, [r2, #24]	@ movhi
+ 262 005e 13F80E1C 		ldrb	r1, [r3, #-14]	@ zero_extendqisi2
+ 263 0062 13F80F0C 		ldrb	r0, [r3, #-15]	@ zero_extendqisi2
+ 264 0066 41EA0020 		orr	r0, r1, r0, lsl #8
+ 265 006a 5083     		strh	r0, [r2, #26]	@ movhi
+ 266 006c 13F80C1C 		ldrb	r1, [r3, #-12]	@ zero_extendqisi2
+ 267 0070 13F80D0C 		ldrb	r0, [r3, #-13]	@ zero_extendqisi2
+ 268 0074 13F80B3C 		ldrb	r3, [r3, #-11]	@ zero_extendqisi2
+ 269 0078 41EA0020 		orr	r0, r1, r0, lsl #8
+ 270 007c 9083     		strh	r0, [r2, #28]	@ movhi
+ 271 007e 9377     		strb	r3, [r2, #30]
+ 272 0080 0548     		ldr	r0, .L34+8
+ 273 0082 9378     		ldrb	r3, [r2, #2]	@ zero_extendqisi2
+ 274 0084 0021     		movs	r1, #0
+ 275 0086 4170     		strb	r1, [r0, #1]
+ 276 0088 591C     		adds	r1, r3, #1
+ 277 008a 9170     		strb	r1, [r2, #2]
+ 278              	.L23:
+ 279 008c 07B0     		add	sp, sp, #28
+ 280 008e 00BD     		pop	{pc}
+ 281              	.L35:
+ 282              		.align	2
+ 283              	.L34:
+ 284 0090 00000000 		.word	UART001_Handle2
+ 285 0094 00000000 		.word	.LANCHOR0
+ 286 0098 00000000 		.word	.LANCHOR1
+ 288              		.section	.text.WatchRC_Init,"ax",%progbits
+ 289              		.align	1
+ 290              		.global	WatchRC_Init
+ 291              		.thumb
+ 292              		.thumb_func
+ 294              	WatchRC_Init:
+ 295              		@ args = 0, pretend = 0, frame = 0
+ 296              		@ frame_needed = 0, uses_anonymous_args = 0
+ 297 0000 08B5     		push	{r3, lr}
+ 298 0002 074A     		ldr	r2, .L38
+ 299 0004 6420     		movs	r0, #100
+ 300 0006 0121     		movs	r1, #1
+ 301 0008 0023     		movs	r3, #0
+ 302 000a FFF7FEFF 		bl	SYSTM001_CreateTimer
+ 303 000e 054A     		ldr	r2, .L38+4
+ 304 0010 1060     		str	r0, [r2, #0]
+ 305 0012 18B1     		cbz	r0, .L36
+ 306 0014 BDE80840 		pop	{r3, lr}
+ 307 0018 FFF7FEBF 		b	SYSTM001_StartTimer
+ 308              	.L36:
+ 309 001c 08BD     		pop	{r3, pc}
+ 310              	.L39:
+ 311 001e 00BF     		.align	2
+ 312              	.L38:
+ 313 0020 00000000 		.word	WatchRC
+ 314 0024 00000000 		.word	TimerWatchRC
+ 316              		.section	.text.GetRCCount,"ax",%progbits
+ 317              		.align	1
+ 318              		.global	GetRCCount
+ 319              		.thumb
+ 320              		.thumb_func
+ 322              	GetRCCount:
+ 323              		@ args = 0, pretend = 0, frame = 0
+ 324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 325              		@ link register save eliminated.
+ 326 0000 014B     		ldr	r3, .L41
+ 327 0002 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 328 0004 7047     		bx	lr
+ 329              	.L42:
+ 330 0006 00BF     		.align	2
+ 331              	.L41:
+ 332 0008 00000000 		.word	.LANCHOR0
+ 334              		.section	.text.GetRCTimeOut,"ax",%progbits
+ 335              		.align	1
+ 336              		.global	GetRCTimeOut
+ 337              		.thumb
+ 338              		.thumb_func
+ 340              	GetRCTimeOut:
+ 341              		@ args = 0, pretend = 0, frame = 0
+ 342              		@ frame_needed = 0, uses_anonymous_args = 0
+ 343              		@ link register save eliminated.
+ 344 0000 014B     		ldr	r3, .L44
+ 345 0002 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 346 0004 7047     		bx	lr
+ 347              	.L45:
+ 348 0006 00BF     		.align	2
+ 349              	.L44:
+ 350 0008 00000000 		.word	.LANCHOR1
+ 352              		.global	__aeabi_f2d
+ 353              		.global	__aeabi_dcmpgt
+ 354              		.global	__aeabi_dcmplt
+ 355              		.global	__aeabi_dadd
+ 356              		.global	__aeabi_dmul
+ 357              		.section	.text.GetRCData,"ax",%progbits
+ 358              		.align	1
+ 359              		.global	GetRCData
+ 360              		.thumb
+ 361              		.thumb_func
+ 363              	GetRCData:
+ 364              		@ args = 0, pretend = 0, frame = 0
+ 365              		@ frame_needed = 0, uses_anonymous_args = 0
+ 366 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 367 0004 2DED028B 		fstmfdd	sp!, {d8}
+ 368 0008 554C     		ldr	r4, .L58+24
+ 369 000a 1746     		mov	r7, r2
+ 370 000c 227D     		ldrb	r2, [r4, #20]	@ zero_extendqisi2
+ 371 000e 1E46     		mov	r6, r3
+ 372 0010 0546     		mov	r5, r0
+ 373 0012 8846     		mov	r8, r1
+ 374 0014 534B     		ldr	r3, .L58+28
+ 375 0016 002A     		cmp	r2, #0
+ 376 0018 38D1     		bne	.L47
+ 377 001a 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 378 001c 0028     		cmp	r0, #0
+ 379 001e 39D1     		bne	.L54
+ 380              	.L48:
+ 381 0020 94ED017A 		flds	s14, [r4, #4]
+ 382 0024 DFED507A 		flds	s15, .L58+32
+ 383 0028 27EE270A 		fmuls	s0, s14, s15
+ 384 002c 9FED4F8A 		flds	s16, .L58+36
+ 385 0030 85ED000A 		fsts	s0, [r5, #0]
+ 386 0034 D4ED048A 		flds	s17, [r4, #16]
+ 387 0038 18EE900A 		fmrs	r0, s17
+ 388 003c FFF7FEFF 		bl	__aeabi_f2d
+ 389 0040 41A3     		adr	r3, .L58
+ 390 0042 D3E90023 		ldrd	r2, [r3]
+ 391 0046 0446     		mov	r4, r0
+ 392 0048 0D46     		mov	r5, r1
+ 393 004a FFF7FEFF 		bl	__aeabi_dcmpgt
+ 394 004e 38B9     		cbnz	r0, .L50
+ 395 0050 2046     		mov	r0, r4
+ 396 0052 2946     		mov	r1, r5
+ 397 0054 3EA3     		adr	r3, .L58+8
+ 398 0056 D3E90023 		ldrd	r2, [r3]
+ 399 005a FFF7FEFF 		bl	__aeabi_dcmplt
+ 400 005e 20B1     		cbz	r0, .L57
+ 401              	.L50:
+ 402 0060 68EE888A 		fmuls	s17, s17, s16
+ 403 0064 C8ED008A 		fsts	s17, [r8, #0]
+ 404 0068 02E0     		b	.L53
+ 405              	.L57:
+ 406 006a 0021     		movs	r1, #0
+ 407 006c C8F80010 		str	r1, [r8, #0]	@ float
+ 408              	.L53:
+ 409 0070 3B4A     		ldr	r2, .L58+24
+ 410 0072 D2ED030A 		flds	s1, [r2, #12]
+ 411 0076 20EE881A 		fmuls	s2, s1, s16
+ 412 007a 87ED001A 		fsts	s2, [r7, #0]
+ 413 007e D2ED021A 		flds	s3, [r2, #8]
+ 414 0082 21EEC88A 		fnmuls	s16, s3, s16
+ 415 0086 86ED008A 		fsts	s16, [r6, #0]
+ 416 008a 58E0     		b	.L46
+ 417              	.L47:
+ 418 008c 5878     		ldrb	r0, [r3, #1]	@ zero_extendqisi2
+ 419 008e 08B9     		cbnz	r0, .L54
+ 420 0090 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 421 0092 31B1     		cbz	r1, .L55
+ 422              	.L54:
+ 423 0094 0023     		movs	r3, #0
+ 424 0096 2B60     		str	r3, [r5, #0]	@ float
+ 425 0098 C8F80030 		str	r3, [r8, #0]	@ float
+ 426 009c 3B60     		str	r3, [r7, #0]	@ float
+ 427 009e 3360     		str	r3, [r6, #0]	@ float
+ 428 00a0 4DE0     		b	.L46
+ 429              	.L55:
+ 430 00a2 B4F91600 		ldrsh	r0, [r4, #22]
+ 431 00a6 FFF7FEFF 		bl	__aeabi_i2d
+ 432 00aa 2BA3     		adr	r3, .L58+16
+ 433 00ac D3E90023 		ldrd	r2, [r3]
+ 434 00b0 FFF7FEFF 		bl	__aeabi_ddiv
+ 435 00b4 0022     		movs	r2, #0
+ 436 00b6 2E4B     		ldr	r3, .L58+40
+ 437 00b8 FFF7FEFF 		bl	__aeabi_dadd
+ 438 00bc 0022     		movs	r2, #0
+ 439 00be 2D4B     		ldr	r3, .L58+44
+ 440 00c0 FFF7FEFF 		bl	__aeabi_dmul
+ 441 00c4 0022     		movs	r2, #0
+ 442 00c6 2C4B     		ldr	r3, .L58+48
+ 443 00c8 FFF7FEFF 		bl	__aeabi_dmul
+ 444 00cc FFF7FEFF 		bl	__aeabi_d2f
+ 445 00d0 B4F91820 		ldrsh	r2, [r4, #24]
+ 446 00d4 2860     		str	r0, [r5, #0]	@ float
+ 447 00d6 5042     		negs	r0, r2
+ 448 00d8 FFF7FEFF 		bl	__aeabi_i2d
+ 449 00dc 1EA3     		adr	r3, .L58+16
+ 450 00de D3E90023 		ldrd	r2, [r3]
+ 451 00e2 FFF7FEFF 		bl	__aeabi_ddiv
+ 452 00e6 0022     		movs	r2, #0
+ 453 00e8 244B     		ldr	r3, .L58+52
+ 454 00ea FFF7FEFF 		bl	__aeabi_dmul
+ 455 00ee FFF7FEFF 		bl	__aeabi_d2f
+ 456 00f2 C8F80000 		str	r0, [r8, #0]	@ float
+ 457 00f6 A37F     		ldrb	r3, [r4, #30]	@ zero_extendqisi2
+ 458 00f8 B4F91A00 		ldrsh	r0, [r4, #26]
+ 459 00fc 012B     		cmp	r3, #1
+ 460 00fe 08BF     		it	eq
+ 461 0100 4042     		negeq	r0, r0
+ 462 0102 FFF7FEFF 		bl	__aeabi_i2d
+ 463 0106 14A3     		adr	r3, .L58+16
+ 464 0108 D3E90023 		ldrd	r2, [r3]
+ 465 010c FFF7FEFF 		bl	__aeabi_ddiv
+ 466 0110 0022     		movs	r2, #0
+ 467 0112 1A4B     		ldr	r3, .L58+52
+ 468 0114 FFF7FEFF 		bl	__aeabi_dmul
+ 469 0118 FFF7FEFF 		bl	__aeabi_d2f
+ 470 011c 3860     		str	r0, [r7, #0]	@ float
+ 471 011e B4F91C00 		ldrsh	r0, [r4, #28]
+ 472 0122 FFF7FEFF 		bl	__aeabi_i2d
+ 473 0126 0CA3     		adr	r3, .L58+16
+ 474 0128 D3E90023 		ldrd	r2, [r3]
+ 475 012c FFF7FEFF 		bl	__aeabi_ddiv
+ 476 0130 0022     		movs	r2, #0
+ 477 0132 124B     		ldr	r3, .L58+52
+ 478 0134 FFF7FEFF 		bl	__aeabi_dmul
+ 479 0138 FFF7FEFF 		bl	__aeabi_d2f
+ 480 013c 3060     		str	r0, [r6, #0]	@ float
+ 481              	.L46:
+ 482 013e BDEC028B 		fldmfdd	sp!, {d8}
+ 483 0142 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 484              	.L59:
+ 485 0146 00BF     		.align	3
+ 486              	.L58:
+ 487 0148 7B14AE47 		.word	1202590843
+ 488 014c E17A843F 		.word	1065646817
+ 489 0150 7B14AE47 		.word	1202590843
+ 490 0154 E17A84BF 		.word	-1081836831
+ 491 0158 00000000 		.word	0
+ 492 015c C0FFDF40 		.word	1088421824
+ 493 0160 00000000 		.word	.LANCHOR0
+ 494 0164 00000000 		.word	.LANCHOR1
+ 495 0168 0000C842 		.word	1120403456
+ 496 016c 0000B442 		.word	1119092736
+ 497 0170 0000F03F 		.word	1072693248
+ 498 0174 00005940 		.word	1079574528
+ 499 0178 0000E03F 		.word	1071644672
+ 500 017c 00805640 		.word	1079410688
+ 502              		.section	.text.map,"ax",%progbits
+ 503              		.align	1
+ 504              		.global	map
+ 505              		.thumb
+ 506              		.thumb_func
+ 508              	map:
+ 509              		@ args = 4, pretend = 0, frame = 0
+ 510              		@ frame_needed = 0, uses_anonymous_args = 0
+ 511 0000 10B5     		push	{r4, lr}
+ 512 0002 029C     		ldr	r4, [sp, #8]
+ 513 0004 401A     		subs	r0, r0, r1
+ 514 0006 E41A     		subs	r4, r4, r3
+ 515 0008 4443     		muls	r4, r0, r4
+ 516 000a 521A     		subs	r2, r2, r1
+ 517 000c 94FBF2F1 		sdiv	r1, r4, r2
+ 518 0010 C818     		adds	r0, r1, r3
+ 519 0012 10BD     		pop	{r4, pc}
+ 521              		.comm	TimerWatchRC,4,4
+ 522              		.global	BTCount
+ 523              		.global	BTTimeOut
+ 524              		.global	RCCount
+ 525              		.global	RCTimeOut
+ 526              		.global	flightmode
+ 527              		.global	modeBT
+ 528              		.global	elevatorBT
+ 529              		.global	aileronBT
+ 530              		.global	rudderBT
+ 531              		.global	throttleBT
+ 532              		.global	aileron
+ 533              		.global	elevator
+ 534              		.global	rudder
+ 535              		.global	throttle
+ 536              		.data
+ 537              		.set	.LANCHOR1,. + 0
+ 540              	RCTimeOut:
+ 541 0000 01       		.byte	1
+ 544              	BTTimeOut:
+ 545 0001 01       		.byte	1
+ 546              		.bss
+ 547              		.align	2
+ 548              		.set	.LANCHOR0,. + 0
+ 551              	RCCount:
+ 552 0000 00       		.space	1
+ 555              	lastCount.10653:
+ 556 0001 00       		.space	1
+ 559              	BTCount:
+ 560 0002 00       		.space	1
+ 563              	lastBTCount.10654:
+ 564 0003 00       		.space	1
+ 567              	throttle:
+ 568 0004 00000000 		.space	4
+ 571              	aileron:
+ 572 0008 00000000 		.space	4
+ 575              	elevator:
+ 576 000c 00000000 		.space	4
+ 579              	rudder:
+ 580 0010 00000000 		.space	4
+ 583              	flightmode:
+ 584 0014 00       		.space	1
+ 585 0015 00       		.space	1
+ 588              	throttleBT:
+ 589 0016 0000     		.space	2
+ 592              	rudderBT:
+ 593 0018 0000     		.space	2
+ 596              	elevatorBT:
+ 597 001a 0000     		.space	2
+ 600              	aileronBT:
+ 601 001c 0000     		.space	2
+ 604              	modeBT:
+ 605 001e 00       		.space	1
+ 606 001f 00       		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 RCReceive.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:17     .text.WatchRC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:22     .text.WatchRC:00000000 WatchRC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:50     .text.WatchRC:00000028 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:54     .text.mergeBytes:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:59     .text.mergeBytes:00000000 mergeBytes
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:70     .text.USIC1_0_IRQHandler:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:75     .text.USIC1_0_IRQHandler:00000000 USIC1_0_IRQHandler
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:205    .text.USIC1_0_IRQHandler:00000160 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:214    .text.USIC0_5_IRQHandler:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:219    .text.USIC0_5_IRQHandler:00000000 USIC0_5_IRQHandler
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:284    .text.USIC0_5_IRQHandler:00000090 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:289    .text.WatchRC_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:294    .text.WatchRC_Init:00000000 WatchRC_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:313    .text.WatchRC_Init:00000020 $d
+                            *COM*:00000004 TimerWatchRC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:317    .text.GetRCCount:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:322    .text.GetRCCount:00000000 GetRCCount
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:332    .text.GetRCCount:00000008 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:335    .text.GetRCTimeOut:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:340    .text.GetRCTimeOut:00000000 GetRCTimeOut
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:350    .text.GetRCTimeOut:00000008 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:358    .text.GetRCData:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:363    .text.GetRCData:00000000 GetRCData
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:487    .text.GetRCData:00000148 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:503    .text.map:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:508    .text.map:00000000 map
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:559    .bss:00000002 BTCount
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:544    .data:00000001 BTTimeOut
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:551    .bss:00000000 RCCount
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:540    .data:00000000 RCTimeOut
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:583    .bss:00000014 flightmode
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:604    .bss:0000001e modeBT
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:596    .bss:0000001a elevatorBT
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:600    .bss:0000001c aileronBT
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:592    .bss:00000018 rudderBT
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:588    .bss:00000016 throttleBT
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:571    .bss:00000008 aileron
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:575    .bss:0000000c elevator
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:579    .bss:00000010 rudder
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:567    .bss:00000004 throttle
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:547    .bss:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:555    .bss:00000001 lastCount.10653
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:563    .bss:00000003 lastBTCount.10654
+C:\Users\TOGABL~1\AppData\Local\Temp\ccxS1mil.s:213    .text.USIC1_0_IRQHandler:0000017c $t
+
+UNDEFINED SYMBOLS
+__aeabi_i2d
+__aeabi_ddiv
+__aeabi_d2f
+UART001_GetFlagStatus
+UART001_ReadDataBytes
+UART001_ClearFlag
+UART001_Handle0
+memset
+UART001_Handle2
+SYSTM001_CreateTimer
+SYSTM001_StartTimer
+__aeabi_f2d
+__aeabi_dcmpgt
+__aeabi_dcmplt
+__aeabi_dadd
+__aeabi_dmul

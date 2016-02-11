@@ -1,0 +1,247 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"system_XMC1300.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.comm	SystemCoreClock,4,4
+  18              		.section	.text.SystemInit,"ax",%progbits
+  19              		.align	2
+  20              		.global	SystemInit
+  21              		.code	16
+  22              		.thumb_func
+  24              	SystemInit:
+  25              	.LFB33:
+  26              		.file 1 "../Startup/system_XMC1300.c"
+   1:../Startup/system_XMC1300.c **** /******************************************************************************
+   2:../Startup/system_XMC1300.c ****  * @file     system_XMC1300.c
+   3:../Startup/system_XMC1300.c ****  * @brief    Device specific initialization for the XMC1300-Series according 
+   4:../Startup/system_XMC1300.c ****  * to CMSIS
+   5:../Startup/system_XMC1300.c ****  * @version  V1.6
+   6:../Startup/system_XMC1300.c ****  * @date     19 Feb 2014
+   7:../Startup/system_XMC1300.c ****  *
+   8:../Startup/system_XMC1300.c ****  * @note
+   9:../Startup/system_XMC1300.c ****  * Copyright (C) 2012-2014 Infineon Technologies AG. All rights reserved.
+  10:../Startup/system_XMC1300.c **** 
+  11:../Startup/system_XMC1300.c ****  *
+  12:../Startup/system_XMC1300.c ****  * @par
+  13:../Startup/system_XMC1300.c ****  * Infineon Technologies AG (Infineon) is supplying this software for use with 
+  14:../Startup/system_XMC1300.c ****  * Infineon’s microcontrollers.
+  15:../Startup/system_XMC1300.c ****  *   
+  16:../Startup/system_XMC1300.c ****  * This file can be freely distributed within development tools that are 
+  17:../Startup/system_XMC1300.c ****  * supporting such microcontrollers.
+  18:../Startup/system_XMC1300.c ****  *  
+  19:../Startup/system_XMC1300.c ****  *
+  20:../Startup/system_XMC1300.c ****  * @par
+  21:../Startup/system_XMC1300.c ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  22:../Startup/system_XMC1300.c ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  23:../Startup/system_XMC1300.c ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  24:../Startup/system_XMC1300.c ****  * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL,
+  25:../Startup/system_XMC1300.c ****  * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  26:../Startup/system_XMC1300.c ****  *
+  27:../Startup/system_XMC1300.c ****  ******************************************************************************/
+  28:../Startup/system_XMC1300.c **** /*
+  29:../Startup/system_XMC1300.c ****  * *************************** Change history ********************************
+  30:../Startup/system_XMC1300.c ****  * V1.2, 13 Dec 2012, PKB : Created change history table
+  31:../Startup/system_XMC1300.c ****  * V1.3, 20 Dec 2012, PKB : Fixed SystemCoreClock computation
+  32:../Startup/system_XMC1300.c ****  * V1.4, 02 Feb 2013, PKB : SCU_CLOCK -> SCU_CLK
+  33:../Startup/system_XMC1300.c ****  * V1.5, 27 Nov 2013, DNE : Comments added in SystemInit function for MCLK support
+  34:../Startup/system_XMC1300.c ****  * V1.6, 19 Feb 2014, JFT : Fixed SystemCoreClock when FDIV != 0 
+  35:../Startup/system_XMC1300.c ****  */
+  36:../Startup/system_XMC1300.c **** 
+  37:../Startup/system_XMC1300.c **** #include "system_XMC1300.h"
+  38:../Startup/system_XMC1300.c **** #include <XMC1300.h>
+  39:../Startup/system_XMC1300.c **** 
+  40:../Startup/system_XMC1300.c **** /*----------------------------------------------------------------------------
+  41:../Startup/system_XMC1300.c ****   Clock Global defines
+  42:../Startup/system_XMC1300.c ****  *----------------------------------------------------------------------------*/
+  43:../Startup/system_XMC1300.c **** #define DCO_DCLK                  64000000UL
+  44:../Startup/system_XMC1300.c **** #define MCLK_MHZ                  32000000UL
+  45:../Startup/system_XMC1300.c **** 
+  46:../Startup/system_XMC1300.c **** /*----------------------------------------------------------------------------
+  47:../Startup/system_XMC1300.c ****   Clock Variable definitions
+  48:../Startup/system_XMC1300.c ****  *----------------------------------------------------------------------------*/
+  49:../Startup/system_XMC1300.c **** /*!< System Clock Frequency (Core Clock) (MCLK on TIMM1) */
+  50:../Startup/system_XMC1300.c **** uint32_t SystemCoreClock;
+  51:../Startup/system_XMC1300.c **** 
+  52:../Startup/system_XMC1300.c **** /**
+  53:../Startup/system_XMC1300.c ****   * @brief  Setup the microcontroller system.
+  54:../Startup/system_XMC1300.c ****   * @param  None
+  55:../Startup/system_XMC1300.c ****   * @retval None
+  56:../Startup/system_XMC1300.c ****   */
+  57:../Startup/system_XMC1300.c **** void SystemInit(void)
+  58:../Startup/system_XMC1300.c **** {    
+  27              		.loc 1 58 0
+  28              		.cfi_startproc
+  29 0000 80B5     		push	{r7, lr}
+  30              	.LCFI0:
+  31              		.cfi_def_cfa_offset 8
+  32              		.cfi_offset 7, -8
+  33              		.cfi_offset 14, -4
+  34 0002 00AF     		add	r7, sp, #0
+  35              	.LCFI1:
+  36              		.cfi_def_cfa_register 7
+  59:../Startup/system_XMC1300.c ****   /* Do not change default values of IDIV,FDIV and RTCCLKSEL */
+  60:../Startup/system_XMC1300.c ****   /* ====== Default configuration ======= */
+  61:../Startup/system_XMC1300.c ****   /*
+  62:../Startup/system_XMC1300.c ****    * MCLK    = DCO_DCLK
+  63:../Startup/system_XMC1300.c ****    * PCLK    = MCLK
+  64:../Startup/system_XMC1300.c ****    * RTC CLK = Standby clock
+  65:../Startup/system_XMC1300.c ****    */
+  66:../Startup/system_XMC1300.c ****   
+  67:../Startup/system_XMC1300.c ****    /* In the absence of DAVE Clock app, user can choose to change the MCLK
+  68:../Startup/system_XMC1300.c ****    * and PCLK setting in this routine. Using the following set of code.
+  69:../Startup/system_XMC1300.c ****    * This changes the MCLK to 16MHz and PCLK to 32MHz.
+  70:../Startup/system_XMC1300.c ****    *
+  71:../Startup/system_XMC1300.c ****    * SCU_GENERAL->PASSWD = 0x000000C0UL; // disable bit protection
+  72:../Startup/system_XMC1300.c ****    * SCU_CLK->CLKCR = 0x3FF01200UL; 	 // MCLK = 16MHz, PCLK = 32MHz
+  73:../Startup/system_XMC1300.c ****    * while((SCU_CLK->CLKCR & SCU_CLK_CLKCR_VDDC2LOW_Msk));
+  74:../Startup/system_XMC1300.c ****    * SCU_GENERAL->PASSWD = 0x000000C3UL; // enable bit protection
+  75:../Startup/system_XMC1300.c ****    * SystemCoreClockUpdate();
+  76:../Startup/system_XMC1300.c ****    *
+  77:../Startup/system_XMC1300.c ****    */
+  78:../Startup/system_XMC1300.c ****   SystemCoreClockUpdate();
+  37              		.loc 1 78 0
+  38 0004 FFF7FEFF 		bl	SystemCoreClockUpdate
+  79:../Startup/system_XMC1300.c **** }
+  39              		.loc 1 79 0
+  40 0008 BD46     		mov	sp, r7
+  41              		@ sp needed for prologue
+  42 000a 80BD     		pop	{r7, pc}
+  43              		.cfi_endproc
+  44              	.LFE33:
+  46              		.global	__aeabi_uidiv
+  47              		.section	.text.SystemCoreClockUpdate,"ax",%progbits
+  48              		.align	2
+  49              		.global	SystemCoreClockUpdate
+  50              		.code	16
+  51              		.thumb_func
+  53              	SystemCoreClockUpdate:
+  54              	.LFB34:
+  80:../Startup/system_XMC1300.c **** 
+  81:../Startup/system_XMC1300.c **** /**
+  82:../Startup/system_XMC1300.c ****   * @brief  Update SystemCoreClock according to Clock Register Values
+  83:../Startup/system_XMC1300.c ****   * @note   -  
+  84:../Startup/system_XMC1300.c ****   * @param  None
+  85:../Startup/system_XMC1300.c ****   * @retval None
+  86:../Startup/system_XMC1300.c ****   */
+  87:../Startup/system_XMC1300.c **** void SystemCoreClockUpdate(void)
+  88:../Startup/system_XMC1300.c **** {
+  55              		.loc 1 88 0
+  56              		.cfi_startproc
+  57 0000 80B5     		push	{r7, lr}
+  58              	.LCFI2:
+  59              		.cfi_def_cfa_offset 8
+  60              		.cfi_offset 7, -8
+  61              		.cfi_offset 14, -4
+  62 0002 82B0     		sub	sp, sp, #8
+  63              	.LCFI3:
+  64              		.cfi_def_cfa_offset 16
+  65 0004 00AF     		add	r7, sp, #0
+  66              	.LCFI4:
+  67              		.cfi_def_cfa_register 7
+  89:../Startup/system_XMC1300.c ****   uint32_t IDIV, FDIV;
+  90:../Startup/system_XMC1300.c **** 
+  91:../Startup/system_XMC1300.c ****   IDIV = ((SCU_CLK->CLKCR) & SCU_CLK_CLKCR_IDIV_Msk) >> SCU_CLK_CLKCR_IDIV_Pos;
+  68              		.loc 1 91 0
+  69 0006 114B     		ldr	r3, .L5
+  70 0008 1A68     		ldr	r2, [r3]
+  71 000a FF23     		mov	r3, #255
+  72 000c 1B02     		lsl	r3, r3, #8
+  73 000e 1340     		and	r3, r2
+  74 0010 1B0A     		lsr	r3, r3, #8
+  75 0012 7B60     		str	r3, [r7, #4]
+  92:../Startup/system_XMC1300.c ****   FDIV = ((SCU_CLK->CLKCR) & SCU_CLK_CLKCR_FDIV_Msk) >> SCU_CLK_CLKCR_FDIV_Pos;
+  76              		.loc 1 92 0
+  77 0014 0D4B     		ldr	r3, .L5
+  78 0016 1A68     		ldr	r2, [r3]
+  79 0018 FF23     		mov	r3, #255
+  80 001a 1340     		and	r3, r2
+  81 001c 3B60     		str	r3, [r7]
+  93:../Startup/system_XMC1300.c ****   
+  94:../Startup/system_XMC1300.c ****   if(IDIV)
+  82              		.loc 1 94 0
+  83 001e 7B68     		ldr	r3, [r7, #4]
+  84 0020 002B     		cmp	r3, #0
+  85 0022 0CD0     		beq	.L3
+  95:../Startup/system_XMC1300.c ****   {
+  96:../Startup/system_XMC1300.c ****     /* Fractional divider is enabled and used */
+  97:../Startup/system_XMC1300.c ****     SystemCoreClock = ((MCLK_MHZ << 7) / ((IDIV << 8) + FDIV)) << 1;
+  86              		.loc 1 97 0
+  87 0024 7B68     		ldr	r3, [r7, #4]
+  88 0026 1A02     		lsl	r2, r3, #8
+  89 0028 3B68     		ldr	r3, [r7]
+  90 002a D318     		add	r3, r2, r3
+  91 002c 0848     		ldr	r0, .L5+4
+  92 002e 191C     		mov	r1, r3
+  93 0030 FFF7FEFF 		bl	__aeabi_uidiv
+  94 0034 031C     		mov	r3, r0
+  95 0036 5A00     		lsl	r2, r3, #1
+  96 0038 064B     		ldr	r3, .L5+8
+  97 003a 1A60     		str	r2, [r3]
+  98 003c 02E0     		b	.L2
+  99              	.L3:
+  98:../Startup/system_XMC1300.c ****   }
+  99:../Startup/system_XMC1300.c ****   else
+ 100:../Startup/system_XMC1300.c ****   {
+ 101:../Startup/system_XMC1300.c ****     /* Fractional divider bypassed. Simply divide DCO_DCLK by 2 */
+ 102:../Startup/system_XMC1300.c ****     SystemCoreClock = MCLK_MHZ;
+ 100              		.loc 1 102 0
+ 101 003e 054B     		ldr	r3, .L5+8
+ 102 0040 054A     		ldr	r2, .L5+12
+ 103 0042 1A60     		str	r2, [r3]
+ 104              	.L2:
+ 103:../Startup/system_XMC1300.c ****   }
+ 104:../Startup/system_XMC1300.c **** }
+ 105              		.loc 1 104 0
+ 106 0044 BD46     		mov	sp, r7
+ 107 0046 02B0     		add	sp, sp, #8
+ 108              		@ sp needed for prologue
+ 109 0048 80BD     		pop	{r7, pc}
+ 110              	.L6:
+ 111 004a C046     		.align	2
+ 112              	.L5:
+ 113 004c 00030140 		.word	1073808128
+ 114 0050 000024F4 		.word	-198967296
+ 115 0054 00000000 		.word	SystemCoreClock
+ 116 0058 0048E801 		.word	32000000
+ 117              		.cfi_endproc
+ 118              	.LFE34:
+ 120              		.text
+ 121              	.Letext0:
+ 122              		.file 2 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC1300_series/Include/XMC1300.h"
+ 123              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+DEFINED SYMBOLS
+                            *ABS*:00000000 system_XMC1300.c
+                            *COM*:00000004 SystemCoreClock
+C:\Users\maan\AppData\Local\Temp\ccQGnM1J.s:19     .text.SystemInit:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccQGnM1J.s:24     .text.SystemInit:00000000 SystemInit
+C:\Users\maan\AppData\Local\Temp\ccQGnM1J.s:53     .text.SystemCoreClockUpdate:00000000 SystemCoreClockUpdate
+C:\Users\maan\AppData\Local\Temp\ccQGnM1J.s:48     .text.SystemCoreClockUpdate:00000000 $t
+C:\Users\maan\AppData\Local\Temp\ccQGnM1J.s:113    .text.SystemCoreClockUpdate:0000004c $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.665d63c3c957c91c5ed795826dcbc088
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.XMC1000_RomFunctionTable.h.31.6d9a94465618f31b040dc9cea9a47ad7
+                           .group:00000000 wm4.XMC1300.h.45.4ee692c6c98aa9fc42e2abbc732052b9
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.core_cm0.h.135.ca70469f87e143609670bb393bfa6518
+                           .group:00000000 wm4.XMC1300.h.126.871a37eeeb3f6a078f5ddf5efd64103f
+
+UNDEFINED SYMBOLS
+__aeabi_uidiv

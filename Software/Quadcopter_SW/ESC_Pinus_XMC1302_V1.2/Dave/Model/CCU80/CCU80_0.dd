@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="CCU80" description="Capture/Compare Unit 8 (CAPCOM8)" URI="http://www.infineon.com/0.13.40/peripheral/ccu8/0">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="global" URI="http://www.infineon.com/0.13.40/peripheral/ccu8/0/global">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CCU8GLOBAL/1.0.20/ccu8global_0.app#//@consumed.0"/>
+    <resourcesList name="gctrl" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/gctrl" isResolved="true"/>
+    <resourcesList name="gctrl_pcis" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/gctrl/pcis" isResolved="true"/>
+    <resourcesList name="gstat" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/gstat" isResolved="true"/>
+    <resourcesList name="gidls_cprb" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/gidls/cprb" isResolved="true"/>
+    <resourcesList name="gidls_psic" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/gidls/psic" isResolved="true"/>
+    <resourcesList name="gidlc_sprb" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/gidlc/sprb" isResolved="true"/>
+    <resourcesList name="ecrd" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/ecrd" isResolved="true"/>
+    <resourcesList name="midr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/midr" isResolved="true"/>
+    <resourcesList name="global_signal" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/global_signal_out" isResolved="true"/>
+    <resourcesList name="clk" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/clk" isResolved="true"/>
+    <resourcesList name="gctrl_mse0" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/gctrl/mse0" isResolved="true"/>
+    <resourcesList name="gctrl_mse1" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/gctrl/mse1" isResolved="true"/>
+    <resourcesList name="gctrl_mse2" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/gctrl/mse2" isResolved="true"/>
+    <resourcesList name="gctrl_mse3" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/ccu8/0/gctrl/mse3" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="global_signal_out" description="global_signal_out" URI="http://www.infineon.com/0.13.40/peripheral/ccu8/0/global/global_signal" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CCU8GLOBAL/1.0.20/ccu8global_0.app#//@consumed.4"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="clk" description="clk" URI="http://www.infineon.com/0.13.40/peripheral/ccu8/0/global/clk" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CCU8GLOBAL/1.0.20/ccu8global_0.app#//@consumed.5"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PCIS" URI="http://www.infineon.com/0.13.40/peripheral/ccu8/0/global/gctrl_pcis" maxValue="3" minValue="0" startPos="4" stopPos="5" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Prescaler Input Clock Selection</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Module clock"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="CCU8xECLK[A]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="CCU8xECLK[B]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="CCU8xECLK[C]"/>
+  </provided>
+  <categoryDescription description="Capture/Compare Unit 8 (CAPCOM8)" name="CAPCOM8"/>
+</ResourceModel:Peripheral>

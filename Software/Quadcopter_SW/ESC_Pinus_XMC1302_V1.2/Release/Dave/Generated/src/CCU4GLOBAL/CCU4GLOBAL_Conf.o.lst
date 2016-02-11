@@ -1,0 +1,34 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"CCU4GLOBAL_Conf.c"
+  14              		.global	CCU4Global_HandleArray
+  15              		.global	CCU4Global_Handle0
+  16              		.section	.rodata
+  17              		.align	2
+  20              	CCU4Global_Handle0:
+  21 0000 00000448 		.word	1208221696
+  22 0004 00000000 		.word	0
+  23 0008 02000000 		.word	2
+  24              		.data
+  25              		.align	2
+  28              	CCU4Global_HandleArray:
+  29 0000 00000000 		.word	CCU4Global_Handle0
+  30              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 CCU4GLOBAL_Conf.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccUeQv5b.s:28     .data:00000000 CCU4Global_HandleArray
+C:\Users\TOGABL~1\AppData\Local\Temp\ccUeQv5b.s:20     .rodata:00000000 CCU4Global_Handle0
+C:\Users\TOGABL~1\AppData\Local\Temp\ccUeQv5b.s:17     .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccUeQv5b.s:25     .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,66 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"DaisyChain.c"
+  16              		.section	.text.SendDaisyData,"ax",%progbits
+  17              		.align	1
+  18              		.global	SendDaisyData
+  19              		.thumb
+  20              		.thumb_func
+  22              	SendDaisyData:
+  23              		@ args = 4, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 70B5     		push	{r4, r5, r6, lr}
+  26 0002 0C46     		mov	r4, r1
+  27 0004 0D49     		ldr	r1, .L2
+  28 0006 BDF81050 		ldrh	r5, [sp, #16]
+  29 000a 0870     		strb	r0, [r1, #0]
+  30 000c C870     		strb	r0, [r1, #3]
+  31 000e 8871     		strb	r0, [r1, #6]
+  32 0010 4872     		strb	r0, [r1, #9]
+  33 0012 0420     		movs	r0, #4
+  34 0014 260A     		lsrs	r6, r4, #8
+  35 0016 8C70     		strb	r4, [r1, #2]
+  36 0018 4A71     		strb	r2, [r1, #5]
+  37 001a 140A     		lsrs	r4, r2, #8
+  38 001c 0873     		strb	r0, [r1, #12]
+  39 001e 1A0A     		lsrs	r2, r3, #8
+  40 0020 0748     		ldr	r0, .L2+4
+  41 0022 CA71     		strb	r2, [r1, #7]
+  42 0024 0B72     		strb	r3, [r1, #8]
+  43 0026 0D22     		movs	r2, #13
+  44 0028 2B0A     		lsrs	r3, r5, #8
+  45 002a 4E70     		strb	r6, [r1, #1]
+  46 002c 0C71     		strb	r4, [r1, #4]
+  47 002e 8B72     		strb	r3, [r1, #10]
+  48 0030 CD72     		strb	r5, [r1, #11]
+  49 0032 BDE87040 		pop	{r4, r5, r6, lr}
+  50 0036 FFF7FEBF 		b	UART001_WriteDataBytes
+  51              	.L3:
+  52 003a 00BF     		.align	2
+  53              	.L2:
+  54 003c 00000000 		.word	DaisyTransmit
+  55 0040 00000000 		.word	UART001_Handle1
+  57              		.comm	DaisyTransmit,13,1
+  58              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 DaisyChain.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cctWlEka.s:17     .text.SendDaisyData:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cctWlEka.s:22     .text.SendDaisyData:00000000 SendDaisyData
+C:\Users\TOGABL~1\AppData\Local\Temp\cctWlEka.s:54     .text.SendDaisyData:0000003c $d
+                            *COM*:0000000d DaisyTransmit
+
+UNDEFINED SYMBOLS
+UART001_WriteDataBytes
+UART001_Handle1

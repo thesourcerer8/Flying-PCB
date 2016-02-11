@@ -1,0 +1,460 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"LMM001.c"
+  16              		.section	.text.LMM001_lmake_new_block,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	LMM001_lmake_new_block:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 70B5     		push	{r4, r5, r6, lr}
+  25 0002 CD00     		lsls	r5, r1, #3
+  26 0004 0468     		ldr	r4, [r0, #0]	@ unaligned
+  27 0006 665B     		ldrh	r6, [r4, r5]	@ unaligned
+  28 0008 8A18     		adds	r2, r1, r2
+  29 000a 7604     		lsls	r6, r6, #17
+  30 000c 760C     		lsrs	r6, r6, #17
+  31 000e 24F83260 		strh	r6, [r4, r2, lsl #3]	@ unaligned
+  32 0012 0468     		ldr	r4, [r0, #0]	@ unaligned
+  33 0014 04EBC204 		add	r4, r4, r2, lsl #3
+  34 0018 92B2     		uxth	r2, r2
+  35 001a 6180     		strh	r1, [r4, #2]	@ unaligned
+  36 001c 0468     		ldr	r4, [r0, #0]	@ unaligned
+  37 001e 655B     		ldrh	r5, [r4, r5]	@ unaligned
+  38 0020 6D04     		lsls	r5, r5, #17
+  39 0022 04EB9534 		add	r4, r4, r5, lsr #14
+  40 0026 1343     		orrs	r3, r3, r2
+  41 0028 6280     		strh	r2, [r4, #2]	@ unaligned
+  42 002a 0068     		ldr	r0, [r0, #0]	@ unaligned
+  43 002c 20F83130 		strh	r3, [r0, r1, lsl #3]	@ unaligned
+  44 0030 70BD     		pop	{r4, r5, r6, pc}
+  46              		.section	.text.LMM001_ldisconnect_from_free_list,"ax",%progbits
+  47              		.align	1
+  48              		.thumb
+  49              		.thumb_func
+  51              	LMM001_ldisconnect_from_free_list:
+  52              		@ args = 0, pretend = 0, frame = 0
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54 0000 30B5     		push	{r4, r5, lr}
+  55 0002 0268     		ldr	r2, [r0, #0]	@ unaligned
+  56 0004 CB00     		lsls	r3, r1, #3
+  57 0006 D418     		adds	r4, r2, r3
+  58 0008 A588     		ldrh	r5, [r4, #4]	@ unaligned
+  59 000a E488     		ldrh	r4, [r4, #6]	@ unaligned
+  60 000c 02EBC402 		add	r2, r2, r4, lsl #3
+  61 0010 9580     		strh	r5, [r2, #4]	@ unaligned
+  62 0012 0268     		ldr	r2, [r0, #0]	@ unaligned
+  63 0014 D418     		adds	r4, r2, r3
+  64 0016 E588     		ldrh	r5, [r4, #6]	@ unaligned
+  65 0018 A488     		ldrh	r4, [r4, #4]	@ unaligned
+  66 001a 02EBC402 		add	r2, r2, r4, lsl #3
+  67 001e D580     		strh	r5, [r2, #6]	@ unaligned
+  68 0020 0068     		ldr	r0, [r0, #0]	@ unaligned
+  69 0022 C35A     		ldrh	r3, [r0, r3]	@ unaligned
+  70 0024 5A04     		lsls	r2, r3, #17
+  71 0026 530C     		lsrs	r3, r2, #17
+  72 0028 20F83130 		strh	r3, [r0, r1, lsl #3]	@ unaligned
+  73 002c 30BD     		pop	{r4, r5, pc}
+  75              		.section	.text.LMM001_l_assimilate_up,"ax",%progbits
+  76              		.align	1
+  77              		.thumb
+  78              		.thumb_func
+  80              	LMM001_l_assimilate_up:
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83 0000 70B5     		push	{r4, r5, r6, lr}
+  84 0002 CD00     		lsls	r5, r1, #3
+  85 0004 0368     		ldr	r3, [r0, #0]	@ unaligned
+  86 0006 0C46     		mov	r4, r1
+  87 0008 595B     		ldrh	r1, [r3, r5]	@ unaligned
+  88 000a 33F93120 		ldrsh	r2, [r3, r1, lsl #3]	@ unaligned
+  89 000e 002A     		cmp	r2, #0
+  90 0010 0646     		mov	r6, r0
+  91 0012 11DA     		bge	.L3
+  92 0014 FFF7FEFF 		bl	LMM001_ldisconnect_from_free_list
+  93 0018 3068     		ldr	r0, [r6, #0]	@ unaligned
+  94 001a 415B     		ldrh	r1, [r0, r5]	@ unaligned
+  95 001c 30F83130 		ldrh	r3, [r0, r1, lsl #3]	@ unaligned
+  96 0020 5A04     		lsls	r2, r3, #17
+  97 0022 00EB9230 		add	r0, r0, r2, lsr #14
+  98 0026 4480     		strh	r4, [r0, #2]	@ unaligned
+  99 0028 3168     		ldr	r1, [r6, #0]	@ unaligned
+ 100 002a 4B5B     		ldrh	r3, [r1, r5]	@ unaligned
+ 101 002c 31F83320 		ldrh	r2, [r1, r3, lsl #3]	@ unaligned
+ 102 0030 5004     		lsls	r0, r2, #17
+ 103 0032 430C     		lsrs	r3, r0, #17
+ 104 0034 21F83430 		strh	r3, [r1, r4, lsl #3]	@ unaligned
+ 105              	.L3:
+ 106 0038 70BD     		pop	{r4, r5, r6, pc}
+ 108              		.section	.text.LMM001_l_assimilate_down,"ax",%progbits
+ 109              		.align	1
+ 110              		.thumb
+ 111              		.thumb_func
+ 113              	LMM001_l_assimilate_down:
+ 114              		@ args = 0, pretend = 0, frame = 0
+ 115              		@ frame_needed = 0, uses_anonymous_args = 0
+ 116 0000 30B5     		push	{r4, r5, lr}
+ 117 0002 0368     		ldr	r3, [r0, #0]	@ unaligned
+ 118 0004 C900     		lsls	r1, r1, #3
+ 119 0006 5C18     		adds	r4, r3, r1
+ 120 0008 6588     		ldrh	r5, [r4, #2]	@ unaligned
+ 121 000a 2488     		ldrh	r4, [r4, #0]	@ unaligned
+ 122 000c 2243     		orrs	r2, r2, r4
+ 123 000e 23F83520 		strh	r2, [r3, r5, lsl #3]	@ unaligned
+ 124 0012 0368     		ldr	r3, [r0, #0]	@ unaligned
+ 125 0014 5A18     		adds	r2, r3, r1
+ 126 0016 5488     		ldrh	r4, [r2, #2]	@ unaligned
+ 127 0018 1288     		ldrh	r2, [r2, #0]	@ unaligned
+ 128 001a 03EBC203 		add	r3, r3, r2, lsl #3
+ 129 001e 5C80     		strh	r4, [r3, #2]	@ unaligned
+ 130 0020 0068     		ldr	r0, [r0, #0]	@ unaligned
+ 131 0022 4118     		adds	r1, r0, r1
+ 132 0024 4888     		ldrh	r0, [r1, #2]	@ unaligned
+ 133 0026 30BD     		pop	{r4, r5, pc}
+ 135              		.section	.text.LMM001_free,"ax",%progbits
+ 136              		.align	1
+ 137              		.global	LMM001_free
+ 138              		.thumb
+ 139              		.thumb_func
+ 141              	LMM001_free:
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144 0000 70B5     		push	{r4, r5, r6, lr}
+ 145 0002 0446     		mov	r4, r0
+ 146 0004 79B3     		cbz	r1, .L7
+ 147              	@ 342 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmFunc.h" 1
+ 148 0006 72B6     		cpsid i
+ 149              	@ 0 "" 2
+ 150              		.thumb
+ 151 0008 0668     		ldr	r6, [r0, #0]	@ unaligned
+ 152 000a 891B     		subs	r1, r1, r6
+ 153 000c CA08     		lsrs	r2, r1, #3
+ 154 000e 95B2     		uxth	r5, r2
+ 155 0010 2946     		mov	r1, r5
+ 156 0012 FFF7FEFF 		bl	LMM001_l_assimilate_up
+ 157 0016 2068     		ldr	r0, [r4, #0]	@ unaligned
+ 158 0018 EB00     		lsls	r3, r5, #3
+ 159 001a C118     		adds	r1, r0, r3
+ 160 001c 2E46     		mov	r6, r5
+ 161 001e 4A88     		ldrh	r2, [r1, #2]	@ unaligned
+ 162 0020 30F93210 		ldrsh	r1, [r0, r2, lsl #3]	@ unaligned
+ 163 0024 0029     		cmp	r1, #0
+ 164 0026 06DA     		bge	.L9
+ 165 0028 2046     		mov	r0, r4
+ 166 002a 2946     		mov	r1, r5
+ 167 002c 4FF40042 		mov	r2, #32768
+ 168 0030 FFF7FEFF 		bl	LMM001_l_assimilate_down
+ 169 0034 16E0     		b	.L10
+ 170              	.L9:
+ 171 0036 8288     		ldrh	r2, [r0, #4]	@ unaligned
+ 172 0038 00EBC200 		add	r0, r0, r2, lsl #3
+ 173 003c C580     		strh	r5, [r0, #6]	@ unaligned
+ 174 003e 2268     		ldr	r2, [r4, #0]	@ unaligned
+ 175 0040 9188     		ldrh	r1, [r2, #4]	@ unaligned
+ 176 0042 D018     		adds	r0, r2, r3
+ 177 0044 8180     		strh	r1, [r0, #4]	@ unaligned
+ 178 0046 2268     		ldr	r2, [r4, #0]	@ unaligned
+ 179 0048 D018     		adds	r0, r2, r3
+ 180 004a 0021     		movs	r1, #0
+ 181 004c 8171     		strb	r1, [r0, #6]
+ 182 004e C171     		strb	r1, [r0, #7]
+ 183 0050 2268     		ldr	r2, [r4, #0]	@ unaligned
+ 184 0052 9580     		strh	r5, [r2, #4]	@ unaligned
+ 185 0054 2068     		ldr	r0, [r4, #0]	@ unaligned
+ 186 0056 C35A     		ldrh	r3, [r0, r3]	@ unaligned
+ 187 0058 6FEA4341 		mvn	r1, r3, lsl #17
+ 188 005c 6FEA5142 		mvn	r2, r1, lsr #17
+ 189 0060 20F83520 		strh	r2, [r0, r5, lsl #3]	@ unaligned
+ 190              	.L10:
+ 191              	@ 331 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmFunc.h" 1
+ 192 0064 62B6     		cpsie i
+ 193              	@ 0 "" 2
+ 194              		.thumb
+ 195              	.L7:
+ 196 0066 70BD     		pop	{r4, r5, r6, pc}
+ 198              		.section	.text.LMM001_malloc,"ax",%progbits
+ 199              		.align	1
+ 200              		.global	LMM001_malloc
+ 201              		.thumb
+ 202              		.thumb_func
+ 204              	LMM001_malloc:
+ 205              		@ args = 0, pretend = 0, frame = 0
+ 206              		@ frame_needed = 0, uses_anonymous_args = 0
+ 207 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 208 0002 0546     		mov	r5, r0
+ 209 0004 0029     		cmp	r1, #0
+ 210 0006 6FD0     		beq	.L26
+ 211              	@ 342 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmFunc.h" 1
+ 212 0008 72B6     		cpsid i
+ 213              	@ 0 "" 2
+ 214              		.thumb
+ 215 000a 0429     		cmp	r1, #4
+ 216 000c 04D9     		bls	.L27
+ 217 000e 4B1F     		subs	r3, r1, #5
+ 218 0010 D808     		lsrs	r0, r3, #3
+ 219 0012 811C     		adds	r1, r0, #2
+ 220 0014 8BB2     		uxth	r3, r1
+ 221 0016 00E0     		b	.L16
+ 222              	.L27:
+ 223 0018 0123     		movs	r3, #1
+ 224              	.L16:
+ 225 001a 2E68     		ldr	r6, [r5, #0]	@ unaligned
+ 226 001c B288     		ldrh	r2, [r6, #4]	@ unaligned
+ 227 001e 47F6FF70 		movw	r0, #32767
+ 228 0022 1446     		mov	r4, r2
+ 229 0024 0021     		movs	r1, #0
+ 230              	.L17:
+ 231 0026 06EBC20C 		add	ip, r6, r2, lsl #3
+ 232 002a BCF80470 		ldrh	r7, [ip, #4]	@ unaligned
+ 233 002e 6FB1     		cbz	r7, .L30
+ 234              	.L19:
+ 235 0030 BCF80010 		ldrh	r1, [ip, #0]	@ unaligned
+ 236 0034 4904     		lsls	r1, r1, #17
+ 237 0036 C2EB5141 		rsb	r1, r2, r1, lsr #17
+ 238 003a 89B2     		uxth	r1, r1
+ 239 003c 9942     		cmp	r1, r3
+ 240 003e 03D3     		bcc	.L18
+ 241 0040 8142     		cmp	r1, r0
+ 242 0042 3CBF     		itt	cc
+ 243 0044 1446     		movcc	r4, r2
+ 244 0046 0846     		movcc	r0, r1
+ 245              	.L18:
+ 246 0048 3A46     		mov	r2, r7
+ 247 004a ECE7     		b	.L17
+ 248              	.L30:
+ 249 004c 47F6FF77 		movw	r7, #32767
+ 250 0050 B842     		cmp	r0, r7
+ 251 0052 08BF     		it	eq
+ 252 0054 1446     		moveq	r4, r2
+ 253 0056 0CBF     		ite	eq
+ 254 0058 0A46     		moveq	r2, r1
+ 255 005a 0246     		movne	r2, r0
+ 256 005c 36F83400 		ldrh	r0, [r6, r4, lsl #3]	@ unaligned
+ 257 0060 4704     		lsls	r7, r0, #17
+ 258 0062 780C     		lsrs	r0, r7, #17
+ 259 0064 97B1     		cbz	r7, .L21
+ 260 0066 9A42     		cmp	r2, r3
+ 261 0068 04D1     		bne	.L22
+ 262 006a 2846     		mov	r0, r5
+ 263 006c 2146     		mov	r1, r4
+ 264 006e FFF7FEFF 		bl	LMM001_ldisconnect_from_free_list
+ 265 0072 33E0     		b	.L23
+ 266              	.L22:
+ 267 0074 D61A     		subs	r6, r2, r3
+ 268 0076 B6B2     		uxth	r6, r6
+ 269 0078 2146     		mov	r1, r4
+ 270 007a 2846     		mov	r0, r5
+ 271 007c 3246     		mov	r2, r6
+ 272 007e 4FF40043 		mov	r3, #32768
+ 273 0082 3419     		adds	r4, r6, r4
+ 274 0084 FFF7FEFF 		bl	LMM001_lmake_new_block
+ 275 0088 A4B2     		uxth	r4, r4
+ 276 008a 27E0     		b	.L23
+ 277              	.L21:
+ 278 008c A988     		ldrh	r1, [r5, #4]	@ unaligned
+ 279 008e E218     		adds	r2, r4, r3
+ 280 0090 0132     		adds	r2, r2, #1
+ 281 0092 9142     		cmp	r1, r2
+ 282 0094 01DC     		bgt	.L24
+ 283              	@ 331 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmFunc.h" 1
+ 284 0096 62B6     		cpsie i
+ 285              	@ 0 "" 2
+ 286              		.thumb
+ 287 0098 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 288              	.L24:
+ 289 009a 34B9     		cbnz	r4, .L25
+ 290 009c 0127     		movs	r7, #1
+ 291 009e 7470     		strb	r4, [r6, #1]
+ 292 00a0 3770     		strb	r7, [r6, #0]
+ 293 00a2 2E68     		ldr	r6, [r5, #0]	@ unaligned
+ 294 00a4 7471     		strb	r4, [r6, #5]
+ 295 00a6 3771     		strb	r7, [r6, #4]
+ 296 00a8 3C46     		mov	r4, r7
+ 297              	.L25:
+ 298 00aa 2868     		ldr	r0, [r5, #0]	@ unaligned
+ 299 00ac E600     		lsls	r6, r4, #3
+ 300 00ae 8119     		adds	r1, r0, r6
+ 301 00b0 E318     		adds	r3, r4, r3
+ 302 00b2 CA88     		ldrh	r2, [r1, #6]	@ unaligned
+ 303 00b4 00EBC207 		add	r7, r0, r2, lsl #3
+ 304 00b8 D900     		lsls	r1, r3, #3
+ 305 00ba BB80     		strh	r3, [r7, #4]	@ unaligned
+ 306 00bc 2A68     		ldr	r2, [r5, #0]	@ unaligned
+ 307 00be 9619     		adds	r6, r2, r6
+ 308 00c0 1846     		mov	r0, r3	@ movhi
+ 309 00c2 D6F800C0 		ldr	ip, [r6, #0]	@ unaligned
+ 310 00c6 42F833C0 		str	ip, [r2, r3, lsl #3]	@ unaligned
+ 311 00ca 5718     		adds	r7, r2, r1
+ 312 00cc 7368     		ldr	r3, [r6, #4]	@ unaligned
+ 313 00ce 7B60     		str	r3, [r7, #4]	@ unaligned
+ 314 00d0 2A68     		ldr	r2, [r5, #0]	@ unaligned
+ 315 00d2 22F83400 		strh	r0, [r2, r4, lsl #3]	@ unaligned
+ 316 00d6 2868     		ldr	r0, [r5, #0]	@ unaligned
+ 317 00d8 4118     		adds	r1, r0, r1
+ 318 00da 4C80     		strh	r4, [r1, #2]	@ unaligned
+ 319              	.L23:
+ 320              	@ 331 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmFunc.h" 1
+ 321 00dc 62B6     		cpsie i
+ 322              	@ 0 "" 2
+ 323              		.thumb
+ 324 00de 2B68     		ldr	r3, [r5, #0]	@ unaligned
+ 325 00e0 03EBC404 		add	r4, r3, r4, lsl #3
+ 326 00e4 201D     		adds	r0, r4, #4
+ 327 00e6 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 328              	.L26:
+ 329 00e8 0846     		mov	r0, r1
+ 330 00ea F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 332              		.section	.text.LMM001_realloc,"ax",%progbits
+ 333              		.align	1
+ 334              		.global	LMM001_realloc
+ 335              		.thumb
+ 336              		.thumb_func
+ 338              	LMM001_realloc:
+ 339              		@ args = 0, pretend = 0, frame = 0
+ 340              		@ frame_needed = 0, uses_anonymous_args = 0
+ 341 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, sl, lr}
+ 342 0004 0446     		mov	r4, r0
+ 343 0006 9046     		mov	r8, r2
+ 344 0008 0E46     		mov	r6, r1
+ 345 000a 21B9     		cbnz	r1, .L32
+ 346 000c 1146     		mov	r1, r2
+ 347 000e BDE8F047 		pop	{r4, r5, r6, r7, r8, r9, sl, lr}
+ 348 0012 FFF7FEBF 		b	LMM001_malloc
+ 349              	.L32:
+ 350 0016 1AB9     		cbnz	r2, .L33
+ 351 0018 FFF7FEFF 		bl	LMM001_free
+ 352 001c 4646     		mov	r6, r8
+ 353 001e 6AE0     		b	.L34
+ 354              	.L33:
+ 355              	@ 342 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmFunc.h" 1
+ 356 0020 72B6     		cpsid i
+ 357              	@ 0 "" 2
+ 358              		.thumb
+ 359 0022 042A     		cmp	r2, #4
+ 360 0024 05D9     		bls	.L41
+ 361 0026 A2F10507 		sub	r7, r2, #5
+ 362 002a F808     		lsrs	r0, r7, #3
+ 363 002c 811C     		adds	r1, r0, #2
+ 364 002e 8FB2     		uxth	r7, r1
+ 365 0030 00E0     		b	.L35
+ 366              	.L41:
+ 367 0032 0127     		movs	r7, #1
+ 368              	.L35:
+ 369 0034 2368     		ldr	r3, [r4, #0]	@ unaligned
+ 370 0036 C3EB060A 		rsb	sl, r3, r6
+ 371 003a 4FEADA02 		lsr	r2, sl, #3
+ 372 003e 95B2     		uxth	r5, r2
+ 373 0040 4FEAC50A 		lsl	sl, r5, #3
+ 374 0044 33F80A90 		ldrh	r9, [r3, sl]	@ unaligned
+ 375 0048 C5EB0901 		rsb	r1, r5, r9
+ 376 004c 1FFA81F9 		uxth	r9, r1
+ 377 0050 B945     		cmp	r9, r7
+ 378 0052 4FD0     		beq	.L38
+ 379              	.L36:
+ 380 0054 4FEAC903 		lsl	r3, r9, #3
+ 381 0058 2046     		mov	r0, r4
+ 382 005a 2946     		mov	r1, r5
+ 383 005c A3F10409 		sub	r9, r3, #4
+ 384 0060 FFF7FEFF 		bl	LMM001_l_assimilate_up
+ 385 0064 2268     		ldr	r2, [r4, #0]	@ unaligned
+ 386 0066 02EB0A00 		add	r0, r2, sl
+ 387 006a 4188     		ldrh	r1, [r0, #2]	@ unaligned
+ 388 006c 32F93130 		ldrsh	r3, [r2, r1, lsl #3]	@ unaligned
+ 389 0070 002B     		cmp	r3, #0
+ 390 0072 1ADA     		bge	.L37
+ 391 0074 0288     		ldrh	r2, [r0, #0]	@ unaligned
+ 392 0076 501A     		subs	r0, r2, r1
+ 393 0078 8742     		cmp	r7, r0
+ 394 007a 16DC     		bgt	.L37
+ 395 007c 2046     		mov	r0, r4
+ 396 007e FFF7FEFF 		bl	LMM001_ldisconnect_from_free_list
+ 397 0082 2946     		mov	r1, r5
+ 398 0084 0022     		movs	r2, #0
+ 399 0086 2046     		mov	r0, r4
+ 400 0088 FFF7FEFF 		bl	LMM001_l_assimilate_down
+ 401 008c 2168     		ldr	r1, [r4, #0]	@ unaligned
+ 402 008e 4FEAC00A 		lsl	sl, r0, #3
+ 403 0092 01EB0A03 		add	r3, r1, sl
+ 404 0096 4A46     		mov	r2, r9
+ 405 0098 3146     		mov	r1, r6
+ 406 009a 0546     		mov	r5, r0
+ 407 009c 181D     		adds	r0, r3, #4
+ 408 009e FFF7FEFF 		bl	memmove
+ 409 00a2 2668     		ldr	r6, [r4, #0]	@ unaligned
+ 410 00a4 06EB0A02 		add	r2, r6, sl
+ 411 00a8 161D     		adds	r6, r2, #4
+ 412              	.L37:
+ 413 00aa 2068     		ldr	r0, [r4, #0]	@ unaligned
+ 414 00ac 30F83510 		ldrh	r1, [r0, r5, lsl #3]	@ unaligned
+ 415 00b0 4B1B     		subs	r3, r1, r5
+ 416 00b2 9AB2     		uxth	r2, r3
+ 417 00b4 BA42     		cmp	r2, r7
+ 418 00b6 1DD0     		beq	.L38
+ 419 00b8 2046     		mov	r0, r4
+ 420 00ba 0DD9     		bls	.L39
+ 421 00bc 2946     		mov	r1, r5
+ 422 00be 3A46     		mov	r2, r7
+ 423 00c0 0023     		movs	r3, #0
+ 424 00c2 FFF7FEFF 		bl	LMM001_lmake_new_block
+ 425 00c6 2068     		ldr	r0, [r4, #0]	@ unaligned
+ 426 00c8 ED19     		adds	r5, r5, r7
+ 427 00ca 00EBC501 		add	r1, r0, r5, lsl #3
+ 428 00ce 0431     		adds	r1, r1, #4
+ 429 00d0 2046     		mov	r0, r4
+ 430 00d2 FFF7FEFF 		bl	LMM001_free
+ 431 00d6 0DE0     		b	.L38
+ 432              	.L39:
+ 433 00d8 4146     		mov	r1, r8
+ 434 00da FFF7FEFF 		bl	LMM001_malloc
+ 435 00de 0546     		mov	r5, r0
+ 436 00e0 18B1     		cbz	r0, .L40
+ 437 00e2 3146     		mov	r1, r6
+ 438 00e4 4A46     		mov	r2, r9
+ 439 00e6 FFF7FEFF 		bl	memcpy
+ 440              	.L40:
+ 441 00ea 3146     		mov	r1, r6
+ 442 00ec 2046     		mov	r0, r4
+ 443 00ee FFF7FEFF 		bl	LMM001_free
+ 444 00f2 2E46     		mov	r6, r5
+ 445              	.L38:
+ 446              	@ 331 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmFunc.h" 1
+ 447 00f4 62B6     		cpsie i
+ 448              	@ 0 "" 2
+ 449              		.thumb
+ 450              	.L34:
+ 451 00f6 3046     		mov	r0, r6
+ 452 00f8 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+ 454              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 LMM001.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:17     .text.LMM001_lmake_new_block:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:21     .text.LMM001_lmake_new_block:00000000 LMM001_lmake_new_block
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:47     .text.LMM001_ldisconnect_from_free_list:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:51     .text.LMM001_ldisconnect_from_free_list:00000000 LMM001_ldisconnect_from_free_list
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:76     .text.LMM001_l_assimilate_up:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:80     .text.LMM001_l_assimilate_up:00000000 LMM001_l_assimilate_up
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:109    .text.LMM001_l_assimilate_down:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:113    .text.LMM001_l_assimilate_down:00000000 LMM001_l_assimilate_down
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:136    .text.LMM001_free:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:141    .text.LMM001_free:00000000 LMM001_free
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:199    .text.LMM001_malloc:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:204    .text.LMM001_malloc:00000000 LMM001_malloc
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:333    .text.LMM001_realloc:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cceSqPGF.s:338    .text.LMM001_realloc:00000000 LMM001_realloc
+
+UNDEFINED SYMBOLS
+memmove
+memcpy

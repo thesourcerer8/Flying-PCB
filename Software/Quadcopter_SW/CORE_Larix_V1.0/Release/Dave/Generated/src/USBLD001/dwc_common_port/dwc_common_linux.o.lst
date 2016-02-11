@@ -1,0 +1,933 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"dwc_common_linux.c"
+  16              		.section	.text.DWC_MEMSET,"ax",%progbits
+  17              		.align	1
+  18              		.global	DWC_MEMSET
+  19              		.thumb
+  20              		.thumb_func
+  22              	DWC_MEMSET:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 FFF7FEBF 		b	memset
+  28              		.section	.text.DWC_MEMCPY,"ax",%progbits
+  29              		.align	1
+  30              		.global	DWC_MEMCPY
+  31              		.thumb
+  32              		.thumb_func
+  34              	DWC_MEMCPY:
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37              		@ link register save eliminated.
+  38 0000 FFF7FEBF 		b	memcpy
+  40              		.section	.text.DWC_MEMMOVE,"ax",%progbits
+  41              		.align	1
+  42              		.global	DWC_MEMMOVE
+  43              		.thumb
+  44              		.thumb_func
+  46              	DWC_MEMMOVE:
+  47              		@ args = 0, pretend = 0, frame = 0
+  48              		@ frame_needed = 0, uses_anonymous_args = 0
+  49              		@ link register save eliminated.
+  50 0000 FFF7FEBF 		b	memmove
+  52              		.section	.text.DWC_MEMCMP,"ax",%progbits
+  53              		.align	1
+  54              		.global	DWC_MEMCMP
+  55              		.thumb
+  56              		.thumb_func
+  58              	DWC_MEMCMP:
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+  61              		@ link register save eliminated.
+  62 0000 FFF7FEBF 		b	memcmp
+  64              		.section	.text.DWC_STRNCMP,"ax",%progbits
+  65              		.align	1
+  66              		.global	DWC_STRNCMP
+  67              		.thumb
+  68              		.thumb_func
+  70              	DWC_STRNCMP:
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  74 0000 FFF7FEBF 		b	strncmp
+  76              		.section	.text.DWC_STRCMP,"ax",%progbits
+  77              		.align	1
+  78              		.global	DWC_STRCMP
+  79              		.thumb
+  80              		.thumb_func
+  82              	DWC_STRCMP:
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85              		@ link register save eliminated.
+  86 0000 FFF7FEBF 		b	strcmp
+  88              		.section	.text.DWC_STRLEN,"ax",%progbits
+  89              		.align	1
+  90              		.global	DWC_STRLEN
+  91              		.thumb
+  92              		.thumb_func
+  94              	DWC_STRLEN:
+  95              		@ args = 0, pretend = 0, frame = 0
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97              		@ link register save eliminated.
+  98 0000 FFF7FEBF 		b	strlen
+ 100              		.section	.text.DWC_STRCPY,"ax",%progbits
+ 101              		.align	1
+ 102              		.global	DWC_STRCPY
+ 103              		.thumb
+ 104              		.thumb_func
+ 106              	DWC_STRCPY:
+ 107              		@ args = 0, pretend = 0, frame = 0
+ 108              		@ frame_needed = 0, uses_anonymous_args = 0
+ 109              		@ link register save eliminated.
+ 110 0000 FFF7FEBF 		b	strcpy
+ 112              		.section	.text.DWC_STRDUP,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	DWC_STRDUP
+ 115              		.thumb
+ 116              		.thumb_func
+ 118              	DWC_STRDUP:
+ 119              		@ args = 0, pretend = 0, frame = 0
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121 0000 70B5     		push	{r4, r5, r6, lr}
+ 122 0002 0646     		mov	r6, r0
+ 123 0004 FFF7FEFF 		bl	strlen
+ 124 0008 441C     		adds	r4, r0, #1
+ 125 000a 2046     		mov	r0, r4
+ 126 000c FFF7FEFF 		bl	malloc
+ 127 0010 0546     		mov	r5, r0
+ 128 0012 18B1     		cbz	r0, .L10
+ 129 0014 3146     		mov	r1, r6
+ 130 0016 2246     		mov	r2, r4
+ 131 0018 FFF7FEFF 		bl	DWC_MEMCPY
+ 132              	.L10:
+ 133 001c 2846     		mov	r0, r5
+ 134 001e 70BD     		pop	{r4, r5, r6, pc}
+ 136              		.section	.text.__DWC_DMA_ALLOC_ATOMIC,"ax",%progbits
+ 137              		.align	1
+ 138              		.global	__DWC_DMA_ALLOC_ATOMIC
+ 139              		.thumb
+ 140              		.thumb_func
+ 142              	__DWC_DMA_ALLOC_ATOMIC:
+ 143              		@ args = 0, pretend = 0, frame = 0
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145              		@ link register save eliminated.
+ 146 0000 0020     		movs	r0, #0
+ 147 0002 7047     		bx	lr
+ 149              		.section	.text.__DWC_DMA_FREE,"ax",%progbits
+ 150              		.align	1
+ 151              		.global	__DWC_DMA_FREE
+ 152              		.thumb
+ 153              		.thumb_func
+ 155              	__DWC_DMA_FREE:
+ 156              		@ args = 0, pretend = 0, frame = 0
+ 157              		@ frame_needed = 0, uses_anonymous_args = 0
+ 158              		@ link register save eliminated.
+ 159 0000 7047     		bx	lr
+ 161              		.section	.text.__DWC_ALLOC,"ax",%progbits
+ 162              		.align	1
+ 163              		.global	__DWC_ALLOC
+ 164              		.thumb
+ 165              		.thumb_func
+ 167              	__DWC_ALLOC:
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170 0000 38B5     		push	{r3, r4, r5, lr}
+ 171 0002 0846     		mov	r0, r1
+ 172 0004 0C46     		mov	r4, r1
+ 173 0006 FFF7FEFF 		bl	malloc
+ 174 000a 0546     		mov	r5, r0
+ 175 000c 18B1     		cbz	r0, .L18
+ 176 000e 0021     		movs	r1, #0
+ 177 0010 2246     		mov	r2, r4
+ 178 0012 FFF7FEFF 		bl	memset
+ 179              	.L18:
+ 180 0016 2846     		mov	r0, r5
+ 181 0018 38BD     		pop	{r3, r4, r5, pc}
+ 183              		.section	.text.__DWC_DMA_ALLOC,"ax",%progbits
+ 184              		.align	1
+ 185              		.global	__DWC_DMA_ALLOC
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	__DWC_DMA_ALLOC:
+ 190              		@ args = 0, pretend = 0, frame = 0
+ 191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 192 0000 10B5     		push	{r4, lr}
+ 193 0002 0020     		movs	r0, #0
+ 194 0004 1446     		mov	r4, r2
+ 195 0006 FFF7FEFF 		bl	__DWC_ALLOC
+ 196 000a 04B1     		cbz	r4, .L23
+ 197 000c 2060     		str	r0, [r4, #0]
+ 198              	.L23:
+ 199 000e 10BD     		pop	{r4, pc}
+ 201              		.section	.text.__DWC_ALLOC_ATOMIC,"ax",%progbits
+ 202              		.align	1
+ 203              		.global	__DWC_ALLOC_ATOMIC
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	__DWC_ALLOC_ATOMIC:
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210              		@ link register save eliminated.
+ 211 0000 0846     		mov	r0, r1
+ 212 0002 FFF7FEBF 		b	malloc
+ 214              		.section	.text.__DWC_FREE,"ax",%progbits
+ 215              		.align	1
+ 216              		.global	__DWC_FREE
+ 217              		.thumb
+ 218              		.thumb_func
+ 220              	__DWC_FREE:
+ 221              		@ args = 0, pretend = 0, frame = 0
+ 222              		@ frame_needed = 0, uses_anonymous_args = 0
+ 223              		@ link register save eliminated.
+ 224 0000 0846     		mov	r0, r1
+ 225 0002 FFF7FEBF 		b	free
+ 227              		.section	.text.DWC_CPU_TO_LE32,"ax",%progbits
+ 228              		.align	1
+ 229              		.global	DWC_CPU_TO_LE32
+ 230              		.thumb
+ 231              		.thumb_func
+ 233              	DWC_CPU_TO_LE32:
+ 234              		@ args = 0, pretend = 0, frame = 0
+ 235              		@ frame_needed = 0, uses_anonymous_args = 0
+ 236              		@ link register save eliminated.
+ 237 0000 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 238 0002 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+ 239 0004 1904     		lsls	r1, r3, #16
+ 240 0006 41EA0223 		orr	r3, r1, r2, lsl #8
+ 241 000a C278     		ldrb	r2, [r0, #3]	@ zero_extendqisi2
+ 242 000c 0078     		ldrb	r0, [r0, #0]	@ zero_extendqisi2
+ 243 000e 1343     		orrs	r3, r3, r2
+ 244 0010 43EA0060 		orr	r0, r3, r0, lsl #24
+ 245 0014 7047     		bx	lr
+ 247              		.section	.text.DWC_CPU_TO_BE32,"ax",%progbits
+ 248              		.align	1
+ 249              		.global	DWC_CPU_TO_BE32
+ 250              		.thumb
+ 251              		.thumb_func
+ 253              	DWC_CPU_TO_BE32:
+ 254              		@ args = 0, pretend = 0, frame = 0
+ 255              		@ frame_needed = 0, uses_anonymous_args = 0
+ 256              		@ link register save eliminated.
+ 257 0000 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 258 0002 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+ 259 0004 1904     		lsls	r1, r3, #16
+ 260 0006 41EA0223 		orr	r3, r1, r2, lsl #8
+ 261 000a C278     		ldrb	r2, [r0, #3]	@ zero_extendqisi2
+ 262 000c 0078     		ldrb	r0, [r0, #0]	@ zero_extendqisi2
+ 263 000e 1343     		orrs	r3, r3, r2
+ 264 0010 43EA0060 		orr	r0, r3, r0, lsl #24
+ 265 0014 7047     		bx	lr
+ 267              		.section	.text.DWC_LE32_TO_CPU,"ax",%progbits
+ 268              		.align	1
+ 269              		.global	DWC_LE32_TO_CPU
+ 270              		.thumb
+ 271              		.thumb_func
+ 273              	DWC_LE32_TO_CPU:
+ 274              		@ args = 0, pretend = 0, frame = 0
+ 275              		@ frame_needed = 0, uses_anonymous_args = 0
+ 276              		@ link register save eliminated.
+ 277 0000 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 278 0002 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+ 279 0004 1904     		lsls	r1, r3, #16
+ 280 0006 41EA0223 		orr	r3, r1, r2, lsl #8
+ 281 000a C278     		ldrb	r2, [r0, #3]	@ zero_extendqisi2
+ 282 000c 0078     		ldrb	r0, [r0, #0]	@ zero_extendqisi2
+ 283 000e 1343     		orrs	r3, r3, r2
+ 284 0010 43EA0060 		orr	r0, r3, r0, lsl #24
+ 285 0014 7047     		bx	lr
+ 287              		.section	.text.DWC_BE32_TO_CPU,"ax",%progbits
+ 288              		.align	1
+ 289              		.global	DWC_BE32_TO_CPU
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	DWC_BE32_TO_CPU:
+ 294              		@ args = 0, pretend = 0, frame = 0
+ 295              		@ frame_needed = 0, uses_anonymous_args = 0
+ 296              		@ link register save eliminated.
+ 297 0000 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 298 0002 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+ 299 0004 1904     		lsls	r1, r3, #16
+ 300 0006 41EA0223 		orr	r3, r1, r2, lsl #8
+ 301 000a C278     		ldrb	r2, [r0, #3]	@ zero_extendqisi2
+ 302 000c 0078     		ldrb	r0, [r0, #0]	@ zero_extendqisi2
+ 303 000e 1343     		orrs	r3, r3, r2
+ 304 0010 43EA0060 		orr	r0, r3, r0, lsl #24
+ 305 0014 7047     		bx	lr
+ 307              		.section	.text.DWC_CPU_TO_LE16,"ax",%progbits
+ 308              		.align	1
+ 309              		.global	DWC_CPU_TO_LE16
+ 310              		.thumb
+ 311              		.thumb_func
+ 313              	DWC_CPU_TO_LE16:
+ 314              		@ args = 0, pretend = 0, frame = 0
+ 315              		@ frame_needed = 0, uses_anonymous_args = 0
+ 316              		@ link register save eliminated.
+ 317 0000 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 318 0002 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 319 0004 40EA0220 		orr	r0, r0, r2, lsl #8
+ 320 0008 7047     		bx	lr
+ 322              		.section	.text.DWC_CPU_TO_BE16,"ax",%progbits
+ 323              		.align	1
+ 324              		.global	DWC_CPU_TO_BE16
+ 325              		.thumb
+ 326              		.thumb_func
+ 328              	DWC_CPU_TO_BE16:
+ 329              		@ args = 0, pretend = 0, frame = 0
+ 330              		@ frame_needed = 0, uses_anonymous_args = 0
+ 331              		@ link register save eliminated.
+ 332 0000 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 333 0002 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 334 0004 40EA0220 		orr	r0, r0, r2, lsl #8
+ 335 0008 7047     		bx	lr
+ 337              		.section	.text.DWC_LE16_TO_CPU,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	DWC_LE16_TO_CPU
+ 340              		.thumb
+ 341              		.thumb_func
+ 343              	DWC_LE16_TO_CPU:
+ 344              		@ args = 0, pretend = 0, frame = 0
+ 345              		@ frame_needed = 0, uses_anonymous_args = 0
+ 346              		@ link register save eliminated.
+ 347 0000 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 348 0002 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 349 0004 40EA0220 		orr	r0, r0, r2, lsl #8
+ 350 0008 7047     		bx	lr
+ 352              		.section	.text.DWC_BE16_TO_CPU,"ax",%progbits
+ 353              		.align	1
+ 354              		.global	DWC_BE16_TO_CPU
+ 355              		.thumb
+ 356              		.thumb_func
+ 358              	DWC_BE16_TO_CPU:
+ 359              		@ args = 0, pretend = 0, frame = 0
+ 360              		@ frame_needed = 0, uses_anonymous_args = 0
+ 361              		@ link register save eliminated.
+ 362 0000 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 363 0002 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 364 0004 40EA0220 		orr	r0, r0, r2, lsl #8
+ 365 0008 7047     		bx	lr
+ 367              		.section	.text.DWC_READ_REG32,"ax",%progbits
+ 368              		.align	1
+ 369              		.global	DWC_READ_REG32
+ 370              		.thumb
+ 371              		.thumb_func
+ 373              	DWC_READ_REG32:
+ 374              		@ args = 0, pretend = 0, frame = 0
+ 375              		@ frame_needed = 0, uses_anonymous_args = 0
+ 376              		@ link register save eliminated.
+ 377 0000 0068     		ldr	r0, [r0, #0]
+ 378 0002 7047     		bx	lr
+ 380              		.section	.text.DWC_WRITE_REG32,"ax",%progbits
+ 381              		.align	1
+ 382              		.global	DWC_WRITE_REG32
+ 383              		.thumb
+ 384              		.thumb_func
+ 386              	DWC_WRITE_REG32:
+ 387              		@ args = 0, pretend = 0, frame = 0
+ 388              		@ frame_needed = 0, uses_anonymous_args = 0
+ 389              		@ link register save eliminated.
+ 390 0000 0160     		str	r1, [r0, #0]
+ 391 0002 7047     		bx	lr
+ 393              		.section	.text.DWC_MODIFY_REG32,"ax",%progbits
+ 394              		.align	1
+ 395              		.global	DWC_MODIFY_REG32
+ 396              		.thumb
+ 397              		.thumb_func
+ 399              	DWC_MODIFY_REG32:
+ 400              		@ args = 0, pretend = 0, frame = 0
+ 401              		@ frame_needed = 0, uses_anonymous_args = 0
+ 402              		@ link register save eliminated.
+ 403 0000 0368     		ldr	r3, [r0, #0]
+ 404 0002 23EA0101 		bic	r1, r3, r1
+ 405 0006 0A43     		orrs	r2, r2, r1
+ 406 0008 0260     		str	r2, [r0, #0]
+ 407 000a 7047     		bx	lr
+ 409              		.section	.text.DWC_SPINLOCK_ALLOC,"ax",%progbits
+ 410              		.align	1
+ 411              		.global	DWC_SPINLOCK_ALLOC
+ 412              		.thumb
+ 413              		.thumb_func
+ 415              	DWC_SPINLOCK_ALLOC:
+ 416              		@ args = 0, pretend = 0, frame = 0
+ 417              		@ frame_needed = 0, uses_anonymous_args = 0
+ 418              		@ link register save eliminated.
+ 419 0000 0120     		movs	r0, #1
+ 420 0002 7047     		bx	lr
+ 422              		.section	.text.DWC_SPINLOCK_FREE,"ax",%progbits
+ 423              		.align	1
+ 424              		.global	DWC_SPINLOCK_FREE
+ 425              		.thumb
+ 426              		.thumb_func
+ 428              	DWC_SPINLOCK_FREE:
+ 429              		@ args = 0, pretend = 0, frame = 0
+ 430              		@ frame_needed = 0, uses_anonymous_args = 0
+ 431              		@ link register save eliminated.
+ 432 0000 7047     		bx	lr
+ 434              		.section	.text.DWC_SPINLOCK,"ax",%progbits
+ 435              		.align	1
+ 436              		.global	DWC_SPINLOCK
+ 437              		.thumb
+ 438              		.thumb_func
+ 440              	DWC_SPINLOCK:
+ 441              		@ args = 0, pretend = 0, frame = 0
+ 442              		@ frame_needed = 0, uses_anonymous_args = 0
+ 443              		@ link register save eliminated.
+ 444 0000 7047     		bx	lr
+ 446              		.section	.text.DWC_SPINUNLOCK,"ax",%progbits
+ 447              		.align	1
+ 448              		.global	DWC_SPINUNLOCK
+ 449              		.thumb
+ 450              		.thumb_func
+ 452              	DWC_SPINUNLOCK:
+ 453              		@ args = 0, pretend = 0, frame = 0
+ 454              		@ frame_needed = 0, uses_anonymous_args = 0
+ 455              		@ link register save eliminated.
+ 456 0000 7047     		bx	lr
+ 458              		.section	.text.DWC_SPINLOCK_IRQSAVE,"ax",%progbits
+ 459              		.align	1
+ 460              		.global	DWC_SPINLOCK_IRQSAVE
+ 461              		.thumb
+ 462              		.thumb_func
+ 464              	DWC_SPINLOCK_IRQSAVE:
+ 465              		@ args = 0, pretend = 0, frame = 0
+ 466              		@ frame_needed = 0, uses_anonymous_args = 0
+ 467              		@ link register save eliminated.
+ 468 0000 024B     		ldr	r3, .L45
+ 469 0002 4FF40062 		mov	r2, #2048
+ 470 0006 C3F88C20 		str	r2, [r3, #140]
+ 471 000a 7047     		bx	lr
+ 472              	.L46:
+ 473              		.align	2
+ 474              	.L45:
+ 475 000c 00E100E0 		.word	-536813312
+ 477              		.section	.text.DWC_SPINUNLOCK_IRQRESTORE,"ax",%progbits
+ 478              		.align	1
+ 479              		.global	DWC_SPINUNLOCK_IRQRESTORE
+ 480              		.thumb
+ 481              		.thumb_func
+ 483              	DWC_SPINUNLOCK_IRQRESTORE:
+ 484              		@ args = 0, pretend = 0, frame = 0
+ 485              		@ frame_needed = 0, uses_anonymous_args = 0
+ 486              		@ link register save eliminated.
+ 487 0000 024B     		ldr	r3, .L48
+ 488 0002 4FF40062 		mov	r2, #2048
+ 489 0006 DA60     		str	r2, [r3, #12]
+ 490 0008 7047     		bx	lr
+ 491              	.L49:
+ 492 000a 00BF     		.align	2
+ 493              	.L48:
+ 494 000c 00E100E0 		.word	-536813312
+ 496              		.section	.text.DWC_MUTEX_ALLOC,"ax",%progbits
+ 497              		.align	1
+ 498              		.global	DWC_MUTEX_ALLOC
+ 499              		.thumb
+ 500              		.thumb_func
+ 502              	DWC_MUTEX_ALLOC:
+ 503              		@ args = 0, pretend = 0, frame = 0
+ 504              		@ frame_needed = 0, uses_anonymous_args = 0
+ 505              		@ link register save eliminated.
+ 506 0000 0020     		movs	r0, #0
+ 507 0002 7047     		bx	lr
+ 509              		.section	.text.DWC_MUTEX_FREE,"ax",%progbits
+ 510              		.align	1
+ 511              		.global	DWC_MUTEX_FREE
+ 512              		.thumb
+ 513              		.thumb_func
+ 515              	DWC_MUTEX_FREE:
+ 516              		@ args = 0, pretend = 0, frame = 0
+ 517              		@ frame_needed = 0, uses_anonymous_args = 0
+ 518              		@ link register save eliminated.
+ 519 0000 7047     		bx	lr
+ 521              		.section	.text.DWC_MUTEX_LOCK,"ax",%progbits
+ 522              		.align	1
+ 523              		.global	DWC_MUTEX_LOCK
+ 524              		.thumb
+ 525              		.thumb_func
+ 527              	DWC_MUTEX_LOCK:
+ 528              		@ args = 0, pretend = 0, frame = 0
+ 529              		@ frame_needed = 0, uses_anonymous_args = 0
+ 530              		@ link register save eliminated.
+ 531 0000 7047     		bx	lr
+ 533              		.section	.text.DWC_MUTEX_TRYLOCK,"ax",%progbits
+ 534              		.align	1
+ 535              		.global	DWC_MUTEX_TRYLOCK
+ 536              		.thumb
+ 537              		.thumb_func
+ 539              	DWC_MUTEX_TRYLOCK:
+ 540              		@ args = 0, pretend = 0, frame = 0
+ 541              		@ frame_needed = 0, uses_anonymous_args = 0
+ 542              		@ link register save eliminated.
+ 543 0000 0020     		movs	r0, #0
+ 544 0002 7047     		bx	lr
+ 546              		.section	.text.DWC_MUTEX_UNLOCK,"ax",%progbits
+ 547              		.align	1
+ 548              		.global	DWC_MUTEX_UNLOCK
+ 549              		.thumb
+ 550              		.thumb_func
+ 552              	DWC_MUTEX_UNLOCK:
+ 553              		@ args = 0, pretend = 0, frame = 0
+ 554              		@ frame_needed = 0, uses_anonymous_args = 0
+ 555              		@ link register save eliminated.
+ 556 0000 7047     		bx	lr
+ 558              		.section	.text.DWC_UDELAY,"ax",%progbits
+ 559              		.align	1
+ 560              		.global	DWC_UDELAY
+ 561              		.thumb
+ 562              		.thumb_func
+ 564              	DWC_UDELAY:
+ 565              		@ args = 0, pretend = 0, frame = 8
+ 566              		@ frame_needed = 0, uses_anonymous_args = 0
+ 567 0000 07B5     		push	{r0, r1, r2, lr}
+ 568 0002 0190     		str	r0, [sp, #4]
+ 569 0004 019B     		ldr	r3, [sp, #4]
+ 570 0006 B3F57A7F 		cmp	r3, #1000
+ 571 000a 01D8     		bhi	.L56
+ 572 000c 0A20     		movs	r0, #10
+ 573 000e 05E0     		b	.L58
+ 574              	.L56:
+ 575 0010 4FF47A71 		mov	r1, #1000
+ 576 0014 B0FBF1F0 		udiv	r0, r0, r1
+ 577 0018 0190     		str	r0, [sp, #4]
+ 578 001a 0198     		ldr	r0, [sp, #4]
+ 579              	.L58:
+ 580 001c FFF7FEFF 		bl	USBLD001_lDelay
+ 581 0020 0EBD     		pop	{r1, r2, r3, pc}
+ 583              		.section	.text.DWC_MDELAY,"ax",%progbits
+ 584              		.align	1
+ 585              		.global	DWC_MDELAY
+ 586              		.thumb
+ 587              		.thumb_func
+ 589              	DWC_MDELAY:
+ 590              		@ args = 0, pretend = 0, frame = 0
+ 591              		@ frame_needed = 0, uses_anonymous_args = 0
+ 592              		@ link register save eliminated.
+ 593 0000 FFF7FEBF 		b	USBLD001_lDelay
+ 595              		.section	.text.DWC_MSLEEP,"ax",%progbits
+ 596              		.align	1
+ 597              		.global	DWC_MSLEEP
+ 598              		.thumb
+ 599              		.thumb_func
+ 601              	DWC_MSLEEP:
+ 602              		@ args = 0, pretend = 0, frame = 8
+ 603              		@ frame_needed = 0, uses_anonymous_args = 0
+ 604 0000 07B5     		push	{r0, r1, r2, lr}
+ 605 0002 0190     		str	r0, [sp, #4]
+ 606 0004 0198     		ldr	r0, [sp, #4]
+ 607 0006 FFF7FEFF 		bl	USBLD001_lDelay
+ 608 000a 0EBD     		pop	{r1, r2, r3, pc}
+ 610              		.section	.text.DWC_TIME,"ax",%progbits
+ 611              		.align	1
+ 612              		.global	DWC_TIME
+ 613              		.thumb
+ 614              		.thumb_func
+ 616              	DWC_TIME:
+ 617              		@ args = 0, pretend = 0, frame = 0
+ 618              		@ frame_needed = 0, uses_anonymous_args = 0
+ 619              		@ link register save eliminated.
+ 620 0000 0020     		movs	r0, #0
+ 621 0002 7047     		bx	lr
+ 623              		.section	.text.DWC_TIMER_ALLOC,"ax",%progbits
+ 624              		.align	1
+ 625              		.global	DWC_TIMER_ALLOC
+ 626              		.thumb
+ 627              		.thumb_func
+ 629              	DWC_TIMER_ALLOC:
+ 630              		@ args = 0, pretend = 0, frame = 0
+ 631              		@ frame_needed = 0, uses_anonymous_args = 0
+ 632 0000 38B5     		push	{r3, r4, r5, lr}
+ 633 0002 0020     		movs	r0, #0
+ 634 0004 0C46     		mov	r4, r1
+ 635 0006 1C21     		movs	r1, #28
+ 636 0008 1546     		mov	r5, r2
+ 637 000a FFF7FEFF 		bl	__DWC_ALLOC
+ 638 000e 08B1     		cbz	r0, .L63
+ 639 0010 8460     		str	r4, [r0, #8]
+ 640 0012 C560     		str	r5, [r0, #12]
+ 641              	.L63:
+ 642 0014 38BD     		pop	{r3, r4, r5, pc}
+ 644              		.section	.text.DWC_TIMER_FREE,"ax",%progbits
+ 645              		.align	1
+ 646              		.global	DWC_TIMER_FREE
+ 647              		.thumb
+ 648              		.thumb_func
+ 650              	DWC_TIMER_FREE:
+ 651              		@ args = 0, pretend = 0, frame = 0
+ 652              		@ frame_needed = 0, uses_anonymous_args = 0
+ 653              		@ link register save eliminated.
+ 654 0000 FFF7FEBF 		b	free
+ 656              		.section	.text.DWC_TIMER_SCHEDULE,"ax",%progbits
+ 657              		.align	1
+ 658              		.global	DWC_TIMER_SCHEDULE
+ 659              		.thumb
+ 660              		.thumb_func
+ 662              	DWC_TIMER_SCHEDULE:
+ 663              		@ args = 0, pretend = 0, frame = 0
+ 664              		@ frame_needed = 0, uses_anonymous_args = 0
+ 665              		@ link register save eliminated.
+ 666 0000 7047     		bx	lr
+ 668              		.section	.text.DWC_TIMER_CANCEL,"ax",%progbits
+ 669              		.align	1
+ 670              		.global	DWC_TIMER_CANCEL
+ 671              		.thumb
+ 672              		.thumb_func
+ 674              	DWC_TIMER_CANCEL:
+ 675              		@ args = 0, pretend = 0, frame = 0
+ 676              		@ frame_needed = 0, uses_anonymous_args = 0
+ 677              		@ link register save eliminated.
+ 678 0000 7047     		bx	lr
+ 680              		.section	.text.DWC_WAITQ_ALLOC,"ax",%progbits
+ 681              		.align	1
+ 682              		.global	DWC_WAITQ_ALLOC
+ 683              		.thumb
+ 684              		.thumb_func
+ 686              	DWC_WAITQ_ALLOC:
+ 687              		@ args = 0, pretend = 0, frame = 0
+ 688              		@ frame_needed = 0, uses_anonymous_args = 0
+ 689              		@ link register save eliminated.
+ 690 0000 0020     		movs	r0, #0
+ 691 0002 7047     		bx	lr
+ 693              		.section	.text.DWC_WAITQ_FREE,"ax",%progbits
+ 694              		.align	1
+ 695              		.global	DWC_WAITQ_FREE
+ 696              		.thumb
+ 697              		.thumb_func
+ 699              	DWC_WAITQ_FREE:
+ 700              		@ args = 0, pretend = 0, frame = 0
+ 701              		@ frame_needed = 0, uses_anonymous_args = 0
+ 702              		@ link register save eliminated.
+ 703 0000 7047     		bx	lr
+ 705              		.section	.text.DWC_WAITQ_WAIT,"ax",%progbits
+ 706              		.align	1
+ 707              		.global	DWC_WAITQ_WAIT
+ 708              		.thumb
+ 709              		.thumb_func
+ 711              	DWC_WAITQ_WAIT:
+ 712              		@ args = 0, pretend = 0, frame = 0
+ 713              		@ frame_needed = 0, uses_anonymous_args = 0
+ 714              		@ link register save eliminated.
+ 715 0000 0020     		movs	r0, #0
+ 716 0002 7047     		bx	lr
+ 718              		.section	.text.DWC_WAITQ_WAIT_TIMEOUT,"ax",%progbits
+ 719              		.align	1
+ 720              		.global	DWC_WAITQ_WAIT_TIMEOUT
+ 721              		.thumb
+ 722              		.thumb_func
+ 724              	DWC_WAITQ_WAIT_TIMEOUT:
+ 725              		@ args = 0, pretend = 0, frame = 0
+ 726              		@ frame_needed = 0, uses_anonymous_args = 0
+ 727              		@ link register save eliminated.
+ 728 0000 0020     		movs	r0, #0
+ 729 0002 7047     		bx	lr
+ 731              		.section	.text.DWC_WAITQ_TRIGGER,"ax",%progbits
+ 732              		.align	1
+ 733              		.global	DWC_WAITQ_TRIGGER
+ 734              		.thumb
+ 735              		.thumb_func
+ 737              	DWC_WAITQ_TRIGGER:
+ 738              		@ args = 0, pretend = 0, frame = 0
+ 739              		@ frame_needed = 0, uses_anonymous_args = 0
+ 740              		@ link register save eliminated.
+ 741 0000 7047     		bx	lr
+ 743              		.section	.text.DWC_WAITQ_ABORT,"ax",%progbits
+ 744              		.align	1
+ 745              		.global	DWC_WAITQ_ABORT
+ 746              		.thumb
+ 747              		.thumb_func
+ 749              	DWC_WAITQ_ABORT:
+ 750              		@ args = 0, pretend = 0, frame = 0
+ 751              		@ frame_needed = 0, uses_anonymous_args = 0
+ 752              		@ link register save eliminated.
+ 753 0000 7047     		bx	lr
+ 755              		.section	.text.DWC_THREAD_RUN,"ax",%progbits
+ 756              		.align	1
+ 757              		.global	DWC_THREAD_RUN
+ 758              		.thumb
+ 759              		.thumb_func
+ 761              	DWC_THREAD_RUN:
+ 762              		@ args = 0, pretend = 0, frame = 0
+ 763              		@ frame_needed = 0, uses_anonymous_args = 0
+ 764              		@ link register save eliminated.
+ 765 0000 0020     		movs	r0, #0
+ 766 0002 7047     		bx	lr
+ 768              		.section	.text.DWC_THREAD_STOP,"ax",%progbits
+ 769              		.align	1
+ 770              		.global	DWC_THREAD_STOP
+ 771              		.thumb
+ 772              		.thumb_func
+ 774              	DWC_THREAD_STOP:
+ 775              		@ args = 0, pretend = 0, frame = 0
+ 776              		@ frame_needed = 0, uses_anonymous_args = 0
+ 777              		@ link register save eliminated.
+ 778 0000 0020     		movs	r0, #0
+ 779 0002 7047     		bx	lr
+ 781              		.section	.text.DWC_THREAD_SHOULD_STOP,"ax",%progbits
+ 782              		.align	1
+ 783              		.global	DWC_THREAD_SHOULD_STOP
+ 784              		.thumb
+ 785              		.thumb_func
+ 787              	DWC_THREAD_SHOULD_STOP:
+ 788              		@ args = 0, pretend = 0, frame = 0
+ 789              		@ frame_needed = 0, uses_anonymous_args = 0
+ 790              		@ link register save eliminated.
+ 791 0000 0020     		movs	r0, #0
+ 792 0002 7047     		bx	lr
+ 794              		.section	.text.DWC_TASK_ALLOC,"ax",%progbits
+ 795              		.align	1
+ 796              		.global	DWC_TASK_ALLOC
+ 797              		.thumb
+ 798              		.thumb_func
+ 800              	DWC_TASK_ALLOC:
+ 801              		@ args = 0, pretend = 0, frame = 0
+ 802              		@ frame_needed = 0, uses_anonymous_args = 0
+ 803 0000 38B5     		push	{r3, r4, r5, lr}
+ 804 0002 0020     		movs	r0, #0
+ 805 0004 0C46     		mov	r4, r1
+ 806 0006 0C21     		movs	r1, #12
+ 807 0008 1546     		mov	r5, r2
+ 808 000a FFF7FEFF 		bl	__DWC_ALLOC
+ 809 000e 08B1     		cbz	r0, .L80
+ 810 0010 80E83000 		stmia	r0, {r4, r5}
+ 811              	.L80:
+ 812 0014 38BD     		pop	{r3, r4, r5, pc}
+ 814              		.section	.text.DWC_TASK_FREE,"ax",%progbits
+ 815              		.align	1
+ 816              		.global	DWC_TASK_FREE
+ 817              		.thumb
+ 818              		.thumb_func
+ 820              	DWC_TASK_FREE:
+ 821              		@ args = 0, pretend = 0, frame = 0
+ 822              		@ frame_needed = 0, uses_anonymous_args = 0
+ 823              		@ link register save eliminated.
+ 824 0000 FFF7FEBF 		b	free
+ 826              		.section	.text.DWC_TASK_SCHEDULE,"ax",%progbits
+ 827              		.align	1
+ 828              		.global	DWC_TASK_SCHEDULE
+ 829              		.thumb
+ 830              		.thumb_func
+ 832              	DWC_TASK_SCHEDULE:
+ 833              		@ args = 0, pretend = 0, frame = 0
+ 834              		@ frame_needed = 0, uses_anonymous_args = 0
+ 835              		@ link register save eliminated.
+ 836 0000 7047     		bx	lr
+ 838              		.section	.text.DWC_WORKQ_WAIT_WORK_DONE,"ax",%progbits
+ 839              		.align	1
+ 840              		.global	DWC_WORKQ_WAIT_WORK_DONE
+ 841              		.thumb
+ 842              		.thumb_func
+ 844              	DWC_WORKQ_WAIT_WORK_DONE:
+ 845              		@ args = 0, pretend = 0, frame = 0
+ 846              		@ frame_needed = 0, uses_anonymous_args = 0
+ 847              		@ link register save eliminated.
+ 848 0000 0020     		movs	r0, #0
+ 849 0002 7047     		bx	lr
+ 851              		.section	.text.DWC_WORKQ_ALLOC,"ax",%progbits
+ 852              		.align	1
+ 853              		.global	DWC_WORKQ_ALLOC
+ 854              		.thumb
+ 855              		.thumb_func
+ 857              	DWC_WORKQ_ALLOC:
+ 858              		@ args = 0, pretend = 0, frame = 0
+ 859              		@ frame_needed = 0, uses_anonymous_args = 0
+ 860              		@ link register save eliminated.
+ 861 0000 0020     		movs	r0, #0
+ 862 0002 1421     		movs	r1, #20
+ 863 0004 FFF7FEBF 		b	__DWC_ALLOC
+ 865              		.section	.text.DWC_WORKQ_FREE,"ax",%progbits
+ 866              		.align	1
+ 867              		.global	DWC_WORKQ_FREE
+ 868              		.thumb
+ 869              		.thumb_func
+ 871              	DWC_WORKQ_FREE:
+ 872              		@ args = 0, pretend = 0, frame = 0
+ 873              		@ frame_needed = 0, uses_anonymous_args = 0
+ 874              		@ link register save eliminated.
+ 875 0000 FFF7FEBF 		b	free
+ 877              		.section	.text.DWC_WORKQ_SCHEDULE,"ax",%progbits
+ 878              		.align	1
+ 879              		.global	DWC_WORKQ_SCHEDULE
+ 880              		.thumb
+ 881              		.thumb_func
+ 883              	DWC_WORKQ_SCHEDULE:
+ 884              		@ args = 4, pretend = 4, frame = 0
+ 885              		@ frame_needed = 0, uses_anonymous_args = 1
+ 886              		@ link register save eliminated.
+ 887 0000 08B4     		push	{r3}
+ 888 0002 01B0     		add	sp, sp, #4
+ 889 0004 7047     		bx	lr
+ 891              		.section	.text.DWC_WORKQ_SCHEDULE_DELAYED,"ax",%progbits
+ 892              		.align	1
+ 893              		.global	DWC_WORKQ_SCHEDULE_DELAYED
+ 894              		.thumb
+ 895              		.thumb_func
+ 897              	DWC_WORKQ_SCHEDULE_DELAYED:
+ 898              		@ args = 4, pretend = 0, frame = 0
+ 899              		@ frame_needed = 0, uses_anonymous_args = 1
+ 900              		@ link register save eliminated.
+ 901 0000 7047     		bx	lr
+ 903              		.section	.text.DWC_WORKQ_PENDING,"ax",%progbits
+ 904              		.align	1
+ 905              		.global	DWC_WORKQ_PENDING
+ 906              		.thumb
+ 907              		.thumb_func
+ 909              	DWC_WORKQ_PENDING:
+ 910              		@ args = 0, pretend = 0, frame = 0
+ 911              		@ frame_needed = 0, uses_anonymous_args = 0
+ 912              		@ link register save eliminated.
+ 913 0000 0020     		movs	r0, #0
+ 914 0002 7047     		bx	lr
+ 916              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 dwc_common_linux.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:17     .text.DWC_MEMSET:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:22     .text.DWC_MEMSET:00000000 DWC_MEMSET
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:29     .text.DWC_MEMCPY:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:34     .text.DWC_MEMCPY:00000000 DWC_MEMCPY
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:41     .text.DWC_MEMMOVE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:46     .text.DWC_MEMMOVE:00000000 DWC_MEMMOVE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:53     .text.DWC_MEMCMP:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:58     .text.DWC_MEMCMP:00000000 DWC_MEMCMP
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:65     .text.DWC_STRNCMP:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:70     .text.DWC_STRNCMP:00000000 DWC_STRNCMP
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:77     .text.DWC_STRCMP:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:82     .text.DWC_STRCMP:00000000 DWC_STRCMP
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:89     .text.DWC_STRLEN:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:94     .text.DWC_STRLEN:00000000 DWC_STRLEN
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:101    .text.DWC_STRCPY:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:106    .text.DWC_STRCPY:00000000 DWC_STRCPY
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:113    .text.DWC_STRDUP:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:118    .text.DWC_STRDUP:00000000 DWC_STRDUP
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:137    .text.__DWC_DMA_ALLOC_ATOMIC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:142    .text.__DWC_DMA_ALLOC_ATOMIC:00000000 __DWC_DMA_ALLOC_ATOMIC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:150    .text.__DWC_DMA_FREE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:155    .text.__DWC_DMA_FREE:00000000 __DWC_DMA_FREE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:162    .text.__DWC_ALLOC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:167    .text.__DWC_ALLOC:00000000 __DWC_ALLOC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:184    .text.__DWC_DMA_ALLOC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:189    .text.__DWC_DMA_ALLOC:00000000 __DWC_DMA_ALLOC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:202    .text.__DWC_ALLOC_ATOMIC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:207    .text.__DWC_ALLOC_ATOMIC:00000000 __DWC_ALLOC_ATOMIC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:215    .text.__DWC_FREE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:220    .text.__DWC_FREE:00000000 __DWC_FREE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:228    .text.DWC_CPU_TO_LE32:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:233    .text.DWC_CPU_TO_LE32:00000000 DWC_CPU_TO_LE32
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:248    .text.DWC_CPU_TO_BE32:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:253    .text.DWC_CPU_TO_BE32:00000000 DWC_CPU_TO_BE32
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:268    .text.DWC_LE32_TO_CPU:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:273    .text.DWC_LE32_TO_CPU:00000000 DWC_LE32_TO_CPU
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:288    .text.DWC_BE32_TO_CPU:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:293    .text.DWC_BE32_TO_CPU:00000000 DWC_BE32_TO_CPU
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:308    .text.DWC_CPU_TO_LE16:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:313    .text.DWC_CPU_TO_LE16:00000000 DWC_CPU_TO_LE16
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:323    .text.DWC_CPU_TO_BE16:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:328    .text.DWC_CPU_TO_BE16:00000000 DWC_CPU_TO_BE16
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:338    .text.DWC_LE16_TO_CPU:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:343    .text.DWC_LE16_TO_CPU:00000000 DWC_LE16_TO_CPU
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:353    .text.DWC_BE16_TO_CPU:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:358    .text.DWC_BE16_TO_CPU:00000000 DWC_BE16_TO_CPU
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:368    .text.DWC_READ_REG32:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:373    .text.DWC_READ_REG32:00000000 DWC_READ_REG32
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:381    .text.DWC_WRITE_REG32:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:386    .text.DWC_WRITE_REG32:00000000 DWC_WRITE_REG32
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:394    .text.DWC_MODIFY_REG32:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:399    .text.DWC_MODIFY_REG32:00000000 DWC_MODIFY_REG32
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:410    .text.DWC_SPINLOCK_ALLOC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:415    .text.DWC_SPINLOCK_ALLOC:00000000 DWC_SPINLOCK_ALLOC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:423    .text.DWC_SPINLOCK_FREE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:428    .text.DWC_SPINLOCK_FREE:00000000 DWC_SPINLOCK_FREE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:435    .text.DWC_SPINLOCK:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:440    .text.DWC_SPINLOCK:00000000 DWC_SPINLOCK
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:447    .text.DWC_SPINUNLOCK:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:452    .text.DWC_SPINUNLOCK:00000000 DWC_SPINUNLOCK
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:459    .text.DWC_SPINLOCK_IRQSAVE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:464    .text.DWC_SPINLOCK_IRQSAVE:00000000 DWC_SPINLOCK_IRQSAVE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:475    .text.DWC_SPINLOCK_IRQSAVE:0000000c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:478    .text.DWC_SPINUNLOCK_IRQRESTORE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:483    .text.DWC_SPINUNLOCK_IRQRESTORE:00000000 DWC_SPINUNLOCK_IRQRESTORE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:494    .text.DWC_SPINUNLOCK_IRQRESTORE:0000000c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:497    .text.DWC_MUTEX_ALLOC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:502    .text.DWC_MUTEX_ALLOC:00000000 DWC_MUTEX_ALLOC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:510    .text.DWC_MUTEX_FREE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:515    .text.DWC_MUTEX_FREE:00000000 DWC_MUTEX_FREE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:522    .text.DWC_MUTEX_LOCK:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:527    .text.DWC_MUTEX_LOCK:00000000 DWC_MUTEX_LOCK
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:534    .text.DWC_MUTEX_TRYLOCK:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:539    .text.DWC_MUTEX_TRYLOCK:00000000 DWC_MUTEX_TRYLOCK
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:547    .text.DWC_MUTEX_UNLOCK:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:552    .text.DWC_MUTEX_UNLOCK:00000000 DWC_MUTEX_UNLOCK
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:559    .text.DWC_UDELAY:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:564    .text.DWC_UDELAY:00000000 DWC_UDELAY
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:584    .text.DWC_MDELAY:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:589    .text.DWC_MDELAY:00000000 DWC_MDELAY
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:596    .text.DWC_MSLEEP:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:601    .text.DWC_MSLEEP:00000000 DWC_MSLEEP
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:611    .text.DWC_TIME:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:616    .text.DWC_TIME:00000000 DWC_TIME
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:624    .text.DWC_TIMER_ALLOC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:629    .text.DWC_TIMER_ALLOC:00000000 DWC_TIMER_ALLOC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:645    .text.DWC_TIMER_FREE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:650    .text.DWC_TIMER_FREE:00000000 DWC_TIMER_FREE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:657    .text.DWC_TIMER_SCHEDULE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:662    .text.DWC_TIMER_SCHEDULE:00000000 DWC_TIMER_SCHEDULE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:669    .text.DWC_TIMER_CANCEL:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:674    .text.DWC_TIMER_CANCEL:00000000 DWC_TIMER_CANCEL
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:681    .text.DWC_WAITQ_ALLOC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:686    .text.DWC_WAITQ_ALLOC:00000000 DWC_WAITQ_ALLOC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:694    .text.DWC_WAITQ_FREE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:699    .text.DWC_WAITQ_FREE:00000000 DWC_WAITQ_FREE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:706    .text.DWC_WAITQ_WAIT:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:711    .text.DWC_WAITQ_WAIT:00000000 DWC_WAITQ_WAIT
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:719    .text.DWC_WAITQ_WAIT_TIMEOUT:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:724    .text.DWC_WAITQ_WAIT_TIMEOUT:00000000 DWC_WAITQ_WAIT_TIMEOUT
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:732    .text.DWC_WAITQ_TRIGGER:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:737    .text.DWC_WAITQ_TRIGGER:00000000 DWC_WAITQ_TRIGGER
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:744    .text.DWC_WAITQ_ABORT:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:749    .text.DWC_WAITQ_ABORT:00000000 DWC_WAITQ_ABORT
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:756    .text.DWC_THREAD_RUN:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:761    .text.DWC_THREAD_RUN:00000000 DWC_THREAD_RUN
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:769    .text.DWC_THREAD_STOP:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:774    .text.DWC_THREAD_STOP:00000000 DWC_THREAD_STOP
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:782    .text.DWC_THREAD_SHOULD_STOP:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:787    .text.DWC_THREAD_SHOULD_STOP:00000000 DWC_THREAD_SHOULD_STOP
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:795    .text.DWC_TASK_ALLOC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:800    .text.DWC_TASK_ALLOC:00000000 DWC_TASK_ALLOC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:815    .text.DWC_TASK_FREE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:820    .text.DWC_TASK_FREE:00000000 DWC_TASK_FREE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:827    .text.DWC_TASK_SCHEDULE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:832    .text.DWC_TASK_SCHEDULE:00000000 DWC_TASK_SCHEDULE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:839    .text.DWC_WORKQ_WAIT_WORK_DONE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:844    .text.DWC_WORKQ_WAIT_WORK_DONE:00000000 DWC_WORKQ_WAIT_WORK_DONE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:852    .text.DWC_WORKQ_ALLOC:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:857    .text.DWC_WORKQ_ALLOC:00000000 DWC_WORKQ_ALLOC
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:866    .text.DWC_WORKQ_FREE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:871    .text.DWC_WORKQ_FREE:00000000 DWC_WORKQ_FREE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:878    .text.DWC_WORKQ_SCHEDULE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:883    .text.DWC_WORKQ_SCHEDULE:00000000 DWC_WORKQ_SCHEDULE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:892    .text.DWC_WORKQ_SCHEDULE_DELAYED:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:897    .text.DWC_WORKQ_SCHEDULE_DELAYED:00000000 DWC_WORKQ_SCHEDULE_DELAYED
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:904    .text.DWC_WORKQ_PENDING:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccd2OPny.s:909    .text.DWC_WORKQ_PENDING:00000000 DWC_WORKQ_PENDING
+
+UNDEFINED SYMBOLS
+memset
+memcpy
+memmove
+memcmp
+strncmp
+strcmp
+strlen
+strcpy
+malloc
+free
+USBLD001_lDelay

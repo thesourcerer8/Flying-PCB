@@ -1,0 +1,122 @@
+<%@ jet package="CodeGenerator" class="nvic002_confh_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+<% String AppBaseuri = "app/nvic002/";%>
+<% String appInst  = null; %>
+<% String NodeID = null; %>
+<% String MappedUri = null; %>
+<% String UserFunc = null; %>
+
+/*CODE_BLOCK_BEGIN[NVIC002_Conf.h]*/
+/**************************************************************************//**
+ *
+ * Copyright (C) 2014 Infineon Technologies AG. All rights reserved.
+ *
+ * Infineon Technologies AG (Infineon) is supplying this software for use with 
+ * Infineon's microcontrollers.  
+ * This file can be freely distributed within development tools that are 
+ * supporting such microcontrollers. 
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, 
+ * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series   			                  **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : Jul 17, 2014                                           **
+*******************************************************************************/
+
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** SNR          App Developer                                                 **
+*******************************************************************************/
+
+/**
+ * @file   NVIC002_Conf.h
+ *
+ * @App    Version NVIC002 <<%= app.getAppVersion(AppBaseuri)%>>
+ *
+ * @brief  Configuration file generated based on UI settings 
+ *         of NVIC002 App
+ *
+ */
+/* Revision History	
+ * 18  Feb 2013   v1.0.12 
+ * 08  Oct 2013   v1.0.20 Updated as per coding guidelines
+ * 17 Jul 2014   v1.0.28   End of line is corrected
+ */
+#ifndef _NVIC002_CONF_H_
+#define _NVIC002_CONF_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/****************************************************************************
+@Defines
+****************************************************************************/
+<% String TempApps = null;
+   String MyAppName = null;
+   ArrayList<String> apps;
+   String TempLowerApps = null; 
+   boolean DBGApp = false;   
+   apps=(ArrayList<String>)(app.getApps());
+   for (int k = 0; k < apps.size(); k++) {
+   TempApps = apps.get(k);
+   MyAppName = TempApps.substring(TempApps.indexOf("/app/") + 5, 
+		                          TempApps.lastIndexOf("/"));
+   TempLowerApps = MyAppName.toLowerCase();
+   if (TempLowerApps.equalsIgnoreCase("dbg002")) {DBGApp = true;}   
+  } %>
+#define DEBUG_APP <%=DBGApp%>
+  
+<% int NumInstances = 0; %>
+<% ArrayList<String> appsList = 
+		(ArrayList<String>)(app.getApps("app/nvic002/"));%>
+<% for (String appIns : appsList ) {
+appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+<% NumInstances++; %>
+<% MappedUri = app.getMappedUri(AppBaseuri + appInst + "/nvicnode"); %>
+<% if((MappedUri != null) && (MappedUri != "")) { %>
+<% NodeID = MappedUri.substring(MappedUri.lastIndexOf('/')+ 1 );
+int Offset = Integer.parseInt(NodeID); 
+UserFunc = app.getStringValue(AppBaseuri+appInst+"/NVIC002_srwUserFunction");  
+if((UserFunc != null) && (UserFunc != "")) { %>
+/* User defined function mapped to IRQ_Hdlr_<%=Offset%> */
+#define <%=UserFunc%>    IRQ_Hdlr_<%=Offset%> 
+
+<% }} %>
+<% else { %>
+/* NVIC NODE NOT MAPPED FOR APP INSTANCE <%=appInst%> */
+<% }} %>
+
+/**
+ * @ingroup NVIC002_constants
+ * @{
+ */
+#define NVIC002_NUM_INSTANCES <%=NumInstances%>U
+/**
+  * @}
+  */
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /* ifndef _NVIC002_CONF_H_ */
+/*CODE_BLOCK_END*/

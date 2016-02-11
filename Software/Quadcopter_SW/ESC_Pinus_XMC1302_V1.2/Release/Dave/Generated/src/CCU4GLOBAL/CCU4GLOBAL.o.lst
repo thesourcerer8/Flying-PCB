@@ -1,0 +1,90 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"CCU4GLOBAL.c"
+  14              		.section	.text.CCU4GLOBAL_Init,"ax",%progbits
+  15              		.align	1
+  16              		.global	CCU4GLOBAL_Init
+  17              		.code	16
+  18              		.thumb_func
+  20              	CCU4GLOBAL_Init:
+  21 0000 154B     		ldr	r3, .L7
+  22 0002 70B5     		push	{r4, r5, r6, lr}
+  23 0004 1A68     		ldr	r2, [r3]
+  24 0006 1C1C     		mov	r4, r3
+  25 0008 002A     		cmp	r2, #0
+  26 000a 23D1     		bne	.L1
+  27 000c 1348     		ldr	r0, .L7+4
+  28 000e 0268     		ldr	r2, [r0]
+  29 0010 5168     		ldr	r1, [r2, #4]
+  30 0012 0229     		cmp	r1, #2
+  31 0014 16D8     		bhi	.L3
+  32 0016 124B     		ldr	r3, .L7+8
+  33 0018 9068     		ldr	r0, [r2, #8]
+  34 001a 1D69     		ldr	r5, [r3, #16]
+  35 001c 0542     		tst	r5, r0
+  36 001e 11D1     		bne	.L3
+  37 0020 1049     		ldr	r1, .L7+12
+  38 0022 C026     		mov	r6, #192
+  39 0024 4E62     		str	r6, [r1, #36]
+  40 0026 1D68     		ldr	r5, [r3]
+  41 0028 0F4E     		ldr	r6, .L7+16
+  42 002a 3543     		orr	r5, r6
+  43 002c 1D60     		str	r5, [r3]
+  44 002e 0126     		mov	r6, #1
+  45 0030 1D69     		ldr	r5, [r3, #16]
+  46 0032 8640     		lsl	r6, r6, r0
+  47 0034 301C     		mov	r0, r6
+  48 0036 2843     		orr	r0, r5
+  49 0038 1861     		str	r0, [r3, #16]
+  50              	.L4:
+  51 003a 1D68     		ldr	r5, [r3]
+  52 003c 6D00     		lsl	r5, r5, #1
+  53 003e FCD4     		bmi	.L4
+  54 0040 C323     		mov	r3, #195
+  55 0042 4B62     		str	r3, [r1, #36]
+  56              	.L3:
+  57 0044 1668     		ldr	r6, [r2]
+  58 0046 8022     		mov	r2, #128
+  59 0048 F168     		ldr	r1, [r6, #12]
+  60 004a 5000     		lsl	r0, r2, #1
+  61 004c 0843     		orr	r0, r1
+  62 004e 0125     		mov	r5, #1
+  63 0050 F060     		str	r0, [r6, #12]
+  64 0052 2560     		str	r5, [r4]
+  65              	.L1:
+  66              		@ sp needed for prologue
+  67 0054 70BD     		pop	{r4, r5, r6, pc}
+  68              	.L8:
+  69 0056 C046     		.align	2
+  70              	.L7:
+  71 0058 00000000 		.word	.LANCHOR0
+  72 005c 00000000 		.word	CCU4Global_HandleArray
+  73 0060 00030140 		.word	1073808128
+  74 0064 00000140 		.word	1073807360
+  75 0068 0000F03F 		.word	1072693248
+  77              		.bss
+  78              		.align	2
+  79              		.set	.LANCHOR0,. + 0
+  82              	CCU4InitCalled.5541:
+  83 0000 00000000 		.space	4
+  84              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 CCU4GLOBAL.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOl7kOb.s:15     .text.CCU4GLOBAL_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOl7kOb.s:20     .text.CCU4GLOBAL_Init:00000000 CCU4GLOBAL_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOl7kOb.s:71     .text.CCU4GLOBAL_Init:00000058 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOl7kOb.s:78     .bss:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOl7kOb.s:82     .bss:00000000 CCU4InitCalled.5541
+
+UNDEFINED SYMBOLS
+CCU4Global_HandleArray

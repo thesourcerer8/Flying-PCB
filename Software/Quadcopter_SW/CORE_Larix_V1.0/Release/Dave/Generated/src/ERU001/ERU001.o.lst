@@ -1,0 +1,122 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ERU001.c"
+  16              		.section	.text.ERU001_lInit,"ax",%progbits
+  17              		.align	1
+  18              		.global	ERU001_lInit
+  19              		.thumb
+  20              		.thumb_func
+  22              	ERU001_lInit:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 38B5     		push	{r3, r4, r5, lr}
+  26 0002 1A4A     		ldr	r2, .L6
+  27 0004 0368     		ldr	r3, [r0, #0]
+  28 0006 9342     		cmp	r3, r2
+  29 0008 0446     		mov	r4, r0
+  30 000a 09D1     		bne	.L3
+  31 000c 4FF48030 		mov	r0, #65536
+  32 0010 FFF7FEFF 		bl	RESET001_GetStatus
+  33 0014 0128     		cmp	r0, #1
+  34 0016 03D1     		bne	.L3
+  35 0018 4FF48030 		mov	r0, #65536
+  36 001c FFF7FEFF 		bl	RESET001_DeassertReset
+  37              	.L3:
+  38 0020 6579     		ldrb	r5, [r4, #5]	@ zero_extendqisi2
+  39 0022 2079     		ldrb	r0, [r4, #4]	@ zero_extendqisi2
+  40 0024 2368     		ldr	r3, [r4, #0]
+  41 0026 6900     		lsls	r1, r5, #1
+  42 0028 01F00205 		and	r5, r1, #2
+  43 002c A179     		ldrb	r1, [r4, #6]	@ zero_extendqisi2
+  44 002e 021D     		adds	r2, r0, #4
+  45 0030 8900     		lsls	r1, r1, #2
+  46 0032 53F82200 		ldr	r0, [r3, r2, lsl #2]
+  47 0036 01F00401 		and	r1, r1, #4
+  48 003a 2943     		orrs	r1, r1, r5
+  49 003c 0143     		orrs	r1, r1, r0
+  50 003e E079     		ldrb	r0, [r4, #7]	@ zero_extendqisi2
+  51 0040 C000     		lsls	r0, r0, #3
+  52 0042 00F00800 		and	r0, r0, #8
+  53 0046 0143     		orrs	r1, r1, r0
+  54 0048 207A     		ldrb	r0, [r4, #8]	@ zero_extendqisi2
+  55 004a 0002     		lsls	r0, r0, #8
+  56 004c 00F44070 		and	r0, r0, #768
+  57 0050 0143     		orrs	r1, r1, r0
+  58 0052 607A     		ldrb	r0, [r4, #9]	@ zero_extendqisi2
+  59 0054 8002     		lsls	r0, r0, #10
+  60 0056 00F48060 		and	r0, r0, #1024
+  61 005a 0143     		orrs	r1, r1, r0
+  62 005c A07A     		ldrb	r0, [r4, #10]	@ zero_extendqisi2
+  63 005e C002     		lsls	r0, r0, #11
+  64 0060 00F40060 		and	r0, r0, #2048
+  65 0064 0143     		orrs	r1, r1, r0
+  66 0066 43F82210 		str	r1, [r3, r2, lsl #2]
+  67 006a 38BD     		pop	{r3, r4, r5, pc}
+  68              	.L7:
+  69              		.align	2
+  70              	.L6:
+  71 006c 00400440 		.word	1074020352
+  73              		.section	.text.ERU001_Init,"ax",%progbits
+  74              		.align	1
+  75              		.global	ERU001_Init
+  76              		.thumb
+  77              		.thumb_func
+  79              	ERU001_Init:
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82              		@ link register save eliminated.
+  83 0000 014B     		ldr	r3, .L9
+  84 0002 1868     		ldr	r0, [r3, #0]
+  85 0004 FFF7FEBF 		b	ERU001_lInit
+  86              	.L10:
+  87              		.align	2
+  88              	.L9:
+  89 0008 00000000 		.word	ERU001_HandleArray
+  91              		.section	.text.ERU001_ClearFlag,"ax",%progbits
+  92              		.align	1
+  93              		.global	ERU001_ClearFlag
+  94              		.thumb
+  95              		.thumb_func
+  97              	ERU001_ClearFlag:
+  98              		@ args = 0, pretend = 0, frame = 16
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+ 101 0000 84B0     		sub	sp, sp, #16
+ 102 0002 04AB     		add	r3, sp, #16
+ 103 0004 03E90700 		stmdb	r3, {r0, r1, r2}
+ 104 0008 9DF80820 		ldrb	r2, [sp, #8]	@ zero_extendqisi2
+ 105 000c 0198     		ldr	r0, [sp, #4]
+ 106 000e 131D     		adds	r3, r2, #4
+ 107 0010 50F82310 		ldr	r1, [r0, r3, lsl #2]
+ 108 0014 21F08002 		bic	r2, r1, #128
+ 109 0018 40F82320 		str	r2, [r0, r3, lsl #2]
+ 110 001c 04B0     		add	sp, sp, #16
+ 111 001e 7047     		bx	lr
+ 113              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ERU001.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cco5tXMg.s:17     .text.ERU001_lInit:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cco5tXMg.s:22     .text.ERU001_lInit:00000000 ERU001_lInit
+C:\Users\TOGABL~1\AppData\Local\Temp\cco5tXMg.s:71     .text.ERU001_lInit:0000006c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cco5tXMg.s:74     .text.ERU001_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cco5tXMg.s:79     .text.ERU001_Init:00000000 ERU001_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\cco5tXMg.s:89     .text.ERU001_Init:00000008 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cco5tXMg.s:92     .text.ERU001_ClearFlag:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cco5tXMg.s:97     .text.ERU001_ClearFlag:00000000 ERU001_ClearFlag
+
+UNDEFINED SYMBOLS
+RESET001_GetStatus
+RESET001_DeassertReset
+ERU001_HandleArray

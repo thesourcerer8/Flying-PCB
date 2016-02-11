@@ -1,0 +1,64 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"USBTask.c"
+  16              		.section	.text.USB_USBTask,"ax",%progbits
+  17              		.align	1
+  18              		.global	USB_USBTask
+  19              		.thumb
+  20              		.thumb_func
+  22              	USB_USBTask:
+  23              		@ args = 0, pretend = 0, frame = 8
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 07B5     		push	{r0, r1, r2, lr}
+  26 0002 0C4B     		ldr	r3, .L11
+  27 0004 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+  28 0006 A0B1     		cbz	r0, .L1
+  29 0008 0DF10600 		add	r0, sp, #6
+  30 000c 0DF10701 		add	r1, sp, #7
+  31 0010 FFF7FEFF 		bl	Endpoint_GetCurrentEndpoint
+  32 0014 0020     		movs	r0, #0
+  33 0016 8021     		movs	r1, #128
+  34 0018 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+  35 001c FFF7FEFF 		bl	Endpoint_IsSETUPReceived
+  36 0020 08B1     		cbz	r0, .L3
+  37 0022 FFF7FEFF 		bl	USB_Device_ProcessControlRequest
+  38              	.L3:
+  39 0026 9DF80600 		ldrb	r0, [sp, #6]	@ zero_extendqisi2
+  40 002a 9DF80710 		ldrb	r1, [sp, #7]	@ zero_extendqisi2
+  41 002e FFF7FEFF 		bl	Endpoint_SelectEndpoint
+  42              	.L1:
+  43 0032 0EBD     		pop	{r1, r2, r3, pc}
+  44              	.L12:
+  45              		.align	2
+  46              	.L11:
+  47 0034 00000000 		.word	USB_DeviceState
+  49              		.comm	USB_DeviceState,1,1
+  50              		.comm	USB_ControlRequest,8,2
+  51              		.comm	USB_IsInitialized,1,1
+  52              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 USBTask.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccjrS3f6.s:17     .text.USB_USBTask:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccjrS3f6.s:22     .text.USB_USBTask:00000000 USB_USBTask
+C:\Users\TOGABL~1\AppData\Local\Temp\ccjrS3f6.s:47     .text.USB_USBTask:00000034 $d
+                            *COM*:00000001 USB_DeviceState
+                            *COM*:00000008 USB_ControlRequest
+                            *COM*:00000001 USB_IsInitialized
+
+UNDEFINED SYMBOLS
+Endpoint_GetCurrentEndpoint
+Endpoint_SelectEndpoint
+Endpoint_IsSETUPReceived
+USB_Device_ProcessControlRequest

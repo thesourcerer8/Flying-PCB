@@ -1,0 +1,542 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"CDC.c"
+  16              		.section	.text.CDC_Device_ConfigureEndpoints,"ax",%progbits
+  17              		.align	1
+  18              		.global	CDC_Device_ConfigureEndpoints
+  19              		.thumb
+  20              		.thumb_func
+  22              	CDC_Device_ConfigureEndpoints:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+  26 0002 0446     		mov	r4, r0
+  27 0004 0021     		movs	r1, #0
+  28 0006 00F10E00 		add	r0, r0, #14
+  29 000a 0922     		movs	r2, #9
+  30 000c FFF7FEFF 		bl	memset
+  31 0010 0125     		movs	r5, #1
+  32              	.L6:
+  33 0012 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+  34 0014 AB42     		cmp	r3, r5
+  35 0016 03D1     		bne	.L2
+  36 0018 6388     		ldrh	r3, [r4, #2]
+  37 001a 2079     		ldrb	r0, [r4, #4]	@ zero_extendqisi2
+  38 001c 8022     		movs	r2, #128
+  39 001e 05E0     		b	.L10
+  40              	.L2:
+  41 0020 6079     		ldrb	r0, [r4, #5]	@ zero_extendqisi2
+  42 0022 A842     		cmp	r0, r5
+  43 0024 04D1     		bne	.L4
+  44 0026 E388     		ldrh	r3, [r4, #6]
+  45 0028 207A     		ldrb	r0, [r4, #8]	@ zero_extendqisi2
+  46 002a 0022     		movs	r2, #0
+  47              	.L10:
+  48 002c 0221     		movs	r1, #2
+  49 002e 0CE0     		b	.L3
+  50              	.L4:
+  51 0030 617A     		ldrb	r1, [r4, #9]	@ zero_extendqisi2
+  52 0032 A942     		cmp	r1, r5
+  53 0034 05D0     		beq	.L5
+  54              	.L8:
+  55 0036 0135     		adds	r5, r5, #1
+  56 0038 EDB2     		uxtb	r5, r5
+  57 003a 082D     		cmp	r5, #8
+  58 003c E9D1     		bne	.L6
+  59 003e 0120     		movs	r0, #1
+  60 0040 0CE0     		b	.L7
+  61              	.L5:
+  62 0042 6389     		ldrh	r3, [r4, #10]
+  63 0044 207B     		ldrb	r0, [r4, #12]	@ zero_extendqisi2
+  64 0046 8022     		movs	r2, #128
+  65 0048 0321     		movs	r1, #3
+  66              	.L3:
+  67 004a 0030     		adds	r0, r0, #0
+  68 004c 18BF     		it	ne
+  69 004e 0120     		movne	r0, #1
+  70 0050 0090     		str	r0, [sp, #0]
+  71 0052 2846     		mov	r0, r5
+  72 0054 FFF7FEFF 		bl	Endpoint_ConfigureEndpoint
+  73 0058 0028     		cmp	r0, #0
+  74 005a ECD1     		bne	.L8
+  75              	.L7:
+  76 005c 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+  78              		.section	.text.CDC_Device_SendString,"ax",%progbits
+  79              		.align	1
+  80              		.global	CDC_Device_SendString
+  81              		.thumb
+  82              		.thumb_func
+  84              	CDC_Device_SendString:
+  85              		@ args = 0, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87 0000 10B5     		push	{r4, lr}
+  88 0002 0B4B     		ldr	r3, .L17
+  89 0004 0C46     		mov	r4, r1
+  90 0006 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+  91 0008 0429     		cmp	r1, #4
+  92 000a 0FD1     		bne	.L13
+  93 000c 0269     		ldr	r2, [r0, #16]	@ unaligned
+  94 000e 6AB1     		cbz	r2, .L13
+  95 0010 8021     		movs	r1, #128
+  96 0012 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+  97 0014 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+  98 0018 2046     		mov	r0, r4
+  99 001a FFF7FEFF 		bl	strlen
+ 100 001e 0022     		movs	r2, #0
+ 101 0020 81B2     		uxth	r1, r0
+ 102 0022 2046     		mov	r0, r4
+ 103 0024 BDE81040 		pop	{r4, lr}
+ 104 0028 FFF7FEBF 		b	Endpoint_Write_Stream_LE
+ 105              	.L13:
+ 106 002c 0220     		movs	r0, #2
+ 107 002e 10BD     		pop	{r4, pc}
+ 108              	.L18:
+ 109              		.align	2
+ 110              	.L17:
+ 111 0030 00000000 		.word	USB_DeviceState
+ 113              		.section	.text.CDC_Device_SendData,"ax",%progbits
+ 114              		.align	1
+ 115              		.global	CDC_Device_SendData
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	CDC_Device_SendData:
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122 0000 38B5     		push	{r3, r4, r5, lr}
+ 123 0002 1546     		mov	r5, r2
+ 124 0004 094A     		ldr	r2, .L24
+ 125 0006 0C46     		mov	r4, r1
+ 126 0008 1178     		ldrb	r1, [r2, #0]	@ zero_extendqisi2
+ 127 000a 0429     		cmp	r1, #4
+ 128 000c 0CD1     		bne	.L20
+ 129 000e 0369     		ldr	r3, [r0, #16]	@ unaligned
+ 130 0010 53B1     		cbz	r3, .L20
+ 131 0012 8021     		movs	r1, #128
+ 132 0014 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 133 0016 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 134 001a 2046     		mov	r0, r4
+ 135 001c 2946     		mov	r1, r5
+ 136 001e 0022     		movs	r2, #0
+ 137 0020 BDE83840 		pop	{r3, r4, r5, lr}
+ 138 0024 FFF7FEBF 		b	Endpoint_Write_Stream_LE
+ 139              	.L20:
+ 140 0028 0220     		movs	r0, #2
+ 141 002a 38BD     		pop	{r3, r4, r5, pc}
+ 142              	.L25:
+ 143              		.align	2
+ 144              	.L24:
+ 145 002c 00000000 		.word	USB_DeviceState
+ 147              		.section	.text.CDC_Device_SendByte,"ax",%progbits
+ 148              		.align	1
+ 149              		.global	CDC_Device_SendByte
+ 150              		.thumb
+ 151              		.thumb_func
+ 153              	CDC_Device_SendByte:
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156 0000 10B5     		push	{r4, lr}
+ 157 0002 0E4A     		ldr	r2, .L35
+ 158 0004 0C46     		mov	r4, r1
+ 159 0006 1178     		ldrb	r1, [r2, #0]	@ zero_extendqisi2
+ 160 0008 0429     		cmp	r1, #4
+ 161 000a 14D1     		bne	.L31
+ 162 000c 0369     		ldr	r3, [r0, #16]	@ unaligned
+ 163 000e 93B1     		cbz	r3, .L31
+ 164 0010 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 165 0012 8021     		movs	r1, #128
+ 166 0014 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 167 0018 FFF7FEFF 		bl	Endpoint_IsReadWriteAllowed
+ 168 001c 20B1     		cbz	r0, .L28
+ 169              	.L29:
+ 170 001e 2046     		mov	r0, r4
+ 171 0020 FFF7FEFF 		bl	Endpoint_Write_8
+ 172 0024 0020     		movs	r0, #0
+ 173 0026 10BD     		pop	{r4, pc}
+ 174              	.L28:
+ 175 0028 FFF7FEFF 		bl	Endpoint_ClearIN
+ 176 002c FFF7FEFF 		bl	Endpoint_WaitUntilReady
+ 177 0030 0028     		cmp	r0, #0
+ 178 0032 F4D0     		beq	.L29
+ 179 0034 10BD     		pop	{r4, pc}
+ 180              	.L31:
+ 181 0036 0220     		movs	r0, #2
+ 182 0038 10BD     		pop	{r4, pc}
+ 183              	.L36:
+ 184 003a 00BF     		.align	2
+ 185              	.L35:
+ 186 003c 00000000 		.word	USB_DeviceState
+ 188              		.section	.text.CDC_Device_Flush,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	CDC_Device_Flush
+ 191              		.thumb
+ 192              		.thumb_func
+ 194              	CDC_Device_Flush:
+ 195              		@ args = 0, pretend = 0, frame = 0
+ 196              		@ frame_needed = 0, uses_anonymous_args = 0
+ 197 0000 10B5     		push	{r4, lr}
+ 198 0002 104B     		ldr	r3, .L43
+ 199 0004 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 200 0006 0429     		cmp	r1, #4
+ 201 0008 18D1     		bne	.L42
+ 202 000a 0269     		ldr	r2, [r0, #16]	@ unaligned
+ 203 000c B2B1     		cbz	r2, .L42
+ 204 000e 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 205 0010 8021     		movs	r1, #128
+ 206 0012 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 207 0016 FFF7FEFF 		bl	Endpoint_BytesInEndpoint
+ 208 001a 08B9     		cbnz	r0, .L39
+ 209              	.L40:
+ 210 001c 0024     		movs	r4, #0
+ 211 001e 0EE0     		b	.L38
+ 212              	.L39:
+ 213 0020 FFF7FEFF 		bl	Endpoint_IsReadWriteAllowed
+ 214 0024 0446     		mov	r4, r0
+ 215 0026 FFF7FEFF 		bl	Endpoint_ClearIN
+ 216 002a 002C     		cmp	r4, #0
+ 217 002c F6D1     		bne	.L40
+ 218 002e FFF7FEFF 		bl	Endpoint_WaitUntilReady
+ 219 0032 0446     		mov	r4, r0
+ 220 0034 18B9     		cbnz	r0, .L38
+ 221 0036 FFF7FEFF 		bl	Endpoint_ClearIN
+ 222 003a 00E0     		b	.L38
+ 223              	.L42:
+ 224 003c 0224     		movs	r4, #2
+ 225              	.L38:
+ 226 003e 2046     		mov	r0, r4
+ 227 0040 10BD     		pop	{r4, pc}
+ 228              	.L44:
+ 229 0042 00BF     		.align	2
+ 230              	.L43:
+ 231 0044 00000000 		.word	USB_DeviceState
+ 233              		.section	.text.CDC_Device_USBTask,"ax",%progbits
+ 234              		.align	1
+ 235              		.global	CDC_Device_USBTask
+ 236              		.thumb
+ 237              		.thumb_func
+ 239              	CDC_Device_USBTask:
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242              		@ link register save eliminated.
+ 243 0000 044A     		ldr	r2, .L50
+ 244 0002 1178     		ldrb	r1, [r2, #0]	@ zero_extendqisi2
+ 245 0004 0429     		cmp	r1, #4
+ 246 0006 03D1     		bne	.L45
+ 247 0008 0369     		ldr	r3, [r0, #16]	@ unaligned
+ 248 000a 0BB1     		cbz	r3, .L45
+ 249 000c FFF7FEBF 		b	CDC_Device_Flush
+ 250              	.L45:
+ 251 0010 7047     		bx	lr
+ 252              	.L51:
+ 253 0012 00BF     		.align	2
+ 254              	.L50:
+ 255 0014 00000000 		.word	USB_DeviceState
+ 257              		.section	.text.CDC_Device_BytesReceived,"ax",%progbits
+ 258              		.align	1
+ 259              		.global	CDC_Device_BytesReceived
+ 260              		.thumb
+ 261              		.thumb_func
+ 263              	CDC_Device_BytesReceived:
+ 264              		@ args = 0, pretend = 0, frame = 0
+ 265              		@ frame_needed = 0, uses_anonymous_args = 0
+ 266 0000 08B5     		push	{r3, lr}
+ 267 0002 0C4B     		ldr	r3, .L63
+ 268 0004 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 269 0006 0429     		cmp	r1, #4
+ 270 0008 12D1     		bne	.L54
+ 271 000a 0269     		ldr	r2, [r0, #16]	@ unaligned
+ 272 000c 82B1     		cbz	r2, .L54
+ 273 000e 4079     		ldrb	r0, [r0, #5]	@ zero_extendqisi2
+ 274 0010 0021     		movs	r1, #0
+ 275 0012 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 276 0016 FFF7FEFF 		bl	Endpoint_IsOUTReceived
+ 277 001a 48B1     		cbz	r0, .L54
+ 278 001c FFF7FEFF 		bl	Endpoint_BytesInEndpoint
+ 279 0020 10B9     		cbnz	r0, .L56
+ 280 0022 FFF7FEFF 		bl	Endpoint_ClearOUT
+ 281 0026 03E0     		b	.L54
+ 282              	.L56:
+ 283 0028 BDE80840 		pop	{r3, lr}
+ 284 002c FFF7FEBF 		b	Endpoint_BytesInEndpoint
+ 285              	.L54:
+ 286 0030 0020     		movs	r0, #0
+ 287 0032 08BD     		pop	{r3, pc}
+ 288              	.L64:
+ 289              		.align	2
+ 290              	.L63:
+ 291 0034 00000000 		.word	USB_DeviceState
+ 293              		.section	.text.CDC_Device_ReceiveByte,"ax",%progbits
+ 294              		.align	1
+ 295              		.global	CDC_Device_ReceiveByte
+ 296              		.thumb
+ 297              		.thumb_func
+ 299              	CDC_Device_ReceiveByte:
+ 300              		@ args = 0, pretend = 0, frame = 0
+ 301              		@ frame_needed = 0, uses_anonymous_args = 0
+ 302 0000 10B5     		push	{r4, lr}
+ 303 0002 114B     		ldr	r3, .L77
+ 304 0004 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 305 0006 0429     		cmp	r1, #4
+ 306 0008 02D0     		beq	.L66
+ 307              	.L68:
+ 308 000a 4FF6FF74 		movw	r4, #65535
+ 309 000e 18E0     		b	.L67
+ 310              	.L66:
+ 311 0010 0269     		ldr	r2, [r0, #16]	@ unaligned
+ 312 0012 002A     		cmp	r2, #0
+ 313 0014 F9D0     		beq	.L68
+ 314 0016 4079     		ldrb	r0, [r0, #5]	@ zero_extendqisi2
+ 315 0018 0021     		movs	r1, #0
+ 316 001a FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 317 001e FFF7FEFF 		bl	Endpoint_IsOUTReceived
+ 318 0022 0028     		cmp	r0, #0
+ 319 0024 F1D0     		beq	.L68
+ 320 0026 FFF7FEFF 		bl	Endpoint_BytesInEndpoint
+ 321 002a 18B1     		cbz	r0, .L70
+ 322 002c FFF7FEFF 		bl	Endpoint_Read_8
+ 323 0030 0446     		mov	r4, r0
+ 324 0032 01E0     		b	.L69
+ 325              	.L70:
+ 326 0034 4FF6FF74 		movw	r4, #65535
+ 327              	.L69:
+ 328 0038 FFF7FEFF 		bl	Endpoint_BytesInEndpoint
+ 329 003c 08B9     		cbnz	r0, .L67
+ 330 003e FFF7FEFF 		bl	Endpoint_ClearOUT
+ 331              	.L67:
+ 332 0042 20B2     		sxth	r0, r4
+ 333 0044 10BD     		pop	{r4, pc}
+ 334              	.L78:
+ 335 0046 00BF     		.align	2
+ 336              	.L77:
+ 337 0048 00000000 		.word	USB_DeviceState
+ 339              		.section	.text.CDC_Device_SendControlLineStateChange,"ax",%progbits
+ 340              		.align	1
+ 341              		.global	CDC_Device_SendControlLineStateChange
+ 342              		.thumb
+ 343              		.thumb_func
+ 345              	CDC_Device_SendControlLineStateChange:
+ 346              		@ args = 0, pretend = 0, frame = 8
+ 347              		@ frame_needed = 0, uses_anonymous_args = 0
+ 348 0000 13B5     		push	{r0, r1, r4, lr}
+ 349 0002 0F4B     		ldr	r3, .L85
+ 350 0004 0446     		mov	r4, r0
+ 351 0006 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 352 0008 0428     		cmp	r0, #4
+ 353 000a 17D1     		bne	.L79
+ 354 000c 2169     		ldr	r1, [r4, #16]	@ unaligned
+ 355 000e A9B1     		cbz	r1, .L79
+ 356 0010 607A     		ldrb	r0, [r4, #9]	@ zero_extendqisi2
+ 357 0012 8021     		movs	r1, #128
+ 358 0014 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 359 0018 0A4A     		ldr	r2, .L85+4
+ 360 001a 1068     		ldr	r0, [r2, #0]	@ unaligned
+ 361 001c 5168     		ldr	r1, [r2, #4]	@ unaligned
+ 362 001e 6B46     		mov	r3, sp
+ 363 0020 03C3     		stmia	r3!, {r0, r1}
+ 364 0022 0022     		movs	r2, #0
+ 365 0024 0821     		movs	r1, #8
+ 366 0026 6846     		mov	r0, sp
+ 367 0028 FFF7FEFF 		bl	Endpoint_Write_Stream_LE
+ 368 002c 0121     		movs	r1, #1
+ 369 002e 0022     		movs	r2, #0
+ 370 0030 04F10F00 		add	r0, r4, #15
+ 371 0034 FFF7FEFF 		bl	Endpoint_Write_Stream_LE
+ 372 0038 FFF7FEFF 		bl	Endpoint_ClearIN
+ 373              	.L79:
+ 374 003c 1CBD     		pop	{r2, r3, r4, pc}
+ 375              	.L86:
+ 376 003e 00BF     		.align	2
+ 377              	.L85:
+ 378 0040 00000000 		.word	USB_DeviceState
+ 379 0044 00000000 		.word	.LANCHOR0
+ 381              		.section	.text.CDC_Device_Event_Stub,"ax",%progbits
+ 382              		.align	1
+ 383              		.global	CDC_Device_Event_Stub
+ 384              		.thumb
+ 385              		.thumb_func
+ 387              	CDC_Device_Event_Stub:
+ 388              		@ args = 0, pretend = 0, frame = 0
+ 389              		@ frame_needed = 0, uses_anonymous_args = 0
+ 390              		@ link register save eliminated.
+ 391 0000 7047     		bx	lr
+ 393              		.weak	EVENT_CDC_Device_ControLineStateChanged
+ 394              		.thumb_set EVENT_CDC_Device_ControLineStateChanged,CDC_Device_Event_Stub
+ 395              		.weak	EVENT_CDC_Device_BreakSent
+ 396              		.thumb_set EVENT_CDC_Device_BreakSent,CDC_Device_Event_Stub
+ 397              		.weak	EVENT_CDC_Device_LineEncodingChanged
+ 398              		.thumb_set EVENT_CDC_Device_LineEncodingChanged,CDC_Device_Event_Stub
+ 399              		.section	.text.CDC_Device_ProcessControlRequest,"ax",%progbits
+ 400              		.align	1
+ 401              		.global	CDC_Device_ProcessControlRequest
+ 402              		.thumb
+ 403              		.thumb_func
+ 405              	CDC_Device_ProcessControlRequest:
+ 406              		@ args = 0, pretend = 0, frame = 0
+ 407              		@ frame_needed = 0, uses_anonymous_args = 0
+ 408 0000 38B5     		push	{r3, r4, r5, lr}
+ 409 0002 0446     		mov	r4, r0
+ 410 0004 FFF7FEFF 		bl	Endpoint_IsSETUPReceived
+ 411 0008 0028     		cmp	r0, #0
+ 412 000a 4DD0     		beq	.L88
+ 413 000c 274B     		ldr	r3, .L105
+ 414 000e 2278     		ldrb	r2, [r4, #0]	@ zero_extendqisi2
+ 415 0010 9988     		ldrh	r1, [r3, #4]
+ 416 0012 9142     		cmp	r1, r2
+ 417 0014 48D1     		bne	.L88
+ 418 0016 5878     		ldrb	r0, [r3, #1]	@ zero_extendqisi2
+ 419 0018 2038     		subs	r0, r0, #32
+ 420 001a 0328     		cmp	r0, #3
+ 421 001c 44D8     		bhi	.L88
+ 422 001e DFE800F0 		tbb	[pc, r0]
+ 423              	.L94:
+ 424 0022 11       		.byte	(.L90-.L94)/2
+ 425 0023 02       		.byte	(.L91-.L94)/2
+ 426 0024 29       		.byte	(.L92-.L94)/2
+ 427 0025 37       		.byte	(.L93-.L94)/2
+ 428              		.align	1
+ 429              	.L91:
+ 430 0026 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 431 0028 A129     		cmp	r1, #161
+ 432 002a 3DD1     		bne	.L88
+ 433 002c FFF7FEFF 		bl	Endpoint_ClearSETUP
+ 434 0030 0721     		movs	r1, #7
+ 435 0032 1F48     		ldr	r0, .L105+4
+ 436 0034 FFF7FEFF 		bl	Endpoint_Write_Control_Stream_LE
+ 437 0038 FFF7FEFF 		bl	Endpoint_ClearOUT
+ 438 003c BDE83840 		pop	{r3, r4, r5, lr}
+ 439 0040 FFF7FEBF 		b	Endpoint_ClearIN
+ 440              	.L90:
+ 441 0044 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 442 0046 212A     		cmp	r2, #33
+ 443 0048 2ED1     		bne	.L88
+ 444 004a 194D     		ldr	r5, .L105+4
+ 445 004c FFF7FEFF 		bl	Endpoint_ClearSETUP
+ 446 0050 0721     		movs	r1, #7
+ 447 0052 2846     		mov	r0, r5
+ 448 0054 FFF7FEFF 		bl	Endpoint_Read_Control_Stream_LE
+ 449 0058 FFF7FEFF 		bl	Endpoint_ClearIN
+ 450 005c A879     		ldrb	r0, [r5, #6]	@ zero_extendqisi2
+ 451 005e 28B1     		cbz	r0, .L95
+ 452 0060 2B68     		ldr	r3, [r5, #0]	@ unaligned
+ 453 0062 1BB1     		cbz	r3, .L95
+ 454 0064 A988     		ldrh	r1, [r5, #4]	@ unaligned
+ 455 0066 2361     		str	r3, [r4, #16]	@ unaligned
+ 456 0068 A182     		strh	r1, [r4, #20]	@ unaligned
+ 457 006a A075     		strb	r0, [r4, #22]
+ 458              	.L95:
+ 459 006c 2046     		mov	r0, r4
+ 460 006e FFF7FEFF 		bl	EVENT_CDC_Device_LineEncodingChanged
+ 461 0072 38BD     		pop	{r3, r4, r5, pc}
+ 462              	.L92:
+ 463 0074 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 464 0076 212A     		cmp	r2, #33
+ 465 0078 16D1     		bne	.L88
+ 466 007a FFF7FEFF 		bl	Endpoint_ClearSETUP
+ 467 007e FFF7FEFF 		bl	Endpoint_ClearStatusStage
+ 468 0082 0A48     		ldr	r0, .L105
+ 469 0084 4388     		ldrh	r3, [r0, #2]
+ 470 0086 2046     		mov	r0, r4
+ 471 0088 A373     		strb	r3, [r4, #14]
+ 472 008a FFF7FEFF 		bl	EVENT_CDC_Device_ControLineStateChanged
+ 473 008e 38BD     		pop	{r3, r4, r5, pc}
+ 474              	.L93:
+ 475 0090 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 476 0092 212B     		cmp	r3, #33
+ 477 0094 08D1     		bne	.L88
+ 478 0096 FFF7FEFF 		bl	Endpoint_ClearSETUP
+ 479 009a FFF7FEFF 		bl	Endpoint_ClearStatusStage
+ 480 009e 0349     		ldr	r1, .L105
+ 481 00a0 2046     		mov	r0, r4
+ 482 00a2 8978     		ldrb	r1, [r1, #2]	@ zero_extendqisi2
+ 483 00a4 FFF7FEFF 		bl	EVENT_CDC_Device_BreakSent
+ 484              	.L88:
+ 485 00a8 38BD     		pop	{r3, r4, r5, pc}
+ 486              	.L106:
+ 487 00aa 00BF     		.align	2
+ 488              	.L105:
+ 489 00ac 00000000 		.word	USB_ControlRequest
+ 490 00b0 00000000 		.word	LineEncodingRx
+ 492              		.comm	LineEncodingRx,7,1
+ 493              		.section	.rodata
+ 494              		.align	1
+ 495              		.set	.LANCHOR0,. + 0
+ 496              	.LC0:
+ 497 0000 A1       		.byte	-95
+ 498 0001 20       		.byte	32
+ 499 0002 0000     		.short	0
+ 500 0004 0000     		.short	0
+ 501 0006 0100     		.short	1
+ 502              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 CDC.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:17     .text.CDC_Device_ConfigureEndpoints:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:22     .text.CDC_Device_ConfigureEndpoints:00000000 CDC_Device_ConfigureEndpoints
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:79     .text.CDC_Device_SendString:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:84     .text.CDC_Device_SendString:00000000 CDC_Device_SendString
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:111    .text.CDC_Device_SendString:00000030 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:114    .text.CDC_Device_SendData:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:119    .text.CDC_Device_SendData:00000000 CDC_Device_SendData
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:145    .text.CDC_Device_SendData:0000002c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:148    .text.CDC_Device_SendByte:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:153    .text.CDC_Device_SendByte:00000000 CDC_Device_SendByte
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:186    .text.CDC_Device_SendByte:0000003c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:189    .text.CDC_Device_Flush:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:194    .text.CDC_Device_Flush:00000000 CDC_Device_Flush
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:231    .text.CDC_Device_Flush:00000044 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:234    .text.CDC_Device_USBTask:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:239    .text.CDC_Device_USBTask:00000000 CDC_Device_USBTask
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:255    .text.CDC_Device_USBTask:00000014 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:258    .text.CDC_Device_BytesReceived:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:263    .text.CDC_Device_BytesReceived:00000000 CDC_Device_BytesReceived
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:291    .text.CDC_Device_BytesReceived:00000034 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:294    .text.CDC_Device_ReceiveByte:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:299    .text.CDC_Device_ReceiveByte:00000000 CDC_Device_ReceiveByte
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:337    .text.CDC_Device_ReceiveByte:00000048 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:340    .text.CDC_Device_SendControlLineStateChange:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:345    .text.CDC_Device_SendControlLineStateChange:00000000 CDC_Device_SendControlLineStateChange
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:378    .text.CDC_Device_SendControlLineStateChange:00000040 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:382    .text.CDC_Device_Event_Stub:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:387    .text.CDC_Device_Event_Stub:00000000 CDC_Device_Event_Stub
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:387    .text.CDC_Device_Event_Stub:00000000 EVENT_CDC_Device_ControLineStateChanged
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:387    .text.CDC_Device_Event_Stub:00000000 EVENT_CDC_Device_BreakSent
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:387    .text.CDC_Device_Event_Stub:00000000 EVENT_CDC_Device_LineEncodingChanged
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:400    .text.CDC_Device_ProcessControlRequest:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:405    .text.CDC_Device_ProcessControlRequest:00000000 CDC_Device_ProcessControlRequest
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:424    .text.CDC_Device_ProcessControlRequest:00000022 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:428    .text.CDC_Device_ProcessControlRequest:00000026 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:489    .text.CDC_Device_ProcessControlRequest:000000ac $d
+                            *COM*:00000007 LineEncodingRx
+C:\Users\TOGABL~1\AppData\Local\Temp\ccnpXl19.s:494    .rodata:00000000 $d
+
+UNDEFINED SYMBOLS
+memset
+Endpoint_ConfigureEndpoint
+Endpoint_SelectEndpoint
+strlen
+Endpoint_Write_Stream_LE
+USB_DeviceState
+Endpoint_IsReadWriteAllowed
+Endpoint_Write_8
+Endpoint_ClearIN
+Endpoint_WaitUntilReady
+Endpoint_BytesInEndpoint
+Endpoint_IsOUTReceived
+Endpoint_ClearOUT
+Endpoint_Read_8
+Endpoint_IsSETUPReceived
+Endpoint_ClearSETUP
+Endpoint_Write_Control_Stream_LE
+Endpoint_Read_Control_Stream_LE
+Endpoint_ClearStatusStage
+USB_ControlRequest

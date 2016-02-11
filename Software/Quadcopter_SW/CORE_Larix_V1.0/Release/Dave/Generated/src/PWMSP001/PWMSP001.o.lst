@@ -1,0 +1,1653 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"PWMSP001.c"
+  16              		.section	.text.PWMSP001_Deinit,"ax",%progbits
+  17              		.align	1
+  18              		.global	PWMSP001_Deinit
+  19              		.thumb
+  20              		.thumb_func
+  22              	PWMSP001_Deinit:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  26 0004 C46B     		ldr	r4, [r0, #60]
+  27 0006 2378     		ldrb	r3, [r4, #0]	@ zero_extendqisi2
+  28 0008 002B     		cmp	r3, #0
+  29 000a 3DD0     		beq	.L4
+  30 000c 8269     		ldr	r2, [r0, #24]
+  31 000e 4169     		ldr	r1, [r0, #20]
+  32 0010 0023     		movs	r3, #0
+  33 0012 0727     		movs	r7, #7
+  34 0014 40F60F76 		movw	r6, #3855
+  35 0018 1761     		str	r7, [r2, #16]
+  36 001a C2F8B060 		str	r6, [r2, #176]
+  37 001e C2F8A430 		str	r3, [r2, #164]
+  38 0022 8D68     		ldr	r5, [r1, #8]
+  39 0024 45F4407C 		orr	ip, r5, #768
+  40 0028 90F83750 		ldrb	r5, [r0, #55]	@ zero_extendqisi2
+  41 002c 4FF00108 		mov	r8, #1
+  42 0030 08FA05F5 		lsl	r5, r8, r5
+  43 0034 4CEA0505 		orr	r5, ip, r5
+  44 0038 8D60     		str	r5, [r1, #8]
+  45 003a 1360     		str	r3, [r2, #0]
+  46 003c 5360     		str	r3, [r2, #4]
+  47 003e 5361     		str	r3, [r2, #20]
+  48 0040 5362     		str	r3, [r2, #36]
+  49 0042 9361     		str	r3, [r2, #24]
+  50 0044 1362     		str	r3, [r2, #32]
+  51 0046 D363     		str	r3, [r2, #60]
+  52 0048 5363     		str	r3, [r2, #52]
+  53 004a 90F82050 		ldrb	r5, [r0, #32]	@ zero_extendqisi2
+  54 004e 4545     		cmp	r5, r8
+  55 0050 16D1     		bne	.L3
+  56 0052 C269     		ldr	r2, [r0, #28]
+  57 0054 90F83800 		ldrb	r0, [r0, #56]	@ zero_extendqisi2
+  58 0058 1761     		str	r7, [r2, #16]
+  59 005a C2F8B060 		str	r6, [r2, #176]
+  60 005e C2F8A430 		str	r3, [r2, #164]
+  61 0062 8E68     		ldr	r6, [r1, #8]
+  62 0064 05FA00F5 		lsl	r5, r5, r0
+  63 0068 46F44076 		orr	r6, r6, #768
+  64 006c 3543     		orrs	r5, r5, r6
+  65 006e 8D60     		str	r5, [r1, #8]
+  66 0070 1360     		str	r3, [r2, #0]
+  67 0072 5360     		str	r3, [r2, #4]
+  68 0074 5361     		str	r3, [r2, #20]
+  69 0076 5362     		str	r3, [r2, #36]
+  70 0078 9361     		str	r3, [r2, #24]
+  71 007a 1362     		str	r3, [r2, #32]
+  72 007c D363     		str	r3, [r2, #60]
+  73 007e 5363     		str	r3, [r2, #52]
+  74              	.L3:
+  75 0080 0020     		movs	r0, #0
+  76 0082 2070     		strb	r0, [r4, #0]
+  77 0084 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  78              	.L4:
+  79 0088 0120     		movs	r0, #1
+  80 008a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  82              		.section	.text.PWMSP001_Start,"ax",%progbits
+  83              		.align	1
+  84              		.global	PWMSP001_Start
+  85              		.thumb
+  86              		.thumb_func
+  88              	PWMSP001_Start:
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91 0000 C16B     		ldr	r1, [r0, #60]
+  92 0002 0B78     		ldrb	r3, [r1, #0]	@ zero_extendqisi2
+  93 0004 012B     		cmp	r3, #1
+  94 0006 70B5     		push	{r4, r5, r6, lr}
+  95 0008 01D0     		beq	.L7
+  96 000a 032B     		cmp	r3, #3
+  97 000c 62D1     		bne	.L15
+  98              	.L7:
+  99 000e 8369     		ldr	r3, [r0, #24]
+ 100 0010 90F83740 		ldrb	r4, [r0, #55]	@ zero_extendqisi2
+ 101 0014 40F60F72 		movw	r2, #3855
+ 102 0018 C3F8B020 		str	r2, [r3, #176]
+ 103 001c 4269     		ldr	r2, [r0, #20]
+ 104 001e 0126     		movs	r6, #1
+ 105 0020 D568     		ldr	r5, [r2, #12]
+ 106 0022 06FA04F4 		lsl	r4, r6, r4
+ 107 0026 2C43     		orrs	r4, r4, r5
+ 108 0028 D460     		str	r4, [r2, #12]
+ 109 002a 90F82040 		ldrb	r4, [r0, #32]	@ zero_extendqisi2
+ 110 002e B442     		cmp	r4, r6
+ 111 0030 06D1     		bne	.L9
+ 112 0032 90F83860 		ldrb	r6, [r0, #56]	@ zero_extendqisi2
+ 113 0036 D568     		ldr	r5, [r2, #12]
+ 114 0038 04FA06F4 		lsl	r4, r4, r6
+ 115 003c 2C43     		orrs	r4, r4, r5
+ 116 003e D460     		str	r4, [r2, #12]
+ 117              	.L9:
+ 118 0040 827B     		ldrb	r2, [r0, #14]	@ zero_extendqisi2
+ 119 0042 6AB9     		cbnz	r2, .L10
+ 120 0044 DA68     		ldr	r2, [r3, #12]
+ 121 0046 42F00102 		orr	r2, r2, #1
+ 122 004a DA60     		str	r2, [r3, #12]
+ 123 004c 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 124 0050 012B     		cmp	r3, #1
+ 125 0052 3BD1     		bne	.L12
+ 126 0054 C069     		ldr	r0, [r0, #28]
+ 127 0056 C268     		ldr	r2, [r0, #12]
+ 128 0058 42F00103 		orr	r3, r2, #1
+ 129 005c C360     		str	r3, [r0, #12]
+ 130 005e 35E0     		b	.L12
+ 131              	.L10:
+ 132 0060 012A     		cmp	r2, #1
+ 133 0062 15D1     		bne	.L13
+ 134 0064 1C68     		ldr	r4, [r3, #0]
+ 135 0066 24F0C062 		bic	r2, r4, #100663296
+ 136 006a 22F44034 		bic	r4, r2, #196608
+ 137 006e 1C60     		str	r4, [r3, #0]
+ 138 0070 5A68     		ldr	r2, [r3, #4]
+ 139 0072 22F00304 		bic	r4, r2, #3
+ 140 0076 90F82320 		ldrb	r2, [r0, #35]	@ zero_extendqisi2
+ 141 007a 5C60     		str	r4, [r3, #4]
+ 142 007c 1C68     		ldr	r4, [r3, #0]
+ 143 007e 1204     		lsls	r2, r2, #16
+ 144 0080 02F44032 		and	r2, r2, #196608
+ 145 0084 2243     		orrs	r2, r2, r4
+ 146 0086 1A60     		str	r2, [r3, #0]
+ 147 0088 5A68     		ldr	r2, [r3, #4]
+ 148 008a 42F00102 		orr	r2, r2, #1
+ 149 008e 5A60     		str	r2, [r3, #4]
+ 150              	.L13:
+ 151 0090 837B     		ldrb	r3, [r0, #14]	@ zero_extendqisi2
+ 152 0092 012B     		cmp	r3, #1
+ 153 0094 1AD1     		bne	.L12
+ 154 0096 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 155 009a 012A     		cmp	r2, #1
+ 156 009c 16D1     		bne	.L12
+ 157 009e C369     		ldr	r3, [r0, #28]
+ 158 00a0 90F82300 		ldrb	r0, [r0, #35]	@ zero_extendqisi2
+ 159 00a4 1C68     		ldr	r4, [r3, #0]
+ 160 00a6 24F0C062 		bic	r2, r4, #100663296
+ 161 00aa 22F44034 		bic	r4, r2, #196608
+ 162 00ae 1C60     		str	r4, [r3, #0]
+ 163 00b0 5A68     		ldr	r2, [r3, #4]
+ 164 00b2 22F00304 		bic	r4, r2, #3
+ 165 00b6 5C60     		str	r4, [r3, #4]
+ 166 00b8 1C68     		ldr	r4, [r3, #0]
+ 167 00ba 0204     		lsls	r2, r0, #16
+ 168 00bc 02F44030 		and	r0, r2, #196608
+ 169 00c0 2043     		orrs	r0, r0, r4
+ 170 00c2 1860     		str	r0, [r3, #0]
+ 171 00c4 5A68     		ldr	r2, [r3, #4]
+ 172 00c6 42F00100 		orr	r0, r2, #1
+ 173 00ca 5860     		str	r0, [r3, #4]
+ 174              	.L12:
+ 175 00cc 0220     		movs	r0, #2
+ 176 00ce 0870     		strb	r0, [r1, #0]
+ 177 00d0 0020     		movs	r0, #0
+ 178 00d2 70BD     		pop	{r4, r5, r6, pc}
+ 179              	.L15:
+ 180 00d4 0120     		movs	r0, #1
+ 181 00d6 70BD     		pop	{r4, r5, r6, pc}
+ 183              		.section	.text.PWMSP001_Stop,"ax",%progbits
+ 184              		.align	1
+ 185              		.global	PWMSP001_Stop
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	PWMSP001_Stop:
+ 190              		@ args = 0, pretend = 0, frame = 0
+ 191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 192 0000 C26B     		ldr	r2, [r0, #60]
+ 193 0002 1378     		ldrb	r3, [r2, #0]	@ zero_extendqisi2
+ 194 0004 022B     		cmp	r3, #2
+ 195 0006 70B5     		push	{r4, r5, r6, lr}
+ 196 0008 20D1     		bne	.L22
+ 197 000a 8169     		ldr	r1, [r0, #24]
+ 198 000c 4369     		ldr	r3, [r0, #20]
+ 199 000e 90F83760 		ldrb	r6, [r0, #55]	@ zero_extendqisi2
+ 200 0012 0724     		movs	r4, #7
+ 201 0014 0C61     		str	r4, [r1, #16]
+ 202 0016 9D68     		ldr	r5, [r3, #8]
+ 203 0018 0121     		movs	r1, #1
+ 204 001a 45F40075 		orr	r5, r5, #512
+ 205 001e 01FA06F1 		lsl	r1, r1, r6
+ 206 0022 2943     		orrs	r1, r1, r5
+ 207 0024 9960     		str	r1, [r3, #8]
+ 208 0026 90F82010 		ldrb	r1, [r0, #32]	@ zero_extendqisi2
+ 209 002a 0129     		cmp	r1, #1
+ 210 002c 0AD1     		bne	.L21
+ 211 002e C569     		ldr	r5, [r0, #28]
+ 212 0030 90F83800 		ldrb	r0, [r0, #56]	@ zero_extendqisi2
+ 213 0034 2C61     		str	r4, [r5, #16]
+ 214 0036 9C68     		ldr	r4, [r3, #8]
+ 215 0038 01FA00F1 		lsl	r1, r1, r0
+ 216 003c 44F40074 		orr	r4, r4, #512
+ 217 0040 2143     		orrs	r1, r1, r4
+ 218 0042 9960     		str	r1, [r3, #8]
+ 219              	.L21:
+ 220 0044 0323     		movs	r3, #3
+ 221 0046 1370     		strb	r3, [r2, #0]
+ 222 0048 0020     		movs	r0, #0
+ 223 004a 70BD     		pop	{r4, r5, r6, pc}
+ 224              	.L22:
+ 225 004c 0120     		movs	r0, #1
+ 226 004e 70BD     		pop	{r4, r5, r6, pc}
+ 228              		.section	.text.PWMSP001_SetCompare,"ax",%progbits
+ 229              		.align	1
+ 230              		.global	PWMSP001_SetCompare
+ 231              		.thumb
+ 232              		.thumb_func
+ 234              	PWMSP001_SetCompare:
+ 235              		@ args = 0, pretend = 0, frame = 0
+ 236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 237 0000 38B5     		push	{r3, r4, r5, lr}
+ 238 0002 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 239 0006 8469     		ldr	r4, [r0, #24]
+ 240 0008 012A     		cmp	r2, #1
+ 241 000a 05D1     		bne	.L24
+ 242 000c C569     		ldr	r5, [r0, #28]
+ 243 000e 6D6B     		ldr	r5, [r5, #52]
+ 244 0010 646B     		ldr	r4, [r4, #52]
+ 245 0012 44EA0543 		orr	r3, r4, r5, lsl #16
+ 246 0016 00E0     		b	.L25
+ 247              	.L24:
+ 248 0018 636B     		ldr	r3, [r4, #52]
+ 249              	.L25:
+ 250 001a C46B     		ldr	r4, [r0, #60]
+ 251 001c 2478     		ldrb	r4, [r4, #0]	@ zero_extendqisi2
+ 252 001e 54B1     		cbz	r4, .L29
+ 253 0020 C46A     		ldr	r4, [r0, #44]
+ 254 0022 A142     		cmp	r1, r4
+ 255 0024 00D9     		bls	.L27
+ 256 0026 42B1     		cbz	r2, .L30
+ 257              	.L27:
+ 258 0028 9942     		cmp	r1, r3
+ 259 002a 28BF     		it	cs
+ 260 002c 591C     		addcs	r1, r3, #1
+ 261 002e 026C     		ldr	r2, [r0, #64]
+ 262 0030 9047     		blx	r2
+ 263 0032 0020     		movs	r0, #0
+ 264 0034 38BD     		pop	{r3, r4, r5, pc}
+ 265              	.L29:
+ 266 0036 0120     		movs	r0, #1
+ 267 0038 38BD     		pop	{r3, r4, r5, pc}
+ 268              	.L30:
+ 269 003a 0220     		movs	r0, #2
+ 270 003c 38BD     		pop	{r3, r4, r5, pc}
+ 272              		.section	.text.PWMSP001_lSetCompareEdgeAlign,"ax",%progbits
+ 273              		.align	1
+ 274              		.global	PWMSP001_lSetCompareEdgeAlign
+ 275              		.thumb
+ 276              		.thumb_func
+ 278              	PWMSP001_lSetCompareEdgeAlign:
+ 279              		@ args = 0, pretend = 0, frame = 0
+ 280              		@ frame_needed = 0, uses_anonymous_args = 0
+ 281              		@ link register save eliminated.
+ 282 0000 8369     		ldr	r3, [r0, #24]
+ 283 0002 90F83720 		ldrb	r2, [r0, #55]	@ zero_extendqisi2
+ 284 0006 89B2     		uxth	r1, r1
+ 285 0008 D963     		str	r1, [r3, #60]
+ 286 000a 4369     		ldr	r3, [r0, #20]
+ 287 000c 9200     		lsls	r2, r2, #2
+ 288 000e 1969     		ldr	r1, [r3, #16]
+ 289 0010 0120     		movs	r0, #1
+ 290 0012 00FA02F2 		lsl	r2, r0, r2
+ 291 0016 0A43     		orrs	r2, r2, r1
+ 292 0018 1A61     		str	r2, [r3, #16]
+ 293 001a 7047     		bx	lr
+ 295              		.section	.text.PWMSP001_lSetCompareEdgeAlignTimerConcat,"ax",%progbits
+ 296              		.align	1
+ 297              		.global	PWMSP001_lSetCompareEdgeAlignTimerConcat
+ 298              		.thumb
+ 299              		.thumb_func
+ 301              	PWMSP001_lSetCompareEdgeAlignTimerConcat:
+ 302              		@ args = 0, pretend = 0, frame = 0
+ 303              		@ frame_needed = 0, uses_anonymous_args = 0
+ 304 0000 8369     		ldr	r3, [r0, #24]
+ 305 0002 5A6B     		ldr	r2, [r3, #52]
+ 306 0004 92B2     		uxth	r2, r2
+ 307 0006 30B5     		push	{r4, r5, lr}
+ 308 0008 5C6B     		ldr	r4, [r3, #52]
+ 309 000a B1FBF2F5 		udiv	r5, r1, r2
+ 310 000e 02FB1512 		mls	r2, r2, r5, r1
+ 311 0012 92B2     		uxth	r2, r2
+ 312 0014 A4B2     		uxth	r4, r4
+ 313 0016 DA63     		str	r2, [r3, #60]
+ 314 0018 B1FBF4F1 		udiv	r1, r1, r4
+ 315 001c C369     		ldr	r3, [r0, #28]
+ 316 001e 90F83740 		ldrb	r4, [r0, #55]	@ zero_extendqisi2
+ 317 0022 8AB2     		uxth	r2, r1
+ 318 0024 DA63     		str	r2, [r3, #60]
+ 319 0026 4369     		ldr	r3, [r0, #20]
+ 320 0028 90F83800 		ldrb	r0, [r0, #56]	@ zero_extendqisi2
+ 321 002c 1969     		ldr	r1, [r3, #16]
+ 322 002e 0122     		movs	r2, #1
+ 323 0030 A400     		lsls	r4, r4, #2
+ 324 0032 8000     		lsls	r0, r0, #2
+ 325 0034 02FA04F4 		lsl	r4, r2, r4
+ 326 0038 02FA00F2 		lsl	r2, r2, r0
+ 327 003c 2243     		orrs	r2, r2, r4
+ 328 003e 0A43     		orrs	r2, r2, r1
+ 329 0040 1A61     		str	r2, [r3, #16]
+ 330 0042 30BD     		pop	{r4, r5, pc}
+ 332              		.section	.text.PWMSP001_lSetCompareCenterAlign,"ax",%progbits
+ 333              		.align	1
+ 334              		.global	PWMSP001_lSetCompareCenterAlign
+ 335              		.thumb
+ 336              		.thumb_func
+ 338              	PWMSP001_lSetCompareCenterAlign:
+ 339              		@ args = 0, pretend = 0, frame = 0
+ 340              		@ frame_needed = 0, uses_anonymous_args = 0
+ 341              		@ link register save eliminated.
+ 342 0000 8369     		ldr	r3, [r0, #24]
+ 343 0002 90F83720 		ldrb	r2, [r0, #55]	@ zero_extendqisi2
+ 344 0006 89B2     		uxth	r1, r1
+ 345 0008 D963     		str	r1, [r3, #60]
+ 346 000a 4369     		ldr	r3, [r0, #20]
+ 347 000c 9200     		lsls	r2, r2, #2
+ 348 000e 1969     		ldr	r1, [r3, #16]
+ 349 0010 0120     		movs	r0, #1
+ 350 0012 00FA02F2 		lsl	r2, r0, r2
+ 351 0016 0A43     		orrs	r2, r2, r1
+ 352 0018 1A61     		str	r2, [r3, #16]
+ 353 001a 7047     		bx	lr
+ 355              		.section	.text.PWMSP001_SetDutyCycle,"ax",%progbits
+ 356              		.align	1
+ 357              		.global	PWMSP001_SetDutyCycle
+ 358              		.thumb
+ 359              		.thumb_func
+ 361              	PWMSP001_SetDutyCycle:
+ 362              		@ args = 0, pretend = 0, frame = 0
+ 363              		@ frame_needed = 0, uses_anonymous_args = 0
+ 364 0000 C26B     		ldr	r2, [r0, #60]
+ 365 0002 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 366 0004 08B5     		push	{r3, lr}
+ 367 0006 07EE901A 		fmsr	s15, r1
+ 368 000a 7AB1     		cbz	r2, .L36
+ 369 000c 9FED097A 		flds	s14, .L39
+ 370 0010 F4EEC77A 		fcmpes	s15, s14
+ 371 0014 F1EE10FA 		fmstat
+ 372 0018 0ADC     		bgt	.L38
+ 373 001a F5EEC07A 		fcmpezs	s15
+ 374 001e F1EE10FA 		fmstat
+ 375 0022 05D4     		bmi	.L38
+ 376 0024 436C     		ldr	r3, [r0, #68]
+ 377 0026 9847     		blx	r3
+ 378 0028 0020     		movs	r0, #0
+ 379 002a 08BD     		pop	{r3, pc}
+ 380              	.L36:
+ 381 002c 0120     		movs	r0, #1
+ 382 002e 08BD     		pop	{r3, pc}
+ 383              	.L38:
+ 384 0030 0220     		movs	r0, #2
+ 385 0032 08BD     		pop	{r3, pc}
+ 386              	.L40:
+ 387              		.align	2
+ 388              	.L39:
+ 389 0034 0000C842 		.word	1120403456
+ 391              		.section	.text.PWMSP001_lSetDutyEdgeAlign,"ax",%progbits
+ 392              		.align	1
+ 393              		.global	PWMSP001_lSetDutyEdgeAlign
+ 394              		.thumb
+ 395              		.thumb_func
+ 397              	PWMSP001_lSetDutyEdgeAlign:
+ 398              		@ args = 0, pretend = 0, frame = 0
+ 399              		@ frame_needed = 0, uses_anonymous_args = 0
+ 400              		@ link register save eliminated.
+ 401 0000 DFED107A 		flds	s15, .L42
+ 402 0004 00EE101A 		fmsr	s0, r1
+ 403 0008 77EEC06A 		fsubs	s13, s15, s0
+ 404 000c 8369     		ldr	r3, [r0, #24]
+ 405 000e C6EEA70A 		fdivs	s1, s13, s15
+ 406 0012 5A6B     		ldr	r2, [r3, #52]
+ 407 0014 0132     		adds	r2, r2, #1
+ 408 0016 06EE102A 		fmsr	s12, r2	@ int
+ 409 001a B8EE467A 		fuitos	s14, s12
+ 410 001e 27EE201A 		fmuls	s2, s14, s1
+ 411 0022 FCEEC11A 		ftouizs	s3, s2
+ 412 0026 11EE901A 		fmrs	r1, s3	@ int
+ 413 002a 8AB2     		uxth	r2, r1
+ 414 002c DA63     		str	r2, [r3, #60]
+ 415 002e 4369     		ldr	r3, [r0, #20]
+ 416 0030 90F83700 		ldrb	r0, [r0, #55]	@ zero_extendqisi2
+ 417 0034 1969     		ldr	r1, [r3, #16]
+ 418 0036 8200     		lsls	r2, r0, #2
+ 419 0038 0120     		movs	r0, #1
+ 420 003a 00FA02F2 		lsl	r2, r0, r2
+ 421 003e 0A43     		orrs	r2, r2, r1
+ 422 0040 1A61     		str	r2, [r3, #16]
+ 423 0042 7047     		bx	lr
+ 424              	.L43:
+ 425              		.align	2
+ 426              	.L42:
+ 427 0044 0000C842 		.word	1120403456
+ 429              		.section	.text.PWMSP001_lSetDutyEdgeAlignTimerConcat,"ax",%progbits
+ 430              		.align	1
+ 431              		.global	PWMSP001_lSetDutyEdgeAlignTimerConcat
+ 432              		.thumb
+ 433              		.thumb_func
+ 435              	PWMSP001_lSetDutyEdgeAlignTimerConcat:
+ 436              		@ args = 0, pretend = 0, frame = 0
+ 437              		@ frame_needed = 0, uses_anonymous_args = 0
+ 438 0000 DFED1D7A 		flds	s15, .L45
+ 439 0004 00EE101A 		fmsr	s0, r1
+ 440 0008 77EEC06A 		fsubs	s13, s15, s0
+ 441 000c 8369     		ldr	r3, [r0, #24]
+ 442 000e C6EEA70A 		fdivs	s1, s13, s15
+ 443 0012 30B5     		push	{r4, r5, lr}
+ 444 0014 C469     		ldr	r4, [r0, #28]
+ 445 0016 656B     		ldr	r5, [r4, #52]
+ 446 0018 5A6B     		ldr	r2, [r3, #52]
+ 447 001a 596B     		ldr	r1, [r3, #52]
+ 448 001c 92B2     		uxth	r2, r2
+ 449 001e 0135     		adds	r5, r5, #1
+ 450 0020 0132     		adds	r2, r2, #1
+ 451 0022 6A43     		muls	r2, r5, r2
+ 452 0024 551C     		adds	r5, r2, #1
+ 453 0026 06EE105A 		fmsr	s12, r5	@ int
+ 454 002a B8EE467A 		fuitos	s14, s12
+ 455 002e 89B2     		uxth	r1, r1
+ 456 0030 27EE201A 		fmuls	s2, s14, s1
+ 457 0034 FCEEC11A 		ftouizs	s3, s2
+ 458 0038 11EE902A 		fmrs	r2, s3	@ int
+ 459 003c B2FBF1F5 		udiv	r5, r2, r1
+ 460 0040 01FB1521 		mls	r1, r1, r5, r2
+ 461 0044 89B2     		uxth	r1, r1
+ 462 0046 D963     		str	r1, [r3, #60]
+ 463 0048 5B6B     		ldr	r3, [r3, #52]
+ 464 004a 99B2     		uxth	r1, r3
+ 465 004c B2FBF1F2 		udiv	r2, r2, r1
+ 466 0050 93B2     		uxth	r3, r2
+ 467 0052 E363     		str	r3, [r4, #60]
+ 468 0054 4369     		ldr	r3, [r0, #20]
+ 469 0056 90F83740 		ldrb	r4, [r0, #55]	@ zero_extendqisi2
+ 470 005a 90F83800 		ldrb	r0, [r0, #56]	@ zero_extendqisi2
+ 471 005e 1969     		ldr	r1, [r3, #16]
+ 472 0060 0122     		movs	r2, #1
+ 473 0062 A400     		lsls	r4, r4, #2
+ 474 0064 8000     		lsls	r0, r0, #2
+ 475 0066 02FA04F4 		lsl	r4, r2, r4
+ 476 006a 02FA00F2 		lsl	r2, r2, r0
+ 477 006e 2243     		orrs	r2, r2, r4
+ 478 0070 0A43     		orrs	r2, r2, r1
+ 479 0072 1A61     		str	r2, [r3, #16]
+ 480 0074 30BD     		pop	{r4, r5, pc}
+ 481              	.L46:
+ 482 0076 00BF     		.align	2
+ 483              	.L45:
+ 484 0078 0000C842 		.word	1120403456
+ 486              		.section	.text.PWMSP001_lSetDutyCenterAlign,"ax",%progbits
+ 487              		.align	1
+ 488              		.global	PWMSP001_lSetDutyCenterAlign
+ 489              		.thumb
+ 490              		.thumb_func
+ 492              	PWMSP001_lSetDutyCenterAlign:
+ 493              		@ args = 0, pretend = 0, frame = 0
+ 494              		@ frame_needed = 0, uses_anonymous_args = 0
+ 495              		@ link register save eliminated.
+ 496 0000 DFED0F7A 		flds	s15, .L48
+ 497 0004 06EE101A 		fmsr	s12, r1
+ 498 0008 77EEC66A 		fsubs	s13, s15, s12
+ 499 000c 8369     		ldr	r3, [r0, #24]
+ 500 000e C6EEA70A 		fdivs	s1, s13, s15
+ 501 0012 93ED0D7A 		flds	s14, [r3, #52]	@ int
+ 502 0016 B8EE470A 		fuitos	s0, s14
+ 503 001a 20EE201A 		fmuls	s2, s0, s1
+ 504 001e FCEEC11A 		ftouizs	s3, s2
+ 505 0022 11EE902A 		fmrs	r2, s3	@ int
+ 506 0026 91B2     		uxth	r1, r2
+ 507 0028 D963     		str	r1, [r3, #60]
+ 508 002a 4369     		ldr	r3, [r0, #20]
+ 509 002c 90F83700 		ldrb	r0, [r0, #55]	@ zero_extendqisi2
+ 510 0030 1969     		ldr	r1, [r3, #16]
+ 511 0032 8200     		lsls	r2, r0, #2
+ 512 0034 0120     		movs	r0, #1
+ 513 0036 00FA02F2 		lsl	r2, r0, r2
+ 514 003a 0A43     		orrs	r2, r2, r1
+ 515 003c 1A61     		str	r2, [r3, #16]
+ 516 003e 7047     		bx	lr
+ 517              	.L49:
+ 518              		.align	2
+ 519              	.L48:
+ 520 0040 0000C842 		.word	1120403456
+ 522              		.section	.text.PWMSP001_SetPeriodAndCompare,"ax",%progbits
+ 523              		.align	1
+ 524              		.global	PWMSP001_SetPeriodAndCompare
+ 525              		.thumb
+ 526              		.thumb_func
+ 528              	PWMSP001_SetPeriodAndCompare:
+ 529              		@ args = 0, pretend = 0, frame = 0
+ 530              		@ frame_needed = 0, uses_anonymous_args = 0
+ 531 0000 C36B     		ldr	r3, [r0, #60]
+ 532 0002 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 533 0004 10B5     		push	{r4, lr}
+ 534 0006 D3B1     		cbz	r3, .L55
+ 535 0008 D9B1     		cbz	r1, .L58
+ 536 000a C36A     		ldr	r3, [r0, #44]
+ 537 000c 9A42     		cmp	r2, r3
+ 538 000e 02D9     		bls	.L52
+ 539 0010 90F82040 		ldrb	r4, [r0, #32]	@ zero_extendqisi2
+ 540 0014 ACB1     		cbz	r4, .L58
+ 541              	.L52:
+ 542 0016 9942     		cmp	r1, r3
+ 543 0018 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 544 001c 02D9     		bls	.L53
+ 545 001e 012B     		cmp	r3, #1
+ 546 0020 0FD1     		bne	.L58
+ 547 0022 01E0     		b	.L59
+ 548              	.L53:
+ 549 0024 012B     		cmp	r3, #1
+ 550 0026 02D1     		bne	.L54
+ 551              	.L59:
+ 552 0028 C369     		ldr	r3, [r0, #28]
+ 553 002a 0C0C     		lsrs	r4, r1, #16
+ 554 002c 5C63     		str	r4, [r3, #52]
+ 555              	.L54:
+ 556 002e 8369     		ldr	r3, [r0, #24]
+ 557 0030 89B2     		uxth	r1, r1
+ 558 0032 5963     		str	r1, [r3, #52]
+ 559 0034 036C     		ldr	r3, [r0, #64]
+ 560 0036 1146     		mov	r1, r2
+ 561 0038 9847     		blx	r3
+ 562 003a 0020     		movs	r0, #0
+ 563 003c 10BD     		pop	{r4, pc}
+ 564              	.L55:
+ 565 003e 0120     		movs	r0, #1
+ 566 0040 10BD     		pop	{r4, pc}
+ 567              	.L58:
+ 568 0042 0220     		movs	r0, #2
+ 569 0044 10BD     		pop	{r4, pc}
+ 571              		.section	.text.PWMSP001_SetPeriod,"ax",%progbits
+ 572              		.align	1
+ 573              		.global	PWMSP001_SetPeriod
+ 574              		.thumb
+ 575              		.thumb_func
+ 577              	PWMSP001_SetPeriod:
+ 578              		@ args = 0, pretend = 0, frame = 0
+ 579              		@ frame_needed = 0, uses_anonymous_args = 0
+ 580 0000 C36B     		ldr	r3, [r0, #60]
+ 581 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 582 0004 10B5     		push	{r4, lr}
+ 583 0006 3AB3     		cbz	r2, .L64
+ 584 0008 41B3     		cbz	r1, .L66
+ 585 000a C36A     		ldr	r3, [r0, #44]
+ 586 000c 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 587 0010 9942     		cmp	r1, r3
+ 588 0012 02D9     		bls	.L62
+ 589 0014 012A     		cmp	r2, #1
+ 590 0016 21D1     		bne	.L66
+ 591 0018 01E0     		b	.L68
+ 592              	.L62:
+ 593 001a 012A     		cmp	r2, #1
+ 594 001c 02D1     		bne	.L63
+ 595              	.L68:
+ 596 001e C469     		ldr	r4, [r0, #28]
+ 597 0020 0B0C     		lsrs	r3, r1, #16
+ 598 0022 6363     		str	r3, [r4, #52]
+ 599              	.L63:
+ 600 0024 8269     		ldr	r2, [r0, #24]
+ 601 0026 90F83740 		ldrb	r4, [r0, #55]	@ zero_extendqisi2
+ 602 002a 4369     		ldr	r3, [r0, #20]
+ 603 002c 89B2     		uxth	r1, r1
+ 604 002e 5163     		str	r1, [r2, #52]
+ 605 0030 1969     		ldr	r1, [r3, #16]
+ 606 0032 A200     		lsls	r2, r4, #2
+ 607 0034 0124     		movs	r4, #1
+ 608 0036 04FA02F2 		lsl	r2, r4, r2
+ 609 003a 0A43     		orrs	r2, r2, r1
+ 610 003c 1A61     		str	r2, [r3, #16]
+ 611 003e 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 612 0042 A242     		cmp	r2, r4
+ 613 0044 0CD1     		bne	.L67
+ 614 0046 90F83800 		ldrb	r0, [r0, #56]	@ zero_extendqisi2
+ 615 004a 1969     		ldr	r1, [r3, #16]
+ 616 004c 8000     		lsls	r0, r0, #2
+ 617 004e 02FA00F2 		lsl	r2, r2, r0
+ 618 0052 0A43     		orrs	r2, r2, r1
+ 619 0054 1A61     		str	r2, [r3, #16]
+ 620 0056 03E0     		b	.L67
+ 621              	.L64:
+ 622 0058 0120     		movs	r0, #1
+ 623 005a 10BD     		pop	{r4, pc}
+ 624              	.L66:
+ 625 005c 0220     		movs	r0, #2
+ 626 005e 10BD     		pop	{r4, pc}
+ 627              	.L67:
+ 628 0060 0020     		movs	r0, #0
+ 629 0062 10BD     		pop	{r4, pc}
+ 631              		.section	.text.PWMSP001_lSetPwmFreqTimerConcat,"ax",%progbits
+ 632              		.align	1
+ 633              		.global	PWMSP001_lSetPwmFreqTimerConcat
+ 634              		.thumb
+ 635              		.thumb_func
+ 637              	PWMSP001_lSetPwmFreqTimerConcat:
+ 638              		@ args = 0, pretend = 0, frame = 0
+ 639              		@ frame_needed = 0, uses_anonymous_args = 0
+ 640              		@ link register save eliminated.
+ 641 0000 4B1C     		adds	r3, r1, #1
+ 642 0002 1BD0     		beq	.L74
+ 643 0004 0023     		movs	r3, #0
+ 644 0006 B1F5803F 		cmp	r1, #65536
+ 645 000a 0AD3     		bcc	.L71
+ 646              	.L72:
+ 647 000c 4908     		lsrs	r1, r1, #1
+ 648 000e 4FF6FE72 		movw	r2, #65534
+ 649 0012 0133     		adds	r3, r3, #1
+ 650 0014 9142     		cmp	r1, r2
+ 651 0016 DBB2     		uxtb	r3, r3
+ 652 0018 F8D8     		bhi	.L72
+ 653 001a 0122     		movs	r2, #1
+ 654 001c 02FA03F3 		lsl	r3, r2, r3
+ 655 0020 013B     		subs	r3, r3, #1
+ 656              	.L71:
+ 657 0022 90F83620 		ldrb	r2, [r0, #54]	@ zero_extendqisi2
+ 658 0026 012A     		cmp	r2, #1
+ 659 0028 01D1     		bne	.L73
+ 660 002a 5B08     		lsrs	r3, r3, #1
+ 661 002c 4908     		lsrs	r1, r1, #1
+ 662              	.L73:
+ 663 002e 8269     		ldr	r2, [r0, #24]
+ 664 0030 C069     		ldr	r0, [r0, #28]
+ 665 0032 5163     		str	r1, [r2, #52]
+ 666 0034 99B2     		uxth	r1, r3
+ 667 0036 4163     		str	r1, [r0, #52]
+ 668 0038 0020     		movs	r0, #0
+ 669 003a 7047     		bx	lr
+ 670              	.L74:
+ 671 003c 0220     		movs	r0, #2
+ 672 003e 7047     		bx	lr
+ 674              		.section	.text.PWMSP001_SetPwmFreq,"ax",%progbits
+ 675              		.align	1
+ 676              		.global	PWMSP001_SetPwmFreq
+ 677              		.thumb
+ 678              		.thumb_func
+ 680              	PWMSP001_SetPwmFreq:
+ 681              		@ args = 0, pretend = 0, frame = 0
+ 682              		@ frame_needed = 0, uses_anonymous_args = 0
+ 683 0000 38B5     		push	{r3, r4, r5, lr}
+ 684 0002 C36B     		ldr	r3, [r0, #60]
+ 685 0004 07EE901A 		fmsr	s15, r1
+ 686 0008 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 687 000a 0446     		mov	r4, r0
+ 688 000c 0029     		cmp	r1, #0
+ 689 000e 3DD0     		beq	.L82
+ 690 0010 F5EE407A 		fcmpzs	s15
+ 691 0014 F1EE10FA 		fmstat
+ 692 0018 3AD0     		beq	.L84
+ 693 001a 90ED017A 		flds	s14, [r0, #4]
+ 694 001e DFED1D0A 		flds	s1, .L86
+ 695 0022 27EE270A 		fmuls	s0, s14, s15
+ 696 0026 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 697 002a 80EE801A 		fdivs	s2, s1, s0
+ 698 002e FCEEC11A 		ftouizs	s3, s2
+ 699 0032 11EE901A 		fmrs	r1, s3	@ int
+ 700 0036 AAB9     		cbnz	r2, .L79
+ 701 0038 B1F5803F 		cmp	r1, #65536
+ 702 003c 28D2     		bcs	.L84
+ 703 003e 90F83600 		ldrb	r0, [r0, #54]	@ zero_extendqisi2
+ 704 0042 A369     		ldr	r3, [r4, #24]
+ 705 0044 0139     		subs	r1, r1, #1
+ 706 0046 00B1     		cbz	r0, .L85
+ 707              	.L80:
+ 708 0048 4908     		lsrs	r1, r1, #1
+ 709              	.L85:
+ 710 004a 5963     		str	r1, [r3, #52]
+ 711 004c 94F83720 		ldrb	r2, [r4, #55]	@ zero_extendqisi2
+ 712 0050 6369     		ldr	r3, [r4, #20]
+ 713 0052 0120     		movs	r0, #1
+ 714 0054 1969     		ldr	r1, [r3, #16]
+ 715 0056 9200     		lsls	r2, r2, #2
+ 716 0058 00FA02F2 		lsl	r2, r0, r2
+ 717 005c 0A43     		orrs	r2, r2, r1
+ 718 005e 1A61     		str	r2, [r3, #16]
+ 719 0060 0020     		movs	r0, #0
+ 720 0062 38BD     		pop	{r3, r4, r5, pc}
+ 721              	.L79:
+ 722 0064 FFF7FEFF 		bl	PWMSP001_lSetPwmFreqTimerConcat
+ 723 0068 98B9     		cbnz	r0, .L78
+ 724 006a 6369     		ldr	r3, [r4, #20]
+ 725 006c 94F83750 		ldrb	r5, [r4, #55]	@ zero_extendqisi2
+ 726 0070 94F83840 		ldrb	r4, [r4, #56]	@ zero_extendqisi2
+ 727 0074 1969     		ldr	r1, [r3, #16]
+ 728 0076 0122     		movs	r2, #1
+ 729 0078 AD00     		lsls	r5, r5, #2
+ 730 007a A400     		lsls	r4, r4, #2
+ 731 007c 02FA05F5 		lsl	r5, r2, r5
+ 732 0080 02FA04F2 		lsl	r2, r2, r4
+ 733 0084 2A43     		orrs	r2, r2, r5
+ 734 0086 0A43     		orrs	r2, r2, r1
+ 735 0088 1A61     		str	r2, [r3, #16]
+ 736 008a 38BD     		pop	{r3, r4, r5, pc}
+ 737              	.L82:
+ 738 008c 0120     		movs	r0, #1
+ 739 008e 38BD     		pop	{r3, r4, r5, pc}
+ 740              	.L84:
+ 741 0090 0220     		movs	r0, #2
+ 742              	.L78:
+ 743 0092 38BD     		pop	{r3, r4, r5, pc}
+ 744              	.L87:
+ 745              		.align	2
+ 746              	.L86:
+ 747 0094 286B6E4E 		.word	1315859240
+ 749              		.section	.text.PWMSP001_SetPwmFreqAndDutyCycle,"ax",%progbits
+ 750              		.align	1
+ 751              		.global	PWMSP001_SetPwmFreqAndDutyCycle
+ 752              		.thumb
+ 753              		.thumb_func
+ 755              	PWMSP001_SetPwmFreqAndDutyCycle:
+ 756              		@ args = 0, pretend = 0, frame = 0
+ 757              		@ frame_needed = 0, uses_anonymous_args = 0
+ 758 0000 10B5     		push	{r4, lr}
+ 759 0002 C36B     		ldr	r3, [r0, #60]
+ 760 0004 0446     		mov	r4, r0
+ 761 0006 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 762 0008 2DED028B 		fstmfdd	sp!, {d8}
+ 763 000c 07EE901A 		fmsr	s15, r1
+ 764 0010 08EE102A 		fmsr	s16, r2
+ 765 0014 0028     		cmp	r0, #0
+ 766 0016 3AD0     		beq	.L95
+ 767 0018 F5EE407A 		fcmpzs	s15
+ 768 001c F1EE10FA 		fmstat
+ 769 0020 37D0     		beq	.L100
+ 770 0022 9FED1E7A 		flds	s14, .L102
+ 771 0026 B4EEC78A 		fcmpes	s16, s14
+ 772 002a F1EE10FA 		fmstat
+ 773 002e 30DC     		bgt	.L100
+ 774 0030 B5EEC08A 		fcmpezs	s16
+ 775 0034 F1EE10FA 		fmstat
+ 776 0038 2BD4     		bmi	.L100
+ 777 003a 94ED010A 		flds	s0, [r4, #4]
+ 778 003e 9FED181A 		flds	s2, .L102+4
+ 779 0042 60EE270A 		fmuls	s1, s0, s15
+ 780 0046 94F82020 		ldrb	r2, [r4, #32]	@ zero_extendqisi2
+ 781 004a C1EE201A 		fdivs	s3, s2, s1
+ 782 004e BCEEE12A 		ftouizs	s4, s3
+ 783 0052 12EE101A 		fmrs	r1, s4	@ int
+ 784 0056 52B9     		cbnz	r2, .L90
+ 785 0058 B1F5803F 		cmp	r1, #65536
+ 786 005c 19D2     		bcs	.L100
+ 787 005e 94F83600 		ldrb	r0, [r4, #54]	@ zero_extendqisi2
+ 788 0062 A369     		ldr	r3, [r4, #24]
+ 789 0064 0139     		subs	r1, r1, #1
+ 790 0066 00B1     		cbz	r0, .L101
+ 791              	.L91:
+ 792 0068 4908     		lsrs	r1, r1, #1
+ 793              	.L101:
+ 794 006a 5963     		str	r1, [r3, #52]
+ 795 006c 08E0     		b	.L94
+ 796              	.L90:
+ 797 006e 012A     		cmp	r2, #1
+ 798 0070 02D1     		bne	.L93
+ 799 0072 B1F5803F 		cmp	r1, #65536
+ 800 0076 0CD3     		bcc	.L100
+ 801              	.L93:
+ 802 0078 2046     		mov	r0, r4
+ 803 007a FFF7FEFF 		bl	PWMSP001_lSetPwmFreqTimerConcat
+ 804 007e 48B9     		cbnz	r0, .L89
+ 805              	.L94:
+ 806 0080 2046     		mov	r0, r4
+ 807 0082 626C     		ldr	r2, [r4, #68]
+ 808 0084 18EE101A 		fmrs	r1, s16
+ 809 0088 9047     		blx	r2
+ 810 008a 0020     		movs	r0, #0
+ 811 008c 02E0     		b	.L89
+ 812              	.L95:
+ 813 008e 0120     		movs	r0, #1
+ 814 0090 00E0     		b	.L89
+ 815              	.L100:
+ 816 0092 0220     		movs	r0, #2
+ 817              	.L89:
+ 818 0094 BDEC028B 		fldmfdd	sp!, {d8}
+ 819 0098 10BD     		pop	{r4, pc}
+ 820              	.L103:
+ 821 009a 00BF     		.align	2
+ 822              	.L102:
+ 823 009c 0000C842 		.word	1120403456
+ 824 00a0 286B6E4E 		.word	1315859240
+ 826              		.section	.text.PWMSP001_SetTimerVal,"ax",%progbits
+ 827              		.align	1
+ 828              		.global	PWMSP001_SetTimerVal
+ 829              		.thumb
+ 830              		.thumb_func
+ 832              	PWMSP001_SetTimerVal:
+ 833              		@ args = 0, pretend = 0, frame = 0
+ 834              		@ frame_needed = 0, uses_anonymous_args = 0
+ 835              		@ link register save eliminated.
+ 836 0000 C36B     		ldr	r3, [r0, #60]
+ 837 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 838 0004 012A     		cmp	r2, #1
+ 839 0006 01D0     		beq	.L105
+ 840 0008 032A     		cmp	r2, #3
+ 841 000a 0AD1     		bne	.L107
+ 842              	.L105:
+ 843 000c 8369     		ldr	r3, [r0, #24]
+ 844 000e 8AB2     		uxth	r2, r1
+ 845 0010 1A67     		str	r2, [r3, #112]
+ 846 0012 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 847 0016 012B     		cmp	r3, #1
+ 848 0018 05D1     		bne	.L108
+ 849 001a C069     		ldr	r0, [r0, #28]
+ 850 001c 090C     		lsrs	r1, r1, #16
+ 851 001e 0167     		str	r1, [r0, #112]
+ 852 0020 01E0     		b	.L108
+ 853              	.L107:
+ 854 0022 0120     		movs	r0, #1
+ 855 0024 7047     		bx	lr
+ 856              	.L108:
+ 857 0026 0020     		movs	r0, #0
+ 858 0028 7047     		bx	lr
+ 860              		.section	.text.PWMSP001_GetTimerStatus,"ax",%progbits
+ 861              		.align	1
+ 862              		.global	PWMSP001_GetTimerStatus
+ 863              		.thumb
+ 864              		.thumb_func
+ 866              	PWMSP001_GetTimerStatus:
+ 867              		@ args = 0, pretend = 0, frame = 0
+ 868              		@ frame_needed = 0, uses_anonymous_args = 0
+ 869              		@ link register save eliminated.
+ 870 0000 C36B     		ldr	r3, [r0, #60]
+ 871 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 872 0004 7AB1     		cbz	r2, .L115
+ 873 0006 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 874 000a 012B     		cmp	r3, #1
+ 875 000c 8369     		ldr	r3, [r0, #24]
+ 876 000e 04D1     		bne	.L114
+ 877 0010 C269     		ldr	r2, [r0, #28]
+ 878 0012 9268     		ldr	r2, [r2, #8]
+ 879 0014 9868     		ldr	r0, [r3, #8]
+ 880 0016 1040     		ands	r0, r0, r2
+ 881 0018 00E0     		b	.L116
+ 882              	.L114:
+ 883 001a 9868     		ldr	r0, [r3, #8]
+ 884              	.L116:
+ 885 001c 00F00103 		and	r3, r0, #1
+ 886 0020 0B60     		str	r3, [r1, #0]
+ 887 0022 0020     		movs	r0, #0
+ 888 0024 7047     		bx	lr
+ 889              	.L115:
+ 890 0026 0120     		movs	r0, #1
+ 891 0028 7047     		bx	lr
+ 893              		.section	.text.PWMSP001_GetTimerRegsVal,"ax",%progbits
+ 894              		.align	1
+ 895              		.global	PWMSP001_GetTimerRegsVal
+ 896              		.thumb
+ 897              		.thumb_func
+ 899              	PWMSP001_GetTimerRegsVal:
+ 900              		@ args = 0, pretend = 0, frame = 0
+ 901              		@ frame_needed = 0, uses_anonymous_args = 0
+ 902 0000 C36B     		ldr	r3, [r0, #60]
+ 903 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 904 0004 30B5     		push	{r4, r5, lr}
+ 905 0006 12B3     		cbz	r2, .L120
+ 906 0008 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 907 000c 012B     		cmp	r3, #1
+ 908 000e 8369     		ldr	r3, [r0, #24]
+ 909 0010 14D1     		bne	.L119
+ 910 0012 C269     		ldr	r2, [r0, #28]
+ 911 0014 146F     		ldr	r4, [r2, #112]
+ 912 0016 1D6F     		ldr	r5, [r3, #112]
+ 913 0018 A8B2     		uxth	r0, r5
+ 914 001a 40EA0444 		orr	r4, r0, r4, lsl #16
+ 915 001e D56B     		ldr	r5, [r2, #60]
+ 916 0020 8C60     		str	r4, [r1, #8]
+ 917 0022 586B     		ldr	r0, [r3, #52]
+ 918 0024 DC6B     		ldr	r4, [r3, #60]
+ 919 0026 05FB0040 		mla	r0, r5, r0, r4
+ 920 002a 0860     		str	r0, [r1, #0]
+ 921 002c 506B     		ldr	r0, [r2, #52]
+ 922 002e 5B6B     		ldr	r3, [r3, #52]
+ 923 0030 9AB2     		uxth	r2, r3
+ 924 0032 0132     		adds	r2, r2, #1
+ 925 0034 0130     		adds	r0, r0, #1
+ 926 0036 5043     		muls	r0, r2, r0
+ 927 0038 431C     		adds	r3, r0, #1
+ 928 003a 05E0     		b	.L121
+ 929              	.L119:
+ 930 003c 186F     		ldr	r0, [r3, #112]
+ 931 003e 82B2     		uxth	r2, r0
+ 932 0040 D86B     		ldr	r0, [r3, #60]
+ 933 0042 5B6B     		ldr	r3, [r3, #52]
+ 934 0044 8A60     		str	r2, [r1, #8]
+ 935 0046 0860     		str	r0, [r1, #0]
+ 936              	.L121:
+ 937 0048 4B60     		str	r3, [r1, #4]
+ 938 004a 0020     		movs	r0, #0
+ 939 004c 30BD     		pop	{r4, r5, pc}
+ 940              	.L120:
+ 941 004e 0120     		movs	r0, #1
+ 942 0050 30BD     		pop	{r4, r5, pc}
+ 944              		.section	.text.PWMSP001_GetPeriodReg,"ax",%progbits
+ 945              		.align	1
+ 946              		.global	PWMSP001_GetPeriodReg
+ 947              		.thumb
+ 948              		.thumb_func
+ 950              	PWMSP001_GetPeriodReg:
+ 951              		@ args = 0, pretend = 0, frame = 0
+ 952              		@ frame_needed = 0, uses_anonymous_args = 0
+ 953              		@ link register save eliminated.
+ 954 0000 C36B     		ldr	r3, [r0, #60]
+ 955 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 956 0004 9AB1     		cbz	r2, .L125
+ 957 0006 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 958 000a 012B     		cmp	r3, #1
+ 959 000c 0AD1     		bne	.L124
+ 960 000e C369     		ldr	r3, [r0, #28]
+ 961 0010 8069     		ldr	r0, [r0, #24]
+ 962 0012 5A6B     		ldr	r2, [r3, #52]
+ 963 0014 531C     		adds	r3, r2, #1
+ 964 0016 0B60     		str	r3, [r1, #0]
+ 965 0018 426B     		ldr	r2, [r0, #52]
+ 966 001a 90B2     		uxth	r0, r2
+ 967 001c 421C     		adds	r2, r0, #1
+ 968 001e 5343     		muls	r3, r2, r3
+ 969 0020 5A1C     		adds	r2, r3, #1
+ 970 0022 01E0     		b	.L126
+ 971              	.L124:
+ 972 0024 8069     		ldr	r0, [r0, #24]
+ 973 0026 426B     		ldr	r2, [r0, #52]
+ 974              	.L126:
+ 975 0028 0A60     		str	r2, [r1, #0]
+ 976 002a 0020     		movs	r0, #0
+ 977 002c 7047     		bx	lr
+ 978              	.L125:
+ 979 002e 0120     		movs	r0, #1
+ 980 0030 7047     		bx	lr
+ 982              		.section	.text.PWMSP001_SWRequestShadowTransfer,"ax",%progbits
+ 983              		.align	1
+ 984              		.global	PWMSP001_SWRequestShadowTransfer
+ 985              		.thumb
+ 986              		.thumb_func
+ 988              	PWMSP001_SWRequestShadowTransfer:
+ 989              		@ args = 0, pretend = 0, frame = 0
+ 990              		@ frame_needed = 0, uses_anonymous_args = 0
+ 991 0000 C36B     		ldr	r3, [r0, #60]
+ 992 0002 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 993 0004 10B5     		push	{r4, lr}
+ 994 0006 E1B1     		cbz	r1, .L130
+ 995 0008 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 996 000c 4369     		ldr	r3, [r0, #20]
+ 997 000e 90F83710 		ldrb	r1, [r0, #55]	@ zero_extendqisi2
+ 998 0012 012A     		cmp	r2, #1
+ 999 0014 0CD1     		bne	.L129
+ 1000 0016 90F83800 		ldrb	r0, [r0, #56]	@ zero_extendqisi2
+ 1001 001a 1C69     		ldr	r4, [r3, #16]
+ 1002 001c 8900     		lsls	r1, r1, #2
+ 1003 001e 8000     		lsls	r0, r0, #2
+ 1004 0020 02FA01F1 		lsl	r1, r2, r1
+ 1005 0024 02FA00F2 		lsl	r2, r2, r0
+ 1006 0028 0A43     		orrs	r2, r2, r1
+ 1007 002a 2243     		orrs	r2, r2, r4
+ 1008 002c 1A61     		str	r2, [r3, #16]
+ 1009 002e 06E0     		b	.L131
+ 1010              	.L129:
+ 1011 0030 1A69     		ldr	r2, [r3, #16]
+ 1012 0032 8900     		lsls	r1, r1, #2
+ 1013 0034 0120     		movs	r0, #1
+ 1014 0036 00FA01F1 		lsl	r1, r0, r1
+ 1015 003a 1143     		orrs	r1, r1, r2
+ 1016 003c 1961     		str	r1, [r3, #16]
+ 1017              	.L131:
+ 1018 003e 0020     		movs	r0, #0
+ 1019 0040 10BD     		pop	{r4, pc}
+ 1020              	.L130:
+ 1021 0042 0120     		movs	r0, #1
+ 1022 0044 10BD     		pop	{r4, pc}
+ 1024              		.section	.text.PWMSP001_ResetTrapFlag,"ax",%progbits
+ 1025              		.align	1
+ 1026              		.global	PWMSP001_ResetTrapFlag
+ 1027              		.thumb
+ 1028              		.thumb_func
+ 1030              	PWMSP001_ResetTrapFlag:
+ 1031              		@ args = 0, pretend = 0, frame = 0
+ 1032              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1033              		@ link register save eliminated.
+ 1034 0000 C37C     		ldrb	r3, [r0, #19]	@ zero_extendqisi2
+ 1035 0002 012B     		cmp	r3, #1
+ 1036 0004 11D1     		bne	.L134
+ 1037 0006 8169     		ldr	r1, [r0, #24]
+ 1038 0008 D1F8B020 		ldr	r2, [r1, #176]
+ 1039 000c 42F48063 		orr	r3, r2, #1024
+ 1040 0010 C1F8B030 		str	r3, [r1, #176]
+ 1041 0014 90F82010 		ldrb	r1, [r0, #32]	@ zero_extendqisi2
+ 1042 0018 0129     		cmp	r1, #1
+ 1043 001a 06D1     		bne	.L134
+ 1044 001c C369     		ldr	r3, [r0, #28]
+ 1045 001e D3F8B020 		ldr	r2, [r3, #176]
+ 1046 0022 42F48061 		orr	r1, r2, #1024
+ 1047 0026 C3F8B010 		str	r1, [r3, #176]
+ 1048              	.L134:
+ 1049 002a 8369     		ldr	r3, [r0, #24]
+ 1050 002c D3F8B020 		ldr	r2, [r3, #176]
+ 1051 0030 42F40061 		orr	r1, r2, #2048
+ 1052 0034 C3F8B010 		str	r1, [r3, #176]
+ 1053 0038 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 1054 003c 012B     		cmp	r3, #1
+ 1055 003e 06D1     		bne	.L132
+ 1056 0040 C069     		ldr	r0, [r0, #28]
+ 1057 0042 D0F8B020 		ldr	r2, [r0, #176]
+ 1058 0046 42F40061 		orr	r1, r2, #2048
+ 1059 004a C0F8B010 		str	r1, [r0, #176]
+ 1060              	.L132:
+ 1061 004e 7047     		bx	lr
+ 1063              		.section	.text.PWMSP001_lConfigureSecondSlice,"ax",%progbits
+ 1064              		.align	1
+ 1065              		.global	PWMSP001_lConfigureSecondSlice
+ 1066              		.thumb
+ 1067              		.thumb_func
+ 1069              	PWMSP001_lConfigureSecondSlice:
+ 1070              		@ args = 0, pretend = 0, frame = 0
+ 1071              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1072 0000 10B5     		push	{r4, lr}
+ 1073 0002 C369     		ldr	r3, [r0, #28]
+ 1074 0004 418D     		ldrh	r1, [r0, #42]
+ 1075 0006 4489     		ldrh	r4, [r0, #10]
+ 1076 0008 0722     		movs	r2, #7
+ 1077 000a 1A61     		str	r2, [r3, #16]
+ 1078 000c 5963     		str	r1, [r3, #52]
+ 1079 000e DC63     		str	r4, [r3, #60]
+ 1080 0010 5A68     		ldr	r2, [r3, #4]
+ 1081 0012 42F48011 		orr	r1, r2, #1048576
+ 1082 0016 5960     		str	r1, [r3, #4]
+ 1083 0018 C47B     		ldrb	r4, [r0, #15]	@ zero_extendqisi2
+ 1084 001a 012C     		cmp	r4, #1
+ 1085 001c 15D1     		bne	.L138
+ 1086 001e 1A68     		ldr	r2, [r3, #0]
+ 1087 0020 22F0C051 		bic	r1, r2, #402653184
+ 1088 0024 21F44024 		bic	r4, r1, #786432
+ 1089 0028 1C60     		str	r4, [r3, #0]
+ 1090 002a 5A68     		ldr	r2, [r3, #4]
+ 1091 002c 22F00C01 		bic	r1, r2, #12
+ 1092 0030 90F82420 		ldrb	r2, [r0, #36]	@ zero_extendqisi2
+ 1093 0034 5960     		str	r1, [r3, #4]
+ 1094 0036 1C68     		ldr	r4, [r3, #0]
+ 1095 0038 9104     		lsls	r1, r2, #18
+ 1096 003a 01F44022 		and	r2, r1, #786432
+ 1097 003e 2243     		orrs	r2, r2, r4
+ 1098 0040 1A60     		str	r2, [r3, #0]
+ 1099 0042 5C68     		ldr	r4, [r3, #4]
+ 1100 0044 44F00801 		orr	r1, r4, #8
+ 1101 0048 5960     		str	r1, [r3, #4]
+ 1102              	.L138:
+ 1103 004a 427C     		ldrb	r2, [r0, #17]	@ zero_extendqisi2
+ 1104 004c 012A     		cmp	r2, #1
+ 1105 004e 14D1     		bne	.L139
+ 1106 0050 1C68     		ldr	r4, [r3, #0]
+ 1107 0052 24F0C241 		bic	r1, r4, #1627389952
+ 1108 0056 21F44012 		bic	r2, r1, #3145728
+ 1109 005a 1A60     		str	r2, [r3, #0]
+ 1110 005c 5C68     		ldr	r4, [r3, #4]
+ 1111 005e 24F40031 		bic	r1, r4, #131072
+ 1112 0062 5960     		str	r1, [r3, #4]
+ 1113 0064 0278     		ldrb	r2, [r0, #0]	@ zero_extendqisi2
+ 1114 0066 1C68     		ldr	r4, [r3, #0]
+ 1115 0068 1106     		lsls	r1, r2, #24
+ 1116 006a 01F08072 		and	r2, r1, #16777216
+ 1117 006e 2243     		orrs	r2, r2, r4
+ 1118 0070 1A60     		str	r2, [r3, #0]
+ 1119 0072 5C68     		ldr	r4, [r3, #4]
+ 1120 0074 44F40031 		orr	r1, r4, #131072
+ 1121 0078 5960     		str	r1, [r3, #4]
+ 1122              	.L139:
+ 1123 007a 5A69     		ldr	r2, [r3, #20]
+ 1124 007c 22F4CE44 		bic	r4, r2, #26368
+ 1125 0080 24F00B01 		bic	r1, r4, #11
+ 1126 0084 5961     		str	r1, [r3, #20]
+ 1127 0086 027B     		ldrb	r2, [r0, #12]	@ zero_extendqisi2
+ 1128 0088 5400     		lsls	r4, r2, #1
+ 1129 008a 90F83420 		ldrb	r2, [r0, #52]	@ zero_extendqisi2
+ 1130 008e 04F00201 		and	r1, r4, #2
+ 1131 0092 9402     		lsls	r4, r2, #10
+ 1132 0094 04F48062 		and	r2, r4, #1024
+ 1133 0098 41EA0204 		orr	r4, r1, r2
+ 1134 009c 90F83610 		ldrb	r1, [r0, #54]	@ zero_extendqisi2
+ 1135 00a0 01F00102 		and	r2, r1, #1
+ 1136 00a4 90F83510 		ldrb	r1, [r0, #53]	@ zero_extendqisi2
+ 1137 00a8 1443     		orrs	r4, r4, r2
+ 1138 00aa 0A02     		lsls	r2, r1, #8
+ 1139 00ac 02F44071 		and	r1, r2, #768
+ 1140 00b0 0C43     		orrs	r4, r4, r1
+ 1141 00b2 5C61     		str	r4, [r3, #20]
+ 1142 00b4 90F82120 		ldrb	r2, [r0, #33]	@ zero_extendqisi2
+ 1143 00b8 5C69     		ldr	r4, [r3, #20]
+ 1144 00ba 5103     		lsls	r1, r2, #13
+ 1145 00bc 01F4C042 		and	r2, r1, #24576
+ 1146 00c0 2243     		orrs	r2, r2, r4
+ 1147 00c2 5A61     		str	r2, [r3, #20]
+ 1148 00c4 1C6A     		ldr	r4, [r3, #32]
+ 1149 00c6 417B     		ldrb	r1, [r0, #13]	@ zero_extendqisi2
+ 1150 00c8 24F00F02 		bic	r2, r4, #15
+ 1151 00cc 01F00F01 		and	r1, r1, #15
+ 1152 00d0 41EA0204 		orr	r4, r1, r2
+ 1153 00d4 1C62     		str	r4, [r3, #32]
+ 1154 00d6 827C     		ldrb	r2, [r0, #18]	@ zero_extendqisi2
+ 1155 00d8 5969     		ldr	r1, [r3, #20]
+ 1156 00da 5405     		lsls	r4, r2, #21
+ 1157 00dc 04F40012 		and	r2, r4, #2097152
+ 1158 00e0 21F40011 		bic	r1, r1, #2097152
+ 1159 00e4 0A43     		orrs	r2, r2, r1
+ 1160 00e6 5A61     		str	r2, [r3, #20]
+ 1161 00e8 C27C     		ldrb	r2, [r0, #19]	@ zero_extendqisi2
+ 1162 00ea 5C69     		ldr	r4, [r3, #20]
+ 1163 00ec 9105     		lsls	r1, r2, #22
+ 1164 00ee 01F48002 		and	r2, r1, #4194304
+ 1165 00f2 24F48004 		bic	r4, r4, #4194304
+ 1166 00f6 2243     		orrs	r2, r2, r4
+ 1167 00f8 5A61     		str	r2, [r3, #20]
+ 1168 00fa 427C     		ldrb	r2, [r0, #17]	@ zero_extendqisi2
+ 1169 00fc 5969     		ldr	r1, [r3, #20]
+ 1170 00fe 5404     		lsls	r4, r2, #17
+ 1171 0100 04F40032 		and	r2, r4, #131072
+ 1172 0104 21F40031 		bic	r1, r1, #131072
+ 1173 0108 0A43     		orrs	r2, r2, r1
+ 1174 010a 5A61     		str	r2, [r3, #20]
+ 1175 010c 5C6A     		ldr	r4, [r3, #36]
+ 1176 010e 90F82220 		ldrb	r2, [r0, #34]	@ zero_extendqisi2
+ 1177 0112 24F00F04 		bic	r4, r4, #15
+ 1178 0116 02F00F01 		and	r1, r2, #15
+ 1179 011a 41EA0402 		orr	r2, r1, r4
+ 1180 011e 5A62     		str	r2, [r3, #36]
+ 1181 0120 017C     		ldrb	r1, [r0, #16]	@ zero_extendqisi2
+ 1182 0122 9961     		str	r1, [r3, #24]
+ 1183 0124 4169     		ldr	r1, [r0, #20]
+ 1184 0126 90F83800 		ldrb	r0, [r0, #56]	@ zero_extendqisi2
+ 1185 012a 0C69     		ldr	r4, [r1, #16]
+ 1186 012c 0123     		movs	r3, #1
+ 1187 012e 8200     		lsls	r2, r0, #2
+ 1188 0130 03FA02F0 		lsl	r0, r3, r2
+ 1189 0134 2043     		orrs	r0, r0, r4
+ 1190 0136 D418     		adds	r4, r2, r3
+ 1191 0138 03FA04F4 		lsl	r4, r3, r4
+ 1192 013c 0232     		adds	r2, r2, #2
+ 1193 013e 2043     		orrs	r0, r0, r4
+ 1194 0140 03FA02F3 		lsl	r3, r3, r2
+ 1195 0144 0343     		orrs	r3, r3, r0
+ 1196 0146 0B61     		str	r3, [r1, #16]
+ 1197 0148 10BD     		pop	{r4, pc}
+ 1199              		.section	.text.PWMSP001_lInit,"ax",%progbits
+ 1200              		.align	1
+ 1201              		.global	PWMSP001_lInit
+ 1202              		.thumb
+ 1203              		.thumb_func
+ 1205              	PWMSP001_lInit:
+ 1206              		@ args = 0, pretend = 0, frame = 0
+ 1207              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1208 0000 38B5     		push	{r3, r4, r5, lr}
+ 1209 0002 C36B     		ldr	r3, [r0, #60]
+ 1210 0004 0446     		mov	r4, r0
+ 1211 0006 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 1212 0008 0028     		cmp	r0, #0
+ 1213 000a 40F0CB80 		bne	.L148
+ 1214 000e A369     		ldr	r3, [r4, #24]
+ 1215 0010 0722     		movs	r2, #7
+ 1216 0012 1A61     		str	r2, [r3, #16]
+ 1217 0014 E17B     		ldrb	r1, [r4, #15]	@ zero_extendqisi2
+ 1218 0016 0129     		cmp	r1, #1
+ 1219 0018 15D1     		bne	.L142
+ 1220 001a 1D68     		ldr	r5, [r3, #0]
+ 1221 001c 25F0C050 		bic	r0, r5, #402653184
+ 1222 0020 20F44022 		bic	r2, r0, #786432
+ 1223 0024 1A60     		str	r2, [r3, #0]
+ 1224 0026 5968     		ldr	r1, [r3, #4]
+ 1225 0028 94F82420 		ldrb	r2, [r4, #36]	@ zero_extendqisi2
+ 1226 002c 21F00C05 		bic	r5, r1, #12
+ 1227 0030 5D60     		str	r5, [r3, #4]
+ 1228 0032 1868     		ldr	r0, [r3, #0]
+ 1229 0034 9104     		lsls	r1, r2, #18
+ 1230 0036 01F44025 		and	r5, r1, #786432
+ 1231 003a 0543     		orrs	r5, r5, r0
+ 1232 003c 1D60     		str	r5, [r3, #0]
+ 1233 003e 5868     		ldr	r0, [r3, #4]
+ 1234 0040 40F00802 		orr	r2, r0, #8
+ 1235 0044 5A60     		str	r2, [r3, #4]
+ 1236              	.L142:
+ 1237 0046 617C     		ldrb	r1, [r4, #17]	@ zero_extendqisi2
+ 1238 0048 0129     		cmp	r1, #1
+ 1239 004a 18D1     		bne	.L143
+ 1240 004c 94F82050 		ldrb	r5, [r4, #32]	@ zero_extendqisi2
+ 1241 0050 012D     		cmp	r5, #1
+ 1242 0052 14D0     		beq	.L143
+ 1243 0054 1868     		ldr	r0, [r3, #0]
+ 1244 0056 20F0C242 		bic	r2, r0, #1627389952
+ 1245 005a 22F44011 		bic	r1, r2, #3145728
+ 1246 005e 1960     		str	r1, [r3, #0]
+ 1247 0060 5D68     		ldr	r5, [r3, #4]
+ 1248 0062 25F40030 		bic	r0, r5, #131072
+ 1249 0066 5860     		str	r0, [r3, #4]
+ 1250 0068 2278     		ldrb	r2, [r4, #0]	@ zero_extendqisi2
+ 1251 006a 1968     		ldr	r1, [r3, #0]
+ 1252 006c 1506     		lsls	r5, r2, #24
+ 1253 006e 05F08070 		and	r0, r5, #16777216
+ 1254 0072 0843     		orrs	r0, r0, r1
+ 1255 0074 1860     		str	r0, [r3, #0]
+ 1256 0076 5968     		ldr	r1, [r3, #4]
+ 1257 0078 41F40032 		orr	r2, r1, #131072
+ 1258 007c 5A60     		str	r2, [r3, #4]
+ 1259              	.L143:
+ 1260 007e 5D69     		ldr	r5, [r3, #20]
+ 1261 0080 94F83620 		ldrb	r2, [r4, #54]	@ zero_extendqisi2
+ 1262 0084 25F4CE40 		bic	r0, r5, #26368
+ 1263 0088 20F00901 		bic	r1, r0, #9
+ 1264 008c 5961     		str	r1, [r3, #20]
+ 1265 008e 5D69     		ldr	r5, [r3, #20]
+ 1266 0090 94F83410 		ldrb	r1, [r4, #52]	@ zero_extendqisi2
+ 1267 0094 02F00100 		and	r0, r2, #1
+ 1268 0098 2843     		orrs	r0, r0, r5
+ 1269 009a 8D02     		lsls	r5, r1, #10
+ 1270 009c 94F83510 		ldrb	r1, [r4, #53]	@ zero_extendqisi2
+ 1271 00a0 05F48062 		and	r2, r5, #1024
+ 1272 00a4 0D02     		lsls	r5, r1, #8
+ 1273 00a6 1043     		orrs	r0, r0, r2
+ 1274 00a8 05F44072 		and	r2, r5, #768
+ 1275 00ac 1043     		orrs	r0, r0, r2
+ 1276 00ae 5861     		str	r0, [r3, #20]
+ 1277 00b0 94F82000 		ldrb	r0, [r4, #32]	@ zero_extendqisi2
+ 1278 00b4 0128     		cmp	r0, #1
+ 1279 00b6 08D0     		beq	.L144
+ 1280 00b8 257B     		ldrb	r5, [r4, #12]	@ zero_extendqisi2
+ 1281 00ba 5969     		ldr	r1, [r3, #20]
+ 1282 00bc 6A00     		lsls	r2, r5, #1
+ 1283 00be 02F00200 		and	r0, r2, #2
+ 1284 00c2 21F00201 		bic	r1, r1, #2
+ 1285 00c6 0843     		orrs	r0, r0, r1
+ 1286 00c8 5861     		str	r0, [r3, #20]
+ 1287              	.L144:
+ 1288 00ca 94F82120 		ldrb	r2, [r4, #33]	@ zero_extendqisi2
+ 1289 00ce 5D69     		ldr	r5, [r3, #20]
+ 1290 00d0 5003     		lsls	r0, r2, #13
+ 1291 00d2 00F4C041 		and	r1, r0, #24576
+ 1292 00d6 2943     		orrs	r1, r1, r5
+ 1293 00d8 5961     		str	r1, [r3, #20]
+ 1294 00da 1D6A     		ldr	r5, [r3, #32]
+ 1295 00dc 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+ 1296 00de 25F00F01 		bic	r1, r5, #15
+ 1297 00e2 02F00F00 		and	r0, r2, #15
+ 1298 00e6 40EA0105 		orr	r5, r0, r1
+ 1299 00ea 1D62     		str	r5, [r3, #32]
+ 1300 00ec 94F82020 		ldrb	r2, [r4, #32]	@ zero_extendqisi2
+ 1301 00f0 012A     		cmp	r2, #1
+ 1302 00f2 1AD0     		beq	.L145
+ 1303 00f4 A17C     		ldrb	r1, [r4, #18]	@ zero_extendqisi2
+ 1304 00f6 5869     		ldr	r0, [r3, #20]
+ 1305 00f8 4D05     		lsls	r5, r1, #21
+ 1306 00fa 05F40012 		and	r2, r5, #2097152
+ 1307 00fe 20F40010 		bic	r0, r0, #2097152
+ 1308 0102 0243     		orrs	r2, r2, r0
+ 1309 0104 5A61     		str	r2, [r3, #20]
+ 1310 0106 E57C     		ldrb	r5, [r4, #19]	@ zero_extendqisi2
+ 1311 0108 5969     		ldr	r1, [r3, #20]
+ 1312 010a AA05     		lsls	r2, r5, #22
+ 1313 010c 02F48000 		and	r0, r2, #4194304
+ 1314 0110 21F48001 		bic	r1, r1, #4194304
+ 1315 0114 0843     		orrs	r0, r0, r1
+ 1316 0116 5861     		str	r0, [r3, #20]
+ 1317 0118 627C     		ldrb	r2, [r4, #17]	@ zero_extendqisi2
+ 1318 011a 5D69     		ldr	r5, [r3, #20]
+ 1319 011c 5004     		lsls	r0, r2, #17
+ 1320 011e 00F40032 		and	r2, r0, #131072
+ 1321 0122 25F40031 		bic	r1, r5, #131072
+ 1322 0126 0A43     		orrs	r2, r2, r1
+ 1323 0128 5A61     		str	r2, [r3, #20]
+ 1324              	.L145:
+ 1325 012a 5D6A     		ldr	r5, [r3, #36]
+ 1326 012c 94F82200 		ldrb	r0, [r4, #34]	@ zero_extendqisi2
+ 1327 0130 25F00F02 		bic	r2, r5, #15
+ 1328 0134 00F00F01 		and	r1, r0, #15
+ 1329 0138 41EA0205 		orr	r5, r1, r2
+ 1330 013c 5D62     		str	r5, [r3, #36]
+ 1331 013e 207C     		ldrb	r0, [r4, #16]	@ zero_extendqisi2
+ 1332 0140 218D     		ldrh	r1, [r4, #40]
+ 1333 0142 2289     		ldrh	r2, [r4, #8]
+ 1334 0144 9861     		str	r0, [r3, #24]
+ 1335 0146 5963     		str	r1, [r3, #52]
+ 1336 0148 DA63     		str	r2, [r3, #60]
+ 1337 014a D3F8B050 		ldr	r5, [r3, #176]
+ 1338 014e 45F47060 		orr	r0, r5, #3840
+ 1339 0152 40F00F01 		orr	r1, r0, #15
+ 1340 0156 C3F8B010 		str	r1, [r3, #176]
+ 1341 015a 94F82020 		ldrb	r2, [r4, #32]	@ zero_extendqisi2
+ 1342 015e 012A     		cmp	r2, #1
+ 1343 0160 03D1     		bne	.L146
+ 1344 0162 2046     		mov	r0, r4
+ 1345 0164 FFF7FEFF 		bl	PWMSP001_lConfigureSecondSlice
+ 1346 0168 E369     		ldr	r3, [r4, #28]
+ 1347              	.L146:
+ 1348 016a D3F8A450 		ldr	r5, [r3, #164]
+ 1349 016e 206B     		ldr	r0, [r4, #48]
+ 1350 0170 94F83720 		ldrb	r2, [r4, #55]	@ zero_extendqisi2
+ 1351 0174 45EA0001 		orr	r1, r5, r0
+ 1352 0178 C3F8A410 		str	r1, [r3, #164]
+ 1353 017c 6169     		ldr	r1, [r4, #20]
+ 1354 017e 0123     		movs	r3, #1
+ 1355 0180 0869     		ldr	r0, [r1, #16]
+ 1356 0182 9200     		lsls	r2, r2, #2
+ 1357 0184 03FA02F5 		lsl	r5, r3, r2
+ 1358 0188 2843     		orrs	r0, r0, r5
+ 1359 018a D518     		adds	r5, r2, r3
+ 1360 018c 03FA05F5 		lsl	r5, r3, r5
+ 1361 0190 0232     		adds	r2, r2, #2
+ 1362 0192 2843     		orrs	r0, r0, r5
+ 1363 0194 03FA02F2 		lsl	r2, r3, r2
+ 1364 0198 1043     		orrs	r0, r0, r2
+ 1365 019a 0861     		str	r0, [r1, #16]
+ 1366 019c E16B     		ldr	r1, [r4, #60]
+ 1367 019e 0020     		movs	r0, #0
+ 1368 01a0 0B70     		strb	r3, [r1, #0]
+ 1369 01a2 38BD     		pop	{r3, r4, r5, pc}
+ 1370              	.L148:
+ 1371 01a4 0120     		movs	r0, #1
+ 1372 01a6 38BD     		pop	{r3, r4, r5, pc}
+ 1374              		.section	.text.PWMSP001_Init,"ax",%progbits
+ 1375              		.align	1
+ 1376              		.global	PWMSP001_Init
+ 1377              		.thumb
+ 1378              		.thumb_func
+ 1380              	PWMSP001_Init:
+ 1381              		@ args = 0, pretend = 0, frame = 0
+ 1382              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1383 0000 38B5     		push	{r3, r4, r5, lr}
+ 1384 0002 254C     		ldr	r4, .L162
+ 1385 0004 FFF7FEFF 		bl	CCU4GLOBAL_Init
+ 1386 0008 2046     		mov	r0, r4
+ 1387 000a FFF7FEFF 		bl	PWMSP001_lInit
+ 1388 000e 28B9     		cbnz	r0, .L159
+ 1389 0010 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 1390 0012 012B     		cmp	r3, #1
+ 1391 0014 02D1     		bne	.L159
+ 1392 0016 2046     		mov	r0, r4
+ 1393 0018 FFF7FEFF 		bl	PWMSP001_Start
+ 1394              	.L159:
+ 1395 001c 1F4C     		ldr	r4, .L162+4
+ 1396 001e 206C     		ldr	r0, [r4, #64]
+ 1397 0020 20F4E061 		bic	r1, r0, #1792
+ 1398 0024 2164     		str	r1, [r4, #64]
+ 1399 0026 226C     		ldr	r2, [r4, #64]
+ 1400 0028 2264     		str	r2, [r4, #64]
+ 1401 002a 2569     		ldr	r5, [r4, #16]
+ 1402 002c 25F48003 		bic	r3, r5, #4194304
+ 1403 0030 2361     		str	r3, [r4, #16]
+ 1404 0032 2069     		ldr	r0, [r4, #16]
+ 1405 0034 1A4D     		ldr	r5, .L162+8
+ 1406 0036 2061     		str	r0, [r4, #16]
+ 1407 0038 2846     		mov	r0, r5
+ 1408 003a FFF7FEFF 		bl	PWMSP001_lInit
+ 1409 003e 28B9     		cbnz	r0, .L160
+ 1410 0040 6978     		ldrb	r1, [r5, #1]	@ zero_extendqisi2
+ 1411 0042 0129     		cmp	r1, #1
+ 1412 0044 02D1     		bne	.L160
+ 1413 0046 2846     		mov	r0, r5
+ 1414 0048 FFF7FEFF 		bl	PWMSP001_Start
+ 1415              	.L160:
+ 1416 004c 226C     		ldr	r2, [r4, #64]
+ 1417 004e 22F4E023 		bic	r3, r2, #458752
+ 1418 0052 2364     		str	r3, [r4, #64]
+ 1419 0054 206C     		ldr	r0, [r4, #64]
+ 1420 0056 2064     		str	r0, [r4, #64]
+ 1421 0058 6169     		ldr	r1, [r4, #20]
+ 1422 005a 21F04002 		bic	r2, r1, #64
+ 1423 005e 6261     		str	r2, [r4, #20]
+ 1424 0060 6369     		ldr	r3, [r4, #20]
+ 1425 0062 6361     		str	r3, [r4, #20]
+ 1426 0064 0F4C     		ldr	r4, .L162+12
+ 1427 0066 2046     		mov	r0, r4
+ 1428 0068 FFF7FEFF 		bl	PWMSP001_lInit
+ 1429 006c 28B9     		cbnz	r0, .L161
+ 1430 006e 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 1431 0070 0128     		cmp	r0, #1
+ 1432 0072 02D1     		bne	.L161
+ 1433 0074 2046     		mov	r0, r4
+ 1434 0076 FFF7FEFF 		bl	PWMSP001_Start
+ 1435              	.L161:
+ 1436 007a 0849     		ldr	r1, .L162+4
+ 1437 007c 0A6C     		ldr	r2, [r1, #64]
+ 1438 007e 22F4E043 		bic	r3, r2, #28672
+ 1439 0082 0B64     		str	r3, [r1, #64]
+ 1440 0084 086C     		ldr	r0, [r1, #64]
+ 1441 0086 0864     		str	r0, [r1, #64]
+ 1442 0088 0A69     		ldr	r2, [r1, #16]
+ 1443 008a 22F08043 		bic	r3, r2, #1073741824
+ 1444 008e 0B61     		str	r3, [r1, #16]
+ 1445 0090 0869     		ldr	r0, [r1, #16]
+ 1446 0092 0861     		str	r0, [r1, #16]
+ 1447 0094 38BD     		pop	{r3, r4, r5, pc}
+ 1448              	.L163:
+ 1449 0096 00BF     		.align	2
+ 1450              	.L162:
+ 1451 0098 00000000 		.word	PWMSP001_Handle0
+ 1452 009c 00820248 		.word	1208123904
+ 1453 00a0 00000000 		.word	PWMSP001_Handle1
+ 1454 00a4 00000000 		.word	PWMSP001_Handle2
+ 1456              		.section	.text.PWMSP001_EnableEvent,"ax",%progbits
+ 1457              		.align	1
+ 1458              		.global	PWMSP001_EnableEvent
+ 1459              		.thumb
+ 1460              		.thumb_func
+ 1462              	PWMSP001_EnableEvent:
+ 1463              		@ args = 0, pretend = 0, frame = 0
+ 1464              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1465              		@ link register save eliminated.
+ 1466 0000 C36B     		ldr	r3, [r0, #60]
+ 1467 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 1468 0004 BAB1     		cbz	r2, .L167
+ 1469 0006 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 1470 000a 012A     		cmp	r2, #1
+ 1471 000c 08D1     		bne	.L166
+ 1472 000e C369     		ldr	r3, [r0, #28]
+ 1473 0010 D3F8A400 		ldr	r0, [r3, #164]
+ 1474 0014 02FA01F2 		lsl	r2, r2, r1
+ 1475 0018 0243     		orrs	r2, r2, r0
+ 1476 001a C3F8A420 		str	r2, [r3, #164]
+ 1477 001e 08E0     		b	.L168
+ 1478              	.L166:
+ 1479 0020 8369     		ldr	r3, [r0, #24]
+ 1480 0022 0120     		movs	r0, #1
+ 1481 0024 D3F8A420 		ldr	r2, [r3, #164]
+ 1482 0028 00FA01F1 		lsl	r1, r0, r1
+ 1483 002c 1143     		orrs	r1, r1, r2
+ 1484 002e C3F8A410 		str	r1, [r3, #164]
+ 1485              	.L168:
+ 1486 0032 0020     		movs	r0, #0
+ 1487 0034 7047     		bx	lr
+ 1488              	.L167:
+ 1489 0036 0120     		movs	r0, #1
+ 1490 0038 7047     		bx	lr
+ 1492              		.section	.text.PWMSP001_DisableEvent,"ax",%progbits
+ 1493              		.align	1
+ 1494              		.global	PWMSP001_DisableEvent
+ 1495              		.thumb
+ 1496              		.thumb_func
+ 1498              	PWMSP001_DisableEvent:
+ 1499              		@ args = 0, pretend = 0, frame = 0
+ 1500              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1501              		@ link register save eliminated.
+ 1502 0000 C36B     		ldr	r3, [r0, #60]
+ 1503 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 1504 0004 CAB1     		cbz	r2, .L172
+ 1505 0006 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 1506 000a 012A     		cmp	r2, #1
+ 1507 000c 09D1     		bne	.L171
+ 1508 000e C369     		ldr	r3, [r0, #28]
+ 1509 0010 D3F8A400 		ldr	r0, [r3, #164]
+ 1510 0014 02FA01F2 		lsl	r2, r2, r1
+ 1511 0018 20EA0201 		bic	r1, r0, r2
+ 1512 001c C3F8A410 		str	r1, [r3, #164]
+ 1513 0020 09E0     		b	.L173
+ 1514              	.L171:
+ 1515 0022 8369     		ldr	r3, [r0, #24]
+ 1516 0024 0120     		movs	r0, #1
+ 1517 0026 D3F8A420 		ldr	r2, [r3, #164]
+ 1518 002a 00FA01F1 		lsl	r1, r0, r1
+ 1519 002e 22EA0102 		bic	r2, r2, r1
+ 1520 0032 C3F8A420 		str	r2, [r3, #164]
+ 1521              	.L173:
+ 1522 0036 0020     		movs	r0, #0
+ 1523 0038 7047     		bx	lr
+ 1524              	.L172:
+ 1525 003a 0120     		movs	r0, #1
+ 1526 003c 7047     		bx	lr
+ 1528              		.section	.text.PWMSP001_ClearPendingEvent,"ax",%progbits
+ 1529              		.align	1
+ 1530              		.global	PWMSP001_ClearPendingEvent
+ 1531              		.thumb
+ 1532              		.thumb_func
+ 1534              	PWMSP001_ClearPendingEvent:
+ 1535              		@ args = 0, pretend = 0, frame = 0
+ 1536              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1537              		@ link register save eliminated.
+ 1538 0000 C36B     		ldr	r3, [r0, #60]
+ 1539 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 1540 0004 BAB1     		cbz	r2, .L177
+ 1541 0006 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 1542 000a 012A     		cmp	r2, #1
+ 1543 000c 08D1     		bne	.L176
+ 1544 000e C369     		ldr	r3, [r0, #28]
+ 1545 0010 D3F8B000 		ldr	r0, [r3, #176]
+ 1546 0014 02FA01F2 		lsl	r2, r2, r1
+ 1547 0018 0243     		orrs	r2, r2, r0
+ 1548 001a C3F8B020 		str	r2, [r3, #176]
+ 1549 001e 08E0     		b	.L178
+ 1550              	.L176:
+ 1551 0020 8369     		ldr	r3, [r0, #24]
+ 1552 0022 0120     		movs	r0, #1
+ 1553 0024 D3F8B020 		ldr	r2, [r3, #176]
+ 1554 0028 00FA01F1 		lsl	r1, r0, r1
+ 1555 002c 1143     		orrs	r1, r1, r2
+ 1556 002e C3F8B010 		str	r1, [r3, #176]
+ 1557              	.L178:
+ 1558 0032 0020     		movs	r0, #0
+ 1559 0034 7047     		bx	lr
+ 1560              	.L177:
+ 1561 0036 0120     		movs	r0, #1
+ 1562 0038 7047     		bx	lr
+ 1564              		.section	.text.PWMSP001_SetPendingEvent,"ax",%progbits
+ 1565              		.align	1
+ 1566              		.global	PWMSP001_SetPendingEvent
+ 1567              		.thumb
+ 1568              		.thumb_func
+ 1570              	PWMSP001_SetPendingEvent:
+ 1571              		@ args = 0, pretend = 0, frame = 0
+ 1572              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1573              		@ link register save eliminated.
+ 1574 0000 C36B     		ldr	r3, [r0, #60]
+ 1575 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 1576 0004 BAB1     		cbz	r2, .L182
+ 1577 0006 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 1578 000a 012A     		cmp	r2, #1
+ 1579 000c 08D1     		bne	.L181
+ 1580 000e C369     		ldr	r3, [r0, #28]
+ 1581 0010 D3F8AC00 		ldr	r0, [r3, #172]
+ 1582 0014 02FA01F2 		lsl	r2, r2, r1
+ 1583 0018 0243     		orrs	r2, r2, r0
+ 1584 001a C3F8AC20 		str	r2, [r3, #172]
+ 1585 001e 08E0     		b	.L183
+ 1586              	.L181:
+ 1587 0020 8369     		ldr	r3, [r0, #24]
+ 1588 0022 0120     		movs	r0, #1
+ 1589 0024 D3F8AC20 		ldr	r2, [r3, #172]
+ 1590 0028 00FA01F1 		lsl	r1, r0, r1
+ 1591 002c 1143     		orrs	r1, r1, r2
+ 1592 002e C3F8AC10 		str	r1, [r3, #172]
+ 1593              	.L183:
+ 1594 0032 0020     		movs	r0, #0
+ 1595 0034 7047     		bx	lr
+ 1596              	.L182:
+ 1597 0036 0120     		movs	r0, #1
+ 1598 0038 7047     		bx	lr
+ 1600              		.section	.text.PWMSP001_GetPendingEvent,"ax",%progbits
+ 1601              		.align	1
+ 1602              		.global	PWMSP001_GetPendingEvent
+ 1603              		.thumb
+ 1604              		.thumb_func
+ 1606              	PWMSP001_GetPendingEvent:
+ 1607              		@ args = 0, pretend = 0, frame = 0
+ 1608              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1609 0000 C36B     		ldr	r3, [r0, #60]
+ 1610 0002 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1611 0004 10B5     		push	{r4, lr}
+ 1612 0006 ABB1     		cbz	r3, .L189
+ 1613 0008 90F82030 		ldrb	r3, [r0, #32]	@ zero_extendqisi2
+ 1614 000c 012B     		cmp	r3, #1
+ 1615 000e 03D1     		bne	.L186
+ 1616 0010 C469     		ldr	r4, [r0, #28]
+ 1617 0012 D4F8A000 		ldr	r0, [r4, #160]
+ 1618 0016 03E0     		b	.L192
+ 1619              	.L186:
+ 1620 0018 8069     		ldr	r0, [r0, #24]
+ 1621 001a D0F8A000 		ldr	r0, [r0, #160]
+ 1622 001e 0123     		movs	r3, #1
+ 1623              	.L192:
+ 1624 0020 03FA01F4 		lsl	r4, r3, r1
+ 1625 0024 2040     		ands	r0, r0, r4
+ 1626 0026 C840     		lsrs	r0, r0, r1
+ 1627 0028 02D0     		beq	.L188
+ 1628 002a 1370     		strb	r3, [r2, #0]
+ 1629 002c 0020     		movs	r0, #0
+ 1630 002e 10BD     		pop	{r4, pc}
+ 1631              	.L188:
+ 1632 0030 1070     		strb	r0, [r2, #0]
+ 1633 0032 10BD     		pop	{r4, pc}
+ 1634              	.L189:
+ 1635 0034 0120     		movs	r0, #1
+ 1636 0036 10BD     		pop	{r4, pc}
+ 1638              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 PWMSP001.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:17     .text.PWMSP001_Deinit:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:22     .text.PWMSP001_Deinit:00000000 PWMSP001_Deinit
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:83     .text.PWMSP001_Start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:88     .text.PWMSP001_Start:00000000 PWMSP001_Start
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:184    .text.PWMSP001_Stop:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:189    .text.PWMSP001_Stop:00000000 PWMSP001_Stop
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:229    .text.PWMSP001_SetCompare:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:234    .text.PWMSP001_SetCompare:00000000 PWMSP001_SetCompare
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:273    .text.PWMSP001_lSetCompareEdgeAlign:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:278    .text.PWMSP001_lSetCompareEdgeAlign:00000000 PWMSP001_lSetCompareEdgeAlign
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:296    .text.PWMSP001_lSetCompareEdgeAlignTimerConcat:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:301    .text.PWMSP001_lSetCompareEdgeAlignTimerConcat:00000000 PWMSP001_lSetCompareEdgeAlignTimerConcat
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:333    .text.PWMSP001_lSetCompareCenterAlign:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:338    .text.PWMSP001_lSetCompareCenterAlign:00000000 PWMSP001_lSetCompareCenterAlign
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:356    .text.PWMSP001_SetDutyCycle:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:361    .text.PWMSP001_SetDutyCycle:00000000 PWMSP001_SetDutyCycle
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:389    .text.PWMSP001_SetDutyCycle:00000034 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:392    .text.PWMSP001_lSetDutyEdgeAlign:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:397    .text.PWMSP001_lSetDutyEdgeAlign:00000000 PWMSP001_lSetDutyEdgeAlign
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:427    .text.PWMSP001_lSetDutyEdgeAlign:00000044 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:430    .text.PWMSP001_lSetDutyEdgeAlignTimerConcat:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:435    .text.PWMSP001_lSetDutyEdgeAlignTimerConcat:00000000 PWMSP001_lSetDutyEdgeAlignTimerConcat
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:484    .text.PWMSP001_lSetDutyEdgeAlignTimerConcat:00000078 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:487    .text.PWMSP001_lSetDutyCenterAlign:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:492    .text.PWMSP001_lSetDutyCenterAlign:00000000 PWMSP001_lSetDutyCenterAlign
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:520    .text.PWMSP001_lSetDutyCenterAlign:00000040 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:523    .text.PWMSP001_SetPeriodAndCompare:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:528    .text.PWMSP001_SetPeriodAndCompare:00000000 PWMSP001_SetPeriodAndCompare
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:572    .text.PWMSP001_SetPeriod:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:577    .text.PWMSP001_SetPeriod:00000000 PWMSP001_SetPeriod
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:632    .text.PWMSP001_lSetPwmFreqTimerConcat:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:637    .text.PWMSP001_lSetPwmFreqTimerConcat:00000000 PWMSP001_lSetPwmFreqTimerConcat
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:675    .text.PWMSP001_SetPwmFreq:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:680    .text.PWMSP001_SetPwmFreq:00000000 PWMSP001_SetPwmFreq
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:747    .text.PWMSP001_SetPwmFreq:00000094 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:750    .text.PWMSP001_SetPwmFreqAndDutyCycle:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:755    .text.PWMSP001_SetPwmFreqAndDutyCycle:00000000 PWMSP001_SetPwmFreqAndDutyCycle
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:823    .text.PWMSP001_SetPwmFreqAndDutyCycle:0000009c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:827    .text.PWMSP001_SetTimerVal:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:832    .text.PWMSP001_SetTimerVal:00000000 PWMSP001_SetTimerVal
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:861    .text.PWMSP001_GetTimerStatus:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:866    .text.PWMSP001_GetTimerStatus:00000000 PWMSP001_GetTimerStatus
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:894    .text.PWMSP001_GetTimerRegsVal:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:899    .text.PWMSP001_GetTimerRegsVal:00000000 PWMSP001_GetTimerRegsVal
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:945    .text.PWMSP001_GetPeriodReg:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:950    .text.PWMSP001_GetPeriodReg:00000000 PWMSP001_GetPeriodReg
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:983    .text.PWMSP001_SWRequestShadowTransfer:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:988    .text.PWMSP001_SWRequestShadowTransfer:00000000 PWMSP001_SWRequestShadowTransfer
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1025   .text.PWMSP001_ResetTrapFlag:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1030   .text.PWMSP001_ResetTrapFlag:00000000 PWMSP001_ResetTrapFlag
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1064   .text.PWMSP001_lConfigureSecondSlice:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1069   .text.PWMSP001_lConfigureSecondSlice:00000000 PWMSP001_lConfigureSecondSlice
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1200   .text.PWMSP001_lInit:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1205   .text.PWMSP001_lInit:00000000 PWMSP001_lInit
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1375   .text.PWMSP001_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1380   .text.PWMSP001_Init:00000000 PWMSP001_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1451   .text.PWMSP001_Init:00000098 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1457   .text.PWMSP001_EnableEvent:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1462   .text.PWMSP001_EnableEvent:00000000 PWMSP001_EnableEvent
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1493   .text.PWMSP001_DisableEvent:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1498   .text.PWMSP001_DisableEvent:00000000 PWMSP001_DisableEvent
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1529   .text.PWMSP001_ClearPendingEvent:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1534   .text.PWMSP001_ClearPendingEvent:00000000 PWMSP001_ClearPendingEvent
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1565   .text.PWMSP001_SetPendingEvent:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1570   .text.PWMSP001_SetPendingEvent:00000000 PWMSP001_SetPendingEvent
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1601   .text.PWMSP001_GetPendingEvent:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccYPVVXx.s:1606   .text.PWMSP001_GetPendingEvent:00000000 PWMSP001_GetPendingEvent
+
+UNDEFINED SYMBOLS
+CCU4GLOBAL_Init
+PWMSP001_Handle0
+PWMSP001_Handle1
+PWMSP001_Handle2

@@ -1,0 +1,289 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"System_LibcStubs.c"
+  16              		.section	.text._open,"ax",%progbits
+  17              		.align	1
+  18              		.weak	_open
+  19              		.thumb
+  20              		.thumb_func
+  22              	_open:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 4FF0FF30 		mov	r0, #-1
+  27 0004 7047     		bx	lr
+  29              		.section	.text._lseek,"ax",%progbits
+  30              		.align	1
+  31              		.weak	_lseek
+  32              		.thumb
+  33              		.thumb_func
+  35              	_lseek:
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 0, uses_anonymous_args = 0
+  38              		@ link register save eliminated.
+  39 0000 4FF0FF30 		mov	r0, #-1
+  40 0004 7047     		bx	lr
+  42              		.section	.text._read,"ax",%progbits
+  43              		.align	1
+  44              		.weak	_read
+  45              		.thumb
+  46              		.thumb_func
+  48              	_read:
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  52 0000 0020     		movs	r0, #0
+  53 0002 7047     		bx	lr
+  55              		.section	.text._write,"ax",%progbits
+  56              		.align	1
+  57              		.weak	_write
+  58              		.thumb
+  59              		.thumb_func
+  61              	_write:
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64              		@ link register save eliminated.
+  65 0000 4FF0FF30 		mov	r0, #-1
+  66 0004 7047     		bx	lr
+  68              		.section	.text._close,"ax",%progbits
+  69              		.align	1
+  70              		.weak	_close
+  71              		.thumb
+  72              		.thumb_func
+  74              	_close:
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 0, uses_anonymous_args = 0
+  77              		@ link register save eliminated.
+  78 0000 4FF0FF30 		mov	r0, #-1
+  79 0004 7047     		bx	lr
+  81              		.section	.text._fstat,"ax",%progbits
+  82              		.align	1
+  83              		.weak	_fstat
+  84              		.thumb
+  85              		.thumb_func
+  87              	_fstat:
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  91 0000 0029     		cmp	r1, #0
+  92 0002 0CBF     		ite	eq
+  93 0004 6FF00100 		mvneq	r0, #1
+  94 0008 4FF0FF30 		movne	r0, #-1
+  95 000c 7047     		bx	lr
+  97              		.section	.text._link,"ax",%progbits
+  98              		.align	1
+  99              		.weak	_link
+ 100              		.thumb
+ 101              		.thumb_func
+ 103              	_link:
+ 104              		@ args = 0, pretend = 0, frame = 0
+ 105              		@ frame_needed = 0, uses_anonymous_args = 0
+ 106              		@ link register save eliminated.
+ 107 0000 8142     		cmp	r1, r0
+ 108 0002 14BF     		ite	ne
+ 109 0004 6FF00100 		mvnne	r0, #1
+ 110 0008 4FF0FF30 		moveq	r0, #-1
+ 111 000c 7047     		bx	lr
+ 113              		.section	.text._unlink,"ax",%progbits
+ 114              		.align	1
+ 115              		.weak	_unlink
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	_unlink:
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 123 0000 4FF0FF30 		mov	r0, #-1
+ 124 0004 7047     		bx	lr
+ 126              		.section	.text._sbrk,"ax",%progbits
+ 127              		.align	1
+ 128              		.weak	_sbrk
+ 129              		.thumb
+ 130              		.thumb_func
+ 132              	_sbrk:
+ 133              		@ args = 0, pretend = 0, frame = 0
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135              		@ link register save eliminated.
+ 136 0000 0A4B     		ldr	r3, .L18
+ 137 0002 1A68     		ldr	r2, [r3, #0]
+ 138 0004 22B9     		cbnz	r2, .L14
+ 139 0006 0A4A     		ldr	r2, .L18+4
+ 140 0008 0A49     		ldr	r1, .L18+8
+ 141 000a 1A60     		str	r2, [r3, #0]
+ 142 000c 5218     		adds	r2, r2, r1
+ 143 000e 5A60     		str	r2, [r3, #4]
+ 144              	.L14:
+ 145 0010 1A68     		ldr	r2, [r3, #0]
+ 146 0012 5B68     		ldr	r3, [r3, #4]
+ 147 0014 D11D     		adds	r1, r2, #7
+ 148 0016 0818     		adds	r0, r1, r0
+ 149 0018 20F00701 		bic	r1, r0, #7
+ 150 001c 9942     		cmp	r1, r3
+ 151 001e 3ABF     		itte	cc
+ 152 0020 024B     		ldrcc	r3, .L18
+ 153 0022 1960     		strcc	r1, [r3, #0]
+ 154 0024 0022     		movcs	r2, #0
+ 155 0026 1046     		mov	r0, r2
+ 156 0028 7047     		bx	lr
+ 157              	.L19:
+ 158 002a 00BF     		.align	2
+ 159              	.L18:
+ 160 002c 00000000 		.word	.LANCHOR0
+ 161 0030 00000000 		.word	Heap_Bank1_Start
+ 162 0034 00000000 		.word	Heap_Bank1_Size
+ 164              		.section	.text._times,"ax",%progbits
+ 165              		.align	1
+ 166              		.weak	_times
+ 167              		.thumb
+ 168              		.thumb_func
+ 170              	_times:
+ 171              		@ args = 0, pretend = 0, frame = 0
+ 172              		@ frame_needed = 0, uses_anonymous_args = 0
+ 173              		@ link register save eliminated.
+ 174 0000 4FF0FF30 		mov	r0, #-1
+ 175 0004 7047     		bx	lr
+ 177              		.section	.text._wait,"ax",%progbits
+ 178              		.align	1
+ 179              		.weak	_wait
+ 180              		.thumb
+ 181              		.thumb_func
+ 183              	_wait:
+ 184              		@ args = 0, pretend = 0, frame = 0
+ 185              		@ frame_needed = 0, uses_anonymous_args = 0
+ 186              		@ link register save eliminated.
+ 187 0000 4FF0FF30 		mov	r0, #-1
+ 188 0004 7047     		bx	lr
+ 190              		.section	.text._kill,"ax",%progbits
+ 191              		.align	1
+ 192              		.weak	_kill
+ 193              		.thumb
+ 194              		.thumb_func
+ 196              	_kill:
+ 197              		@ args = 0, pretend = 0, frame = 0
+ 198              		@ frame_needed = 0, uses_anonymous_args = 0
+ 199              		@ link register save eliminated.
+ 200 0000 4FF0FF30 		mov	r0, #-1
+ 201 0004 7047     		bx	lr
+ 203              		.section	.text._fork,"ax",%progbits
+ 204              		.align	1
+ 205              		.weak	_fork
+ 206              		.thumb
+ 207              		.thumb_func
+ 209              	_fork:
+ 210              		@ args = 0, pretend = 0, frame = 0
+ 211              		@ frame_needed = 0, uses_anonymous_args = 0
+ 212              		@ link register save eliminated.
+ 213 0000 4FF0FF30 		mov	r0, #-1
+ 214 0004 7047     		bx	lr
+ 216              		.section	.text._getpid,"ax",%progbits
+ 217              		.align	1
+ 218              		.weak	_getpid
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	_getpid:
+ 223              		@ args = 0, pretend = 0, frame = 0
+ 224              		@ frame_needed = 0, uses_anonymous_args = 0
+ 225              		@ link register save eliminated.
+ 226 0000 4FF0FF30 		mov	r0, #-1
+ 227 0004 7047     		bx	lr
+ 229              		.section	.text._exit,"ax",%progbits
+ 230              		.align	1
+ 231              		.weak	_exit
+ 232              		.thumb
+ 233              		.thumb_func
+ 235              	_exit:
+ 236              		@ Volatile: function does not return.
+ 237              		@ args = 0, pretend = 0, frame = 0
+ 238              		@ frame_needed = 0, uses_anonymous_args = 0
+ 239              		@ link register save eliminated.
+ 240              	.L26:
+ 241 0000 FEE7     		b	.L26
+ 243              		.section	.text._init,"ax",%progbits
+ 244              		.align	1
+ 245              		.weak	_init
+ 246              		.thumb
+ 247              		.thumb_func
+ 249              	_init:
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 0, uses_anonymous_args = 0
+ 252              		@ link register save eliminated.
+ 253 0000 7047     		bx	lr
+ 255              		.section	.text._isatty,"ax",%progbits
+ 256              		.align	1
+ 257              		.weak	_isatty
+ 258              		.thumb
+ 259              		.thumb_func
+ 261              	_isatty:
+ 262              		@ args = 0, pretend = 0, frame = 0
+ 263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 264              		@ link register save eliminated.
+ 265 0000 4FF0FF30 		mov	r0, #-1
+ 266 0004 7047     		bx	lr
+ 268              		.global	__dso_handle
+ 269              		.bss
+ 270              		.align	2
+ 271              		.set	.LANCHOR0,. + 0
+ 274              	heap.4604:
+ 275 0000 00000000 		.space	4
+ 278              	HeapBound.4603:
+ 279 0004 00000000 		.space	4
+ 282              	__dso_handle:
+ 283 0008 00000000 		.space	4
+ 284              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 System_LibcStubs.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:17     .text._open:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:22     .text._open:00000000 _open
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:30     .text._lseek:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:35     .text._lseek:00000000 _lseek
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:43     .text._read:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:48     .text._read:00000000 _read
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:56     .text._write:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:61     .text._write:00000000 _write
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:69     .text._close:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:74     .text._close:00000000 _close
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:82     .text._fstat:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:87     .text._fstat:00000000 _fstat
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:98     .text._link:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:103    .text._link:00000000 _link
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:114    .text._unlink:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:119    .text._unlink:00000000 _unlink
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:127    .text._sbrk:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:132    .text._sbrk:00000000 _sbrk
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:160    .text._sbrk:0000002c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:165    .text._times:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:170    .text._times:00000000 _times
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:178    .text._wait:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:183    .text._wait:00000000 _wait
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:191    .text._kill:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:196    .text._kill:00000000 _kill
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:204    .text._fork:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:209    .text._fork:00000000 _fork
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:217    .text._getpid:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:222    .text._getpid:00000000 _getpid
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:230    .text._exit:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:235    .text._exit:00000000 _exit
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:244    .text._init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:249    .text._init:00000000 _init
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:256    .text._isatty:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:261    .text._isatty:00000000 _isatty
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:282    .bss:00000008 __dso_handle
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:270    .bss:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:274    .bss:00000000 heap.4604
+C:\Users\TOGABL~1\AppData\Local\Temp\cc95Nvlu.s:278    .bss:00000004 HeapBound.4603
+
+UNDEFINED SYMBOLS
+Heap_Bank1_Start
+Heap_Bank1_Size

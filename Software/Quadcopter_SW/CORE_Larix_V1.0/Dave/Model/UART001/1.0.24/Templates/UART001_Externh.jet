@@ -1,0 +1,93 @@
+<%@ jet package="CodeGenerator" class="uart001_externh_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[UART001_Extern.h]*/
+/*******************************************************************************
+**                                                                            **
+** Copyright (C) 2013 Infineon Technologies AG. All rights reserved.          **
+**                                                                            **
+** Infineon Technologies AG (Infineon) is supplying this software for use     **
+** with Infineon's microcontrollers.                                          **
+** This file can be freely distributed within development tools that are      **
+** supporting such microcontrollers.                                          **
+**                                                                            **
+** THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS,        **
+** IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF **
+** MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS         **
+** SOFTWARE. INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, ** 
+** INCIDENTAL, OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.           **
+**                                                                            **
+********************************************************************************
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** NOTE     : Any Changes made to this file will be overwritten during Code   **
+**            Generation                                                      **
+**                                                                            **
+********************************************************************************
+** VERSION HISTORY:
+********************************************************************************
+** 29 Nov 2013  V1.0.20  Newly created for extern declarations of UART001 app 
+*******************************************************************************/
+<% String AppBaseuri = "app/uart001/";%>
+/**
+ * @file   UART001_Extern.h
+ *
+ * @App Version UART001 <<%=app.getAppVersion(AppBaseuri) %>>
+ *
+ * @brief  This file contains extern declarations of UART001.
+ *
+ */
+
+#ifndef UART001_EXTERN_H_
+#define UART001_EXTERN_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/*******************************************************************************
+** @Defines
+*******************************************************************************/
+
+<% String MappedUri = null; %>
+<% String appInst  = null; %>
+<% int NodeNr = 0; %>
+<% int Is44Device = -1; %>
+<% int Is42Device = -1; %>
+<% int Is45Device = -1; %>
+<% int Is1xDevice = -1; %>
+<% String deviceId = null; %>
+<% deviceId = app.getSoftwareId(); %>
+<% if (deviceId != null)
+{      
+   Is44Device = ((deviceId.substring(0,2).compareTo("44")==0)?1:0);
+   Is42Device = ((deviceId.substring(0,2).compareTo("42")==0)?1:0);
+   Is45Device = ((deviceId.substring(0,2).compareTo("45")==0)?1:0);
+   Is1xDevice = ((deviceId.substring(0,1).compareTo("1")==0)?1:0); 	
+}%>     
+<% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/uart001/"));
+ for (String appIns : appsList ) {
+ appInst = appIns.substring(appIns.lastIndexOf("/")+1);
+ MappedUri = app.getMappedUri(AppBaseuri + appInst + "/channel");
+ if((MappedUri != null) && (MappedUri != "")) {
+NodeNr++; %>
+extern const UART001_HandleType	UART001_Handle<%=appInst%>; 
+<% }else { %>
+/* CHANNEL IS NOT MAPPED */
+<% } %>
+<% } %>
+extern const UART001_HandleType *UART001_HandleArray[<%=NodeNr%>]; 
+
+#ifdef __cplusplus
+}
+#endif                     
+
+#endif  /* ifndef UART001_EXTERN_H_ */
+
+/*CODE_BLOCK_END*/

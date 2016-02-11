@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage33" displayName="Configure Pin" className="IfxGroupBox" controlId="1323689476331">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group44" displayName="Configuration" className="IfxGroupBox" controlId="1323689479750">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/io002/0/IO002_erwOutputMode" displayName="Output Driver Enabled (driven by higher level App)" readonly="true" className="EnumerationType" paramName="app/io002/0/IO002_erwOutputMode:Output Driver Enabled" controlId="1323689495878">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group93" displayName="Input/Output Characteristics" className="IfxGroupBox" controlId="1323689509602">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/io002/0/IO002_erwInputChar" displayName="Input characteristics" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/io002/0/IO002_erwOutputMode/0&quot;) ==1) &#xD;&#xA;{&#xD;&#xA;CM.setEnable(false);&#xD;&#xA;}else{&#xD;&#xA;CM.setEnable(true);&#xD;&#xA;}" paramName="app/io002/0/IO002_erwInputChar:Input characteristics" controlId="1323689514770">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/io002/0/IO002_erwOutputChar" displayName="Output characteristics" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/io002/0/IO002_erwOutputMode/0&quot;) ==1) &#xD;&#xA;{&#xD;&#xA;CM.setEnable(true);&#xD;&#xA;}else{&#xD;&#xA;CM.setEnable(false);&#xD;&#xA;}" paramName="app/io002/0/IO002_erwOutputChar:Output characteristics" controlId="1323689517705">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/io002/0/IO002_erwDefaultOutputLevel" displayName="Default Output level" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/io002/0/IO002_erwOutputMode/0&quot;) ==1) &#xD;&#xA;{&#xD;&#xA;CM.setEnable(true);&#xD;&#xA;}else{&#xD;&#xA;CM.setEnable(false);&#xD;&#xA;}" paramName="app/io002/0/IO002_erwDefaultOutputLevel:Default Output level" controlId="1323689560126">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/io002/0/IO002_erwPadClass" displayName="Pad Class" className="EnumerationType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;}&#xD;&#xA;else if (CM.getParamValue(&quot;app/io002/0/IO002_erwOutputMode/0&quot;) ==1) {&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA; CM.setEnable(true); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;    CM.setVisible(true);&#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/io002/0/IO002_erwPadClass:Pad Class" controlId="1331736266984">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/io002/0/IO002_erwPadDriverMode" displayName="Pad Driver Mode" className="EnumerationType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;}&#xD;&#xA;else if (CM.getParamValue(&quot;app/io002/0/IO002_erwOutputMode/0&quot;) ==1) {&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA; CM.setEnable(true); &#xD;&#xA;}&#xD;&#xA;else {&#xD;&#xA;    CM.setVisible(true);&#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/io002/0/IO002_erwPadDriverMode:Pad Driver Mode" controlId="1331736271984">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/io002/0/IO002_erwPadHysteresis" displayName="Hysteresis Control" className="EnumerationType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) != 0 ) &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;} else if (CM.getParamValue(&quot;app/io002/0/IO002_erwOutputMode/0&quot;) == 0)&#xD;&#xA; {&#xD;&#xA;       CM.setVisible(true);&#xD;&#xA; &#x9;CM.setEnable(true); &#xD;&#xA;} else &#xD;&#xA;{&#xD;&#xA;       CM.setVisible(true);&#xD;&#xA;   &#x9;CM.setEnable(false); &#xD;&#xA;}" paramName="app/io002/0/IO002_erwPadHysteresis:Hysteresis Control" controlId="1373978009106">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

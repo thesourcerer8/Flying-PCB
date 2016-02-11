@@ -1,0 +1,196 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"MULTIPLEXER.c"
+  16              		.section	.text.DAVE_MUX_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	DAVE_MUX_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	DAVE_MUX_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 804B     		ldr	r3, .L2
+  26 0002 DA69     		ldr	r2, [r3, #28]
+  27 0004 42F00100 		orr	r0, r2, #1
+  28 0008 F0B5     		push	{r4, r5, r6, r7, lr}
+  29 000a D861     		str	r0, [r3, #28]
+  30 000c A3F5A033 		sub	r3, r3, #81920
+  31 0010 7D48     		ldr	r0, .L2+4
+  32 0012 1E6C     		ldr	r6, [r3, #64]
+  33 0014 196C     		ldr	r1, [r3, #64]
+  34 0016 21F00F04 		bic	r4, r1, #15
+  35 001a 1C64     		str	r4, [r3, #64]
+  36 001c 076C     		ldr	r7, [r0, #64]
+  37 001e 056C     		ldr	r5, [r0, #64]
+  38 0020 7A49     		ldr	r1, .L2+8
+  39 0022 25F00F02 		bic	r2, r5, #15
+  40 0026 0264     		str	r2, [r0, #64]
+  41 0028 0D6C     		ldr	r5, [r1, #64]
+  42 002a 0C6C     		ldr	r4, [r1, #64]
+  43 002c 24F00F02 		bic	r2, r4, #15
+  44 0030 0A64     		str	r2, [r1, #64]
+  45 0032 774A     		ldr	r2, .L2+12
+  46 0034 146C     		ldr	r4, [r2, #64]
+  47 0036 D2F840C0 		ldr	ip, [r2, #64]
+  48 003a 2CF00F0C 		bic	ip, ip, #15
+  49 003e C2F840C0 		str	ip, [r2, #64]
+  50 0042 D3F80CC1 		ldr	ip, [r3, #268]
+  51 0046 4CF0804C 		orr	ip, ip, #1073741824
+  52 004a C3F80CC1 		str	ip, [r3, #268]
+  53 004e D3F80CC1 		ldr	ip, [r3, #268]
+  54 0052 2CF4E02C 		bic	ip, ip, #458752
+  55 0056 4CF4A02C 		orr	ip, ip, #327680
+  56 005a C3F80CC1 		str	ip, [r3, #268]
+  57 005e D3F808C1 		ldr	ip, [r3, #264]
+  58 0062 2CF0E06C 		bic	ip, ip, #117440512
+  59 0066 2CF03F0C 		bic	ip, ip, #63
+  60 006a 4CF0A06C 		orr	ip, ip, #83886080
+  61 006e 4CF0200C 		orr	ip, ip, #32
+  62 0072 C3F808C1 		str	ip, [r3, #264]
+  63 0076 D3F80CC1 		ldr	ip, [r3, #268]
+  64 007a 2CF0E06C 		bic	ip, ip, #117440512
+  65 007e 2CF03F0C 		bic	ip, ip, #63
+  66 0082 4CF0A06C 		orr	ip, ip, #83886080
+  67 0086 C3F80CC1 		str	ip, [r3, #268]
+  68 008a D0F80CC1 		ldr	ip, [r0, #268]
+  69 008e 4CF0804C 		orr	ip, ip, #1073741824
+  70 0092 C0F80CC1 		str	ip, [r0, #268]
+  71 0096 D0F80CC1 		ldr	ip, [r0, #268]
+  72 009a 2CF0E06C 		bic	ip, ip, #117440512
+  73 009e 2CF03F0C 		bic	ip, ip, #63
+  74 00a2 4CF0A06C 		orr	ip, ip, #83886080
+  75 00a6 C0F80CC1 		str	ip, [r0, #268]
+  76 00aa D1F81CC0 		ldr	ip, [r1, #28]
+  77 00ae 2CF0070C 		bic	ip, ip, #7
+  78 00b2 4CF0030C 		orr	ip, ip, #3
+  79 00b6 C1F81CC0 		str	ip, [r1, #28]
+  80 00ba D1F808C1 		ldr	ip, [r1, #264]
+  81 00be 2CF0E06C 		bic	ip, ip, #117440512
+  82 00c2 2CF03F0C 		bic	ip, ip, #63
+  83 00c6 4CF0806C 		orr	ip, ip, #67108864
+  84 00ca 4CF0300C 		orr	ip, ip, #48
+  85 00ce C1F808C1 		str	ip, [r1, #264]
+  86 00d2 D1F80CC1 		ldr	ip, [r1, #268]
+  87 00d6 2CF0E06C 		bic	ip, ip, #117440512
+  88 00da 2CF03F0C 		bic	ip, ip, #63
+  89 00de 4CF0806C 		orr	ip, ip, #67108864
+  90 00e2 4CF0200C 		orr	ip, ip, #32
+  91 00e6 C1F80CC1 		str	ip, [r1, #268]
+  92 00ea D2F81CC0 		ldr	ip, [r2, #28]
+  93 00ee 2CF0070C 		bic	ip, ip, #7
+  94 00f2 4CF0010C 		orr	ip, ip, #1
+  95 00f6 C2F81CC0 		str	ip, [r2, #28]
+  96 00fa D2F808C1 		ldr	ip, [r2, #264]
+  97 00fe 2CF0E06C 		bic	ip, ip, #117440512
+  98 0102 2CF03F0C 		bic	ip, ip, #63
+  99 0106 4CF0A06C 		orr	ip, ip, #83886080
+ 100 010a 4CF0200C 		orr	ip, ip, #32
+ 101 010e C2F808C1 		str	ip, [r2, #264]
+ 102 0112 D2F80CC1 		ldr	ip, [r2, #268]
+ 103 0116 2CF0E06C 		bic	ip, ip, #117440512
+ 104 011a 2CF03F0C 		bic	ip, ip, #63
+ 105 011e 4CF0A06C 		orr	ip, ip, #83886080
+ 106 0122 C2F80CC1 		str	ip, [r2, #268]
+ 107 0126 D3F840C0 		ldr	ip, [r3, #64]
+ 108 012a 06F00F06 		and	r6, r6, #15
+ 109 012e 2CF00F0C 		bic	ip, ip, #15
+ 110 0132 4CEA0606 		orr	r6, ip, r6
+ 111 0136 1E64     		str	r6, [r3, #64]
+ 112 0138 036C     		ldr	r3, [r0, #64]
+ 113 013a 23F00F06 		bic	r6, r3, #15
+ 114 013e 07F00F03 		and	r3, r7, #15
+ 115 0142 3343     		orrs	r3, r3, r6
+ 116 0144 0364     		str	r3, [r0, #64]
+ 117 0146 086C     		ldr	r0, [r1, #64]
+ 118 0148 05F00F03 		and	r3, r5, #15
+ 119 014c 20F00F00 		bic	r0, r0, #15
+ 120 0150 1843     		orrs	r0, r0, r3
+ 121 0152 0864     		str	r0, [r1, #64]
+ 122 0154 116C     		ldr	r1, [r2, #64]
+ 123 0156 04F00F03 		and	r3, r4, #15
+ 124 015a 21F00F00 		bic	r0, r1, #15
+ 125 015e 40EA0301 		orr	r1, r0, r3
+ 126 0162 2C48     		ldr	r0, .L2+16
+ 127 0164 1164     		str	r1, [r2, #64]
+ 128 0166 D0F8A820 		ldr	r2, [r0, #168]
+ 129 016a 42F00C03 		orr	r3, r2, #12
+ 130 016e C0F8A830 		str	r3, [r0, #168]
+ 131 0172 D0F8A811 		ldr	r1, [r0, #424]
+ 132 0176 21F00C02 		bic	r2, r1, #12
+ 133 017a 42F00403 		orr	r3, r2, #4
+ 134 017e C0F8A831 		str	r3, [r0, #424]
+ 135 0182 2548     		ldr	r0, .L2+20
+ 136 0184 0169     		ldr	r1, [r0, #16]
+ 137 0186 21F43842 		bic	r2, r1, #47104
+ 138 018a 42F41043 		orr	r3, r2, #36864
+ 139 018e 0361     		str	r3, [r0, #16]
+ 140 0190 D0F81012 		ldr	r1, [r0, #528]
+ 141 0194 21F43802 		bic	r2, r1, #12058624
+ 142 0198 42F41803 		orr	r3, r2, #9961472
+ 143 019c C0F81032 		str	r3, [r0, #528]
+ 144 01a0 D0F81012 		ldr	r1, [r0, #528]
+ 145 01a4 21F03842 		bic	r2, r1, #-1207959552
+ 146 01a8 42F01843 		orr	r3, r2, #-1744830464
+ 147 01ac C0F81032 		str	r3, [r0, #528]
+ 148 01b0 D0F81412 		ldr	r1, [r0, #532]
+ 149 01b4 21F0B802 		bic	r2, r1, #184
+ 150 01b8 42F09803 		orr	r3, r2, #152
+ 151 01bc C0F81432 		str	r3, [r0, #532]
+ 152 01c0 D0F81C12 		ldr	r1, [r0, #540]
+ 153 01c4 21F43802 		bic	r2, r1, #12058624
+ 154 01c8 42F41003 		orr	r3, r2, #9437184
+ 155 01cc C0F81C32 		str	r3, [r0, #540]
+ 156 01d0 D0F81015 		ldr	r1, [r0, #1296]
+ 157 01d4 21F0B802 		bic	r2, r1, #184
+ 158 01d8 42F08803 		orr	r3, r2, #136
+ 159 01dc C0F81035 		str	r3, [r0, #1296]
+ 160 01e0 D0F81015 		ldr	r1, [r0, #1296]
+ 161 01e4 21F43842 		bic	r2, r1, #47104
+ 162 01e8 42F40843 		orr	r3, r2, #34816
+ 163 01ec C0F81035 		str	r3, [r0, #1296]
+ 164 01f0 D0F81015 		ldr	r1, [r0, #1296]
+ 165 01f4 21F43802 		bic	r2, r1, #12058624
+ 166 01f8 42F40803 		orr	r3, r2, #8912896
+ 167 01fc C0F81035 		str	r3, [r0, #1296]
+ 168 0200 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 169              	.L3:
+ 170 0202 00BF     		.align	2
+ 171              	.L2:
+ 172 0204 00400440 		.word	1074020352
+ 173 0208 00000248 		.word	1208090624
+ 174 020c 00020248 		.word	1208091136
+ 175 0210 00400248 		.word	1208107008
+ 176 0214 00030140 		.word	1073808128
+ 177 0218 00800248 		.word	1208123392
+ 179              		.section	.text.DAVE_MUX_PreInit,"ax",%progbits
+ 180              		.align	1
+ 181              		.global	DAVE_MUX_PreInit
+ 182              		.thumb
+ 183              		.thumb_func
+ 185              	DAVE_MUX_PreInit:
+ 186              		@ args = 0, pretend = 0, frame = 0
+ 187              		@ frame_needed = 0, uses_anonymous_args = 0
+ 188              		@ link register save eliminated.
+ 189 0000 7047     		bx	lr
+ 191              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 MULTIPLEXER.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccNjxYEd.s:17     .text.DAVE_MUX_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccNjxYEd.s:22     .text.DAVE_MUX_Init:00000000 DAVE_MUX_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccNjxYEd.s:172    .text.DAVE_MUX_Init:00000204 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccNjxYEd.s:180    .text.DAVE_MUX_PreInit:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccNjxYEd.s:185    .text.DAVE_MUX_PreInit:00000000 DAVE_MUX_PreInit
+
+NO UNDEFINED SYMBOLS

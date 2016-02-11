@@ -1,0 +1,1571 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"usbcore001_device.c"
+  16              		.section	.text.USBCORE001_DevicePCDConnect,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	USBCORE001_DevicePCDConnect:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 08B5     		push	{r3, lr}
+  25 0002 054B     		ldr	r3, .L7
+  26 0004 D3F8AC02 		ldr	r0, [r3, #684]
+  27 0008 00B1     		cbz	r0, .L2
+  28 000a 8047     		blx	r0
+  29              	.L2:
+  30 000c 0349     		ldr	r1, .L7+4
+  31 000e 0222     		movs	r2, #2
+  32 0010 0A70     		strb	r2, [r1, #0]
+  33 0012 0020     		movs	r0, #0
+  34 0014 08BD     		pop	{r3, pc}
+  35              	.L8:
+  36 0016 00BF     		.align	2
+  37              	.L7:
+  38 0018 00000000 		.word	USBCORE001_DevicePCD
+  39 001c 00000000 		.word	USBCORE001_DeviceCurrentState
+  41              		.section	.text.USBCORE001_DevicePCDDisconnect,"ax",%progbits
+  42              		.align	1
+  43              		.thumb
+  44              		.thumb_func
+  46              	USBCORE001_DevicePCDDisconnect:
+  47              		@ args = 0, pretend = 0, frame = 0
+  48              		@ frame_needed = 0, uses_anonymous_args = 0
+  49 0000 0548     		ldr	r0, .L14
+  50 0002 08B5     		push	{r3, lr}
+  51 0004 D0F8B012 		ldr	r1, [r0, #688]
+  52 0008 044B     		ldr	r3, .L14+4
+  53 000a 0022     		movs	r2, #0
+  54 000c 1A70     		strb	r2, [r3, #0]
+  55 000e 01B1     		cbz	r1, .L10
+  56 0010 8847     		blx	r1
+  57              	.L10:
+  58 0012 0020     		movs	r0, #0
+  59 0014 08BD     		pop	{r3, pc}
+  60              	.L15:
+  61 0016 00BF     		.align	2
+  62              	.L14:
+  63 0018 00000000 		.word	USBCORE001_DevicePCD
+  64 001c 00000000 		.word	USBCORE001_DeviceCurrentState
+  66              		.section	.text.USBCORE001_DevicePCDResume,"ax",%progbits
+  67              		.align	1
+  68              		.thumb
+  69              		.thumb_func
+  71              	USBCORE001_DevicePCDResume:
+  72              		@ args = 0, pretend = 0, frame = 0
+  73              		@ frame_needed = 0, uses_anonymous_args = 0
+  74              		@ link register save eliminated.
+  75 0000 0020     		movs	r0, #0
+  76 0002 7047     		bx	lr
+  78              		.section	.text.USBCORE001_DevicePCDSuspend,"ax",%progbits
+  79              		.align	1
+  80              		.thumb
+  81              		.thumb_func
+  83              	USBCORE001_DevicePCDSuspend:
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86              		@ link register save eliminated.
+  87 0000 0020     		movs	r0, #0
+  88 0002 7047     		bx	lr
+  90              		.section	.text.USBCORE001_DevicePCDHnpChangedcb,"ax",%progbits
+  91              		.align	1
+  92              		.thumb
+  93              		.thumb_func
+  95              	USBCORE001_DevicePCDHnpChangedcb:
+  96              		@ args = 0, pretend = 0, frame = 0
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98              		@ link register save eliminated.
+  99 0000 0020     		movs	r0, #0
+ 100 0002 7047     		bx	lr
+ 102              		.section	.text.USBCORE001_DevicePCDReset,"ax",%progbits
+ 103              		.align	1
+ 104              		.thumb
+ 105              		.thumb_func
+ 107              	USBCORE001_DevicePCDReset:
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110              		@ link register save eliminated.
+ 111 0000 0020     		movs	r0, #0
+ 112 0002 7047     		bx	lr
+ 114              		.section	.text.USBCORE001_DevicePCDSetup,"ax",%progbits
+ 115              		.align	1
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	USBCORE001_DevicePCDSetup:
+ 120              		@ args = 0, pretend = 0, frame = 8
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122 0000 70B5     		push	{r4, r5, r6, lr}
+ 123 0002 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 124 0004 581F     		subs	r0, r3, #5
+ 125 0006 86B0     		sub	sp, sp, #24
+ 126 0008 0C46     		mov	r4, r1
+ 127 000a 0628     		cmp	r0, #6
+ 128 000c 75D8     		bhi	.L21
+ 129 000e DFE800F0 		tbb	[pc, r0]
+ 130              	.L28:
+ 131 0012 6B       		.byte	(.L22-.L28)/2
+ 132 0013 04       		.byte	(.L23-.L28)/2
+ 133 0014 74       		.byte	(.L21-.L28)/2
+ 134 0015 2F       		.byte	(.L24-.L28)/2
+ 135 0016 5A       		.byte	(.L25-.L28)/2
+ 136 0017 3E       		.byte	(.L26-.L28)/2
+ 137 0018 62       		.byte	(.L27-.L28)/2
+ 138 0019 00       		.align	1
+ 139              	.L23:
+ 140 001a 594E     		ldr	r6, .L63
+ 141 001c D6F8C032 		ldr	r3, [r6, #704]
+ 142 0020 002B     		cmp	r3, #0
+ 143 0022 00F0AA80 		beq	.L40
+ 144 0026 8D88     		ldrh	r5, [r1, #4]	@ unaligned
+ 145 0028 4888     		ldrh	r0, [r1, #2]	@ unaligned
+ 146 002a 05AA     		add	r2, sp, #20
+ 147 002c E9B2     		uxtb	r1, r5
+ 148 002e 9847     		blx	r3
+ 149 0030 E488     		ldrh	r4, [r4, #6]	@ unaligned
+ 150 0032 82B2     		uxth	r2, r0
+ 151 0034 A242     		cmp	r2, r4
+ 152 0036 38BF     		it	cc
+ 153 0038 1446     		movcc	r4, r2
+ 154 003a 0020     		movs	r0, #0
+ 155 003c E11C     		adds	r1, r4, #3
+ 156 003e FFF7FEFF 		bl	__DWC_ALLOC
+ 157 0042 0546     		mov	r5, r0
+ 158 0044 10B9     		cbnz	r0, .L30
+ 159              	.L31:
+ 160 0046 4FF0FF30 		mov	r0, #-1
+ 161 004a 97E0     		b	.L29
+ 162              	.L30:
+ 163 004c 2246     		mov	r2, r4
+ 164 004e 0021     		movs	r1, #0
+ 165 0050 FFF7FEFF 		bl	memset
+ 166 0054 0599     		ldr	r1, [sp, #20]
+ 167 0056 2246     		mov	r2, r4
+ 168 0058 2846     		mov	r0, r5
+ 169 005a FFF7FEFF 		bl	memcpy
+ 170 005e 0094     		str	r4, [sp, #0]
+ 171 0060 0024     		movs	r4, #0
+ 172 0062 0194     		str	r4, [sp, #4]
+ 173 0064 0295     		str	r5, [sp, #8]
+ 174 0066 0394     		str	r4, [sp, #12]
+ 175 0068 D6F8C802 		ldr	r0, [r6, #712]
+ 176 006c 3146     		mov	r1, r6
+ 177 006e 25E0     		b	.L62
+ 178              	.L24:
+ 179 0070 CC88     		ldrh	r4, [r1, #6]	@ unaligned
+ 180 0072 0020     		movs	r0, #0
+ 181 0074 E11C     		adds	r1, r4, #3
+ 182 0076 FFF7FEFF 		bl	__DWC_ALLOC
+ 183 007a 0546     		mov	r5, r0
+ 184 007c 0028     		cmp	r0, #0
+ 185 007e E2D0     		beq	.L31
+ 186 0080 0021     		movs	r1, #0
+ 187 0082 2246     		mov	r2, r4
+ 188 0084 FFF7FEFF 		bl	memset
+ 189 0088 3E49     		ldr	r1, .L63+4
+ 190 008a 0A78     		ldrb	r2, [r1, #0]	@ zero_extendqisi2
+ 191 008c 0DE0     		b	.L61
+ 192              	.L26:
+ 193 008e CC88     		ldrh	r4, [r1, #6]	@ unaligned
+ 194 0090 0020     		movs	r0, #0
+ 195 0092 E11C     		adds	r1, r4, #3
+ 196 0094 FFF7FEFF 		bl	__DWC_ALLOC
+ 197 0098 0546     		mov	r5, r0
+ 198 009a 0028     		cmp	r0, #0
+ 199 009c D3D0     		beq	.L31
+ 200 009e 0021     		movs	r1, #0
+ 201 00a0 2246     		mov	r2, r4
+ 202 00a2 FFF7FEFF 		bl	memset
+ 203 00a6 3749     		ldr	r1, .L63+4
+ 204 00a8 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 205              	.L61:
+ 206 00aa 2A70     		strb	r2, [r5, #0]
+ 207 00ac 3449     		ldr	r1, .L63
+ 208 00ae 0094     		str	r4, [sp, #0]
+ 209 00b0 0024     		movs	r4, #0
+ 210 00b2 0194     		str	r4, [sp, #4]
+ 211 00b4 0295     		str	r5, [sp, #8]
+ 212 00b6 0394     		str	r4, [sp, #12]
+ 213 00b8 D1F8C802 		ldr	r0, [r1, #712]
+ 214              	.L62:
+ 215 00bc 2A46     		mov	r2, r5
+ 216 00be 2B46     		mov	r3, r5
+ 217 00c0 FFF7FEFF 		bl	dwc_otg_pcd_ep_queue
+ 218 00c4 57E0     		b	.L58
+ 219              	.L25:
+ 220 00c6 2E48     		ldr	r0, .L63
+ 221 00c8 D0F8B432 		ldr	r3, [r0, #692]
+ 222 00cc 03B1     		cbz	r3, .L32
+ 223 00ce 9847     		blx	r3
+ 224              	.L32:
+ 225 00d0 6288     		ldrh	r2, [r4, #2]	@ unaligned
+ 226 00d2 2C4B     		ldr	r3, .L63+4
+ 227 00d4 0FE0     		b	.L60
+ 228              	.L27:
+ 229 00d6 2A49     		ldr	r1, .L63
+ 230 00d8 D1F8B422 		ldr	r2, [r1, #692]
+ 231 00dc 02B1     		cbz	r2, .L33
+ 232 00de 9047     		blx	r2
+ 233              	.L33:
+ 234 00e0 6088     		ldrh	r0, [r4, #2]	@ unaligned
+ 235 00e2 284B     		ldr	r3, .L63+4
+ 236 00e4 5870     		strb	r0, [r3, #1]
+ 237 00e6 46E0     		b	.L58
+ 238              	.L22:
+ 239 00e8 2548     		ldr	r0, .L63
+ 240 00ea D0F8BC12 		ldr	r1, [r0, #700]
+ 241 00ee 01B1     		cbz	r1, .L34
+ 242 00f0 8847     		blx	r1
+ 243              	.L34:
+ 244 00f2 254B     		ldr	r3, .L63+8
+ 245 00f4 0322     		movs	r2, #3
+ 246              	.L60:
+ 247 00f6 1A70     		strb	r2, [r3, #0]
+ 248 00f8 3DE0     		b	.L58
+ 249              	.L21:
+ 250 00fa 214D     		ldr	r5, .L63
+ 251 00fc D5F8B802 		ldr	r0, [r5, #696]
+ 252 0100 0028     		cmp	r0, #0
+ 253 0102 3BD0     		beq	.L29
+ 254 0104 91F90000 		ldrsb	r0, [r1, #0]
+ 255 0108 0028     		cmp	r0, #0
+ 256 010a 2CDB     		blt	.L35
+ 257 010c CA88     		ldrh	r2, [r1, #6]	@ unaligned
+ 258 010e CAB1     		cbz	r2, .L36
+ 259 0110 298C     		ldrh	r1, [r5, #32]
+ 260 0112 9142     		cmp	r1, r2
+ 261 0114 0BD8     		bhi	.L37
+ 262 0116 0020     		movs	r0, #0
+ 263 0118 D11C     		adds	r1, r2, #3
+ 264 011a EE68     		ldr	r6, [r5, #12]
+ 265 011c FFF7FEFF 		bl	__DWC_ALLOC
+ 266 0120 E860     		str	r0, [r5, #12]
+ 267 0122 10B9     		cbnz	r0, .L38
+ 268 0124 EE60     		str	r6, [r5, #12]
+ 269 0126 1948     		ldr	r0, .L63+12
+ 270 0128 28E0     		b	.L29
+ 271              	.L38:
+ 272 012a E288     		ldrh	r2, [r4, #6]	@ unaligned
+ 273 012c 2A84     		strh	r2, [r5, #32]	@ movhi
+ 274              	.L37:
+ 275 012e 1449     		ldr	r1, .L63
+ 276 0130 E388     		ldrh	r3, [r4, #6]	@ unaligned
+ 277 0132 CA68     		ldr	r2, [r1, #12]
+ 278 0134 0093     		str	r3, [sp, #0]
+ 279 0136 0020     		movs	r0, #0
+ 280 0138 0190     		str	r0, [sp, #4]
+ 281 013a 0292     		str	r2, [sp, #8]
+ 282 013c 0390     		str	r0, [sp, #12]
+ 283 013e D1F8C802 		ldr	r0, [r1, #712]
+ 284 0142 08E0     		b	.L57
+ 285              	.L36:
+ 286 0144 0123     		movs	r3, #1
+ 287 0146 0092     		str	r2, [sp, #0]
+ 288 0148 0193     		str	r3, [sp, #4]
+ 289 014a 6868     		ldr	r0, [r5, #4]
+ 290 014c 0392     		str	r2, [sp, #12]
+ 291 014e 0290     		str	r0, [sp, #8]
+ 292 0150 D5F8C802 		ldr	r0, [r5, #712]
+ 293 0154 2946     		mov	r1, r5
+ 294              	.L57:
+ 295 0156 1346     		mov	r3, r2
+ 296 0158 FFF7FEFF 		bl	dwc_otg_pcd_ep_queue
+ 297 015c 084A     		ldr	r2, .L63
+ 298 015e 0121     		movs	r1, #1
+ 299 0160 82F8C412 		strb	r1, [r2, #708]
+ 300 0164 02E0     		b	.L59
+ 301              	.L35:
+ 302 0166 0121     		movs	r1, #1
+ 303 0168 85F8C412 		strb	r1, [r5, #708]
+ 304              	.L59:
+ 305 016c 084B     		ldr	r3, .L63+16
+ 306 016e 2068     		ldr	r0, [r4, #0]	@ unaligned
+ 307 0170 1860     		str	r0, [r3, #0]	@ unaligned
+ 308 0172 6168     		ldr	r1, [r4, #4]	@ unaligned
+ 309 0174 5960     		str	r1, [r3, #4]	@ unaligned
+ 310              	.L58:
+ 311 0176 0020     		movs	r0, #0
+ 312 0178 00E0     		b	.L29
+ 313              	.L40:
+ 314 017a 1846     		mov	r0, r3
+ 315              	.L29:
+ 316 017c 06B0     		add	sp, sp, #24
+ 317 017e 70BD     		pop	{r4, r5, r6, pc}
+ 318              	.L64:
+ 319              		.align	2
+ 320              	.L63:
+ 321 0180 00000000 		.word	USBCORE001_DevicePCD
+ 322 0184 00000000 		.word	.LANCHOR0
+ 323 0188 00000000 		.word	USBCORE001_DeviceCurrentState
+ 324 018c 16FCFFFF 		.word	-1002
+ 325 0190 00000000 		.word	USBCORE001_DeviceCurrentControlRequest
+ 327              		.section	.text.USBCORE001_DevicePCDComplete,"ax",%progbits
+ 328              		.align	1
+ 329              		.thumb
+ 330              		.thumb_func
+ 332              	USBCORE001_DevicePCDComplete:
+ 333              		@ args = 4, pretend = 0, frame = 0
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 336 0002 4E68     		ldr	r6, [r1, #4]
+ 337 0004 089D     		ldr	r5, [sp, #32]
+ 338 0006 B242     		cmp	r2, r6
+ 339 0008 0846     		mov	r0, r1
+ 340 000a 1446     		mov	r4, r2
+ 341 000c 0BD1     		bne	.L66
+ 342 000e 8B8B     		ldrh	r3, [r1, #28]
+ 343 0010 A9B2     		uxth	r1, r5
+ 344 0012 5D1A     		subs	r5, r3, r1
+ 345 0014 038B     		ldrh	r3, [r0, #24]
+ 346 0016 AAB2     		uxth	r2, r5
+ 347 0018 5D1A     		subs	r5, r3, r1
+ 348 001a 0021     		movs	r1, #0
+ 349 001c 8283     		strh	r2, [r0, #28]	@ movhi
+ 350 001e 0583     		strh	r5, [r0, #24]	@ movhi
+ 351 0020 0172     		strb	r1, [r0, #8]
+ 352 0022 8177     		strb	r1, [r0, #30]
+ 353 0024 1BE0     		b	.L67
+ 354              	.L66:
+ 355 0026 CE68     		ldr	r6, [r1, #12]
+ 356 0028 B242     		cmp	r2, r6
+ 357 002a 14D1     		bne	.L68
+ 358 002c 3DB1     		cbz	r5, .L69
+ 359 002e 498A     		ldrh	r1, [r1, #18]
+ 360 0030 15FA81F5 		uxtah	r5, r5, r1
+ 361 0034 ADB2     		uxth	r5, r5
+ 362 0036 0022     		movs	r2, #0
+ 363 0038 4582     		strh	r5, [r0, #18]	@ movhi
+ 364 003a 0274     		strb	r2, [r0, #16]
+ 365 003c 0FE0     		b	.L67
+ 366              	.L69:
+ 367 003e 73B9     		cbnz	r3, .L67
+ 368 0040 088C     		ldrh	r0, [r1, #32]
+ 369 0042 0393     		str	r3, [sp, #12]
+ 370 0044 8DE81900 		stmia	sp, {r0, r3, r4}
+ 371 0048 064B     		ldr	r3, .L70
+ 372 004a D3F8C802 		ldr	r0, [r3, #712]
+ 373 004e 1346     		mov	r3, r2
+ 374 0050 FFF7FEFF 		bl	dwc_otg_pcd_ep_queue
+ 375 0054 03E0     		b	.L67
+ 376              	.L68:
+ 377 0056 0020     		movs	r0, #0
+ 378 0058 1146     		mov	r1, r2
+ 379 005a FFF7FEFF 		bl	__DWC_FREE
+ 380              	.L67:
+ 381 005e 0020     		movs	r0, #0
+ 382 0060 04B0     		add	sp, sp, #16
+ 383 0062 70BD     		pop	{r4, r5, r6, pc}
+ 384              	.L71:
+ 385              		.align	2
+ 386              	.L70:
+ 387 0064 00000000 		.word	USBCORE001_DevicePCD
+ 389              		.section	.text.USBCore001_DeviceStart,"ax",%progbits
+ 390              		.align	1
+ 391              		.global	USBCore001_DeviceStart
+ 392              		.thumb
+ 393              		.thumb_func
+ 395              	USBCore001_DeviceStart:
+ 396              		@ args = 0, pretend = 0, frame = 0
+ 397              		@ frame_needed = 0, uses_anonymous_args = 0
+ 398 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 399 0002 0F46     		mov	r7, r1
+ 400 0004 0446     		mov	r4, r0
+ 401 0006 08B9     		cbnz	r0, .L73
+ 402              	.L75:
+ 403 0008 304D     		ldr	r5, .L83
+ 404 000a 59E0     		b	.L74
+ 405              	.L73:
+ 406 000c 0068     		ldr	r0, [r0, #0]
+ 407 000e FFF7FEFF 		bl	dwc_otg_disable_global_interrupts
+ 408 0012 2068     		ldr	r0, [r4, #0]
+ 409 0014 FFF7FEFF 		bl	dwc_otg_pcd_init
+ 410 0018 6060     		str	r0, [r4, #4]
+ 411 001a 0028     		cmp	r0, #0
+ 412 001c F4D0     		beq	.L75
+ 413 001e 2C4D     		ldr	r5, .L83+4
+ 414 0020 2368     		ldr	r3, [r4, #0]
+ 415 0022 C5F8C802 		str	r0, [r5, #712]
+ 416 0026 9868     		ldr	r0, [r3, #8]
+ 417 0028 0168     		ldr	r1, [r0, #0]
+ 418 002a 081D     		adds	r0, r1, #4
+ 419 002c FFF7FEFF 		bl	DWC_READ_REG32
+ 420 0030 2668     		ldr	r6, [r4, #0]
+ 421 0032 B368     		ldr	r3, [r6, #8]
+ 422 0034 0246     		mov	r2, r0
+ 423 0036 1868     		ldr	r0, [r3, #0]
+ 424 0038 22F00201 		bic	r1, r2, #2
+ 425 003c 0430     		adds	r0, r0, #4
+ 426 003e FFF7FEFF 		bl	DWC_WRITE_REG32
+ 427 0042 6068     		ldr	r0, [r4, #4]
+ 428 0044 2349     		ldr	r1, .L83+8
+ 429 0046 FFF7FEFF 		bl	dwc_otg_pcd_start
+ 430 004a 0FCF     		ldmia	r7!, {r0, r1, r2, r3}
+ 431 004c 05F52B76 		add	r6, r5, #684
+ 432 0050 0FC6     		stmia	r6!, {r0, r1, r2, r3}
+ 433 0052 97E80300 		ldmia	r7, {r0, r1}
+ 434 0056 86E80300 		stmia	r6, {r0, r1}
+ 435 005a 4FF42071 		mov	r1, #640
+ 436 005e 0020     		movs	r0, #0
+ 437 0060 FFF7FEFF 		bl	__DWC_ALLOC
+ 438 0064 4FF42071 		mov	r1, #640
+ 439 0068 6860     		str	r0, [r5, #4]
+ 440 006a 0020     		movs	r0, #0
+ 441 006c FFF7FEFF 		bl	__DWC_ALLOC
+ 442 0070 4021     		movs	r1, #64
+ 443 0072 E860     		str	r0, [r5, #12]
+ 444 0074 2984     		strh	r1, [r5, #32]	@ movhi
+ 445 0076 2A46     		mov	r2, r5
+ 446 0078 D5F8C802 		ldr	r0, [r5, #712]
+ 447 007c 0021     		movs	r1, #0
+ 448 007e FFF7FEFF 		bl	dwc_otg_pcd_ep_enable
+ 449 0082 2B46     		mov	r3, r5
+ 450 0084 0022     		movs	r2, #0
+ 451              	.L76:
+ 452 0086 62F07F00 		orn	r0, r2, #127
+ 453 008a 83F86801 		strb	r0, [r3, #360]
+ 454 008e 0121     		movs	r1, #1
+ 455 0090 0020     		movs	r0, #0
+ 456 0092 0132     		adds	r2, r2, #1
+ 457 0094 83F86911 		strb	r1, [r3, #361]
+ 458 0098 C3F86C01 		str	r0, [r3, #364]
+ 459 009c C3F87401 		str	r0, [r3, #372]
+ 460 00a0 2433     		adds	r3, r3, #36
+ 461 00a2 092A     		cmp	r2, #9
+ 462 00a4 EFD1     		bne	.L76
+ 463 00a6 0346     		mov	r3, r0
+ 464              	.L77:
+ 465 00a8 0021     		movs	r1, #0
+ 466 00aa 85F82430 		strb	r3, [r5, #36]
+ 467 00ae 0133     		adds	r3, r3, #1
+ 468 00b0 85F82510 		strb	r1, [r5, #37]
+ 469 00b4 A962     		str	r1, [r5, #40]
+ 470 00b6 2963     		str	r1, [r5, #48]
+ 471 00b8 2435     		adds	r5, r5, #36
+ 472 00ba 092B     		cmp	r3, #9
+ 473 00bc F4D1     		bne	.L77
+ 474 00be 0D46     		mov	r5, r1
+ 475              	.L74:
+ 476 00c0 2068     		ldr	r0, [r4, #0]
+ 477 00c2 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 478 00c6 2846     		mov	r0, r5
+ 479 00c8 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 480              	.L84:
+ 481 00ca 00BF     		.align	2
+ 482              	.L83:
+ 483 00cc 16FCFFFF 		.word	-1002
+ 484 00d0 00000000 		.word	USBCORE001_DevicePCD
+ 485 00d4 00000000 		.word	.LANCHOR1
+ 487              		.section	.text.Endpoint_IsSETUPReceived,"ax",%progbits
+ 488              		.align	1
+ 489              		.global	Endpoint_IsSETUPReceived
+ 490              		.thumb
+ 491              		.thumb_func
+ 493              	Endpoint_IsSETUPReceived:
+ 494              		@ args = 0, pretend = 0, frame = 0
+ 495              		@ frame_needed = 0, uses_anonymous_args = 0
+ 496              		@ link register save eliminated.
+ 497 0000 014B     		ldr	r3, .L86
+ 498 0002 93F8C402 		ldrb	r0, [r3, #708]	@ zero_extendqisi2
+ 499 0006 7047     		bx	lr
+ 500              	.L87:
+ 501              		.align	2
+ 502              	.L86:
+ 503 0008 00000000 		.word	USBCORE001_DevicePCD
+ 505              		.section	.text.Endpoint_ClearSETUP,"ax",%progbits
+ 506              		.align	1
+ 507              		.global	Endpoint_ClearSETUP
+ 508              		.thumb
+ 509              		.thumb_func
+ 511              	Endpoint_ClearSETUP:
+ 512              		@ args = 0, pretend = 0, frame = 0
+ 513              		@ frame_needed = 0, uses_anonymous_args = 0
+ 514              		@ link register save eliminated.
+ 515 0000 024B     		ldr	r3, .L89
+ 516 0002 0022     		movs	r2, #0
+ 517 0004 83F8C422 		strb	r2, [r3, #708]
+ 518 0008 7047     		bx	lr
+ 519              	.L90:
+ 520 000a 00BF     		.align	2
+ 521              	.L89:
+ 522 000c 00000000 		.word	USBCORE001_DevicePCD
+ 524              		.section	.text.USB_1msDelay,"ax",%progbits
+ 525              		.align	1
+ 526              		.global	USB_1msDelay
+ 527              		.thumb
+ 528              		.thumb_func
+ 530              	USB_1msDelay:
+ 531              		@ args = 0, pretend = 0, frame = 8
+ 532              		@ frame_needed = 0, uses_anonymous_args = 0
+ 533              		@ link register save eliminated.
+ 534 0000 82B0     		sub	sp, sp, #8
+ 535 0002 0190     		str	r0, [sp, #4]
+ 536              	.L92:
+ 537 0004 019B     		ldr	r3, [sp, #4]
+ 538 0006 3BB1     		cbz	r3, .L94
+ 539              	.L93:
+ 540              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+ 541 0008 00BF     		nop
+ 542              	@ 0 "" 2
+ 543              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+ 544 000a 00BF     		nop
+ 545              	@ 0 "" 2
+ 546              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+ 547 000c 00BF     		nop
+ 548              	@ 0 "" 2
+ 549              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+ 550 000e 00BF     		nop
+ 551              	@ 0 "" 2
+ 552              		.thumb
+ 553 0010 0198     		ldr	r0, [sp, #4]
+ 554 0012 411E     		subs	r1, r0, #1
+ 555 0014 0191     		str	r1, [sp, #4]
+ 556 0016 F5E7     		b	.L92
+ 557              	.L94:
+ 558 0018 02B0     		add	sp, sp, #8
+ 559 001a 7047     		bx	lr
+ 561              		.section	.text.Endpoint_ClearOUT,"ax",%progbits
+ 562              		.align	1
+ 563              		.global	Endpoint_ClearOUT
+ 564              		.thumb
+ 565              		.thumb_func
+ 567              	Endpoint_ClearOUT:
+ 568              		@ args = 0, pretend = 0, frame = 0
+ 569              		@ frame_needed = 0, uses_anonymous_args = 0
+ 570 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 571 0002 1349     		ldr	r1, .L99
+ 572 0004 91F8D032 		ldrb	r3, [r1, #720]	@ zero_extendqisi2
+ 573 0008 03B3     		cbz	r3, .L95
+ 574 000a 2424     		movs	r4, #36
+ 575 000c 04FB0314 		mla	r4, r4, r3, r1
+ 576 0010 94F83430 		ldrb	r3, [r4, #52]	@ zero_extendqisi2
+ 577 0014 2434     		adds	r4, r4, #36
+ 578 0016 CBB9     		cbnz	r3, .L95
+ 579 0018 208C     		ldrh	r0, [r4, #32]
+ 580 001a 6382     		strh	r3, [r4, #18]	@ movhi
+ 581 001c 0122     		movs	r2, #1
+ 582 001e 2274     		strb	r2, [r4, #16]
+ 583 0020 6383     		strh	r3, [r4, #26]	@ movhi
+ 584 0022 E268     		ldr	r2, [r4, #12]
+ 585 0024 0393     		str	r3, [sp, #12]
+ 586 0026 8DE80900 		stmia	sp, {r0, r3}
+ 587 002a 0292     		str	r2, [sp, #8]
+ 588 002c D1F8C802 		ldr	r0, [r1, #712]
+ 589 0030 1346     		mov	r3, r2
+ 590 0032 2146     		mov	r1, r4
+ 591 0034 FFF7FEFF 		bl	dwc_otg_pcd_ep_queue
+ 592 0038 208C     		ldrh	r0, [r4, #32]
+ 593 003a 1028     		cmp	r0, #16
+ 594 003c 06D9     		bls	.L95
+ 595 003e 40F6C410 		movw	r0, #2500
+ 596 0042 04B0     		add	sp, sp, #16
+ 597 0044 BDE81040 		pop	{r4, lr}
+ 598 0048 FFF7FEBF 		b	USB_1msDelay
+ 599              	.L95:
+ 600 004c 04B0     		add	sp, sp, #16
+ 601 004e 10BD     		pop	{r4, pc}
+ 602              	.L100:
+ 603              		.align	2
+ 604              	.L99:
+ 605 0050 00000000 		.word	USBCORE001_DevicePCD
+ 607              		.section	.text.USB_Device_ProcessControlRequest,"ax",%progbits
+ 608              		.align	1
+ 609              		.global	USB_Device_ProcessControlRequest
+ 610              		.thumb
+ 611              		.thumb_func
+ 613              	USB_Device_ProcessControlRequest:
+ 614              		@ args = 0, pretend = 0, frame = 0
+ 615              		@ frame_needed = 0, uses_anonymous_args = 0
+ 616 0000 38B5     		push	{r3, r4, r5, lr}
+ 617 0002 084C     		ldr	r4, .L109
+ 618 0004 94F8C432 		ldrb	r3, [r4, #708]	@ zero_extendqisi2
+ 619 0008 5BB1     		cbz	r3, .L101
+ 620 000a D4F8B812 		ldr	r1, [r4, #696]
+ 621 000e 41B1     		cbz	r1, .L101
+ 622 0010 94F8D052 		ldrb	r5, [r4, #720]	@ zero_extendqisi2
+ 623 0014 0448     		ldr	r0, .L109+4
+ 624 0016 0022     		movs	r2, #0
+ 625 0018 84F8D022 		strb	r2, [r4, #720]
+ 626 001c 8847     		blx	r1
+ 627 001e 84F8D052 		strb	r5, [r4, #720]
+ 628              	.L101:
+ 629 0022 38BD     		pop	{r3, r4, r5, pc}
+ 630              	.L110:
+ 631              		.align	2
+ 632              	.L109:
+ 633 0024 00000000 		.word	USBCORE001_DevicePCD
+ 634 0028 00000000 		.word	USBCORE001_DeviceCurrentControlRequest
+ 636              		.section	.text.Endpoint_ClearIN,"ax",%progbits
+ 637              		.align	1
+ 638              		.global	Endpoint_ClearIN
+ 639              		.thumb
+ 640              		.thumb_func
+ 642              	Endpoint_ClearIN:
+ 643              		@ args = 0, pretend = 0, frame = 0
+ 644              		@ frame_needed = 0, uses_anonymous_args = 0
+ 645 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 646 0002 2F4C     		ldr	r4, .L129
+ 647 0004 94F8D032 		ldrb	r3, [r4, #720]	@ zero_extendqisi2
+ 648 0008 23B1     		cbz	r3, .L113
+ 649 000a 2422     		movs	r2, #36
+ 650 000c 02FB0344 		mla	r4, r2, r3, r4
+ 651 0010 04F5B474 		add	r4, r4, #360
+ 652              	.L113:
+ 653 0014 A07F     		ldrb	r0, [r4, #30]	@ zero_extendqisi2
+ 654 0016 0028     		cmp	r0, #0
+ 655 0018 FCD1     		bne	.L113
+ 656 001a A38B     		ldrh	r3, [r4, #28]
+ 657 001c 294E     		ldr	r6, .L129+4
+ 658 001e 9AB2     		uxth	r2, r3
+ 659 0020 7080     		strh	r0, [r6, #2]	@ movhi
+ 660 0022 002A     		cmp	r2, #0
+ 661 0024 4BD0     		beq	.L111
+ 662 0026 0125     		movs	r5, #1
+ 663 0028 A577     		strb	r5, [r4, #30]
+ 664 002a A18B     		ldrh	r1, [r4, #28]
+ 665 002c 6268     		ldr	r2, [r4, #4]
+ 666 002e 0190     		str	r0, [sp, #4]
+ 667 0030 0390     		str	r0, [sp, #12]
+ 668 0032 CDB2     		uxtb	r5, r1
+ 669 0034 2248     		ldr	r0, .L129
+ 670 0036 0095     		str	r5, [sp, #0]
+ 671 0038 0292     		str	r2, [sp, #8]
+ 672 003a 1346     		mov	r3, r2
+ 673 003c D0F8C802 		ldr	r0, [r0, #712]
+ 674 0040 2146     		mov	r1, r4
+ 675 0042 FFF7FEFF 		bl	dwc_otg_pcd_ep_queue
+ 676 0046 3379     		ldrb	r3, [r6, #4]	@ zero_extendqisi2
+ 677 0048 012B     		cmp	r3, #1
+ 678 004a 1BD1     		bne	.L116
+ 679 004c 2278     		ldrb	r2, [r4, #0]	@ zero_extendqisi2
+ 680 004e CAB1     		cbz	r2, .L116
+ 681 0050 7188     		ldrh	r1, [r6, #2]
+ 682              	.L117:
+ 683 0052 A57F     		ldrb	r5, [r4, #30]	@ zero_extendqisi2
+ 684 0054 4E1C     		adds	r6, r1, #1
+ 685 0056 B2B2     		uxth	r2, r6
+ 686 0058 0DB1     		cbz	r5, .L127
+ 687              	.L121:
+ 688 005a 1146     		mov	r1, r2
+ 689 005c F9E7     		b	.L117
+ 690              	.L127:
+ 691 005e 194E     		ldr	r6, .L129+4
+ 692 0060 174B     		ldr	r3, .L129
+ 693 0062 7180     		strh	r1, [r6, #2]	@ movhi
+ 694 0064 0121     		movs	r1, #1
+ 695 0066 A177     		strb	r1, [r4, #30]
+ 696 0068 0191     		str	r1, [sp, #4]
+ 697 006a 0095     		str	r5, [sp, #0]
+ 698 006c 6068     		ldr	r0, [r4, #4]
+ 699 006e 0395     		str	r5, [sp, #12]
+ 700 0070 0290     		str	r0, [sp, #8]
+ 701 0072 D3F8C802 		ldr	r0, [r3, #712]
+ 702 0076 2146     		mov	r1, r4
+ 703 0078 2A46     		mov	r2, r5
+ 704 007a 2B46     		mov	r3, r5
+ 705 007c FFF7FEFF 		bl	dwc_otg_pcd_ep_queue
+ 706 0080 3571     		strb	r5, [r6, #4]
+ 707 0082 1CE0     		b	.L111
+ 708              	.L116:
+ 709 0084 218C     		ldrh	r1, [r4, #32]
+ 710 0086 A942     		cmp	r1, r5
+ 711 0088 19D1     		bne	.L111
+ 712 008a 2078     		ldrb	r0, [r4, #0]	@ zero_extendqisi2
+ 713 008c B8B9     		cbnz	r0, .L111
+ 714 008e 0D4B     		ldr	r3, .L129+4
+ 715 0090 5B88     		ldrh	r3, [r3, #2]
+ 716              	.L119:
+ 717 0092 A27F     		ldrb	r2, [r4, #30]	@ zero_extendqisi2
+ 718 0094 591C     		adds	r1, r3, #1
+ 719 0096 88B2     		uxth	r0, r1
+ 720 0098 0AB1     		cbz	r2, .L128
+ 721              	.L122:
+ 722 009a 0346     		mov	r3, r0
+ 723 009c F9E7     		b	.L119
+ 724              	.L128:
+ 725 009e 0949     		ldr	r1, .L129+4
+ 726 00a0 0748     		ldr	r0, .L129
+ 727 00a2 4B80     		strh	r3, [r1, #2]	@ movhi
+ 728 00a4 0123     		movs	r3, #1
+ 729 00a6 A377     		strb	r3, [r4, #30]
+ 730 00a8 8DE80C00 		stmia	sp, {r2, r3}
+ 731 00ac 6368     		ldr	r3, [r4, #4]
+ 732 00ae 0392     		str	r2, [sp, #12]
+ 733 00b0 0293     		str	r3, [sp, #8]
+ 734 00b2 D0F8C802 		ldr	r0, [r0, #712]
+ 735 00b6 2146     		mov	r1, r4
+ 736 00b8 1346     		mov	r3, r2
+ 737 00ba FFF7FEFF 		bl	dwc_otg_pcd_ep_queue
+ 738              	.L111:
+ 739 00be 7FBD     		pop	{r0, r1, r2, r3, r4, r5, r6, pc}
+ 740              	.L130:
+ 741              		.align	2
+ 742              	.L129:
+ 743 00c0 00000000 		.word	USBCORE001_DevicePCD
+ 744 00c4 00000000 		.word	.LANCHOR0
+ 746              		.section	.text.Endpoint_Write_Control_Stream_BE,"ax",%progbits
+ 747              		.align	1
+ 748              		.global	Endpoint_Write_Control_Stream_BE
+ 749              		.thumb
+ 750              		.thumb_func
+ 752              	Endpoint_Write_Control_Stream_BE:
+ 753              		@ args = 0, pretend = 0, frame = 0
+ 754              		@ frame_needed = 0, uses_anonymous_args = 0
+ 755 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 756 0004 114B     		ldr	r3, .L135
+ 757 0006 0022     		movs	r2, #0
+ 758 0008 93F8D072 		ldrb	r7, [r3, #720]	@ zero_extendqisi2
+ 759 000c 83F8D022 		strb	r2, [r3, #720]
+ 760 0010 8046     		mov	r8, r0
+ 761 0012 0D46     		mov	r5, r1
+ 762 0014 9946     		mov	r9, r3
+ 763              	.L132:
+ 764 0016 B9F81C60 		ldrh	r6, [r9, #28]
+ 765 001a 0C4C     		ldr	r4, .L135
+ 766 001c B6B2     		uxth	r6, r6
+ 767 001e 16B1     		cbz	r6, .L134
+ 768              	.L133:
+ 769 0020 FFF7FEFF 		bl	Endpoint_ClearIN
+ 770 0024 F7E7     		b	.L132
+ 771              	.L134:
+ 772 0026 4146     		mov	r1, r8
+ 773 0028 2A46     		mov	r2, r5
+ 774 002a 6068     		ldr	r0, [r4, #4]
+ 775 002c FFF7FEFF 		bl	memcpy
+ 776 0030 A08B     		ldrh	r0, [r4, #28]
+ 777 0032 228B     		ldrh	r2, [r4, #24]
+ 778 0034 84F8D072 		strb	r7, [r4, #720]
+ 779 0038 15FA80F1 		uxtah	r1, r5, r0
+ 780 003c 8BB2     		uxth	r3, r1
+ 781 003e AD18     		adds	r5, r5, r2
+ 782 0040 A383     		strh	r3, [r4, #28]	@ movhi
+ 783 0042 2583     		strh	r5, [r4, #24]	@ movhi
+ 784 0044 3046     		mov	r0, r6
+ 785 0046 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 786              	.L136:
+ 787 004a 00BF     		.align	2
+ 788              	.L135:
+ 789 004c 00000000 		.word	USBCORE001_DevicePCD
+ 791              		.section	.text.Endpoint_Write_Control_Stream_LE,"ax",%progbits
+ 792              		.align	1
+ 793              		.global	Endpoint_Write_Control_Stream_LE
+ 794              		.thumb
+ 795              		.thumb_func
+ 797              	Endpoint_Write_Control_Stream_LE:
+ 798              		@ args = 0, pretend = 0, frame = 0
+ 799              		@ frame_needed = 0, uses_anonymous_args = 0
+ 800              		@ link register save eliminated.
+ 801 0000 FFF7FEBF 		b	Endpoint_Write_Control_Stream_BE
+ 803              		.section	.text.Endpoint_Read_Control_Stream_BE,"ax",%progbits
+ 804              		.align	1
+ 805              		.global	Endpoint_Read_Control_Stream_BE
+ 806              		.thumb
+ 807              		.thumb_func
+ 809              	Endpoint_Read_Control_Stream_BE:
+ 810              		@ args = 0, pretend = 0, frame = 0
+ 811              		@ frame_needed = 0, uses_anonymous_args = 0
+ 812 0000 70B5     		push	{r4, r5, r6, lr}
+ 813 0002 0646     		mov	r6, r0
+ 814 0004 0D46     		mov	r5, r1
+ 815              	.L144:
+ 816 0006 0E4C     		ldr	r4, .L145
+ 817 0008 638A     		ldrh	r3, [r4, #18]
+ 818 000a 98B2     		uxth	r0, r3
+ 819 000c 8542     		cmp	r5, r0
+ 820 000e FAD8     		bhi	.L144
+ 821 0010 E268     		ldr	r2, [r4, #12]
+ 822 0012 618B     		ldrh	r1, [r4, #26]
+ 823 0014 3046     		mov	r0, r6
+ 824 0016 12FA81F1 		uxtah	r1, r2, r1
+ 825 001a 2A46     		mov	r2, r5
+ 826 001c FFF7FEFF 		bl	memcpy
+ 827 0020 638A     		ldrh	r3, [r4, #18]
+ 828 0022 581B     		subs	r0, r3, r5
+ 829 0024 82B2     		uxth	r2, r0
+ 830 0026 6282     		strh	r2, [r4, #18]	@ movhi
+ 831 0028 618A     		ldrh	r1, [r4, #18]
+ 832 002a 88B2     		uxth	r0, r1
+ 833 002c 28B1     		cbz	r0, .L141
+ 834 002e 638B     		ldrh	r3, [r4, #26]
+ 835 0030 15FA83F0 		uxtah	r0, r5, r3
+ 836 0034 82B2     		uxth	r2, r0
+ 837 0036 6283     		strh	r2, [r4, #26]	@ movhi
+ 838 0038 E5E7     		b	.L144
+ 839              	.L141:
+ 840 003a 6083     		strh	r0, [r4, #26]	@ movhi
+ 841 003c 70BD     		pop	{r4, r5, r6, pc}
+ 842              	.L146:
+ 843 003e 00BF     		.align	2
+ 844              	.L145:
+ 845 0040 00000000 		.word	USBCORE001_DevicePCD
+ 847              		.section	.text.Endpoint_Read_Control_Stream_LE,"ax",%progbits
+ 848              		.align	1
+ 849              		.global	Endpoint_Read_Control_Stream_LE
+ 850              		.thumb
+ 851              		.thumb_func
+ 853              	Endpoint_Read_Control_Stream_LE:
+ 854              		@ args = 0, pretend = 0, frame = 0
+ 855              		@ frame_needed = 0, uses_anonymous_args = 0
+ 856              		@ link register save eliminated.
+ 857 0000 FFF7FEBF 		b	Endpoint_Read_Control_Stream_BE
+ 859              		.section	.text.Endpoint_ClearStatusStage,"ax",%progbits
+ 860              		.align	1
+ 861              		.global	Endpoint_ClearStatusStage
+ 862              		.thumb
+ 863              		.thumb_func
+ 865              	Endpoint_ClearStatusStage:
+ 866              		@ args = 0, pretend = 0, frame = 0
+ 867              		@ frame_needed = 0, uses_anonymous_args = 0
+ 868              		@ link register save eliminated.
+ 869 0000 7047     		bx	lr
+ 871              		.section	.text.Endpoint_SelectEndpoint,"ax",%progbits
+ 872              		.align	1
+ 873              		.global	Endpoint_SelectEndpoint
+ 874              		.thumb
+ 875              		.thumb_func
+ 877              	Endpoint_SelectEndpoint:
+ 878              		@ args = 0, pretend = 0, frame = 0
+ 879              		@ frame_needed = 0, uses_anonymous_args = 0
+ 880              		@ link register save eliminated.
+ 881 0000 024B     		ldr	r3, .L150
+ 882 0002 83F8D002 		strb	r0, [r3, #720]
+ 883 0006 83F8D112 		strb	r1, [r3, #721]
+ 884 000a 7047     		bx	lr
+ 885              	.L151:
+ 886              		.align	2
+ 887              	.L150:
+ 888 000c 00000000 		.word	USBCORE001_DevicePCD
+ 890              		.section	.text.Endpoint_GetCurrentEndpoint,"ax",%progbits
+ 891              		.align	1
+ 892              		.global	Endpoint_GetCurrentEndpoint
+ 893              		.thumb
+ 894              		.thumb_func
+ 896              	Endpoint_GetCurrentEndpoint:
+ 897              		@ args = 0, pretend = 0, frame = 0
+ 898              		@ frame_needed = 0, uses_anonymous_args = 0
+ 899              		@ link register save eliminated.
+ 900 0000 034B     		ldr	r3, .L153
+ 901 0002 93F8D022 		ldrb	r2, [r3, #720]	@ zero_extendqisi2
+ 902 0006 0270     		strb	r2, [r0, #0]
+ 903 0008 93F8D102 		ldrb	r0, [r3, #721]	@ zero_extendqisi2
+ 904 000c 0870     		strb	r0, [r1, #0]
+ 905 000e 7047     		bx	lr
+ 906              	.L154:
+ 907              		.align	2
+ 908              	.L153:
+ 909 0010 00000000 		.word	USBCORE001_DevicePCD
+ 911              		.section	.text.Endpoint_BytesInEndpoint,"ax",%progbits
+ 912              		.align	1
+ 913              		.global	Endpoint_BytesInEndpoint
+ 914              		.thumb
+ 915              		.thumb_func
+ 917              	Endpoint_BytesInEndpoint:
+ 918              		@ args = 0, pretend = 0, frame = 0
+ 919              		@ frame_needed = 0, uses_anonymous_args = 0
+ 920              		@ link register save eliminated.
+ 921 0000 074B     		ldr	r3, .L160
+ 922 0002 93F8D002 		ldrb	r0, [r3, #720]	@ zero_extendqisi2
+ 923 0006 50B1     		cbz	r0, .L156
+ 924 0008 93F8D112 		ldrb	r1, [r3, #721]	@ zero_extendqisi2
+ 925 000c 2422     		movs	r2, #36
+ 926 000e 02FB0030 		mla	r0, r2, r0, r3
+ 927 0012 11B1     		cbz	r1, .L157
+ 928 0014 B0F88431 		ldrh	r3, [r0, #388]
+ 929 0018 00E0     		b	.L159
+ 930              	.L157:
+ 931 001a C38E     		ldrh	r3, [r0, #54]
+ 932              	.L159:
+ 933 001c 98B2     		uxth	r0, r3
+ 934              	.L156:
+ 935 001e 7047     		bx	lr
+ 936              	.L161:
+ 937              		.align	2
+ 938              	.L160:
+ 939 0020 00000000 		.word	USBCORE001_DevicePCD
+ 941              		.section	.text.Endpoint_IsOUTReceived,"ax",%progbits
+ 942              		.align	1
+ 943              		.global	Endpoint_IsOUTReceived
+ 944              		.thumb
+ 945              		.thumb_func
+ 947              	Endpoint_IsOUTReceived:
+ 948              		@ args = 0, pretend = 0, frame = 0
+ 949              		@ frame_needed = 0, uses_anonymous_args = 0
+ 950              		@ link register save eliminated.
+ 951 0000 0848     		ldr	r0, .L167
+ 952 0002 90F8D022 		ldrb	r2, [r0, #720]	@ zero_extendqisi2
+ 953 0006 1AB1     		cbz	r2, .L163
+ 954 0008 2421     		movs	r1, #36
+ 955 000a 01FB0203 		mla	r3, r1, r2, r0
+ 956 000e 5818     		adds	r0, r3, r1
+ 957              	.L163:
+ 958 0010 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ 959 0012 2AB9     		cbnz	r2, .L166
+ 960 0014 418A     		ldrh	r1, [r0, #18]
+ 961 0016 8BB2     		uxth	r3, r1
+ 962 0018 181C     		adds	r0, r3, #0
+ 963 001a 18BF     		it	ne
+ 964 001c 0120     		movne	r0, #1
+ 965 001e 7047     		bx	lr
+ 966              	.L166:
+ 967 0020 0020     		movs	r0, #0
+ 968 0022 7047     		bx	lr
+ 969              	.L168:
+ 970              		.align	2
+ 971              	.L167:
+ 972 0024 00000000 		.word	USBCORE001_DevicePCD
+ 974              		.section	.text.Endpoint_Read_8,"ax",%progbits
+ 975              		.align	1
+ 976              		.global	Endpoint_Read_8
+ 977              		.thumb
+ 978              		.thumb_func
+ 980              	Endpoint_Read_8:
+ 981              		@ args = 0, pretend = 0, frame = 0
+ 982              		@ frame_needed = 0, uses_anonymous_args = 0
+ 983              		@ link register save eliminated.
+ 984 0000 0C4B     		ldr	r3, .L179
+ 985 0002 93F8D022 		ldrb	r2, [r3, #720]	@ zero_extendqisi2
+ 986 0006 1AB1     		cbz	r2, .L176
+ 987 0008 2421     		movs	r1, #36
+ 988 000a 01FB0233 		mla	r3, r1, r2, r3
+ 989 000e 5B18     		adds	r3, r3, r1
+ 990              	.L176:
+ 991 0010 588A     		ldrh	r0, [r3, #18]
+ 992 0012 82B2     		uxth	r2, r0
+ 993 0014 002A     		cmp	r2, #0
+ 994 0016 FBD0     		beq	.L176
+ 995 0018 5A8B     		ldrh	r2, [r3, #26]
+ 996 001a D968     		ldr	r1, [r3, #12]
+ 997 001c 885C     		ldrb	r0, [r1, r2]	@ zero_extendqisi2
+ 998 001e 598A     		ldrh	r1, [r3, #18]
+ 999 0020 0132     		adds	r2, r2, #1
+ 1000 0022 5A83     		strh	r2, [r3, #26]	@ movhi
+ 1001 0024 4A1E     		subs	r2, r1, #1
+ 1002 0026 91B2     		uxth	r1, r2
+ 1003 0028 5982     		strh	r1, [r3, #18]	@ movhi
+ 1004 002a 5A8A     		ldrh	r2, [r3, #18]
+ 1005 002c 91B2     		uxth	r1, r2
+ 1006 002e 01B9     		cbnz	r1, .L172
+ 1007 0030 5983     		strh	r1, [r3, #26]	@ movhi
+ 1008              	.L172:
+ 1009 0032 7047     		bx	lr
+ 1010              	.L180:
+ 1011              		.align	2
+ 1012              	.L179:
+ 1013 0034 00000000 		.word	USBCORE001_DevicePCD
+ 1015              		.section	.text.Endpoint_ConfigureEndpoint,"ax",%progbits
+ 1016              		.align	1
+ 1017              		.global	Endpoint_ConfigureEndpoint
+ 1018              		.thumb
+ 1019              		.thumb_func
+ 1021              	Endpoint_ConfigureEndpoint:
+ 1022              		@ args = 4, pretend = 0, frame = 8
+ 1023              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1024 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1025 0004 8846     		mov	r8, r1
+ 1026 0006 86B0     		sub	sp, sp, #24
+ 1027 0008 1746     		mov	r7, r2
+ 1028 000a 1D46     		mov	r5, r3
+ 1029 000c 0646     		mov	r6, r0
+ 1030 000e 0028     		cmp	r0, #0
+ 1031 0010 53D0     		beq	.L187
+ 1032 0012 2B4B     		ldr	r3, .L195
+ 1033 0014 2424     		movs	r4, #36
+ 1034 0016 04FB0034 		mla	r4, r4, r0, r3
+ 1035 001a 42B1     		cbz	r2, .L183
+ 1036 001c 04F5B474 		add	r4, r4, #360
+ 1037 0020 6068     		ldr	r0, [r4, #4]
+ 1038 0022 60B9     		cbnz	r0, .L184
+ 1039 0024 2946     		mov	r1, r5
+ 1040 0026 FFF7FEFF 		bl	__DWC_ALLOC
+ 1041 002a 6060     		str	r0, [r4, #4]
+ 1042 002c 07E0     		b	.L184
+ 1043              	.L183:
+ 1044 002e 2434     		adds	r4, r4, #36
+ 1045 0030 E068     		ldr	r0, [r4, #12]
+ 1046 0032 20B9     		cbnz	r0, .L184
+ 1047 0034 1046     		mov	r0, r2
+ 1048 0036 2946     		mov	r1, r5
+ 1049 0038 FFF7FEFF 		bl	__DWC_ALLOC
+ 1050 003c E060     		str	r0, [r4, #12]
+ 1051              	.L184:
+ 1052 003e 94F82210 		ldrb	r1, [r4, #34]	@ zero_extendqisi2
+ 1053 0042 29B1     		cbz	r1, .L185
+ 1054 0044 1E4A     		ldr	r2, .L195
+ 1055 0046 2146     		mov	r1, r4
+ 1056 0048 D2F8C802 		ldr	r0, [r2, #712]
+ 1057 004c FFF7FEFF 		bl	dwc_otg_pcd_ep_disable
+ 1058              	.L185:
+ 1059 0050 3E43     		orrs	r6, r6, r7
+ 1060 0052 8DF81260 		strb	r6, [sp, #18]
+ 1061 0056 1A4E     		ldr	r6, .L195
+ 1062 0058 8DF81380 		strb	r8, [sp, #19]
+ 1063 005c 0520     		movs	r0, #5
+ 1064 005e 290A     		lsrs	r1, r5, #8
+ 1065 0060 0723     		movs	r3, #7
+ 1066 0062 8DF81100 		strb	r0, [sp, #17]
+ 1067 0066 8DF81510 		strb	r1, [sp, #21]
+ 1068 006a D6F8C802 		ldr	r0, [r6, #712]
+ 1069 006e 8DF81030 		strb	r3, [sp, #16]
+ 1070 0072 04A9     		add	r1, sp, #16
+ 1071 0074 2246     		mov	r2, r4
+ 1072 0076 8DF81450 		strb	r5, [sp, #20]
+ 1073 007a FFF7FEFF 		bl	dwc_otg_pcd_ep_enable
+ 1074 007e 0120     		movs	r0, #1
+ 1075 0080 84F82200 		strb	r0, [r4, #34]
+ 1076 0084 2584     		strh	r5, [r4, #32]	@ movhi
+ 1077 0086 6070     		strb	r0, [r4, #1]
+ 1078 0088 BFB9     		cbnz	r7, .L182
+ 1079 008a 227C     		ldrb	r2, [r4, #16]	@ zero_extendqisi2
+ 1080 008c 2AB1     		cbz	r2, .L186
+ 1081 008e D6F8C802 		ldr	r0, [r6, #712]
+ 1082 0092 E268     		ldr	r2, [r4, #12]
+ 1083 0094 2146     		mov	r1, r4
+ 1084 0096 FFF7FEFF 		bl	dwc_otg_pcd_ep_dequeue
+ 1085              	.L186:
+ 1086 009a E268     		ldr	r2, [r4, #12]
+ 1087 009c 0095     		str	r5, [sp, #0]
+ 1088 009e 0025     		movs	r5, #0
+ 1089 00a0 0195     		str	r5, [sp, #4]
+ 1090 00a2 0292     		str	r2, [sp, #8]
+ 1091 00a4 0395     		str	r5, [sp, #12]
+ 1092 00a6 D6F8C802 		ldr	r0, [r6, #712]
+ 1093 00aa 2146     		mov	r1, r4
+ 1094 00ac 1346     		mov	r3, r2
+ 1095 00ae FFF7FEFF 		bl	dwc_otg_pcd_ep_queue
+ 1096 00b2 0120     		movs	r0, #1
+ 1097 00b4 2074     		strb	r0, [r4, #16]
+ 1098 00b6 6570     		strb	r5, [r4, #1]
+ 1099 00b8 FFE7     		b	.L182
+ 1100              	.L187:
+ 1101              	.L182:
+ 1102 00ba 06B0     		add	sp, sp, #24
+ 1103 00bc BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1104              	.L196:
+ 1105              		.align	2
+ 1106              	.L195:
+ 1107 00c0 00000000 		.word	USBCORE001_DevicePCD
+ 1109              		.section	.text.Endpoint_SendZLP,"ax",%progbits
+ 1110              		.align	1
+ 1111              		.global	Endpoint_SendZLP
+ 1112              		.thumb
+ 1113              		.thumb_func
+ 1115              	Endpoint_SendZLP:
+ 1116              		@ args = 0, pretend = 0, frame = 0
+ 1117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1118 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 1119 0002 1149     		ldr	r1, .L203
+ 1120 0004 91F8D032 		ldrb	r3, [r1, #720]	@ zero_extendqisi2
+ 1121 0008 23B1     		cbz	r3, .L198
+ 1122 000a 2422     		movs	r2, #36
+ 1123 000c 02FB0311 		mla	r1, r2, r3, r1
+ 1124 0010 01F5B471 		add	r1, r1, #360
+ 1125              	.L198:
+ 1126 0014 0D48     		ldr	r0, .L203+4
+ 1127 0016 4388     		ldrh	r3, [r0, #2]
+ 1128              	.L199:
+ 1129 0018 8A7F     		ldrb	r2, [r1, #30]	@ zero_extendqisi2
+ 1130 001a 581C     		adds	r0, r3, #1
+ 1131 001c 80B2     		uxth	r0, r0
+ 1132 001e 0AB1     		cbz	r2, .L202
+ 1133              	.L201:
+ 1134 0020 0346     		mov	r3, r0
+ 1135 0022 F9E7     		b	.L199
+ 1136              	.L202:
+ 1137 0024 0948     		ldr	r0, .L203+4
+ 1138 0026 4380     		strh	r3, [r0, #2]	@ movhi
+ 1139 0028 0123     		movs	r3, #1
+ 1140 002a 8B77     		strb	r3, [r1, #30]
+ 1141 002c 8DE80C00 		stmia	sp, {r2, r3}
+ 1142 0030 4B68     		ldr	r3, [r1, #4]
+ 1143 0032 0548     		ldr	r0, .L203
+ 1144 0034 0293     		str	r3, [sp, #8]
+ 1145 0036 0392     		str	r2, [sp, #12]
+ 1146 0038 1346     		mov	r3, r2
+ 1147 003a D0F8C802 		ldr	r0, [r0, #712]
+ 1148 003e FFF7FEFF 		bl	dwc_otg_pcd_ep_queue
+ 1149 0042 05B0     		add	sp, sp, #20
+ 1150 0044 00BD     		pop	{pc}
+ 1151              	.L204:
+ 1152 0046 00BF     		.align	2
+ 1153              	.L203:
+ 1154 0048 00000000 		.word	USBCORE001_DevicePCD
+ 1155 004c 00000000 		.word	.LANCHOR0
+ 1157              		.section	.text.Endpoint_IsReadWriteAllowed,"ax",%progbits
+ 1158              		.align	1
+ 1159              		.global	Endpoint_IsReadWriteAllowed
+ 1160              		.thumb
+ 1161              		.thumb_func
+ 1163              	Endpoint_IsReadWriteAllowed:
+ 1164              		@ args = 0, pretend = 0, frame = 0
+ 1165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1166              		@ link register save eliminated.
+ 1167 0000 0D4B     		ldr	r3, .L209
+ 1168 0002 93F8D002 		ldrb	r0, [r3, #720]	@ zero_extendqisi2
+ 1169 0006 A8B1     		cbz	r0, .L206
+ 1170 0008 93F8D112 		ldrb	r1, [r3, #721]	@ zero_extendqisi2
+ 1171 000c 2422     		movs	r2, #36
+ 1172 000e 02FB0033 		mla	r3, r2, r0, r3
+ 1173 0012 51B1     		cbz	r1, .L207
+ 1174 0014 B3F88421 		ldrh	r2, [r3, #388]
+ 1175 0018 03F5B473 		add	r3, r3, #360
+ 1176 001c 90B2     		uxth	r0, r2
+ 1177 001e 198C     		ldrh	r1, [r3, #32]
+ 1178 0020 8142     		cmp	r1, r0
+ 1179 0022 94BF     		ite	ls
+ 1180 0024 0020     		movls	r0, #0
+ 1181 0026 0120     		movhi	r0, #1
+ 1182 0028 7047     		bx	lr
+ 1183              	.L207:
+ 1184 002a D88E     		ldrh	r0, [r3, #54]
+ 1185 002c 81B2     		uxth	r1, r0
+ 1186 002e 081C     		adds	r0, r1, #0
+ 1187 0030 18BF     		it	ne
+ 1188 0032 0120     		movne	r0, #1
+ 1189              	.L206:
+ 1190 0034 7047     		bx	lr
+ 1191              	.L210:
+ 1192 0036 00BF     		.align	2
+ 1193              	.L209:
+ 1194 0038 00000000 		.word	USBCORE001_DevicePCD
+ 1196              		.section	.text.Endpoint_Write_Stream_LE,"ax",%progbits
+ 1197              		.align	1
+ 1198              		.global	Endpoint_Write_Stream_LE
+ 1199              		.thumb
+ 1200              		.thumb_func
+ 1202              	Endpoint_Write_Stream_LE:
+ 1203              		@ args = 0, pretend = 0, frame = 0
+ 1204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1205 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 1206 0004 2A4C     		ldr	r4, .L231
+ 1207 0006 94F8D032 		ldrb	r3, [r4, #720]	@ zero_extendqisi2
+ 1208 000a 8146     		mov	r9, r0
+ 1209 000c 0D46     		mov	r5, r1
+ 1210 000e 1746     		mov	r7, r2
+ 1211 0010 23B1     		cbz	r3, .L212
+ 1212 0012 2422     		movs	r2, #36
+ 1213 0014 02FB0344 		mla	r4, r2, r3, r4
+ 1214 0018 04F5B474 		add	r4, r4, #360
+ 1215              	.L212:
+ 1216 001c 1FB1     		cbz	r7, .L222
+ 1217 001e 3E88     		ldrh	r6, [r7, #0]
+ 1218 0020 AD1B     		subs	r5, r5, r6
+ 1219 0022 ADB2     		uxth	r5, r5
+ 1220 0024 00E0     		b	.L213
+ 1221              	.L222:
+ 1222 0026 3E46     		mov	r6, r7
+ 1223              	.L213:
+ 1224 0028 4FF00008 		mov	r8, #0
+ 1225              	.L229:
+ 1226 002c 002D     		cmp	r5, #0
+ 1227 002e 36D0     		beq	.L230
+ 1228              	.L220:
+ 1229 0030 FFF7FEFF 		bl	Endpoint_IsReadWriteAllowed
+ 1230 0034 30B3     		cbz	r0, .L215
+ 1231 0036 A38B     		ldrh	r3, [r4, #28]
+ 1232 0038 218C     		ldrh	r1, [r4, #32]
+ 1233 003a 9AB2     		uxth	r2, r3
+ 1234 003c 881A     		subs	r0, r1, r2
+ 1235 003e A842     		cmp	r0, r5
+ 1236 0040 D8BF     		it	le
+ 1237 0042 B4F81C80 		ldrhle	r8, [r4, #28]
+ 1238 0046 6368     		ldr	r3, [r4, #4]
+ 1239 0048 DCBF     		itt	le
+ 1240 004a 1FFA88F8 		uxthle	r8, r8
+ 1241 004e C8EB0108 		rsble	r8, r8, r1
+ 1242 0052 218B     		ldrh	r1, [r4, #24]
+ 1243 0054 C8BF     		it	gt
+ 1244 0056 A846     		movgt	r8, r5
+ 1245 0058 5818     		adds	r0, r3, r1
+ 1246 005a 4246     		mov	r2, r8
+ 1247 005c 09EB0601 		add	r1, r9, r6
+ 1248 0060 FFF7FEFF 		bl	memcpy
+ 1249 0064 A08B     		ldrh	r0, [r4, #28]
+ 1250 0066 1FFA88F2 		uxth	r2, r8
+ 1251 006a 12FA80F1 		uxtah	r1, r2, r0
+ 1252 006e 208B     		ldrh	r0, [r4, #24]
+ 1253 0070 8BB2     		uxth	r3, r1
+ 1254 0072 9619     		adds	r6, r2, r6
+ 1255 0074 1118     		adds	r1, r2, r0
+ 1256 0076 AA1A     		subs	r2, r5, r2
+ 1257 0078 A846     		mov	r8, r5
+ 1258 007a A383     		strh	r3, [r4, #28]	@ movhi
+ 1259 007c 2183     		strh	r1, [r4, #24]	@ movhi
+ 1260 007e B6B2     		uxth	r6, r6
+ 1261 0080 95B2     		uxth	r5, r2
+ 1262 0082 D3E7     		b	.L229
+ 1263              	.L215:
+ 1264 0084 FFF7FEFF 		bl	Endpoint_ClearIN
+ 1265 0088 228C     		ldrh	r2, [r4, #32]
+ 1266 008a AA42     		cmp	r2, r5
+ 1267 008c CED9     		bls	.L229
+ 1268 008e 002F     		cmp	r7, #0
+ 1269 0090 CCD0     		beq	.L229
+ 1270 0092 3888     		ldrh	r0, [r7, #0]
+ 1271 0094 3618     		adds	r6, r6, r0
+ 1272 0096 3E80     		strh	r6, [r7, #0]	@ movhi
+ 1273 0098 0520     		movs	r0, #5
+ 1274 009a BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 1275              	.L230:
+ 1276 009e 208C     		ldrh	r0, [r4, #32]
+ 1277 00a0 4045     		cmp	r0, r8
+ 1278 00a2 02D1     		bne	.L223
+ 1279 00a4 034B     		ldr	r3, .L231+4
+ 1280 00a6 0121     		movs	r1, #1
+ 1281 00a8 1971     		strb	r1, [r3, #4]
+ 1282              	.L223:
+ 1283 00aa 2846     		mov	r0, r5
+ 1284 00ac BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 1285              	.L232:
+ 1286              		.align	2
+ 1287              	.L231:
+ 1288 00b0 00000000 		.word	USBCORE001_DevicePCD
+ 1289 00b4 00000000 		.word	.LANCHOR0
+ 1291              		.section	.text.Endpoint_Write_Stream_BE,"ax",%progbits
+ 1292              		.align	1
+ 1293              		.global	Endpoint_Write_Stream_BE
+ 1294              		.thumb
+ 1295              		.thumb_func
+ 1297              	Endpoint_Write_Stream_BE:
+ 1298              		@ args = 0, pretend = 0, frame = 0
+ 1299              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1300              		@ link register save eliminated.
+ 1301 0000 FFF7FEBF 		b	Endpoint_Write_Stream_LE
+ 1303              		.section	.text.Endpoint_WaitUntilReady,"ax",%progbits
+ 1304              		.align	1
+ 1305              		.global	Endpoint_WaitUntilReady
+ 1306              		.thumb
+ 1307              		.thumb_func
+ 1309              	Endpoint_WaitUntilReady:
+ 1310              		@ args = 0, pretend = 0, frame = 0
+ 1311              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1312              		@ link register save eliminated.
+ 1313 0000 0020     		movs	r0, #0
+ 1314 0002 7047     		bx	lr
+ 1316              		.section	.text.Endpoint_Write_8,"ax",%progbits
+ 1317              		.align	1
+ 1318              		.global	Endpoint_Write_8
+ 1319              		.thumb
+ 1320              		.thumb_func
+ 1322              	Endpoint_Write_8:
+ 1323              		@ args = 0, pretend = 0, frame = 0
+ 1324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1325 0000 10B5     		push	{r4, lr}
+ 1326 0002 0F4B     		ldr	r3, .L241
+ 1327 0004 93F8D022 		ldrb	r2, [r3, #720]	@ zero_extendqisi2
+ 1328 0008 4AB1     		cbz	r2, .L236
+ 1329 000a 93F8D142 		ldrb	r4, [r3, #721]	@ zero_extendqisi2
+ 1330 000e 2421     		movs	r1, #36
+ 1331 0010 01FB0233 		mla	r3, r1, r2, r3
+ 1332 0014 14B1     		cbz	r4, .L237
+ 1333 0016 03F5B473 		add	r3, r3, #360
+ 1334 001a 00E0     		b	.L236
+ 1335              	.L237:
+ 1336 001c 2433     		adds	r3, r3, #36
+ 1337              	.L236:
+ 1338 001e 1A8C     		ldrh	r2, [r3, #32]
+ 1339 0020 013A     		subs	r2, r2, #1
+ 1340              	.L238:
+ 1341 0022 998B     		ldrh	r1, [r3, #28]
+ 1342 0024 89B2     		uxth	r1, r1
+ 1343 0026 9142     		cmp	r1, r2
+ 1344 0028 FBDA     		bge	.L238
+ 1345 002a 198B     		ldrh	r1, [r3, #24]
+ 1346 002c 5A68     		ldr	r2, [r3, #4]
+ 1347 002e 5054     		strb	r0, [r2, r1]
+ 1348 0030 188B     		ldrh	r0, [r3, #24]
+ 1349 0032 9A8B     		ldrh	r2, [r3, #28]
+ 1350 0034 411C     		adds	r1, r0, #1
+ 1351 0036 501C     		adds	r0, r2, #1
+ 1352 0038 1983     		strh	r1, [r3, #24]	@ movhi
+ 1353 003a 81B2     		uxth	r1, r0
+ 1354 003c 9983     		strh	r1, [r3, #28]	@ movhi
+ 1355 003e 10BD     		pop	{r4, pc}
+ 1356              	.L242:
+ 1357              		.align	2
+ 1358              	.L241:
+ 1359 0040 00000000 		.word	USBCORE001_DevicePCD
+ 1361              		.section	.text.Endpoint_Read_Stream_BE,"ax",%progbits
+ 1362              		.align	1
+ 1363              		.global	Endpoint_Read_Stream_BE
+ 1364              		.thumb
+ 1365              		.thumb_func
+ 1367              	Endpoint_Read_Stream_BE:
+ 1368              		@ args = 0, pretend = 0, frame = 0
+ 1369              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1370 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 1371 0004 234C     		ldr	r4, .L263
+ 1372 0006 94F8D032 		ldrb	r3, [r4, #720]	@ zero_extendqisi2
+ 1373 000a 8146     		mov	r9, r0
+ 1374 000c 0D46     		mov	r5, r1
+ 1375 000e 1746     		mov	r7, r2
+ 1376 0010 4BB1     		cbz	r3, .L244
+ 1377 0012 94F8D112 		ldrb	r1, [r4, #721]	@ zero_extendqisi2
+ 1378 0016 2422     		movs	r2, #36
+ 1379 0018 02FB0344 		mla	r4, r2, r3, r4
+ 1380 001c 11B1     		cbz	r1, .L245
+ 1381 001e 04F5B474 		add	r4, r4, #360
+ 1382 0022 00E0     		b	.L244
+ 1383              	.L245:
+ 1384 0024 2434     		adds	r4, r4, #36
+ 1385              	.L244:
+ 1386 0026 1FB1     		cbz	r7, .L255
+ 1387 0028 3E88     		ldrh	r6, [r7, #0]
+ 1388 002a AD1B     		subs	r5, r5, r6
+ 1389 002c ADB2     		uxth	r5, r5
+ 1390 002e 23E0     		b	.L261
+ 1391              	.L255:
+ 1392 0030 3E46     		mov	r6, r7
+ 1393 0032 21E0     		b	.L261
+ 1394              	.L253:
+ 1395 0034 FFF7FEFF 		bl	Endpoint_IsReadWriteAllowed
+ 1396 0038 08B3     		cbz	r0, .L248
+ 1397 003a 608A     		ldrh	r0, [r4, #18]
+ 1398 003c E268     		ldr	r2, [r4, #12]
+ 1399 003e 618B     		ldrh	r1, [r4, #26]
+ 1400 0040 83B2     		uxth	r3, r0
+ 1401 0042 AB42     		cmp	r3, r5
+ 1402 0044 96BF     		itet	ls
+ 1403 0046 B4F81280 		ldrhls	r8, [r4, #18]
+ 1404 004a A846     		movhi	r8, r5
+ 1405 004c 1FFA88F8 		uxthls	r8, r8
+ 1406 0050 5118     		adds	r1, r2, r1
+ 1407 0052 09EB0600 		add	r0, r9, r6
+ 1408 0056 4246     		mov	r2, r8
+ 1409 0058 FFF7FEFF 		bl	memcpy
+ 1410 005c 608A     		ldrh	r0, [r4, #18]
+ 1411 005e 1FFA88F1 		uxth	r1, r8
+ 1412 0062 431A     		subs	r3, r0, r1
+ 1413 0064 608B     		ldrh	r0, [r4, #26]
+ 1414 0066 8E19     		adds	r6, r1, r6
+ 1415 0068 9AB2     		uxth	r2, r3
+ 1416 006a B6B2     		uxth	r6, r6
+ 1417 006c 0B18     		adds	r3, r1, r0
+ 1418 006e 6D1A     		subs	r5, r5, r1
+ 1419 0070 6282     		strh	r2, [r4, #18]	@ movhi
+ 1420 0072 6383     		strh	r3, [r4, #26]	@ movhi
+ 1421 0074 ADB2     		uxth	r5, r5
+ 1422 0076 3E80     		strh	r6, [r7, #0]	@ movhi
+ 1423              	.L261:
+ 1424 0078 002D     		cmp	r5, #0
+ 1425 007a DBD1     		bne	.L253
+ 1426 007c 07E0     		b	.L262
+ 1427              	.L248:
+ 1428 007e FFF7FEFF 		bl	Endpoint_ClearOUT
+ 1429 0082 002F     		cmp	r7, #0
+ 1430 0084 F8D0     		beq	.L261
+ 1431 0086 3E80     		strh	r6, [r7, #0]	@ movhi
+ 1432 0088 0520     		movs	r0, #5
+ 1433 008a BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 1434              	.L262:
+ 1435 008e 2846     		mov	r0, r5
+ 1436 0090 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 1437              	.L264:
+ 1438              		.align	2
+ 1439              	.L263:
+ 1440 0094 00000000 		.word	USBCORE001_DevicePCD
+ 1442              		.section	.text.Endpoint_Read_Stream_LE,"ax",%progbits
+ 1443              		.align	1
+ 1444              		.global	Endpoint_Read_Stream_LE
+ 1445              		.thumb
+ 1446              		.thumb_func
+ 1448              	Endpoint_Read_Stream_LE:
+ 1449              		@ args = 0, pretend = 0, frame = 0
+ 1450              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1451              		@ link register save eliminated.
+ 1452 0000 FFF7FEBF 		b	Endpoint_Read_Stream_BE
+ 1454              		.section	.text.USBCORE001_EPHalt,"ax",%progbits
+ 1455              		.align	1
+ 1456              		.global	USBCORE001_EPHalt
+ 1457              		.thumb
+ 1458              		.thumb_func
+ 1460              	USBCORE001_EPHalt:
+ 1461              		@ args = 0, pretend = 0, frame = 0
+ 1462              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1463              		@ link register save eliminated.
+ 1464 0000 074B     		ldr	r3, .L269
+ 1465 0002 93F8D012 		ldrb	r1, [r3, #720]	@ zero_extendqisi2
+ 1466 0006 0246     		mov	r2, r0
+ 1467 0008 29B1     		cbz	r1, .L268
+ 1468 000a 2420     		movs	r0, #36
+ 1469 000c 00FB0131 		mla	r1, r0, r1, r3
+ 1470 0010 01F5B471 		add	r1, r1, #360
+ 1471 0014 00E0     		b	.L267
+ 1472              	.L268:
+ 1473 0016 1946     		mov	r1, r3
+ 1474              	.L267:
+ 1475 0018 D3F8C802 		ldr	r0, [r3, #712]
+ 1476 001c FFF7FEBF 		b	dwc_otg_pcd_ep_halt
+ 1477              	.L270:
+ 1478              		.align	2
+ 1479              	.L269:
+ 1480 0020 00000000 		.word	USBCORE001_DevicePCD
+ 1482              		.comm	USBCORE001_DeviceCurrentState,1,1
+ 1483              		.comm	USBCORE001_DeviceCurrentControlRequest,8,1
+ 1484              		.comm	USBCORE001_DevicePCD,724,4
+ 1485              		.global	InterfaceNumber
+ 1486              		.global	zlp_flag
+ 1487              		.global	ConfigNumber
+ 1488              		.global	USBCORE001_Waitval
+ 1489              		.section	.rodata
+ 1490              		.align	2
+ 1491              		.set	.LANCHOR1,. + 0
+ 1494              	USBCORE001_DevicePCDfops:
+ 1495 0000 00000000 		.word	USBCORE001_DevicePCDConnect
+ 1496 0004 00000000 		.word	USBCORE001_DevicePCDDisconnect
+ 1497 0008 00000000 		.word	USBCORE001_DevicePCDSetup
+ 1498 000c 00000000 		.word	USBCORE001_DevicePCDComplete
+ 1499 0010 00000000 		.word	0
+ 1500 0014 00000000 		.word	USBCORE001_DevicePCDSuspend
+ 1501 0018 00000000 		.word	0
+ 1502 001c 00000000 		.word	USBCORE001_DevicePCDResume
+ 1503 0020 00000000 		.word	USBCORE001_DevicePCDReset
+ 1504 0024 00000000 		.word	USBCORE001_DevicePCDHnpChangedcb
+ 1505 0028 00000000 		.word	0
+ 1506              		.bss
+ 1507              		.align	1
+ 1508              		.set	.LANCHOR0,. + 0
+ 1511              	ConfigNumber:
+ 1512 0000 00       		.space	1
+ 1515              	InterfaceNumber:
+ 1516 0001 00       		.space	1
+ 1519              	USBCORE001_Waitval:
+ 1520 0002 0000     		.space	2
+ 1523              	zlp_flag:
+ 1524 0004 00       		.space	1
+ 1525 0005 00       		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 usbcore001_device.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:17     .text.USBCORE001_DevicePCDConnect:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:21     .text.USBCORE001_DevicePCDConnect:00000000 USBCORE001_DevicePCDConnect
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:38     .text.USBCORE001_DevicePCDConnect:00000018 $d
+                            *COM*:000002d4 USBCORE001_DevicePCD
+                            *COM*:00000001 USBCORE001_DeviceCurrentState
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:42     .text.USBCORE001_DevicePCDDisconnect:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:46     .text.USBCORE001_DevicePCDDisconnect:00000000 USBCORE001_DevicePCDDisconnect
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:63     .text.USBCORE001_DevicePCDDisconnect:00000018 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:67     .text.USBCORE001_DevicePCDResume:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:71     .text.USBCORE001_DevicePCDResume:00000000 USBCORE001_DevicePCDResume
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:79     .text.USBCORE001_DevicePCDSuspend:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:83     .text.USBCORE001_DevicePCDSuspend:00000000 USBCORE001_DevicePCDSuspend
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:91     .text.USBCORE001_DevicePCDHnpChangedcb:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:95     .text.USBCORE001_DevicePCDHnpChangedcb:00000000 USBCORE001_DevicePCDHnpChangedcb
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:103    .text.USBCORE001_DevicePCDReset:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:107    .text.USBCORE001_DevicePCDReset:00000000 USBCORE001_DevicePCDReset
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:115    .text.USBCORE001_DevicePCDSetup:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:119    .text.USBCORE001_DevicePCDSetup:00000000 USBCORE001_DevicePCDSetup
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:131    .text.USBCORE001_DevicePCDSetup:00000012 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:321    .text.USBCORE001_DevicePCDSetup:00000180 $d
+                            *COM*:00000008 USBCORE001_DeviceCurrentControlRequest
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:328    .text.USBCORE001_DevicePCDComplete:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:332    .text.USBCORE001_DevicePCDComplete:00000000 USBCORE001_DevicePCDComplete
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:387    .text.USBCORE001_DevicePCDComplete:00000064 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:390    .text.USBCore001_DeviceStart:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:395    .text.USBCore001_DeviceStart:00000000 USBCore001_DeviceStart
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:483    .text.USBCore001_DeviceStart:000000cc $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:488    .text.Endpoint_IsSETUPReceived:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:493    .text.Endpoint_IsSETUPReceived:00000000 Endpoint_IsSETUPReceived
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:503    .text.Endpoint_IsSETUPReceived:00000008 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:506    .text.Endpoint_ClearSETUP:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:511    .text.Endpoint_ClearSETUP:00000000 Endpoint_ClearSETUP
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:522    .text.Endpoint_ClearSETUP:0000000c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:525    .text.USB_1msDelay:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:530    .text.USB_1msDelay:00000000 USB_1msDelay
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:562    .text.Endpoint_ClearOUT:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:567    .text.Endpoint_ClearOUT:00000000 Endpoint_ClearOUT
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:605    .text.Endpoint_ClearOUT:00000050 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:608    .text.USB_Device_ProcessControlRequest:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:613    .text.USB_Device_ProcessControlRequest:00000000 USB_Device_ProcessControlRequest
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:633    .text.USB_Device_ProcessControlRequest:00000024 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:637    .text.Endpoint_ClearIN:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:642    .text.Endpoint_ClearIN:00000000 Endpoint_ClearIN
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:743    .text.Endpoint_ClearIN:000000c0 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:747    .text.Endpoint_Write_Control_Stream_BE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:752    .text.Endpoint_Write_Control_Stream_BE:00000000 Endpoint_Write_Control_Stream_BE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:789    .text.Endpoint_Write_Control_Stream_BE:0000004c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:792    .text.Endpoint_Write_Control_Stream_LE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:797    .text.Endpoint_Write_Control_Stream_LE:00000000 Endpoint_Write_Control_Stream_LE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:804    .text.Endpoint_Read_Control_Stream_BE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:809    .text.Endpoint_Read_Control_Stream_BE:00000000 Endpoint_Read_Control_Stream_BE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:845    .text.Endpoint_Read_Control_Stream_BE:00000040 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:848    .text.Endpoint_Read_Control_Stream_LE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:853    .text.Endpoint_Read_Control_Stream_LE:00000000 Endpoint_Read_Control_Stream_LE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:860    .text.Endpoint_ClearStatusStage:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:865    .text.Endpoint_ClearStatusStage:00000000 Endpoint_ClearStatusStage
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:872    .text.Endpoint_SelectEndpoint:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:877    .text.Endpoint_SelectEndpoint:00000000 Endpoint_SelectEndpoint
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:888    .text.Endpoint_SelectEndpoint:0000000c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:891    .text.Endpoint_GetCurrentEndpoint:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:896    .text.Endpoint_GetCurrentEndpoint:00000000 Endpoint_GetCurrentEndpoint
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:909    .text.Endpoint_GetCurrentEndpoint:00000010 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:912    .text.Endpoint_BytesInEndpoint:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:917    .text.Endpoint_BytesInEndpoint:00000000 Endpoint_BytesInEndpoint
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:939    .text.Endpoint_BytesInEndpoint:00000020 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:942    .text.Endpoint_IsOUTReceived:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:947    .text.Endpoint_IsOUTReceived:00000000 Endpoint_IsOUTReceived
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:972    .text.Endpoint_IsOUTReceived:00000024 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:975    .text.Endpoint_Read_8:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:980    .text.Endpoint_Read_8:00000000 Endpoint_Read_8
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1013   .text.Endpoint_Read_8:00000034 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1016   .text.Endpoint_ConfigureEndpoint:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1021   .text.Endpoint_ConfigureEndpoint:00000000 Endpoint_ConfigureEndpoint
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1107   .text.Endpoint_ConfigureEndpoint:000000c0 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1110   .text.Endpoint_SendZLP:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1115   .text.Endpoint_SendZLP:00000000 Endpoint_SendZLP
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1154   .text.Endpoint_SendZLP:00000048 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1158   .text.Endpoint_IsReadWriteAllowed:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1163   .text.Endpoint_IsReadWriteAllowed:00000000 Endpoint_IsReadWriteAllowed
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1194   .text.Endpoint_IsReadWriteAllowed:00000038 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1197   .text.Endpoint_Write_Stream_LE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1202   .text.Endpoint_Write_Stream_LE:00000000 Endpoint_Write_Stream_LE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1288   .text.Endpoint_Write_Stream_LE:000000b0 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1292   .text.Endpoint_Write_Stream_BE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1297   .text.Endpoint_Write_Stream_BE:00000000 Endpoint_Write_Stream_BE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1304   .text.Endpoint_WaitUntilReady:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1309   .text.Endpoint_WaitUntilReady:00000000 Endpoint_WaitUntilReady
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1317   .text.Endpoint_Write_8:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1322   .text.Endpoint_Write_8:00000000 Endpoint_Write_8
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1359   .text.Endpoint_Write_8:00000040 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1362   .text.Endpoint_Read_Stream_BE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1367   .text.Endpoint_Read_Stream_BE:00000000 Endpoint_Read_Stream_BE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1440   .text.Endpoint_Read_Stream_BE:00000094 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1443   .text.Endpoint_Read_Stream_LE:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1448   .text.Endpoint_Read_Stream_LE:00000000 Endpoint_Read_Stream_LE
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1455   .text.USBCORE001_EPHalt:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1460   .text.USBCORE001_EPHalt:00000000 USBCORE001_EPHalt
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1480   .text.USBCORE001_EPHalt:00000020 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1515   .bss:00000001 InterfaceNumber
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1523   .bss:00000004 zlp_flag
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1511   .bss:00000000 ConfigNumber
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1519   .bss:00000002 USBCORE001_Waitval
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1490   .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1494   .rodata:00000000 USBCORE001_DevicePCDfops
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:1507   .bss:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:138    .text.USBCORE001_DevicePCDSetup:00000019 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccV8d2ZZ.s:138    .text.USBCORE001_DevicePCDSetup:0000001a $t
+
+UNDEFINED SYMBOLS
+__DWC_ALLOC
+memset
+memcpy
+dwc_otg_pcd_ep_queue
+__DWC_FREE
+dwc_otg_disable_global_interrupts
+dwc_otg_pcd_init
+DWC_READ_REG32
+DWC_WRITE_REG32
+dwc_otg_pcd_start
+dwc_otg_pcd_ep_enable
+dwc_otg_enable_global_interrupts
+dwc_otg_pcd_ep_disable
+dwc_otg_pcd_ep_dequeue
+dwc_otg_pcd_ep_halt

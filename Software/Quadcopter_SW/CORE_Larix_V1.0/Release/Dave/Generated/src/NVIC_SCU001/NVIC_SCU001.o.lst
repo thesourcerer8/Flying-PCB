@@ -1,0 +1,323 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"NVIC_SCU001.c"
+  16              		.section	.text.NVIC_SCU001_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	NVIC_SCU001_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	NVIC_SCU001_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 0C4B     		ldr	r3, .L5
+  27 0002 D868     		ldr	r0, [r3, #12]
+  28 0004 C0F30223 		ubfx	r3, r0, #8, #3
+  29 0008 C3F10702 		rsb	r2, r3, #7
+  30 000c 062A     		cmp	r2, #6
+  31 000e 28BF     		it	cs
+  32 0010 0622     		movcs	r2, #6
+  33 0012 03B1     		cbz	r3, .L2
+  34 0014 013B     		subs	r3, r3, #1
+  35              	.L2:
+  36 0016 0121     		movs	r1, #1
+  37 0018 01FA02F0 		lsl	r0, r1, r2
+  38 001c 421E     		subs	r2, r0, #1
+  39 001e 02F03F00 		and	r0, r2, #63
+  40 0022 00FA03F3 		lsl	r3, r0, r3
+  41 0026 9A00     		lsls	r2, r3, #2
+  42 0028 034B     		ldr	r3, .L5+4
+  43 002a D0B2     		uxtb	r0, r2
+  44 002c 83F80003 		strb	r0, [r3, #768]
+  45 0030 1960     		str	r1, [r3, #0]
+  46 0032 7047     		bx	lr
+  47              	.L6:
+  48              		.align	2
+  49              	.L5:
+  50 0034 00ED00E0 		.word	-536810240
+  51 0038 00E100E0 		.word	-536813312
+  53              		.section	.text.NVIC_SCU001_RegisterCallback,"ax",%progbits
+  54              		.align	1
+  55              		.global	NVIC_SCU001_RegisterCallback
+  56              		.thumb
+  57              		.thumb_func
+  59              	NVIC_SCU001_RegisterCallback:
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62              		@ link register save eliminated.
+  63 0000 034B     		ldr	r3, .L8
+  64 0002 43F83010 		str	r1, [r3, r0, lsl #3]
+  65 0006 03EBC000 		add	r0, r3, r0, lsl #3
+  66 000a 4260     		str	r2, [r0, #4]
+  67 000c 7047     		bx	lr
+  68              	.L9:
+  69 000e 00BF     		.align	2
+  70              	.L8:
+  71 0010 00000000 		.word	NVIC_SCU001_Handle0
+  73              		.section	.text.SCU_0_IRQHandler,"ax",%progbits
+  74              		.align	1
+  75              		.global	SCU_0_IRQHandler
+  76              		.thumb
+  77              		.thumb_func
+  79              	SCU_0_IRQHandler:
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82 0000 10B5     		push	{r4, lr}
+  83 0002 684C     		ldr	r4, .L100
+  84 0004 2368     		ldr	r3, [r4, #0]
+  85 0006 DA07     		lsls	r2, r3, #31
+  86 0008 09D5     		bpl	.L11
+  87 000a 6749     		ldr	r1, .L100+4
+  88 000c 0B68     		ldr	r3, [r1, #0]
+  89 000e 0BB1     		cbz	r3, .L12
+  90 0010 4868     		ldr	r0, [r1, #4]
+  91 0012 9847     		blx	r3
+  92              	.L12:
+  93 0014 E068     		ldr	r0, [r4, #12]
+  94 0016 40F00102 		orr	r2, r0, #1
+  95 001a E260     		str	r2, [r4, #12]
+  96 001c 10BD     		pop	{r4, pc}
+  97              	.L11:
+  98 001e 9807     		lsls	r0, r3, #30
+  99 0020 09D5     		bpl	.L14
+ 100 0022 6148     		ldr	r0, .L100+4
+ 101 0024 8368     		ldr	r3, [r0, #8]
+ 102 0026 0BB1     		cbz	r3, .L15
+ 103 0028 C068     		ldr	r0, [r0, #12]
+ 104 002a 9847     		blx	r3
+ 105              	.L15:
+ 106 002c 5D48     		ldr	r0, .L100
+ 107 002e C268     		ldr	r2, [r0, #12]
+ 108 0030 42F00202 		orr	r2, r2, #2
+ 109 0034 B4E0     		b	.L99
+ 110              	.L14:
+ 111 0036 5907     		lsls	r1, r3, #29
+ 112 0038 09D5     		bpl	.L16
+ 113 003a 5B48     		ldr	r0, .L100+4
+ 114 003c 0269     		ldr	r2, [r0, #16]
+ 115 003e 0AB1     		cbz	r2, .L17
+ 116 0040 4069     		ldr	r0, [r0, #20]
+ 117 0042 9047     		blx	r2
+ 118              	.L17:
+ 119 0044 5748     		ldr	r0, .L100
+ 120 0046 C168     		ldr	r1, [r0, #12]
+ 121 0048 41F00402 		orr	r2, r1, #4
+ 122 004c A8E0     		b	.L99
+ 123              	.L16:
+ 124 004e 1A07     		lsls	r2, r3, #28
+ 125 0050 09D5     		bpl	.L18
+ 126 0052 554A     		ldr	r2, .L100+4
+ 127 0054 9169     		ldr	r1, [r2, #24]
+ 128 0056 09B1     		cbz	r1, .L19
+ 129 0058 D069     		ldr	r0, [r2, #28]
+ 130 005a 8847     		blx	r1
+ 131              	.L19:
+ 132 005c 5148     		ldr	r0, .L100
+ 133 005e C368     		ldr	r3, [r0, #12]
+ 134 0060 43F00802 		orr	r2, r3, #8
+ 135 0064 9CE0     		b	.L99
+ 136              	.L18:
+ 137 0066 D803     		lsls	r0, r3, #15
+ 138 0068 09D5     		bpl	.L20
+ 139 006a 4F48     		ldr	r0, .L100+4
+ 140 006c 016A     		ldr	r1, [r0, #32]
+ 141 006e 09B1     		cbz	r1, .L21
+ 142 0070 406A     		ldr	r0, [r0, #36]
+ 143 0072 8847     		blx	r1
+ 144              	.L21:
+ 145 0074 4B48     		ldr	r0, .L100
+ 146 0076 C368     		ldr	r3, [r0, #12]
+ 147 0078 43F48032 		orr	r2, r3, #65536
+ 148 007c 90E0     		b	.L99
+ 149              	.L20:
+ 150 007e 9903     		lsls	r1, r3, #14
+ 151 0080 09D5     		bpl	.L22
+ 152 0082 4949     		ldr	r1, .L100+4
+ 153 0084 8B6A     		ldr	r3, [r1, #40]
+ 154 0086 0BB1     		cbz	r3, .L23
+ 155 0088 C86A     		ldr	r0, [r1, #44]
+ 156 008a 9847     		blx	r3
+ 157              	.L23:
+ 158 008c 4548     		ldr	r0, .L100
+ 159 008e C268     		ldr	r2, [r0, #12]
+ 160 0090 42F40032 		orr	r2, r2, #131072
+ 161 0094 84E0     		b	.L99
+ 162              	.L22:
+ 163 0096 5A03     		lsls	r2, r3, #13
+ 164 0098 09D5     		bpl	.L24
+ 165 009a 4348     		ldr	r0, .L100+4
+ 166 009c 036B     		ldr	r3, [r0, #48]
+ 167 009e 0BB1     		cbz	r3, .L25
+ 168 00a0 406B     		ldr	r0, [r0, #52]
+ 169 00a2 9847     		blx	r3
+ 170              	.L25:
+ 171 00a4 3F48     		ldr	r0, .L100
+ 172 00a6 C268     		ldr	r2, [r0, #12]
+ 173 00a8 42F48022 		orr	r2, r2, #262144
+ 174 00ac 78E0     		b	.L99
+ 175              	.L24:
+ 176 00ae 1803     		lsls	r0, r3, #12
+ 177 00b0 09D5     		bpl	.L26
+ 178 00b2 3D48     		ldr	r0, .L100+4
+ 179 00b4 826B     		ldr	r2, [r0, #56]
+ 180 00b6 0AB1     		cbz	r2, .L27
+ 181 00b8 C06B     		ldr	r0, [r0, #60]
+ 182 00ba 9047     		blx	r2
+ 183              	.L27:
+ 184 00bc 3948     		ldr	r0, .L100
+ 185 00be C168     		ldr	r1, [r0, #12]
+ 186 00c0 41F40022 		orr	r2, r1, #524288
+ 187 00c4 6CE0     		b	.L99
+ 188              	.L26:
+ 189 00c6 9902     		lsls	r1, r3, #10
+ 190 00c8 09D5     		bpl	.L28
+ 191 00ca 374A     		ldr	r2, .L100+4
+ 192 00cc 116C     		ldr	r1, [r2, #64]
+ 193 00ce 09B1     		cbz	r1, .L29
+ 194 00d0 506C     		ldr	r0, [r2, #68]
+ 195 00d2 8847     		blx	r1
+ 196              	.L29:
+ 197 00d4 3348     		ldr	r0, .L100
+ 198 00d6 C368     		ldr	r3, [r0, #12]
+ 199 00d8 43F40012 		orr	r2, r3, #2097152
+ 200 00dc 60E0     		b	.L99
+ 201              	.L28:
+ 202 00de 5A02     		lsls	r2, r3, #9
+ 203 00e0 09D5     		bpl	.L30
+ 204 00e2 3148     		ldr	r0, .L100+4
+ 205 00e4 816C     		ldr	r1, [r0, #72]
+ 206 00e6 09B1     		cbz	r1, .L31
+ 207 00e8 C06C     		ldr	r0, [r0, #76]
+ 208 00ea 8847     		blx	r1
+ 209              	.L31:
+ 210 00ec 2D48     		ldr	r0, .L100
+ 211 00ee C368     		ldr	r3, [r0, #12]
+ 212 00f0 43F48002 		orr	r2, r3, #4194304
+ 213 00f4 54E0     		b	.L99
+ 214              	.L30:
+ 215 00f6 1802     		lsls	r0, r3, #8
+ 216 00f8 09D5     		bpl	.L32
+ 217 00fa 2B49     		ldr	r1, .L100+4
+ 218 00fc 0B6D     		ldr	r3, [r1, #80]
+ 219 00fe 0BB1     		cbz	r3, .L33
+ 220 0100 486D     		ldr	r0, [r1, #84]
+ 221 0102 9847     		blx	r3
+ 222              	.L33:
+ 223 0104 2748     		ldr	r0, .L100
+ 224 0106 C268     		ldr	r2, [r0, #12]
+ 225 0108 42F40002 		orr	r2, r2, #8388608
+ 226 010c 48E0     		b	.L99
+ 227              	.L32:
+ 228 010e D901     		lsls	r1, r3, #7
+ 229 0110 09D5     		bpl	.L34
+ 230 0112 2548     		ldr	r0, .L100+4
+ 231 0114 836D     		ldr	r3, [r0, #88]
+ 232 0116 0BB1     		cbz	r3, .L35
+ 233 0118 C06D     		ldr	r0, [r0, #92]
+ 234 011a 9847     		blx	r3
+ 235              	.L35:
+ 236 011c 2148     		ldr	r0, .L100
+ 237 011e C268     		ldr	r2, [r0, #12]
+ 238 0120 42F08072 		orr	r2, r2, #16777216
+ 239 0124 3CE0     		b	.L99
+ 240              	.L34:
+ 241 0126 9A01     		lsls	r2, r3, #6
+ 242 0128 09D5     		bpl	.L36
+ 243 012a 1F48     		ldr	r0, .L100+4
+ 244 012c 026E     		ldr	r2, [r0, #96]
+ 245 012e 0AB1     		cbz	r2, .L37
+ 246 0130 406E     		ldr	r0, [r0, #100]
+ 247 0132 9047     		blx	r2
+ 248              	.L37:
+ 249 0134 1B48     		ldr	r0, .L100
+ 250 0136 C168     		ldr	r1, [r0, #12]
+ 251 0138 41F00072 		orr	r2, r1, #33554432
+ 252 013c 30E0     		b	.L99
+ 253              	.L36:
+ 254 013e 5801     		lsls	r0, r3, #5
+ 255 0140 09D5     		bpl	.L38
+ 256 0142 194A     		ldr	r2, .L100+4
+ 257 0144 916E     		ldr	r1, [r2, #104]
+ 258 0146 09B1     		cbz	r1, .L39
+ 259 0148 D06E     		ldr	r0, [r2, #108]
+ 260 014a 8847     		blx	r1
+ 261              	.L39:
+ 262 014c 1548     		ldr	r0, .L100
+ 263 014e C368     		ldr	r3, [r0, #12]
+ 264 0150 43F08062 		orr	r2, r3, #67108864
+ 265 0154 24E0     		b	.L99
+ 266              	.L38:
+ 267 0156 1901     		lsls	r1, r3, #4
+ 268 0158 09D5     		bpl	.L40
+ 269 015a 1348     		ldr	r0, .L100+4
+ 270 015c 016F     		ldr	r1, [r0, #112]
+ 271 015e 09B1     		cbz	r1, .L41
+ 272 0160 406F     		ldr	r0, [r0, #116]
+ 273 0162 8847     		blx	r1
+ 274              	.L41:
+ 275 0164 0F48     		ldr	r0, .L100
+ 276 0166 C368     		ldr	r3, [r0, #12]
+ 277 0168 43F00062 		orr	r2, r3, #134217728
+ 278 016c 18E0     		b	.L99
+ 279              	.L40:
+ 280 016e DA00     		lsls	r2, r3, #3
+ 281 0170 09D5     		bpl	.L42
+ 282 0172 0D49     		ldr	r1, .L100+4
+ 283 0174 8B6F     		ldr	r3, [r1, #120]
+ 284 0176 0BB1     		cbz	r3, .L43
+ 285 0178 C86F     		ldr	r0, [r1, #124]
+ 286 017a 9847     		blx	r3
+ 287              	.L43:
+ 288 017c 0948     		ldr	r0, .L100
+ 289 017e C268     		ldr	r2, [r0, #12]
+ 290 0180 42F08052 		orr	r2, r2, #268435456
+ 291 0184 0CE0     		b	.L99
+ 292              	.L42:
+ 293 0186 9B00     		lsls	r3, r3, #2
+ 294 0188 0BD5     		bpl	.L10
+ 295 018a 074A     		ldr	r2, .L100+4
+ 296 018c D2F88010 		ldr	r1, [r2, #128]
+ 297 0190 11B1     		cbz	r1, .L44
+ 298 0192 D2F88400 		ldr	r0, [r2, #132]
+ 299 0196 8847     		blx	r1
+ 300              	.L44:
+ 301 0198 0248     		ldr	r0, .L100
+ 302 019a C368     		ldr	r3, [r0, #12]
+ 303 019c 43F00052 		orr	r2, r3, #536870912
+ 304              	.L99:
+ 305 01a0 C260     		str	r2, [r0, #12]
+ 306              	.L10:
+ 307 01a2 10BD     		pop	{r4, pc}
+ 308              	.L101:
+ 309              		.align	2
+ 310              	.L100:
+ 311 01a4 74400050 		.word	1342193780
+ 312 01a8 00000000 		.word	NVIC_SCU001_Handle0
+ 314              		.comm	NVIC_SCU001_Handle0,136,4
+ 315              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 NVIC_SCU001.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cciOVi6F.s:17     .text.NVIC_SCU001_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cciOVi6F.s:22     .text.NVIC_SCU001_Init:00000000 NVIC_SCU001_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\cciOVi6F.s:50     .text.NVIC_SCU001_Init:00000034 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cciOVi6F.s:54     .text.NVIC_SCU001_RegisterCallback:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cciOVi6F.s:59     .text.NVIC_SCU001_RegisterCallback:00000000 NVIC_SCU001_RegisterCallback
+C:\Users\TOGABL~1\AppData\Local\Temp\cciOVi6F.s:71     .text.NVIC_SCU001_RegisterCallback:00000010 $d
+                            *COM*:00000088 NVIC_SCU001_Handle0
+C:\Users\TOGABL~1\AppData\Local\Temp\cciOVi6F.s:74     .text.SCU_0_IRQHandler:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cciOVi6F.s:79     .text.SCU_0_IRQHandler:00000000 SCU_0_IRQHandler
+C:\Users\TOGABL~1\AppData\Local\Temp\cciOVi6F.s:311    .text.SCU_0_IRQHandler:000001a4 $d
+
+NO UNDEFINED SYMBOLS

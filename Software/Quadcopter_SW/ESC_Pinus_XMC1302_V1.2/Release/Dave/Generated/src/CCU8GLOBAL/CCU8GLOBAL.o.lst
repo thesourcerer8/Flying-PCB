@@ -1,0 +1,87 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"CCU8GLOBAL.c"
+  14              		.section	.text.CCU8GLOBAL_Init,"ax",%progbits
+  15              		.align	1
+  16              		.global	CCU8GLOBAL_Init
+  17              		.code	16
+  18              		.thumb_func
+  20              	CCU8GLOBAL_Init:
+  21 0000 134B     		ldr	r3, .L7
+  22 0002 70B5     		push	{r4, r5, r6, lr}
+  23 0004 1A68     		ldr	r2, [r3]
+  24 0006 1C1C     		mov	r4, r3
+  25 0008 002A     		cmp	r2, #0
+  26 000a 20D1     		bne	.L1
+  27 000c 1148     		ldr	r0, .L7+4
+  28 000e 124B     		ldr	r3, .L7+8
+  29 0010 0268     		ldr	r2, [r0]
+  30 0012 1969     		ldr	r1, [r3, #16]
+  31 0014 5068     		ldr	r0, [r2, #4]
+  32 0016 0142     		tst	r1, r0
+  33 0018 11D1     		bne	.L3
+  34 001a 1049     		ldr	r1, .L7+12
+  35 001c C025     		mov	r5, #192
+  36 001e 4D62     		str	r5, [r1, #36]
+  37 0020 1D68     		ldr	r5, [r3]
+  38 0022 0F4E     		ldr	r6, .L7+16
+  39 0024 3543     		orr	r5, r6
+  40 0026 1D60     		str	r5, [r3]
+  41 0028 0126     		mov	r6, #1
+  42 002a 1D69     		ldr	r5, [r3, #16]
+  43 002c 8640     		lsl	r6, r6, r0
+  44 002e 301C     		mov	r0, r6
+  45 0030 2843     		orr	r0, r5
+  46 0032 1861     		str	r0, [r3, #16]
+  47              	.L4:
+  48 0034 1D68     		ldr	r5, [r3]
+  49 0036 6D00     		lsl	r5, r5, #1
+  50 0038 FCD4     		bmi	.L4
+  51 003a C323     		mov	r3, #195
+  52 003c 4B62     		str	r3, [r1, #36]
+  53              	.L3:
+  54 003e 1668     		ldr	r6, [r2]
+  55 0040 8022     		mov	r2, #128
+  56 0042 F168     		ldr	r1, [r6, #12]
+  57 0044 5000     		lsl	r0, r2, #1
+  58 0046 0843     		orr	r0, r1
+  59 0048 0125     		mov	r5, #1
+  60 004a F060     		str	r0, [r6, #12]
+  61 004c 2560     		str	r5, [r4]
+  62              	.L1:
+  63              		@ sp needed for prologue
+  64 004e 70BD     		pop	{r4, r5, r6, pc}
+  65              	.L8:
+  66              		.align	2
+  67              	.L7:
+  68 0050 00000000 		.word	.LANCHOR0
+  69 0054 00000000 		.word	CCU8GLOBAL_HandleArray
+  70 0058 00030140 		.word	1073808128
+  71 005c 00000140 		.word	1073807360
+  72 0060 0000F03F 		.word	1072693248
+  74              		.bss
+  75              		.align	2
+  76              		.set	.LANCHOR0,. + 0
+  79              	isInitialized.5542:
+  80 0000 00000000 		.space	4
+  81              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 CCU8GLOBAL.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsmO2I9.s:15     .text.CCU8GLOBAL_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsmO2I9.s:20     .text.CCU8GLOBAL_Init:00000000 CCU8GLOBAL_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsmO2I9.s:68     .text.CCU8GLOBAL_Init:00000050 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsmO2I9.s:75     .bss:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsmO2I9.s:79     .bss:00000000 isInitialized.5542
+
+UNDEFINED SYMBOLS
+CCU8GLOBAL_HandleArray

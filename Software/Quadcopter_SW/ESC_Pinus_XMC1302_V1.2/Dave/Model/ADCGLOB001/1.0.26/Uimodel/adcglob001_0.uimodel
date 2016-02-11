@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page62" displayName="Global Configuration" className="IfxGroupBox" controlId="1343119592248">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group64" displayName="Clock" className="IfxGroupBox" controlId="1343119679016">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group62" displayName="" className="IfxGroupBox" controlId="1343129275945">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwperibusclock" displayName="Peripheral Bus Clock" readonly="true" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwperibusclock:Peripheral Bus Clock" controlId="1343123681780" defaultType="MHz" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>Hz</conversionType>
+          <conversionType>GHz</conversionType>
+          <conversionType>MHz</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group66" displayName="Analog Clock" className="IfxGroupBox" controlId="1343119681621">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwanalogclock" displayName="Desired Analog Clock" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwanalogclock:Desired Analog Clock" controlId="1343294205688" defaultType="MHz" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>MHz</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwselanalogclock" displayName="Actual Analog Clock" readonly="true" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwselanalogclock:Actual Analog Clock" controlId="1343127919718" defaultType="MHz" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>Hz</conversionType>
+          <conversionType>KHz</conversionType>
+          <conversionType>MHz</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group22" displayName="Digital Clock" className="IfxGroupBox" controlId="1343119684383">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_erwdigitalclock" displayName="Digital Clock" className="EnumerationType" paramName="app/adcglob001/0/adcglob001_erwdigitalclock:Digital Clock" controlId="1343626153296">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwseldigitalclock" displayName="Actual Digital Clock" readonly="true" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwseldigitalclock:Actual Digital Clock" controlId="1343300396816" defaultType="MHz" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>MHz</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group8" displayName="" className="IfxGroupBox" controlId="1343120334887">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group3" displayName="" className="IfxGroupBox" controlId="1343887866466">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_erwstartupcalibration" displayName="Enable Startup Calibration" className="EnumerationType" paramName="app/adcglob001/0/adcglob001_erwstartupcalibration:Enable Startup Calibration" controlId="1343120341299">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_erwdblclockmsb" displayName="Double Clock for MSB Conversion" className="EnumerationType" paramName="app/adcglob001/0/adcglob001_erwdblclockmsb:Double Clock for MSB Conversion" controlId="1343121294097">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group70" displayName="Global Specific Boundary" className="IfxGroupBox" controlId="1344235745560">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwglobboundary0" displayName="Boundary0" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwglobboundary0:Global specific boundary0" controlId="1344317531754">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+          <conversionType>dec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwglobboundary1" displayName="Boundary1" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwglobboundary1:Global specific boundary1" controlId="1344317557494">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+          <conversionType>dec</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page98" displayName="Global Input Class 0 Configuration" className="IfxGroupBox" controlId="1343200573138">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group11" displayName="Global Class 0 Parameters" className="IfxGroupBox" controlId="1343204477901">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group21" displayName="Standard Conversion Mode" className="IfxGroupBox" controlId="1343204509598">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001001_erwconmodeclass0" displayName="Conversion Mode" className="EnumerationType" paramName="app/adcglob001/0/adcglob001001_erwconmodeclass0:Global Class 0 Conversion Mode" controlId="1343204574505">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass0desiredsampletime" displayName="Desired Sample Time" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwclass0desiredsampletime:Class 0 Desired Sample Time" controlId="1344578578892" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass0actualsampletime" displayName="Actual Sample Time" readonly="true" className="IntegerType" constraint="" paramName="app/adcglob001/0/adcglob001_irwclass0actualsampletime:Class 0 Actual Sample Time" controlId="1344578595052" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass0actconversiontime" displayName="Conversion Time" readonly="true" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwclass0actconversiontime:Class 0 Actual Conversion Time" controlId="1344578633602" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group2" displayName="External Multiplexer Conversion Mode" className="IfxGroupBox" constraint="" controlId="1343204511860">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001001_erwextmuxclass0" displayName="Conversion Mode" className="EnumerationType" constraint="if(CM.getSoftwareId().substring(0,2).compareTo(&quot;11&quot;) ==0)&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}" paramName="app/adcglob001/0/adcglob001001_erwextmuxclass0:Global Class 0 External Multiplexer Conversion Mode" controlId="1343204620148">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass0desiredemuxsampletime" displayName="Desired EMUX Sample Time" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,2).compareTo(&quot;11&quot;) ==0)&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}" paramName="app/adcglob001/0/adcglob001_irwclass0desiredemuxsampletime:Class 0 Desired EMUX Sample Time" controlId="1344578678882" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass0actualemuxsampletime" displayName="Actual EMUX Sample Time" readonly="true" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,2).compareTo(&quot;11&quot;) ==0)&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/adcglob001/0/adcglob001_irwclass0actualemuxsampletime:Class 0 Actual EMUX Sample Time" controlId="1344578688772" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass0extmuxconvtime" displayName="Conversion Time" readonly="true" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,2).compareTo(&quot;11&quot;) ==0)&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/adcglob001/0/adcglob001_irwclass0extmuxconvtime:Class 0 EMUX Conversion Time" controlId="1344578719522" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page55" displayName="Global Input Class 1 Configuration" className="IfxGroupBox" controlId="1343367978411">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group57" displayName="Global Class 1 Parameters" className="IfxGroupBox" controlId="1343204480584">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group7" displayName="Standard Conversion Mode" className="IfxGroupBox" controlId="1343204518147">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001001_erwconmodeclass1" displayName="Conversion Mode" className="EnumerationType" paramName="app/adcglob001/0/adcglob001001_erwconmodeclass1:Global Class 1 Conversion Mode" controlId="1343204592226">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass1desiredsampletime" displayName="Desired Sample Time" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwclass1desiredsampletime:Class 1 Desired Sample Time" controlId="1344578827752" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass1actualsampletime" displayName="Actual Sample Time" readonly="true" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwclass1actualsampletime:Class 1 Actual Sample Time" controlId="1344578822632" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass1actconversiontime" displayName="Conversion Time" readonly="true" className="IntegerType" paramName="app/adcglob001/0/adcglob001_irwclass1actconversiontime:Class 1 Actual Conversion Time" controlId="1344578788482" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group41" displayName="External Multiplexer Conversion Mode" className="IfxGroupBox" constraint="" controlId="1343204521500">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001001_erwextmuxclass1" displayName="Conversion Mode" className="EnumerationType" constraint="if(CM.getSoftwareId().substring(0,2).compareTo(&quot;11&quot;) ==0)&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}" paramName="app/adcglob001/0/adcglob001001_erwextmuxclass1:Global Class 1 External Multiplexer Conversion Mode" controlId="1343204630583">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass1desiredemuxsampletime" displayName="Desired EMUX Sample Time" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,2).compareTo(&quot;11&quot;) ==0)&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}" paramName="app/adcglob001/0/adcglob001_irwclass1desiredemuxsampletime:Class 1 Desired EMUX Sample Time" controlId="1344578906662" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass1actualemuxsampletime" displayName="Actual EMUX Sample Time" readonly="true" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,2).compareTo(&quot;11&quot;) ==0)&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/adcglob001/0/adcglob001_irwclass1actualemuxsampletime:Class 1 Actual EMUX Sample Time" controlId="1344578882822" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/adcglob001/0/adcglob001_irwclass1extmuxconvtime" displayName="Conversion Time" readonly="true" className="IntegerType" constraint="if(CM.getSoftwareId().substring(0,2).compareTo(&quot;11&quot;) ==0)&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/adcglob001/0/adcglob001_irwclass1extmuxconvtime:Class 1 EMUX Conversion Time" controlId="1344578898162" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

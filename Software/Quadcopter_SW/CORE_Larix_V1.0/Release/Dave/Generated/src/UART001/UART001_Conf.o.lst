@@ -1,0 +1,128 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"UART001_Conf.c"
+  16              		.global	UART001_HandleArray
+  17              		.global	UART001_Handle2
+  18              		.global	UART001_Handle1
+  19              		.global	UART001_Handle0
+  20              		.section	.rodata
+  21              		.align	2
+  24              	UART001_Handle2:
+  25 0000 00000340 		.word	1073938432
+  26 0004 00850248 		.word	1208124672
+  27 0008 01       		.byte	1
+  28 0009 000000   		.space	3
+  29 000c 00810248 		.word	1208123648
+  30 0010 05       		.byte	5
+  31 0011 000000   		.space	3
+  32 0014 00       		.byte	0
+  33 0015 00       		.byte	0
+  34 0016 00       		.byte	0
+  35 0017 00       		.space	1
+  36 0018 00C20100 		.word	115200
+  37 001c 0700     		.short	7
+  38 001e 01       		.byte	1
+  39 001f 01       		.byte	1
+  40 0020 01       		.byte	1
+  41 0021 12       		.byte	18
+  42 0022 05       		.byte	5
+  43 0023 05       		.byte	5
+  44 0024 00       		.byte	0
+  45 0025 00       		.byte	0
+  46 0026 00       		.byte	0
+  47 0027 00       		.space	1
+  48 0028 BA02     		.short	698
+  49 002a 4600     		.short	70
+  50 002c 0900     		.short	9
+  51 002e 0600     		.short	6
+  52 0030 00       		.byte	0
+  53 0031 000000   		.space	3
+  56              	UART001_Handle1:
+  57 0034 00020248 		.word	1208091136
+  58 0038 00800248 		.word	1208123392
+  59 003c 01       		.byte	1
+  60 003d 000000   		.space	3
+  61 0040 00800248 		.word	1208123392
+  62 0044 00       		.byte	0
+  63 0045 000000   		.space	3
+  64 0048 00       		.byte	0
+  65 0049 00       		.byte	0
+  66 004a 00       		.byte	0
+  67 004b 00       		.space	1
+  68 004c 00C20100 		.word	115200
+  69 0050 0700     		.short	7
+  70 0052 01       		.byte	1
+  71 0053 01       		.byte	1
+  72 0054 0B       		.byte	11
+  73 0055 0B       		.byte	11
+  74 0056 04       		.byte	4
+  75 0057 04       		.byte	4
+  76 0058 00       		.byte	0
+  77 0059 00       		.byte	0
+  78 005a 00       		.byte	0
+  79 005b 00       		.space	1
+  80 005c BA02     		.short	698
+  81 005e 4600     		.short	70
+  82 0060 0900     		.short	9
+  83 0062 0600     		.short	6
+  84 0064 00       		.byte	0
+  85 0065 000000   		.space	3
+  88              	UART001_Handle0:
+  89 0068 00000248 		.word	1208090624
+  90 006c 00820248 		.word	1208123904
+  91 0070 0E       		.byte	14
+  92 0071 000000   		.space	3
+  93 0074 00800248 		.word	1208123392
+  94 0078 04       		.byte	4
+  95 0079 000000   		.space	3
+  96 007c 00       		.byte	0
+  97 007d 00       		.byte	0
+  98 007e 00       		.byte	0
+  99 007f 00       		.space	1
+ 100 0080 00C20100 		.word	115200
+ 101 0084 0700     		.short	7
+ 102 0086 00       		.byte	0
+ 103 0087 01       		.byte	1
+ 104 0088 00       		.byte	0
+ 105 0089 1F       		.byte	31
+ 106 008a 00       		.byte	0
+ 107 008b 05       		.byte	5
+ 108 008c 00       		.byte	0
+ 109 008d 00       		.byte	0
+ 110 008e 00       		.byte	0
+ 111 008f 00       		.space	1
+ 112 0090 BA02     		.short	698
+ 113 0092 4600     		.short	70
+ 114 0094 0900     		.short	9
+ 115 0096 0600     		.short	6
+ 116 0098 00       		.byte	0
+ 117 0099 000000   		.space	3
+ 118              		.data
+ 119              		.align	2
+ 122              	UART001_HandleArray:
+ 123 0000 00000000 		.word	UART001_Handle0
+ 124 0004 00000000 		.word	UART001_Handle1
+ 125 0008 00000000 		.word	UART001_Handle2
+ 126              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 UART001_Conf.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn730re.s:122    .data:00000000 UART001_HandleArray
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn730re.s:24     .rodata:00000000 UART001_Handle2
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn730re.s:56     .rodata:00000034 UART001_Handle1
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn730re.s:88     .rodata:00000068 UART001_Handle0
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn730re.s:21     .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccn730re.s:119    .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

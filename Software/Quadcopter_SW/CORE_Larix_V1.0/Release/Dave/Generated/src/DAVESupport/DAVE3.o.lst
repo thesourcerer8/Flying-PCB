@@ -1,0 +1,89 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"DAVE3.c"
+  16              		.section	.text.DAVE_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	DAVE_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	DAVE_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 1549     		ldr	r1, .L2
+  26 0002 1648     		ldr	r0, .L2+4
+  27 0004 08B5     		push	{r3, lr}
+  28 0006 CB68     		ldr	r3, [r1, #12]
+  29 0008 4FF6FF02 		movw	r2, #63743
+  30 000c 1A40     		ands	r2, r2, r3
+  31 000e 42EA0003 		orr	r3, r2, r0
+  32 0012 CB60     		str	r3, [r1, #12]
+  33 0014 FFF7FEFF 		bl	DAVE_MUX_PreInit
+  34 0018 FFF7FEFF 		bl	CLK001_Init
+  35 001c FFF7FEFF 		bl	NVIC_SCU001_Init
+  36 0020 FFF7FEFF 		bl	RTC001_Init
+  37 0024 FFF7FEFF 		bl	GMM001_Init
+  38 0028 FFF7FEFF 		bl	SYSTM001_Init
+  39 002c FFF7FEFF 		bl	USBCORE001_Init
+  40 0030 FFF7FEFF 		bl	UART001_Init
+  41 0034 FFF7FEFF 		bl	CCU4GLOBAL_Init
+  42 0038 FFF7FEFF 		bl	PWMSP001_Init
+  43 003c FFF7FEFF 		bl	NVIC002_Init
+  44 0040 FFF7FEFF 		bl	I2C001_Init
+  45 0044 FFF7FEFF 		bl	ERU001_Init
+  46 0048 FFF7FEFF 		bl	ERU002_Init
+  47 004c FFF7FEFF 		bl	IO002_Init
+  48 0050 BDE80840 		pop	{r3, lr}
+  49 0054 FFF7FEBF 		b	DAVE_MUX_Init
+  50              	.L3:
+  51              		.align	2
+  52              	.L2:
+  53 0058 00ED00E0 		.word	-536810240
+  54 005c 0001FA05 		.word	100270336
+  56              		.section	.text.SystemInit_DAVE3,"ax",%progbits
+  57              		.align	1
+  58              		.global	SystemInit_DAVE3
+  59              		.thumb
+  60              		.thumb_func
+  62              	SystemInit_DAVE3:
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65              		@ link register save eliminated.
+  66 0000 FFF7FEBF 		b	CLK001_Init
+  68              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 DAVE3.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL6c8Ta.s:17     .text.DAVE_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL6c8Ta.s:22     .text.DAVE_Init:00000000 DAVE_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL6c8Ta.s:53     .text.DAVE_Init:00000058 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL6c8Ta.s:57     .text.SystemInit_DAVE3:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL6c8Ta.s:62     .text.SystemInit_DAVE3:00000000 SystemInit_DAVE3
+
+UNDEFINED SYMBOLS
+DAVE_MUX_PreInit
+CLK001_Init
+NVIC_SCU001_Init
+RTC001_Init
+GMM001_Init
+SYSTM001_Init
+USBCORE001_Init
+UART001_Init
+CCU4GLOBAL_Init
+PWMSP001_Init
+NVIC002_Init
+I2C001_Init
+ERU001_Init
+ERU002_Init
+IO002_Init
+DAVE_MUX_Init

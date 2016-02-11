@@ -1,0 +1,146 @@
+<%@ jet package="CodeGenerator" class="nvic002_confc_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+<% String AppBaseuri = "app/nvic002/";%>
+
+/*CODE_BLOCK_BEGIN[NVIC002_Conf.c]*/
+/*******************************************************************************
+ Copyright (c) 2014, Infineon Technologies AG                                 **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without** 
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series   		            	      **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : July 17, 2014                                          **
+*******************************************************************************/
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** SNR          App Developer                                                 **
+*******************************************************************************/
+/**
+ * @file   NVIC002_Conf.c
+ *
+ * @App    Version NVIC002 <<%= app.getAppVersion(AppBaseuri)%>>
+ * 
+ * @brief  Configuration file generated based on UI settings 
+ *         of NVIC002 App
+ *
+ */
+/* Revision History	
+ * 18 Feb 2013 	 v1.0.12   Conditional Codes are added to support both 
+ * 	                       XMC4000/XMC1000 devices.
+ * 18 Oct 2013   v1.0.20   Updated as per coding guidelines	     
+ * 17 Jul 2014   v1.0.28   End of line is corrected                  
+ */
+
+/*******************************************************************************
+ ** INCLUDE FILES                                                             **
+ ******************************************************************************/
+#include "../../inc/NVIC002/NVIC002.h"
+/**
+ * @ingroup NVIC002_publicparam
+ * @{
+ */
+<% String MappedUri = null; %>
+<% String appInst  = null; %>
+<% String Node_ID = null; %>
+<% int NodeNum = 0; %>
+
+<% ArrayList<String> appsList = 
+		(ArrayList<String>)(app.getApps("app/nvic002/"));
+ for (String appIns : appsList ) {
+ appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+ 
+<% MappedUri = app.getMappedUri(AppBaseuri + appInst + "/nvicnode"); %>
+<% if((MappedUri != null) && (MappedUri != "")) { %>
+<% NodeNum++; %>
+<% Node_ID = MappedUri.substring(MappedUri.lastIndexOf('/')+ 1 ); %>
+<% int IsXMC1000Device = -1; %>
+<% IsXMC1000Device = 
+		((app.getSoftwareId().substring(0,1).compareTo("1")==0)?1:0); %>  
+<%int Prio = 0;
+int SubPrio= 0;
+if(IsXMC1000Device ==1)
+{
+Prio=app.getIntegerValue(AppBaseuri+appInst+
+		                      "/NVIC002_TIMMirwInterruptPriority");
+}
+else
+{
+Prio = app.getIntegerValue(AppBaseuri + appInst +
+		                      "/NVIC002_irwInterruptPriority");
+SubPrio = app.getIntegerValue(AppBaseuri + appInst +
+		                      "/NVIC002_irwInterruptSubPriority");
+}
+int IntEnable = app.getIntegerValue(AppBaseuri + appInst +
+		                              "/NVIC002_erwEnableInt/0");%>
+const NVIC002_HandleType NVIC002_Handle<%=appInst%> = {
+   /* Mapped NVIC Node */
+  .NodeID      = <%=Node_ID%> , 
+  /* Node Interrupt Priority */
+  .Priority    = <%=Prio%>,  
+  /* Node Interrupt SubPriority */
+  .SubPriority = <%=SubPrio%>,
+  /* Interrupt enable for Node<%=Node_ID%> */
+  .InterruptEnable = <%=IntEnable%>
+};
+<% } %>
+<% else { %>
+/* NVIC NODE NOT MAPPED FOR APP INSTANCE <%=appInst%> */
+<% } %>
+<%} %> 
+const NVIC002_HandleType * NVIC002_HandleArray[NVIC002_NUM_INSTANCES] =
+{
+<% int NumInstances = 0; %>
+<% for (String appIns : appsList ) { %>
+<% appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+   &NVIC002_Handle<%=appInst%>
+ <% NumInstances++; %><% if(NumInstances != NodeNum) {%>,<%} %> 
+<%}%>
+
+};
+/**
+ * @}
+ */
+
+/*CODE_BLOCK_END*/

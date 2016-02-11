@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="DefaultPage" className="IfxGroupBox" controlId="1325832859521">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/usbld001/0/usbld001_erwusbopmode" displayName="USB Mode" className="EnumerationType" constraint="if ( CM.getParamValue(&quot;app/usbld001/0/usbld001_irwusbmode&quot;) == &quot;0&quot;)  &#xD;&#xA;{&#xD;&#xA;  if(CM.getSoftwareId().substring(0,2).compareTo(&quot;42&quot;) == 0 )&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true);&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true);&#xD;&#xA;    CM.setEnable(true);&#xD;&#xA;   }&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;" paramName="app/usbld001/0/usbld001_erwusbopmode:USB Mode" controlId="1338383842951">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/usbld001/0/usbld001_erwrtos_mode" displayName="Use RTOS mode" className="EnumerationType" constraint="if ( CM.getParamValue(&quot;app/usbld001/0/usbld001_irwrtos_mode&quot;) == &quot;2&quot;)  &#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;" paramName="app/usbld001/0/usbld001_erwrtos_mode:Use RTOS mode" controlId="1338439194798">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

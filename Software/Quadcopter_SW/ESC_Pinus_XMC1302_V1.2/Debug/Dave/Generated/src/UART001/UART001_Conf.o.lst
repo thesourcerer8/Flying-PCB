@@ -1,0 +1,88 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"UART001_Conf.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	UART001_Handle0
+  18              		.section	.rodata
+  19              		.align	2
+  22              	UART001_Handle0:
+  23 0000 00000048 		.word	1207959552
+  24 0004 00010440 		.word	1074004224
+  25 0008 05       		.byte	5
+  26 0009 000000   		.space	3
+  27 000c 00010440 		.word	1074004224
+  28 0010 04       		.byte	4
+  29 0011 000000   		.space	3
+  30 0014 00       		.byte	0
+  31 0015 00       		.byte	0
+  32 0016 00       		.byte	0
+  33 0017 00       		.space	1
+  34 0018 00C20100 		.word	115200
+  35 001c 0700     		.short	7
+  36 001e 01       		.byte	1
+  37 001f 01       		.byte	1
+  38 0020 1F       		.byte	31
+  39 0021 1F       		.byte	31
+  40 0022 05       		.byte	5
+  41 0023 05       		.byte	5
+  42 0024 01       		.byte	1
+  43 0025 01       		.byte	1
+  44 0026 00       		.byte	0
+  45 0027 00       		.space	1
+  46 0028 2B03     		.short	811
+  47 002a 1500     		.short	21
+  48 002c 0900     		.short	9
+  49 002e 0600     		.short	6
+  50 0030 00       		.byte	0
+  51 0031 000000   		.space	3
+  52              		.global	UART001_HandleArray
+  53              		.data
+  54              		.align	2
+  57              	UART001_HandleArray:
+  58 0000 00000000 		.word	UART001_Handle0
+  59              		.text
+  60              	.Letext0:
+  61              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+  62              		.file 2 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC1300_series/Include/XMC1300.h"
+  63              		.file 3 "../Dave/Generated/src/UART001/../../inc/UART001/Usic.h"
+  64              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\ESC_Pinus_XMC1302_V1.2\\Dave\\Generated\\inc\\LIBS/types.h
+  65              		.file 5 "../Dave/Generated/src/UART001/../../inc/UART001/UART001.h"
+  66              		.file 6 "../Dave/Generated/src/UART001/UART001_Conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 UART001_Conf.c
+C:\Users\maan\AppData\Local\Temp\cceG89xS.s:22     .rodata:00000000 UART001_Handle0
+C:\Users\maan\AppData\Local\Temp\cceG89xS.s:19     .rodata:00000000 $d
+C:\Users\maan\AppData\Local\Temp\cceG89xS.s:57     .data:00000000 UART001_HandleArray
+C:\Users\maan\AppData\Local\Temp\cceG89xS.s:54     .data:00000000 $d
+                           .group:00000000 wm4.1.665d63c3c957c91c5ed795826dcbc088
+                           .group:00000000 wm4.uc_id.h.35.f852fba3565a132d8ed947977fab9fbc
+                           .group:00000000 wm4.XMC1300.h.45.4ee692c6c98aa9fc42e2abbc732052b9
+                           .group:00000000 wm4.core_cm0.h.47.022e66414e77714da7c4b30b3ad99fe8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.b7b6650bdd2316848d940915272d75b8
+                           .group:00000000 wm4.core_cm0.h.135.ca70469f87e143609670bb393bfa6518
+                           .group:00000000 wm4.XMC1000_RomFunctionTable.h.31.6d9a94465618f31b040dc9cea9a47ad7
+                           .group:00000000 wm4.XMC1300.h.126.871a37eeeb3f6a078f5ddf5efd64103f
+                           .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.UART001_Conf.h.53.f334402b2e237110b77f625dfc27af0e
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+
+NO UNDEFINED SYMBOLS

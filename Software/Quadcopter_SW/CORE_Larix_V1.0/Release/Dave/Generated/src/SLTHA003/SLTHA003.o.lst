@@ -1,0 +1,127 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"SLTHA003.c"
+  16              		.section	.text._malloc_r,"ax",%progbits
+  17              		.align	1
+  18              		.global	_malloc_r
+  19              		.thumb
+  20              		.thumb_func
+  22              	_malloc_r:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 0846     		mov	r0, r1
+  27 0002 FFF7FEBF 		b	GMM001_malloc
+  29              		.section	.text._calloc_r,"ax",%progbits
+  30              		.align	1
+  31              		.global	_calloc_r
+  32              		.thumb
+  33              		.thumb_func
+  35              	_calloc_r:
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 0, uses_anonymous_args = 0
+  38 0000 38B5     		push	{r3, r4, r5, lr}
+  39 0002 01FB02F4 		mul	r4, r1, r2
+  40 0006 2046     		mov	r0, r4
+  41 0008 FFF7FEFF 		bl	GMM001_malloc
+  42 000c 0021     		movs	r1, #0
+  43 000e 0546     		mov	r5, r0
+  44 0010 2246     		mov	r2, r4
+  45 0012 FFF7FEFF 		bl	memset
+  46 0016 2846     		mov	r0, r5
+  47 0018 38BD     		pop	{r3, r4, r5, pc}
+  49              		.section	.text._free_r,"ax",%progbits
+  50              		.align	1
+  51              		.global	_free_r
+  52              		.thumb
+  53              		.thumb_func
+  55              	_free_r:
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58              		@ link register save eliminated.
+  59 0000 0846     		mov	r0, r1
+  60 0002 FFF7FEBF 		b	GMM001_free
+  62              		.section	.text._realloc_r,"ax",%progbits
+  63              		.align	1
+  64              		.global	_realloc_r
+  65              		.thumb
+  66              		.thumb_func
+  68              	_realloc_r:
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71              		@ link register save eliminated.
+  72 0000 1046     		mov	r0, r2
+  73 0002 FFF7FEBF 		b	GMM001_realloc
+  75              		.section	.text._gettimeofday_r,"ax",%progbits
+  76              		.align	1
+  77              		.global	_gettimeofday_r
+  78              		.thumb
+  79              		.thumb_func
+  81              	_gettimeofday_r:
+  82              		@ args = 0, pretend = 0, frame = 8
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  84 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+  85 0002 1546     		mov	r5, r2
+  86 0004 0C46     		mov	r4, r1
+  87 0006 31B1     		cbz	r1, .L7
+  88 0008 01A8     		add	r0, sp, #4
+  89 000a FFF7FEFF 		bl	RTC001_Time
+  90 000e 10B9     		cbnz	r0, .L7
+  91 0010 019B     		ldr	r3, [sp, #4]
+  92 0012 6060     		str	r0, [r4, #4]
+  93 0014 2360     		str	r3, [r4, #0]
+  94              	.L7:
+  95 0016 0020     		movs	r0, #0
+  96 0018 2860     		str	r0, [r5, #0]
+  97 001a 6860     		str	r0, [r5, #4]
+  98 001c 0198     		ldr	r0, [sp, #4]
+  99 001e 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 101              		.section	.text._times_r,"ax",%progbits
+ 102              		.align	1
+ 103              		.global	_times_r
+ 104              		.thumb
+ 105              		.thumb_func
+ 107              	_times_r:
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110              		@ link register save eliminated.
+ 111 0000 0020     		movs	r0, #0
+ 112 0002 0860     		str	r0, [r1, #0]
+ 113 0004 4860     		str	r0, [r1, #4]
+ 114 0006 8860     		str	r0, [r1, #8]
+ 115 0008 C860     		str	r0, [r1, #12]
+ 116 000a 7047     		bx	lr
+ 118              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 SLTHA003.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:17     .text._malloc_r:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:22     .text._malloc_r:00000000 _malloc_r
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:30     .text._calloc_r:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:35     .text._calloc_r:00000000 _calloc_r
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:50     .text._free_r:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:55     .text._free_r:00000000 _free_r
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:63     .text._realloc_r:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:68     .text._realloc_r:00000000 _realloc_r
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:76     .text._gettimeofday_r:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:81     .text._gettimeofday_r:00000000 _gettimeofday_r
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:102    .text._times_r:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccCOzIPb.s:107    .text._times_r:00000000 _times_r
+
+UNDEFINED SYMBOLS
+GMM001_malloc
+memset
+GMM001_free
+GMM001_realloc
+RTC001_Time

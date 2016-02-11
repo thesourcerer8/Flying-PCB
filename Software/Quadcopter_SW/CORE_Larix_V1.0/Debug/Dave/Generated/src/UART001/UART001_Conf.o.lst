@@ -1,0 +1,160 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"UART001_Conf.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	UART001_Handle0
+  20              		.section	.rodata
+  21              		.align	2
+  24              	UART001_Handle0:
+  25 0000 00000248 		.word	1208090624
+  26 0004 00820248 		.word	1208123904
+  27 0008 0E       		.byte	14
+  28 0009 000000   		.space	3
+  29 000c 00800248 		.word	1208123392
+  30 0010 04       		.byte	4
+  31 0011 000000   		.space	3
+  32 0014 00       		.byte	0
+  33 0015 00       		.byte	0
+  34 0016 00       		.byte	0
+  35 0017 00       		.space	1
+  36 0018 00C20100 		.word	115200
+  37 001c 0700     		.short	7
+  38 001e 00       		.byte	0
+  39 001f 01       		.byte	1
+  40 0020 00       		.byte	0
+  41 0021 1F       		.byte	31
+  42 0022 00       		.byte	0
+  43 0023 05       		.byte	5
+  44 0024 00       		.byte	0
+  45 0025 00       		.byte	0
+  46 0026 00       		.byte	0
+  47 0027 00       		.space	1
+  48 0028 BA02     		.short	698
+  49 002a 4600     		.short	70
+  50 002c 0900     		.short	9
+  51 002e 0600     		.short	6
+  52 0030 00       		.byte	0
+  53 0031 000000   		.space	3
+  54              		.global	UART001_Handle1
+  55              		.align	2
+  58              	UART001_Handle1:
+  59 0034 00020248 		.word	1208091136
+  60 0038 00800248 		.word	1208123392
+  61 003c 01       		.byte	1
+  62 003d 000000   		.space	3
+  63 0040 00800248 		.word	1208123392
+  64 0044 00       		.byte	0
+  65 0045 000000   		.space	3
+  66 0048 00       		.byte	0
+  67 0049 00       		.byte	0
+  68 004a 00       		.byte	0
+  69 004b 00       		.space	1
+  70 004c 00C20100 		.word	115200
+  71 0050 0700     		.short	7
+  72 0052 01       		.byte	1
+  73 0053 01       		.byte	1
+  74 0054 0B       		.byte	11
+  75 0055 0B       		.byte	11
+  76 0056 04       		.byte	4
+  77 0057 04       		.byte	4
+  78 0058 00       		.byte	0
+  79 0059 00       		.byte	0
+  80 005a 00       		.byte	0
+  81 005b 00       		.space	1
+  82 005c BA02     		.short	698
+  83 005e 4600     		.short	70
+  84 0060 0900     		.short	9
+  85 0062 0600     		.short	6
+  86 0064 00       		.byte	0
+  87 0065 000000   		.space	3
+  88              		.global	UART001_Handle2
+  89              		.align	2
+  92              	UART001_Handle2:
+  93 0068 00000340 		.word	1073938432
+  94 006c 00850248 		.word	1208124672
+  95 0070 01       		.byte	1
+  96 0071 000000   		.space	3
+  97 0074 00810248 		.word	1208123648
+  98 0078 05       		.byte	5
+  99 0079 000000   		.space	3
+ 100 007c 00       		.byte	0
+ 101 007d 00       		.byte	0
+ 102 007e 00       		.byte	0
+ 103 007f 00       		.space	1
+ 104 0080 00C20100 		.word	115200
+ 105 0084 0700     		.short	7
+ 106 0086 01       		.byte	1
+ 107 0087 01       		.byte	1
+ 108 0088 01       		.byte	1
+ 109 0089 12       		.byte	18
+ 110 008a 05       		.byte	5
+ 111 008b 05       		.byte	5
+ 112 008c 00       		.byte	0
+ 113 008d 00       		.byte	0
+ 114 008e 00       		.byte	0
+ 115 008f 00       		.space	1
+ 116 0090 BA02     		.short	698
+ 117 0092 4600     		.short	70
+ 118 0094 0900     		.short	9
+ 119 0096 0600     		.short	6
+ 120 0098 00       		.byte	0
+ 121 0099 000000   		.space	3
+ 122              		.global	UART001_HandleArray
+ 123              		.data
+ 124              		.align	2
+ 127              	UART001_HandleArray:
+ 128 0000 00000000 		.word	UART001_Handle0
+ 129 0004 00000000 		.word	UART001_Handle1
+ 130 0008 00000000 		.word	UART001_Handle2
+ 131              		.text
+ 132              	.Letext0:
+ 133              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 134              		.file 2 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 135              		.file 3 "../Dave/Generated/src/UART001/../../inc/UART001/Usic.h"
+ 136              		.file 4 "C:\\DAVE_WorkSpace\\20\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\LIBS/types.h"
+ 137              		.file 5 "../Dave/Generated/src/UART001/../../inc/UART001/UART001.h"
+ 138              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 139              		.file 7 "../Dave/Generated/src/UART001/UART001_Conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 UART001_Conf.c
+C:\Users\Andreas\AppData\Local\Temp\cca5SBpD.s:24     .rodata:00000000 UART001_Handle0
+C:\Users\Andreas\AppData\Local\Temp\cca5SBpD.s:21     .rodata:00000000 $d
+C:\Users\Andreas\AppData\Local\Temp\cca5SBpD.s:58     .rodata:00000034 UART001_Handle1
+C:\Users\Andreas\AppData\Local\Temp\cca5SBpD.s:92     .rodata:00000068 UART001_Handle2
+C:\Users\Andreas\AppData\Local\Temp\cca5SBpD.s:127    .data:00000000 UART001_HandleArray
+C:\Users\Andreas\AppData\Local\Temp\cca5SBpD.s:124    .data:00000000 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.Usic.h.90.22743468abc46f16747d12430b219aaf
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.UART001_Conf.h.53.fce01a2aa073e958cae0b1cc894db26c
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+
+NO UNDEFINED SYMBOLS

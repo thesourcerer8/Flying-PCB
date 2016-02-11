@@ -1,0 +1,1248 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"dwc_otg_cil_intr.c"
+  16              		.section	.text.cil_hcd_start,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	cil_hcd_start:
+  22              		@ args = 0, pretend = 0, frame = 0
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24 0000 08B5     		push	{r3, lr}
+  25 0002 836E     		ldr	r3, [r0, #104]
+  26 0004 1BB1     		cbz	r3, .L1
+  27 0006 1A68     		ldr	r2, [r3, #0]
+  28 0008 0AB1     		cbz	r2, .L1
+  29 000a 9869     		ldr	r0, [r3, #24]
+  30 000c 9047     		blx	r2
+  31              	.L1:
+  32 000e 08BD     		pop	{r3, pc}
+  34              		.section	.text.cil_pcd_start,"ax",%progbits
+  35              		.align	1
+  36              		.thumb
+  37              		.thumb_func
+  39              	cil_pcd_start:
+  40              		@ args = 0, pretend = 0, frame = 0
+  41              		@ frame_needed = 0, uses_anonymous_args = 0
+  42 0000 08B5     		push	{r3, lr}
+  43 0002 C36E     		ldr	r3, [r0, #108]
+  44 0004 1BB1     		cbz	r3, .L10
+  45 0006 1A68     		ldr	r2, [r3, #0]
+  46 0008 0AB1     		cbz	r2, .L10
+  47 000a 9869     		ldr	r0, [r3, #24]
+  48 000c 9047     		blx	r2
+  49              	.L10:
+  50 000e 08BD     		pop	{r3, pc}
+  52              		.section	.text.cil_pcd_stop,"ax",%progbits
+  53              		.align	1
+  54              		.thumb
+  55              		.thumb_func
+  57              	cil_pcd_stop:
+  58              		@ args = 0, pretend = 0, frame = 0
+  59              		@ frame_needed = 0, uses_anonymous_args = 0
+  60 0000 08B5     		push	{r3, lr}
+  61 0002 C36E     		ldr	r3, [r0, #108]
+  62 0004 1BB1     		cbz	r3, .L18
+  63 0006 5A68     		ldr	r2, [r3, #4]
+  64 0008 0AB1     		cbz	r2, .L18
+  65 000a 9869     		ldr	r0, [r3, #24]
+  66 000c 9047     		blx	r2
+  67              	.L18:
+  68 000e 08BD     		pop	{r3, pc}
+  70              		.section	.text.dwc_otg_read_hprt0,"ax",%progbits
+  71              		.align	1
+  72              		.thumb
+  73              		.thumb_func
+  75              	dwc_otg_read_hprt0:
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78 0000 08B5     		push	{r3, lr}
+  79 0002 C368     		ldr	r3, [r0, #12]
+  80 0004 5868     		ldr	r0, [r3, #4]
+  81 0006 FFF7FEFF 		bl	DWC_READ_REG32
+  82 000a 20F02E00 		bic	r0, r0, #46
+  83 000e 08BD     		pop	{r3, pc}
+  85              		.section	.text.w_conn_id_status_change,"ax",%progbits
+  86              		.align	1
+  87              		.global	w_conn_id_status_change
+  88              		.thumb
+  89              		.thumb_func
+  91              	w_conn_id_status_change:
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94 0000 38B5     		push	{r3, r4, r5, lr}
+  95 0002 0446     		mov	r4, r0
+  96 0004 4068     		ldr	r0, [r0, #4]
+  97 0006 FFF7FEFF 		bl	DWC_READ_REG32
+  98 000a C303     		lsls	r3, r0, #15
+  99 000c 42F21175 		movw	r5, #10001
+ 100 0010 1BD5     		bpl	.L29
+ 101              	.L28:
+ 102 0012 2046     		mov	r0, r4
+ 103 0014 FFF7FEFF 		bl	dwc_otg_is_device_mode
+ 104 0018 20B9     		cbnz	r0, .L31
+ 105              	.L30:
+ 106 001a 6420     		movs	r0, #100
+ 107 001c FFF7FEFF 		bl	DWC_MDELAY
+ 108 0020 013D     		subs	r5, r5, #1
+ 109 0022 F6D1     		bne	.L28
+ 110              	.L31:
+ 111 0024 0420     		movs	r0, #4
+ 112 0026 84F86400 		strb	r0, [r4, #100]
+ 113 002a 2046     		mov	r0, r4
+ 114 002c FFF7FEFF 		bl	dwc_otg_core_init
+ 115 0030 2046     		mov	r0, r4
+ 116 0032 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 117 0036 2046     		mov	r0, r4
+ 118 0038 BDE83840 		pop	{r3, r4, r5, lr}
+ 119 003c FFF7FEBF 		b	cil_pcd_start
+ 120              	.L32:
+ 121 0040 6420     		movs	r0, #100
+ 122 0042 FFF7FEFF 		bl	DWC_MDELAY
+ 123 0046 013D     		subs	r5, r5, #1
+ 124 0048 04D0     		beq	.L33
+ 125              	.L29:
+ 126 004a 2046     		mov	r0, r4
+ 127 004c FFF7FEFF 		bl	dwc_otg_is_host_mode
+ 128 0050 0028     		cmp	r0, #0
+ 129 0052 F5D0     		beq	.L32
+ 130              	.L33:
+ 131 0054 0123     		movs	r3, #1
+ 132 0056 84F86430 		strb	r3, [r4, #100]
+ 133 005a 2046     		mov	r0, r4
+ 134 005c FFF7FEFF 		bl	dwc_otg_core_init
+ 135 0060 2046     		mov	r0, r4
+ 136 0062 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 137 0066 2046     		mov	r0, r4
+ 138 0068 BDE83840 		pop	{r3, r4, r5, lr}
+ 139 006c FFF7FEBF 		b	cil_hcd_start
+ 141              		.section	.text.dwc_otg_handle_mode_mismatch_intr,"ax",%progbits
+ 142              		.align	1
+ 143              		.global	dwc_otg_handle_mode_mismatch_intr
+ 144              		.thumb
+ 145              		.thumb_func
+ 147              	dwc_otg_handle_mode_mismatch_intr:
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150 0000 4068     		ldr	r0, [r0, #4]
+ 151 0002 08B5     		push	{r3, lr}
+ 152 0004 1430     		adds	r0, r0, #20
+ 153 0006 0221     		movs	r1, #2
+ 154 0008 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 155 000c 0120     		movs	r0, #1
+ 156 000e 08BD     		pop	{r3, pc}
+ 158              		.section	.text.dwc_otg_handle_otg_intr,"ax",%progbits
+ 159              		.align	1
+ 160              		.global	dwc_otg_handle_otg_intr
+ 161              		.thumb
+ 162              		.thumb_func
+ 164              	dwc_otg_handle_otg_intr:
+ 165              		@ args = 0, pretend = 0, frame = 0
+ 166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 168 0002 4568     		ldr	r5, [r0, #4]
+ 169 0004 0446     		mov	r4, r0
+ 170 0006 281D     		adds	r0, r5, #4
+ 171 0008 FFF7FEFF 		bl	DWC_READ_REG32
+ 172 000c 0646     		mov	r6, r0
+ 173 000e 2846     		mov	r0, r5
+ 174 0010 FFF7FEFF 		bl	DWC_READ_REG32
+ 175 0014 06F00403 		and	r3, r6, #4
+ 176 0018 D8B2     		uxtb	r0, r3
+ 177 001a B8B3     		cbz	r0, .L39
+ 178 001c 2846     		mov	r0, r5
+ 179 001e FFF7FEFF 		bl	DWC_READ_REG32
+ 180 0022 94F86410 		ldrb	r1, [r4, #100]	@ zero_extendqisi2
+ 181 0026 0529     		cmp	r1, #5
+ 182 0028 06D1     		bne	.L40
+ 183 002a 2046     		mov	r0, r4
+ 184 002c FFF7FEFF 		bl	cil_pcd_start
+ 185 0030 0420     		movs	r0, #4
+ 186 0032 84F86400 		strb	r0, [r4, #100]
+ 187 0036 23E0     		b	.L41
+ 188              	.L40:
+ 189 0038 0027     		movs	r7, #0
+ 190 003a D4F8CC00 		ldr	r0, [r4, #204]
+ 191 003e 84F88070 		strb	r7, [r4, #128]
+ 192 0042 FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 193 0046 2046     		mov	r0, r4
+ 194 0048 FFF7FEFF 		bl	cil_pcd_stop
+ 195 004c D4F8CC00 		ldr	r0, [r4, #204]
+ 196 0050 FFF7FEFF 		bl	DWC_SPINLOCK
+ 197 0054 D4F89420 		ldr	r2, [r4, #148]
+ 198 0058 92B1     		cbz	r2, .L41
+ 199 005a D4F89030 		ldr	r3, [r4, #144]
+ 200 005e 022B     		cmp	r3, #2
+ 201 0060 05D1     		bne	.L42
+ 202 0062 6068     		ldr	r0, [r4, #4]
+ 203 0064 2021     		movs	r1, #32
+ 204 0066 5830     		adds	r0, r0, #88
+ 205 0068 3A46     		mov	r2, r7
+ 206 006a FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 207              	.L42:
+ 208 006e 6068     		ldr	r0, [r4, #4]
+ 209 0070 0021     		movs	r1, #0
+ 210 0072 5830     		adds	r0, r0, #88
+ 211 0074 0222     		movs	r2, #2
+ 212 0076 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 213 007a 2046     		mov	r0, r4
+ 214 007c FFF7FEFF 		bl	dwc_otg_adp_sense_start
+ 215              	.L41:
+ 216 0080 2846     		mov	r0, r5
+ 217 0082 4FF40061 		mov	r1, #2048
+ 218 0086 0022     		movs	r2, #0
+ 219 0088 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 220              	.L39:
+ 221 008c C6F30727 		ubfx	r7, r6, #8, #8
+ 222 0090 F907     		lsls	r1, r7, #31
+ 223 0092 21D5     		bpl	.L44
+ 224 0094 2846     		mov	r0, r5
+ 225 0096 FFF7FEFF 		bl	DWC_READ_REG32
+ 226 009a C207     		lsls	r2, r0, #31
+ 227 009c 1CD5     		bpl	.L44
+ 228 009e 2168     		ldr	r1, [r4, #0]
+ 229 00a0 D1F88820 		ldr	r2, [r1, #136]
+ 230 00a4 2AB9     		cbnz	r2, .L46
+ 231 00a6 D1F89830 		ldr	r3, [r1, #152]
+ 232 00aa 13B1     		cbz	r3, .L46
+ 233 00ac 0122     		movs	r2, #1
+ 234 00ae 6275     		strb	r2, [r4, #21]
+ 235 00b0 12E0     		b	.L44
+ 236              	.L46:
+ 237 00b2 D4F8CC00 		ldr	r0, [r4, #204]
+ 238 00b6 FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 239 00ba E06E     		ldr	r0, [r4, #108]
+ 240 00bc 18B1     		cbz	r0, .L47
+ 241 00be C168     		ldr	r1, [r0, #12]
+ 242 00c0 09B1     		cbz	r1, .L47
+ 243 00c2 8069     		ldr	r0, [r0, #24]
+ 244 00c4 8847     		blx	r1
+ 245              	.L47:
+ 246 00c6 D4F8CC00 		ldr	r0, [r4, #204]
+ 247 00ca FFF7FEFF 		bl	DWC_SPINLOCK
+ 248 00ce 2846     		mov	r0, r5
+ 249 00d0 0221     		movs	r1, #2
+ 250 00d2 0022     		movs	r2, #0
+ 251 00d4 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 252              	.L44:
+ 253 00d8 07F00207 		and	r7, r7, #2
+ 254 00dc FFB2     		uxtb	r7, r7
+ 255 00de 47B3     		cbz	r7, .L49
+ 256 00e0 2846     		mov	r0, r5
+ 257 00e2 FFF7FEFF 		bl	DWC_READ_REG32
+ 258 00e6 C0F30022 		ubfx	r2, r0, #8, #1
+ 259 00ea EAB1     		cbz	r2, .L50
+ 260 00ec 2046     		mov	r0, r4
+ 261 00ee FFF7FEFF 		bl	dwc_otg_is_host_mode
+ 262 00f2 F0B1     		cbz	r0, .L49
+ 263 00f4 0527     		movs	r7, #5
+ 264 00f6 0821     		movs	r1, #8
+ 265 00f8 0022     		movs	r2, #0
+ 266 00fa 05F11800 		add	r0, r5, #24
+ 267 00fe 84F86470 		strb	r7, [r4, #100]
+ 268 0102 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 269 0106 D4F8CC00 		ldr	r0, [r4, #204]
+ 270 010a FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 271 010e 2046     		mov	r0, r4
+ 272 0110 FFF7FEFF 		bl	cil_pcd_stop
+ 273 0114 2046     		mov	r0, r4
+ 274 0116 FFF7FEFF 		bl	cil_hcd_start
+ 275 011a D4F8CC00 		ldr	r0, [r4, #204]
+ 276 011e FFF7FEFF 		bl	DWC_SPINLOCK
+ 277 0122 84F86470 		strb	r7, [r4, #100]
+ 278 0126 04E0     		b	.L49
+ 279              	.L50:
+ 280 0128 2846     		mov	r0, r5
+ 281 012a 4FF42061 		mov	r1, #2560
+ 282 012e FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 283              	.L49:
+ 284 0132 C6F30743 		ubfx	r3, r6, #16, #8
+ 285 0136 03F00200 		and	r0, r3, #2
+ 286 013a C1B2     		uxtb	r1, r0
+ 287 013c 69B3     		cbz	r1, .L52
+ 288 013e 2046     		mov	r0, r4
+ 289 0140 FFF7FEFF 		bl	dwc_otg_is_device_mode
+ 290 0144 0246     		mov	r2, r0
+ 291 0146 90B1     		cbz	r0, .L53
+ 292 0148 D4F8CC00 		ldr	r0, [r4, #204]
+ 293 014c FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 294 0150 A36E     		ldr	r3, [r4, #104]
+ 295 0152 1BB1     		cbz	r3, .L54
+ 296 0154 9968     		ldr	r1, [r3, #8]
+ 297 0156 09B1     		cbz	r1, .L54
+ 298 0158 9869     		ldr	r0, [r3, #24]
+ 299 015a 8847     		blx	r1
+ 300              	.L54:
+ 301 015c 2046     		mov	r0, r4
+ 302 015e FFF7FEFF 		bl	cil_pcd_start
+ 303 0162 D4F8CC00 		ldr	r0, [r4, #204]
+ 304 0166 FFF7FEFF 		bl	DWC_SPINLOCK
+ 305 016a 0322     		movs	r2, #3
+ 306 016c 13E0     		b	.L85
+ 307              	.L53:
+ 308 016e 0821     		movs	r1, #8
+ 309 0170 05F11800 		add	r0, r5, #24
+ 310 0174 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 311 0178 D4F8CC00 		ldr	r0, [r4, #204]
+ 312 017c FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 313 0180 2046     		mov	r0, r4
+ 314 0182 FFF7FEFF 		bl	cil_pcd_stop
+ 315 0186 2046     		mov	r0, r4
+ 316 0188 FFF7FEFF 		bl	cil_hcd_start
+ 317 018c D4F8CC00 		ldr	r0, [r4, #204]
+ 318 0190 FFF7FEFF 		bl	DWC_SPINLOCK
+ 319 0194 0122     		movs	r2, #1
+ 320              	.L85:
+ 321 0196 84F86420 		strb	r2, [r4, #100]
+ 322              	.L52:
+ 323 019a 6068     		ldr	r0, [r4, #4]
+ 324 019c 3146     		mov	r1, r6
+ 325 019e 0430     		adds	r0, r0, #4
+ 326 01a0 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 327 01a4 0120     		movs	r0, #1
+ 328 01a6 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 330              		.section	.text.dwc_otg_handle_conn_id_status_change_intr,"ax",%progbits
+ 331              		.align	1
+ 332              		.global	dwc_otg_handle_conn_id_status_change_intr
+ 333              		.thumb
+ 334              		.thumb_func
+ 336              	dwc_otg_handle_conn_id_status_change_intr:
+ 337              		@ args = 0, pretend = 0, frame = 0
+ 338              		@ frame_needed = 0, uses_anonymous_args = 0
+ 339 0000 10B5     		push	{r4, lr}
+ 340 0002 0446     		mov	r4, r0
+ 341 0004 4068     		ldr	r0, [r0, #4]
+ 342 0006 0821     		movs	r1, #8
+ 343 0008 0022     		movs	r2, #0
+ 344 000a 1830     		adds	r0, r0, #24
+ 345 000c FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 346 0010 D4F8CC00 		ldr	r0, [r4, #204]
+ 347 0014 FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 348 0018 2246     		mov	r2, r4
+ 349 001a 084B     		ldr	r3, .L87
+ 350 001c A06F     		ldr	r0, [r4, #120]
+ 351 001e 0849     		ldr	r1, .L87+4
+ 352 0020 FFF7FEFF 		bl	DWC_WORKQ_SCHEDULE
+ 353 0024 D4F8CC00 		ldr	r0, [r4, #204]
+ 354 0028 FFF7FEFF 		bl	DWC_SPINLOCK
+ 355 002c 6068     		ldr	r0, [r4, #4]
+ 356 002e 4FF08051 		mov	r1, #268435456
+ 357 0032 1430     		adds	r0, r0, #20
+ 358 0034 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 359 0038 0120     		movs	r0, #1
+ 360 003a 10BD     		pop	{r4, pc}
+ 361              	.L88:
+ 362              		.align	2
+ 363              	.L87:
+ 364 003c 00000000 		.word	.LC0
+ 365 0040 00000000 		.word	w_conn_id_status_change
+ 367              		.section	.text.dwc_otg_handle_session_req_intr,"ax",%progbits
+ 368              		.align	1
+ 369              		.global	dwc_otg_handle_session_req_intr
+ 370              		.thumb
+ 371              		.thumb_func
+ 373              	dwc_otg_handle_session_req_intr:
+ 374              		@ args = 0, pretend = 0, frame = 0
+ 375              		@ frame_needed = 0, uses_anonymous_args = 0
+ 376 0000 10B5     		push	{r4, lr}
+ 377 0002 0446     		mov	r4, r0
+ 378 0004 FFF7FEFF 		bl	dwc_otg_is_device_mode
+ 379 0008 70B9     		cbnz	r0, .L91
+ 380 000a 2046     		mov	r0, r4
+ 381 000c FFF7FEFF 		bl	dwc_otg_read_hprt0
+ 382 0010 E368     		ldr	r3, [r4, #12]
+ 383 0012 40F48051 		orr	r1, r0, #4096
+ 384 0016 5868     		ldr	r0, [r3, #4]
+ 385 0018 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 386 001c A06E     		ldr	r0, [r4, #104]
+ 387 001e 18B1     		cbz	r0, .L91
+ 388 0020 4269     		ldr	r2, [r0, #20]
+ 389 0022 0AB1     		cbz	r2, .L91
+ 390 0024 8069     		ldr	r0, [r0, #24]
+ 391 0026 9047     		blx	r2
+ 392              	.L91:
+ 393 0028 6068     		ldr	r0, [r4, #4]
+ 394 002a 4FF08041 		mov	r1, #1073741824
+ 395 002e 1430     		adds	r0, r0, #20
+ 396 0030 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 397 0034 0120     		movs	r0, #1
+ 398 0036 10BD     		pop	{r4, pc}
+ 400              		.section	.text.w_wakeup_detected,"ax",%progbits
+ 401              		.align	1
+ 402              		.global	w_wakeup_detected
+ 403              		.thumb
+ 404              		.thumb_func
+ 406              	w_wakeup_detected:
+ 407              		@ args = 0, pretend = 0, frame = 0
+ 408              		@ frame_needed = 0, uses_anonymous_args = 0
+ 409 0000 10B5     		push	{r4, lr}
+ 410 0002 0446     		mov	r4, r0
+ 411 0004 FFF7FEFF 		bl	dwc_otg_read_hprt0
+ 412 0008 E368     		ldr	r3, [r4, #12]
+ 413 000a 0146     		mov	r1, r0
+ 414 000c 21F04001 		bic	r1, r1, #64
+ 415 0010 5868     		ldr	r0, [r3, #4]
+ 416 0012 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 417 0016 A06E     		ldr	r0, [r4, #104]
+ 418 0018 18B1     		cbz	r0, .L100
+ 419 001a C268     		ldr	r2, [r0, #12]
+ 420 001c 0AB1     		cbz	r2, .L100
+ 421 001e 8069     		ldr	r0, [r0, #24]
+ 422 0020 9047     		blx	r2
+ 423              	.L100:
+ 424 0022 0021     		movs	r1, #0
+ 425 0024 84F88010 		strb	r1, [r4, #128]
+ 426 0028 10BD     		pop	{r4, pc}
+ 428              		.section	.text.dwc_otg_handle_wakeup_detected_intr,"ax",%progbits
+ 429              		.align	1
+ 430              		.global	dwc_otg_handle_wakeup_detected_intr
+ 431              		.thumb
+ 432              		.thumb_func
+ 434              	dwc_otg_handle_wakeup_detected_intr:
+ 435              		@ args = 0, pretend = 0, frame = 0
+ 436              		@ frame_needed = 0, uses_anonymous_args = 0
+ 437 0000 10B5     		push	{r4, lr}
+ 438 0002 0446     		mov	r4, r0
+ 439 0004 FFF7FEFF 		bl	dwc_otg_is_device_mode
+ 440 0008 94F88030 		ldrb	r3, [r4, #128]	@ zero_extendqisi2
+ 441 000c 0246     		mov	r2, r0
+ 442 000e 40B3     		cbz	r0, .L108
+ 443 0010 022B     		cmp	r3, #2
+ 444 0012 15D1     		bne	.L109
+ 445 0014 A168     		ldr	r1, [r4, #8]
+ 446 0016 0A68     		ldr	r2, [r1, #0]
+ 447 0018 0121     		movs	r1, #1
+ 448 001a 101D     		adds	r0, r2, #4
+ 449 001c 0022     		movs	r2, #0
+ 450 001e FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 451 0022 D4F8CC00 		ldr	r0, [r4, #204]
+ 452 0026 FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 453 002a E36E     		ldr	r3, [r4, #108]
+ 454 002c 1BB1     		cbz	r3, .L110
+ 455 002e D968     		ldr	r1, [r3, #12]
+ 456 0030 09B1     		cbz	r1, .L110
+ 457 0032 9869     		ldr	r0, [r3, #24]
+ 458 0034 8847     		blx	r1
+ 459              	.L110:
+ 460 0036 D4F8CC00 		ldr	r0, [r4, #204]
+ 461 003a FFF7FEFF 		bl	DWC_SPINLOCK
+ 462 003e 0CE0     		b	.L111
+ 463              	.L109:
+ 464 0040 6068     		ldr	r0, [r4, #4]
+ 465 0042 5430     		adds	r0, r0, #84
+ 466 0044 FFF7FEFF 		bl	DWC_READ_REG32
+ 467 0048 0146     		mov	r1, r0
+ 468 004a C0F30320 		ubfx	r0, r0, #8, #4
+ 469 004e 60F30C21 		bfi	r1, r0, #8, #5
+ 470 0052 6068     		ldr	r0, [r4, #4]
+ 471 0054 5430     		adds	r0, r0, #84
+ 472 0056 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 473              	.L111:
+ 474 005a 0020     		movs	r0, #0
+ 475 005c 84F88000 		strb	r0, [r4, #128]
+ 476 0060 0CE0     		b	.L112
+ 477              	.L108:
+ 478 0062 012B     		cmp	r3, #1
+ 479 0064 08D0     		beq	.L113
+ 480 0066 E069     		ldr	r0, [r4, #28]
+ 481 0068 0121     		movs	r1, #1
+ 482 006a FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 483 006e E06F     		ldr	r0, [r4, #124]
+ 484 0070 4721     		movs	r1, #71
+ 485 0072 FFF7FEFF 		bl	DWC_TIMER_SCHEDULE
+ 486 0076 01E0     		b	.L112
+ 487              	.L113:
+ 488 0078 84F88000 		strb	r0, [r4, #128]
+ 489              	.L112:
+ 490 007c 6068     		ldr	r0, [r4, #4]
+ 491 007e 4FF00041 		mov	r1, #-2147483648
+ 492 0082 1430     		adds	r0, r0, #20
+ 493 0084 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 494 0088 0120     		movs	r0, #1
+ 495 008a 10BD     		pop	{r4, pc}
+ 497              		.section	.text.dwc_otg_handle_restore_done_intr,"ax",%progbits
+ 498              		.align	1
+ 499              		.global	dwc_otg_handle_restore_done_intr
+ 500              		.thumb
+ 501              		.thumb_func
+ 503              	dwc_otg_handle_restore_done_intr:
+ 504              		@ args = 0, pretend = 0, frame = 0
+ 505              		@ frame_needed = 0, uses_anonymous_args = 0
+ 506 0000 10B5     		push	{r4, lr}
+ 507 0002 0446     		mov	r4, r0
+ 508 0004 C069     		ldr	r0, [r0, #28]
+ 509 0006 FFF7FEFF 		bl	DWC_READ_REG32
+ 510 000a C0F30720 		ubfx	r0, r0, #8, #8
+ 511 000e 00F00203 		and	r3, r0, #2
+ 512 0012 D9B2     		uxtb	r1, r3
+ 513 0014 31B1     		cbz	r1, .L121
+ 514 0016 6068     		ldr	r0, [r4, #4]
+ 515 0018 0021     		movs	r1, #0
+ 516 001a 1830     		adds	r0, r0, #24
+ 517 001c 4FF00042 		mov	r2, #-2147483648
+ 518 0020 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 519              	.L121:
+ 520 0024 0120     		movs	r0, #1
+ 521 0026 10BD     		pop	{r4, pc}
+ 523              		.section	.text.dwc_otg_handle_disconnect_intr,"ax",%progbits
+ 524              		.align	1
+ 525              		.global	dwc_otg_handle_disconnect_intr
+ 526              		.thumb
+ 527              		.thumb_func
+ 529              	dwc_otg_handle_disconnect_intr:
+ 530              		@ args = 0, pretend = 0, frame = 0
+ 531              		@ frame_needed = 0, uses_anonymous_args = 0
+ 532 0000 08B5     		push	{r3, lr}
+ 533 0002 0323     		movs	r3, #3
+ 534 0004 80F88030 		strb	r3, [r0, #128]
+ 535 0008 4068     		ldr	r0, [r0, #4]
+ 536 000a 4FF00051 		mov	r1, #536870912
+ 537 000e 1430     		adds	r0, r0, #20
+ 538 0010 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 539 0014 0120     		movs	r0, #1
+ 540 0016 08BD     		pop	{r3, pc}
+ 542              		.section	.text.dwc_otg_handle_usb_suspend_intr,"ax",%progbits
+ 543              		.align	1
+ 544              		.global	dwc_otg_handle_usb_suspend_intr
+ 545              		.thumb
+ 546              		.thumb_func
+ 548              	dwc_otg_handle_usb_suspend_intr:
+ 549              		@ args = 0, pretend = 0, frame = 0
+ 550              		@ frame_needed = 0, uses_anonymous_args = 0
+ 551 0000 70B5     		push	{r4, r5, r6, lr}
+ 552 0002 0446     		mov	r4, r0
+ 553 0004 FFF7FEFF 		bl	dwc_otg_is_device_mode
+ 554 0008 0028     		cmp	r0, #0
+ 555 000a 76D0     		beq	.L127
+ 556 000c E16E     		ldr	r1, [r4, #108]
+ 557 000e 19B1     		cbz	r1, .L128
+ 558 0010 0A69     		ldr	r2, [r1, #16]
+ 559 0012 0AB1     		cbz	r2, .L128
+ 560 0014 8869     		ldr	r0, [r1, #24]
+ 561 0016 9047     		blx	r2
+ 562              	.L128:
+ 563 0018 D4F89050 		ldr	r5, [r4, #144]
+ 564 001c 022D     		cmp	r5, #2
+ 565 001e 40F08180 		bne	.L130
+ 566 0022 A368     		ldr	r3, [r4, #8]
+ 567 0024 1868     		ldr	r0, [r3, #0]
+ 568 0026 FFF7FEFF 		bl	DWC_READ_REG32
+ 569 002a 94F88010 		ldrb	r1, [r4, #128]	@ zero_extendqisi2
+ 570 002e 0329     		cmp	r1, #3
+ 571 0030 78D0     		beq	.L130
+ 572 0032 10F4FE6F 		tst	r0, #2032
+ 573 0036 75D0     		beq	.L130
+ 574 0038 6068     		ldr	r0, [r4, #4]
+ 575 003a 84F88050 		strb	r5, [r4, #128]
+ 576 003e 4FF40061 		mov	r1, #2048
+ 577 0042 1430     		adds	r0, r0, #20
+ 578 0044 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 579 0048 2046     		mov	r0, r4
+ 580 004a FFF7FEFF 		bl	dwc_otg_save_global_regs
+ 581 004e 2046     		mov	r0, r4
+ 582 0050 FFF7FEFF 		bl	dwc_otg_save_dev_regs
+ 583 0054 6068     		ldr	r0, [r4, #4]
+ 584 0056 0C30     		adds	r0, r0, #12
+ 585 0058 FFF7FEFF 		bl	DWC_READ_REG32
+ 586 005c 00F01006 		and	r6, r0, #16
+ 587 0060 F6B2     		uxtb	r6, r6
+ 588 0062 76B1     		cbz	r6, .L132
+ 589 0064 0021     		movs	r1, #0
+ 590 0066 0122     		movs	r2, #1
+ 591 0068 E069     		ldr	r0, [r4, #28]
+ 592 006a FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 593 006e 0A20     		movs	r0, #10
+ 594 0070 FFF7FEFF 		bl	DWC_UDELAY
+ 595 0074 6068     		ldr	r0, [r4, #4]
+ 596 0076 0021     		movs	r1, #0
+ 597 0078 5830     		adds	r0, r0, #88
+ 598 007a 2A46     		mov	r2, r5
+ 599 007c FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 600 0080 10E0     		b	.L133
+ 601              	.L132:
+ 602 0082 6068     		ldr	r0, [r4, #4]
+ 603 0084 3146     		mov	r1, r6
+ 604 0086 2A46     		mov	r2, r5
+ 605 0088 5830     		adds	r0, r0, #88
+ 606 008a FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 607 008e 0A20     		movs	r0, #10
+ 608 0090 FFF7FEFF 		bl	DWC_UDELAY
+ 609 0094 E069     		ldr	r0, [r4, #28]
+ 610 0096 3146     		mov	r1, r6
+ 611 0098 0122     		movs	r2, #1
+ 612 009a FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 613 009e 0A20     		movs	r0, #10
+ 614 00a0 FFF7FEFF 		bl	DWC_UDELAY
+ 615              	.L133:
+ 616 00a4 6068     		ldr	r0, [r4, #4]
+ 617 00a6 0122     		movs	r2, #1
+ 618 00a8 C4F8C020 		str	r2, [r4, #192]
+ 619 00ac 0021     		movs	r1, #0
+ 620 00ae 5830     		adds	r0, r0, #88
+ 621 00b0 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 622 00b4 0A20     		movs	r0, #10
+ 623 00b6 FFF7FEFF 		bl	DWC_UDELAY
+ 624 00ba 6068     		ldr	r0, [r4, #4]
+ 625 00bc 1F4A     		ldr	r2, .L147
+ 626 00be 0021     		movs	r1, #0
+ 627 00c0 5830     		adds	r0, r0, #88
+ 628 00c2 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 629 00c6 0A20     		movs	r0, #10
+ 630 00c8 FFF7FEFF 		bl	DWC_UDELAY
+ 631 00cc 6068     		ldr	r0, [r4, #4]
+ 632 00ce 0021     		movs	r1, #0
+ 633 00d0 0822     		movs	r2, #8
+ 634 00d2 5830     		adds	r0, r0, #88
+ 635 00d4 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 636 00d8 0A20     		movs	r0, #10
+ 637 00da FFF7FEFF 		bl	DWC_UDELAY
+ 638 00de 6068     		ldr	r0, [r4, #4]
+ 639 00e0 0021     		movs	r1, #0
+ 640 00e2 5830     		adds	r0, r0, #88
+ 641 00e4 2022     		movs	r2, #32
+ 642 00e6 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 643 00ea 6068     		ldr	r0, [r4, #4]
+ 644 00ec D4F88450 		ldr	r5, [r4, #132]
+ 645 00f0 5830     		adds	r0, r0, #88
+ 646 00f2 FFF7FEFF 		bl	DWC_READ_REG32
+ 647 00f6 A864     		str	r0, [r5, #72]
+ 648 00f8 1DE0     		b	.L134
+ 649              	.L127:
+ 650 00fa 94F86430 		ldrb	r3, [r4, #100]	@ zero_extendqisi2
+ 651 00fe 032B     		cmp	r3, #3
+ 652 0100 10D1     		bne	.L130
+ 653 0102 D4F8CC00 		ldr	r0, [r4, #204]
+ 654 0106 FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 655 010a 2046     		mov	r0, r4
+ 656 010c FFF7FEFF 		bl	cil_pcd_stop
+ 657 0110 2046     		mov	r0, r4
+ 658 0112 FFF7FEFF 		bl	cil_hcd_start
+ 659 0116 D4F8CC00 		ldr	r0, [r4, #204]
+ 660 011a FFF7FEFF 		bl	DWC_SPINLOCK
+ 661 011e 0120     		movs	r0, #1
+ 662 0120 84F86400 		strb	r0, [r4, #100]
+ 663              	.L130:
+ 664 0124 0220     		movs	r0, #2
+ 665 0126 84F88000 		strb	r0, [r4, #128]
+ 666 012a 6068     		ldr	r0, [r4, #4]
+ 667 012c 4FF40061 		mov	r1, #2048
+ 668 0130 1430     		adds	r0, r0, #20
+ 669 0132 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 670              	.L134:
+ 671 0136 0120     		movs	r0, #1
+ 672 0138 70BD     		pop	{r4, r5, r6, pc}
+ 673              	.L148:
+ 674 013a 00BF     		.align	2
+ 675              	.L147:
+ 676 013c 00050400 		.word	263424
+ 678              		.section	.text.dwc_otg_handle_common_intr,"ax",%progbits
+ 679              		.align	1
+ 680              		.global	dwc_otg_handle_common_intr
+ 681              		.thumb
+ 682              		.thumb_func
+ 684              	dwc_otg_handle_common_intr:
+ 685              		@ args = 0, pretend = 0, frame = 0
+ 686              		@ frame_needed = 0, uses_anonymous_args = 0
+ 687 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 688 0002 0446     		mov	r4, r0
+ 689 0004 D0F8CC00 		ldr	r0, [r0, #204]
+ 690 0008 08B1     		cbz	r0, .L150
+ 691 000a FFF7FEFF 		bl	DWC_SPINLOCK
+ 692              	.L150:
+ 693 000e D4F8C030 		ldr	r3, [r4, #192]
+ 694 0012 6068     		ldr	r0, [r4, #4]
+ 695 0014 002B     		cmp	r3, #0
+ 696 0016 69DC     		bgt	.L151
+ 697 0018 1430     		adds	r0, r0, #20
+ 698 001a FFF7FEFF 		bl	DWC_READ_REG32
+ 699 001e 0546     		mov	r5, r0
+ 700 0020 6068     		ldr	r0, [r4, #4]
+ 701 0022 854E     		ldr	r6, .L248
+ 702 0024 1830     		adds	r0, r0, #24
+ 703 0026 FFF7FEFF 		bl	DWC_READ_REG32
+ 704 002a 2840     		ands	r0, r0, r5
+ 705 002c 0640     		ands	r6, r6, r0
+ 706 002e F7B2     		uxtb	r7, r6
+ 707 0030 07F00203 		and	r3, r7, #2
+ 708 0034 DDB2     		uxtb	r5, r3
+ 709 0036 1DB1     		cbz	r5, .L152
+ 710 0038 2046     		mov	r0, r4
+ 711 003a FFF7FEFF 		bl	dwc_otg_handle_mode_mismatch_intr
+ 712 003e 0546     		mov	r5, r0
+ 713              	.L152:
+ 714 0040 07F00402 		and	r2, r7, #4
+ 715 0044 D1B2     		uxtb	r1, r2
+ 716 0046 19B1     		cbz	r1, .L153
+ 717 0048 2046     		mov	r0, r4
+ 718 004a FFF7FEFF 		bl	dwc_otg_handle_otg_intr
+ 719 004e 0543     		orrs	r5, r5, r0
+ 720              	.L153:
+ 721 0050 370E     		lsrs	r7, r6, #24
+ 722 0052 07F01000 		and	r0, r7, #16
+ 723 0056 C3B2     		uxtb	r3, r0
+ 724 0058 1BB1     		cbz	r3, .L154
+ 725 005a 2046     		mov	r0, r4
+ 726 005c FFF7FEFF 		bl	dwc_otg_handle_conn_id_status_change_intr
+ 727 0060 0543     		orrs	r5, r5, r0
+ 728              	.L154:
+ 729 0062 07F02002 		and	r2, r7, #32
+ 730 0066 D1B2     		uxtb	r1, r2
+ 731 0068 19B1     		cbz	r1, .L155
+ 732 006a 2046     		mov	r0, r4
+ 733 006c FFF7FEFF 		bl	dwc_otg_handle_disconnect_intr
+ 734 0070 0543     		orrs	r5, r5, r0
+ 735              	.L155:
+ 736 0072 07F04000 		and	r0, r7, #64
+ 737 0076 C3B2     		uxtb	r3, r0
+ 738 0078 1BB1     		cbz	r3, .L156
+ 739 007a 2046     		mov	r0, r4
+ 740 007c FFF7FEFF 		bl	dwc_otg_handle_session_req_intr
+ 741 0080 0543     		orrs	r5, r5, r0
+ 742              	.L156:
+ 743 0082 07F08007 		and	r7, r7, #128
+ 744 0086 FFB2     		uxtb	r7, r7
+ 745 0088 1FB1     		cbz	r7, .L157
+ 746 008a 2046     		mov	r0, r4
+ 747 008c FFF7FEFF 		bl	dwc_otg_handle_wakeup_detected_intr
+ 748 0090 0543     		orrs	r5, r5, r0
+ 749              	.L157:
+ 750 0092 C6F30722 		ubfx	r2, r6, #8, #8
+ 751 0096 02F00801 		and	r1, r2, #8
+ 752 009a C8B2     		uxtb	r0, r1
+ 753 009c 18B1     		cbz	r0, .L158
+ 754 009e 2046     		mov	r0, r4
+ 755 00a0 FFF7FEFF 		bl	dwc_otg_handle_usb_suspend_intr
+ 756 00a4 0543     		orrs	r5, r5, r0
+ 757              	.L158:
+ 758 00a6 F303     		lsls	r3, r6, #15
+ 759 00a8 10D5     		bpl	.L159
+ 760 00aa D4F89060 		ldr	r6, [r4, #144]
+ 761 00ae 6068     		ldr	r0, [r4, #4]
+ 762 00b0 022E     		cmp	r6, #2
+ 763 00b2 04BF     		itt	eq
+ 764 00b4 4FF0FF36 		moveq	r6, #-1
+ 765 00b8 C4F8C060 		streq	r6, [r4, #192]
+ 766 00bc 4FF48036 		mov	r6, #65536
+ 767 00c0 1430     		adds	r0, r0, #20
+ 768 00c2 3146     		mov	r1, r6
+ 769 00c4 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 770 00c8 45F00105 		orr	r5, r5, #1
+ 771              	.L159:
+ 772 00cc F001     		lsls	r0, r6, #7
+ 773 00ce 40F12F82 		bpl	.L161
+ 774 00d2 2046     		mov	r0, r4
+ 775 00d4 FFF7FEFF 		bl	dwc_otg_is_device_mode
+ 776 00d8 0028     		cmp	r0, #0
+ 777 00da 00F02982 		beq	.L161
+ 778 00de 6068     		ldr	r0, [r4, #4]
+ 779 00e0 4FF08071 		mov	r1, #16777216
+ 780 00e4 1430     		adds	r0, r0, #20
+ 781 00e6 FFF7FEFF 		bl	DWC_WRITE_REG32
+ 782 00ea 1FE2     		b	.L174
+ 783              	.L151:
+ 784 00ec 5830     		adds	r0, r0, #88
+ 785 00ee FFF7FEFF 		bl	DWC_READ_REG32
+ 786 00f2 0646     		mov	r6, r0
+ 787 00f4 C0F30720 		ubfx	r0, r0, #8, #8
+ 788 00f8 00F01801 		and	r1, r0, #24
+ 789 00fc 1829     		cmp	r1, #24
+ 790 00fe 66D1     		bne	.L186
+ 791 0100 6068     		ldr	r0, [r4, #4]
+ 792 0102 0021     		movs	r1, #0
+ 793 0104 5830     		adds	r0, r0, #88
+ 794 0106 4FF40062 		mov	r2, #2048
+ 795 010a C6F30745 		ubfx	r5, r6, #16, #8
+ 796 010e FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 797 0112 15F01805 		ands	r5, r5, #24
+ 798 0116 5CD1     		bne	.L187
+ 799 0118 6068     		ldr	r0, [r4, #4]
+ 800 011a 5830     		adds	r0, r0, #88
+ 801 011c FFF7FEFF 		bl	DWC_READ_REG32
+ 802 0120 D4F8C020 		ldr	r2, [r4, #192]
+ 803 0124 0746     		mov	r7, r0
+ 804 0126 002A     		cmp	r2, #0
+ 805 0128 53D0     		beq	.L187
+ 806 012a 6068     		ldr	r0, [r4, #4]
+ 807 012c 2021     		movs	r1, #32
+ 808 012e 2A46     		mov	r2, r5
+ 809 0130 5830     		adds	r0, r0, #88
+ 810 0132 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 811 0136 0A20     		movs	r0, #10
+ 812 0138 FFF7FEFF 		bl	DWC_UDELAY
+ 813 013c 6068     		ldr	r0, [r4, #4]
+ 814 013e 1021     		movs	r1, #16
+ 815 0140 2A46     		mov	r2, r5
+ 816 0142 5830     		adds	r0, r0, #88
+ 817 0144 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 818 0148 0A20     		movs	r0, #10
+ 819 014a FFF7FEFF 		bl	DWC_UDELAY
+ 820 014e 6068     		ldr	r0, [r4, #4]
+ 821 0150 0821     		movs	r1, #8
+ 822 0152 5830     		adds	r0, r0, #88
+ 823 0154 2A46     		mov	r2, r5
+ 824 0156 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 825 015a 6068     		ldr	r0, [r4, #4]
+ 826 015c 2946     		mov	r1, r5
+ 827 015e 1022     		movs	r2, #16
+ 828 0160 5830     		adds	r0, r0, #88
+ 829 0162 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 830 0166 0A20     		movs	r0, #10
+ 831 0168 FFF7FEFF 		bl	DWC_UDELAY
+ 832 016c 6068     		ldr	r0, [r4, #4]
+ 833 016e 0121     		movs	r1, #1
+ 834 0170 5830     		adds	r0, r0, #88
+ 835 0172 2A46     		mov	r2, r5
+ 836 0174 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 837 0178 6068     		ldr	r0, [r4, #4]
+ 838 017a C4F8C050 		str	r5, [r4, #192]
+ 839 017e 0221     		movs	r1, #2
+ 840 0180 5830     		adds	r0, r0, #88
+ 841 0182 2A46     		mov	r2, r5
+ 842 0184 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 843 0188 0A20     		movs	r0, #10
+ 844 018a FFF7FEFF 		bl	DWC_UDELAY
+ 845 018e C7F30743 		ubfx	r3, r7, #16, #8
+ 846 0192 03F02000 		and	r0, r3, #32
+ 847 0196 C1B2     		uxtb	r1, r0
+ 848 0198 61B1     		cbz	r1, .L164
+ 849 019a 0427     		movs	r7, #4
+ 850 019c 2046     		mov	r0, r4
+ 851 019e 84F86470 		strb	r7, [r4, #100]
+ 852 01a2 FFF7FEFF 		bl	dwc_otg_core_init
+ 853 01a6 2046     		mov	r0, r4
+ 854 01a8 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 855 01ac 2046     		mov	r0, r4
+ 856 01ae FFF7FEFF 		bl	cil_pcd_start
+ 857 01b2 0EE0     		b	.L187
+ 858              	.L164:
+ 859 01b4 0125     		movs	r5, #1
+ 860 01b6 2046     		mov	r0, r4
+ 861 01b8 84F86450 		strb	r5, [r4, #100]
+ 862 01bc FFF7FEFF 		bl	dwc_otg_core_init
+ 863 01c0 2046     		mov	r0, r4
+ 864 01c2 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 865 01c6 2046     		mov	r0, r4
+ 866 01c8 FFF7FEFF 		bl	cil_hcd_start
+ 867 01cc 01E0     		b	.L187
+ 868              	.L186:
+ 869 01ce 0025     		movs	r5, #0
+ 870 01d0 00E0     		b	.L162
+ 871              	.L187:
+ 872 01d2 0125     		movs	r5, #1
+ 873              	.L162:
+ 874 01d4 06F4C072 		and	r2, r6, #384
+ 875 01d8 B2F5C07F 		cmp	r2, #384
+ 876 01dc 38D1     		bne	.L165
+ 877 01de 6068     		ldr	r0, [r4, #4]
+ 878 01e0 0021     		movs	r1, #0
+ 879 01e2 5830     		adds	r0, r0, #88
+ 880 01e4 8022     		movs	r2, #128
+ 881 01e6 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 882 01ea C6F30743 		ubfx	r3, r6, #16, #8
+ 883 01ee 03F01800 		and	r0, r3, #24
+ 884 01f2 1028     		cmp	r0, #16
+ 885 01f4 03D0     		beq	.L166
+ 886 01f6 0828     		cmp	r0, #8
+ 887 01f8 01D0     		beq	.L166
+ 888              	.L167:
+ 889 01fa 0125     		movs	r5, #1
+ 890 01fc 28E0     		b	.L165
+ 891              	.L166:
+ 892 01fe D4F8C010 		ldr	r1, [r4, #192]
+ 893 0202 0029     		cmp	r1, #0
+ 894 0204 F9D0     		beq	.L167
+ 895 0206 6068     		ldr	r0, [r4, #4]
+ 896 0208 5830     		adds	r0, r0, #88
+ 897 020a FFF7FEFF 		bl	DWC_READ_REG32
+ 898 020e C0F30745 		ubfx	r5, r0, #16, #8
+ 899 0212 05F02007 		and	r7, r5, #32
+ 900 0216 FAB2     		uxtb	r2, r7
+ 901 0218 D4F89030 		ldr	r3, [r4, #144]
+ 902 021c 72B1     		cbz	r2, .L168
+ 903 021e 022B     		cmp	r3, #2
+ 904 0220 EBD1     		bne	.L167
+ 905 0222 D4F8C050 		ldr	r5, [r4, #192]
+ 906 0226 012D     		cmp	r5, #1
+ 907 0228 E7D1     		bne	.L167
+ 908 022a 0021     		movs	r1, #0
+ 909 022c 2046     		mov	r0, r4
+ 910 022e 0A46     		mov	r2, r1
+ 911 0230 FFF7FEFF 		bl	dwc_otg_device_hibernation_restore
+ 912 0234 0CE0     		b	.L165
+ 913              	.L249:
+ 914 0236 00BF     		.align	2
+ 915              	.L248:
+ 916 0238 060801F1 		.word	-251590650
+ 917              	.L168:
+ 918 023c 022B     		cmp	r3, #2
+ 919 023e DCD1     		bne	.L167
+ 920 0240 D4F8C050 		ldr	r5, [r4, #192]
+ 921 0244 012D     		cmp	r5, #1
+ 922 0246 D8D1     		bne	.L167
+ 923 0248 2046     		mov	r0, r4
+ 924 024a 2946     		mov	r1, r5
+ 925 024c FFF7FEFF 		bl	dwc_otg_host_hibernation_restore
+ 926              	.L165:
+ 927 0250 C6F30722 		ubfx	r2, r6, #8, #8
+ 928 0254 02F00600 		and	r0, r2, #6
+ 929 0258 0628     		cmp	r0, #6
+ 930 025a 10D1     		bne	.L169
+ 931 025c 6068     		ldr	r0, [r4, #4]
+ 932 025e 0021     		movs	r1, #0
+ 933 0260 5830     		adds	r0, r0, #88
+ 934 0262 4FF40072 		mov	r2, #512
+ 935 0266 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 936 026a C6F30741 		ubfx	r1, r6, #16, #8
+ 937 026e 11F01801 		ands	r1, r1, #24
+ 938 0272 04D1     		bne	.L169
+ 939 0274 2046     		mov	r0, r4
+ 940 0276 0122     		movs	r2, #1
+ 941 0278 FFF7FEFF 		bl	dwc_otg_device_hibernation_restore
+ 942 027c 0543     		orrs	r5, r5, r0
+ 943              	.L169:
+ 944 027e C6F30747 		ubfx	r7, r6, #16, #8
+ 945 0282 07F08003 		and	r3, r7, #128
+ 946 0286 DAB2     		uxtb	r2, r3
+ 947 0288 5AB1     		cbz	r2, .L170
+ 948 028a 6068     		ldr	r0, [r4, #4]
+ 949 028c 0021     		movs	r1, #0
+ 950 028e 5830     		adds	r0, r0, #88
+ 951 0290 4FF40002 		mov	r2, #8388608
+ 952 0294 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 953 0298 2046     		mov	r0, r4
+ 954 029a FFF7FEFF 		bl	dwc_otg_adp_handle_intr
+ 955 029e 45F00105 		orr	r5, r5, #1
+ 956              	.L170:
+ 957 02a2 06F4C036 		and	r6, r6, #98304
+ 958 02a6 B6F5C03F 		cmp	r6, #98304
+ 959 02aa 51D1     		bne	.L171
+ 960 02ac 6068     		ldr	r0, [r4, #4]
+ 961 02ae 0026     		movs	r6, #0
+ 962 02b0 5830     		adds	r0, r0, #88
+ 963 02b2 3146     		mov	r1, r6
+ 964 02b4 4FF40042 		mov	r2, #32768
+ 965 02b8 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 966 02bc D4F8C000 		ldr	r0, [r4, #192]
+ 967 02c0 0028     		cmp	r0, #0
+ 968 02c2 43D0     		beq	.L172
+ 969 02c4 6068     		ldr	r0, [r4, #4]
+ 970 02c6 2021     		movs	r1, #32
+ 971 02c8 3246     		mov	r2, r6
+ 972 02ca 5830     		adds	r0, r0, #88
+ 973 02cc FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 974 02d0 0A20     		movs	r0, #10
+ 975 02d2 FFF7FEFF 		bl	DWC_UDELAY
+ 976 02d6 6068     		ldr	r0, [r4, #4]
+ 977 02d8 1021     		movs	r1, #16
+ 978 02da 3246     		mov	r2, r6
+ 979 02dc 5830     		adds	r0, r0, #88
+ 980 02de FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 981 02e2 0A20     		movs	r0, #10
+ 982 02e4 FFF7FEFF 		bl	DWC_UDELAY
+ 983 02e8 6068     		ldr	r0, [r4, #4]
+ 984 02ea 0821     		movs	r1, #8
+ 985 02ec 5830     		adds	r0, r0, #88
+ 986 02ee 3246     		mov	r2, r6
+ 987 02f0 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 988 02f4 6068     		ldr	r0, [r4, #4]
+ 989 02f6 3146     		mov	r1, r6
+ 990 02f8 1022     		movs	r2, #16
+ 991 02fa 5830     		adds	r0, r0, #88
+ 992 02fc FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 993 0300 0A20     		movs	r0, #10
+ 994 0302 FFF7FEFF 		bl	DWC_UDELAY
+ 995 0306 6068     		ldr	r0, [r4, #4]
+ 996 0308 0121     		movs	r1, #1
+ 997 030a 5830     		adds	r0, r0, #88
+ 998 030c 3246     		mov	r2, r6
+ 999 030e FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1000 0312 6068     		ldr	r0, [r4, #4]
+ 1001 0314 C4F8C060 		str	r6, [r4, #192]
+ 1002 0318 0221     		movs	r1, #2
+ 1003 031a 3246     		mov	r2, r6
+ 1004 031c 5830     		adds	r0, r0, #88
+ 1005 031e FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1006 0322 0A20     		movs	r0, #10
+ 1007 0324 FFF7FEFF 		bl	DWC_UDELAY
+ 1008 0328 6068     		ldr	r0, [r4, #4]
+ 1009 032a 3246     		mov	r2, r6
+ 1010 032c 5830     		adds	r0, r0, #88
+ 1011 032e 4021     		movs	r1, #64
+ 1012 0330 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1013 0334 0121     		movs	r1, #1
+ 1014 0336 84F86410 		strb	r1, [r4, #100]
+ 1015 033a 2046     		mov	r0, r4
+ 1016 033c FFF7FEFF 		bl	dwc_otg_core_init
+ 1017 0340 2046     		mov	r0, r4
+ 1018 0342 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 1019 0346 2046     		mov	r0, r4
+ 1020 0348 FFF7FEFF 		bl	cil_hcd_start
+ 1021              	.L172:
+ 1022 034c 45F00105 		orr	r5, r5, #1
+ 1023              	.L171:
+ 1024 0350 07F00607 		and	r7, r7, #6
+ 1025 0354 062F     		cmp	r7, #6
+ 1026 0356 40F0EB80 		bne	.L161
+ 1027 035a 6068     		ldr	r0, [r4, #4]
+ 1028 035c 0026     		movs	r6, #0
+ 1029 035e 5830     		adds	r0, r0, #88
+ 1030 0360 3146     		mov	r1, r6
+ 1031 0362 4FF40032 		mov	r2, #131072
+ 1032 0366 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1033 036a D4F8C030 		ldr	r3, [r4, #192]
+ 1034 036e 002B     		cmp	r3, #0
+ 1035 0370 00F0DC80 		beq	.L174
+ 1036 0374 6068     		ldr	r0, [r4, #4]
+ 1037 0376 5830     		adds	r0, r0, #88
+ 1038 0378 FFF7FEFF 		bl	DWC_READ_REG32
+ 1039 037c D4F88470 		ldr	r7, [r4, #132]
+ 1040 0380 97F84A20 		ldrb	r2, [r7, #74]	@ zero_extendqisi2
+ 1041 0384 82EA1040 		eor	r0, r2, r0, lsr #16
+ 1042 0388 00F0FF01 		and	r1, r0, #255
+ 1043 038c 01F02003 		and	r3, r1, #32
+ 1044 0390 DFB2     		uxtb	r7, r3
+ 1045 0392 002F     		cmp	r7, #0
+ 1046 0394 68D0     		beq	.L175
+ 1047 0396 D4F8C030 		ldr	r3, [r4, #192]
+ 1048 039a 002B     		cmp	r3, #0
+ 1049 039c 00F0C680 		beq	.L174
+ 1050 03a0 6068     		ldr	r0, [r4, #4]
+ 1051 03a2 5830     		adds	r0, r0, #88
+ 1052 03a4 FFF7FEFF 		bl	DWC_READ_REG32
+ 1053 03a8 0746     		mov	r7, r0
+ 1054 03aa 6068     		ldr	r0, [r4, #4]
+ 1055 03ac 2021     		movs	r1, #32
+ 1056 03ae 3246     		mov	r2, r6
+ 1057 03b0 5830     		adds	r0, r0, #88
+ 1058 03b2 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1059 03b6 0A20     		movs	r0, #10
+ 1060 03b8 FFF7FEFF 		bl	DWC_UDELAY
+ 1061 03bc 6068     		ldr	r0, [r4, #4]
+ 1062 03be 1021     		movs	r1, #16
+ 1063 03c0 3246     		mov	r2, r6
+ 1064 03c2 5830     		adds	r0, r0, #88
+ 1065 03c4 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1066 03c8 0A20     		movs	r0, #10
+ 1067 03ca FFF7FEFF 		bl	DWC_UDELAY
+ 1068 03ce 6068     		ldr	r0, [r4, #4]
+ 1069 03d0 0821     		movs	r1, #8
+ 1070 03d2 5830     		adds	r0, r0, #88
+ 1071 03d4 3246     		mov	r2, r6
+ 1072 03d6 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1073 03da 6068     		ldr	r0, [r4, #4]
+ 1074 03dc 3146     		mov	r1, r6
+ 1075 03de 1022     		movs	r2, #16
+ 1076 03e0 5830     		adds	r0, r0, #88
+ 1077 03e2 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1078 03e6 0A20     		movs	r0, #10
+ 1079 03e8 FFF7FEFF 		bl	DWC_UDELAY
+ 1080 03ec 6068     		ldr	r0, [r4, #4]
+ 1081 03ee 0121     		movs	r1, #1
+ 1082 03f0 5830     		adds	r0, r0, #88
+ 1083 03f2 3246     		mov	r2, r6
+ 1084 03f4 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1085 03f8 6068     		ldr	r0, [r4, #4]
+ 1086 03fa C4F8C060 		str	r6, [r4, #192]
+ 1087 03fe 0221     		movs	r1, #2
+ 1088 0400 3246     		mov	r2, r6
+ 1089 0402 5830     		adds	r0, r0, #88
+ 1090 0404 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1091 0408 0A20     		movs	r0, #10
+ 1092 040a FFF7FEFF 		bl	DWC_UDELAY
+ 1093 040e D4F88420 		ldr	r2, [r4, #132]
+ 1094 0412 916C     		ldr	r1, [r2, #72]
+ 1095 0414 01F04000 		and	r0, r1, #64
+ 1096 0418 C3B2     		uxtb	r3, r0
+ 1097 041a 2BB1     		cbz	r3, .L177
+ 1098 041c 6068     		ldr	r0, [r4, #4]
+ 1099 041e 4021     		movs	r1, #64
+ 1100 0420 5830     		adds	r0, r0, #88
+ 1101 0422 3246     		mov	r2, r6
+ 1102 0424 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1103              	.L177:
+ 1104 0428 C7F30747 		ubfx	r7, r7, #16, #8
+ 1105 042c 07F02002 		and	r2, r7, #32
+ 1106 0430 D7B2     		uxtb	r7, r2
+ 1107 0432 67B1     		cbz	r7, .L178
+ 1108 0434 0420     		movs	r0, #4
+ 1109 0436 84F86400 		strb	r0, [r4, #100]
+ 1110 043a 2046     		mov	r0, r4
+ 1111 043c FFF7FEFF 		bl	dwc_otg_core_init
+ 1112 0440 2046     		mov	r0, r4
+ 1113 0442 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 1114 0446 2046     		mov	r0, r4
+ 1115 0448 FFF7FEFF 		bl	cil_pcd_start
+ 1116 044c 6EE0     		b	.L174
+ 1117              	.L178:
+ 1118 044e 0121     		movs	r1, #1
+ 1119 0450 84F86410 		strb	r1, [r4, #100]
+ 1120 0454 2046     		mov	r0, r4
+ 1121 0456 FFF7FEFF 		bl	dwc_otg_core_init
+ 1122 045a 2046     		mov	r0, r4
+ 1123 045c FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 1124 0460 2046     		mov	r0, r4
+ 1125 0462 FFF7FEFF 		bl	cil_hcd_start
+ 1126 0466 61E0     		b	.L174
+ 1127              	.L175:
+ 1128 0468 01F04002 		and	r2, r1, #64
+ 1129 046c D0B2     		uxtb	r0, r2
+ 1130 046e 0028     		cmp	r0, #0
+ 1131 0470 5CD0     		beq	.L174
+ 1132 0472 6068     		ldr	r0, [r4, #4]
+ 1133 0474 2668     		ldr	r6, [r4, #0]
+ 1134 0476 5830     		adds	r0, r0, #88
+ 1135 0478 7668     		ldr	r6, [r6, #4]
+ 1136 047a FFF7FEFF 		bl	DWC_READ_REG32
+ 1137 047e D4F8C010 		ldr	r1, [r4, #192]
+ 1138 0482 0029     		cmp	r1, #0
+ 1139 0484 52D0     		beq	.L174
+ 1140 0486 C0F30743 		ubfx	r3, r0, #16, #8
+ 1141 048a 03F04002 		and	r2, r3, #64
+ 1142 048e D1B2     		uxtb	r1, r2
+ 1143 0490 6068     		ldr	r0, [r4, #4]
+ 1144 0492 31B9     		cbnz	r1, .L182
+ 1145 0494 5830     		adds	r0, r0, #88
+ 1146 0496 D4F88460 		ldr	r6, [r4, #132]
+ 1147 049a FFF7FEFF 		bl	DWC_READ_REG32
+ 1148 049e B064     		str	r0, [r6, #72]
+ 1149 04a0 44E0     		b	.L174
+ 1150              	.L182:
+ 1151 04a2 2021     		movs	r1, #32
+ 1152 04a4 5830     		adds	r0, r0, #88
+ 1153 04a6 3A46     		mov	r2, r7
+ 1154 04a8 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1155 04ac 0A20     		movs	r0, #10
+ 1156 04ae FFF7FEFF 		bl	DWC_UDELAY
+ 1157 04b2 6068     		ldr	r0, [r4, #4]
+ 1158 04b4 1021     		movs	r1, #16
+ 1159 04b6 5830     		adds	r0, r0, #88
+ 1160 04b8 3A46     		mov	r2, r7
+ 1161 04ba FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1162 04be 0A20     		movs	r0, #10
+ 1163 04c0 FFF7FEFF 		bl	DWC_UDELAY
+ 1164 04c4 6068     		ldr	r0, [r4, #4]
+ 1165 04c6 0821     		movs	r1, #8
+ 1166 04c8 5830     		adds	r0, r0, #88
+ 1167 04ca 3A46     		mov	r2, r7
+ 1168 04cc FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1169 04d0 6068     		ldr	r0, [r4, #4]
+ 1170 04d2 1022     		movs	r2, #16
+ 1171 04d4 5830     		adds	r0, r0, #88
+ 1172 04d6 3946     		mov	r1, r7
+ 1173 04d8 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1174 04dc 0A20     		movs	r0, #10
+ 1175 04de FFF7FEFF 		bl	DWC_UDELAY
+ 1176 04e2 6068     		ldr	r0, [r4, #4]
+ 1177 04e4 0121     		movs	r1, #1
+ 1178 04e6 5830     		adds	r0, r0, #88
+ 1179 04e8 3A46     		mov	r2, r7
+ 1180 04ea FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1181 04ee 0A20     		movs	r0, #10
+ 1182 04f0 FFF7FEFF 		bl	DWC_UDELAY
+ 1183 04f4 6068     		ldr	r0, [r4, #4]
+ 1184 04f6 C4F8C070 		str	r7, [r4, #192]
+ 1185 04fa 0221     		movs	r1, #2
+ 1186 04fc 3A46     		mov	r2, r7
+ 1187 04fe 5830     		adds	r0, r0, #88
+ 1188 0500 FFF7FEFF 		bl	DWC_MODIFY_REG32
+ 1189 0504 0A20     		movs	r0, #10
+ 1190 0506 FFF7FEFF 		bl	DWC_UDELAY
+ 1191 050a 0420     		movs	r0, #4
+ 1192 050c 84F86400 		strb	r0, [r4, #100]
+ 1193 0510 2046     		mov	r0, r4
+ 1194 0512 FFF7FEFF 		bl	dwc_otg_core_init
+ 1195 0516 2046     		mov	r0, r4
+ 1196 0518 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 1197 051c 2046     		mov	r0, r4
+ 1198 051e FFF7FEFF 		bl	cil_pcd_start
+ 1199 0522 012E     		cmp	r6, #1
+ 1200 0524 02D8     		bhi	.L174
+ 1201 0526 2046     		mov	r0, r4
+ 1202 0528 FFF7FEFF 		bl	dwc_otg_initiate_srp
+ 1203              	.L174:
+ 1204 052c 45F00105 		orr	r5, r5, #1
+ 1205              	.L161:
+ 1206 0530 D4F8CC00 		ldr	r0, [r4, #204]
+ 1207 0534 08B1     		cbz	r0, .L184
+ 1208 0536 FFF7FEFF 		bl	DWC_SPINUNLOCK
+ 1209              	.L184:
+ 1210 053a 2846     		mov	r0, r5
+ 1211 053c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1213 053e 00BF     		.section	.rodata.str1.1,"aMS",%progbits,1
+ 1214              	.LC0:
+ 1215 0000 636F6E6E 		.ascii	"connection id status change\000"
+ 1215      65637469 
+ 1215      6F6E2069 
+ 1215      64207374 
+ 1215      61747573 
+ 1216              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 dwc_otg_cil_intr.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:17     .text.cil_hcd_start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:21     .text.cil_hcd_start:00000000 cil_hcd_start
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:35     .text.cil_pcd_start:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:39     .text.cil_pcd_start:00000000 cil_pcd_start
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:53     .text.cil_pcd_stop:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:57     .text.cil_pcd_stop:00000000 cil_pcd_stop
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:71     .text.dwc_otg_read_hprt0:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:75     .text.dwc_otg_read_hprt0:00000000 dwc_otg_read_hprt0
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:86     .text.w_conn_id_status_change:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:91     .text.w_conn_id_status_change:00000000 w_conn_id_status_change
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:142    .text.dwc_otg_handle_mode_mismatch_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:147    .text.dwc_otg_handle_mode_mismatch_intr:00000000 dwc_otg_handle_mode_mismatch_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:159    .text.dwc_otg_handle_otg_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:164    .text.dwc_otg_handle_otg_intr:00000000 dwc_otg_handle_otg_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:331    .text.dwc_otg_handle_conn_id_status_change_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:336    .text.dwc_otg_handle_conn_id_status_change_intr:00000000 dwc_otg_handle_conn_id_status_change_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:364    .text.dwc_otg_handle_conn_id_status_change_intr:0000003c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:368    .text.dwc_otg_handle_session_req_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:373    .text.dwc_otg_handle_session_req_intr:00000000 dwc_otg_handle_session_req_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:401    .text.w_wakeup_detected:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:406    .text.w_wakeup_detected:00000000 w_wakeup_detected
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:429    .text.dwc_otg_handle_wakeup_detected_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:434    .text.dwc_otg_handle_wakeup_detected_intr:00000000 dwc_otg_handle_wakeup_detected_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:498    .text.dwc_otg_handle_restore_done_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:503    .text.dwc_otg_handle_restore_done_intr:00000000 dwc_otg_handle_restore_done_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:524    .text.dwc_otg_handle_disconnect_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:529    .text.dwc_otg_handle_disconnect_intr:00000000 dwc_otg_handle_disconnect_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:543    .text.dwc_otg_handle_usb_suspend_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:548    .text.dwc_otg_handle_usb_suspend_intr:00000000 dwc_otg_handle_usb_suspend_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:676    .text.dwc_otg_handle_usb_suspend_intr:0000013c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:679    .text.dwc_otg_handle_common_intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:684    .text.dwc_otg_handle_common_intr:00000000 dwc_otg_handle_common_intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:916    .text.dwc_otg_handle_common_intr:00000238 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc7o4xfC.s:918    .text.dwc_otg_handle_common_intr:0000023c $t
+
+UNDEFINED SYMBOLS
+DWC_READ_REG32
+dwc_otg_is_device_mode
+DWC_MDELAY
+dwc_otg_core_init
+dwc_otg_enable_global_interrupts
+dwc_otg_is_host_mode
+DWC_WRITE_REG32
+DWC_SPINUNLOCK
+DWC_SPINLOCK
+DWC_MODIFY_REG32
+dwc_otg_adp_sense_start
+DWC_WORKQ_SCHEDULE
+DWC_TIMER_SCHEDULE
+dwc_otg_save_global_regs
+dwc_otg_save_dev_regs
+DWC_UDELAY
+dwc_otg_device_hibernation_restore
+dwc_otg_host_hibernation_restore
+dwc_otg_adp_handle_intr
+dwc_otg_initiate_srp

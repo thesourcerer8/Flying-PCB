@@ -1,0 +1,427 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"usbvc001.c"
+  16              		.section	.text.EVENT_USB_Device_Connect,"ax",%progbits
+  17              		.align	1
+  18              		.global	EVENT_USB_Device_Connect
+  19              		.thumb
+  20              		.thumb_func
+  22              	EVENT_USB_Device_Connect:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 014B     		ldr	r3, .L2
+  27 0002 0222     		movs	r2, #2
+  28 0004 1A70     		strb	r2, [r3, #0]
+  29 0006 7047     		bx	lr
+  30              	.L3:
+  31              		.align	2
+  32              	.L2:
+  33 0008 00000000 		.word	USB_DeviceState
+  35              		.section	.text.EVENT_USB_Device_Disconnect,"ax",%progbits
+  36              		.align	1
+  37              		.global	EVENT_USB_Device_Disconnect
+  38              		.thumb
+  39              		.thumb_func
+  41              	EVENT_USB_Device_Disconnect:
+  42              		@ args = 0, pretend = 0, frame = 0
+  43              		@ frame_needed = 0, uses_anonymous_args = 0
+  44              		@ link register save eliminated.
+  45 0000 014B     		ldr	r3, .L5
+  46 0002 0022     		movs	r2, #0
+  47 0004 1A70     		strb	r2, [r3, #0]
+  48 0006 7047     		bx	lr
+  49              	.L6:
+  50              		.align	2
+  51              	.L5:
+  52 0008 00000000 		.word	USB_DeviceState
+  54              		.section	.text.EVENT_USB_Device_SetAddress,"ax",%progbits
+  55              		.align	1
+  56              		.global	EVENT_USB_Device_SetAddress
+  57              		.thumb
+  58              		.thumb_func
+  60              	EVENT_USB_Device_SetAddress:
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+  64 0000 014B     		ldr	r3, .L8
+  65 0002 0322     		movs	r2, #3
+  66 0004 1A70     		strb	r2, [r3, #0]
+  67 0006 7047     		bx	lr
+  68              	.L9:
+  69              		.align	2
+  70              	.L8:
+  71 0008 00000000 		.word	USB_DeviceState
+  73              		.section	.text.EVENT_USB_Device_ControlRequest,"ax",%progbits
+  74              		.align	1
+  75              		.global	EVENT_USB_Device_ControlRequest
+  76              		.thumb
+  77              		.thumb_func
+  79              	EVENT_USB_Device_ControlRequest:
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82              		@ link register save eliminated.
+  83 0000 0268     		ldr	r2, [r0, #0]	@ unaligned
+  84 0002 034B     		ldr	r3, .L11
+  85 0004 1A60     		str	r2, [r3, #0]	@ unaligned
+  86 0006 4068     		ldr	r0, [r0, #4]	@ unaligned
+  87 0008 5860     		str	r0, [r3, #4]	@ unaligned
+  88 000a 0248     		ldr	r0, .L11+4
+  89 000c FFF7FEBF 		b	CDC_Device_ProcessControlRequest
+  90              	.L12:
+  91              		.align	2
+  92              	.L11:
+  93 0010 00000000 		.word	USB_ControlRequest
+  94 0014 00000000 		.word	.LANCHOR0
+  96              		.section	.text.EVENT_USB_Device_ConfigurationChanged,"ax",%progbits
+  97              		.align	1
+  98              		.global	EVENT_USB_Device_ConfigurationChanged
+  99              		.thumb
+ 100              		.thumb_func
+ 102              	EVENT_USB_Device_ConfigurationChanged:
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 105 0000 08B5     		push	{r3, lr}
+ 106 0002 0348     		ldr	r0, .L14
+ 107 0004 FFF7FEFF 		bl	CDC_Device_ConfigureEndpoints
+ 108 0008 024B     		ldr	r3, .L14+4
+ 109 000a 0422     		movs	r2, #4
+ 110 000c 1A70     		strb	r2, [r3, #0]
+ 111 000e 08BD     		pop	{r3, pc}
+ 112              	.L15:
+ 113              		.align	2
+ 114              	.L14:
+ 115 0010 00000000 		.word	.LANCHOR0
+ 116 0014 00000000 		.word	USB_DeviceState
+ 118              		.section	.text.USBVC001_Init,"ax",%progbits
+ 119              		.align	1
+ 120              		.global	USBVC001_Init
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	USBVC001_Init:
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127 0000 10B5     		push	{r4, lr}
+ 128 0002 064C     		ldr	r4, .L20
+ 129 0004 2046     		mov	r0, r4
+ 130 0006 FFF7FEFF 		bl	USBCORE001_Initialize
+ 131 000a 2068     		ldr	r0, [r4, #0]
+ 132 000c 20B1     		cbz	r0, .L18
+ 133 000e 0449     		ldr	r1, .L20+4
+ 134 0010 FFF7FEFF 		bl	USBCore001_DeviceStart
+ 135 0014 0020     		movs	r0, #0
+ 136 0016 10BD     		pop	{r4, pc}
+ 137              	.L18:
+ 138 0018 0120     		movs	r0, #1
+ 139 001a 10BD     		pop	{r4, pc}
+ 140              	.L21:
+ 141              		.align	2
+ 142              	.L20:
+ 143 001c 00000000 		.word	.LANCHOR1
+ 144 0020 18000000 		.word	.LANCHOR0+24
+ 146              		.section	.text.USBVC001_SendByte,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	USBVC001_SendByte
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	USBVC001_SendByte:
+ 153              		@ args = 0, pretend = 0, frame = 0
+ 154              		@ frame_needed = 0, uses_anonymous_args = 0
+ 155 0000 10B5     		push	{r4, lr}
+ 156 0002 0146     		mov	r1, r0
+ 157 0004 0748     		ldr	r0, .L27
+ 158 0006 FFF7FEFF 		bl	CDC_Device_SendByte
+ 159 000a 0028     		cmp	r0, #0
+ 160 000c 14BF     		ite	ne
+ 161 000e 0624     		movne	r4, #6
+ 162 0010 0024     		moveq	r4, #0
+ 163 0012 0448     		ldr	r0, .L27
+ 164 0014 FFF7FEFF 		bl	CDC_Device_Flush
+ 165 0018 0028     		cmp	r0, #0
+ 166 001a 0CBF     		ite	eq
+ 167 001c 2046     		moveq	r0, r4
+ 168 001e 0620     		movne	r0, #6
+ 169 0020 10BD     		pop	{r4, pc}
+ 170              	.L28:
+ 171 0022 00BF     		.align	2
+ 172              	.L27:
+ 173 0024 00000000 		.word	.LANCHOR0
+ 175              		.section	.text.USBVC001_SendData,"ax",%progbits
+ 176              		.align	1
+ 177              		.global	USBVC001_SendData
+ 178              		.thumb
+ 179              		.thumb_func
+ 181              	USBVC001_SendData:
+ 182              		@ args = 0, pretend = 0, frame = 0
+ 183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184 0000 08B5     		push	{r3, lr}
+ 185 0002 0A46     		mov	r2, r1
+ 186 0004 0346     		mov	r3, r0
+ 187 0006 61B1     		cbz	r1, .L31
+ 188 0008 0848     		ldr	r0, .L34
+ 189 000a 1946     		mov	r1, r3
+ 190 000c FFF7FEFF 		bl	CDC_Device_SendData
+ 191 0010 48B9     		cbnz	r0, .L32
+ 192 0012 0648     		ldr	r0, .L34
+ 193 0014 FFF7FEFF 		bl	CDC_Device_Flush
+ 194 0018 0028     		cmp	r0, #0
+ 195 001a 14BF     		ite	ne
+ 196 001c 0620     		movne	r0, #6
+ 197 001e 0020     		moveq	r0, #0
+ 198 0020 08BD     		pop	{r3, pc}
+ 199              	.L31:
+ 200 0022 0120     		movs	r0, #1
+ 201 0024 08BD     		pop	{r3, pc}
+ 202              	.L32:
+ 203 0026 0620     		movs	r0, #6
+ 204 0028 08BD     		pop	{r3, pc}
+ 205              	.L35:
+ 206 002a 00BF     		.align	2
+ 207              	.L34:
+ 208 002c 00000000 		.word	.LANCHOR0
+ 210              		.section	.text.USBVC001_SendString,"ax",%progbits
+ 211              		.align	1
+ 212              		.global	USBVC001_SendString
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	USBVC001_SendString:
+ 217              		@ args = 0, pretend = 0, frame = 0
+ 218              		@ frame_needed = 0, uses_anonymous_args = 0
+ 219 0000 08B5     		push	{r3, lr}
+ 220 0002 0146     		mov	r1, r0
+ 221 0004 0648     		ldr	r0, .L40
+ 222 0006 FFF7FEFF 		bl	CDC_Device_SendString
+ 223 000a 38B9     		cbnz	r0, .L38
+ 224 000c 0448     		ldr	r0, .L40
+ 225 000e FFF7FEFF 		bl	CDC_Device_Flush
+ 226 0012 0028     		cmp	r0, #0
+ 227 0014 14BF     		ite	ne
+ 228 0016 0620     		movne	r0, #6
+ 229 0018 0020     		moveq	r0, #0
+ 230 001a 08BD     		pop	{r3, pc}
+ 231              	.L38:
+ 232 001c 0620     		movs	r0, #6
+ 233 001e 08BD     		pop	{r3, pc}
+ 234              	.L41:
+ 235              		.align	2
+ 236              	.L40:
+ 237 0020 00000000 		.word	.LANCHOR0
+ 239              		.section	.text.USBVC001_ReceiveByte,"ax",%progbits
+ 240              		.align	1
+ 241              		.global	USBVC001_ReceiveByte
+ 242              		.thumb
+ 243              		.thumb_func
+ 245              	USBVC001_ReceiveByte:
+ 246              		@ args = 0, pretend = 0, frame = 0
+ 247              		@ frame_needed = 0, uses_anonymous_args = 0
+ 248 0000 10B5     		push	{r4, lr}
+ 249 0002 0446     		mov	r4, r0
+ 250 0004 0448     		ldr	r0, .L45
+ 251 0006 FFF7FEFF 		bl	CDC_Device_ReceiveByte
+ 252 000a 431C     		adds	r3, r0, #1
+ 253 000c 02D0     		beq	.L44
+ 254 000e 2070     		strb	r0, [r4, #0]
+ 255 0010 0020     		movs	r0, #0
+ 256 0012 10BD     		pop	{r4, pc}
+ 257              	.L44:
+ 258 0014 0620     		movs	r0, #6
+ 259 0016 10BD     		pop	{r4, pc}
+ 260              	.L46:
+ 261              		.align	2
+ 262              	.L45:
+ 263 0018 00000000 		.word	.LANCHOR0
+ 265              		.section	.text.USBVC001_ReceiveData,"ax",%progbits
+ 266              		.align	1
+ 267              		.global	USBVC001_ReceiveData
+ 268              		.thumb
+ 269              		.thumb_func
+ 271              	USBVC001_ReceiveData:
+ 272              		@ args = 0, pretend = 0, frame = 8
+ 273              		@ frame_needed = 0, uses_anonymous_args = 0
+ 274 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 275 0002 0546     		mov	r5, r0
+ 276 0004 0C46     		mov	r4, r1
+ 277 0006 0420     		movs	r0, #4
+ 278 0008 0021     		movs	r1, #0
+ 279 000a ADF80610 		strh	r1, [sp, #6]	@ movhi
+ 280 000e FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 281              	.L48:
+ 282 0012 2846     		mov	r0, r5
+ 283 0014 A1B2     		uxth	r1, r4
+ 284 0016 0DF10602 		add	r2, sp, #6
+ 285 001a FFF7FEFF 		bl	Endpoint_Read_Stream_LE
+ 286 001e 0528     		cmp	r0, #5
+ 287 0020 F7D0     		beq	.L48
+ 288 0022 0028     		cmp	r0, #0
+ 289 0024 14BF     		ite	ne
+ 290 0026 4FF0FF30 		movne	r0, #-1
+ 291 002a 0020     		moveq	r0, #0
+ 292 002c 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 294              		.section	.text.USBVC001_GetLineEncoding,"ax",%progbits
+ 295              		.align	1
+ 296              		.global	USBVC001_GetLineEncoding
+ 297              		.thumb
+ 298              		.thumb_func
+ 300              	USBVC001_GetLineEncoding:
+ 301              		@ args = 0, pretend = 0, frame = 0
+ 302              		@ frame_needed = 0, uses_anonymous_args = 0
+ 303              		@ link register save eliminated.
+ 304 0000 084B     		ldr	r3, .L60
+ 305 0002 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 306 0004 0429     		cmp	r1, #4
+ 307 0006 0BD1     		bne	.L59
+ 308 0008 074B     		ldr	r3, .L60+4
+ 309 000a 1A69     		ldr	r2, [r3, #16]	@ unaligned
+ 310 000c 42B1     		cbz	r2, .L59
+ 311 000e 38B1     		cbz	r0, .L59
+ 312 0010 0260     		str	r2, [r0, #0]	@ unaligned
+ 313 0012 998A     		ldrh	r1, [r3, #20]	@ unaligned
+ 314 0014 1033     		adds	r3, r3, #16
+ 315 0016 8180     		strh	r1, [r0, #4]	@ unaligned
+ 316 0018 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 317 001a 8371     		strb	r3, [r0, #6]
+ 318 001c 0020     		movs	r0, #0
+ 319 001e 7047     		bx	lr
+ 320              	.L59:
+ 321 0020 0120     		movs	r0, #1
+ 322 0022 7047     		bx	lr
+ 323              	.L61:
+ 324              		.align	2
+ 325              	.L60:
+ 326 0024 00000000 		.word	USB_DeviceState
+ 327 0028 00000000 		.word	.LANCHOR0
+ 329              		.section	.text.USBVC001_BytesReceived,"ax",%progbits
+ 330              		.align	1
+ 331              		.global	USBVC001_BytesReceived
+ 332              		.thumb
+ 333              		.thumb_func
+ 335              	USBVC001_BytesReceived:
+ 336              		@ args = 0, pretend = 0, frame = 0
+ 337              		@ frame_needed = 0, uses_anonymous_args = 0
+ 338 0000 70B5     		push	{r4, r5, r6, lr}
+ 339 0002 074D     		ldr	r5, .L64
+ 340 0004 0748     		ldr	r0, .L64+4
+ 341 0006 4FF40064 		mov	r4, #2048
+ 342 000a C5F88C40 		str	r4, [r5, #140]
+ 343 000e FFF7FEFF 		bl	CDC_Device_BytesReceived
+ 344 0012 0646     		mov	r6, r0
+ 345 0014 08B9     		cbnz	r0, .L63
+ 346 0016 FFF7FEFF 		bl	Endpoint_ClearOUT
+ 347              	.L63:
+ 348 001a EC60     		str	r4, [r5, #12]
+ 349 001c 3046     		mov	r0, r6
+ 350 001e 70BD     		pop	{r4, r5, r6, pc}
+ 351              	.L65:
+ 352              		.align	2
+ 353              	.L64:
+ 354 0020 00E100E0 		.word	-536813312
+ 355 0024 00000000 		.word	.LANCHOR0
+ 357              		.global	USBVC001_CDCInterface
+ 358              		.global	USBVC001_DeviceCb
+ 359              		.global	USBVC001_OtgDevPtr
+ 360              		.data
+ 361              		.align	2
+ 362              		.set	.LANCHOR0,. + 0
+ 365              	USBVC001_CDCInterface:
+ 366 0000 00       		.byte	0
+ 367 0001 03       		.byte	3
+ 368 0002 1000     		.short	16
+ 369 0004 00       		.byte	0
+ 370 0005 04       		.byte	4
+ 371 0006 1000     		.short	16
+ 372 0008 00       		.byte	0
+ 373 0009 02       		.byte	2
+ 374 000a 0800     		.short	8
+ 375 000c 00       		.byte	0
+ 376 000d 00       		.space	1
+ 377 000e 00000000 		.space	10
+ 377      00000000 
+ 377      0000
+ 380              	USBVC001_DeviceCb:
+ 381 0018 00000000 		.word	EVENT_USB_Device_Connect
+ 382 001c 00000000 		.word	EVENT_USB_Device_Disconnect
+ 383 0020 00000000 		.word	EVENT_USB_Device_ConfigurationChanged
+ 384 0024 00000000 		.word	EVENT_USB_Device_ControlRequest
+ 385 0028 00000000 		.word	EVENT_USB_Device_SetAddress
+ 386 002c 00000000 		.word	CALLBACK_USB_GetDescriptor
+ 387              		.bss
+ 388              		.align	2
+ 389              		.set	.LANCHOR1,. + 0
+ 392              	USBVC001_OtgDevPtr:
+ 393 0000 00000000 		.space	4
+ 394              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 usbvc001.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:17     .text.EVENT_USB_Device_Connect:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:22     .text.EVENT_USB_Device_Connect:00000000 EVENT_USB_Device_Connect
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:33     .text.EVENT_USB_Device_Connect:00000008 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:36     .text.EVENT_USB_Device_Disconnect:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:41     .text.EVENT_USB_Device_Disconnect:00000000 EVENT_USB_Device_Disconnect
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:52     .text.EVENT_USB_Device_Disconnect:00000008 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:55     .text.EVENT_USB_Device_SetAddress:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:60     .text.EVENT_USB_Device_SetAddress:00000000 EVENT_USB_Device_SetAddress
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:71     .text.EVENT_USB_Device_SetAddress:00000008 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:74     .text.EVENT_USB_Device_ControlRequest:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:79     .text.EVENT_USB_Device_ControlRequest:00000000 EVENT_USB_Device_ControlRequest
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:93     .text.EVENT_USB_Device_ControlRequest:00000010 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:97     .text.EVENT_USB_Device_ConfigurationChanged:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:102    .text.EVENT_USB_Device_ConfigurationChanged:00000000 EVENT_USB_Device_ConfigurationChanged
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:115    .text.EVENT_USB_Device_ConfigurationChanged:00000010 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:119    .text.USBVC001_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:124    .text.USBVC001_Init:00000000 USBVC001_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:143    .text.USBVC001_Init:0000001c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:147    .text.USBVC001_SendByte:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:152    .text.USBVC001_SendByte:00000000 USBVC001_SendByte
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:173    .text.USBVC001_SendByte:00000024 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:176    .text.USBVC001_SendData:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:181    .text.USBVC001_SendData:00000000 USBVC001_SendData
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:208    .text.USBVC001_SendData:0000002c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:211    .text.USBVC001_SendString:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:216    .text.USBVC001_SendString:00000000 USBVC001_SendString
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:237    .text.USBVC001_SendString:00000020 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:240    .text.USBVC001_ReceiveByte:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:245    .text.USBVC001_ReceiveByte:00000000 USBVC001_ReceiveByte
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:263    .text.USBVC001_ReceiveByte:00000018 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:266    .text.USBVC001_ReceiveData:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:271    .text.USBVC001_ReceiveData:00000000 USBVC001_ReceiveData
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:295    .text.USBVC001_GetLineEncoding:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:300    .text.USBVC001_GetLineEncoding:00000000 USBVC001_GetLineEncoding
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:326    .text.USBVC001_GetLineEncoding:00000024 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:330    .text.USBVC001_BytesReceived:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:335    .text.USBVC001_BytesReceived:00000000 USBVC001_BytesReceived
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:354    .text.USBVC001_BytesReceived:00000020 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:365    .data:00000000 USBVC001_CDCInterface
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:380    .data:00000018 USBVC001_DeviceCb
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:392    .bss:00000000 USBVC001_OtgDevPtr
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:361    .data:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccL7rDvB.s:388    .bss:00000000 $d
+
+UNDEFINED SYMBOLS
+USB_DeviceState
+CDC_Device_ProcessControlRequest
+USB_ControlRequest
+CDC_Device_ConfigureEndpoints
+USBCORE001_Initialize
+USBCore001_DeviceStart
+CDC_Device_SendByte
+CDC_Device_Flush
+CDC_Device_SendData
+CDC_Device_SendString
+CDC_Device_ReceiveByte
+Endpoint_SelectEndpoint
+Endpoint_Read_Stream_LE
+CDC_Device_BytesReceived
+Endpoint_ClearOUT
+CALLBACK_USB_GetDescriptor

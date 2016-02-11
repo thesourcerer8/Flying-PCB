@@ -1,0 +1,42 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"I2C001_Conf.c"
+  16              		.global	I2C001_Handle0
+  17              		.section	.rodata
+  18              		.align	2
+  21              	I2C001_Handle0:
+  22 0000 04       		.byte	4
+  23 0001 000000   		.space	3
+  24 0004 00400248 		.word	1208107008
+  25 0008 90010000 		.word	400
+  26 000c 01       		.byte	1
+  27 000d 00       		.byte	0
+  28 000e 05       		.byte	5
+  29 000f 05       		.byte	5
+  30 0010 00       		.byte	0
+  31 0011 00       		.byte	0
+  32 0012 00       		.byte	0
+  33 0013 00       		.byte	0
+  34 0014 00       		.byte	0
+  35 0015 00       		.byte	0
+  36 0016 00       		.byte	0
+  37 0017 00       		.space	1
+  38              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 I2C001_Conf.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cconZtA2.s:21     .rodata:00000000 I2C001_Handle0
+C:\Users\TOGABL~1\AppData\Local\Temp\cconZtA2.s:18     .rodata:00000000 $d
+
+NO UNDEFINED SYMBOLS

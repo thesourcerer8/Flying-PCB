@@ -1,0 +1,374 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"CLK001.c"
+  16              		.section	.text.CLK001_Delay,"ax",%progbits
+  17              		.align	1
+  18              		.thumb
+  19              		.thumb_func
+  21              	CLK001_Delay:
+  22              		@ args = 0, pretend = 0, frame = 8
+  23              		@ frame_needed = 0, uses_anonymous_args = 0
+  24              		@ link register save eliminated.
+  25 0000 82B0     		sub	sp, sp, #8
+  26 0002 0022     		movs	r2, #0
+  27              	.L4:
+  28 0004 0192     		str	r2, [sp, #4]
+  29 0006 019B     		ldr	r3, [sp, #4]
+  30 0008 8342     		cmp	r3, r0
+  31 000a 06D2     		bcs	.L6
+  32              	.L3:
+  33              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+  34 000c 00BF     		nop
+  35              	@ 0 "" 2
+  36              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+  37 000e 00BF     		nop
+  38              	@ 0 "" 2
+  39              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+  40 0010 00BF     		nop
+  41              	@ 0 "" 2
+  42              	@ 327 "C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmInstr.h" 1
+  43 0012 00BF     		nop
+  44              	@ 0 "" 2
+  45              		.thumb
+  46 0014 0199     		ldr	r1, [sp, #4]
+  47 0016 4A1C     		adds	r2, r1, #1
+  48 0018 F4E7     		b	.L4
+  49              	.L6:
+  50 001a 02B0     		add	sp, sp, #8
+  51 001c 7047     		bx	lr
+  53              		.section	.text.CLK001_Init,"ax",%progbits
+  54              		.align	1
+  55              		.global	CLK001_Init
+  56              		.thumb
+  57              		.thumb_func
+  59              	CLK001_Init:
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62 0000 38B5     		push	{r3, r4, r5, lr}
+  63 0002 964B     		ldr	r3, .L67
+  64 0004 964C     		ldr	r4, .L67+4
+  65 0006 5868     		ldr	r0, [r3, #4]
+  66 0008 0440     		ands	r4, r4, r0
+  67 000a 002C     		cmp	r4, #0
+  68 000c 00F0B080 		beq	.L9
+  69              	.L8:
+  70 0010 9449     		ldr	r1, .L67+8
+  71 0012 0A68     		ldr	r2, [r1, #0]
+  72 0014 D207     		lsls	r2, r2, #31
+  73 0016 03D4     		bmi	.L30
+  74              	.L29:
+  75 0018 4C68     		ldr	r4, [r1, #4]
+  76 001a 44F00105 		orr	r5, r4, #1
+  77 001e 4D60     		str	r5, [r1, #4]
+  78              	.L30:
+  79 0020 914B     		ldr	r3, .L67+12
+  80 0022 1868     		ldr	r0, [r3, #0]
+  81 0024 8505     		lsls	r5, r0, #22
+  82 0026 03D5     		bpl	.L10
+  83 0028 9968     		ldr	r1, [r3, #8]
+  84 002a 41F40072 		orr	r2, r1, #512
+  85 002e 9A60     		str	r2, [r3, #8]
+  86              	.L10:
+  87 0030 8A4C     		ldr	r4, .L67
+  88 0032 6568     		ldr	r5, [r4, #4]
+  89 0034 25F48013 		bic	r3, r5, #1048576
+  90 0038 6360     		str	r3, [r4, #4]
+  91 003a 6420     		movs	r0, #100
+  92 003c FFF7FEFF 		bl	CLK001_Delay
+  93 0040 6068     		ldr	r0, [r4, #4]
+  94 0042 40F40021 		orr	r1, r0, #524288
+  95 0046 6160     		str	r1, [r4, #4]
+  96 0048 6420     		movs	r0, #100
+  97 004a FFF7FEFF 		bl	CLK001_Delay
+  98 004e 6268     		ldr	r2, [r4, #4]
+  99 0050 8648     		ldr	r0, .L67+16
+ 100 0052 22F48035 		bic	r5, r2, #65536
+ 101 0056 25F00203 		bic	r3, r5, #2
+ 102 005a 6360     		str	r3, [r4, #4]
+ 103 005c 4168     		ldr	r1, [r0, #4]
+ 104 005e 11F0300F 		tst	r1, #48
+ 105 0062 1DD0     		beq	.L11
+ 106 0064 4268     		ldr	r2, [r0, #4]
+ 107 0066 22F03005 		bic	r5, r2, #48
+ 108 006a 4560     		str	r5, [r0, #4]
+ 109 006c 4368     		ldr	r3, [r0, #4]
+ 110 006e 43F44031 		orr	r1, r3, #196608
+ 111 0072 4160     		str	r1, [r0, #4]
+ 112 0074 E068     		ldr	r0, [r4, #12]
+ 113 0076 20F00102 		bic	r2, r0, #1
+ 114 007a E260     		str	r2, [r4, #12]
+ 115 007c 6568     		ldr	r5, [r4, #4]
+ 116 007e 25F40033 		bic	r3, r5, #131072
+ 117 0082 6360     		str	r3, [r4, #4]
+ 118 0084 44F25064 		movw	r4, #18000
+ 119              	.L13:
+ 120 0088 0A20     		movs	r0, #10
+ 121 008a FFF7FEFF 		bl	CLK001_Delay
+ 122 008e 7349     		ldr	r1, .L67
+ 123 0090 0868     		ldr	r0, [r1, #0]
+ 124 0092 00F46072 		and	r2, r0, #896
+ 125 0096 B2F5607F 		cmp	r2, #896
+ 126 009a 40F0CF80 		bne	.L64
+ 127              	.L12:
+ 128 009e 0B68     		ldr	r3, [r1, #0]
+ 129              	.L11:
+ 130 00a0 6E4D     		ldr	r5, .L67
+ 131 00a2 2B68     		ldr	r3, [r5, #0]
+ 132 00a4 5C07     		lsls	r4, r3, #29
+ 133 00a6 2ED4     		bmi	.L15
+ 134 00a8 714A     		ldr	r2, .L67+20
+ 135 00aa 7248     		ldr	r0, .L67+24
+ 136 00ac 1321     		movs	r1, #19
+ 137 00ae 82E80300 		stmia	r2, {r0, r1}
+ 138 00b2 6968     		ldr	r1, [r5, #4]
+ 139 00b4 704A     		ldr	r2, .L67+28
+ 140 00b6 41F00100 		orr	r0, r1, #1
+ 141 00ba 6860     		str	r0, [r5, #4]
+ 142 00bc 6C68     		ldr	r4, [r5, #4]
+ 143 00be 44F01003 		orr	r3, r4, #16
+ 144 00c2 6B60     		str	r3, [r5, #4]
+ 145 00c4 AA60     		str	r2, [r5, #8]
+ 146 00c6 6968     		ldr	r1, [r5, #4]
+ 147 00c8 41F04000 		orr	r0, r1, #64
+ 148 00cc 6860     		str	r0, [r5, #4]
+ 149 00ce 6C68     		ldr	r4, [r5, #4]
+ 150 00d0 24F01003 		bic	r3, r4, #16
+ 151 00d4 6B60     		str	r3, [r5, #4]
+ 152 00d6 6A68     		ldr	r2, [r5, #4]
+ 153 00d8 42F48021 		orr	r1, r2, #262144
+ 154 00dc 6960     		str	r1, [r5, #4]
+ 155 00de 44F25064 		movw	r4, #18000
+ 156              	.L17:
+ 157 00e2 5E4D     		ldr	r5, .L67
+ 158 00e4 0A20     		movs	r0, #10
+ 159 00e6 FFF7FEFF 		bl	CLK001_Delay
+ 160 00ea 2868     		ldr	r0, [r5, #0]
+ 161 00ec 10F0040F 		tst	r0, #4
+ 162 00f0 2A46     		mov	r2, r5
+ 163 00f2 00F0A780 		beq	.L65
+ 164              	.L16:
+ 165 00f6 1168     		ldr	r1, [r2, #0]
+ 166 00f8 584B     		ldr	r3, .L67
+ 167 00fa 4907     		lsls	r1, r1, #29
+ 168 00fc 03D5     		bpl	.L15
+ 169 00fe 5D68     		ldr	r5, [r3, #4]
+ 170 0100 25F00100 		bic	r0, r5, #1
+ 171 0104 5860     		str	r0, [r3, #4]
+ 172              	.L15:
+ 173 0106 5D4C     		ldr	r4, .L67+32
+ 174 0108 5A48     		ldr	r0, .L67+24
+ 175 010a E268     		ldr	r2, [r4, #12]
+ 176 010c 42F48033 		orr	r3, r2, #65536
+ 177 0110 E360     		str	r3, [r4, #12]
+ 178 0112 524C     		ldr	r4, .L67
+ 179 0114 6168     		ldr	r1, [r4, #4]
+ 180 0116 21F04005 		bic	r5, r1, #64
+ 181 011a 6560     		str	r5, [r4, #4]
+ 182 011c 544D     		ldr	r5, .L67+20
+ 183 011e 2860     		str	r0, [r5, #0]
+ 184 0120 6420     		movs	r0, #100
+ 185 0122 FFF7FEFF 		bl	CLK001_Delay
+ 186 0126 564A     		ldr	r2, .L67+36
+ 187 0128 6420     		movs	r0, #100
+ 188 012a A260     		str	r2, [r4, #8]
+ 189 012c FFF7FEFF 		bl	CLK001_Delay
+ 190 0130 5449     		ldr	r1, .L67+40
+ 191 0132 0423     		movs	r3, #4
+ 192 0134 6B60     		str	r3, [r5, #4]
+ 193 0136 9620     		movs	r0, #150
+ 194 0138 A160     		str	r1, [r4, #8]
+ 195 013a FFF7FEFF 		bl	CLK001_Delay
+ 196 013e 5248     		ldr	r0, .L67+44
+ 197 0140 A060     		str	r0, [r4, #8]
+ 198 0142 A268     		ldr	r2, [r4, #8]
+ 199 0144 C2F30363 		ubfx	r3, r2, #24, #4
+ 200 0148 002B     		cmp	r3, #0
+ 201 014a 7FD1     		bne	.L32
+ 202 014c A168     		ldr	r1, [r4, #8]
+ 203 014e C1F30620 		ubfx	r0, r1, #8, #7
+ 204 0152 2728     		cmp	r0, #39
+ 205 0154 7CD1     		bne	.L34
+ 206 0156 A268     		ldr	r2, [r4, #8]
+ 207 0158 5206     		lsls	r2, r2, #25
+ 208 015a 79D1     		bne	.L34
+ 209 015c A468     		ldr	r4, [r4, #8]
+ 210 015e C4F30643 		ubfx	r3, r4, #16, #7
+ 211 0162 D91E     		subs	r1, r3, #3
+ 212 0164 4842     		rsbs	r0, r1, #0
+ 213 0166 50EB0104 		adcs	r4, r0, r1
+ 214              	.L19:
+ 215 016a 484B     		ldr	r3, .L67+48
+ 216 016c 0522     		movs	r2, #5
+ 217 016e DA60     		str	r2, [r3, #12]
+ 218              	.L9:
+ 219 0170 3A48     		ldr	r0, .L67
+ 220 0172 3B4A     		ldr	r2, .L67+4
+ 221 0174 4169     		ldr	r1, [r0, #20]
+ 222 0176 0A40     		ands	r2, r2, r1
+ 223 0178 002A     		cmp	r2, #0
+ 224 017a 54D0     		beq	.L21
+ 225              	.L20:
+ 226 017c 4369     		ldr	r3, [r0, #20]
+ 227 017e 23F48031 		bic	r1, r3, #65536
+ 228 0182 21F00202 		bic	r2, r1, #2
+ 229 0186 394B     		ldr	r3, .L67+16
+ 230 0188 4261     		str	r2, [r0, #20]
+ 231 018a 5968     		ldr	r1, [r3, #4]
+ 232 018c 11F0300F 		tst	r1, #48
+ 233 0190 28D0     		beq	.L25
+ 234              	.L31:
+ 235 0192 4568     		ldr	r5, [r0, #4]
+ 236 0194 324A     		ldr	r2, .L67+4
+ 237 0196 2A40     		ands	r2, r2, r5
+ 238 0198 2AB1     		cbz	r2, .L22
+ 239 019a 4368     		ldr	r3, [r0, #4]
+ 240 019c 23F48031 		bic	r1, r3, #65536
+ 241 01a0 21F00205 		bic	r5, r1, #2
+ 242 01a4 4560     		str	r5, [r0, #4]
+ 243              	.L22:
+ 244 01a6 3148     		ldr	r0, .L67+16
+ 245 01a8 4268     		ldr	r2, [r0, #4]
+ 246 01aa 22F03003 		bic	r3, r2, #48
+ 247 01ae 4360     		str	r3, [r0, #4]
+ 248 01b0 4168     		ldr	r1, [r0, #4]
+ 249 01b2 41F44035 		orr	r5, r1, #196608
+ 250 01b6 4560     		str	r5, [r0, #4]
+ 251 01b8 4269     		ldr	r2, [r0, #20]
+ 252 01ba 22F40033 		bic	r3, r2, #131072
+ 253 01be 4361     		str	r3, [r0, #20]
+ 254 01c0 44F25065 		movw	r5, #18000
+ 255              	.L24:
+ 256 01c4 0A20     		movs	r0, #10
+ 257 01c6 FFF7FEFF 		bl	CLK001_Delay
+ 258 01ca 2448     		ldr	r0, .L67
+ 259 01cc 0168     		ldr	r1, [r0, #0]
+ 260 01ce 01F46072 		and	r2, r1, #896
+ 261 01d2 B2F5607F 		cmp	r2, #896
+ 262 01d6 3DD1     		bne	.L66
+ 263              	.L23:
+ 264 01d8 0368     		ldr	r3, [r0, #0]
+ 265 01da 03F46070 		and	r0, r3, #896
+ 266 01de B0F5607F 		cmp	r0, #896
+ 267 01e2 3AD1     		bne	.L63
+ 268              	.L25:
+ 269 01e4 1D4B     		ldr	r3, .L67
+ 270 01e6 5969     		ldr	r1, [r3, #20]
+ 271 01e8 41F00102 		orr	r2, r1, #1
+ 272 01ec 5A61     		str	r2, [r3, #20]
+ 273 01ee 5869     		ldr	r0, [r3, #20]
+ 274 01f0 274A     		ldr	r2, .L67+52
+ 275 01f2 40F01001 		orr	r1, r0, #16
+ 276 01f6 2148     		ldr	r0, .L67+32
+ 277 01f8 5961     		str	r1, [r3, #20]
+ 278 01fa 0321     		movs	r1, #3
+ 279 01fc 5A61     		str	r2, [r3, #20]
+ 280 01fe 8161     		str	r1, [r0, #24]
+ 281 0200 5A69     		ldr	r2, [r3, #20]
+ 282 0202 42F04001 		orr	r1, r2, #64
+ 283 0206 5961     		str	r1, [r3, #20]
+ 284 0208 5A69     		ldr	r2, [r3, #20]
+ 285 020a 22F01001 		bic	r1, r2, #16
+ 286 020e 5961     		str	r1, [r3, #20]
+ 287 0210 5A69     		ldr	r2, [r3, #20]
+ 288 0212 42F48021 		orr	r1, r2, #262144
+ 289 0216 5961     		str	r1, [r3, #20]
+ 290              	.L27:
+ 291 0218 1A69     		ldr	r2, [r3, #16]
+ 292 021a 5107     		lsls	r1, r2, #29
+ 293 021c FCD5     		bpl	.L27
+ 294 021e 4368     		ldr	r3, [r0, #4]
+ 295 0220 43F00101 		orr	r1, r3, #1
+ 296 0224 4160     		str	r1, [r0, #4]
+ 297              	.L21:
+ 298 0226 012C     		cmp	r4, #1
+ 299 0228 04D1     		bne	.L28
+ 300 022a 1448     		ldr	r0, .L67+32
+ 301 022c 4268     		ldr	r2, [r0, #4]
+ 302 022e 42F01003 		orr	r3, r2, #16
+ 303 0232 4360     		str	r3, [r0, #4]
+ 304              	.L28:
+ 305 0234 BDE83840 		pop	{r3, r4, r5, lr}
+ 306 0238 FFF7FEBF 		b	SystemCoreClockUpdate
+ 307              	.L64:
+ 308 023c 013C     		subs	r4, r4, #1
+ 309 023e 7FF423AF 		bne	.L13
+ 310 0242 2CE7     		b	.L12
+ 311              	.L65:
+ 312 0244 013C     		subs	r4, r4, #1
+ 313 0246 7FF44CAF 		bne	.L17
+ 314 024a 54E7     		b	.L16
+ 315              	.L32:
+ 316 024c 0024     		movs	r4, #0
+ 317 024e 8CE7     		b	.L19
+ 318              	.L34:
+ 319 0250 1C46     		mov	r4, r3
+ 320 0252 8AE7     		b	.L19
+ 321              	.L66:
+ 322 0254 013D     		subs	r5, r5, #1
+ 323 0256 B5D1     		bne	.L24
+ 324 0258 BEE7     		b	.L23
+ 325              	.L63:
+ 326 025a FEE7     		b	.L63
+ 327              	.L68:
+ 328              		.align	2
+ 329              	.L67:
+ 330 025c 10470050 		.word	1342195472
+ 331 0260 02000100 		.word	65538
+ 332 0264 00420050 		.word	1342194176
+ 333 0268 00440050 		.word	1342194688
+ 334 026c 00470050 		.word	1342195456
+ 335 0270 00000000 		.word	.LANCHOR0
+ 336 0274 00389C1C 		.word	480000000
+ 337 0278 00271300 		.word	1255168
+ 338 027c 00460050 		.word	1342195200
+ 339 0280 00270700 		.word	468736
+ 340 0284 00270400 		.word	272128
+ 341 0288 00270300 		.word	206592
+ 342 028c 60410050 		.word	1342194016
+ 343 0290 003F0001 		.word	16793344
+ 345              		.section	.text.AllowPLLInitByStartup,"ax",%progbits
+ 346              		.align	1
+ 347              		.global	AllowPLLInitByStartup
+ 348              		.thumb
+ 349              		.thumb_func
+ 351              	AllowPLLInitByStartup:
+ 352              		@ args = 0, pretend = 0, frame = 0
+ 353              		@ frame_needed = 0, uses_anonymous_args = 0
+ 354              		@ link register save eliminated.
+ 355 0000 0020     		movs	r0, #0
+ 356 0002 7047     		bx	lr
+ 358              		.bss
+ 359              		.align	2
+ 360              		.set	.LANCHOR0,. + 0
+ 363              	VCO:
+ 364 0000 00000000 		.space	4
+ 367              	stepping_K2DIV:
+ 368 0004 00000000 		.space	4
+ 369              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 CLK001.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccJduv8k.s:17     .text.CLK001_Delay:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccJduv8k.s:21     .text.CLK001_Delay:00000000 CLK001_Delay
+C:\Users\TOGABL~1\AppData\Local\Temp\ccJduv8k.s:54     .text.CLK001_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccJduv8k.s:59     .text.CLK001_Init:00000000 CLK001_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccJduv8k.s:330    .text.CLK001_Init:0000025c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccJduv8k.s:346    .text.AllowPLLInitByStartup:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccJduv8k.s:351    .text.AllowPLLInitByStartup:00000000 AllowPLLInitByStartup
+C:\Users\TOGABL~1\AppData\Local\Temp\ccJduv8k.s:359    .bss:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccJduv8k.s:363    .bss:00000000 VCO
+C:\Users\TOGABL~1\AppData\Local\Temp\ccJduv8k.s:367    .bss:00000004 stepping_K2DIV
+
+UNDEFINED SYMBOLS
+SystemCoreClockUpdate

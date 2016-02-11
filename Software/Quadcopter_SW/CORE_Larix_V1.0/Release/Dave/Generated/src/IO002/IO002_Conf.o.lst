@@ -1,0 +1,54 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"IO002_Conf.c"
+  16              		.global	IO002_HandleArr
+  17              		.global	IO002_Handle0
+  18              		.section	.rodata
+  19              		.align	2
+  22              	IO002_Handle0:
+  23 0000 00       		.byte	0
+  24 0001 05       		.byte	5
+  25 0002 0000     		.space	2
+  26 0004 00000000 		.word	0
+  27 0008 00000000 		.word	0
+  28 000c 00000000 		.word	0
+  29 0010 00000000 		.word	0
+  30 0014 00000000 		.word	0
+  31 0018 00000000 		.word	0
+  32 001c 00000000 		.word	0
+  33 0020 00000000 		.word	0
+  34 0024 00000000 		.word	0
+  35 0028 00007000 		.word	7340032
+  36 002c 14000000 		.word	20
+  37 0030 00000000 		.space	16
+  37      00000000 
+  37      00000000 
+  37      00000000 
+  38 0040 00800248 		.word	1208123392
+  39 0044 40800248 		.word	1208123456
+  40 0048 00000000 		.space	4
+  41              		.data
+  42              		.align	2
+  45              	IO002_HandleArr:
+  46 0000 00000000 		.word	IO002_Handle0
+  47              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO002_Conf.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOIQg4Y.s:45     .data:00000000 IO002_HandleArr
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOIQg4Y.s:22     .rodata:00000000 IO002_Handle0
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOIQg4Y.s:19     .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccOIQg4Y.s:42     .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

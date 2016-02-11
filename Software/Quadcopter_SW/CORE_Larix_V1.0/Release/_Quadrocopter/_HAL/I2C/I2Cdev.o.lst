@@ -1,0 +1,354 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"I2Cdev.c"
+  16              		.section	.text.I2Cdev_writeBytes,"ax",%progbits
+  17              		.align	1
+  18              		.global	I2Cdev_writeBytes
+  19              		.thumb
+  20              		.thumb_func
+  22              	I2Cdev_writeBytes:
+  23              		@ args = 0, pretend = 0, frame = 8
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 F7B5     		push	{r0, r1, r2, r4, r5, r6, r7, lr}
+  26 0002 1F46     		mov	r7, r3
+  27 0004 0423     		movs	r3, #4
+  28 0006 0D46     		mov	r5, r1
+  29 0008 1646     		mov	r6, r2
+  30 000a 8DF80530 		strb	r3, [sp, #5]
+  31 000e 8DF80400 		strb	r0, [sp, #4]
+  32 0012 0124     		movs	r4, #1
+  33              	.L2:
+  34 0014 2B48     		ldr	r0, .L30
+  35 0016 01A9     		add	r1, sp, #4
+  36 0018 FFF7FEFF 		bl	I2C001_WriteData
+  37 001c 50B9     		cbnz	r0, .L25
+  38              	.L5:
+  39 001e 41F28831 		movw	r1, #5000
+  40 0022 94FBF1F2 		sdiv	r2, r4, r1
+  41 0026 01FB1240 		mls	r0, r1, r2, r4
+  42 002a 08B9     		cbnz	r0, .L3
+  43              	.L7:
+  44 002c 0020     		movs	r0, #0
+  45 002e 48E0     		b	.L4
+  46              	.L3:
+  47 0030 0134     		adds	r4, r4, #1
+  48 0032 EFE7     		b	.L2
+  49              	.L25:
+  50 0034 0020     		movs	r0, #0
+  51 0036 8DF80500 		strb	r0, [sp, #5]
+  52 003a 8DF80450 		strb	r5, [sp, #4]
+  53 003e 0124     		movs	r4, #1
+  54              	.L6:
+  55 0040 2048     		ldr	r0, .L30
+  56 0042 01A9     		add	r1, sp, #4
+  57 0044 FFF7FEFF 		bl	I2C001_WriteData
+  58 0048 48B9     		cbnz	r0, .L26
+  59              	.L8:
+  60 004a 41F28832 		movw	r2, #5000
+  61 004e 94FBF2F0 		sdiv	r0, r4, r2
+  62 0052 02FB1043 		mls	r3, r2, r0, r4
+  63 0056 002B     		cmp	r3, #0
+  64 0058 E8D0     		beq	.L7
+  65 005a 0134     		adds	r4, r4, #1
+  66 005c F0E7     		b	.L6
+  67              	.L26:
+  68 005e 0024     		movs	r4, #0
+  69              	.L9:
+  70 0060 B442     		cmp	r4, r6
+  71 0062 17DA     		bge	.L27
+  72              	.L12:
+  73 0064 3A5D     		ldrb	r2, [r7, r4]	@ zero_extendqisi2
+  74 0066 0025     		movs	r5, #0
+  75 0068 8DF80550 		strb	r5, [sp, #5]
+  76 006c 8DF80420 		strb	r2, [sp, #4]
+  77 0070 0125     		movs	r5, #1
+  78              	.L10:
+  79 0072 1448     		ldr	r0, .L30
+  80 0074 01A9     		add	r1, sp, #4
+  81 0076 FFF7FEFF 		bl	I2C001_WriteData
+  82 007a 48B9     		cbnz	r0, .L28
+  83              	.L11:
+  84 007c 41F28830 		movw	r0, #5000
+  85 0080 95FBF0F3 		sdiv	r3, r5, r0
+  86 0084 00FB1351 		mls	r1, r0, r3, r5
+  87 0088 0029     		cmp	r1, #0
+  88 008a CFD0     		beq	.L7
+  89 008c 0135     		adds	r5, r5, #1
+  90 008e F0E7     		b	.L10
+  91              	.L28:
+  92 0090 0134     		adds	r4, r4, #1
+  93 0092 E5E7     		b	.L9
+  94              	.L27:
+  95 0094 0621     		movs	r1, #6
+  96 0096 FF22     		movs	r2, #255
+  97 0098 8DF80510 		strb	r1, [sp, #5]
+  98 009c 8DF80420 		strb	r2, [sp, #4]
+  99 00a0 0124     		movs	r4, #1
+ 100              	.L13:
+ 101 00a2 0848     		ldr	r0, .L30
+ 102 00a4 01A9     		add	r1, sp, #4
+ 103 00a6 FFF7FEFF 		bl	I2C001_WriteData
+ 104 00aa 48B9     		cbnz	r0, .L29
+ 105              	.L14:
+ 106 00ac 41F28833 		movw	r3, #5000
+ 107 00b0 94FBF3F0 		sdiv	r0, r4, r3
+ 108 00b4 03FB1041 		mls	r1, r3, r0, r4
+ 109 00b8 0029     		cmp	r1, #0
+ 110 00ba B7D0     		beq	.L7
+ 111 00bc 0134     		adds	r4, r4, #1
+ 112 00be F0E7     		b	.L13
+ 113              	.L29:
+ 114 00c0 0120     		movs	r0, #1
+ 115              	.L4:
+ 116 00c2 FEBD     		pop	{r1, r2, r3, r4, r5, r6, r7, pc}
+ 117              	.L31:
+ 118              		.align	2
+ 119              	.L30:
+ 120 00c4 00000000 		.word	I2C001_Handle0
+ 122              		.section	.text.I2Cdev_writeByte,"ax",%progbits
+ 123              		.align	1
+ 124              		.global	I2Cdev_writeByte
+ 125              		.thumb
+ 126              		.thumb_func
+ 128              	I2Cdev_writeByte:
+ 129              		@ args = 0, pretend = 0, frame = 8
+ 130              		@ frame_needed = 0, uses_anonymous_args = 0
+ 131 0000 07B5     		push	{r0, r1, r2, lr}
+ 132 0002 02AB     		add	r3, sp, #8
+ 133 0004 03F8012D 		strb	r2, [r3, #-1]!
+ 134 0008 0122     		movs	r2, #1
+ 135 000a FFF7FEFF 		bl	I2Cdev_writeBytes
+ 136 000e 0EBD     		pop	{r1, r2, r3, pc}
+ 138              		.section	.text.I2Cdev_readBytes,"ax",%progbits
+ 139              		.align	1
+ 140              		.global	I2Cdev_readBytes
+ 141              		.thumb
+ 142              		.thumb_func
+ 144              	I2Cdev_readBytes:
+ 145              		@ args = 0, pretend = 0, frame = 8
+ 146              		@ frame_needed = 0, uses_anonymous_args = 0
+ 147 0000 2DE9F341 		push	{r0, r1, r4, r5, r6, r7, r8, lr}
+ 148 0004 0546     		mov	r5, r0
+ 149 0006 1F46     		mov	r7, r3
+ 150 0008 0420     		movs	r0, #4
+ 151 000a 0023     		movs	r3, #0
+ 152 000c 8846     		mov	r8, r1
+ 153 000e 1646     		mov	r6, r2
+ 154 0010 ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 155 0014 8DF80500 		strb	r0, [sp, #5]
+ 156 0018 8DF80450 		strb	r5, [sp, #4]
+ 157 001c 0124     		movs	r4, #1
+ 158              	.L34:
+ 159 001e 4748     		ldr	r0, .L79
+ 160 0020 01A9     		add	r1, sp, #4
+ 161 0022 FFF7FEFF 		bl	I2C001_WriteData
+ 162 0026 50B9     		cbnz	r0, .L71
+ 163              	.L37:
+ 164 0028 41F28830 		movw	r0, #5000
+ 165 002c 94FBF0F2 		sdiv	r2, r4, r0
+ 166 0030 00FB1241 		mls	r1, r0, r2, r4
+ 167 0034 09B9     		cbnz	r1, .L35
+ 168              	.L39:
+ 169 0036 0020     		movs	r0, #0
+ 170 0038 7DE0     		b	.L36
+ 171              	.L35:
+ 172 003a 0134     		adds	r4, r4, #1
+ 173 003c EFE7     		b	.L34
+ 174              	.L71:
+ 175 003e 0021     		movs	r1, #0
+ 176 0040 8DF80510 		strb	r1, [sp, #5]
+ 177 0044 8DF80480 		strb	r8, [sp, #4]
+ 178 0048 0124     		movs	r4, #1
+ 179              	.L38:
+ 180 004a 3C48     		ldr	r0, .L79
+ 181 004c 01A9     		add	r1, sp, #4
+ 182 004e FFF7FEFF 		bl	I2C001_WriteData
+ 183 0052 48B9     		cbnz	r0, .L72
+ 184              	.L40:
+ 185 0054 41F28830 		movw	r0, #5000
+ 186 0058 94FBF0F1 		sdiv	r1, r4, r0
+ 187 005c 00FB1143 		mls	r3, r0, r1, r4
+ 188 0060 002B     		cmp	r3, #0
+ 189 0062 E8D0     		beq	.L39
+ 190 0064 0134     		adds	r4, r4, #1
+ 191 0066 F0E7     		b	.L38
+ 192              	.L72:
+ 193 0068 0522     		movs	r2, #5
+ 194 006a 45F00105 		orr	r5, r5, #1
+ 195 006e 8DF80520 		strb	r2, [sp, #5]
+ 196 0072 8DF80450 		strb	r5, [sp, #4]
+ 197 0076 0124     		movs	r4, #1
+ 198              	.L41:
+ 199 0078 3048     		ldr	r0, .L79
+ 200 007a 01A9     		add	r1, sp, #4
+ 201 007c FFF7FEFF 		bl	I2C001_WriteData
+ 202 0080 48B9     		cbnz	r0, .L73
+ 203              	.L42:
+ 204 0082 41F28831 		movw	r1, #5000
+ 205 0086 94FBF1F3 		sdiv	r3, r4, r1
+ 206 008a 01FB1342 		mls	r2, r1, r3, r4
+ 207 008e 002A     		cmp	r2, #0
+ 208 0090 D1D0     		beq	.L39
+ 209 0092 0134     		adds	r4, r4, #1
+ 210 0094 F0E7     		b	.L41
+ 211              	.L73:
+ 212 0096 0024     		movs	r4, #0
+ 213              	.L43:
+ 214 0098 B442     		cmp	r4, r6
+ 215 009a 1CDA     		bge	.L74
+ 216              	.L48:
+ 217 009c 751E     		subs	r5, r6, #1
+ 218 009e AC42     		cmp	r4, r5
+ 219 00a0 01DA     		bge	.L44
+ 220 00a2 0220     		movs	r0, #2
+ 221 00a4 00E0     		b	.L70
+ 222              	.L44:
+ 223 00a6 0320     		movs	r0, #3
+ 224              	.L70:
+ 225 00a8 FF21     		movs	r1, #255
+ 226 00aa 8DF80500 		strb	r0, [sp, #5]
+ 227 00ae 8DF80410 		strb	r1, [sp, #4]
+ 228 00b2 0125     		movs	r5, #1
+ 229              	.L46:
+ 230 00b4 2148     		ldr	r0, .L79
+ 231 00b6 01A9     		add	r1, sp, #4
+ 232 00b8 FFF7FEFF 		bl	I2C001_WriteData
+ 233 00bc 48B9     		cbnz	r0, .L75
+ 234              	.L47:
+ 235 00be 41F28833 		movw	r3, #5000
+ 236 00c2 95FBF3F2 		sdiv	r2, r5, r3
+ 237 00c6 03FB1250 		mls	r0, r3, r2, r5
+ 238 00ca 0028     		cmp	r0, #0
+ 239 00cc B3D0     		beq	.L39
+ 240 00ce 0135     		adds	r5, r5, #1
+ 241 00d0 F0E7     		b	.L46
+ 242              	.L75:
+ 243 00d2 0134     		adds	r4, r4, #1
+ 244 00d4 E0E7     		b	.L43
+ 245              	.L74:
+ 246 00d6 0624     		movs	r4, #6
+ 247 00d8 FF23     		movs	r3, #255
+ 248 00da 8DF80540 		strb	r4, [sp, #5]
+ 249 00de 8DF80430 		strb	r3, [sp, #4]
+ 250 00e2 0124     		movs	r4, #1
+ 251              	.L49:
+ 252 00e4 1548     		ldr	r0, .L79
+ 253 00e6 01A9     		add	r1, sp, #4
+ 254 00e8 FFF7FEFF 		bl	I2C001_WriteData
+ 255 00ec 48B9     		cbnz	r0, .L76
+ 256              	.L50:
+ 257 00ee 41F28831 		movw	r1, #5000
+ 258 00f2 94FBF1F3 		sdiv	r3, r4, r1
+ 259 00f6 01FB1342 		mls	r2, r1, r3, r4
+ 260 00fa 002A     		cmp	r2, #0
+ 261 00fc 9BD0     		beq	.L39
+ 262 00fe 0134     		adds	r4, r4, #1
+ 263 0100 F0E7     		b	.L49
+ 264              	.L76:
+ 265 0102 0024     		movs	r4, #0
+ 266              	.L51:
+ 267 0104 B442     		cmp	r4, r6
+ 268 0106 15DA     		bge	.L77
+ 269              	.L54:
+ 270 0108 0125     		movs	r5, #1
+ 271              	.L53:
+ 272 010a 0C48     		ldr	r0, .L79
+ 273 010c 0DF10601 		add	r1, sp, #6
+ 274 0110 FFF7FEFF 		bl	I2C001_ReadData
+ 275 0114 48B9     		cbnz	r0, .L78
+ 276              	.L52:
+ 277 0116 41F28833 		movw	r3, #5000
+ 278 011a 95FBF3F2 		sdiv	r2, r5, r3
+ 279 011e 03FB1250 		mls	r0, r3, r2, r5
+ 280 0122 0028     		cmp	r0, #0
+ 281 0124 87D0     		beq	.L39
+ 282 0126 0135     		adds	r5, r5, #1
+ 283 0128 EFE7     		b	.L53
+ 284              	.L78:
+ 285 012a BDF80610 		ldrh	r1, [sp, #6]
+ 286 012e 3955     		strb	r1, [r7, r4]
+ 287 0130 0134     		adds	r4, r4, #1
+ 288 0132 E7E7     		b	.L51
+ 289              	.L77:
+ 290 0134 E0B2     		uxtb	r0, r4
+ 291              	.L36:
+ 292 0136 40B2     		sxtb	r0, r0
+ 293 0138 BDE8FC81 		pop	{r2, r3, r4, r5, r6, r7, r8, pc}
+ 294              	.L80:
+ 295              		.align	2
+ 296              	.L79:
+ 297 013c 00000000 		.word	I2C001_Handle0
+ 299              		.section	.text.I2Cdev_readByte,"ax",%progbits
+ 300              		.align	1
+ 301              		.global	I2Cdev_readByte
+ 302              		.thumb
+ 303              		.thumb_func
+ 305              	I2Cdev_readByte:
+ 306              		@ args = 0, pretend = 0, frame = 8
+ 307              		@ frame_needed = 0, uses_anonymous_args = 0
+ 308 0000 07B5     		push	{r0, r1, r2, lr}
+ 309 0002 02AB     		add	r3, sp, #8
+ 310 0004 0022     		movs	r2, #0
+ 311 0006 03F8012D 		strb	r2, [r3, #-1]!
+ 312 000a 0122     		movs	r2, #1
+ 313 000c FFF7FEFF 		bl	I2Cdev_readBytes
+ 314 0010 08B1     		cbz	r0, .L82
+ 315 0012 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ 316              	.L82:
+ 317 0016 0EBD     		pop	{r1, r2, r3, pc}
+ 319              		.section	.text.I2C_Prot_Int_Handler,"ax",%progbits
+ 320              		.align	1
+ 321              		.global	I2C_Prot_Int_Handler
+ 322              		.thumb
+ 323              		.thumb_func
+ 325              	I2C_Prot_Int_Handler:
+ 326              		@ args = 0, pretend = 0, frame = 0
+ 327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 328              		@ link register save eliminated.
+ 329 0000 064B     		ldr	r3, .L85
+ 330 0002 5868     		ldr	r0, [r3, #4]
+ 331 0004 0222     		movs	r2, #2
+ 332 0006 4FF40041 		mov	r1, #32768
+ 333 000a 8266     		str	r2, [r0, #104]
+ 334 000c C0F81811 		str	r1, [r0, #280]
+ 335 0010 C36C     		ldr	r3, [r0, #76]
+ 336 0012 43F02002 		orr	r2, r3, #32
+ 337 0016 C264     		str	r2, [r0, #76]
+ 338 0018 7047     		bx	lr
+ 339              	.L86:
+ 340 001a 00BF     		.align	2
+ 341              	.L85:
+ 342 001c 00000000 		.word	I2C001_Handle0
+ 344              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 I2Cdev.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:17     .text.I2Cdev_writeBytes:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:22     .text.I2Cdev_writeBytes:00000000 I2Cdev_writeBytes
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:120    .text.I2Cdev_writeBytes:000000c4 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:123    .text.I2Cdev_writeByte:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:128    .text.I2Cdev_writeByte:00000000 I2Cdev_writeByte
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:139    .text.I2Cdev_readBytes:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:144    .text.I2Cdev_readBytes:00000000 I2Cdev_readBytes
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:297    .text.I2Cdev_readBytes:0000013c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:300    .text.I2Cdev_readByte:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:305    .text.I2Cdev_readByte:00000000 I2Cdev_readByte
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:320    .text.I2C_Prot_Int_Handler:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:325    .text.I2C_Prot_Int_Handler:00000000 I2C_Prot_Int_Handler
+C:\Users\TOGABL~1\AppData\Local\Temp\ccsyndDf.s:342    .text.I2C_Prot_Int_Handler:0000001c $d
+
+UNDEFINED SYMBOLS
+I2C001_WriteData
+I2C001_Handle0
+I2C001_ReadData

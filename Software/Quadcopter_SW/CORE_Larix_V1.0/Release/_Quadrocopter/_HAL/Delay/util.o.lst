@@ -1,0 +1,301 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"util.c"
+  16              		.section	.text.CCU41_0_IRQHandler,"ax",%progbits
+  17              		.align	1
+  18              		.global	CCU41_0_IRQHandler
+  19              		.thumb
+  20              		.thumb_func
+  22              	CCU41_0_IRQHandler:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 024B     		ldr	r3, .L2
+  27 0002 1A68     		ldr	r2, [r3, #0]
+  28 0004 501C     		adds	r0, r2, #1
+  29 0006 1860     		str	r0, [r3, #0]
+  30 0008 7047     		bx	lr
+  31              	.L3:
+  32 000a 00BF     		.align	2
+  33              	.L2:
+  34 000c 00000000 		.word	.LANCHOR0
+  36              		.section	.text.delay,"ax",%progbits
+  37              		.align	1
+  38              		.global	delay
+  39              		.thumb
+  40              		.thumb_func
+  42              	delay:
+  43              		@ args = 0, pretend = 0, frame = 0
+  44              		@ frame_needed = 0, uses_anonymous_args = 0
+  45 0000 034B     		ldr	r3, .L8
+  46 0002 10B5     		push	{r4, lr}
+  47 0004 1C68     		ldr	r4, [r3, #0]
+  48              	.L5:
+  49 0006 1A68     		ldr	r2, [r3, #0]
+  50 0008 0119     		adds	r1, r0, r4
+  51 000a 9142     		cmp	r1, r2
+  52 000c FBD8     		bhi	.L5
+  53 000e 10BD     		pop	{r4, pc}
+  54              	.L9:
+  55              		.align	2
+  56              	.L8:
+  57 0010 00000000 		.word	.LANCHOR0
+  59              		.section	.text.millis,"ax",%progbits
+  60              		.align	1
+  61              		.global	millis
+  62              		.thumb
+  63              		.thumb_func
+  65              	millis:
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68              		@ link register save eliminated.
+  69 0000 014B     		ldr	r3, .L11
+  70 0002 1868     		ldr	r0, [r3, #0]
+  71 0004 7047     		bx	lr
+  72              	.L12:
+  73 0006 00BF     		.align	2
+  74              	.L11:
+  75 0008 00000000 		.word	.LANCHOR0
+  77              		.global	__aeabi_f2d
+  78              		.global	__aeabi_dmul
+  79              		.global	__aeabi_dadd
+  80              		.global	__aeabi_d2f
+  81              		.section	.text.transformation,"ax",%progbits
+  82              		.align	1
+  83              		.global	transformation
+  84              		.thumb
+  85              		.thumb_func
+  87              	transformation:
+  88              		@ args = 0, pretend = 0, frame = 88
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  91 0004 97B0     		sub	sp, sp, #92
+  92 0006 0646     		mov	r6, r0
+  93 0008 1D49     		ldr	r1, .L18
+  94 000a 04A8     		add	r0, sp, #16
+  95 000c 4822     		movs	r2, #72
+  96 000e FFF7FEFF 		bl	memcpy
+  97 0012 0023     		movs	r3, #0
+  98 0014 0193     		str	r3, [sp, #4]	@ float
+  99 0016 0293     		str	r3, [sp, #8]	@ float
+ 100 0018 0393     		str	r3, [sp, #12]	@ float
+ 101 001a EA46     		mov	sl, sp
+ 102 001c 4FF00008 		mov	r8, #0
+ 103              	.L14:
+ 104 0020 5AF8040F 		ldr	r0, [sl, #4]!	@ float
+ 105 0024 A6F10409 		sub	r9, r6, #4
+ 106 0028 0027     		movs	r7, #0
+ 107              	.L15:
+ 108 002a FFF7FEFF 		bl	__aeabi_f2d
+ 109 002e 0446     		mov	r4, r0
+ 110 0030 04A8     		add	r0, sp, #16
+ 111 0032 08EB000B 		add	fp, r8, r0
+ 112 0036 BB44     		add	fp, fp, r7
+ 113 0038 59F8040F 		ldr	r0, [r9, #4]!	@ float
+ 114 003c 0D46     		mov	r5, r1
+ 115 003e FFF7FEFF 		bl	__aeabi_f2d
+ 116 0042 DBE90023 		ldrd	r2, [fp]
+ 117 0046 FFF7FEFF 		bl	__aeabi_dmul
+ 118 004a 0246     		mov	r2, r0
+ 119 004c 0B46     		mov	r3, r1
+ 120 004e 2046     		mov	r0, r4
+ 121 0050 2946     		mov	r1, r5
+ 122 0052 FFF7FEFF 		bl	__aeabi_dadd
+ 123 0056 0837     		adds	r7, r7, #8
+ 124 0058 FFF7FEFF 		bl	__aeabi_d2f
+ 125 005c 182F     		cmp	r7, #24
+ 126 005e E4D1     		bne	.L15
+ 127 0060 08F11808 		add	r8, r8, #24
+ 128 0064 B8F1480F 		cmp	r8, #72
+ 129 0068 CAF80000 		str	r0, [sl, #0]	@ float
+ 130 006c D8D1     		bne	.L14
+ 131              	.L16:
+ 132 006e 0199     		ldr	r1, [sp, #4]	@ float
+ 133 0070 029A     		ldr	r2, [sp, #8]	@ float
+ 134 0072 039B     		ldr	r3, [sp, #12]	@ float
+ 135 0074 3160     		str	r1, [r6, #0]	@ float
+ 136 0076 7260     		str	r2, [r6, #4]	@ float
+ 137 0078 B360     		str	r3, [r6, #8]	@ float
+ 138 007a 17B0     		add	sp, sp, #92
+ 139 007c BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 140              	.L19:
+ 141              		.align	2
+ 142              	.L18:
+ 143 0080 00000000 		.word	.LANCHOR1
+ 145              		.global	__aeabi_dsub
+ 146              		.section	.text.transformation_mag,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	transformation_mag
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	transformation_mag:
+ 153              		@ args = 0, pretend = 0, frame = 112
+ 154              		@ frame_needed = 0, uses_anonymous_args = 0
+ 155 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 156 0004 2A4D     		ldr	r5, .L27
+ 157 0006 2B49     		ldr	r1, .L27+4
+ 158 0008 9DB0     		sub	sp, sp, #116
+ 159 000a 0646     		mov	r6, r0
+ 160 000c 4822     		movs	r2, #72
+ 161 000e 0AA8     		add	r0, sp, #40
+ 162 0010 FFF7FEFF 		bl	memcpy
+ 163 0014 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 164 0016 04AC     		add	r4, sp, #16
+ 165 0018 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 166 001a 95E80300 		ldmia	r5, {r0, r1}
+ 167 001e 08AF     		add	r7, sp, #32
+ 168 0020 84E80300 		stmia	r4, {r0, r1}
+ 169 0024 3546     		mov	r5, r6
+ 170 0026 02AC     		add	r4, sp, #8
+ 171              	.L21:
+ 172 0028 2868     		ldr	r0, [r5, #0]	@ float
+ 173 002a FFF7FEFF 		bl	__aeabi_f2d
+ 174 002e F4E90223 		ldrd	r2, [r4, #8]!
+ 175 0032 FFF7FEFF 		bl	__aeabi_dsub
+ 176 0036 FFF7FEFF 		bl	__aeabi_d2f
+ 177 003a BC42     		cmp	r4, r7
+ 178 003c 45F8040B 		str	r0, [r5], #4	@ float
+ 179 0040 F2D1     		bne	.L21
+ 180 0042 0023     		movs	r3, #0
+ 181 0044 0193     		str	r3, [sp, #4]	@ float
+ 182 0046 0293     		str	r3, [sp, #8]	@ float
+ 183 0048 0393     		str	r3, [sp, #12]	@ float
+ 184 004a EA46     		mov	sl, sp
+ 185 004c 4FF00008 		mov	r8, #0
+ 186              	.L22:
+ 187 0050 5AF8040F 		ldr	r0, [sl, #4]!	@ float
+ 188 0054 A6F10409 		sub	r9, r6, #4
+ 189 0058 0027     		movs	r7, #0
+ 190              	.L23:
+ 191 005a FFF7FEFF 		bl	__aeabi_f2d
+ 192 005e 0446     		mov	r4, r0
+ 193 0060 0AA8     		add	r0, sp, #40
+ 194 0062 08EB000B 		add	fp, r8, r0
+ 195 0066 BB44     		add	fp, fp, r7
+ 196 0068 59F8040F 		ldr	r0, [r9, #4]!	@ float
+ 197 006c 0D46     		mov	r5, r1
+ 198 006e FFF7FEFF 		bl	__aeabi_f2d
+ 199 0072 DBE90023 		ldrd	r2, [fp]
+ 200 0076 FFF7FEFF 		bl	__aeabi_dmul
+ 201 007a 0246     		mov	r2, r0
+ 202 007c 0B46     		mov	r3, r1
+ 203 007e 2046     		mov	r0, r4
+ 204 0080 2946     		mov	r1, r5
+ 205 0082 FFF7FEFF 		bl	__aeabi_dadd
+ 206 0086 0837     		adds	r7, r7, #8
+ 207 0088 FFF7FEFF 		bl	__aeabi_d2f
+ 208 008c 182F     		cmp	r7, #24
+ 209 008e E4D1     		bne	.L23
+ 210 0090 08F11808 		add	r8, r8, #24
+ 211 0094 B8F1480F 		cmp	r8, #72
+ 212 0098 CAF80000 		str	r0, [sl, #0]	@ float
+ 213 009c D8D1     		bne	.L22
+ 214              	.L24:
+ 215 009e 0199     		ldr	r1, [sp, #4]	@ float
+ 216 00a0 029A     		ldr	r2, [sp, #8]	@ float
+ 217 00a2 039B     		ldr	r3, [sp, #12]	@ float
+ 218 00a4 3160     		str	r1, [r6, #0]	@ float
+ 219 00a6 7260     		str	r2, [r6, #4]	@ float
+ 220 00a8 B360     		str	r3, [r6, #8]	@ float
+ 221 00aa 1DB0     		add	sp, sp, #116
+ 222 00ac BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, sl, fp, pc}
+ 223              	.L28:
+ 224              		.align	2
+ 225              	.L27:
+ 226 00b0 90000000 		.word	.LANCHOR1+144
+ 227 00b4 48000000 		.word	.LANCHOR1+72
+ 229              		.global	timer_cnt
+ 230              		.section	.rodata
+ 231              		.align	3
+ 232              		.set	.LANCHOR1,. + 0
+ 233              	.LC2:
+ 234 0000 CD3B7F66 		.word	1719614413
+ 235 0004 9EA0E6BF 		.word	-1075404642
+ 236 0008 CD3B7F66 		.word	1719614413
+ 237 000c 9EA0E6BF 		.word	-1075404642
+ 238 0010 00000000 		.word	0
+ 239 0014 00000000 		.word	0
+ 240 0018 CD3B7F66 		.word	1719614413
+ 241 001c 9EA0E63F 		.word	1072079006
+ 242 0020 CD3B7F66 		.word	1719614413
+ 243 0024 9EA0E6BF 		.word	-1075404642
+ 244 0028 00000000 		.word	0
+ 245 002c 00000000 		.word	0
+ 246 0030 00000000 		.word	0
+ 247 0034 00000000 		.word	0
+ 248 0038 00000000 		.word	0
+ 249 003c 00000000 		.word	0
+ 250 0040 00000000 		.word	0
+ 251 0044 0000F03F 		.word	1072693248
+ 252              	.LC0:
+ 253 0048 D13B7F66 		.word	1719614417
+ 254 004c 9EA0E6BF 		.word	-1075404642
+ 255 0050 C83B7F66 		.word	1719614408
+ 256 0054 9EA0E6BF 		.word	-1075404642
+ 257 0058 00000000 		.word	0
+ 258 005c 00000000 		.word	0
+ 259 0060 C83B7F66 		.word	1719614408
+ 260 0064 9EA0E6BF 		.word	-1075404642
+ 261 0068 D13B7F66 		.word	1719614417
+ 262 006c 9EA0E63F 		.word	1072079006
+ 263 0070 00000000 		.word	0
+ 264 0074 00000000 		.word	0
+ 265 0078 00000000 		.word	0
+ 266 007c 00000000 		.word	0
+ 267 0080 00000000 		.word	0
+ 268 0084 00000000 		.word	0
+ 269 0088 00000000 		.word	0
+ 270 008c 0000F0BF 		.word	-1074790400
+ 271              	.LC1:
+ 272 0090 6DE7FBA9 		.word	-1443109011
+ 273 0094 F1D2E1BF 		.word	-1075719439
+ 274 0098 C1CAA145 		.word	1168231105
+ 275 009c B6236B40 		.word	1080763318
+ 276 00a0 AE47E17A 		.word	2061584302
+ 277 00a4 14EA7BC0 		.word	-1065620972
+ 278              		.bss
+ 279              		.align	2
+ 280              		.set	.LANCHOR0,. + 0
+ 283              	timer_cnt:
+ 284 0000 00000000 		.space	4
+ 285              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 util.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:17     .text.CCU41_0_IRQHandler:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:22     .text.CCU41_0_IRQHandler:00000000 CCU41_0_IRQHandler
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:34     .text.CCU41_0_IRQHandler:0000000c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:37     .text.delay:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:42     .text.delay:00000000 delay
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:57     .text.delay:00000010 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:60     .text.millis:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:65     .text.millis:00000000 millis
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:75     .text.millis:00000008 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:82     .text.transformation:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:87     .text.transformation:00000000 transformation
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:143    .text.transformation:00000080 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:147    .text.transformation_mag:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:152    .text.transformation_mag:00000000 transformation_mag
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:226    .text.transformation_mag:000000b0 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:283    .bss:00000000 timer_cnt
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:231    .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccIiOoRd.s:279    .bss:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_f2d
+__aeabi_dmul
+__aeabi_dadd
+__aeabi_d2f
+memcpy
+__aeabi_dsub

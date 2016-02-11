@@ -1,0 +1,134 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"RESET001.c"
+  16              		.section	.text.RESET001_AssertReset,"ax",%progbits
+  17              		.align	1
+  18              		.global	RESET001_AssertReset
+  19              		.thumb
+  20              		.thumb_func
+  22              	RESET001_AssertReset:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 030F     		lsrs	r3, r0, #28
+  27 0002 0C22     		movs	r2, #12
+  28 0004 5A43     		muls	r2, r3, r2
+  29 0006 0249     		ldr	r1, .L2
+  30 0008 20F07040 		bic	r0, r0, #-268435456
+  31 000c 5050     		str	r0, [r2, r1]
+  32 000e 7047     		bx	lr
+  33              	.L3:
+  34              		.align	2
+  35              	.L2:
+  36 0010 10440050 		.word	1342194704
+  38              		.section	.text.RESET001_DeassertReset,"ax",%progbits
+  39              		.align	1
+  40              		.global	RESET001_DeassertReset
+  41              		.thumb
+  42              		.thumb_func
+  44              	RESET001_DeassertReset:
+  45              		@ args = 0, pretend = 0, frame = 0
+  46              		@ frame_needed = 0, uses_anonymous_args = 0
+  47              		@ link register save eliminated.
+  48 0000 030F     		lsrs	r3, r0, #28
+  49 0002 0C22     		movs	r2, #12
+  50 0004 5A43     		muls	r2, r3, r2
+  51 0006 0249     		ldr	r1, .L5
+  52 0008 20F07040 		bic	r0, r0, #-268435456
+  53 000c 5050     		str	r0, [r2, r1]
+  54 000e 7047     		bx	lr
+  55              	.L6:
+  56              		.align	2
+  57              	.L5:
+  58 0010 14440050 		.word	1342194708
+  60              		.section	.text.RESET001_GetResetInfo,"ax",%progbits
+  61              		.align	1
+  62              		.global	RESET001_GetResetInfo
+  63              		.thumb
+  64              		.thumb_func
+  66              	RESET001_GetResetInfo:
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+  69              		@ link register save eliminated.
+  70 0000 014B     		ldr	r3, .L8
+  71 0002 1868     		ldr	r0, [r3, #0]
+  72 0004 C0B2     		uxtb	r0, r0
+  73 0006 7047     		bx	lr
+  74              	.L9:
+  75              		.align	2
+  76              	.L8:
+  77 0008 00440050 		.word	1342194688
+  79              		.section	.text.RESET001_GetStatus,"ax",%progbits
+  80              		.align	1
+  81              		.global	RESET001_GetStatus
+  82              		.thumb
+  83              		.thumb_func
+  85              	RESET001_GetStatus:
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88              		@ link register save eliminated.
+  89 0000 20F07042 		bic	r2, r0, #-268435456
+  90 0004 0C23     		movs	r3, #12
+  91 0006 000F     		lsrs	r0, r0, #28
+  92 0008 5843     		muls	r0, r3, r0
+  93 000a 0349     		ldr	r1, .L11
+  94 000c 4058     		ldr	r0, [r0, r1]
+  95 000e 0242     		tst	r2, r0
+  96 0010 0CBF     		ite	eq
+  97 0012 0020     		moveq	r0, #0
+  98 0014 0120     		movne	r0, #1
+  99 0016 7047     		bx	lr
+ 100              	.L12:
+ 101              		.align	2
+ 102              	.L11:
+ 103 0018 0C440050 		.word	1342194700
+ 105              		.section	.text.RESET001_ClearResetInfo,"ax",%progbits
+ 106              		.align	1
+ 107              		.global	RESET001_ClearResetInfo
+ 108              		.thumb
+ 109              		.thumb_func
+ 111              	RESET001_ClearResetInfo:
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114              		@ link register save eliminated.
+ 115 0000 024B     		ldr	r3, .L14
+ 116 0002 9A68     		ldr	r2, [r3, #8]
+ 117 0004 42F00100 		orr	r0, r2, #1
+ 118 0008 9860     		str	r0, [r3, #8]
+ 119 000a 7047     		bx	lr
+ 120              	.L15:
+ 121              		.align	2
+ 122              	.L14:
+ 123 000c 00440050 		.word	1342194688
+ 125              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 RESET001.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:17     .text.RESET001_AssertReset:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:22     .text.RESET001_AssertReset:00000000 RESET001_AssertReset
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:36     .text.RESET001_AssertReset:00000010 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:39     .text.RESET001_DeassertReset:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:44     .text.RESET001_DeassertReset:00000000 RESET001_DeassertReset
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:58     .text.RESET001_DeassertReset:00000010 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:61     .text.RESET001_GetResetInfo:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:66     .text.RESET001_GetResetInfo:00000000 RESET001_GetResetInfo
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:77     .text.RESET001_GetResetInfo:00000008 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:80     .text.RESET001_GetStatus:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:85     .text.RESET001_GetStatus:00000000 RESET001_GetStatus
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:103    .text.RESET001_GetStatus:00000018 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:106    .text.RESET001_ClearResetInfo:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:111    .text.RESET001_ClearResetInfo:00000000 RESET001_ClearResetInfo
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4OrmRi.s:123    .text.RESET001_ClearResetInfo:0000000c $d
+
+NO UNDEFINED SYMBOLS

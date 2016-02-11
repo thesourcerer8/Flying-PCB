@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="SCU" description="System Control Unit " URI="http://www.infineon.com/0.13.40/peripheral/scu/0">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="DCO 2" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/dco/2">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.12"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.28"/>
+    <resourcesList name="clkout" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/dco2_clkout" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="DCO2 CLKOUT" description="" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/dco/2/clkout" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.45"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="CONFIG" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/config">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.0"/>
+    <resourcesList name="clkcr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/clkcr" isResolved="true"/>
+    <resourcesList name="clkcr_rtcclksel" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/clkcr/rtcclksel" isResolved="true"/>
+    <resourcesList name="pwrsvcr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/pwrsvcr" isResolved="true"/>
+    <resourcesList name="osccsr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/osccsr" isResolved="true"/>
+    <resourcesList name="frtc" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/frtc" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PCLKSEL" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/config/clkcr/pclksel" maxValue="1" minValue="0" startPos="16" stopPos="16" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.29"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>PCLK Clock Select</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="PCLK = MCLK"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="PCLK = 2 x MCLK"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="IDIV" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/config/clkcr/idiv" maxValue="255" minValue="0" startPos="8" stopPos="15" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="4"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.30"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>Divider Selection</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="00" description="Divider is bypassed."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="01" description="1; MCLK = 32 MHz"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="02" description="2; MCLK = 16 MHz"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="03" description="3; MCLK = 10.67 MHz"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="04" description="4; MCLK = 8 MHz"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="FE" description="254; MCLK = 126 kHz"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="FF" description="255; MCLK = 125.5 kHz"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="FDIV" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/config/clkcr/fdiv" maxValue="255" minValue="0" startPos="0" stopPos="7" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.31"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Fractional Divider Selection</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RTCCLKSEL" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/config/clkcr/rtcclksel" maxValue="7" minValue="0" startPos="17" stopPos="19" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.32"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>RTC Clock Select</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="fRTC" description="" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/config/frtc" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.44"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="VADCSHS" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/vadcshs">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.1"/>
+    <resourcesList name="cgat_stat" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatstat0/vadc" isResolved="true"/>
+    <resourcesList name="cgat_set" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatset0/vadc" isResolved="true"/>
+    <resourcesList name="cgat_clr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatclr0/vadc" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="VADC" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/vadcshs/cgat_clr" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.33"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>VADC and SHS Gating Clear</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="disable gating"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/ccu8/0">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.2"/>
+    <resourcesList name="cgat_stat" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatstat0/ccu80" isResolved="true"/>
+    <resourcesList name="cgat_set" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatset0/ccu80" isResolved="true"/>
+    <resourcesList name="cgat_clr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatclr0/ccu80" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="CCU80" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/ccu8/0/cgat_clr" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.34"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>CCU80 Gating Clear</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="disble gating"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/ccu4/0">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.3"/>
+    <resourcesList name="cgat_stat" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatstat0/ccu40" isResolved="true"/>
+    <resourcesList name="cgat_set" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatset0/ccu40" isResolved="true"/>
+    <resourcesList name="cgat_clr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatclr0/ccu40" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="CCU40" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/ccu4/0/cgat_clr" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.35"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>CCU40 Gating Clear</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="disable gating"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/usic/0">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.4"/>
+    <resourcesList name="cgat_stat" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatstat0/usic0" isResolved="true"/>
+    <resourcesList name="cgat_set" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatset0/usic0" isResolved="true"/>
+    <resourcesList name="cgat_clr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatclr0/usic0" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="USIC0" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/usic/0/cgat_clr" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.36"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>USIC0 Gating Clear</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="disable gating"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/bccu/0">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.5"/>
+    <resourcesList name="cgat_stat" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatstat0/bccu0" isResolved="true"/>
+    <resourcesList name="cgat_set" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatset0/bccu0" isResolved="true"/>
+    <resourcesList name="cgat_clr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatclr0/bccu0" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="BCCU0" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/bccu/0/cgat_clr" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.37"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>BCCU0 Gating Clear</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="disable gating"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="MATH" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/math">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.9"/>
+    <resourcesList name="cgat_stat" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatstat0/math" isResolved="true"/>
+    <resourcesList name="cgat_set" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatset0/math" isResolved="true"/>
+    <resourcesList name="cgat_clr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatclr0/math" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="MATH" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/math/cgat_clr" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.41"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>MATH Gating Clear</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="disable gating"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="WDT" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/wdt">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.10"/>
+    <resourcesList name="cgat_stat" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatstat0/wdt" isResolved="true"/>
+    <resourcesList name="cgat_set" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatset0/wdt" isResolved="true"/>
+    <resourcesList name="cgat_clr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatclr0/wdt" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="WDT" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/wdt/cgat_clr" maxValue="1" minValue="0" startPos="9" stopPos="9" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.42"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>WDT Gating Clear</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="disable gating"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="RTC" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/rtc">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.11"/>
+    <resourcesList name="cgat_stat" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatstat0/rtc" isResolved="true"/>
+    <resourcesList name="cgat_set" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatset0/rtc" isResolved="true"/>
+    <resourcesList name="cgat_clr" requiredResourceUri="http://www.infineon.com/0.13.40/peripheral/scu/0/cgatclr0/rtc" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RTC" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/clkgating/rtc/cgat_clr" maxValue="1" minValue="0" startPos="10" stopPos="10" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK002/1.0.8/clk002_0.app#//@consumed.43"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>RTC Gating Clear</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="disable gating"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RTCCLKSEL" URI="http://www.infineon.com/0.13.40/peripheral/scu/0/ccu/config/clkcr_rtcclksel" maxValue="7" minValue="0" startPos="17" stopPos="19" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>RTC Clock Select</toolTipHelpDescription>
+  </provided>
+  <categoryDescription description="System Control Unit " name="SCU"/>
+</ResourceModel:Peripheral>

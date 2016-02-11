@@ -1,0 +1,754 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"util.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	timer_cnt
+  20              		.bss
+  21              		.align	2
+  24              	timer_cnt:
+  25 0000 00000000 		.space	4
+  26              		.section	.text.CCU41_0_IRQHandler,"ax",%progbits
+  27              		.align	2
+  28              		.global	CCU41_0_IRQHandler
+  29              		.thumb
+  30              		.thumb_func
+  32              	CCU41_0_IRQHandler:
+  33              	.LFB120:
+  34              		.file 1 "../_Quadrocopter/_HAL/Delay/util.c"
+   1:../_Quadrocopter/_HAL/Delay/util.c **** /*
+   2:../_Quadrocopter/_HAL/Delay/util.c ****  * util.c
+   3:../_Quadrocopter/_HAL/Delay/util.c ****  *
+   4:../_Quadrocopter/_HAL/Delay/util.c ****  *  Created on: 04.04.2015
+   5:../_Quadrocopter/_HAL/Delay/util.c ****  *      Author: maan
+   6:../_Quadrocopter/_HAL/Delay/util.c ****  */
+   7:../_Quadrocopter/_HAL/Delay/util.c **** 
+   8:../_Quadrocopter/_HAL/Delay/util.c **** #include "util.h"
+   9:../_Quadrocopter/_HAL/Delay/util.c **** 
+  10:../_Quadrocopter/_HAL/Delay/util.c **** volatile uint32_t timer_cnt = 0U;
+  11:../_Quadrocopter/_HAL/Delay/util.c **** 
+  12:../_Quadrocopter/_HAL/Delay/util.c **** void Timer_CompareMatch_Int_Handler(void)
+  13:../_Quadrocopter/_HAL/Delay/util.c **** {
+  35              		.loc 1 13 0
+  36              		.cfi_startproc
+  37              		@ args = 0, pretend = 0, frame = 0
+  38              		@ frame_needed = 1, uses_anonymous_args = 0
+  39              		@ link register save eliminated.
+  40 0000 80B4     		push	{r7}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 4
+  43              		.cfi_offset 7, -4
+  44 0002 00AF     		add	r7, sp, #0
+  45              	.LCFI1:
+  46              		.cfi_def_cfa_register 7
+  14:../_Quadrocopter/_HAL/Delay/util.c **** 	timer_cnt++;
+  47              		.loc 1 14 0
+  48 0004 40F20003 		movw	r3, #:lower16:timer_cnt
+  49 0008 C0F20003 		movt	r3, #:upper16:timer_cnt
+  50 000c 1B68     		ldr	r3, [r3, #0]
+  51 000e 03F10102 		add	r2, r3, #1
+  52 0012 40F20003 		movw	r3, #:lower16:timer_cnt
+  53 0016 C0F20003 		movt	r3, #:upper16:timer_cnt
+  54 001a 1A60     		str	r2, [r3, #0]
+  15:../_Quadrocopter/_HAL/Delay/util.c **** }
+  55              		.loc 1 15 0
+  56 001c BD46     		mov	sp, r7
+  57 001e 80BC     		pop	{r7}
+  58 0020 7047     		bx	lr
+  59              		.cfi_endproc
+  60              	.LFE120:
+  62 0022 00BF     		.section	.text.delay,"ax",%progbits
+  63              		.align	2
+  64              		.global	delay
+  65              		.thumb
+  66              		.thumb_func
+  68              	delay:
+  69              	.LFB121:
+  16:../_Quadrocopter/_HAL/Delay/util.c **** 
+  17:../_Quadrocopter/_HAL/Delay/util.c **** void delay(uint32_t pause)
+  18:../_Quadrocopter/_HAL/Delay/util.c **** {
+  70              		.loc 1 18 0
+  71              		.cfi_startproc
+  72              		@ args = 0, pretend = 0, frame = 16
+  73              		@ frame_needed = 1, uses_anonymous_args = 0
+  74              		@ link register save eliminated.
+  75 0000 80B4     		push	{r7}
+  76              	.LCFI2:
+  77              		.cfi_def_cfa_offset 4
+  78              		.cfi_offset 7, -4
+  79 0002 85B0     		sub	sp, sp, #20
+  80              	.LCFI3:
+  81              		.cfi_def_cfa_offset 24
+  82 0004 00AF     		add	r7, sp, #0
+  83              	.LCFI4:
+  84              		.cfi_def_cfa_register 7
+  85 0006 7860     		str	r0, [r7, #4]
+  19:../_Quadrocopter/_HAL/Delay/util.c **** 	uint32_t now = timer_cnt;
+  86              		.loc 1 19 0
+  87 0008 40F20003 		movw	r3, #:lower16:timer_cnt
+  88 000c C0F20003 		movt	r3, #:upper16:timer_cnt
+  89 0010 1B68     		ldr	r3, [r3, #0]
+  90 0012 FB60     		str	r3, [r7, #12]
+  20:../_Quadrocopter/_HAL/Delay/util.c **** 	while((now+pause)>timer_cnt);
+  91              		.loc 1 20 0
+  92 0014 00BF     		nop
+  93              	.L3:
+  94              		.loc 1 20 0 is_stmt 0 discriminator 1
+  95 0016 FA68     		ldr	r2, [r7, #12]
+  96 0018 7B68     		ldr	r3, [r7, #4]
+  97 001a D218     		adds	r2, r2, r3
+  98 001c 40F20003 		movw	r3, #:lower16:timer_cnt
+  99 0020 C0F20003 		movt	r3, #:upper16:timer_cnt
+ 100 0024 1B68     		ldr	r3, [r3, #0]
+ 101 0026 9A42     		cmp	r2, r3
+ 102 0028 F5D8     		bhi	.L3
+  21:../_Quadrocopter/_HAL/Delay/util.c **** }
+ 103              		.loc 1 21 0 is_stmt 1
+ 104 002a 07F11407 		add	r7, r7, #20
+ 105 002e BD46     		mov	sp, r7
+ 106 0030 80BC     		pop	{r7}
+ 107 0032 7047     		bx	lr
+ 108              		.cfi_endproc
+ 109              	.LFE121:
+ 111              		.section	.text.millis,"ax",%progbits
+ 112              		.align	2
+ 113              		.global	millis
+ 114              		.thumb
+ 115              		.thumb_func
+ 117              	millis:
+ 118              	.LFB122:
+  22:../_Quadrocopter/_HAL/Delay/util.c **** 
+  23:../_Quadrocopter/_HAL/Delay/util.c **** uint32_t millis()
+  24:../_Quadrocopter/_HAL/Delay/util.c **** {
+ 119              		.loc 1 24 0
+ 120              		.cfi_startproc
+ 121              		@ args = 0, pretend = 0, frame = 0
+ 122              		@ frame_needed = 1, uses_anonymous_args = 0
+ 123              		@ link register save eliminated.
+ 124 0000 80B4     		push	{r7}
+ 125              	.LCFI5:
+ 126              		.cfi_def_cfa_offset 4
+ 127              		.cfi_offset 7, -4
+ 128 0002 00AF     		add	r7, sp, #0
+ 129              	.LCFI6:
+ 130              		.cfi_def_cfa_register 7
+  25:../_Quadrocopter/_HAL/Delay/util.c **** 	return timer_cnt;
+ 131              		.loc 1 25 0
+ 132 0004 40F20003 		movw	r3, #:lower16:timer_cnt
+ 133 0008 C0F20003 		movt	r3, #:upper16:timer_cnt
+ 134 000c 1B68     		ldr	r3, [r3, #0]
+  26:../_Quadrocopter/_HAL/Delay/util.c **** }
+ 135              		.loc 1 26 0
+ 136 000e 1846     		mov	r0, r3
+ 137 0010 BD46     		mov	sp, r7
+ 138 0012 80BC     		pop	{r7}
+ 139 0014 7047     		bx	lr
+ 140              		.cfi_endproc
+ 141              	.LFE122:
+ 143              		.global	__aeabi_f2d
+ 144              		.global	__aeabi_dmul
+ 145              		.global	__aeabi_dadd
+ 146              		.global	__aeabi_d2f
+ 147 0016 00BF     		.section	.rodata
+ 148              		.align	3
+ 149              	.LC2:
+ 150 0000 CD3B7F66 		.word	1719614413
+ 151 0004 9EA0E6BF 		.word	-1075404642
+ 152 0008 CD3B7F66 		.word	1719614413
+ 153 000c 9EA0E6BF 		.word	-1075404642
+ 154 0010 00000000 		.word	0
+ 155 0014 00000000 		.word	0
+ 156 0018 CD3B7F66 		.word	1719614413
+ 157 001c 9EA0E63F 		.word	1072079006
+ 158 0020 CD3B7F66 		.word	1719614413
+ 159 0024 9EA0E6BF 		.word	-1075404642
+ 160 0028 00000000 		.word	0
+ 161 002c 00000000 		.word	0
+ 162 0030 00000000 		.word	0
+ 163 0034 00000000 		.word	0
+ 164 0038 00000000 		.word	0
+ 165 003c 00000000 		.word	0
+ 166 0040 00000000 		.word	0
+ 167 0044 0000F03F 		.word	1072693248
+ 168              		.section	.text.transformation,"ax",%progbits
+ 169              		.align	2
+ 170              		.global	transformation
+ 171              		.thumb
+ 172              		.thumb_func
+ 174              	transformation:
+ 175              	.LFB123:
+  27:../_Quadrocopter/_HAL/Delay/util.c **** 
+  28:../_Quadrocopter/_HAL/Delay/util.c **** void transformation(float* values)
+  29:../_Quadrocopter/_HAL/Delay/util.c **** {
+ 176              		.loc 1 29 0
+ 177              		.cfi_startproc
+ 178              		@ args = 0, pretend = 0, frame = 112
+ 179              		@ frame_needed = 1, uses_anonymous_args = 0
+ 180 0000 2DE9B043 		push	{r4, r5, r7, r8, r9, lr}
+ 181              	.LCFI7:
+ 182              		.cfi_def_cfa_offset 24
+ 183              		.cfi_offset 4, -24
+ 184              		.cfi_offset 5, -20
+ 185              		.cfi_offset 7, -16
+ 186              		.cfi_offset 8, -12
+ 187              		.cfi_offset 9, -8
+ 188              		.cfi_offset 14, -4
+ 189 0004 9CB0     		sub	sp, sp, #112
+ 190              	.LCFI8:
+ 191              		.cfi_def_cfa_offset 136
+ 192 0006 00AF     		add	r7, sp, #0
+ 193              	.LCFI9:
+ 194              		.cfi_def_cfa_register 7
+ 195 0008 7860     		str	r0, [r7, #4]
+  30:../_Quadrocopter/_HAL/Delay/util.c ****   //transformation matrix
+  31:../_Quadrocopter/_HAL/Delay/util.c ****   double transformation_matrix[3][3] =
+ 196              		.loc 1 31 0
+ 197 000a 40F20003 		movw	r3, #:lower16:.LC2
+ 198 000e C0F20003 		movt	r3, #:upper16:.LC2
+ 199 0012 07F11801 		add	r1, r7, #24
+ 200 0016 1A46     		mov	r2, r3
+ 201 0018 4FF04803 		mov	r3, #72
+ 202 001c 0846     		mov	r0, r1
+ 203 001e 1146     		mov	r1, r2
+ 204 0020 1A46     		mov	r2, r3
+ 205 0022 FFF7FEFF 		bl	memcpy
+  32:../_Quadrocopter/_HAL/Delay/util.c ****   {
+  33:../_Quadrocopter/_HAL/Delay/util.c ****     {-0.70710678118654752440084436210485, -0.70710678118654752440084436210485, 0},
+  34:../_Quadrocopter/_HAL/Delay/util.c ****     {0.70710678118654752440084436210485, -0.70710678118654752440084436210485, 0},
+  35:../_Quadrocopter/_HAL/Delay/util.c ****     {0, 0, 1}
+  36:../_Quadrocopter/_HAL/Delay/util.c ****   };
+  37:../_Quadrocopter/_HAL/Delay/util.c ****   //calculation
+  38:../_Quadrocopter/_HAL/Delay/util.c ****   float result[3] = {0, 0, 0};
+ 206              		.loc 1 38 0
+ 207 0026 4FF00003 		mov	r3, #0
+ 208 002a FB60     		str	r3, [r7, #12]	@ float
+ 209 002c 4FF00003 		mov	r3, #0
+ 210 0030 3B61     		str	r3, [r7, #16]	@ float
+ 211 0032 4FF00003 		mov	r3, #0
+ 212 0036 7B61     		str	r3, [r7, #20]	@ float
+ 213              	.LBB2:
+  39:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i)
+ 214              		.loc 1 39 0
+ 215 0038 4FF00003 		mov	r3, #0
+ 216 003c FB66     		str	r3, [r7, #108]
+ 217 003e 51E0     		b	.L7
+ 218              	.L10:
+ 219              	.LBB3:
+  40:../_Quadrocopter/_HAL/Delay/util.c **** 	  for (int j=0; j<3; ++j)
+ 220              		.loc 1 40 0
+ 221 0040 4FF00003 		mov	r3, #0
+ 222 0044 BB66     		str	r3, [r7, #104]
+ 223 0046 46E0     		b	.L8
+ 224              	.L9:
+  41:../_Quadrocopter/_HAL/Delay/util.c **** 		  result[i] += transformation_matrix[i][j] * values[j];
+ 225              		.loc 1 41 0 discriminator 2
+ 226 0048 FB6E     		ldr	r3, [r7, #108]
+ 227 004a 4FEA8303 		lsl	r3, r3, #2
+ 228 004e 07F17001 		add	r1, r7, #112
+ 229 0052 CB18     		adds	r3, r1, r3
+ 230 0054 A3F16403 		sub	r3, r3, #100
+ 231 0058 1B68     		ldr	r3, [r3, #0]	@ float
+ 232 005a 1846     		mov	r0, r3	@ float
+ 233 005c FFF7FEFF 		bl	__aeabi_f2d
+ 234 0060 0446     		mov	r4, r0
+ 235 0062 0D46     		mov	r5, r1
+ 236 0064 FA6E     		ldr	r2, [r7, #108]
+ 237 0066 1346     		mov	r3, r2
+ 238 0068 4FEA4303 		lsl	r3, r3, #1
+ 239 006c 9B18     		adds	r3, r3, r2
+ 240 006e BA6E     		ldr	r2, [r7, #104]
+ 241 0070 9B18     		adds	r3, r3, r2
+ 242 0072 4FEAC303 		lsl	r3, r3, #3
+ 243 0076 07F17002 		add	r2, r7, #112
+ 244 007a D318     		adds	r3, r2, r3
+ 245 007c A3F15803 		sub	r3, r3, #88
+ 246 0080 D3E90089 		ldrd	r8, [r3]
+ 247 0084 BB6E     		ldr	r3, [r7, #104]
+ 248 0086 4FEA8303 		lsl	r3, r3, #2
+ 249 008a 7A68     		ldr	r2, [r7, #4]
+ 250 008c D318     		adds	r3, r2, r3
+ 251 008e 1B68     		ldr	r3, [r3, #0]	@ float
+ 252 0090 1846     		mov	r0, r3	@ float
+ 253 0092 FFF7FEFF 		bl	__aeabi_f2d
+ 254 0096 0246     		mov	r2, r0
+ 255 0098 0B46     		mov	r3, r1
+ 256 009a 4046     		mov	r0, r8
+ 257 009c 4946     		mov	r1, r9
+ 258 009e FFF7FEFF 		bl	__aeabi_dmul
+ 259 00a2 0246     		mov	r2, r0
+ 260 00a4 0B46     		mov	r3, r1
+ 261 00a6 2046     		mov	r0, r4
+ 262 00a8 2946     		mov	r1, r5
+ 263 00aa FFF7FEFF 		bl	__aeabi_dadd
+ 264 00ae 0246     		mov	r2, r0
+ 265 00b0 0B46     		mov	r3, r1
+ 266 00b2 1046     		mov	r0, r2
+ 267 00b4 1946     		mov	r1, r3
+ 268 00b6 FFF7FEFF 		bl	__aeabi_d2f
+ 269 00ba 0246     		mov	r2, r0	@ float
+ 270 00bc FB6E     		ldr	r3, [r7, #108]
+ 271 00be 4FEA8303 		lsl	r3, r3, #2
+ 272 00c2 07F17001 		add	r1, r7, #112
+ 273 00c6 CB18     		adds	r3, r1, r3
+ 274 00c8 A3F16403 		sub	r3, r3, #100
+ 275 00cc 1A60     		str	r2, [r3, #0]	@ float
+  40:../_Quadrocopter/_HAL/Delay/util.c **** 	  for (int j=0; j<3; ++j)
+ 276              		.loc 1 40 0 discriminator 2
+ 277 00ce BB6E     		ldr	r3, [r7, #104]
+ 278 00d0 03F10103 		add	r3, r3, #1
+ 279 00d4 BB66     		str	r3, [r7, #104]
+ 280              	.L8:
+  40:../_Quadrocopter/_HAL/Delay/util.c **** 	  for (int j=0; j<3; ++j)
+ 281              		.loc 1 40 0 is_stmt 0 discriminator 1
+ 282 00d6 BB6E     		ldr	r3, [r7, #104]
+ 283 00d8 022B     		cmp	r3, #2
+ 284 00da B5DD     		ble	.L9
+ 285              	.LBE3:
+  39:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i)
+ 286              		.loc 1 39 0 is_stmt 1
+ 287 00dc FB6E     		ldr	r3, [r7, #108]
+ 288 00de 03F10103 		add	r3, r3, #1
+ 289 00e2 FB66     		str	r3, [r7, #108]
+ 290              	.L7:
+  39:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i)
+ 291              		.loc 1 39 0 is_stmt 0 discriminator 1
+ 292 00e4 FB6E     		ldr	r3, [r7, #108]
+ 293 00e6 022B     		cmp	r3, #2
+ 294 00e8 AADD     		ble	.L10
+ 295              	.LBE2:
+ 296              	.LBB4:
+  42:../_Quadrocopter/_HAL/Delay/util.c **** 
+  43:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i)
+ 297              		.loc 1 43 0 is_stmt 1
+ 298 00ea 4FF00003 		mov	r3, #0
+ 299 00ee 7B66     		str	r3, [r7, #100]
+ 300 00f0 12E0     		b	.L11
+ 301              	.L12:
+  44:../_Quadrocopter/_HAL/Delay/util.c **** 	  values[i] = result[i];
+ 302              		.loc 1 44 0 discriminator 2
+ 303 00f2 7B6E     		ldr	r3, [r7, #100]
+ 304 00f4 4FEA8303 		lsl	r3, r3, #2
+ 305 00f8 7A68     		ldr	r2, [r7, #4]
+ 306 00fa D318     		adds	r3, r2, r3
+ 307 00fc 7A6E     		ldr	r2, [r7, #100]
+ 308 00fe 4FEA8202 		lsl	r2, r2, #2
+ 309 0102 07F17001 		add	r1, r7, #112
+ 310 0106 8A18     		adds	r2, r1, r2
+ 311 0108 A2F16402 		sub	r2, r2, #100
+ 312 010c 1268     		ldr	r2, [r2, #0]	@ float
+ 313 010e 1A60     		str	r2, [r3, #0]	@ float
+  43:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i)
+ 314              		.loc 1 43 0 discriminator 2
+ 315 0110 7B6E     		ldr	r3, [r7, #100]
+ 316 0112 03F10103 		add	r3, r3, #1
+ 317 0116 7B66     		str	r3, [r7, #100]
+ 318              	.L11:
+  43:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i)
+ 319              		.loc 1 43 0 is_stmt 0 discriminator 1
+ 320 0118 7B6E     		ldr	r3, [r7, #100]
+ 321 011a 022B     		cmp	r3, #2
+ 322 011c E9DD     		ble	.L12
+ 323              	.LBE4:
+  45:../_Quadrocopter/_HAL/Delay/util.c **** }
+ 324              		.loc 1 45 0 is_stmt 1
+ 325 011e 07F17007 		add	r7, r7, #112
+ 326 0122 BD46     		mov	sp, r7
+ 327 0124 BDE8B083 		pop	{r4, r5, r7, r8, r9, pc}
+ 328              		.cfi_endproc
+ 329              	.LFE123:
+ 331              		.global	__aeabi_dsub
+ 332              		.section	.rodata
+ 333              		.align	3
+ 334              	.LC0:
+ 335 0048 D13B7F66 		.word	1719614417
+ 336 004c 9EA0E6BF 		.word	-1075404642
+ 337 0050 C83B7F66 		.word	1719614408
+ 338 0054 9EA0E6BF 		.word	-1075404642
+ 339 0058 00000000 		.word	0
+ 340 005c 00000000 		.word	0
+ 341 0060 C83B7F66 		.word	1719614408
+ 342 0064 9EA0E6BF 		.word	-1075404642
+ 343 0068 D13B7F66 		.word	1719614417
+ 344 006c 9EA0E63F 		.word	1072079006
+ 345 0070 00000000 		.word	0
+ 346 0074 00000000 		.word	0
+ 347 0078 00000000 		.word	0
+ 348 007c 00000000 		.word	0
+ 349 0080 00000000 		.word	0
+ 350 0084 00000000 		.word	0
+ 351 0088 00000000 		.word	0
+ 352 008c 0000F0BF 		.word	-1074790400
+ 353              		.align	3
+ 354              	.LC1:
+ 355 0090 6DE7FBA9 		.word	-1443109011
+ 356 0094 F1D2E1BF 		.word	-1075719439
+ 357 0098 C1CAA145 		.word	1168231105
+ 358 009c B6236B40 		.word	1080763318
+ 359 00a0 AE47E17A 		.word	2061584302
+ 360 00a4 14EA7BC0 		.word	-1065620972
+ 361              		.section	.text.transformation_mag,"ax",%progbits
+ 362              		.align	2
+ 363              		.global	transformation_mag
+ 364              		.thumb
+ 365              		.thumb_func
+ 367              	transformation_mag:
+ 368              	.LFB124:
+  46:../_Quadrocopter/_HAL/Delay/util.c **** 
+  47:../_Quadrocopter/_HAL/Delay/util.c **** void transformation_mag(float* values)
+  48:../_Quadrocopter/_HAL/Delay/util.c **** {
+ 369              		.loc 1 48 0
+ 370              		.cfi_startproc
+ 371              		@ args = 0, pretend = 0, frame = 136
+ 372              		@ frame_needed = 1, uses_anonymous_args = 0
+ 373 0000 2DE9B043 		push	{r4, r5, r7, r8, r9, lr}
+ 374              	.LCFI10:
+ 375              		.cfi_def_cfa_offset 24
+ 376              		.cfi_offset 4, -24
+ 377              		.cfi_offset 5, -20
+ 378              		.cfi_offset 7, -16
+ 379              		.cfi_offset 8, -12
+ 380              		.cfi_offset 9, -8
+ 381              		.cfi_offset 14, -4
+ 382 0004 A2B0     		sub	sp, sp, #136
+ 383              	.LCFI11:
+ 384              		.cfi_def_cfa_offset 160
+ 385 0006 00AF     		add	r7, sp, #0
+ 386              	.LCFI12:
+ 387              		.cfi_def_cfa_register 7
+ 388 0008 7860     		str	r0, [r7, #4]
+  49:../_Quadrocopter/_HAL/Delay/util.c ****   double calibration_matrix[3][3] =
+ 389              		.loc 1 49 0
+ 390 000a 40F20003 		movw	r3, #:lower16:.LC0
+ 391 000e C0F20003 		movt	r3, #:upper16:.LC0
+ 392 0012 07F13001 		add	r1, r7, #48
+ 393 0016 1A46     		mov	r2, r3
+ 394 0018 4FF04803 		mov	r3, #72
+ 395 001c 0846     		mov	r0, r1
+ 396 001e 1146     		mov	r1, r2
+ 397 0020 1A46     		mov	r2, r3
+ 398 0022 FFF7FEFF 		bl	memcpy
+  50:../_Quadrocopter/_HAL/Delay/util.c ****   {
+  51:../_Quadrocopter/_HAL/Delay/util.c ****     {-0.707106781186548, -0.707106781186547, 0},
+  52:../_Quadrocopter/_HAL/Delay/util.c ****     {-0.707106781186547, 0.707106781186548, 0},
+  53:../_Quadrocopter/_HAL/Delay/util.c ****     {0, 0, -1}
+  54:../_Quadrocopter/_HAL/Delay/util.c ****   };
+  55:../_Quadrocopter/_HAL/Delay/util.c **** 
+  56:../_Quadrocopter/_HAL/Delay/util.c ****   double bias[3] =
+ 399              		.loc 1 56 0
+ 400 0026 40F20003 		movw	r3, #:lower16:.LC1
+ 401 002a C0F20003 		movt	r3, #:upper16:.LC1
+ 402 002e 07F11804 		add	r4, r7, #24
+ 403 0032 1D46     		mov	r5, r3
+ 404 0034 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 405 0036 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 406 0038 95E80300 		ldmia	r5, {r0, r1}
+ 407 003c 84E80300 		stmia	r4, {r0, r1}
+ 408              	.LBB5:
+  57:../_Quadrocopter/_HAL/Delay/util.c ****   {
+  58:../_Quadrocopter/_HAL/Delay/util.c **** 	  -0.557,
+  59:../_Quadrocopter/_HAL/Delay/util.c **** 	  217.116,
+  60:../_Quadrocopter/_HAL/Delay/util.c **** 	  -446.63
+  61:../_Quadrocopter/_HAL/Delay/util.c ****   };
+  62:../_Quadrocopter/_HAL/Delay/util.c ****   //calculation
+  63:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i) values[i] = values[i] - bias[i];
+ 409              		.loc 1 63 0
+ 410 0040 4FF00003 		mov	r3, #0
+ 411 0044 C7F88430 		str	r3, [r7, #132]
+ 412 0048 2AE0     		b	.L14
+ 413              	.L15:
+ 414              		.loc 1 63 0 is_stmt 0 discriminator 2
+ 415 004a D7F88430 		ldr	r3, [r7, #132]
+ 416 004e 4FEA8303 		lsl	r3, r3, #2
+ 417 0052 7A68     		ldr	r2, [r7, #4]
+ 418 0054 D418     		adds	r4, r2, r3
+ 419 0056 D7F88430 		ldr	r3, [r7, #132]
+ 420 005a 4FEA8303 		lsl	r3, r3, #2
+ 421 005e 7A68     		ldr	r2, [r7, #4]
+ 422 0060 D318     		adds	r3, r2, r3
+ 423 0062 1B68     		ldr	r3, [r3, #0]	@ float
+ 424 0064 1846     		mov	r0, r3	@ float
+ 425 0066 FFF7FEFF 		bl	__aeabi_f2d
+ 426 006a D7F88430 		ldr	r3, [r7, #132]
+ 427 006e 4FEAC303 		lsl	r3, r3, #3
+ 428 0072 07F18802 		add	r2, r7, #136
+ 429 0076 D318     		adds	r3, r2, r3
+ 430 0078 A3F17003 		sub	r3, r3, #112
+ 431 007c D3E90023 		ldrd	r2, [r3]
+ 432 0080 FFF7FEFF 		bl	__aeabi_dsub
+ 433 0084 0246     		mov	r2, r0
+ 434 0086 0B46     		mov	r3, r1
+ 435 0088 1046     		mov	r0, r2
+ 436 008a 1946     		mov	r1, r3
+ 437 008c FFF7FEFF 		bl	__aeabi_d2f
+ 438 0090 0346     		mov	r3, r0	@ float
+ 439 0092 2360     		str	r3, [r4, #0]	@ float
+ 440 0094 D7F88430 		ldr	r3, [r7, #132]
+ 441 0098 03F10103 		add	r3, r3, #1
+ 442 009c C7F88430 		str	r3, [r7, #132]
+ 443              	.L14:
+ 444              		.loc 1 63 0 discriminator 1
+ 445 00a0 D7F88430 		ldr	r3, [r7, #132]
+ 446 00a4 022B     		cmp	r3, #2
+ 447 00a6 D0DD     		ble	.L15
+ 448              	.LBE5:
+  64:../_Quadrocopter/_HAL/Delay/util.c ****   float result[3] = {0, 0, 0};
+ 449              		.loc 1 64 0 is_stmt 1
+ 450 00a8 4FF00003 		mov	r3, #0
+ 451 00ac FB60     		str	r3, [r7, #12]	@ float
+ 452 00ae 4FF00003 		mov	r3, #0
+ 453 00b2 3B61     		str	r3, [r7, #16]	@ float
+ 454 00b4 4FF00003 		mov	r3, #0
+ 455 00b8 7B61     		str	r3, [r7, #20]	@ float
+ 456              	.LBB6:
+  65:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i)
+ 457              		.loc 1 65 0
+ 458 00ba 4FF00003 		mov	r3, #0
+ 459 00be C7F88030 		str	r3, [r7, #128]
+ 460 00c2 56E0     		b	.L16
+ 461              	.L19:
+ 462              	.LBB7:
+  66:../_Quadrocopter/_HAL/Delay/util.c ****     for (int j=0; j<3; ++j)
+ 463              		.loc 1 66 0
+ 464 00c4 4FF00003 		mov	r3, #0
+ 465 00c8 FB67     		str	r3, [r7, #124]
+ 466 00ca 49E0     		b	.L17
+ 467              	.L18:
+  67:../_Quadrocopter/_HAL/Delay/util.c ****       result[i] += calibration_matrix[i][j] * values[j];
+ 468              		.loc 1 67 0 discriminator 2
+ 469 00cc D7F88030 		ldr	r3, [r7, #128]
+ 470 00d0 4FEA8303 		lsl	r3, r3, #2
+ 471 00d4 07F18801 		add	r1, r7, #136
+ 472 00d8 CB18     		adds	r3, r1, r3
+ 473 00da A3F17C03 		sub	r3, r3, #124
+ 474 00de 1B68     		ldr	r3, [r3, #0]	@ float
+ 475 00e0 1846     		mov	r0, r3	@ float
+ 476 00e2 FFF7FEFF 		bl	__aeabi_f2d
+ 477 00e6 0446     		mov	r4, r0
+ 478 00e8 0D46     		mov	r5, r1
+ 479 00ea D7F88020 		ldr	r2, [r7, #128]
+ 480 00ee 1346     		mov	r3, r2
+ 481 00f0 4FEA4303 		lsl	r3, r3, #1
+ 482 00f4 9B18     		adds	r3, r3, r2
+ 483 00f6 FA6F     		ldr	r2, [r7, #124]
+ 484 00f8 9B18     		adds	r3, r3, r2
+ 485 00fa 4FEAC303 		lsl	r3, r3, #3
+ 486 00fe 07F18802 		add	r2, r7, #136
+ 487 0102 D318     		adds	r3, r2, r3
+ 488 0104 A3F15803 		sub	r3, r3, #88
+ 489 0108 D3E90089 		ldrd	r8, [r3]
+ 490 010c FB6F     		ldr	r3, [r7, #124]
+ 491 010e 4FEA8303 		lsl	r3, r3, #2
+ 492 0112 7A68     		ldr	r2, [r7, #4]
+ 493 0114 D318     		adds	r3, r2, r3
+ 494 0116 1B68     		ldr	r3, [r3, #0]	@ float
+ 495 0118 1846     		mov	r0, r3	@ float
+ 496 011a FFF7FEFF 		bl	__aeabi_f2d
+ 497 011e 0246     		mov	r2, r0
+ 498 0120 0B46     		mov	r3, r1
+ 499 0122 4046     		mov	r0, r8
+ 500 0124 4946     		mov	r1, r9
+ 501 0126 FFF7FEFF 		bl	__aeabi_dmul
+ 502 012a 0246     		mov	r2, r0
+ 503 012c 0B46     		mov	r3, r1
+ 504 012e 2046     		mov	r0, r4
+ 505 0130 2946     		mov	r1, r5
+ 506 0132 FFF7FEFF 		bl	__aeabi_dadd
+ 507 0136 0246     		mov	r2, r0
+ 508 0138 0B46     		mov	r3, r1
+ 509 013a 1046     		mov	r0, r2
+ 510 013c 1946     		mov	r1, r3
+ 511 013e FFF7FEFF 		bl	__aeabi_d2f
+ 512 0142 0246     		mov	r2, r0	@ float
+ 513 0144 D7F88030 		ldr	r3, [r7, #128]
+ 514 0148 4FEA8303 		lsl	r3, r3, #2
+ 515 014c 07F18801 		add	r1, r7, #136
+ 516 0150 CB18     		adds	r3, r1, r3
+ 517 0152 A3F17C03 		sub	r3, r3, #124
+ 518 0156 1A60     		str	r2, [r3, #0]	@ float
+  66:../_Quadrocopter/_HAL/Delay/util.c ****     for (int j=0; j<3; ++j)
+ 519              		.loc 1 66 0 discriminator 2
+ 520 0158 FB6F     		ldr	r3, [r7, #124]
+ 521 015a 03F10103 		add	r3, r3, #1
+ 522 015e FB67     		str	r3, [r7, #124]
+ 523              	.L17:
+  66:../_Quadrocopter/_HAL/Delay/util.c ****     for (int j=0; j<3; ++j)
+ 524              		.loc 1 66 0 is_stmt 0 discriminator 1
+ 525 0160 FB6F     		ldr	r3, [r7, #124]
+ 526 0162 022B     		cmp	r3, #2
+ 527 0164 B2DD     		ble	.L18
+ 528              	.LBE7:
+  65:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i)
+ 529              		.loc 1 65 0 is_stmt 1
+ 530 0166 D7F88030 		ldr	r3, [r7, #128]
+ 531 016a 03F10103 		add	r3, r3, #1
+ 532 016e C7F88030 		str	r3, [r7, #128]
+ 533              	.L16:
+  65:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i)
+ 534              		.loc 1 65 0 is_stmt 0 discriminator 1
+ 535 0172 D7F88030 		ldr	r3, [r7, #128]
+ 536 0176 022B     		cmp	r3, #2
+ 537 0178 A4DD     		ble	.L19
+ 538              	.LBE6:
+ 539              	.LBB8:
+  68:../_Quadrocopter/_HAL/Delay/util.c ****   for (int i=0; i<3; ++i) values[i] = result[i];
+ 540              		.loc 1 68 0 is_stmt 1
+ 541 017a 4FF00003 		mov	r3, #0
+ 542 017e BB67     		str	r3, [r7, #120]
+ 543 0180 12E0     		b	.L20
+ 544              	.L21:
+ 545              		.loc 1 68 0 is_stmt 0 discriminator 2
+ 546 0182 BB6F     		ldr	r3, [r7, #120]
+ 547 0184 4FEA8303 		lsl	r3, r3, #2
+ 548 0188 7A68     		ldr	r2, [r7, #4]
+ 549 018a D318     		adds	r3, r2, r3
+ 550 018c BA6F     		ldr	r2, [r7, #120]
+ 551 018e 4FEA8202 		lsl	r2, r2, #2
+ 552 0192 07F18801 		add	r1, r7, #136
+ 553 0196 8A18     		adds	r2, r1, r2
+ 554 0198 A2F17C02 		sub	r2, r2, #124
+ 555 019c 1268     		ldr	r2, [r2, #0]	@ float
+ 556 019e 1A60     		str	r2, [r3, #0]	@ float
+ 557 01a0 BB6F     		ldr	r3, [r7, #120]
+ 558 01a2 03F10103 		add	r3, r3, #1
+ 559 01a6 BB67     		str	r3, [r7, #120]
+ 560              	.L20:
+ 561              		.loc 1 68 0 discriminator 1
+ 562 01a8 BB6F     		ldr	r3, [r7, #120]
+ 563 01aa 022B     		cmp	r3, #2
+ 564 01ac E9DD     		ble	.L21
+ 565              	.LBE8:
+  69:../_Quadrocopter/_HAL/Delay/util.c **** }
+ 566              		.loc 1 69 0 is_stmt 1
+ 567 01ae 07F18807 		add	r7, r7, #136
+ 568 01b2 BD46     		mov	sp, r7
+ 569 01b4 BDE8B083 		pop	{r4, r5, r7, r8, r9, pc}
+ 570              		.cfi_endproc
+ 571              	.LFE124:
+ 573              		.text
+ 574              	.Letext0:
+ 575              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 576              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 577              		.file 4 "C:\\DAVE_WorkSpace\\20\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVESupport/../../inc/NVIC
+DEFINED SYMBOLS
+                            *ABS*:00000000 util.c
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:24     .bss:00000000 timer_cnt
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:21     .bss:00000000 $d
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:27     .text.CCU41_0_IRQHandler:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:32     .text.CCU41_0_IRQHandler:00000000 CCU41_0_IRQHandler
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:63     .text.delay:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:68     .text.delay:00000000 delay
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:112    .text.millis:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:117    .text.millis:00000000 millis
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:148    .rodata:00000000 $d
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:149    .rodata:00000000 .LC2
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:169    .text.transformation:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:174    .text.transformation:00000000 transformation
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:334    .rodata:00000048 .LC0
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:354    .rodata:00000090 .LC1
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:362    .text.transformation_mag:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cc0hHRhu.s:367    .text.transformation_mag:00000000 transformation_mag
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.types.h.60.43223fdca13f7a32c3450deb52d058eb
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4.time.h.6.3d3a9c1fd5113d6c0b01df22505feae6
+                           .group:00000000 wm4.RTC001.h.113.715d6fcab1863c6656b238bddd304166
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.LMM001.h.45.fa2df8bae969f45df5071221ac433ffa
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.104.05371e300b30617373255b3cdb4765a2
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.stdarg.h.31.fa591a4b1df9e413e9f5b8097f9ae89d
+                           .group:00000000 wm4.Type_CM.h.61.3660c940695d7d5fef91de9c4081d0f0
+                           .group:00000000 wm4.dwc_os.h.82.db2ca40c41e2f648d146b8942e5157d9
+                           .group:00000000 wm4.dwc_otg_core_if.h.95.37e41eee47e9a4502e4044edf60ea92d
+                           .group:00000000 wm4.usbcore001_device.h.107.6c032c9c28ac6c3f4e5e24a068720cd7
+                           .group:00000000 wm4.USB.h.399.44a2bec94122294f06c4d854450494d3
+                           .group:00000000 wm4.Common.h.102.bc881ac788d1d7ce84e651cbaa40f2c2
+                           .group:00000000 wm4.Common.h.134.5069b632a0407201156f18fde915b80c
+                           .group:00000000 wm4.USBMode.h.234.0cc9e23131c025605bb7c0db3ebb8ac9
+                           .group:00000000 wm4.StdRequestType.h.93.4e19c7c655f990c2abedbb76a546fcde
+                           .group:00000000 wm4.Endpoint.h.116.4ef46b127c9047ed49fe1e0df19e09b8
+                           .group:00000000 wm4.StdDescriptors.h.120.0ce817e16dcc91b8cf4a79ba0e0e19b6
+                           .group:00000000 wm4.CDC.h.103.7ce3e4692dde29e827f8736493eef7ef
+                           .group:00000000 wm4.CDC.h.115.c83a7d6c5b6c8644b3dec6212d4ced09
+                           .group:00000000 wm4.Descriptors.h.91.5cf84c2489ee54d154cabfe9e14b5c19
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.fce01a2aa073e958cae0b1cc894db26c
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.a52fac0daa39b5f58343578312b4eb54
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.2cf6f4b7cf62c0c8f8d5baa4db880def
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.e471e519f7471a50493b6f4fe912ee0d
+                           .group:00000000 wm4.ERU001_Conf.h.69.6d7c31a774e428b1dc8770c7c31047dd
+                           .group:00000000 wm4.ERU002_Conf.h.49.47045c766c6d22ab1185285e9d568758
+                           .group:00000000 wm4.IO002_Conf.h.51.be0baad511cf66771895fab0bf90f390
+
+UNDEFINED SYMBOLS
+__aeabi_f2d
+__aeabi_dmul
+__aeabi_dadd
+__aeabi_d2f
+memcpy
+__aeabi_dsub

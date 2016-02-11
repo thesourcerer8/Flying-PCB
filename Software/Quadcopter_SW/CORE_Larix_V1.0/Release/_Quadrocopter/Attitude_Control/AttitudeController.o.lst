@@ -1,0 +1,265 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"AttitudeController.c"
+  16              		.global	__aeabi_f2d
+  17              		.global	__aeabi_dmul
+  18              		.global	__aeabi_ddiv
+  19              		.global	__aeabi_d2f
+  20              		.section	.text.AngleController,"ax",%progbits
+  21              		.align	1
+  22              		.global	AngleController
+  23              		.thumb
+  24              		.thumb_func
+  26              	AngleController:
+  27              		@ args = 12, pretend = 0, frame = 0
+  28              		@ frame_needed = 0, uses_anonymous_args = 0
+  29 0000 90ED007A 		flds	s14, [r0, #0]
+  30 0004 D1ED007A 		flds	s15, [r1, #0]
+  31 0008 37EE670A 		fsubs	s0, s14, s15
+  32 000c 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  33 0010 10EE100A 		fmrs	r0, s0
+  34 0014 9046     		mov	r8, r2
+  35 0016 1F46     		mov	r7, r3
+  36 0018 FFF7FEFF 		bl	__aeabi_f2d
+  37 001c 27A3     		adr	r3, .L6+4
+  38 001e D3E90023 		ldrd	r2, [r3]
+  39 0022 FFF7FEFF 		bl	__aeabi_dmul
+  40 0026 0022     		movs	r2, #0
+  41 0028 234B     		ldr	r3, .L6
+  42 002a 079D     		ldr	r5, [sp, #28]
+  43 002c 069E     		ldr	r6, [sp, #24]
+  44 002e 089C     		ldr	r4, [sp, #32]
+  45 0030 FFF7FEFF 		bl	__aeabi_ddiv
+  46 0034 FFF7FEFF 		bl	__aeabi_d2f
+  47 0038 4FEA8801 		lsl	r1, r8, #2
+  48 003c 08F1FF32 		add	r2, r8, #-1
+  49 0040 04EE100A 		fmsr	s8, r0
+  50 0044 7318     		adds	r3, r6, r1
+  51 0046 05EB8200 		add	r0, r5, r2, lsl #2
+  52 004a D0ED000A 		flds	s1, [r0, #0]
+  53 004e D3ED006A 		flds	s13, [r3, #0]
+  54 0052 44EE260A 		fmacs	s1, s8, s13
+  55 0056 7818     		adds	r0, r7, r1
+  56 0058 C4ED000A 		fsts	s1, [r4, #0]
+  57 005c 6918     		adds	r1, r5, r1
+  58              	.L2:
+  59 005e 002A     		cmp	r2, #0
+  60 0060 11DD     		ble	.L5
+  61              	.L3:
+  62 0062 30ED015A 		fldmdbs	r0!, {s10}
+  63 0066 D4ED005A 		flds	s11, [r4, #0]
+  64 006a 73ED014A 		fldmdbs	r3!, {s9}
+  65 006e 25EE257A 		fmuls	s14, s10, s11
+  66 0072 14EE247A 		fmscs	s14, s8, s9
+  67 0076 51ED027A 		flds	s15, [r1, #-8]
+  68 007a 37EE270A 		fadds	s0, s14, s15
+  69 007e 013A     		subs	r2, r2, #1
+  70 0080 21ED010A 		fstmdbs	r1!, {s0}
+  71 0084 EBE7     		b	.L2
+  72              	.L5:
+  73 0086 97ED006A 		flds	s12, [r7, #0]
+  74 008a D4ED001A 		flds	s3, [r4, #0]
+  75 008e 96ED001A 		flds	s2, [r6, #0]
+  76 0092 26EE212A 		fmuls	s4, s12, s3
+  77 0096 14EE012A 		fmscs	s4, s8, s2
+  78 009a B5EE003A 		fconsts	s6, #80
+  79 009e 85ED002A 		fsts	s4, [r5, #0]
+  80 00a2 D4ED002A 		flds	s5, [r4, #0]
+  81 00a6 62EE833A 		fmuls	s7, s5, s6
+  82 00aa C4ED003A 		fsts	s7, [r4, #0]
+  83 00ae BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  84              	.L7:
+  85 00b2 00BFAFF3 		.align	3
+  85      0080
+  86              	.L6:
+  87 00b8 00806640 		.word	1080459264
+  88 00bc 182D4454 		.word	1413754136
+  89 00c0 FB210940 		.word	1074340347
+  91 00c4 AFF30080 		.section	.text.AngleRateController,"ax",%progbits
+  92              		.align	1
+  93              		.global	AngleRateController
+  94              		.thumb
+  95              		.thumb_func
+  97              	AngleRateController:
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100 0000 90ED007A 		flds	s14, [r0, #0]
+ 101 0004 D1ED007A 		flds	s15, [r1, #0]
+ 102 0008 37EE670A 		fsubs	s0, s14, s15
+ 103 000c F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 104 000e 10EE100A 		fmrs	r0, s0
+ 105 0012 1746     		mov	r7, r2
+ 106 0014 1E46     		mov	r6, r3
+ 107 0016 FFF7FEFF 		bl	__aeabi_f2d
+ 108 001a 0EA3     		adr	r3, .L9+4
+ 109 001c D3E90023 		ldrd	r2, [r3]
+ 110 0020 FFF7FEFF 		bl	__aeabi_dmul
+ 111 0024 0022     		movs	r2, #0
+ 112 0026 0A4B     		ldr	r3, .L9
+ 113 0028 FFF7FEFF 		bl	__aeabi_ddiv
+ 114 002c 0446     		mov	r4, r0
+ 115 002e 3868     		ldr	r0, [r7, #0]	@ float
+ 116 0030 0D46     		mov	r5, r1
+ 117 0032 FFF7FEFF 		bl	__aeabi_f2d
+ 118 0036 0246     		mov	r2, r0
+ 119 0038 0B46     		mov	r3, r1
+ 120 003a 2046     		mov	r0, r4
+ 121 003c 2946     		mov	r1, r5
+ 122 003e FFF7FEFF 		bl	__aeabi_dmul
+ 123 0042 FFF7FEFF 		bl	__aeabi_d2f
+ 124 0046 3060     		str	r0, [r6, #0]	@ float
+ 125 0048 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 126              	.L10:
+ 127 004a 00BFAFF3 		.align	3
+ 127      0080
+ 128              	.L9:
+ 129 0050 00808640 		.word	1082556416
+ 130 0054 182D4454 		.word	1413754136
+ 131 0058 FB210940 		.word	1074340347
+ 133 005c AFF30080 		.section	.text.CreatePulseWidth,"ax",%progbits
+ 134              		.align	1
+ 135              		.global	CreatePulseWidth
+ 136              		.thumb
+ 137              		.thumb_func
+ 139              	CreatePulseWidth:
+ 140              		@ args = 4, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142 0000 D3ED007A 		flds	s15, [r3, #0]
+ 143 0004 B1EE047A 		fconsts	s14, #20
+ 144 0008 F4EEC77A 		fcmpes	s15, s14
+ 145 000c 10B5     		push	{r4, lr}
+ 146 000e F1EE10FA 		fmstat
+ 147 0012 029C     		ldr	r4, [sp, #8]
+ 148 0014 40DD     		ble	.L40
+ 149 0016 D0ED006A 		flds	s13, [r0, #0]
+ 150 001a 91ED000A 		flds	s0, [r1, #0]
+ 151 001e 92ED001A 		flds	s2, [r2, #0]
+ 152 0022 76EEC00A 		fsubs	s1, s13, s0
+ 153 0026 70EEC11A 		fsubs	s3, s1, s2
+ 154 002a 31EEA72A 		fadds	s4, s3, s15
+ 155 002e 84ED002A 		fsts	s4, [r4, #0]
+ 156 0032 D1ED002A 		flds	s5, [r1, #0]
+ 157 0036 D0ED003A 		flds	s7, [r0, #0]
+ 158 003a B1EE623A 		fnegs	s6, s5
+ 159 003e D2ED004A 		flds	s9, [r2, #0]
+ 160 0042 33EE634A 		fsubs	s8, s6, s7
+ 161 0046 D3ED005A 		flds	s11, [r3, #0]
+ 162 004a 34EE245A 		fadds	s10, s8, s9
+ 163 004e 35EE256A 		fadds	s12, s10, s11
+ 164 0052 84ED016A 		fsts	s12, [r4, #4]
+ 165 0056 91ED007A 		flds	s14, [r1, #0]
+ 166 005a D0ED007A 		flds	s15, [r0, #0]
+ 167 005e 92ED000A 		flds	s0, [r2, #0]
+ 168 0062 77EE276A 		fadds	s13, s14, s15
+ 169 0066 93ED001A 		flds	s2, [r3, #0]
+ 170 006a 76EE800A 		fadds	s1, s13, s0
+ 171 006e 70EE811A 		fadds	s3, s1, s2
+ 172 0072 C4ED021A 		fsts	s3, [r4, #8]
+ 173 0076 91ED002A 		flds	s4, [r1, #0]
+ 174 007a D0ED002A 		flds	s5, [r0, #0]
+ 175 007e D2ED003A 		flds	s7, [r2, #0]
+ 176 0082 32EE623A 		fsubs	s6, s4, s5
+ 177 0086 D3ED004A 		flds	s9, [r3, #0]
+ 178 008a 33EE634A 		fsubs	s8, s6, s7
+ 179 008e 34EE245A 		fadds	s10, s8, s9
+ 180 0092 84ED035A 		fsts	s10, [r4, #12]
+ 181 0096 07E0     		b	.L14
+ 182              	.L40:
+ 183 0098 C4ED007A 		fsts	s15, [r4, #0]
+ 184 009c 1A68     		ldr	r2, [r3, #0]	@ float
+ 185 009e 6260     		str	r2, [r4, #4]	@ float
+ 186 00a0 1868     		ldr	r0, [r3, #0]	@ float
+ 187 00a2 A060     		str	r0, [r4, #8]	@ float
+ 188 00a4 1B68     		ldr	r3, [r3, #0]	@ float
+ 189 00a6 E360     		str	r3, [r4, #12]	@ float
+ 190              	.L14:
+ 191 00a8 DFED255A 		flds	s11, .L41
+ 192 00ac 94ED006A 		flds	s12, [r4, #0]
+ 193 00b0 B4EEE56A 		fcmpes	s12, s11
+ 194 00b4 F1EE10FA 		fmstat
+ 195 00b8 C8BF     		it	gt
+ 196 00ba C4ED005A 		fstsgt	s11, [r4, #0]
+ 197 00be 94ED007A 		flds	s14, [r4, #0]
+ 198 00c2 B5EEC07A 		fcmpezs	s14
+ 199 00c6 F1EE10FA 		fmstat
+ 200 00ca 01D5     		bpl	.L17
+ 201 00cc 0023     		movs	r3, #0
+ 202 00ce 2360     		str	r3, [r4, #0]	@ float
+ 203              	.L17:
+ 204 00d0 D4ED017A 		flds	s15, [r4, #4]
+ 205 00d4 F4EEE57A 		fcmpes	s15, s11
+ 206 00d8 F1EE10FA 		fmstat
+ 207 00dc C4BF     		itt	gt
+ 208 00de 194B     		ldrgt	r3, .L41+4
+ 209 00e0 6360     		strgt	r3, [r4, #4]	@ float
+ 210 00e2 D4ED016A 		flds	s13, [r4, #4]
+ 211 00e6 F5EEC06A 		fcmpezs	s13
+ 212 00ea F1EE10FA 		fmstat
+ 213 00ee 01D5     		bpl	.L21
+ 214 00f0 0023     		movs	r3, #0
+ 215 00f2 6360     		str	r3, [r4, #4]	@ float
+ 216              	.L21:
+ 217 00f4 94ED020A 		flds	s0, [r4, #8]
+ 218 00f8 B4EEE50A 		fcmpes	s0, s11
+ 219 00fc F1EE10FA 		fmstat
+ 220 0100 C4BF     		itt	gt
+ 221 0102 104B     		ldrgt	r3, .L41+4
+ 222 0104 A360     		strgt	r3, [r4, #8]	@ float
+ 223 0106 D4ED020A 		flds	s1, [r4, #8]
+ 224 010a F5EEC00A 		fcmpezs	s1
+ 225 010e F1EE10FA 		fmstat
+ 226 0112 01D5     		bpl	.L25
+ 227 0114 0023     		movs	r3, #0
+ 228 0116 A360     		str	r3, [r4, #8]	@ float
+ 229              	.L25:
+ 230 0118 94ED031A 		flds	s2, [r4, #12]
+ 231 011c B4EEE51A 		fcmpes	s2, s11
+ 232 0120 F1EE10FA 		fmstat
+ 233 0124 C4BF     		itt	gt
+ 234 0126 074B     		ldrgt	r3, .L41+4
+ 235 0128 E360     		strgt	r3, [r4, #12]	@ float
+ 236 012a D4ED031A 		flds	s3, [r4, #12]
+ 237 012e F5EEC01A 		fcmpezs	s3
+ 238 0132 F1EE10FA 		fmstat
+ 239 0136 01D5     		bpl	.L11
+ 240 0138 0023     		movs	r3, #0
+ 241 013a E360     		str	r3, [r4, #12]	@ float
+ 242              	.L11:
+ 243 013c 10BD     		pop	{r4, pc}
+ 244              	.L42:
+ 245 013e 00BF     		.align	2
+ 246              	.L41:
+ 247 0140 0000C842 		.word	1120403456
+ 248 0144 0000C842 		.word	1120403456
+ 250              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 AttitudeController.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:21     .text.AngleController:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:26     .text.AngleController:00000000 AngleController
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:87     .text.AngleController:000000b8 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:92     .text.AngleRateController:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:97     .text.AngleRateController:00000000 AngleRateController
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:129    .text.AngleRateController:00000050 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:134    .text.CreatePulseWidth:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:139    .text.CreatePulseWidth:00000000 CreatePulseWidth
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:247    .text.CreatePulseWidth:00000140 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:91     .text.AngleController:000000c4 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccTpIVlf.s:133    .text.AngleRateController:0000005c $t
+
+UNDEFINED SYMBOLS
+__aeabi_f2d
+__aeabi_dmul
+__aeabi_ddiv
+__aeabi_d2f

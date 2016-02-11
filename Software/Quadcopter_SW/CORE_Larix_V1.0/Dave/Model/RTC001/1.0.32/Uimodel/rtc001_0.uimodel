@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="RTC Configuration" className="IfxGroupBox" controlId="1320303151937">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group20" displayName="RTC Configuration" className="IfxGroupBox" controlId="1320303216609">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwEnableRTC" displayName="RTC Enable" labelRequired="false" className="EnumerationType" paramName="app/rtc001/0/RTC001_erwEnableRTC:RTC Enable" controlId="1320303412578">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group40" displayName="Set Time" className="IfxGroupBox" controlId="1329739811906">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwTimeInitialisation" displayName="Enable Time initialization once" labelRequired="false" className="EnumerationType" paramName="app/rtc001/0/RTC001_erwTimeInitialisation:Enable Time initialization once" controlId="1339750816943">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group52" displayName="User Configuration of time" className="IfxGroupBox" controlId="1353324571156">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalSpan="2"/>
+          <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_srwDateValue" displayName="User configured calendar date value" className="StringType" paramName="app/rtc001/0/RTC001_srwDateValue:User configured calender date value" controlId="1329739830937">
+            <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+          </subControls>
+          <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_srwTimeValue" displayName="User configured clock time value" className="StringType" paramName="app/rtc001/0/RTC001_srwTimeValue:User configured clock time value" controlId="1329739835703">
+            <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+          </subControls>
+          <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_Eventtrigger_timer" displayName="Event Trigger for Timer" className="EnumerationType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) {&#xD;&#xA;  CM.setVisible(false); //This wil set status internally to W2&#xD;&#xA;  CM.setEnable(false);  //This wil set status internally to W2    &#xD;&#xA;}else {    &#xD;&#xA;    CM.setVisible(true); //This wil set status internally to W2&#xD;&#xA;    CM.setEnable(true); //This wil set status internally to W2&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_Eventtrigger_timer:Event Trigger for Timer" controlId="1354689941656">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_eroString" displayName="Timer Status Flag" readonly="true" className="StringType" paramName="app/rtc001/0/RTC001_eroString:Timer Status Flag" controlId="1354690013562">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group25" displayName="Periodic Interrupt Configuration" className="IfxGroupBox" controlId="1329280834640">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwPeriodicSecInter" displayName="Enable periodic seconds interrupt" labelRequired="false" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/rtc001/0/RTC001_erwSoftwareTimer/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}else {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true);&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_erwPeriodicSecInter:Enable periodic seconds interrupt" controlId="1320303869062">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwPeriodicMinInter" displayName="Enable periodic minutes interrupt" labelRequired="false" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/rtc001/0/RTC001_erwSoftwareTimer/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}else {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true);&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_erwPeriodicMinInter:Enable periodic minutes interrupt" controlId="1320303882062">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwPeriodicHrsInter" displayName="Enable periodic hours interrupt" labelRequired="false" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/rtc001/0/RTC001_erwSoftwareTimer/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}else {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true);&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_erwPeriodicHrsInter:Enable periodic hours interrupt" controlId="1320303897062">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwPeriodicDaysInter" displayName="Enable periodic days interrupt" labelRequired="false" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/rtc001/0/RTC001_erwSoftwareTimer/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}else {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true);&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_erwPeriodicDaysInter:Enable periodic days interrupt" controlId="1320303908031">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwPeriodicMonths" displayName="Enable periodic months interrupt" labelRequired="false" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/rtc001/0/RTC001_erwSoftwareTimer/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}else {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true);&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_erwPeriodicMonths:Enable periodic months interrupt" controlId="1320303945875">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwPeriodicYears" displayName="Enable periodic years interrupt" labelRequired="false" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/rtc001/0/RTC001_erwSoftwareTimer/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}else {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true);&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_erwPeriodicYears:Enable periodic years interrupt" controlId="1320303965625">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_srwTimerUserFunction" displayName="User defined interrupt handler for Periodic interrupts" className="StringType" constraint="if(CM.getParamValue(&quot;app/rtc001/0/RTC001_Eventtrigger_timer/0&quot;) == &quot;1&quot;)&#xD;&#xA;{&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_srwTimerUserFunction:User defined interrupt handler for Periodic interrupts" controlId="1354595979515">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group61" displayName="Alarm Interrupt Configuration" className="IfxGroupBox" controlId="1329281505484">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwAlarmIntrptEna" displayName="Enable alarm interrupt" className="EnumerationType" constraint="" paramName="app/rtc001/0/RTC001_erwAlarmIntrptEna:Enable alarm interrupt" controlId="1353301969156">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group35" displayName="User Configuration of alarm" className="IfxGroupBox" controlId="1353324369687">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_srwAlarmDate" displayName="User configured alarm date value" className="StringType" constraint="if(CM.getParamValue(&quot;app/rtc001/0/RTC001_erwAlarmIntrptEna/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_srwAlarmDate:User configured alarm date value" controlId="1353301925953">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_srwAlarmTime" displayName="User configured alarm time value" className="StringType" constraint="if(CM.getParamValue(&quot;app/rtc001/0/RTC001_erwAlarmIntrptEna/0&quot;) == &quot;1&quot;) {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;}else {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_srwAlarmTime:User configured alarm time value" controlId="1353301938093">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_Eventtrigger_Alarm" displayName="Event Trigger for Alarm" className="EnumerationType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) {&#xD;&#xA;  CM.setVisible(false); //This wil set status internally to W2&#xD;&#xA;  CM.setEnable(false);  //This wil set status internally to W2    &#xD;&#xA;}else {    &#xD;&#xA;    CM.setVisible(true); //This wil set status internally to W2&#xD;&#xA;    CM.setEnable(true); //This wil set status internally to W2&#xD;&#xA;}" paramName="app/rtc001/0/RTC001_Eventtrigger_Alarm:Event Trigger for Alarm" controlId="1354689971375">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_eroString1" displayName="Alarm Status Flag" readonly="true" className="StringType" paramName="app/rtc001/0/RTC001_eroString1:Alarm Status Flag" controlId="1354690028406">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_srwAlarmUserFunction" displayName="User defined interrupt handler for Alarm interrupts" className="StringType" constraint="if(CM.getParamValue(&quot;app/rtc001/0/RTC001_Eventtrigger_Alarm/0&quot;) == &quot;1&quot;) &#xD;&#xA;{&#xD;&#xA;   if(CM.getParamValue(&quot;app/rtc001/0/RTC001_erwAlarmIntrptEna/0&quot;) == &quot;1&quot;)&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }&#xD;&#xA;}&#xD;&#xA;else &#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;}" paramName="app/rtc001/0/RTC001_srwAlarmUserFunction:User defined interrupt handler for Alarm interrupts" controlId="1353301439968">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalSpan="2"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group63" displayName="RTC Hibernate Configuration" className="IfxGroupBox" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;) == 0 ) {&#xD;&#xA;  CM.setVisible(false); //This wil set status internally to W2&#xD;&#xA;  CM.setEnable(false);  //This wil set status internally to W2    &#xD;&#xA;}else {    &#xD;&#xA;    CM.setVisible(true); //This wil set status internally to W2&#xD;&#xA;    CM.setEnable(true); //This wil set status internally to W2&#xD;&#xA;}" controlId="1320303705921">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group65" displayName="RTC Hibernate Configuration" className="IfxGroupBox" constraint="" controlId="1320304131203">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwTimerAlarm" displayName="Enable alarm event in hibernate mode" labelRequired="false" className="EnumerationType" paramName="app/rtc001/0/RTC001_erwTimerAlarm:Enables the timer alarm" controlId="1332916445875">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwEnaSecComp" displayName="Enable periodic seconds event in hibernate mode" labelRequired="false" className="EnumerationType" constraint="" paramName="app/rtc001/0/RTC001_erwEnaSecComp:Enable seconds comparison" controlId="1320304270843">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwEnaMinComp" displayName="Enable periodic minutes event in hibernate mode" labelRequired="false" className="EnumerationType" paramName="app/rtc001/0/RTC001_erwEnaMinComp:Enable periodic minute event in hibernate mode" controlId="1353659212546">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwEnaHrsComp" displayName="Enable periodic hours event in hibernate mode" labelRequired="false" className="EnumerationType" paramName="app/rtc001/0/RTC001_erwEnaHrsComp:Enable periodic hour event in hibernate mode" controlId="1353659216562">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwEnaDaysComp" displayName="Enable periodic days event in hibernate mode" labelRequired="false" className="EnumerationType" paramName="app/rtc001/0/RTC001_erwEnaDaysComp:Enable periodic day event in hibernate mode" controlId="1353659224328">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwEnaMonthsComp" displayName="Enable periodic months event in hibernate mode" labelRequired="false" className="EnumerationType" paramName="app/rtc001/0/RTC001_erwEnaMonthsComp:Enable periodic month event in hibernate mode" controlId="1353659289140">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/rtc001/0/RTC001_erwEnaYearsComp" displayName="Enable periodic years event in hibernate mode" labelRequired="false" className="EnumerationType" paramName="app/rtc001/0/RTC001_erwEnaYearsComp:Enable periodic year event in hibernate mode" controlId="1353659298187">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

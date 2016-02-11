@@ -1,0 +1,37 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ERU002_Conf.c"
+  16              		.global	ERU002_HandleArray
+  17              		.global	ERU002_Handle0
+  18              		.section	.rodata
+  19              		.align	2
+  22              	ERU002_Handle0:
+  23 0000 00400440 		.word	1074020352
+  24 0004 00000000 		.word	0
+  25 0008 01000000 		.word	1
+  26 000c 00000000 		.word	0
+  27              		.data
+  28              		.align	2
+  31              	ERU002_HandleArray:
+  32 0000 00000000 		.word	ERU002_Handle0
+  33              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ERU002_Conf.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccyaPRdg.s:31     .data:00000000 ERU002_HandleArray
+C:\Users\TOGABL~1\AppData\Local\Temp\ccyaPRdg.s:22     .rodata:00000000 ERU002_Handle0
+C:\Users\TOGABL~1\AppData\Local\Temp\ccyaPRdg.s:19     .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccyaPRdg.s:28     .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

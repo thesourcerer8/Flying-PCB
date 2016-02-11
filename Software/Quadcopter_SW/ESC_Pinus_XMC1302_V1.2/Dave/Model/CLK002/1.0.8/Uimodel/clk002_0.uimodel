@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage61" displayName="Clock Configuration" className="IfxGroupBox" controlId="1356069084447">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group64" displayName="Main Clock Frequency - MCLK" className="IfxGroupBox" controlId="1356070915184">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_irwDesFreqSystemInt" displayName="Desired Frequency" className="IntegerType" paramName="app/clk002/0/clk002_irwDesFreqSystemInt:Desired Frequency" controlId="1358491966388" defaultType="KHz" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>MHz</conversionType>
+        <conversionType>KHz</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwPCLKSelection" displayName="Peripheral Clock Selection - PCLK" className="EnumerationType" paramName="app/clk002/0/clk002_erwPCLKSelection:Peripheral Clock Selection - PCLK" controlId="1359095400218">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group75" displayName="Configured Parameters" className="IfxGroupBox" controlId="1359522843125">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_irMCLK" displayName="Configured MCLK" readonly="true" className="IntegerType" paramName="app/clk002/0/clk002_irMCLK:Configured MCLK" controlId="1358491831930" defaultType="MHz" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>MHz</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_irPCLK" displayName="Configured PCLK" readonly="true" className="IntegerType" paramName="app/clk002/0/clk002_irPCLK:Configured PCLK" controlId="1358491840464" defaultType="MHz" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>MHz</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group53" displayName="DCO2 Clock" className="IfxGroupBox" controlId="1381813505834">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_standbyclock" displayName="Standyby Clock" readonly="true" className="IntegerType" paramName="app/clk002/0/clk002_standbyclock:Standyby Clock" controlId="1381813483728" defaultType="Hz" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>Hz</conversionType>
+        <conversionType>KHz</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwRTCClockSelection" displayName="RTC Clock Selection" className="EnumerationType" paramName="app/clk002/0/clk002_erwRTCClockSelection:RTC Clock Selection" controlId="1357902202547">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page35" displayName="Clock Configuration Data for Bootup Firmware" className="IfxGroupBox" controlId="1358221016769">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group79" displayName="Main Clock Frequency" className="IfxGroupBox" controlId="1359522949984">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_irwSSWDesFreqSystemInt" displayName="Desired MCLK during BootROM Firmware Execution" className="IntegerType" paramName="app/clk002/0/clk002_irwSSWDesFreqSystemInt:Desired MCLK during BootROM Firmware Execution" controlId="1359095559193" defaultType="KHz" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>MHz</conversionType>
+        <conversionType>KHz</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWPCLKSelection" displayName="Peripheral Frequency - PCLK during BootROM Firmware Execution" className="EnumerationType" paramName="app/clk002/0/clk002_erwSSWPCLKSelection:Peripheral Frequency - PCLK during BootROM Firmware Execution" controlId="1359095603671">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group66" displayName="Configured Parameters" className="IfxGroupBox" controlId="1359522999139">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_irSSWMCLK" displayName="Configured MCLK during BootROM Firmware Execution" readonly="true" className="IntegerType" paramName="app/clk002/0/clk002_irSSWMCLK:Configured MCLK during BootROM Firmware Execution" controlId="1359095521050" defaultType="MHz" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>MHz</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_irSSWPCLK" displayName="Configured PCLK during BootROM Firmware Execution" readonly="true" className="IntegerType" paramName="app/clk002/0/clk002_irSSWPCLK:Configured PCLK during BootROM Firmware Execution" controlId="1359095544482" defaultType="MHz" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>MHz</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWRTCClockSelection" displayName="RTC Clock Selection during BootROM Firmware Execution" className="EnumerationType" paramName="app/clk002/0/clk002_erwSSWRTCClockSelection:RTC Clock Selection during BootROM Firmware Execution" controlId="1359095809134">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group6" displayName="Peripherial Gating" className="IfxGroupBox" controlId="1358496261400">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingVADC" displayName="" className="EnumerationType" paramName="app/clk002/0/clk002_erwSSWClockGatingVADC:Select Clock Gating - VADC during BootROM Firmware Execution" controlId="1361270995293">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingCCU8" displayName="" className="EnumerationType" constraint="if((CM.getSoftwareId().substring(0,9).compareTo(&quot;13.0101.9&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;13.0101.7&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;13.0102.7&quot;) == 0))&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;} &#xD;&#xA;&#xD;&#xA;" paramName="app/clk002/0/clk002_erwSSWClockGatingCCU8:Select Clock Gating - CCU8 during BootROM Firmware Execution" controlId="1361270991689">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingCCU4" displayName="" className="EnumerationType" paramName="app/clk002/0/clk002_erwSSWClockGatingCCU4:Select Clock Gating - CCU4 during BootROM Firmware Execution" controlId="1361271003358">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingUSIC0 USIC0" displayName="" className="EnumerationType" paramName="app/clk002/0/clk002_erwSSWClockGatingUSIC0 USIC0:Select Clock Gating - USIC0 during BootROM Firmware Execution" controlId="1361271010831">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingBCCU0" displayName="" className="EnumerationType" constraint="if((CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0102.9&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0102.8&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0102.7&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0103.9&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;13.0102.7&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0100.7&quot;) == 0))&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;} &#xD;&#xA;&#xD;&#xA;" paramName="app/clk002/0/clk002_erwSSWClockGatingBCCU0:Select Clock Gating - BCCU0 during BootROM Firmware Execution" controlId="1361271007102">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingLEDTS0" displayName="" className="EnumerationType" constraint="if((CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0101.8&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0101.7&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0100.7&quot;) == 0))&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;} &#xD;&#xA;&#xD;&#xA;" paramName="app/clk002/0/clk002_erwSSWClockGatingLEDTS0:Select Clock Gating - LEDTS0 during BootROM Firmware Execution" controlId="1361270999614">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingLEDTS1" displayName="" className="EnumerationType" constraint="if((CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0101.8&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0101.7&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0100.7&quot;) == 0))&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;} &#xD;&#xA;&#xD;&#xA;" paramName="app/clk002/0/clk002_erwSSWClockGatingLEDTS1:Select Clock Gating - LEDTS1 during BootROM Firmware Execution" controlId="1361270980941">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingPOSIF0" displayName="" className="EnumerationType" constraint="if((CM.getSoftwareId().substring(0,9).compareTo(&quot;13.0101.9&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;13.0101.7&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;13.0102.7&quot;) == 0))&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;} &#xD;&#xA;&#xD;&#xA;" paramName="app/clk002/0/clk002_erwSSWClockGatingPOSIF0:Select Clock Gating - POSIF0 during BootROM Firmware Execution" controlId="1361270976651">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingMATH" displayName="" className="EnumerationType" constraint="if((CM.getSoftwareId().substring(0,9).compareTo(&quot;12.0103.9&quot;) == 0)||(CM.getSoftwareId().substring(0,9).compareTo(&quot;13.0102.7&quot;) == 0))&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(true);&#xD;&#xA;  CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;  CM.setVisible(false);&#xD;&#xA;  CM.setEnable(false);&#xD;&#xA;} &#xD;&#xA;&#xD;&#xA;" paramName="app/clk002/0/clk002_erwSSWClockGatingMATH:Select Clock Gating - MATH during BootROM Firmware Execution" controlId="1361270987321">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingWDT" displayName="" className="EnumerationType" paramName="app/clk002/0/clk002_erwSSWClockGatingWDT:Select Clock Gating - WDT during BootROM Firmware Execution" controlId="1361270972158">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/clk002/0/clk002_erwSSWClockGatingRTC" displayName="" className="EnumerationType" paramName="app/clk002/0/clk002_erwSSWClockGatingRTC:Select Clock Gating - RTC during BootROM Firmware Execution" controlId="1361270967805">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

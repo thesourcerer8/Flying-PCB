@@ -1,0 +1,372 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"usbcore001.c"
+  16              		.section	.text.USBCORE001_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	USBCORE001_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	USBCORE001_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 08B5     		push	{r3, lr}
+  26 0002 0548     		ldr	r0, .L2
+  27 0004 FFF7FEFF 		bl	RESET001_DeassertReset
+  28 0008 044B     		ldr	r3, .L2+4
+  29 000a D3F80428 		ldr	r2, [r3, #2052]
+  30 000e 42F00200 		orr	r0, r2, #2
+  31 0012 C3F80408 		str	r0, [r3, #2052]
+  32 0016 08BD     		pop	{r3, pc}
+  33              	.L3:
+  34              		.align	2
+  35              	.L2:
+  36 0018 80000020 		.word	536871040
+  37 001c 00000450 		.word	1342439424
+  39              		.section	.text.USBCORE001_Initialize,"ax",%progbits
+  40              		.align	1
+  41              		.global	USBCORE001_Initialize
+  42              		.thumb
+  43              		.thumb_func
+  45              	USBCORE001_Initialize:
+  46              		@ args = 0, pretend = 0, frame = 0
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  49 0002 0023     		movs	r3, #0
+  50 0004 0360     		str	r3, [r0, #0]
+  51 0006 0746     		mov	r7, r0
+  52 0008 5B48     		ldr	r0, .L33
+  53 000a 5C4C     		ldr	r4, .L33+4
+  54 000c 4268     		ldr	r2, [r0, #4]
+  55 000e 42F44031 		orr	r1, r2, #196608
+  56 0012 4160     		str	r1, [r0, #4]
+  57 0014 E568     		ldr	r5, [r4, #12]
+  58 0016 5A48     		ldr	r0, .L33+8
+  59 0018 45F08043 		orr	r3, r5, #1073741824
+  60 001c E360     		str	r3, [r4, #12]
+  61 001e C268     		ldr	r2, [r0, #12]
+  62 0020 C2F30225 		ubfx	r5, r2, #8, #3
+  63 0024 C5F10704 		rsb	r4, r5, #7
+  64 0028 062C     		cmp	r4, #6
+  65 002a 28BF     		it	cs
+  66 002c 0624     		movcs	r4, #6
+  67 002e 05B1     		cbz	r5, .L5
+  68 0030 013D     		subs	r5, r5, #1
+  69              	.L5:
+  70 0032 0121     		movs	r1, #1
+  71 0034 01FA04F3 		lsl	r3, r1, r4
+  72 0038 581E     		subs	r0, r3, #1
+  73 003a 00F03F02 		and	r2, r0, #63
+  74 003e 02FA05F4 		lsl	r4, r2, r5
+  75 0042 A500     		lsls	r5, r4, #2
+  76 0044 4F48     		ldr	r0, .L33+12
+  77 0046 E9B2     		uxtb	r1, r5
+  78 0048 4F4D     		ldr	r5, .L33+16
+  79 004a 80F86B13 		strb	r1, [r0, #875]
+  80 004e 2C68     		ldr	r4, [r5, #0]
+  81 0050 4FF40063 		mov	r3, #2048
+  82 0054 C0F88C31 		str	r3, [r0, #396]
+  83 0058 C360     		str	r3, [r0, #12]
+  84 005a 54B9     		cbnz	r4, .L6
+  85 005c 2046     		mov	r0, r4
+  86 005e 1821     		movs	r1, #24
+  87 0060 FFF7FEFF 		bl	__DWC_ALLOC
+  88 0064 2860     		str	r0, [r5, #0]
+  89 0066 0028     		cmp	r0, #0
+  90 0068 70D0     		beq	.L18
+  91 006a 2146     		mov	r1, r4
+  92 006c 1822     		movs	r2, #24
+  93 006e FFF7FEFF 		bl	DWC_MEMSET
+  94              	.L6:
+  95 0072 454C     		ldr	r4, .L33+16
+  96 0074 4148     		ldr	r0, .L33+4
+  97 0076 2568     		ldr	r5, [r4, #0]
+  98 0078 2861     		str	r0, [r5, #16]
+  99 007a FFF7FEFF 		bl	dwc_otg_cil_init
+ 100 007e 2168     		ldr	r1, [r4, #0]
+ 101 0080 2860     		str	r0, [r5, #0]
+ 102 0082 0868     		ldr	r0, [r1, #0]
+ 103 0084 0028     		cmp	r0, #0
+ 104 0086 63D0     		beq	.L19
+ 105 0088 FFF7FEFF 		bl	dwc_otg_get_gsnpsid
+ 106 008c 3F4B     		ldr	r3, .L33+20
+ 107 008e 20F47F60 		bic	r0, r0, #4080
+ 108 0092 20F00F02 		bic	r2, r0, #15
+ 109 0096 9A42     		cmp	r2, r3
+ 110 0098 02D0     		beq	.L8
+ 111              	.L13:
+ 112 009a 6FF01505 		mvn	r5, #21
+ 113 009e 58E0     		b	.L7
+ 114              	.L8:
+ 115 00a0 2668     		ldr	r6, [r4, #0]
+ 116 00a2 3468     		ldr	r4, [r6, #0]
+ 117 00a4 0221     		movs	r1, #2
+ 118 00a6 2046     		mov	r0, r4
+ 119 00a8 FFF7FEFF 		bl	dwc_otg_set_param_otg_cap
+ 120 00ac 0021     		movs	r1, #0
+ 121 00ae 0546     		mov	r5, r0
+ 122 00b0 2046     		mov	r0, r4
+ 123 00b2 FFF7FEFF 		bl	dwc_otg_set_param_dma_enable
+ 124 00b6 0121     		movs	r1, #1
+ 125 00b8 2E18     		adds	r6, r5, r0
+ 126 00ba 2046     		mov	r0, r4
+ 127 00bc FFF7FEFF 		bl	dwc_otg_set_param_host_support_fs_ls_low_power
+ 128 00c0 0821     		movs	r1, #8
+ 129 00c2 3518     		adds	r5, r6, r0
+ 130 00c4 2046     		mov	r0, r4
+ 131 00c6 FFF7FEFF 		bl	dwc_otg_set_param_host_channels
+ 132 00ca 0021     		movs	r1, #0
+ 133 00cc 2E18     		adds	r6, r5, r0
+ 134 00ce 2046     		mov	r0, r4
+ 135 00d0 FFF7FEFF 		bl	dwc_otg_set_param_phy_type
+ 136 00d4 0121     		movs	r1, #1
+ 137 00d6 3518     		adds	r5, r6, r0
+ 138 00d8 2046     		mov	r0, r4
+ 139 00da FFF7FEFF 		bl	dwc_otg_set_param_speed
+ 140 00de 0121     		movs	r1, #1
+ 141 00e0 2E18     		adds	r6, r5, r0
+ 142 00e2 2046     		mov	r0, r4
+ 143 00e4 FFF7FEFF 		bl	dwc_otg_set_param_host_ls_low_power_phy_clk
+ 144 00e8 3518     		adds	r5, r6, r0
+ 145 00ea 0026     		movs	r6, #0
+ 146              	.L10:
+ 147 00ec 2849     		ldr	r1, .L33+24
+ 148 00ee 01EB8600 		add	r0, r1, r6, lsl #2
+ 149 00f2 016B     		ldr	r1, [r0, #48]
+ 150 00f4 4A1C     		adds	r2, r1, #1
+ 151 00f6 04D0     		beq	.L9
+ 152 00f8 2046     		mov	r0, r4
+ 153 00fa 3246     		mov	r2, r6
+ 154 00fc FFF7FEFF 		bl	dwc_otg_set_param_dev_perio_tx_fifo_size
+ 155 0100 2D18     		adds	r5, r5, r0
+ 156              	.L9:
+ 157 0102 0136     		adds	r6, r6, #1
+ 158 0104 0F2E     		cmp	r6, #15
+ 159 0106 F1D1     		bne	.L10
+ 160 0108 0026     		movs	r6, #0
+ 161              	.L12:
+ 162 010a 214A     		ldr	r2, .L33+24
+ 163 010c 02EB8603 		add	r3, r2, r6, lsl #2
+ 164 0110 D3F8A810 		ldr	r1, [r3, #168]
+ 165 0114 4B1C     		adds	r3, r1, #1
+ 166 0116 04D0     		beq	.L11
+ 167 0118 2046     		mov	r0, r4
+ 168 011a 3246     		mov	r2, r6
+ 169 011c FFF7FEFF 		bl	dwc_otg_set_param_dev_tx_fifo_size
+ 170 0120 2D18     		adds	r5, r5, r0
+ 171              	.L11:
+ 172 0122 0136     		adds	r6, r6, #1
+ 173 0124 0F2E     		cmp	r6, #15
+ 174 0126 F0D1     		bne	.L12
+ 175 0128 002D     		cmp	r5, #0
+ 176 012a B6D1     		bne	.L13
+ 177 012c 164C     		ldr	r4, .L33+16
+ 178 012e 2168     		ldr	r1, [r4, #0]
+ 179 0130 0868     		ldr	r0, [r1, #0]
+ 180 0132 FFF7FEFF 		bl	dwc_otg_disable_global_interrupts
+ 181 0136 2068     		ldr	r0, [r4, #0]
+ 182 0138 0068     		ldr	r0, [r0, #0]
+ 183 013a FFF7FEFF 		bl	dwc_otg_core_init
+ 184 013e 2268     		ldr	r2, [r4, #0]
+ 185 0140 1068     		ldr	r0, [r2, #0]
+ 186 0142 FFF7FEFF 		bl	dwc_otg_enable_global_interrupts
+ 187 0146 2368     		ldr	r3, [r4, #0]
+ 188 0148 3B60     		str	r3, [r7, #0]
+ 189 014a 12E0     		b	.L31
+ 190              	.L18:
+ 191 014c 114D     		ldr	r5, .L33+28
+ 192 014e 00E0     		b	.L7
+ 193              	.L19:
+ 194 0150 114D     		ldr	r5, .L33+32
+ 195              	.L7:
+ 196 0152 0D4C     		ldr	r4, .L33+16
+ 197 0154 2168     		ldr	r1, [r4, #0]
+ 198 0156 61B1     		cbz	r1, .L31
+ 199              	.L16:
+ 200 0158 0868     		ldr	r0, [r1, #0]
+ 201 015a 20B1     		cbz	r0, .L15
+ 202 015c FFF7FEFF 		bl	dwc_otg_cil_remove
+ 203 0160 2068     		ldr	r0, [r4, #0]
+ 204 0162 0022     		movs	r2, #0
+ 205 0164 0260     		str	r2, [r0, #0]
+ 206              	.L15:
+ 207 0166 0020     		movs	r0, #0
+ 208 0168 2168     		ldr	r1, [r4, #0]
+ 209 016a FFF7FEFF 		bl	__DWC_FREE
+ 210 016e 0023     		movs	r3, #0
+ 211 0170 2360     		str	r3, [r4, #0]
+ 212              	.L31:
+ 213 0172 2846     		mov	r0, r5
+ 214 0174 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 215              	.L34:
+ 216 0176 00BF     		.align	2
+ 217              	.L33:
+ 218 0178 00420050 		.word	1342194176
+ 219 017c 00000450 		.word	1342439424
+ 220 0180 00ED00E0 		.word	-536810240
+ 221 0184 00E100E0 		.word	-536813312
+ 222 0188 00000000 		.word	.LANCHOR0
+ 223 018c 0020544F 		.word	1330913280
+ 224 0190 00000000 		.word	.LANCHOR1
+ 225 0194 16FCFFFF 		.word	-1002
+ 226 0198 48F4FFFF 		.word	-3000
+ 228              		.section	.text.USBCORE001_Intr,"ax",%progbits
+ 229              		.align	1
+ 230              		.global	USBCORE001_Intr
+ 231              		.thumb
+ 232              		.thumb_func
+ 234              	USBCORE001_Intr:
+ 235              		@ args = 0, pretend = 0, frame = 0
+ 236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 237              		@ link register save eliminated.
+ 238 0000 034B     		ldr	r3, .L37
+ 239 0002 1868     		ldr	r0, [r3, #0]
+ 240 0004 10B1     		cbz	r0, .L35
+ 241 0006 4068     		ldr	r0, [r0, #4]
+ 242 0008 FFF7FEBF 		b	dwc_otg_pcd_handle_intr
+ 243              	.L35:
+ 244 000c 7047     		bx	lr
+ 245              	.L38:
+ 246 000e 00BF     		.align	2
+ 247              	.L37:
+ 248 0010 00000000 		.word	.LANCHOR0
+ 250              		.section	.text.USB0_0_IRQHandler,"ax",%progbits
+ 251              		.align	1
+ 252              		.global	USB0_0_IRQHandler
+ 253              		.thumb
+ 254              		.thumb_func
+ 256              	USB0_0_IRQHandler:
+ 257              		@ args = 0, pretend = 0, frame = 0
+ 258              		@ frame_needed = 0, uses_anonymous_args = 0
+ 259              		@ link register save eliminated.
+ 260 0000 FFF7FEBF 		b	USBCORE001_Intr
+ 262              		.global	USBCORE001_OtgDevPtr
+ 263              		.section	.rodata
+ 264              		.align	2
+ 265              		.set	.LANCHOR1,. + 0
+ 268              	USBCORE001_DriverParams:
+ 269 0000 FFFFFFFF 		.word	-1
+ 270 0004 02000000 		.word	2
+ 271 0008 00000000 		.word	0
+ 272 000c FFFFFFFF 		.word	-1
+ 273 0010 FFFFFFFF 		.word	-1
+ 274 0014 01000000 		.word	1
+ 275 0018 01000000 		.word	1
+ 276 001c 01000000 		.word	1
+ 277 0020 FFFFFFFF 		.word	-1
+ 278 0024 FFFFFFFF 		.word	-1
+ 279 0028 FFFFFFFF 		.word	-1
+ 280 002c FFFFFFFF 		.word	-1
+ 281 0030 FFFFFFFF 		.word	-1
+ 282 0034 FFFFFFFF 		.word	-1
+ 283 0038 FFFFFFFF 		.word	-1
+ 284 003c FFFFFFFF 		.word	-1
+ 285 0040 FFFFFFFF 		.word	-1
+ 286 0044 FFFFFFFF 		.word	-1
+ 287 0048 FFFFFFFF 		.word	-1
+ 288 004c FFFFFFFF 		.word	-1
+ 289 0050 FFFFFFFF 		.word	-1
+ 290 0054 FFFFFFFF 		.word	-1
+ 291 0058 FFFFFFFF 		.word	-1
+ 292 005c FFFFFFFF 		.word	-1
+ 293 0060 FFFFFFFF 		.word	-1
+ 294 0064 FFFFFFFF 		.word	-1
+ 295 0068 FFFFFFFF 		.word	-1
+ 296 006c FFFFFFFF 		.word	-1
+ 297 0070 FFFFFFFF 		.word	-1
+ 298 0074 FFFFFFFF 		.word	-1
+ 299 0078 FFFFFFFF 		.word	-1
+ 300 007c FFFFFFFF 		.word	-1
+ 301 0080 08000000 		.word	8
+ 302 0084 FFFFFFFF 		.word	-1
+ 303 0088 00000000 		.word	0
+ 304 008c FFFFFFFF 		.word	-1
+ 305 0090 FFFFFFFF 		.word	-1
+ 306 0094 FFFFFFFF 		.word	-1
+ 307 0098 FFFFFFFF 		.word	-1
+ 308 009c FFFFFFFF 		.word	-1
+ 309 00a0 FFFFFFFF 		.word	-1
+ 310 00a4 FFFFFFFF 		.word	-1
+ 311 00a8 FFFFFFFF 		.word	-1
+ 312 00ac FFFFFFFF 		.word	-1
+ 313 00b0 FFFFFFFF 		.word	-1
+ 314 00b4 FFFFFFFF 		.word	-1
+ 315 00b8 FFFFFFFF 		.word	-1
+ 316 00bc FFFFFFFF 		.word	-1
+ 317 00c0 FFFFFFFF 		.word	-1
+ 318 00c4 FFFFFFFF 		.word	-1
+ 319 00c8 FFFFFFFF 		.word	-1
+ 320 00cc FFFFFFFF 		.word	-1
+ 321 00d0 FFFFFFFF 		.word	-1
+ 322 00d4 FFFFFFFF 		.word	-1
+ 323 00d8 FFFFFFFF 		.word	-1
+ 324 00dc FFFFFFFF 		.word	-1
+ 325 00e0 FFFFFFFF 		.word	-1
+ 326 00e4 FFFFFFFF 		.word	-1
+ 327 00e8 FFFFFFFF 		.word	-1
+ 328 00ec FFFFFFFF 		.word	-1
+ 329 00f0 FFFFFFFF 		.word	-1
+ 330 00f4 FFFFFFFF 		.word	-1
+ 331 00f8 FFFFFFFF 		.word	-1
+ 332 00fc FFFFFFFF 		.word	-1
+ 333 0100 FFFFFFFF 		.word	-1
+ 334 0104 FFFFFFFF 		.word	-1
+ 335 0108 FFFFFFFF 		.word	-1
+ 336 010c FFFFFFFF 		.word	-1
+ 337 0110 FFFFFFFF 		.word	-1
+ 338              		.bss
+ 339              		.align	2
+ 340              		.set	.LANCHOR0,. + 0
+ 343              	USBCORE001_OtgDevPtr:
+ 344 0000 00000000 		.space	4
+ 345              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 usbcore001.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:17     .text.USBCORE001_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:22     .text.USBCORE001_Init:00000000 USBCORE001_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:36     .text.USBCORE001_Init:00000018 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:40     .text.USBCORE001_Initialize:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:45     .text.USBCORE001_Initialize:00000000 USBCORE001_Initialize
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:218    .text.USBCORE001_Initialize:00000178 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:229    .text.USBCORE001_Intr:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:234    .text.USBCORE001_Intr:00000000 USBCORE001_Intr
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:248    .text.USBCORE001_Intr:00000010 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:251    .text.USB0_0_IRQHandler:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:256    .text.USB0_0_IRQHandler:00000000 USB0_0_IRQHandler
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:343    .bss:00000000 USBCORE001_OtgDevPtr
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:264    .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:268    .rodata:00000000 USBCORE001_DriverParams
+C:\Users\TOGABL~1\AppData\Local\Temp\cctURJq1.s:339    .bss:00000000 $d
+
+UNDEFINED SYMBOLS
+RESET001_DeassertReset
+__DWC_ALLOC
+DWC_MEMSET
+dwc_otg_cil_init
+dwc_otg_get_gsnpsid
+dwc_otg_set_param_otg_cap
+dwc_otg_set_param_dma_enable
+dwc_otg_set_param_host_support_fs_ls_low_power
+dwc_otg_set_param_host_channels
+dwc_otg_set_param_phy_type
+dwc_otg_set_param_speed
+dwc_otg_set_param_host_ls_low_power_phy_clk
+dwc_otg_set_param_dev_perio_tx_fifo_size
+dwc_otg_set_param_dev_tx_fifo_size
+dwc_otg_disable_global_interrupts
+dwc_otg_core_init
+dwc_otg_enable_global_interrupts
+dwc_otg_cil_remove
+__DWC_FREE
+dwc_otg_pcd_handle_intr

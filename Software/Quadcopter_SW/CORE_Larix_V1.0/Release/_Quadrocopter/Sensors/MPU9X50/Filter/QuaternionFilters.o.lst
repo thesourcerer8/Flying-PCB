@@ -1,0 +1,527 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"QuaternionFilters.c"
+  16              		.global	__aeabi_f2d
+  17              		.global	__aeabi_d2f
+  18              		.section	.text.MadgwickQuaternionUpdate,"ax",%progbits
+  19              		.align	1
+  20              		.global	MadgwickQuaternionUpdate
+  21              		.thumb
+  22              		.thumb_func
+  24              	MadgwickQuaternionUpdate:
+  25              		@ args = 28, pretend = 0, frame = 40
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 10B5     		push	{r4, lr}
+  28 0002 2DED108B 		fstmfdd	sp!, {d8, d9, d10, d11, d12, d13, d14, d15}
+  29 0006 0CEE903A 		fmsr	s25, r3
+  30 000a 02EE102A 		fmsr	s4, r2
+  31 000e 6CEEAC7A 		fmuls	s15, s25, s25
+  32 0012 8AB0     		sub	sp, sp, #40
+  33 0014 42EE027A 		fmacs	s15, s4, s4
+  34 0018 9DED1C3A 		flds	s6, [sp, #112]
+  35 001c 43EE037A 		fmacs	s15, s6, s6
+  36 0020 D0ED009A 		flds	s19, [r0, #0]
+  37 0024 90ED019A 		flds	s18, [r0, #4]
+  38 0028 D0ED028A 		flds	s17, [r0, #8]
+  39 002c 90ED038A 		flds	s16, [r0, #12]
+  40 0030 0446     		mov	r4, r0
+  41 0032 17EE900A 		fmrs	r0, s15
+  42 0036 0592     		str	r2, [sp, #20]	@ float
+  43 0038 0291     		str	r1, [sp, #8]	@ float
+  44 003a FFF7FEFF 		bl	__aeabi_f2d
+  45 003e 9DED20FA 		flds	s30, [sp, #128]
+  46 0042 DDED21EA 		flds	s29, [sp, #132]
+  47 0046 9DED22EA 		flds	s28, [sp, #136]
+  48 004a FFF7FEFF 		bl	sqrt
+  49 004e FFF7FEFF 		bl	__aeabi_d2f
+  50 0052 0FEE900A 		fmsr	s31, r0
+  51 0056 F5EE40FA 		fcmpzs	s31
+  52 005a F1EE10FA 		fmstat
+  53 005e 00F0D481 		beq	.L1
+  54 0062 2EEEAE0A 		fmuls	s0, s29, s29
+  55 0066 0FEE0F0A 		fmacs	s0, s30, s30
+  56 006a 0EEE0E0A 		fmacs	s0, s28, s28
+  57 006e 10EE100A 		fmrs	r0, s0
+  58 0072 FFF7FEFF 		bl	__aeabi_f2d
+  59 0076 FFF7FEFF 		bl	sqrt
+  60 007a FFF7FEFF 		bl	__aeabi_d2f
+  61 007e 00EE900A 		fmsr	s1, r0
+  62 0082 F5EE400A 		fcmpzs	s1
+  63 0086 F1EE10FA 		fmstat
+  64 008a 00F0BE81 		beq	.L1
+  65 008e 4FF07E53 		mov	r3, #1065353216
+  66 0092 06EE103A 		fmsr	s12, r3
+  67 0096 86EE201A 		fdivs	s2, s12, s1
+  68 009a C6EE2FFA 		fdivs	s31, s12, s31
+  69 009e 6EEE81EA 		fmuls	s29, s29, s2
+  70 00a2 2FEE01FA 		fmuls	s30, s30, s2
+  71 00a6 79EEA9AA 		fadds	s21, s19, s19
+  72 00aa 69EEA9DA 		fmuls	s27, s19, s19
+  73 00ae 6AEE8F1A 		fmuls	s3, s21, s30
+  74 00b2 CDED04FA 		fsts	s31, [sp, #16]
+  75 00b6 6AEEAEFA 		fmuls	s31, s21, s29
+  76 00ba 2EEE01EA 		fmuls	s28, s28, s2
+  77 00be 2EEEAD2A 		fmuls	s4, s29, s27
+  78 00c2 01EE882A 		fmacs	s4, s3, s16
+  79 00c6 2FEE884A 		fmuls	s8, s31, s16
+  80 00ca 6AEE8E6A 		fmuls	s13, s21, s28
+  81 00ce 1FEE2D4A 		fmscs	s8, s30, s27
+  82 00d2 79EE093A 		fadds	s7, s18, s18
+  83 00d6 06EEC92A 		fnmacs	s4, s13, s18
+  84 00da 63EE8F2A 		fmuls	s5, s7, s30
+  85 00de 06EEA84A 		fmacs	s8, s13, s17
+  86 00e2 29EE09BA 		fmuls	s22, s18, s18
+  87 00e6 02EEA82A 		fmacs	s4, s5, s17
+  88 00ea 0FEE0B4A 		fmacs	s8, s30, s22
+  89 00ee 23EEAE7A 		fmuls	s14, s7, s29
+  90 00f2 0EEECB2A 		fnmacs	s4, s29, s22
+  91 00f6 28EEA8AA 		fmuls	s20, s17, s17
+  92 00fa 07EE284A 		fmacs	s8, s14, s17
+  93 00fe 63EE8E7A 		fmuls	s15, s7, s28
+  94 0102 78EEA8BA 		fadds	s23, s17, s17
+  95 0106 0EEE8A2A 		fmacs	s4, s29, s20
+  96 010a 2BEE8E3A 		fmuls	s6, s23, s28
+  97 010e 07EE884A 		fmacs	s8, s15, s16
+  98 0112 03EE082A 		fmacs	s4, s6, s16
+  99 0116 28EE08CA 		fmuls	s24, s16, s16
+ 100 011a 0FEE4A4A 		fnmacs	s8, s30, s20
+ 101 011e 0EEECC2A 		fnmacs	s4, s29, s24
+ 102 0122 0FEE4C4A 		fnmacs	s8, s30, s24
+ 103 0126 22EE020A 		fmuls	s0, s4, s4
+ 104 012a 04EE040A 		fmacs	s0, s8, s8
+ 105 012e 78EE084A 		fadds	s9, s16, s16
+ 106 0132 29EE895A 		fmuls	s10, s19, s18
+ 107 0136 69EEA85A 		fmuls	s11, s19, s17
+ 108 013a 10EE100A 		fmrs	r0, s0
+ 109 013e CDED013A 		fsts	s7, [sp, #4]
+ 110 0142 CDED064A 		fsts	s9, [sp, #24]
+ 111 0146 8DED035A 		fsts	s10, [sp, #12]
+ 112 014a CDED075A 		fsts	s11, [sp, #28]
+ 113 014e CDED081A 		fsts	s3, [sp, #32]
+ 114 0152 CDED092A 		fsts	s5, [sp, #36]
+ 115 0156 FFF7FEFF 		bl	__aeabi_f2d
+ 116 015a FFF7FEFF 		bl	sqrt
+ 117 015e FFF7FEFF 		bl	__aeabi_d2f
+ 118 0162 DDED083A 		flds	s7, [sp, #32]
+ 119 0166 2FEE891A 		fmuls	s2, s31, s18
+ 120 016a 03EEE81A 		fnmacs	s2, s7, s17
+ 121 016e 0EEE2D1A 		fmacs	s2, s28, s27
+ 122 0172 DDED094A 		flds	s9, [sp, #36]
+ 123 0176 04EE881A 		fmacs	s2, s9, s16
+ 124 017a 0EEE4B1A 		fnmacs	s2, s28, s22
+ 125 017e 6BEEAEDA 		fmuls	s27, s23, s29
+ 126 0182 DDED03FA 		flds	s31, [sp, #12]
+ 127 0186 0DEE881A 		fmacs	s2, s27, s16
+ 128 018a 7FEEAF6A 		fadds	s13, s31, s31
+ 129 018e 0EEE4A1A 		fnmacs	s2, s28, s20
+ 130 0192 4BEE886A 		fmacs	s13, s23, s16
+ 131 0196 29EE08DA 		fmuls	s26, s18, s16
+ 132 019a DDED045A 		flds	s11, [sp, #16]
+ 133 019e 0EEE0C1A 		fmacs	s2, s28, s24
+ 134 01a2 4CEEE56A 		fnmacs	s13, s25, s11
+ 135 01a6 DDED077A 		flds	s15, [sp, #28]
+ 136 01aa F6EE00CA 		fconsts	s25, #96
+ 137 01ae 7DEE0D1A 		fadds	s3, s26, s26
+ 138 01b2 7CEECA2A 		fsubs	s5, s25, s20
+ 139 01b6 4AEEE81A 		fnmacs	s3, s21, s17
+ 140 01ba 3DEE674A 		fsubs	s8, s26, s15
+ 141 01be 9DED055A 		flds	s10, [sp, #20]
+ 142 01c2 F0EE6F3A 		fcpys	s7, s31
+ 143 01c6 00EE900A 		fmsr	s1, r0
+ 144 01ca 32EECCCA 		fsubs	s24, s5, s24
+ 145 01ce 48EE883A 		fmacs	s7, s17, s16
+ 146 01d2 29EE883A 		fmuls	s6, s19, s16
+ 147 01d6 45EE651A 		fnmacs	s3, s10, s11
+ 148 01da 21EE042A 		fmuls	s4, s2, s8
+ 149 01de 19EE283A 		fmscs	s6, s18, s17
+ 150 01e2 00EE8C2A 		fmacs	s4, s1, s24
+ 151 01e6 9DED01CA 		flds	s24, [sp, #4]
+ 152 01ea 61EE094A 		fmuls	s9, s2, s18
+ 153 01ee 2CEE26CA 		fmuls	s24, s24, s13
+ 154 01f2 61EE23DA 		fmuls	s27, s2, s7
+ 155 01f6 7CEECB5A 		fsubs	s11, s25, s22
+ 156 01fa 40EE83DA 		fmacs	s27, s1, s6
+ 157 01fe 0BEEE1CA 		fnmacs	s24, s23, s3
+ 158 0202 B1EE600A 		fnegs	s0, s1
+ 159 0206 32EE4FFA 		fsubs	s30, s4, s30
+ 160 020a 75EECAFA 		fsubs	s31, s11, s20
+ 161 020e 21EE287A 		fmuls	s14, s2, s17
+ 162 0212 37EE8DDA 		fadds	s26, s15, s26
+ 163 0216 4FF07E50 		mov	r0, #1065353216
+ 164 021a F0EE647A 		fcpys	s15, s9
+ 165 021e 40EE087A 		fmacs	s15, s0, s16
+ 166 0222 04EE100A 		fmsr	s8, r0
+ 167 0226 3BEE0BBA 		fadds	s22, s22, s22
+ 168 022a 61EE2F2A 		fmuls	s5, s2, s31
+ 169 022e 07EE4FCA 		fnmacs	s24, s14, s30
+ 170 0232 7DEEEEEA 		fsubs	s29, s27, s29
+ 171 0236 40EE8D2A 		fmacs	s5, s1, s26
+ 172 023a 34EE4B2A 		fsubs	s4, s8, s22
+ 173 023e 3AEE0AAA 		fadds	s20, s20, s20
+ 174 0242 9DED043A 		flds	s6, [sp, #16]
+ 175 0246 DDED1C3A 		flds	s7, [sp, #112]
+ 176 024a 21EE08BA 		fmuls	s22, s2, s16
+ 177 024e 31EE016A 		fadds	s12, s2, s2
+ 178 0252 61EE29FA 		fmuls	s31, s2, s19
+ 179 0256 07EEAECA 		fmacs	s24, s15, s29
+ 180 025a 9DED061A 		flds	s2, [sp, #24]
+ 181 025e 72EE4A7A 		fsubs	s15, s4, s20
+ 182 0262 43EEC37A 		fnmacs	s15, s7, s6
+ 183 0266 2AEEA6DA 		fmuls	s26, s21, s13
+ 184 026a 01EE21DA 		fmacs	s26, s2, s3
+ 185 026e 32EECEEA 		fsubs	s28, s5, s28
+ 186 0272 F1EE002A 		fconsts	s5, #16
+ 187 0276 69EE22DA 		fmuls	s27, s18, s5
+ 188 027a 9DED062A 		flds	s4, [sp, #24]
+ 189 027e 30EEA04A 		fadds	s8, s1, s1
+ 190 0282 0DEEE7DA 		fnmacs	s26, s27, s15
+ 191 0286 62EE26DA 		fmuls	s27, s4, s13
+ 192 028a 20EEA85A 		fmuls	s10, s1, s17
+ 193 028e 4AEEE1DA 		fnmacs	s27, s21, s3
+ 194 0292 B1EE44AA 		fnegs	s20, s8
+ 195 0296 68EEA2AA 		fmuls	s21, s17, s5
+ 196 029a 05EE0ECA 		fmacs	s24, s10, s28
+ 197 029e 0BEE0FDA 		fmacs	s26, s22, s30
+ 198 02a2 35EE2F5A 		fadds	s10, s10, s31
+ 199 02a6 5AEE28FA 		fmscs	s31, s20, s17
+ 200 02aa 66EE095A 		fmuls	s11, s12, s18
+ 201 02ae 4AEEE7DA 		fnmacs	s27, s21, s15
+ 202 02b2 26EE286A 		fmuls	s12, s12, s17
+ 203 02b6 10EEA96A 		fmscs	s12, s1, s19
+ 204 02ba 60EE893A 		fmuls	s7, s1, s18
+ 205 02be 50EE885A 		fmscs	s11, s1, s16
+ 206 02c2 DDED010A 		flds	s1, [sp, #4]
+ 207 02c6 4AEE084A 		fmacs	s9, s20, s16
+ 208 02ca 05EE2EDA 		fmacs	s26, s10, s29
+ 209 02ce 6BEEA6BA 		fmuls	s23, s23, s13
+ 210 02d2 40EEA1BA 		fmacs	s23, s1, s3
+ 211 02d6 4FEE8FDA 		fmacs	s27, s31, s30
+ 212 02da 73EE8B7A 		fadds	s15, s7, s22
+ 213 02de 05EE8EDA 		fmacs	s26, s11, s28
+ 214 02e2 00EE297A 		fmacs	s14, s0, s19
+ 215 02e6 47EEAEDA 		fmacs	s27, s15, s29
+ 216 02ea 44EE8FBA 		fmacs	s23, s9, s30
+ 217 02ee 46EE0EDA 		fmacs	s27, s12, s28
+ 218 02f2 47EE2EBA 		fmacs	s23, s14, s29
+ 219 02f6 6DEE0D1A 		fmuls	s3, s26, s26
+ 220 02fa 4CEE0C1A 		fmacs	s3, s24, s24
+ 221 02fe 43EE8EBA 		fmacs	s23, s7, s28
+ 222 0302 4DEEAD1A 		fmacs	s3, s27, s27
+ 223 0306 4BEEAB1A 		fmacs	s3, s23, s23
+ 224 030a F0EE49AA 		fcpys	s21, s18
+ 225 030e 11EE900A 		fmrs	r0, s3
+ 226 0312 FFF7FEFF 		bl	__aeabi_f2d
+ 227 0316 FFF7FEFF 		bl	sqrt
+ 228 031a FFF7FEFF 		bl	__aeabi_d2f
+ 229 031e 4FF07E51 		mov	r1, #1065353216
+ 230 0322 07EE100A 		fmsr	s14, r0
+ 231 0326 06EE901A 		fmsr	s13, r1
+ 232 032a 86EE870A 		fdivs	s0, s13, s14
+ 233 032e DDED1F2A 		flds	s5, [sp, #124]
+ 234 0332 9DED1E1A 		flds	s2, [sp, #120]
+ 235 0336 9DED1D3A 		flds	s6, [sp, #116]
+ 236 033a 28EEA2BA 		fmuls	s22, s17, s5
+ 237 033e 68EE814A 		fmuls	s9, s17, s2
+ 238 0342 09EE83BA 		fmacs	s22, s19, s6
+ 239 0346 59EE434A 		fnmscs	s9, s18, s6
+ 240 034a 08EE41BA 		fnmacs	s22, s16, s2
+ 241 034e 29EE224A 		fmuls	s8, s18, s5
+ 242 0352 9FED305A 		flds	s10, .L6
+ 243 0356 48EE624A 		fnmacs	s9, s16, s5
+ 244 035a 2DEE00DA 		fmuls	s26, s26, s0
+ 245 035e 19EE814A 		fmscs	s8, s19, s2
+ 246 0362 2CEE00CA 		fmuls	s24, s24, s0
+ 247 0366 2DEE05DA 		fmuls	s26, s26, s10
+ 248 036a 29EE019A 		fmuls	s18, s18, s2
+ 249 036e 08EE034A 		fmacs	s8, s16, s6
+ 250 0372 2CEE05CA 		fmuls	s24, s24, s10
+ 251 0376 09EEA29A 		fmacs	s18, s19, s5
+ 252 037a 1BEE2CDA 		fmscs	s26, s22, s25
+ 253 037e 14EEACCA 		fmscs	s24, s9, s25
+ 254 0382 6DEE803A 		fmuls	s7, s27, s0
+ 255 0386 DDED025A 		flds	s11, [sp, #8]
+ 256 038a 63EE85DA 		fmuls	s27, s7, s10
+ 257 038e 08EEC39A 		fnmacs	s18, s17, s6
+ 258 0392 4DEE25AA 		fmacs	s21, s26, s11
+ 259 0396 54EE2CDA 		fmscs	s27, s8, s25
+ 260 039a 6BEE80BA 		fmuls	s23, s23, s0
+ 261 039e B0EE69AA 		fcpys	s20, s19
+ 262 03a2 0CEE25AA 		fmacs	s20, s24, s11
+ 263 03a6 2BEE852A 		fmuls	s4, s23, s10
+ 264 03aa 19EE2C2A 		fmscs	s4, s18, s25
+ 265 03ae B0EE68BA 		fcpys	s22, s17
+ 266 03b2 0DEEA5BA 		fmacs	s22, s27, s11
+ 267 03b6 6AEEAA7A 		fmuls	s15, s21, s21
+ 268 03ba 4AEE0A7A 		fmacs	s15, s20, s20
+ 269 03be 02EE258A 		fmacs	s16, s4, s11
+ 270 03c2 4BEE0B7A 		fmacs	s15, s22, s22
+ 271 03c6 48EE087A 		fmacs	s15, s16, s16
+ 272 03ca 17EE900A 		fmrs	r0, s15
+ 273 03ce FFF7FEFF 		bl	__aeabi_f2d
+ 274 03d2 FFF7FEFF 		bl	sqrt
+ 275 03d6 FFF7FEFF 		bl	__aeabi_d2f
+ 276 03da 4FF07E52 		mov	r2, #1065353216
+ 277 03de 06EE102A 		fmsr	s12, r2
+ 278 03e2 00EE900A 		fmsr	s1, r0
+ 279 03e6 C6EE201A 		fdivs	s3, s12, s1
+ 280 03ea 2AEE21AA 		fmuls	s20, s20, s3
+ 281 03ee 6AEEA1AA 		fmuls	s21, s21, s3
+ 282 03f2 2BEE21BA 		fmuls	s22, s22, s3
+ 283 03f6 28EE218A 		fmuls	s16, s16, s3
+ 284 03fa 84ED00AA 		fsts	s20, [r4, #0]
+ 285 03fe C4ED01AA 		fsts	s21, [r4, #4]
+ 286 0402 84ED02BA 		fsts	s22, [r4, #8]
+ 287 0406 84ED038A 		fsts	s16, [r4, #12]
+ 288              	.L1:
+ 289 040a 0AB0     		add	sp, sp, #40
+ 290 040c BDEC108B 		fldmfdd	sp!, {d8, d9, d10, d11, d12, d13, d14, d15}
+ 291 0410 10BD     		pop	{r4, pc}
+ 292              	.L7:
+ 293 0412 00BF     		.align	2
+ 294              	.L6:
+ 295 0414 0EC71A3F 		.word	1058719502
+ 297              		.section	.text.MahonyQuaternionUpdate,"ax",%progbits
+ 298              		.align	1
+ 299              		.global	MahonyQuaternionUpdate
+ 300              		.thumb
+ 301              		.thumb_func
+ 303              	MahonyQuaternionUpdate:
+ 304              		@ args = 32, pretend = 0, frame = 48
+ 305              		@ frame_needed = 0, uses_anonymous_args = 0
+ 306 0000 30B5     		push	{r4, r5, lr}
+ 307 0002 2DED108B 		fstmfdd	sp!, {d8, d9, d10, d11, d12, d13, d14, d15}
+ 308 0006 8DB0     		sub	sp, sp, #52
+ 309 0008 DDED20AA 		flds	s21, [sp, #128]
+ 310 000c 0BEE103A 		fmsr	s22, r3
+ 311 0010 6AEEAA7A 		fmuls	s15, s21, s21
+ 312 0014 4BEE0B7A 		fmacs	s15, s22, s22
+ 313 0018 DDED21DA 		flds	s27, [sp, #132]
+ 314 001c 4DEEAD7A 		fmacs	s15, s27, s27
+ 315 0020 D0ED009A 		flds	s19, [r0, #0]
+ 316 0024 90ED019A 		flds	s18, [r0, #4]
+ 317 0028 D0ED028A 		flds	s17, [r0, #8]
+ 318 002c 90ED038A 		flds	s16, [r0, #12]
+ 319 0030 0446     		mov	r4, r0
+ 320 0032 17EE900A 		fmrs	r0, s15
+ 321 0036 0B92     		str	r2, [sp, #44]	@ float
+ 322 0038 0D46     		mov	r5, r1
+ 323 003a FFF7FEFF 		bl	__aeabi_f2d
+ 324 003e 9DED25EA 		flds	s28, [sp, #148]
+ 325 0042 DDED26EA 		flds	s29, [sp, #152]
+ 326 0046 DDED27BA 		flds	s23, [sp, #156]
+ 327 004a FFF7FEFF 		bl	sqrt
+ 328 004e FFF7FEFF 		bl	__aeabi_d2f
+ 329 0052 9FEDB6AA 		flds	s20, .L12
+ 330 0056 0DEE100A 		fmsr	s26, r0
+ 331 005a B4EE4ADA 		fcmps	s26, s20
+ 332 005e F1EE10FA 		fmstat
+ 333 0062 00F05E81 		beq	.L8
+ 334 0066 2EEEAE0A 		fmuls	s0, s29, s29
+ 335 006a 0EEE0E0A 		fmacs	s0, s28, s28
+ 336 006e 0BEEAB0A 		fmacs	s0, s23, s23
+ 337 0072 10EE100A 		fmrs	r0, s0
+ 338 0076 FFF7FEFF 		bl	__aeabi_f2d
+ 339 007a FFF7FEFF 		bl	sqrt
+ 340 007e FFF7FEFF 		bl	__aeabi_d2f
+ 341 0082 00EE900A 		fmsr	s1, r0
+ 342 0086 F4EE4A0A 		fcmps	s1, s20
+ 343 008a F1EE10FA 		fmstat
+ 344 008e 00F04881 		beq	.L8
+ 345 0092 4FF07E53 		mov	r3, #1065353216
+ 346 0096 01EE103A 		fmsr	s2, r3
+ 347 009a 81EE0DDA 		fdivs	s26, s2, s26
+ 348 009e C1EE201A 		fdivs	s3, s2, s1
+ 349 00a2 69EE095A 		fmuls	s11, s18, s18
+ 350 00a6 68EEA8FA 		fmuls	s31, s17, s17
+ 351 00aa CDED045A 		fsts	s11, [sp, #16]
+ 352 00ae DDED047A 		flds	s15, [sp, #16]
+ 353 00b2 2BEE0DBA 		fmuls	s22, s22, s26
+ 354 00b6 6AEE8DAA 		fmuls	s21, s21, s26
+ 355 00ba 6DEE8DDA 		fmuls	s27, s27, s26
+ 356 00be B6EE00DA 		fconsts	s26, #96
+ 357 00c2 3DEE6F2A 		fsubs	s4, s26, s31
+ 358 00c6 28EE08FA 		fmuls	s30, s16, s16
+ 359 00ca 3DEE670A 		fsubs	s0, s26, s15
+ 360 00ce 29EE895A 		fmuls	s10, s19, s18
+ 361 00d2 8DED05BA 		fsts	s22, [sp, #20]
+ 362 00d6 2EEEA1BA 		fmuls	s22, s29, s3
+ 363 00da 72EE4F2A 		fsubs	s5, s4, s30
+ 364 00de 29EE887A 		fmuls	s14, s19, s16
+ 365 00e2 69EE286A 		fmuls	s13, s18, s17
+ 366 00e6 28EE886A 		fmuls	s12, s17, s16
+ 367 00ea CDED06AA 		fsts	s21, [sp, #24]
+ 368 00ee 6EEE21AA 		fmuls	s21, s28, s3
+ 369 00f2 7BEE0BEA 		fadds	s29, s22, s22
+ 370 00f6 8DED015A 		fsts	s10, [sp, #4]
+ 371 00fa 30EE4F5A 		fsubs	s10, s0, s30
+ 372 00fe 36EEC73A 		fsubs	s6, s13, s14
+ 373 0102 76EE870A 		fadds	s1, s13, s14
+ 374 0106 3AEEAAEA 		fadds	s28, s21, s21
+ 375 010a CDED082A 		fsts	s5, [sp, #32]
+ 376 010e 8DED026A 		fsts	s12, [sp, #8]
+ 377 0112 6BEEA1BA 		fmuls	s23, s23, s3
+ 378 0116 2EEE857A 		fmuls	s14, s29, s10
+ 379 011a DDED084A 		flds	s9, [sp, #32]
+ 380 011e DDED025A 		flds	s11, [sp, #8]
+ 381 0122 DDED016A 		flds	s13, [sp, #4]
+ 382 0126 2EEE834A 		fmuls	s8, s29, s6
+ 383 012a 0EEE207A 		fmacs	s14, s28, s1
+ 384 012e 29EEA8CA 		fmuls	s24, s19, s17
+ 385 0132 69EE08CA 		fmuls	s25, s18, s16
+ 386 0136 35EEE66A 		fsubs	s12, s11, s13
+ 387 013a 0EEE244A 		fmacs	s8, s28, s9
+ 388 013e CDED07DA 		fsts	s27, [sp, #28]
+ 389 0142 7BEEABDA 		fadds	s27, s23, s23
+ 390 0146 7CEE8C3A 		fadds	s7, s25, s24
+ 391 014a 0DEE867A 		fmacs	s14, s27, s12
+ 392 014e 0DEEA34A 		fmacs	s8, s27, s7
+ 393 0152 27EE071A 		fmuls	s2, s14, s14
+ 394 0156 04EE041A 		fmacs	s2, s8, s8
+ 395 015a 8DED030A 		fsts	s0, [sp, #12]
+ 396 015e 11EE100A 		fmrs	r0, s2
+ 397 0162 8DED093A 		fsts	s6, [sp, #36]
+ 398 0166 CDED0A3A 		fsts	s7, [sp, #40]
+ 399 016a FFF7FEFF 		bl	__aeabi_f2d
+ 400 016e FFF7FEFF 		bl	sqrt
+ 401 0172 7CEECCCA 		fsubs	s25, s25, s24
+ 402 0176 DDED011A 		flds	s3, [sp, #4]
+ 403 017a 9DED02CA 		flds	s24, [sp, #8]
+ 404 017e 9DED044A 		flds	s8, [sp, #16]
+ 405 0182 3CEE21CA 		fadds	s24, s24, s3
+ 406 0186 9DED032A 		flds	s4, [sp, #12]
+ 407 018a 19EEA94A 		fmscs	s8, s19, s19
+ 408 018e 72EE6F2A 		fsubs	s5, s4, s31
+ 409 0192 3CEEAC3A 		fadds	s6, s25, s25
+ 410 0196 7CEE0C3A 		fadds	s7, s24, s24
+ 411 019a 6EEE8CEA 		fmuls	s29, s29, s24
+ 412 019e 4EEE2CEA 		fmacs	s29, s28, s25
+ 413 01a2 74EE6FFA 		fsubs	s31, s8, s31
+ 414 01a6 CDED012A 		fsts	s5, [sp, #4]
+ 415 01aa 8DED023A 		fsts	s6, [sp, #8]
+ 416 01ae CDED033A 		fsts	s7, [sp, #12]
+ 417 01b2 FFF7FEFF 		bl	__aeabi_d2f
+ 418 01b6 9DED010A 		flds	s0, [sp, #4]
+ 419 01ba 4DEE80EA 		fmacs	s29, s27, s0
+ 420 01be 04EE900A 		fmsr	s9, r0
+ 421 01c2 7EEEAE0A 		fadds	s1, s29, s29
+ 422 01c6 74EEA47A 		fadds	s15, s9, s9
+ 423 01ca DDED0A5A 		flds	s11, [sp, #40]
+ 424 01ce 20EEAC1A 		fmuls	s2, s1, s25
+ 425 01d2 9DED085A 		flds	s10, [sp, #32]
+ 426 01d6 9DED097A 		flds	s14, [sp, #36]
+ 427 01da 60EE80CA 		fmuls	s25, s1, s0
+ 428 01de 47EEA5CA 		fmacs	s25, s15, s11
+ 429 01e2 20EE8CCA 		fmuls	s24, s1, s24
+ 430 01e6 07EE851A 		fmacs	s2, s15, s10
+ 431 01ea 07EE87CA 		fmacs	s24, s15, s14
+ 432 01ee 9DED076A 		flds	s12, [sp, #28]
+ 433 01f2 DDED036A 		flds	s13, [sp, #12]
+ 434 01f6 DDED057A 		flds	s15, [sp, #20]
+ 435 01fa 9DED062A 		flds	s4, [sp, #24]
+ 436 01fe 3FEE8FFA 		fadds	s30, s31, s30
+ 437 0202 9DED020A 		flds	s0, [sp, #8]
+ 438 0206 66EE261A 		fmuls	s3, s12, s13
+ 439 020a 52EE0F1A 		fmscs	s3, s4, s30
+ 440 020e 6AEEACEA 		fmuls	s29, s21, s25
+ 441 0212 27EE8FFA 		fmuls	s30, s15, s30
+ 442 0216 16EE00FA 		fmscs	s30, s12, s0
+ 443 021a 5BEE81EA 		fmscs	s29, s23, s2
+ 444 021e 6BEE8C2A 		fmuls	s5, s23, s24
+ 445 0222 5BEE2C2A 		fmscs	s5, s22, s25
+ 446 0226 9DED065A 		flds	s10, [sp, #24]
+ 447 022a DDED035A 		flds	s11, [sp, #12]
+ 448 022e DDED05CA 		flds	s25, [sp, #20]
+ 449 0232 25EE006A 		fmuls	s12, s10, s0
+ 450 0236 2BEE01BA 		fmuls	s22, s22, s2
+ 451 023a 1CEEA56A 		fmscs	s12, s25, s11
+ 452 023e 1AEE8CBA 		fmscs	s22, s21, s24
+ 453 0242 DDED230A 		flds	s1, [sp, #140]
+ 454 0246 7FEE2EEA 		fadds	s29, s30, s29
+ 455 024a F2EE043A 		fconsts	s7, #36
+ 456 024e 31EEA23A 		fadds	s6, s3, s5
+ 457 0252 9DED224A 		flds	s8, [sp, #136]
+ 458 0256 4EEEA30A 		fmacs	s1, s29, s7
+ 459 025a 03EE234A 		fmacs	s8, s6, s7
+ 460 025e 76EE0BCA 		fadds	s25, s12, s22
+ 461 0262 DDED24AA 		flds	s21, [sp, #144]
+ 462 0266 30EE8A7A 		fadds	s14, s1, s20
+ 463 026a 4CEEA3AA 		fmacs	s21, s25, s7
+ 464 026e 74EE0A4A 		fadds	s9, s8, s20
+ 465 0272 68EE871A 		fmuls	s3, s17, s14
+ 466 0276 59EE641A 		fnmscs	s3, s18, s9
+ 467 027a 85ED00AA 		fsts	s20, [r5, #0]
+ 468 027e 85ED01AA 		fsts	s20, [r5, #4]
+ 469 0282 85ED02AA 		fsts	s20, [r5, #8]
+ 470 0286 3AEE8AAA 		fadds	s20, s21, s20
+ 471 028a DDED0B6A 		flds	s13, [sp, #44]
+ 472 028e 48EE4A1A 		fnmacs	s3, s16, s20
+ 473 0292 26EE8DDA 		fmuls	s26, s13, s26
+ 474 0296 28EE8A2A 		fmuls	s4, s17, s20
+ 475 029a 41EE8D9A 		fmacs	s19, s3, s26
+ 476 029e 69EE0A2A 		fmuls	s5, s18, s20
+ 477 02a2 09EEA42A 		fmacs	s4, s19, s9
+ 478 02a6 08EE472A 		fnmacs	s4, s16, s14
+ 479 02aa 59EE872A 		fmscs	s5, s19, s14
+ 480 02ae B0EE49BA 		fcpys	s22, s18
+ 481 02b2 29EE079A 		fmuls	s18, s18, s14
+ 482 02b6 48EE242A 		fmacs	s5, s16, s9
+ 483 02ba 02EE0DBA 		fmacs	s22, s4, s26
+ 484 02be 09EE8A9A 		fmacs	s18, s19, s20
+ 485 02c2 F0EE68AA 		fcpys	s21, s17
+ 486 02c6 08EEE49A 		fnmacs	s18, s17, s9
+ 487 02ca 42EE8DAA 		fmacs	s21, s5, s26
+ 488 02ce 2BEE0B3A 		fmuls	s6, s22, s22
+ 489 02d2 09EEA93A 		fmacs	s6, s19, s19
+ 490 02d6 09EE0D8A 		fmacs	s16, s18, s26
+ 491 02da 0AEEAA3A 		fmacs	s6, s21, s21
+ 492 02de 08EE083A 		fmacs	s6, s16, s16
+ 493 02e2 13EE100A 		fmrs	r0, s6
+ 494 02e6 FFF7FEFF 		bl	__aeabi_f2d
+ 495 02ea FFF7FEFF 		bl	sqrt
+ 496 02ee FFF7FEFF 		bl	__aeabi_d2f
+ 497 02f2 4FF07E51 		mov	r1, #1065353216
+ 498 02f6 03EE901A 		fmsr	s7, r1
+ 499 02fa 04EE100A 		fmsr	s8, r0
+ 500 02fe C3EE844A 		fdivs	s9, s7, s8
+ 501 0302 69EEA49A 		fmuls	s19, s19, s9
+ 502 0306 2BEE24BA 		fmuls	s22, s22, s9
+ 503 030a 6AEEA4AA 		fmuls	s21, s21, s9
+ 504 030e 28EE248A 		fmuls	s16, s16, s9
+ 505 0312 C4ED009A 		fsts	s19, [r4, #0]
+ 506 0316 84ED01BA 		fsts	s22, [r4, #4]
+ 507 031a C4ED02AA 		fsts	s21, [r4, #8]
+ 508 031e 84ED038A 		fsts	s16, [r4, #12]
+ 509              	.L8:
+ 510 0322 0DB0     		add	sp, sp, #52
+ 511 0324 BDEC108B 		fldmfdd	sp!, {d8, d9, d10, d11, d12, d13, d14, d15}
+ 512 0328 30BD     		pop	{r4, r5, pc}
+ 513              	.L13:
+ 514 032a 00BF     		.align	2
+ 515              	.L12:
+ 516 032c 00000000 		.word	0
+ 518              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 QuaternionFilters.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cciDPBze.s:19     .text.MadgwickQuaternionUpdate:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cciDPBze.s:24     .text.MadgwickQuaternionUpdate:00000000 MadgwickQuaternionUpdate
+C:\Users\TOGABL~1\AppData\Local\Temp\cciDPBze.s:295    .text.MadgwickQuaternionUpdate:00000414 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cciDPBze.s:298    .text.MahonyQuaternionUpdate:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cciDPBze.s:303    .text.MahonyQuaternionUpdate:00000000 MahonyQuaternionUpdate
+C:\Users\TOGABL~1\AppData\Local\Temp\cciDPBze.s:516    .text.MahonyQuaternionUpdate:0000032c $d
+
+UNDEFINED SYMBOLS
+__aeabi_f2d
+__aeabi_d2f
+sqrt

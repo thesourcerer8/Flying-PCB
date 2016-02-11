@@ -1,0 +1,221 @@
+<%@ jet package= "CodeGenerator" class="dave3_h_template"
+imports= "java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+<% int Is45Device = -1;
+   int Is44Device = -1;
+   int Is42Device = -1;
+   int Is11Device = -1;
+   int Is12Device = -1;
+   int Is13Device = -1;
+   Is45Device = ((app.getSoftwareId().substring(0,2).compareTo("45")==0)?1:0);
+   Is44Device = ((app.getSoftwareId().substring(0,2).compareTo("44")==0)?1:0);
+   Is42Device = ((app.getSoftwareId().substring(0,2).compareTo("42")==0)?1:0);
+   Is11Device = ((app.getSoftwareId().substring(0,2).compareTo("11")==0)?1:0);
+   Is12Device = ((app.getSoftwareId().substring(0,2).compareTo("12")==0)?1:0);
+   Is13Device = ((app.getSoftwareId().substring(0,2).compareTo("13")==0)?1:0);
+   int xmc4Device = -1;
+   xmc4Device = ((app.getSoftwareId().substring(0,1).compareTo("4")==0)?1:0); %>
+
+/**************************************************************************//**
+ *
+ * Copyright (C) 2011 Infineon Technologies AG. All rights reserved.
+ *
+ * Infineon Technologies AG (Infineon) is supplying this software for use with
+ * Infineon's microcontrollers.
+ * This file can be freely distributed within development tools that are
+ * supporting such microcontrollers.
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL,
+ * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon <Microcontroller name, step>                           **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** MODIFICATION DATE : Jan 22, 2014                                          **
+**                                                                            **
+*******************************************************************************/
+
+/**
+ * @file  DAVE3.h
+ *
+ * @brief This file contains all public data structures,enums and function
+ *        prototypes
+ *
+ * Revision History
+ * 26 June 2013 v1.0.32 Initial Version.
+ * 22 Jan  2014 v1.0.40 C++ macro inserted. 
+ *
+ */
+
+#ifndef _DAVE3_H_
+#define _DAVE3_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+<% String TempApps = null;
+   String MyAppName = null;
+   ArrayList<String> apps;
+   ArrayList<String> apps_sorted = new ArrayList<String>();
+   String TempLowerApps = null; 
+   boolean CLKApp = false;
+   boolean DBGApp = false;   
+   apps=(ArrayList<String>)(app.getApps());
+  	 for (int k = 0; k < apps.size(); k++) {
+		 TempApps = apps.get(k);
+//		 if(app.isAppInitProvider(apps.get(k)) == true) {
+		 MyAppName = TempApps.substring(TempApps.indexOf("/app/") + 5, TempApps.lastIndexOf("/"));
+		 TempLowerApps = MyAppName.toLowerCase();
+		 if (TempLowerApps.equalsIgnoreCase("clk001")) {CLKApp = true;}
+		 if (TempLowerApps.equalsIgnoreCase("dbg001")) {DBGApp = true;}
+		 if(!apps_sorted.contains(TempLowerApps)) 
+		 {        
+			 apps_sorted.add(TempLowerApps);
+		 }     
+//   }  
+  } %>
+//****************************************************************************
+// @Prototypes Of Global Functions
+//****************************************************************************
+
+void DAVE_Init(void);
+
+<% if (CLKApp) { %>
+void SystemInit_DAVE3(void);
+
+<% } %>      
+//****************************************************************************
+// @Project Includes
+//****************************************************************************
+
+
+<%if (Is45Device==1){%>
+#include <XMC4500.h>
+<%} else if (Is44Device==1){%>
+#include <XMC4400.h>
+<%} else if (Is42Device==1){%>
+#include <XMC4200.h>
+<%} else if (Is11Device==1){%>
+#include <XMC1100.h>
+<%} else if (Is12Device==1){%>
+#include <XMC1200.h>
+<%} else if (Is13Device==1){%>
+#include <XMC1300.h>
+<%}%>
+
+#include "../../inc/LIBS/types.h"
+	
+#include "../../inc/DAVESupport/MULTIPLEXER.h"
+
+
+// #include APP HEADER FILES.
+<% 
+ for (int k = 0; k < apps_sorted.size(); k++) 
+ {
+ TempLowerApps = apps_sorted.get(k);
+if(TempLowerApps.compareTo("davesupport") != 0 && TempLowerApps.compareTo("mathlibs") != 0
+		                                       && TempLowerApps.compareTo("math01") != 0
+		                                       && TempLowerApps.compareTo("motorlibs") != 0) { %>
+	#include "../../inc/<%= TempLowerApps.toUpperCase()%>/<%=TempLowerApps.toUpperCase()%>.h" 
+<%}else if (TempLowerApps.compareTo("math01") == 0){%>
+	#include "../../inc/<%= TempLowerApps.toUpperCase()%>/<%=TempLowerApps.toUpperCase()%>_Conf.h"
+<%}}%>
+
+
+<%if (xmc4Device==1){%>
+<% if (!DBGApp) { %>  
+/*******************************************************************************
+**                      Global Macro Definitions                              **
+*******************************************************************************/
+#ifndef DBG001_H
+#define DBG001_H
+
+
+#define SAFETY_CRITICAL(groupid,messageid,length,value)
+        /** NULL */
+/** */
+#define CRITICAL(groupid,messageid,length,value)
+        /** NULL */
+/** */
+#define ERROR(groupid,messageid,length,value)
+        /** NULL */
+/** */
+#define WARNING(groupid,messageid,length,value)
+        /** NULL */
+/** */
+#define INFO(groupid,messageid,length,value)
+        /** NULL */
+/** */
+#define TRACE(groupid,messageid,length,value)
+
+#define DBG001_RegisterCallBack(A,B,C)
+
+/** Macro for Logging function start */
+#define FUNCTION_ENTRY(GID, Status) 
+
+/** Macro for logging function stop */
+#define FUNCTION_EXIT(GID, Status) 
+
+#define DBG001_I(e) /* empty */
+#define DBG001_IG(e,g) /* empty */
+#define DBG001_IH(e,h) /* empty */
+#define DBG001_IP(e,p) /* empty */
+#define DBG001_IGH(e,g,h) /* empty */
+#define DBG001_IGP(e,g,p) /* empty */
+#define DBG001_IHP(e,h,p) /* empty */
+#define DBG001_IGHP(e,g,h,p) /* empty */
+
+#define DBG001_N(e) /* empty */
+#define DBG001_NG(e,g) /* empty */
+#define DBG001_NH(e,h) /* empty */
+#define DBG001_NP(e,p) /* empty */
+#define DBG001_NGH(e,g,h) /* empty */
+#define DBG001_NGP(e,g,p) /* empty */
+#define DBG001_NHP(e,h,p) /* empty */
+#define DBG001_NGHP(e,g,h,p) /* empty */
+
+#define DBG001_ID(e) /* empty */
+#define DBG001_IS(e) /* empty */
+#define DBG001_ISG(e,g) /* empty */
+
+#define DBG001_SAFETY_CRITICAL(groupid,messageid,length,value)
+        /** NULL */
+/** */
+#define DBG001_CRITICAL(groupid,messageid,length,value)
+        /** NULL */
+/** */
+#define DBG001_ERROR(groupid,messageid,length,value)
+        /** NULL */
+/** */
+#define DBG001_WARNING(groupid,messageid,length,value)
+        /** NULL */
+/** */
+#define DBG001_INFO(groupid,messageid,length,value)
+        /** NULL */
+/** */
+#define DBG001_TRACE(groupid,messageid,length,value)
+
+/** Macro for Logging function start */
+#define DBG001_FUNCTION_ENTRY(GID, Status)
+ 
+/** Macro for logging function stop */
+#define DBG001_FUNCTION_EXIT(GID, Status) 
+      
+#endif  /** ifndef DBG001_H */ 
+
+<% } %>    
+<% } %>                     
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /** ifndef _DAVE3_H_ */

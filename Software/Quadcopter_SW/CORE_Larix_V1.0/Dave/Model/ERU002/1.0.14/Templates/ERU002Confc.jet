@@ -1,0 +1,121 @@
+<%@ jet package="CodeGenerator" class="eru002confc_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[ERU002_Conf.c]*/
+/*******************************************************************************
+ Copyright (c) 2014, Infineon Technologies AG                                 **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without** 
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000 Series/XMC1000 series                          **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+**                                                                            **
+*******************************************************************************/
+<% String AppBaseuri = "app/eru002/";%>
+/**
+ * @file   ERU002_Conf.c
+ *
+ * Revision History
+ * 25 Jan 2013 v1.0.4 Initial Version
+ * 14 Mar 2013 v1.0.6 Porting to XMC42xx and XMC44xx
+ * 15 Nov 2013 v1.0.12 Coding guidelines followed.
+ *
+ * @brief  Configuration file generated based on UI settings 
+ *         of ERU002 App
+ *
+ */
+
+/*******************************************************************************
+ ** INCLUDE FILES                                                             **
+ ******************************************************************************/
+#include "../../inc/ERU002/ERU002.h"
+/**
+ * @ingroup ERU002_publicparam
+ * @{
+ */
+
+<% String MappedUri = null; %>
+<% String appInst  = null; %>
+<% String UnitInst = null; %>
+<% String ChannelInst = null; %>
+<% int NodeNum = 0; %>
+
+<% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/eru002/"));
+ for (String appIns : appsList ) {
+ appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+<% MappedUri = app.getMappedUri(AppBaseuri + appInst + "/ogu"); %>
+<% if((MappedUri != null) && (MappedUri != "")) { %>
+<% NodeNum++; %>
+<% UnitInst = MappedUri.substring(MappedUri .length()-7,MappedUri.indexOf("/ogu/")); %>
+<% ChannelInst = MappedUri.substring(MappedUri.length()-1); %>
+
+const ERU002_HandleType ERU002_Handle<%=appInst%> = {
+  /* Mapped ERU Unit */
+  .ERURegs      = ERU<%= UnitInst%>, 
+  /* InputChannel  */
+  .OutputChannel = (uint8_t)<%= ChannelInst%>,
+  
+  .GP_Value = <%= app.getIntegerValue(AppBaseuri + appInst + 
+		  	  	  	  	  	  	  	  "/ogu/exocon/gp") %>,
+  
+  .GEEN_Value = <%= app.getIntegerValue(AppBaseuri + appInst + 
+		  	  	  	  	  	  	  	  "/ogu/exocon/geen") %>
+};
+<% } %>
+<% else { %>
+/* OGU NOT MAPPED FOR APP INSTANCE <%=appInst%>*/
+<% } %>
+<%} %> 
+
+const ERU002_HandleType * ERU002_HandleArray[ERU002_NUM_INSTANCES] =
+{
+<% int NumInstances = 0; %>
+<% for (String appIns : appsList ) { %>
+<% appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+   &ERU002_Handle<%=appInst%>
+ <% NumInstances++; %><% if(NumInstances != NodeNum) {%>,<%} %> 
+<%}%>
+
+};
+
+/**
+ * @}
+ */
+/*CODE_BLOCK_END*/

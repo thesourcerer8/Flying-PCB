@@ -1,0 +1,75 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"NVIC002_Conf.c"
+  16              		.global	NVIC002_HandleArray
+  17              		.global	NVIC002_Handle5
+  18              		.global	NVIC002_Handle4
+  19              		.global	NVIC002_Handle3
+  20              		.global	NVIC002_Handle2
+  21              		.global	NVIC002_Handle1
+  22              		.global	NVIC002_Handle0
+  23              		.section	.rodata
+  26              	NVIC002_Handle5:
+  27 0000 59       		.byte	89
+  28 0001 13       		.byte	19
+  29 0002 00       		.byte	0
+  30 0003 01       		.byte	1
+  33              	NVIC002_Handle4:
+  34 0004 33       		.byte	51
+  35 0005 3F       		.byte	63
+  36 0006 00       		.byte	0
+  37 0007 01       		.byte	1
+  40              	NVIC002_Handle3:
+  41 0008 05       		.byte	5
+  42 0009 0A       		.byte	10
+  43 000a 00       		.byte	0
+  44 000b 00       		.byte	0
+  47              	NVIC002_Handle2:
+  48 000c 30       		.byte	48
+  49 000d 05       		.byte	5
+  50 000e 00       		.byte	0
+  51 000f 01       		.byte	1
+  54              	NVIC002_Handle1:
+  55 0010 31       		.byte	49
+  56 0011 0F       		.byte	15
+  57 0012 00       		.byte	0
+  58 0013 01       		.byte	1
+  61              	NVIC002_Handle0:
+  62 0014 5A       		.byte	90
+  63 0015 14       		.byte	20
+  64 0016 00       		.byte	0
+  65 0017 01       		.byte	1
+  66              		.data
+  67              		.align	2
+  70              	NVIC002_HandleArray:
+  71 0000 00000000 		.word	NVIC002_Handle0
+  72 0004 00000000 		.word	NVIC002_Handle1
+  73 0008 00000000 		.word	NVIC002_Handle2
+  74 000c 00000000 		.word	NVIC002_Handle3
+  75 0010 00000000 		.word	NVIC002_Handle4
+  76 0014 00000000 		.word	NVIC002_Handle5
+  77              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 NVIC002_Conf.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccQXMN5I.s:70     .data:00000000 NVIC002_HandleArray
+C:\Users\TOGABL~1\AppData\Local\Temp\ccQXMN5I.s:26     .rodata:00000000 NVIC002_Handle5
+C:\Users\TOGABL~1\AppData\Local\Temp\ccQXMN5I.s:33     .rodata:00000004 NVIC002_Handle4
+C:\Users\TOGABL~1\AppData\Local\Temp\ccQXMN5I.s:40     .rodata:00000008 NVIC002_Handle3
+C:\Users\TOGABL~1\AppData\Local\Temp\ccQXMN5I.s:47     .rodata:0000000c NVIC002_Handle2
+C:\Users\TOGABL~1\AppData\Local\Temp\ccQXMN5I.s:54     .rodata:00000010 NVIC002_Handle1
+C:\Users\TOGABL~1\AppData\Local\Temp\ccQXMN5I.s:61     .rodata:00000014 NVIC002_Handle0
+C:\Users\TOGABL~1\AppData\Local\Temp\ccQXMN5I.s:67     .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

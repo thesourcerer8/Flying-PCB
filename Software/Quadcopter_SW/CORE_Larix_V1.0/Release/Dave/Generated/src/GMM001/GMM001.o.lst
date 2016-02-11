@@ -1,0 +1,250 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"GMM001.c"
+  16              		.section	.text.GMM001_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	GMM001_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	GMM001_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+  26 0004 DFF86880 		ldr	r8, .L2+28
+  27 0008 DFF86890 		ldr	r9, .L2+32
+  28 000c 114E     		ldr	r6, .L2
+  29 000e 124F     		ldr	r7, .L2+4
+  30 0010 124C     		ldr	r4, .L2+8
+  31 0012 134D     		ldr	r5, .L2+12
+  32 0014 4246     		mov	r2, r8
+  33 0016 0021     		movs	r1, #0
+  34 0018 4846     		mov	r0, r9
+  35 001a FFF7FEFF 		bl	memset
+  36 001e 3246     		mov	r2, r6
+  37 0020 0021     		movs	r1, #0
+  38 0022 3846     		mov	r0, r7
+  39 0024 FFF7FEFF 		bl	memset
+  40 0028 0021     		movs	r1, #0
+  41 002a 2246     		mov	r2, r4
+  42 002c 2846     		mov	r0, r5
+  43 002e FFF7FEFF 		bl	memset
+  44 0032 0C4B     		ldr	r3, .L2+16
+  45 0034 0C48     		ldr	r0, .L2+20
+  46 0036 0D49     		ldr	r1, .L2+24
+  47 0038 C3F80090 		str	r9, [r3, #0]	@ unaligned
+  48 003c 4FEAD808 		lsr	r8, r8, #3
+  49 0040 F608     		lsrs	r6, r6, #3
+  50 0042 E408     		lsrs	r4, r4, #3
+  51 0044 A3F80480 		strh	r8, [r3, #4]	@ unaligned
+  52 0048 0760     		str	r7, [r0, #0]	@ unaligned
+  53 004a 8680     		strh	r6, [r0, #4]	@ unaligned
+  54 004c 0D60     		str	r5, [r1, #0]	@ unaligned
+  55 004e 8C80     		strh	r4, [r1, #4]	@ unaligned
+  56 0050 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+  57              	.L3:
+  58              		.align	2
+  59              	.L2:
+  60 0054 00000000 		.word	Heap_Bank2_Size
+  61 0058 00000000 		.word	Heap_Bank2_Start
+  62 005c 00000000 		.word	Heap_Bank3_Size
+  63 0060 00000000 		.word	Heap_Bank3_Start
+  64 0064 00000000 		.word	GMM001_handle0
+  65 0068 00000000 		.word	GMM001_handle1
+  66 006c 00000000 		.word	GMM001_handle2
+  67 0070 00000000 		.word	Heap_Bank1_Size
+  68 0074 00000000 		.word	Heap_Bank1_Start
+  70              		.section	.text.GMM001_malloc,"ax",%progbits
+  71              		.align	1
+  72              		.global	GMM001_malloc
+  73              		.thumb
+  74              		.thumb_func
+  76              	GMM001_malloc:
+  77              		@ args = 0, pretend = 0, frame = 0
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79 0000 10B5     		push	{r4, lr}
+  80 0002 0446     		mov	r4, r0
+  81 0004 2146     		mov	r1, r4
+  82 0006 0848     		ldr	r0, .L7
+  83 0008 FFF7FEFF 		bl	LMM001_malloc
+  84 000c 50B9     		cbnz	r0, .L5
+  85 000e 0748     		ldr	r0, .L7+4
+  86 0010 2146     		mov	r1, r4
+  87 0012 FFF7FEFF 		bl	LMM001_malloc
+  88 0016 28B9     		cbnz	r0, .L5
+  89 0018 0548     		ldr	r0, .L7+8
+  90 001a 2146     		mov	r1, r4
+  91 001c BDE81040 		pop	{r4, lr}
+  92 0020 FFF7FEBF 		b	LMM001_malloc
+  93              	.L5:
+  94 0024 10BD     		pop	{r4, pc}
+  95              	.L8:
+  96 0026 00BF     		.align	2
+  97              	.L7:
+  98 0028 00000000 		.word	GMM001_handle0
+  99 002c 00000000 		.word	GMM001_handle1
+ 100 0030 00000000 		.word	GMM001_handle2
+ 102              		.section	.text.GMM001_realloc,"ax",%progbits
+ 103              		.align	1
+ 104              		.global	GMM001_realloc
+ 105              		.thumb
+ 106              		.thumb_func
+ 108              	GMM001_realloc:
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111 0000 10B5     		push	{r4, lr}
+ 112 0002 0246     		mov	r2, r0
+ 113 0004 0B46     		mov	r3, r1
+ 114 0006 19B9     		cbnz	r1, .L10
+ 115 0008 BDE81040 		pop	{r4, lr}
+ 116 000c FFF7FEBF 		b	GMM001_malloc
+ 117              	.L10:
+ 118 0010 1048     		ldr	r0, .L18
+ 119 0012 8142     		cmp	r1, r0
+ 120 0014 05D3     		bcc	.L11
+ 121 0016 104C     		ldr	r4, .L18+4
+ 122 0018 0019     		adds	r0, r0, r4
+ 123 001a 8142     		cmp	r1, r0
+ 124 001c 01D8     		bhi	.L11
+ 125 001e 0F48     		ldr	r0, .L18+8
+ 126 0020 11E0     		b	.L16
+ 127              	.L11:
+ 128 0022 0F49     		ldr	r1, .L18+12
+ 129 0024 8B42     		cmp	r3, r1
+ 130 0026 05D3     		bcc	.L12
+ 131 0028 0E48     		ldr	r0, .L18+16
+ 132 002a 0918     		adds	r1, r1, r0
+ 133 002c 8B42     		cmp	r3, r1
+ 134 002e 01D8     		bhi	.L12
+ 135 0030 0D48     		ldr	r0, .L18+20
+ 136 0032 07E0     		b	.L17
+ 137              	.L12:
+ 138 0034 0D49     		ldr	r1, .L18+24
+ 139 0036 8B42     		cmp	r3, r1
+ 140 0038 09D3     		bcc	.L13
+ 141 003a 0D48     		ldr	r0, .L18+28
+ 142 003c 0918     		adds	r1, r1, r0
+ 143 003e 8B42     		cmp	r3, r1
+ 144 0040 05D8     		bhi	.L13
+ 145 0042 0C48     		ldr	r0, .L18+32
+ 146              	.L17:
+ 147 0044 1946     		mov	r1, r3
+ 148              	.L16:
+ 149 0046 BDE81040 		pop	{r4, lr}
+ 150 004a FFF7FEBF 		b	LMM001_realloc
+ 151              	.L13:
+ 152 004e 0020     		movs	r0, #0
+ 153 0050 10BD     		pop	{r4, pc}
+ 154              	.L19:
+ 155 0052 00BF     		.align	2
+ 156              	.L18:
+ 157 0054 00000000 		.word	Heap_Bank1_Start
+ 158 0058 00000000 		.word	Heap_Bank1_Size
+ 159 005c 00000000 		.word	GMM001_handle0
+ 160 0060 00000000 		.word	Heap_Bank2_Start
+ 161 0064 00000000 		.word	Heap_Bank2_Size
+ 162 0068 00000000 		.word	GMM001_handle1
+ 163 006c 00000000 		.word	Heap_Bank3_Start
+ 164 0070 00000000 		.word	Heap_Bank3_Size
+ 165 0074 00000000 		.word	GMM001_handle2
+ 167              		.section	.text.GMM001_free,"ax",%progbits
+ 168              		.align	1
+ 169              		.global	GMM001_free
+ 170              		.thumb
+ 171              		.thumb_func
+ 173              	GMM001_free:
+ 174              		@ args = 0, pretend = 0, frame = 0
+ 175              		@ frame_needed = 0, uses_anonymous_args = 0
+ 176 0000 124B     		ldr	r3, .L24
+ 177 0002 9842     		cmp	r0, r3
+ 178 0004 10B5     		push	{r4, lr}
+ 179 0006 0446     		mov	r4, r0
+ 180 0008 07D3     		bcc	.L21
+ 181 000a 114A     		ldr	r2, .L24+4
+ 182 000c 9818     		adds	r0, r3, r2
+ 183 000e 8442     		cmp	r4, r0
+ 184 0010 03D8     		bhi	.L21
+ 185 0012 1048     		ldr	r0, .L24+8
+ 186 0014 2146     		mov	r1, r4
+ 187 0016 FFF7FEFF 		bl	LMM001_free
+ 188              	.L21:
+ 189 001a 0F49     		ldr	r1, .L24+12
+ 190 001c 8C42     		cmp	r4, r1
+ 191 001e 07D3     		bcc	.L22
+ 192 0020 0E4B     		ldr	r3, .L24+16
+ 193 0022 CA18     		adds	r2, r1, r3
+ 194 0024 9442     		cmp	r4, r2
+ 195 0026 03D8     		bhi	.L22
+ 196 0028 0D48     		ldr	r0, .L24+20
+ 197 002a 2146     		mov	r1, r4
+ 198 002c FFF7FEFF 		bl	LMM001_free
+ 199              	.L22:
+ 200 0030 0C48     		ldr	r0, .L24+24
+ 201 0032 8442     		cmp	r4, r0
+ 202 0034 09D3     		bcc	.L20
+ 203 0036 0C49     		ldr	r1, .L24+28
+ 204 0038 4318     		adds	r3, r0, r1
+ 205 003a 9C42     		cmp	r4, r3
+ 206 003c 05D8     		bhi	.L20
+ 207 003e 0B48     		ldr	r0, .L24+32
+ 208 0040 2146     		mov	r1, r4
+ 209 0042 BDE81040 		pop	{r4, lr}
+ 210 0046 FFF7FEBF 		b	LMM001_free
+ 211              	.L20:
+ 212 004a 10BD     		pop	{r4, pc}
+ 213              	.L25:
+ 214              		.align	2
+ 215              	.L24:
+ 216 004c 00000000 		.word	Heap_Bank1_Start
+ 217 0050 00000000 		.word	Heap_Bank1_Size
+ 218 0054 00000000 		.word	GMM001_handle0
+ 219 0058 00000000 		.word	Heap_Bank2_Start
+ 220 005c 00000000 		.word	Heap_Bank2_Size
+ 221 0060 00000000 		.word	GMM001_handle1
+ 222 0064 00000000 		.word	Heap_Bank3_Start
+ 223 0068 00000000 		.word	Heap_Bank3_Size
+ 224 006c 00000000 		.word	GMM001_handle2
+ 226              		.comm	GMM001_handle2,6,1
+ 227              		.comm	GMM001_handle1,6,1
+ 228              		.comm	GMM001_handle0,6,1
+ 229              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 GMM001.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:17     .text.GMM001_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:22     .text.GMM001_Init:00000000 GMM001_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:60     .text.GMM001_Init:00000054 $d
+                            *COM*:00000006 GMM001_handle0
+                            *COM*:00000006 GMM001_handle1
+                            *COM*:00000006 GMM001_handle2
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:71     .text.GMM001_malloc:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:76     .text.GMM001_malloc:00000000 GMM001_malloc
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:98     .text.GMM001_malloc:00000028 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:103    .text.GMM001_realloc:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:108    .text.GMM001_realloc:00000000 GMM001_realloc
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:157    .text.GMM001_realloc:00000054 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:168    .text.GMM001_free:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:173    .text.GMM001_free:00000000 GMM001_free
+C:\Users\TOGABL~1\AppData\Local\Temp\cc4CS3f6.s:216    .text.GMM001_free:0000004c $d
+
+UNDEFINED SYMBOLS
+memset
+Heap_Bank2_Size
+Heap_Bank2_Start
+Heap_Bank3_Size
+Heap_Bank3_Start
+Heap_Bank1_Size
+Heap_Bank1_Start
+LMM001_malloc
+LMM001_realloc
+LMM001_free

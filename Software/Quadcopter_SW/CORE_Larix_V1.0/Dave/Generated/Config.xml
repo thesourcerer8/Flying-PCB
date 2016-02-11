@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project MotherSystem_Version="" Name="CORE_Larix_V1.0" Path="C:\DAVE3_workspace\ws3.1.10\CORE_Larix_V1.0">
+    <COMPILER>
+        <Name>ARM-GCC</Name>
+        <Version/>
+        <Memory_Model/>
+    </COMPILER>
+    <DEVICE>
+        <Sales_Code>XMC4500-F100x1024-AC</Sales_Code>
+        <Description/>
+    </DEVICE>
+    <Generated_Files>
+        <Source_Files>
+            <Source_File>
+                <File_Name>CCU4GLOBAL.c</File_Name>
+                <Path>\Dave\Generated\src\CCU4GLOBAL\CCU4GLOBAL.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>CCU4GLOBAL_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\CCU4GLOBAL\CCU4GLOBAL_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>CLK001.c</File_Name>
+                <Path>\Dave\Generated\src\CLK001\CLK001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>DAVE3.c</File_Name>
+                <Path>\Dave\Generated\src\DAVESupport\DAVE3.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>MULTIPLEXER.c</File_Name>
+                <Path>\Dave\Generated\src\DAVESupport\MULTIPLEXER.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>ERU001.c</File_Name>
+                <Path>\Dave\Generated\src\ERU001\ERU001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>ERU001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\ERU001\ERU001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>ERU002.c</File_Name>
+                <Path>\Dave\Generated\src\ERU002\ERU002.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>ERU002_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\ERU002\ERU002_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>GMM001.c</File_Name>
+                <Path>\Dave\Generated\src\GMM001\GMM001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>GMM001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\GMM001\GMM001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>I2C001.c</File_Name>
+                <Path>\Dave\Generated\src\I2C001\I2C001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>I2C001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\I2C001\I2C001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>IO002.c</File_Name>
+                <Path>\Dave\Generated\src\IO002\IO002.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>IO002_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\IO002\IO002_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>CCU8PWMLIB.c</File_Name>
+                <Path>\Dave\Generated\src\LIBS\CCU8PWMLIB.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>MOTORLIB.c</File_Name>
+                <Path>\Dave\Generated\src\LIBS\MOTORLIB.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>LMM001.c</File_Name>
+                <Path>\Dave\Generated\src\LMM001\LMM001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>LMM001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\LMM001\LMM001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>NVIC002.c</File_Name>
+                <Path>\Dave\Generated\src\NVIC002\NVIC002.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>NVIC002_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\NVIC002\NVIC002_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>NVIC_SCU001.c</File_Name>
+                <Path>\Dave\Generated\src\NVIC_SCU001\NVIC_SCU001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>PWMSP001.c</File_Name>
+                <Path>\Dave\Generated\src\PWMSP001\PWMSP001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>PWMSP001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\PWMSP001\PWMSP001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>RESET001.c</File_Name>
+                <Path>\Dave\Generated\src\RESET001\RESET001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>RTC001.c</File_Name>
+                <Path>\Dave\Generated\src\RTC001\RTC001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>RTC001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\RTC001\RTC001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>SLTHA003.c</File_Name>
+                <Path>\Dave\Generated\src\SLTHA003\SLTHA003.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>SLTHA003_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\SLTHA003\SLTHA003_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>SYSTM001.c</File_Name>
+                <Path>\Dave\Generated\src\SYSTM001\SYSTM001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>UART001.c</File_Name>
+                <Path>\Dave\Generated\src\UART001\UART001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>UART001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\UART001\UART001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>CDC.c</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Class\Device\CDC.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>USBTask.c</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Core\USBTask.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>usbcore001.c</File_Name>
+                <Path>\Dave\Generated\src\USBCORE001\usbcore001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>usbcore001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\USBCORE001\usbcore001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>usbcore001_device.c</File_Name>
+                <Path>\Dave\Generated\src\USBCORE001\usbcore001_device.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>usbcore001_host.c</File_Name>
+                <Path>\Dave\Generated\src\USBCORE001\usbcore001_host.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>dwc_otg_adp.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_adp.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>dwc_otg_cil.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_cil.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>dwc_otg_cil_intr.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_cil_intr.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>dwc_otg_hcd.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_hcd.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>dwc_otg_hcd_ddma.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_hcd_ddma.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>dwc_otg_hcd_intr.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_hcd_intr.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>dwc_otg_hcd_queue.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_hcd_queue.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>dwc_otg_pcd.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_pcd.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>dwc_otg_pcd_intr.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_pcd_intr.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>dwc_common_linux.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\dwc_common_port\dwc_common_linux.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>usbld001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\usbld001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>usbld001_delay.c</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\usbld001_delay.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>Descriptors.c</File_Name>
+                <Path>\Dave\Generated\src\USBVC001\Descriptors.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>usbvc001.c</File_Name>
+                <Path>\Dave\Generated\src\USBVC001\usbvc001.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>USBVC001_Conf.c</File_Name>
+                <Path>\Dave\Generated\src\USBVC001\USBVC001_Conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+        </Source_Files>
+        <Header_Files>
+            <Header_File>
+                <File_Name>CCU4GLOBAL.h</File_Name>
+                <Path>\Dave\Generated\inc\CCU4GLOBAL\CCU4GLOBAL.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CCU4GLOBAL_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\CCU4GLOBAL\CCU4GLOBAL_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CCU4GLOBAL_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\CCU4GLOBAL\CCU4GLOBAL_Extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CLK001.h</File_Name>
+                <Path>\Dave\Generated\inc\CLK001\CLK001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CLK001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\CLK001\CLK001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CLK001_Const.h</File_Name>
+                <Path>\Dave\Generated\inc\CLK001\CLK001_Const.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>DAVE3.h</File_Name>
+                <Path>\Dave\Generated\inc\DAVESupport\DAVE3.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>MULTIPLEXER.h</File_Name>
+                <Path>\Dave\Generated\inc\DAVESupport\MULTIPLEXER.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>DBG001.h</File_Name>
+                <Path>\Dave\Generated\inc\DBG001\DBG001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ERU001.h</File_Name>
+                <Path>\Dave\Generated\inc\ERU001\ERU001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ERU001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\ERU001\ERU001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ERU001_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\ERU001\ERU001_Extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ERU002.h</File_Name>
+                <Path>\Dave\Generated\inc\ERU002\ERU002.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ERU002_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\ERU002\ERU002_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>ERU002_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\ERU002\ERU002_Extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>GMM001.h</File_Name>
+                <Path>\Dave\Generated\inc\GMM001\GMM001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>I2C001.h</File_Name>
+                <Path>\Dave\Generated\inc\I2C001\I2C001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>I2C001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\I2C001\I2C001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Usic.h</File_Name>
+                <Path>\Dave\Generated\inc\I2C001\Usic.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>IO002.h</File_Name>
+                <Path>\Dave\Generated\inc\IO002\IO002.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>IO002_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\IO002\IO002_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>IO002_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\IO002\IO002_Extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CCU8PWMLIB.h</File_Name>
+                <Path>\Dave\Generated\inc\LIBS\CCU8PWMLIB.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>LIBS.h</File_Name>
+                <Path>\Dave\Generated\inc\LIBS\LIBS.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>MOTORLIB.h</File_Name>
+                <Path>\Dave\Generated\inc\LIBS\MOTORLIB.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>types.h</File_Name>
+                <Path>\Dave\Generated\inc\LIBS\types.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>LMM001.h</File_Name>
+                <Path>\Dave\Generated\inc\LMM001\LMM001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>lmm001_debuglog.h</File_Name>
+                <Path>\Dave\Generated\inc\LMM001\lmm001_debuglog.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>MOTORLIBS.h</File_Name>
+                <Path>\Dave\Generated\inc\MOTORLIBS\MOTORLIBS.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC002_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC002\NVIC002_Extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>NVIC_SCU001.h</File_Name>
+                <Path>\Dave\Generated\inc\NVIC_SCU001\NVIC_SCU001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>PWMSP001.h</File_Name>
+                <Path>\Dave\Generated\inc\PWMSP001\PWMSP001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>PWMSP001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\PWMSP001\PWMSP001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>RESET001.h</File_Name>
+                <Path>\Dave\Generated\inc\RESET001\RESET001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>RTC001.h</File_Name>
+                <Path>\Dave\Generated\inc\RTC001\RTC001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>RTC001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\RTC001\RTC001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>RTC001_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\RTC001\RTC001_Extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>SLTHA003.h</File_Name>
+                <Path>\Dave\Generated\inc\SLTHA003\SLTHA003.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>SLTHA003_HW_Private.h</File_Name>
+                <Path>\Dave\Generated\inc\SLTHA003\SLTHA003_HW_Private.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>SYSTM001.h</File_Name>
+                <Path>\Dave\Generated\inc\SYSTM001\SYSTM001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>UART001.h</File_Name>
+                <Path>\Dave\Generated\inc\UART001\UART001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>UART001_Conf.h</File_Name>
+                <Path>\Dave\Generated\inc\UART001\UART001_Conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>UART001_Extern.h</File_Name>
+                <Path>\Dave\Generated\inc\UART001\UART001_Extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Usic.h</File_Name>
+                <Path>\Dave\Generated\inc\UART001\Usic.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>usbcdc001.h</File_Name>
+                <Path>\Dave\Generated\inc\USBCDC001\usbcdc001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>usbcore001.h</File_Name>
+                <Path>\Dave\Generated\inc\USBCORE001\usbcore001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>usbcore001_device.h</File_Name>
+                <Path>\Dave\Generated\inc\USBCORE001\usbcore001_device.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>usbcore001_host.h</File_Name>
+                <Path>\Dave\Generated\inc\USBCORE001\usbcore001_host.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>USBLD001.h</File_Name>
+                <Path>\Dave\Generated\inc\USBLD001\USBLD001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>usbld001_delay.h</File_Name>
+                <Path>\Dave\Generated\inc\USBLD001\usbld001_delay.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>USBLD001_HW_Private.h</File_Name>
+                <Path>\Dave\Generated\inc\USBLD001\USBLD001_HW_Private.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>USBVC001.h</File_Name>
+                <Path>\Dave\Generated\inc\USBVC001\USBVC001.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Common.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\Common\Common.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Endianness.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\Common\Endianness.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CDC.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Class\CDC.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CDC.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Class\Common\CDC.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>CDC.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Class\Device\CDC.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Device.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Core\Device.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Endpoint.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Core\Endpoint.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>StdDescriptors.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Core\StdDescriptors.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>StdRequestType.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Core\StdRequestType.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>USBMode.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Core\USBMode.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>USBTask.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Core\USBTask.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>USB.h</File_Name>
+                <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\USB.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_otg_adp.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_adp.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_otg_cil.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_cil.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_otg_core_if.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_core_if.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_otg_dbg.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_dbg.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_otg_hcd.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_hcd.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_otg_hcd_if.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_hcd_if.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_otg_os_dep.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_os_dep.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_otg_pcd.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_pcd.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_otg_pcd_if.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_pcd_if.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_otg_regs.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\dwc_otg_regs.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>usb.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\driver\usb.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_list.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\dwc_common_port\dwc_list.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>dwc_os.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\dwc_common_port\dwc_os.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>usb.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\dwc_common_port\usb.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Type_CM.h</File_Name>
+                <Path>\Dave\Generated\src\USBLD001\Type_CM.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>Descriptors.h</File_Name>
+                <Path>\Dave\Generated\src\USBVC001\Descriptors.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+        </Header_Files>
+        <Library_Files/>
+        <Assembly_Files/>
+    </Generated_Files>
+    <Include_Path>
+        <Path>\Dave\Generated\inc\DAVESupport</Path>
+        <Path>\Dave\Generated\inc\LIBS</Path>
+        <Path>\Dave\Generated\inc\MOTORLIBS</Path>
+        <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Core</Path>
+        <Path>\Dave\Generated\src\USBCDC001\Drivers\USB</Path>
+        <Path>\Dave\Generated\src\USBCDC001\Drivers\USB\Class</Path>
+    </Include_Path>
+    <Preprocessor_Symbols>
+        <Assembler_Symbol>DAVE_CE=</Assembler_Symbol>
+        <Assembler_Symbol>UC_ID=4503003</Assembler_Symbol>
+        <Compiler_Symbol>DAVE_CE=</Compiler_Symbol>
+        <Compiler_Symbol>UC_ID=4503003</Compiler_Symbol>
+        <Compiler_Symbol>ARM_MATH_CM4=</Compiler_Symbol>
+        <Compiler_Symbol>__FPU_PRESENT=</Compiler_Symbol>
+    </Preprocessor_Symbols>
+</Project>

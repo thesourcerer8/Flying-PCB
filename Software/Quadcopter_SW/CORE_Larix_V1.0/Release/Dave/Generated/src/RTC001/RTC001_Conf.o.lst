@@ -1,0 +1,60 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"RTC001_Conf.c"
+  16              		.global	timeptr1
+  17              		.global	RTC001_Handle
+  18              		.section	.rodata
+  19              		.align	2
+  22              	RTC001_Handle:
+  23 0000 01       		.byte	1
+  24 0001 00       		.byte	0
+  25 0002 FF7F     		.short	32767
+  26 0004 00       		.byte	0
+  27 0005 00       		.byte	0
+  28 0006 00       		.byte	0
+  29 0007 00       		.byte	0
+  30 0008 00       		.byte	0
+  31 0009 00       		.byte	0
+  32 000a 00       		.byte	0
+  33 000b 00       		.byte	0
+  34 000c 00       		.byte	0
+  35 000d 00       		.byte	0
+  36 000e 00       		.byte	0
+  37 000f 00       		.byte	0
+  38 0010 00       		.byte	0
+  39 0011 00       		.byte	0
+  40 0012 00       		.byte	0
+  41 0013 00       		.byte	0
+  42 0014 00000000 		.space	8
+  42      00000000 
+  43              		.data
+  44              		.align	1
+  47              	timeptr1:
+  48 0000 00       		.byte	0
+  49 0001 00       		.byte	0
+  50 0002 00       		.byte	0
+  51 0003 01       		.byte	1
+  52 0004 00       		.space	1
+  53 0005 01       		.byte	1
+  54 0006 B207     		.short	1970
+  55              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 RTC001_Conf.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccSiPBHf.s:47     .data:00000000 timeptr1
+C:\Users\TOGABL~1\AppData\Local\Temp\ccSiPBHf.s:22     .rodata:00000000 RTC001_Handle
+C:\Users\TOGABL~1\AppData\Local\Temp\ccSiPBHf.s:19     .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccSiPBHf.s:44     .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

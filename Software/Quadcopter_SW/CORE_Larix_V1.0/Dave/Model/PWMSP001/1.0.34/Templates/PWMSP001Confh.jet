@@ -1,0 +1,85 @@
+<%@ jet package="CodeGenerator" class="pwmsp001confh_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[pwmsp001conf.h]*/
+
+/******************************************************************************
+ *
+ * Copyright (C) 2014 Infineon Technologies AG. All rights reserved.
+ *
+ * Infineon Technologies AG (Infineon) is supplying this software for use with
+ * Infineon's microcontrollers.
+ * This file can be freely distributed within development tools that are
+ * supporting such microcontrollers.
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL,
+ * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : February 17, 2014                                      **
+**                                                                            **
+*******************************************************************************/
+
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** KS           App Developer                                                 **
+*******************************************************************************/
+
+/**
+ * @file  PWMSP001Conf.h
+ *
+ * @brief This file contains App parameter data as per GUI configurations
+ *
+ */
+/* Revision History					 
+ * 21 Nov 2012   v1.0.16   coding guidelines
+ * 17 Feb 2014   v1.0.32   added c++ support.
+ */
+#ifndef PWMSP001CONF_H_
+#define PWMSP001CONF_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+<% String AppBaseuri = "app/pwmsp001/"; %>
+
+<% String appInst  = null; %>
+
+<% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/pwmsp001/"));
+for (String appIns : appsList ) {
+    appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+
+extern const PWMSP001_HandleType PWMSP001_Handle<%= appInst%>;
+<%}%>
+
+/* Support for C++ codebase */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* PWMSP001CONF_H_ */
+
+/**
+ * @}
+ */
+ 
+/*CODE_BLOCK_END*/

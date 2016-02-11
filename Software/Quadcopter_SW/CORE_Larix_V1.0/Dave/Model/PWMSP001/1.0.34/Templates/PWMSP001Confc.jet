@@ -1,0 +1,209 @@
+<%@ jet package="CodeGenerator" class="pwmsp001confc_template"
+imports="java.util.* java.text.*  com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[pwmsp001Conf.c]*/
+
+/*******************************************************************************
+ Copyright (c) 2014, Infineon Technologies AG                                 **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without**
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : April 28, 2014                                         **
+**                                                                            **
+*******************************************************************************/
+/*******************************************************************************/
+<% String AppBaseuri = "app/pwmsp001/"; %>
+/**
+ * @file  PWMSP001_Conf.c
+ * @App Version PWMSP001 <<%=app.getAppVersion(AppBaseuri)%>>
+ * @brief This file contains App parameter data as per GUI configurations
+ */
+/* Revision History					 
+ * 21 Nov 2012   v1.0.16   coding guidelines
+ * 28 Apr 2014   v1.0.34   During Timer Concatenation Period and compare values
+ *                         are read from UI parameters defined for registers 
+ *                         individually.  
+ */
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** KS           App Developer                                                 **
+*******************************************************************************/
+
+#include <DAVE3.h>
+
+extern void PWMSP001_lSetDutyCenterAlign(const void* HandlePtr,float Duty);
+extern void PWMSP001_lSetDutyEdgeAlign(const void* HandlePtr,float Duty);
+extern void PWMSP001_lSetDutyEdgeAlignTimerConcat(const void* HandlePtr,float Duty);
+extern void PWMSP001_lSetCompareCenterAlign(const void* HandlePtr,uint32_t Compare);
+extern void PWMSP001_lSetCompareEdgeAlign(const void* HandlePtr,uint32_t Compare);
+extern void PWMSP001_lSetCompareEdgeAlignTimerConcat(const void* HandlePtr,uint32_t Compare);
+
+<% String SliceUri = null; %>
+<% String Slice1Uri = null; %>
+<% String kernelNo = null; %>
+<% String sliceNo = null; %>
+<% String slice1No = null; %>
+<% String appInst  = null; %>
+<% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/pwmsp001/"));
+for (String appIns : appsList ) {
+    appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+<% SliceUri = app.getMappedUri(AppBaseuri + appInst +"/slice"); %>
+<% if ((SliceUri != null) && (SliceUri.trim() != "")) { %>
+<% kernelNo = SliceUri.substring(SliceUri.indexOf("/ccu4")+6,SliceUri.indexOf("/cc4/")); %>
+<% sliceNo = SliceUri.substring(SliceUri.length() -1); %>
+<% Slice1Uri = app.getMappedUri(AppBaseuri + appInst +"/slice1"); %>
+<% if ((Slice1Uri != null) && (Slice1Uri.trim() != "")) { %>
+  <% slice1No = Slice1Uri.substring(Slice1Uri.length() -1); %>
+<%}else{ slice1No = "0"; }%>
+<% int interrupt = (app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_erwcomaprematch/0") << 2) | app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_erwperiodmatch/0") 
+|(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_erwextstop/0") << 9) |(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_erwtrap/0") << 10)
+|(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_erwextstart/0") << 8);%>
+<% String SetDutyCycle = null;
+String SetCompare = null;
+int countingmode = app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/tcm");
+int timerconcat =  app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_irtimerconcat");
+int period_val = app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_irperiodval");
+int compreg_val = app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_ircompareval");
+
+if(period_val > 65535 && timerconcat == 1)
+{
+  period_val = (app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_irperiodregval1") << 16) | (app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_irperiodregval0"));
+  compreg_val = (app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_ircompareregval1") << 16 ) | app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_ircompareregval0");
+}
+if(countingmode == 0 && timerconcat == 0){
+  SetDutyCycle = "PWMSP001_lSetDutyEdgeAlign";
+  SetCompare = "PWMSP001_lSetCompareEdgeAlign";
+}
+else if(countingmode == 0 && timerconcat == 1 ){
+  SetDutyCycle = "PWMSP001_lSetDutyEdgeAlignTimerConcat";
+  SetCompare = "PWMSP001_lSetCompareEdgeAlignTimerConcat";
+}
+else if (countingmode == 1){
+  SetDutyCycle = "PWMSP001_lSetDutyCenterAlign";
+  SetCompare = "PWMSP001_lSetCompareCenterAlign";  
+}
+%>  
+PWMSP001_DynamicDataType PWMSP001_DynamicData<%= appInst%> =
+{
+  .StateType = PWMSP001_UNINITIALIZED
+};
+
+const PWMSP001_HandleType PWMSP001_Handle<%= appInst%> =
+{
+  .kTimerMode= <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/tssm")%>U,
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/tcm")==0)%>
+  <%{%>
+  .CountingModeType = PWMSP001_EDGE_ALIGNED,
+  <%}%>
+  <%else%>
+  <%{%>
+  .CountingModeType = PWMSP001_CENTER_ALIGNED,
+  <%}%>
+  .kPassiveLevel= <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/psl/psl") %>U,
+  .kExtStartTrig= <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_erwstartedge/0") ==1){%> 0U, <%}else{%> 1U, <%}%>
+  .kExtStopTrig= <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_erwstopedge/0") == 1){%> 0U, <%}else{%> 1U, <%}%>
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/ev0em") == 0) {%>
+  .kStartEdge = PWMSP001_NO_TRIGGER,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/ev0em") == 1 ) {%>
+  .kStartEdge = PWMSP001_RISING_EDGE,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/ev0em")==2) {%>
+  .kStartEdge = PWMSP001_FALLING_EDGE,
+  <% } else { %>
+  .kStartEdge = PWMSP001_BOTH_EDGES,
+  <% } %>
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/ev1em") == 0) {%>
+  .kStopEdge = PWMSP001_NO_TRIGGER,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/ev1em") == 1 ) {%>
+  .kStopEdge = PWMSP001_RISING_EDGE,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/ev1em")==2) {%>
+  .kStopEdge = PWMSP001_FALLING_EDGE,
+  <% } else { %>
+  .kStopEdge = PWMSP001_BOTH_EDGES,
+  <% } %>
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/strm") == 0) {%>
+  .ExtStartConfigType = PWMSP001_START_TIMER,
+  <% } else { %>
+  .ExtStartConfigType = PWMSP001_CLEAR_START_TIMER,
+  <% } %>
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/endm") == 0) {%>
+  .ExtStopConfigType = PWMSP001_STOP_TIMER,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/endm") == 1) {%>
+  .ExtStopConfigType = PWMSP001_CLEAR_TIMER,
+  <% } else { %>
+  .ExtStopConfigType = PWMSP001_CLEAR_STOP_TIMER,
+  <% } %>
+  .kTrapEnable= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_erwenabletrap/0") %>U,
+  .kTrapSync= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_erwtrapexittime/0") %>U,
+  .kTrapExitControl= <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/trpsw") %>U,
+  .kTrapLevel= <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/ev2lm") %>U,
+  
+  .kResolution = (float)<%= app.getFormattedDoubleValue((AppBaseuri + appInst + "/pwmsp001_irselresolution"),"0.000")%>,
+  .kCCUPrescalar= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_irSelprescalar") %>U,
+  .kTimerConcatenation = <%= timerconcat%>U,
+   /*During timer concatenation, 32-bit period and compare values from UI are 
+   taken. From this value lower 16-bit is loaded into the lower timer and higer 16-bit to higher timer.*/
+  .kCompareValue = <%= compreg_val%>U,
+  .kPeriodVal = <%= period_val%>U,
+  .kMaxPeriodVal= 65535U,
+  .kDitherSetting= <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/dithe")%>U,
+  .kDitherCompare = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/dits/dcvs")%>U,  
+  .FirstSlice= <% if (timerconcat == 0){ %> PWMSP001_SLICE<%=sliceNo%> <%} else {%> PWMSP001_SLICE<%=slice1No%> <%}%>,
+  .SecondSlice= PWMSP001_SLICE<%=sliceNo%>,
+  .CC4yKernRegsPtr= (CCU4_GLOBAL_TypeDef*) CCU4<%= kernelNo%>_BASE,
+  .CC4yRegsPtr= <% if (timerconcat == 0){ %>(CCU4_CC4_TypeDef*)CCU4<%= kernelNo%>_CC4<%=sliceNo%> <%} else {%>(CCU4_CC4_TypeDef*)CCU4<%= kernelNo%>_CC4<%=slice1No%><%}%>,
+  .CC4yRegs1Ptr= (CCU4_CC4_TypeDef*)CCU4<%= kernelNo%>_CC4<%=sliceNo%>,
+  .DynamicDataType= &PWMSP001_DynamicData<%= appInst%>,
+  .StartControl = <%=app.getIntegerValue(AppBaseuri + appInst + "/pwmsp001_erwstart/0")%>U,
+  .InterruptControl = 0x<%= Integer.toHexString(interrupt) %>U,
+  .SetCompareFuncPtr = <%= SetCompare%>,
+  .SetDutyFuncPtr = <%= SetDutyCycle%>,
+};  
+  
+<%}else {%>
+//This app is not mapped to any CCU4 slice.
+<%}}%>
+/*CODE_BLOCK_END*/
+

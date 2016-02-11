@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="SCU" description="SCU " URI="http://www.infineon.com/0.1.33/peripheral/scu/0">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="extclk" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/extclk">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.24"/>
+    <resourcesList name="clkcr" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/extclkcr" isResolved="true"/>
+    <resourcesList name="extclk" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/scu_extclk" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="scu_extclk" description="scu_extclk" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/extclk/extclk" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.28"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="hibernate" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrctrl/0/hibernate">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.25"/>
+    <resourcesList name="pwrstat_hiben" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrstat/hiben" isResolved="true"/>
+    <resourcesList name="pwrstat_hpss" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrstat/hpss" isResolved="true"/>
+    <resourcesList name="pwrset_hib" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrset/hib" isResolved="true"/>
+    <resourcesList name="pwrclr_hib" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrclr/hib" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="RTCCLKSEL" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rtcclksel">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.26"/>
+    <resourcesList name="hdcr_rcs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/hdcr/rcs" isResolved="true"/>
+    <resourcesList name="hib_rtc_xtal1" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/hib_rtc_xtal1" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RCS" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rtcclksel/hdcr_rcs" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.58"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>RTC Clock Selection</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="pll" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.13"/>
+    <resourcesList name="pllstat" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pllstat" isResolved="true"/>
+    <resourcesList name="pllcon0" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pllcon0" isResolved="true"/>
+    <resourcesList name="pllcon1" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pllcon1" isResolved="true"/>
+    <resourcesList name="pllcon2" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pllcon2" isResolved="true"/>
+    <resourcesList name="clkmxstat" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkmxstat" isResolved="true"/>
+    <resourcesList name="usbpllcon" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/usbpllcon" isResolved="true"/>
+    <resourcesList name="usbpllstat" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/usbpllstat" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="PLLCON0" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0" accessPermission="rw" addressOffset="0x0714" resetValue="00030003" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00030003"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.29"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00030003"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00030003"/>
+    <toolTipHelpDescription>PLL Configuration 0 Register</toolTipHelpDescription>
+    <bitFields name="VCOBYP" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0/vcobyp" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.30"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>VCO Bypass</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Normal operation, VCO is not bypassed"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Prescaler Mode, VCO is bypassed"/>
+    </bitFields>
+    <bitFields name="VCOPWD" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0/vcopwd" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <toolTipHelpDescription>VCO Power Saving Mode</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Normal behavior"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The VCO is put into a Power Saving Mode and can no longer be used. Only the Bypass and Prescaler Mode are active if previously selected."/>
+    </bitFields>
+    <bitFields name="VCOTR" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0/vcotr" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>VCO Trim Control</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="VCO bandwidth is operation in the normal range. VCO output frequency is between 260 and 520&#xa0;MHz for a input frequency between 8 and 16 MHz."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="VCO bandwidth is operation in the test range. VCO output frequency is between 260 and 520&#xa0;MHz for a input frequency between 8 and 16 MHz."/>
+    </bitFields>
+    <bitFields name="FINDIS" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0/findis" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Disconnect Oscillator from VCO</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="connect oscillator to the VCO part"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="disconnect oscillator from the VCO part."/>
+    </bitFields>
+    <bitFields name="OSCDISCDIS" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0/oscdiscdis" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Oscillator Disconnect Disable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="In case of a PLL loss-of-lock bit FINDIS is set"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="In case of a PLL loss-of-lock bit FINDIS is cleared"/>
+    </bitFields>
+    <bitFields name="PLLPWD" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0/pllpwd" maxValue="1" minValue="0" startPos="16" stopPos="16" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <toolTipHelpDescription>PLL Power Saving Mode</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Normal behavior"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The complete PLL block is put into a Power Saving Mode and can no longer be used. Only the Bypass Mode is active if previously selected."/>
+    </bitFields>
+    <bitFields name="OSCRES" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0/oscres" maxValue="1" minValue="0" startPos="17" stopPos="17" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <toolTipHelpDescription>Oscillator Watchdog Reset</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The Oscillator Watchdog of the PLL is not cleared and remains active"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The Oscillator Watchdog of the PLL is cleared and restarted"/>
+    </bitFields>
+    <bitFields name="RESLD" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0/resld" maxValue="1" minValue="0" startPos="18" stopPos="18" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Restart VCO Lock Detection</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="AOTREN" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0/aotren" maxValue="1" minValue="0" startPos="19" stopPos="19" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Automatic Oscillator Trimming Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="disable"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="enable"/>
+    </bitFields>
+    <bitFields name="FOTR" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon0/fotr" maxValue="1" minValue="0" startPos="20" stopPos="20" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Force Oscillator Trimming</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="do not force fixed-value trimming"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="force fixed-value trimming"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PDIV" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon1/pdiv" maxValue="15" minValue="0" startPos="24" stopPos="27" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.31"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>P-Divider Value</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="K2DIV" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon1/k2div" maxValue="127" minValue="0" startPos="16" stopPos="22" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.32"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="4"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="4"/>
+    <toolTipHelpDescription>K2-Divider Value</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="K1DIV" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon1/k1div" maxValue="127" minValue="0" startPos="0" stopPos="6" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.33"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>K1-Divider Value</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="NDIV" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon1/ndiv" maxValue="127" minValue="0" startPos="8" stopPos="14" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.34"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="28"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="28"/>
+    <toolTipHelpDescription>N-Divider Value</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="PLLCON1" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon1" accessPermission="rw" addressOffset="0x0718" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.35"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>PLL Configuration 1 Register</toolTipHelpDescription>
+    <bitFields name="K1DIV" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon1/k1div" maxValue="127" minValue="0" startPos="0" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>K1-Divider Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="NDIV" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon1/ndiv" maxValue="127" minValue="0" startPos="8" stopPos="14" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>N-Divider Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="K2DIV" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon1/k2div" maxValue="127" minValue="0" startPos="16" stopPos="22" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>K2-Divider Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="PDIV" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon1/pdiv" maxValue="15" minValue="0" startPos="24" stopPos="27" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>P-Divider Value</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PINSEL" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/pllcon2/pinsel" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.36"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>P-Divider Input Selection</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="PLL external oscillator selected"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="PLL internal oscillator selected"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="USBPLLCON" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/usbpllcon" accessPermission="rw" addressOffset="0x0724" resetValue="00010003" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00010003"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.37"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00010003"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00010003"/>
+    <toolTipHelpDescription>USB PLL Configuration Register</toolTipHelpDescription>
+    <bitFields name="VCOBYP" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/usbpllcon/vcobyp" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <toolTipHelpDescription>VCO Bypass</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Normal operation, VCO is not bypassed"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Prescaler Mode, VCO is bypassed"/>
+    </bitFields>
+    <bitFields name="VCOPWD" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/usbpllcon/vcopwd" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <toolTipHelpDescription>VCO Power Saving Mode</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Normal behavior"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The VCO is put into a Power Saving Mode"/>
+    </bitFields>
+    <bitFields name="VCOTR" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/usbpllcon/vcotr" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>VCO Trim Control</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="VCO bandwidth is operating in the normal range. VCO output frequency is between 260 and 520&#xa0;MHz for a input frequency between 8 and 16 MHz."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="VCO bandwidth is operating in the test range. VCO output frequency is between 260 and 520&#xa0;MHz for a input frequency between 8 and 16 MHz."/>
+    </bitFields>
+    <bitFields name="FINDIS" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/usbpllcon/findis" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Disconnect Oscillator from VCO</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="connect oscillator to the VCO part"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="disconnect oscillator from the VCO part."/>
+    </bitFields>
+    <bitFields name="OSCDISCDIS" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/usbpllcon/oscdiscdis" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Oscillator Disconnect Disable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="In case of a PLL loss-of-lock bit FINDIS is set"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="In case of a PLL loss-of-lock bit FINDIS is cleared"/>
+    </bitFields>
+    <bitFields name="NDIV" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/usbpllcon/ndiv" maxValue="127" minValue="0" startPos="8" stopPos="14" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>N-Divider Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="PLLPWD" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/usbpllcon/pllpwd" maxValue="1" minValue="0" startPos="16" stopPos="16" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <toolTipHelpDescription>PLL Power Saving Mode</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Normal behavior"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The complete PLL block is put into a Power Saving Mode. Only the Bypass Mode is active if previously selected."/>
+    </bitFields>
+    <bitFields name="RESLD" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/usbpllcon/resld" maxValue="1" minValue="0" startPos="18" stopPos="18" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Restart VCO Lock Detection</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="PDIV" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/pll/usbpllcon/pdiv" maxValue="15" minValue="0" startPos="24" stopPos="27" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>P-Divider Value</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="sys" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/sys">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.16"/>
+    <resourcesList name="clkcr" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/sysclkcr" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="cpu" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/cpu">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.17"/>
+    <resourcesList name="clkcr" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/cpuclkcr" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="perbridge" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/perbridge">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.18"/>
+    <resourcesList name="clkcr" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pbclkcr" isResolved="true"/>
+    <resourcesList name="fpb" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/fpb" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="fpb" description="fpb" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/perbridge/fpb" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.62"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="ebu" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/ebu">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.19"/>
+    <resourcesList name="clkcr" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/ebuclkcr" isResolved="true"/>
+    <resourcesList name="clkset_ebucen" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkset/ebucen" isResolved="true"/>
+    <resourcesList name="clkclr_ebucdi" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkclr/ebucdi" isResolved="true"/>
+    <resourcesList name="clkstat_ebucst" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkstat/ebucst" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="EBUCEN" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/ebu/clkset_ebucen" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.42"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>EBU Clock Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="enable clock"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="ccu" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/ccu">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.20"/>
+    <resourcesList name="clkcr" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/ccuclkcr" isResolved="true"/>
+    <resourcesList name="clkset_ccucen" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkset/ccucen" isResolved="true"/>
+    <resourcesList name="clkclr_ccucdi" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkclr/ccucdi" isResolved="true"/>
+    <resourcesList name="clkstat_ccucst" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkstat/ccucst" isResolved="true"/>
+    <resourcesList name="fccu" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/fccu" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="CCUCEN" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/ccu/clkset_ccucen" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.44"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>CCU Clock Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="enable clock"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="fccu" description="fccu" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/ccu/fccu" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.45"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="wdt" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/wdt">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.21"/>
+    <resourcesList name="clkcr" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/wdtclkcr" isResolved="true"/>
+    <resourcesList name="clkset_wdtcen" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkset/wdtcen" isResolved="true"/>
+    <resourcesList name="clkclr_wdtcdi" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkclr/wdtcdi" isResolved="true"/>
+    <resourcesList name="clkstat_wdtcst" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkstat/wdtcst" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="WDTCEN" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/wdt/clkset_wdtcen" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.46"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>WDT Clock Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="enable clock"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="usb" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/usb">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.22"/>
+    <resourcesList name="clkcr" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/usbclkcr" isResolved="true"/>
+    <resourcesList name="clkset_usbcen" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkset/usbcen" isResolved="true"/>
+    <resourcesList name="clkclr_usbcdi" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkclr/usbcdi" isResolved="true"/>
+    <resourcesList name="clkstat_usbcst" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkstat/usbcst" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="USBCEN" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/usb/clkset_usbcen" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.49"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>USB Clock Enable</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="no effect"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="enable clock"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="sdmmc" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/clkctrl/0/sdmmc">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CLK001/1.0.44/clk001_0.app#//@consumed.23"/>
+    <resourcesList name="clkset_mmccen" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkset/mmccen" isResolved="true"/>
+    <resourcesList name="clkclr_mmccdi" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkclr/mmccdi" isResolved="true"/>
+    <resourcesList name="clkstat_mmccst" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/clkstat/mmccst" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="rcurst" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/rcurst">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.0"/>
+    <resourcesList name="rststat" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0" isResolved="true"/>
+    <resourcesList name="rstset" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0" isResolved="true"/>
+    <resourcesList name="rstclr" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="vadcreset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/vadcreset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.1"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/vadcrs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/vadcrs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/vadcrs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="dsdreset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/dsdreset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.2"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/dsdrs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/dsdrs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/dsdrs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/ccu4reset/0">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.3"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/ccu40rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/ccu40rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/ccu40rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="1" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/ccu4reset/1">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.4"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/ccu41rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/ccu41rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/ccu41rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="2" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/ccu4reset/2">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.5"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/ccu42rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/ccu42rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/ccu42rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="3" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/ccu4reset/3">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.6"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat1/ccu43rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset1/ccu43rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr1/ccu43rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/ccu8reset/0">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.7"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/ccu80rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/ccu80rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/ccu80rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="1" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/ccu8reset/1">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.8"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/ccu81rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/ccu81rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/ccu81rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/posifreset/0">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.9"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/posif0rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/posif0rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/posif0rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="1" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/posifreset/1">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.10"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/posif1rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/posif1rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/posif1rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/usicreset/0">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.11"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/usic0rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/usic0rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/usic0rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="1" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/usicreset/1">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.12"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat1/usic1rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset1/usic1rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr1/usic1rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="2" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/usicreset/2">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.13"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat1/usic2rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset1/usic2rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr1/usic2rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="eru1reset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/eru1reset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.14"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat0/eru1rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset0/eru1rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr0/eru1rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="mmcreset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/mmcreset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.15"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat1/mmcirs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset1/mmcirs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr1/mmcirs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="fcereset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/fcereset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.16"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat2/fcers" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset2/fcers" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr2/fcers" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="ledtsreset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/ledtsreset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.17"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat1/ledtscu0rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset1/ledtscu0rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr1/ledtscu0rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="pportreset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/pportreset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.18"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat1/pportsrs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset1/pportsrs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr1/pportsrs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="usbreset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/usbreset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.19"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat2/usbrs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset2/usbrs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr2/usbrs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="mcanreset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/mcanreset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.20"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat1/mcan0rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset1/mcan0rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr1/mcan0rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="wdtreset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/wdtreset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.21"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat2/wdtrs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset2/wdtrs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr2/wdtrs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="dacreset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/dacreset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.22"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat1/dacrs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset1/dacrs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr1/dacrs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/dmareset/0">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.23"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat2/dma0rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset2/dma0rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr2/dma0rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="1" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/dmareset/1">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.24"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat2/dma1rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset2/dma1rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr2/dma1rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="ebureset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/ebureset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.25"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat3/ebu" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset3/ebu" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr3/ebu" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="ethreset" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/rstctrl/0/ethreset">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RESET001/1.0.14/reset001_0.app#//@consumed.26"/>
+    <resourcesList name="prstat_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prstat2/eth0rs" isResolved="true"/>
+    <resourcesList name="prset_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prset2/eth0rs" isResolved="true"/>
+    <resourcesList name="prclr_rs" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/prclr2/eth0rs" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="RTCTICK" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/gcu/interrupt/rtctick">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RTC001/1.0.32/rtc001_0.app#//@consumed.8"/>
+    <resourcesList name="srstat_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/srstat/pi" isResolved="true"/>
+    <resourcesList name="rawsr_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/rawsr/pi" isResolved="true"/>
+    <resourcesList name="srclr_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/srclr/pi" isResolved="true"/>
+    <resourcesList name="srset_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/srset/pi" isResolved="true"/>
+    <resourcesList name="srmsk_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/srmsk/pi" isResolved="true"/>
+    <resourcesList name="nmireqen_pi" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/nmireqen/pi" isResolved="true"/>
+    <resourcesList name="rtc_timer_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/rtc_timer_int" isResolved="true"/>
+    <resourcesList name="int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pi_int" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="RTC_TIMER_INT" description="" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/gcu/interrupt/rtctick/rtc_timer_int" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RTC001/1.0.32/rtc001_0.app#//@consumed.11"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="pi_int" description="" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/gcu/interrupt/rtctick/int" signalType="INTERRUPT" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RTC001/1.0.32/rtc001_0.app#//@consumed.13"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="RTCALARM" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/gcu/interrupt/rtcalarm">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RTC001/1.0.32/rtc001_0.app#//@consumed.9"/>
+    <resourcesList name="srstat_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/srstat/ai" isResolved="true"/>
+    <resourcesList name="rawsr_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/rawsr/ai" isResolved="true"/>
+    <resourcesList name="srclr_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/srclr/ai" isResolved="true"/>
+    <resourcesList name="srset_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/srset/ai" isResolved="true"/>
+    <resourcesList name="srmsk_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/srmsk/ai" isResolved="true"/>
+    <resourcesList name="nmireqen_ai" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/nmireqen/ai" isResolved="true"/>
+    <resourcesList name="rtc_alarm_int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/rtc_alarm_int" isResolved="true"/>
+    <resourcesList name="int" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/ai_int" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ai_int" description="" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/gcu/interrupt/rtcalarm/int" signalType="INTERRUPT" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RTC001/1.0.32/rtc001_0.app#//@consumed.12"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="RTC_ALARM_INT" description="" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/gcu/interrupt/rtcalarm/rtc_alarm_int" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../RTC001/1.0.32/rtc001_0.app#//@consumed.37"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="usb" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrctrl/0/usb">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../USBCORE001/1.0.18/usbcore001_0.app#//@consumed.3"/>
+    <resourcesList name="pwrstat_usbphypdq" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrstat/usbphypdq" isResolved="true"/>
+    <resourcesList name="pwrstat_usbotgen" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrstat/usbotgen" isResolved="true"/>
+    <resourcesList name="pwrstat_usbpuwq" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrstat/usbpuwq" isResolved="true"/>
+    <resourcesList name="pwrset_usbphypdq" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrset/usbphypdq" isResolved="true"/>
+    <resourcesList name="pwrset_usbotgen" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrset/usbotgen" isResolved="true"/>
+    <resourcesList name="pwrset_usbpuwq" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrset/usbpuwq" isResolved="true"/>
+    <resourcesList name="pwrclr_usbphypdq" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrclr/usbphypdq" isResolved="true"/>
+    <resourcesList name="pwrclr_usbotgen" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrclr/usbotgen" isResolved="true"/>
+    <resourcesList name="pwrclr_usbpuwq" requiredResourceUri="http://www.infineon.com/0.1.33/peripheral/scu/0/pwrclr/usbpuwq" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PI" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/gcu/interrupt/rtctick/nmireqen_pi" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Promote RTC Periodic Interrupt request to NMI Request</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="AI" URI="http://www.infineon.com/0.1.33/peripheral/scu/0/gcu/interrupt/rtcalarm/nmireqen_ai" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Promote RTC Alarm Interrupt Request to NMI Request</toolTipHelpDescription>
+  </provided>
+  <categoryDescription description="SCU Device Description" name="SCU"/>
+</ResourceModel:Peripheral>

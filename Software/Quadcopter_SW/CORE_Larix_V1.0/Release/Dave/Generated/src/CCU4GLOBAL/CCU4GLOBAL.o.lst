@@ -1,0 +1,61 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"CCU4GLOBAL.c"
+  16              		.section	.text.CCU4GLOBAL_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	CCU4GLOBAL_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	CCU4GLOBAL_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 38B5     		push	{r3, r4, r5, lr}
+  26 0002 084C     		ldr	r4, .L4
+  27 0004 2368     		ldr	r3, [r4, #0]
+  28 0006 5BB9     		cbnz	r3, .L1
+  29 0008 0748     		ldr	r0, .L4+4
+  30 000a 0568     		ldr	r5, [r0, #0]
+  31 000c A868     		ldr	r0, [r5, #8]
+  32 000e FFF7FEFF 		bl	RESET001_DeassertReset
+  33 0012 2968     		ldr	r1, [r5, #0]
+  34 0014 CA68     		ldr	r2, [r1, #12]
+  35 0016 0120     		movs	r0, #1
+  36 0018 42F48073 		orr	r3, r2, #256
+  37 001c CB60     		str	r3, [r1, #12]
+  38 001e 2060     		str	r0, [r4, #0]
+  39              	.L1:
+  40 0020 38BD     		pop	{r3, r4, r5, pc}
+  41              	.L5:
+  42 0022 00BF     		.align	2
+  43              	.L4:
+  44 0024 00000000 		.word	.LANCHOR0
+  45 0028 00000000 		.word	CCU4Global_HandleArray
+  47              		.bss
+  48              		.align	2
+  49              		.set	.LANCHOR0,. + 0
+  52              	CCU4InitCalled.6330:
+  53 0000 00000000 		.space	4
+  54              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 CCU4GLOBAL.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cc3TK2zd.s:17     .text.CCU4GLOBAL_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc3TK2zd.s:22     .text.CCU4GLOBAL_Init:00000000 CCU4GLOBAL_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\cc3TK2zd.s:44     .text.CCU4GLOBAL_Init:00000024 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc3TK2zd.s:48     .bss:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc3TK2zd.s:52     .bss:00000000 CCU4InitCalled.6330
+
+UNDEFINED SYMBOLS
+RESET001_DeassertReset
+CCU4Global_HandleArray

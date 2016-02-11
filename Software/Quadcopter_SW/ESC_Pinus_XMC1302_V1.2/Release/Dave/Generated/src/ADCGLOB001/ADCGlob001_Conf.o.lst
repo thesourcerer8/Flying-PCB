@@ -1,0 +1,46 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"ADCGlob001_Conf.c"
+  14              		.global	ADCGLOB001_Handle0
+  15              		.global	ADCGLOB001_DynamicData0
+  16              		.section	.rodata
+  17              		.align	2
+  20              	ADCGLOB001_Handle0:
+  21 0000 00000348 		.word	1208156160
+  22 0004 00000000 		.word	ADCGLOB001_DynamicData0
+  23 0008 0000     		.short	0
+  24 000a 0000     		.short	0
+  25 000c 00       		.byte	0
+  26 000d 00       		.byte	0
+  27 000e 00       		.byte	0
+  28 000f 00       		.byte	0
+  29 0010 00       		.byte	0
+  30 0011 00       		.byte	0
+  31 0012 00       		.byte	0
+  32 0013 00       		.byte	0
+  33 0014 00       		.byte	0
+  34 0015 00       		.byte	0
+  35 0016 01       		.byte	1
+  36 0017 00       		.byte	0
+  37              		.bss
+  40              	ADCGLOB001_DynamicData0:
+  41 0000 00       		.space	1
+  42              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADCGlob001_Conf.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cccCiE0j.s:20     .rodata:00000000 ADCGLOB001_Handle0
+C:\Users\TOGABL~1\AppData\Local\Temp\cccCiE0j.s:40     .bss:00000000 ADCGLOB001_DynamicData0
+C:\Users\TOGABL~1\AppData\Local\Temp\cccCiE0j.s:17     .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cccCiE0j.s:41     .bss:00000000 $d
+
+NO UNDEFINED SYMBOLS

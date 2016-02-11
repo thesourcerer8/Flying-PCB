@@ -1,0 +1,88 @@
+<%@ jet package="CodeGenerator" class="io002_externh_template"
+imports="java.util.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[IO002_Extern.h]*/
+/**************************************************************************//**
+ *
+ * Copyright (C) 2013 Infineon Technologies AG. All rights reserved.
+ *
+ * Infineon Technologies AG (Infineon) is supplying this software for use with 
+ * Infineon's microcontrollers.  
+ * This file can be freely distributed within development tools that are 
+ * supporting such microcontrollers. 
+ *
+ * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+ * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+ * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, 
+ * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+ *
+********************************************************************************
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+**                                                                            **
+** MODIFICATION DATE : Oct 10, 2013                                           **
+**                                                                            **
+**                                                                            **
+*******************************************************************************/
+/**
+ * @file   IO002_Extern.h
+ *
+ * @brief  This file has prototypes and Configuration constants for IO002 app.
+ */
+/* Revision History 
+ * 9 Oct 2013 v1.0.23  Added the extern declarations for each instances of IO002
+ * app.
+ *
+ */
+
+#ifndef _IO002_EXTERN_H_
+#define _IO002_EXTERN_H_
+
+/******************************************************************************
+@Defines
+******************************************************************************/
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+<% String P = "port/p/"; %>
+<% String AppBaseuri = "app/io002/"; %>
+<% String appInst  = null; %>
+<% int instance = 0; %>
+
+<% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/io002/"));
+/**
+ * @ingroup IO002_datastructures
+ * @{
+ */
+ for (String appIns : appsList ) {
+ appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+ <% instance++; %>
+<% String pinUri = app.getMappedUri(AppBaseuri + appInst +"/pin"); %>
+<% if ((pinUri != null) && (pinUri.trim() != "")) { %>
+/** Handle for IO002 instance <%=appInst%>*/
+extern const IO002_HandleType IO002_Handle<%=appInst%>;
+
+<% } else { %>
+/* IO002 App instance (no.<%= appInst %>) is not mapped to any Port Pad. */
+<% }} %>
+/**Pointer to array of IO002_HandleType*/
+extern const IO002_HandleType * IO002_HandleArr[IO002_NUM_INSTANCES];
+/**
+  * @}
+  */
+
+
+#ifdef __cplusplus
+}
+#endif
+#endif  /* ifndef _IO002_EXTERN_H_ */
+/*CODE_BLOCK_END*/

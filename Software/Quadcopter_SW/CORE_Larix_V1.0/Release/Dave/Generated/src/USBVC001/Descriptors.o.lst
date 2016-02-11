@@ -1,0 +1,184 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"Descriptors.c"
+  16              		.section	.text.CALLBACK_USB_GetDescriptor,"ax",%progbits
+  17              		.align	1
+  18              		.global	CALLBACK_USB_GetDescriptor
+  19              		.thumb
+  20              		.thumb_func
+  22              	CALLBACK_USB_GetDescriptor:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 000A     		lsrs	r0, r0, #8
+  27 0002 431E     		subs	r3, r0, #1
+  28 0004 DBB2     		uxtb	r3, r3
+  29 0006 012B     		cmp	r3, #1
+  30 0008 05D8     		bhi	.L3
+  31 000a 0548     		ldr	r0, .L5
+  32 000c 50F82310 		ldr	r1, [r0, r3, lsl #2]
+  33 0010 C318     		adds	r3, r0, r3
+  34 0012 187A     		ldrb	r0, [r3, #8]	@ zero_extendqisi2
+  35 0014 01E0     		b	.L2
+  36              	.L3:
+  37 0016 0020     		movs	r0, #0
+  38 0018 0146     		mov	r1, r0
+  39              	.L2:
+  40 001a 1160     		str	r1, [r2, #0]
+  41 001c 7047     		bx	lr
+  42              	.L6:
+  43 001e 00BF     		.align	2
+  44              	.L5:
+  45 0020 00000000 		.word	.LANCHOR0
+  47              		.global	ProductString
+  48              		.global	ManufacturerString
+  49              		.global	LanguageString
+  50              		.global	ConfigurationDescriptor
+  51              		.global	DeviceDescriptor
+  52              		.section	.rodata
+  53              		.align	2
+  54              		.set	.LANCHOR0,. + 0
+  57              	CSWTCH.2:
+  58 0000 00000000 		.word	DeviceDescriptor
+  59 0004 00000000 		.word	ConfigurationDescriptor
+  62              	CSWTCH.3:
+  63 0008 12       		.byte	18
+  64 0009 3E       		.byte	62
+  67              	ProductString:
+  68 000a 1C       		.byte	28
+  69 000b 03       		.byte	3
+  70 000c 4C000000 		.ascii	"L\000\000\000U\000\000\000F\000\000\000A\000\000\000"
+  70      55000000 
+  70      46000000 
+  70      41000000 
+  71 001c 20000000 		.ascii	" \000\000\000C\000\000\000D\000\000\000C\000\000\000"
+  71      43000000 
+  71      44000000 
+  71      43000000 
+  72 002c 20000000 		.ascii	" \000\000\000D\000\000\000e\000\000\000m\000\000\000"
+  72      44000000 
+  72      65000000 
+  72      6D000000 
+  73 003c 6F000000 		.ascii	"o\000\000\000\000\000\000\000"
+  73      00000000 
+  76              	ManufacturerString:
+  77 0044 18       		.byte	24
+  78 0045 03       		.byte	3
+  79 0046 44000000 		.ascii	"D\000\000\000e\000\000\000a\000\000\000n\000\000\000"
+  79      65000000 
+  79      61000000 
+  79      6E000000 
+  80 0056 20000000 		.ascii	" \000\000\000C\000\000\000a\000\000\000m\000\000\000"
+  80      43000000 
+  80      61000000 
+  80      6D000000 
+  81 0066 65000000 		.ascii	"e\000\000\000r\000\000\000a\000\000\000\000\000\000"
+  81      72000000 
+  81      61000000 
+  81      000000
+  82 0075 00       		.ascii	"\000"
+  85              	LanguageString:
+  86 0076 04       		.byte	4
+  87 0077 03       		.byte	3
+  88 0078 09040000 		.4byte	1033
+  91              	ConfigurationDescriptor:
+  92 007c 09       		.byte	9
+  93 007d 02       		.byte	2
+  94 007e 3E00     		.2byte	62
+  95 0080 02       		.byte	2
+  96 0081 01       		.byte	1
+  97 0082 00       		.byte	0
+  98 0083 C0       		.byte	-64
+  99 0084 32       		.byte	50
+ 100 0085 09       		.byte	9
+ 101 0086 04       		.byte	4
+ 102 0087 00       		.byte	0
+ 103 0088 00       		.byte	0
+ 104 0089 01       		.byte	1
+ 105 008a 02       		.byte	2
+ 106 008b 02       		.byte	2
+ 107 008c 01       		.byte	1
+ 108 008d 00       		.byte	0
+ 109 008e 05       		.byte	5
+ 110 008f 24       		.byte	36
+ 111 0090 00       		.byte	0
+ 112 0091 1001     		.2byte	272
+ 113 0093 04       		.byte	4
+ 114 0094 24       		.byte	36
+ 115 0095 02       		.byte	2
+ 116 0096 06       		.byte	6
+ 117 0097 05       		.byte	5
+ 118 0098 24       		.byte	36
+ 119 0099 06       		.byte	6
+ 120 009a 00       		.byte	0
+ 121 009b 01       		.byte	1
+ 122 009c 07       		.byte	7
+ 123 009d 05       		.byte	5
+ 124 009e 82       		.byte	-126
+ 125 009f 03       		.byte	3
+ 126 00a0 0800     		.2byte	8
+ 127 00a2 FF       		.byte	-1
+ 128 00a3 09       		.byte	9
+ 129 00a4 04       		.byte	4
+ 130 00a5 01       		.byte	1
+ 131 00a6 00       		.byte	0
+ 132 00a7 02       		.byte	2
+ 133 00a8 0A       		.byte	10
+ 134 00a9 00       		.byte	0
+ 135 00aa 00       		.byte	0
+ 136 00ab 00       		.byte	0
+ 137 00ac 07       		.byte	7
+ 138 00ad 05       		.byte	5
+ 139 00ae 04       		.byte	4
+ 140 00af 02       		.byte	2
+ 141 00b0 1000     		.2byte	16
+ 142 00b2 01       		.byte	1
+ 143 00b3 07       		.byte	7
+ 144 00b4 05       		.byte	5
+ 145 00b5 83       		.byte	-125
+ 146 00b6 02       		.byte	2
+ 147 00b7 1000     		.2byte	16
+ 148 00b9 01       		.byte	1
+ 151              	DeviceDescriptor:
+ 152 00ba 12       		.byte	18
+ 153 00bb 01       		.byte	1
+ 154 00bc 1001     		.2byte	272
+ 155 00be 02       		.byte	2
+ 156 00bf 00       		.byte	0
+ 157 00c0 00       		.byte	0
+ 158 00c1 40       		.byte	64
+ 159 00c2 8B05     		.2byte	1419
+ 160 00c4 5800     		.2byte	88
+ 161 00c6 0100     		.2byte	1
+ 162 00c8 00       		.byte	0
+ 163 00c9 00       		.byte	0
+ 164 00ca 00       		.byte	0
+ 165 00cb 01       		.byte	1
+ 166              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 Descriptors.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:17     .text.CALLBACK_USB_GetDescriptor:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:22     .text.CALLBACK_USB_GetDescriptor:00000000 CALLBACK_USB_GetDescriptor
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:45     .text.CALLBACK_USB_GetDescriptor:00000020 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:67     .rodata:0000000a ProductString
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:76     .rodata:00000044 ManufacturerString
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:85     .rodata:00000076 LanguageString
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:91     .rodata:0000007c ConfigurationDescriptor
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:151    .rodata:000000ba DeviceDescriptor
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:53     .rodata:00000000 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:57     .rodata:00000000 CSWTCH.2
+C:\Users\TOGABL~1\AppData\Local\Temp\cclWjA1s.s:62     .rodata:00000008 CSWTCH.3
+
+NO UNDEFINED SYMBOLS

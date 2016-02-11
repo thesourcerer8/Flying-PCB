@@ -1,0 +1,315 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"system_XMC4500.c"
+  16              		.section	.text.SystemCoreClockUpdate,"ax",%progbits
+  17              		.align	1
+  18              		.global	SystemCoreClockUpdate
+  19              		.thumb
+  20              		.thumb_func
+  22              	SystemCoreClockUpdate:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 164A     		ldr	r2, .L10
+  26 0002 D368     		ldr	r3, [r2, #12]
+  27 0004 B3F5803F 		cmp	r3, #65536
+  28 0008 30B5     		push	{r4, r5, lr}
+  29 000a 22D1     		bne	.L2
+  30 000c 144B     		ldr	r3, .L10+4
+  31 000e 1868     		ldr	r0, [r3, #0]
+  32 0010 4107     		lsls	r1, r0, #29
+  33 0012 21D5     		bpl	.L1
+  34 0014 9C68     		ldr	r4, [r3, #8]
+  35 0016 9868     		ldr	r0, [r3, #8]
+  36 0018 C4F30361 		ubfx	r1, r4, #24, #4
+  37 001c 4C1C     		adds	r4, r1, #1
+  38 001e C0F30621 		ubfx	r1, r0, #8, #7
+  39 0022 481C     		adds	r0, r1, #1
+  40 0024 9968     		ldr	r1, [r3, #8]
+  41 0026 DB68     		ldr	r3, [r3, #12]
+  42 0028 D268     		ldr	r2, [r2, #12]
+  43 002a C1F30641 		ubfx	r1, r1, #16, #7
+  44 002e 0131     		adds	r1, r1, #1
+  45 0030 13F0010F 		tst	r3, #1
+  46 0034 14BF     		ite	ne
+  47 0036 0B4D     		ldrne	r5, .L10+8
+  48 0038 0B4D     		ldreq	r5, .L10+12
+  49 003a 0C4B     		ldr	r3, .L10+16
+  50 003c B5FBF4F4 		udiv	r4, r5, r4
+  51 0040 6043     		muls	r0, r4, r0
+  52 0042 B0FBF1F0 		udiv	r0, r0, r1
+  53 0046 D1B2     		uxtb	r1, r2
+  54 0048 4A1C     		adds	r2, r1, #1
+  55 004a B0FBF2F0 		udiv	r0, r0, r2
+  56 004e 1860     		str	r0, [r3, #0]
+  57 0050 30BD     		pop	{r4, r5, pc}
+  58              	.L2:
+  59 0052 0448     		ldr	r0, .L10+8
+  60 0054 0549     		ldr	r1, .L10+16
+  61 0056 0860     		str	r0, [r1, #0]
+  62              	.L1:
+  63 0058 30BD     		pop	{r4, r5, pc}
+  64              	.L11:
+  65 005a 00BF     		.align	2
+  66              	.L10:
+  67 005c 00460050 		.word	1342195200
+  68 0060 10470050 		.word	1342195472
+  69 0064 00366E01 		.word	24000000
+  70 0068 001BB700 		.word	12000000
+  71 006c 00000000 		.word	.LANCHOR0
+  73              		.section	.text.SystemInit,"ax",%progbits
+  74              		.align	1
+  75              		.global	SystemInit
+  76              		.thumb
+  77              		.thumb_func
+  79              	SystemInit:
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82 0000 734B     		ldr	r3, .L45
+  83 0002 D3F88820 		ldr	r2, [r3, #136]
+  84 0006 42F47000 		orr	r0, r2, #15728640
+  85 000a 10B5     		push	{r4, lr}
+  86 000c C3F88800 		str	r0, [r3, #136]
+  87 0010 5969     		ldr	r1, [r3, #20]
+  88 0012 21F00802 		bic	r2, r1, #8
+  89 0016 5A61     		str	r2, [r3, #20]
+  90 0018 6E4B     		ldr	r3, .L45+4
+  91 001a 5868     		ldr	r0, [r3, #4]
+  92 001c 20F00101 		bic	r1, r0, #1
+  93 0020 5960     		str	r1, [r3, #4]
+  94 0022 6D4B     		ldr	r3, .L45+8
+  95 0024 5A69     		ldr	r2, [r3, #20]
+  96 0026 22F00F00 		bic	r0, r2, #15
+  97 002a 40F00301 		orr	r1, r0, #3
+  98 002e 5961     		str	r1, [r3, #20]
+  99 0030 FFF7FEFF 		bl	AllowPLLInitByStartup
+ 100 0034 0028     		cmp	r0, #0
+ 101 0036 00F0C780 		beq	.L14
+ 102 003a 684B     		ldr	r3, .L45+12
+ 103 003c 684A     		ldr	r2, .L45+16
+ 104 003e 5868     		ldr	r0, [r3, #4]
+ 105 0040 0240     		ands	r2, r2, r0
+ 106 0042 2AB1     		cbz	r2, .L15
+ 107 0044 5968     		ldr	r1, [r3, #4]
+ 108 0046 21F48030 		bic	r0, r1, #65536
+ 109 004a 20F00202 		bic	r2, r0, #2
+ 110 004e 5A60     		str	r2, [r3, #4]
+ 111              	.L15:
+ 112 0050 644B     		ldr	r3, .L45+20
+ 113 0052 5968     		ldr	r1, [r3, #4]
+ 114 0054 11F0300F 		tst	r1, #48
+ 115 0058 04D1     		bne	.L16
+ 116              	.L21:
+ 117 005a 604B     		ldr	r3, .L45+12
+ 118 005c 1868     		ldr	r0, [r3, #0]
+ 119 005e 4007     		lsls	r0, r0, #29
+ 120 0060 31D5     		bpl	.L17
+ 121 0062 B1E0     		b	.L14
+ 122              	.L16:
+ 123 0064 5868     		ldr	r0, [r3, #4]
+ 124 0066 20F0F002 		bic	r2, r0, #240
+ 125 006a 5A60     		str	r2, [r3, #4]
+ 126 006c 5968     		ldr	r1, [r3, #4]
+ 127 006e 41F40030 		orr	r0, r1, #131072
+ 128 0072 5860     		str	r0, [r3, #4]
+ 129 0074 594B     		ldr	r3, .L45+12
+ 130 0076 DA68     		ldr	r2, [r3, #12]
+ 131 0078 22F00101 		bic	r1, r2, #1
+ 132 007c D960     		str	r1, [r3, #12]
+ 133 007e 5868     		ldr	r0, [r3, #4]
+ 134 0080 5949     		ldr	r1, .L45+24
+ 135 0082 20F40032 		bic	r2, r0, #131072
+ 136 0086 5A60     		str	r2, [r3, #4]
+ 137 0088 584B     		ldr	r3, .L45+28
+ 138 008a 0020     		movs	r0, #0
+ 139 008c 0522     		movs	r2, #5
+ 140 008e 5960     		str	r1, [r3, #4]
+ 141 0090 9860     		str	r0, [r3, #8]
+ 142 0092 1A60     		str	r2, [r3, #0]
+ 143              	.L20:
+ 144 0094 514B     		ldr	r3, .L45+12
+ 145 0096 1968     		ldr	r1, [r3, #0]
+ 146 0098 544B     		ldr	r3, .L45+28
+ 147 009a 01F46070 		and	r0, r1, #896
+ 148 009e B0F5607F 		cmp	r0, #896
+ 149 00a2 03D0     		beq	.L19
+ 150 00a4 9A68     		ldr	r2, [r3, #8]
+ 151 00a6 B2F5FA7F 		cmp	r2, #500
+ 152 00aa F3D2     		bcs	.L20
+ 153              	.L19:
+ 154 00ac 1968     		ldr	r1, [r3, #0]
+ 155 00ae 21F00100 		bic	r0, r1, #1
+ 156 00b2 1860     		str	r0, [r3, #0]
+ 157 00b4 494B     		ldr	r3, .L45+12
+ 158 00b6 1A68     		ldr	r2, [r3, #0]
+ 159 00b8 02F46071 		and	r1, r2, #896
+ 160 00bc B1F5607F 		cmp	r1, #896
+ 161 00c0 40F08280 		bne	.L14
+ 162 00c4 C9E7     		b	.L21
+ 163              	.L17:
+ 164 00c6 4A4A     		ldr	r2, .L45+32
+ 165 00c8 D168     		ldr	r1, [r2, #12]
+ 166 00ca C903     		lsls	r1, r1, #15
+ 167 00cc 03D5     		bpl	.L22
+ 168 00ce D068     		ldr	r0, [r2, #12]
+ 169 00d0 20F48031 		bic	r1, r0, #65536
+ 170 00d4 D160     		str	r1, [r2, #12]
+ 171              	.L22:
+ 172 00d6 5A68     		ldr	r2, [r3, #4]
+ 173 00d8 42F00100 		orr	r0, r2, #1
+ 174 00dc 5860     		str	r0, [r3, #4]
+ 175 00de 5968     		ldr	r1, [r3, #4]
+ 176 00e0 4448     		ldr	r0, .L45+36
+ 177 00e2 41F01002 		orr	r2, r1, #16
+ 178 00e6 5A60     		str	r2, [r3, #4]
+ 179 00e8 9860     		str	r0, [r3, #8]
+ 180 00ea 5968     		ldr	r1, [r3, #4]
+ 181 00ec 41F04002 		orr	r2, r1, #64
+ 182 00f0 5A60     		str	r2, [r3, #4]
+ 183 00f2 5868     		ldr	r0, [r3, #4]
+ 184 00f4 20F01001 		bic	r1, r0, #16
+ 185 00f8 5960     		str	r1, [r3, #4]
+ 186 00fa 5A68     		ldr	r2, [r3, #4]
+ 187 00fc 3A49     		ldr	r1, .L45+24
+ 188 00fe 42F48020 		orr	r0, r2, #262144
+ 189 0102 5860     		str	r0, [r3, #4]
+ 190 0104 394B     		ldr	r3, .L45+28
+ 191 0106 0022     		movs	r2, #0
+ 192 0108 0520     		movs	r0, #5
+ 193 010a 5960     		str	r1, [r3, #4]
+ 194 010c 9A60     		str	r2, [r3, #8]
+ 195 010e 1860     		str	r0, [r3, #0]
+ 196              	.L24:
+ 197 0110 324B     		ldr	r3, .L45+12
+ 198 0112 1968     		ldr	r1, [r3, #0]
+ 199 0114 354B     		ldr	r3, .L45+28
+ 200 0116 11F0040F 		tst	r1, #4
+ 201 011a 03D1     		bne	.L23
+ 202 011c 9A68     		ldr	r2, [r3, #8]
+ 203 011e B2F5FA7F 		cmp	r2, #500
+ 204 0122 F5D2     		bcs	.L24
+ 205              	.L23:
+ 206 0124 1968     		ldr	r1, [r3, #0]
+ 207 0126 3148     		ldr	r0, .L45+28
+ 208 0128 21F00102 		bic	r2, r1, #1
+ 209 012c 1A60     		str	r2, [r3, #0]
+ 210 012e 2B4B     		ldr	r3, .L45+12
+ 211 0130 1968     		ldr	r1, [r3, #0]
+ 212 0132 4A07     		lsls	r2, r1, #29
+ 213 0134 48D5     		bpl	.L14
+ 214 0136 5C68     		ldr	r4, [r3, #4]
+ 215 0138 24F00102 		bic	r2, r4, #1
+ 216 013c 5A60     		str	r2, [r3, #4]
+ 217 013e 2C4A     		ldr	r2, .L45+32
+ 218 0140 0021     		movs	r1, #0
+ 219 0142 1161     		str	r1, [r2, #16]
+ 220 0144 5161     		str	r1, [r2, #20]
+ 221 0146 1162     		str	r1, [r2, #32]
+ 222 0148 D468     		ldr	r4, [r2, #12]
+ 223 014a 44F48034 		orr	r4, r4, #65536
+ 224 014e D460     		str	r4, [r2, #12]
+ 225 0150 5A68     		ldr	r2, [r3, #4]
+ 226 0152 22F04002 		bic	r2, r2, #64
+ 227 0156 5A60     		str	r2, [r3, #4]
+ 228 0158 40F24553 		movw	r3, #1349
+ 229 015c 4360     		str	r3, [r0, #4]
+ 230 015e 8160     		str	r1, [r0, #8]
+ 231 0160 0521     		movs	r1, #5
+ 232 0162 0160     		str	r1, [r0, #0]
+ 233              	.L25:
+ 234 0164 2148     		ldr	r0, .L45+28
+ 235 0166 8268     		ldr	r2, [r0, #8]
+ 236 0168 632A     		cmp	r2, #99
+ 237 016a FBD8     		bhi	.L25
+ 238 016c 0368     		ldr	r3, [r0, #0]
+ 239 016e 1B4A     		ldr	r2, .L45+12
+ 240 0170 23F00101 		bic	r1, r3, #1
+ 241 0174 204B     		ldr	r3, .L45+40
+ 242 0176 0160     		str	r1, [r0, #0]
+ 243 0178 40F61B41 		movw	r1, #3099
+ 244 017c 9360     		str	r3, [r2, #8]
+ 245 017e 4160     		str	r1, [r0, #4]
+ 246 0180 0023     		movs	r3, #0
+ 247 0182 0521     		movs	r1, #5
+ 248 0184 8360     		str	r3, [r0, #8]
+ 249 0186 0160     		str	r1, [r0, #0]
+ 250              	.L26:
+ 251 0188 1848     		ldr	r0, .L45+28
+ 252 018a 8368     		ldr	r3, [r0, #8]
+ 253 018c 632B     		cmp	r3, #99
+ 254 018e FBD8     		bhi	.L26
+ 255 0190 0168     		ldr	r1, [r0, #0]
+ 256 0192 21F00103 		bic	r3, r1, #1
+ 257 0196 1949     		ldr	r1, .L45+44
+ 258 0198 0360     		str	r3, [r0, #0]
+ 259 019a 9160     		str	r1, [r2, #8]
+ 260 019c 0023     		movs	r3, #0
+ 261 019e 41F22332 		movw	r2, #4899
+ 262 01a2 0521     		movs	r1, #5
+ 263 01a4 4260     		str	r2, [r0, #4]
+ 264 01a6 8360     		str	r3, [r0, #8]
+ 265 01a8 0160     		str	r1, [r0, #0]
+ 266              	.L27:
+ 267 01aa 1048     		ldr	r0, .L45+28
+ 268 01ac 8268     		ldr	r2, [r0, #8]
+ 269 01ae 632A     		cmp	r2, #99
+ 270 01b0 FBD8     		bhi	.L27
+ 271 01b2 0368     		ldr	r3, [r0, #0]
+ 272 01b4 23F00101 		bic	r1, r3, #1
+ 273 01b8 084B     		ldr	r3, .L45+12
+ 274 01ba 0160     		str	r1, [r0, #0]
+ 275 01bc 1048     		ldr	r0, .L45+48
+ 276 01be A3F5B661 		sub	r1, r3, #1456
+ 277 01c2 0522     		movs	r2, #5
+ 278 01c4 9860     		str	r0, [r3, #8]
+ 279 01c6 CA60     		str	r2, [r1, #12]
+ 280              	.L14:
+ 281 01c8 BDE81040 		pop	{r4, lr}
+ 282 01cc FFF7FEBF 		b	SystemCoreClockUpdate
+ 283              	.L46:
+ 284              		.align	2
+ 285              	.L45:
+ 286 01d0 00ED00E0 		.word	-536810240
+ 287 01d4 00800050 		.word	1342210048
+ 288 01d8 00200058 		.word	1476403200
+ 289 01dc 10470050 		.word	1342195472
+ 290 01e0 02000100 		.word	65538
+ 291 01e4 00470050 		.word	1342195456
+ 292 01e8 A34B4C00 		.word	5000099
+ 293 01ec 10E000E0 		.word	-536813552
+ 294 01f0 00460050 		.word	1342195200
+ 295 01f4 014F1301 		.word	18042625
+ 296 01f8 014F0701 		.word	17256193
+ 297 01fc 014F0401 		.word	17059585
+ 298 0200 014F0301 		.word	16994049
+ 300              		.global	SystemCoreClock
+ 301              		.data
+ 302              		.align	2
+ 303              		.set	.LANCHOR0,. + 0
+ 306              	SystemCoreClock:
+ 307 0000 000E2707 		.word	120000000
+ 308              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 system_XMC4500.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccDjDJEs.s:17     .text.SystemCoreClockUpdate:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccDjDJEs.s:22     .text.SystemCoreClockUpdate:00000000 SystemCoreClockUpdate
+C:\Users\TOGABL~1\AppData\Local\Temp\ccDjDJEs.s:67     .text.SystemCoreClockUpdate:0000005c $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccDjDJEs.s:74     .text.SystemInit:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccDjDJEs.s:79     .text.SystemInit:00000000 SystemInit
+C:\Users\TOGABL~1\AppData\Local\Temp\ccDjDJEs.s:286    .text.SystemInit:000001d0 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\ccDjDJEs.s:306    .data:00000000 SystemCoreClock
+C:\Users\TOGABL~1\AppData\Local\Temp\ccDjDJEs.s:302    .data:00000000 $d
+
+UNDEFINED SYMBOLS
+AllowPLLInitByStartup

@@ -1,0 +1,1228 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"IO002.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.IO002_lInit,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  24              	IO002_lInit:
+  25              	.LFB112:
+  26              		.file 1 "../Dave/Generated/src/IO002/IO002.c"
+   1:../Dave/Generated/src/IO002/IO002.c **** /*CODE_BLOCK_BEGIN[IO002.c]*/
+   2:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+   3:../Dave/Generated/src/IO002/IO002.c ****  Copyright (c) 2013, Infineon Technologies AG                                 **
+   4:../Dave/Generated/src/IO002/IO002.c ****  All rights reserved.                                                         **
+   5:../Dave/Generated/src/IO002/IO002.c ****                                                                               **
+   6:../Dave/Generated/src/IO002/IO002.c ****  Redistribution and use in source and binary forms, with or without           **
+   7:../Dave/Generated/src/IO002/IO002.c ****  modification,are permitted provided that the following conditions are met:   **
+   8:../Dave/Generated/src/IO002/IO002.c ****                                                                               **
+   9:../Dave/Generated/src/IO002/IO002.c ****  *Redistributions of source code must retain the above copyright notice,      **
+  10:../Dave/Generated/src/IO002/IO002.c ****  this list of conditions and the following disclaimer.                        **
+  11:../Dave/Generated/src/IO002/IO002.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  12:../Dave/Generated/src/IO002/IO002.c ****  this list of conditions and the following disclaimer in the documentation    **
+  13:../Dave/Generated/src/IO002/IO002.c ****  and/or other materials provided with the distribution.                       **
+  14:../Dave/Generated/src/IO002/IO002.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  15:../Dave/Generated/src/IO002/IO002.c ****  may be used to endorse or promote products derived from this software without**
+  16:../Dave/Generated/src/IO002/IO002.c ****  specific prior written permission.                                           **
+  17:../Dave/Generated/src/IO002/IO002.c ****                                                                               **
+  18:../Dave/Generated/src/IO002/IO002.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  19:../Dave/Generated/src/IO002/IO002.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  20:../Dave/Generated/src/IO002/IO002.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  21:../Dave/Generated/src/IO002/IO002.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  22:../Dave/Generated/src/IO002/IO002.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  23:../Dave/Generated/src/IO002/IO002.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  24:../Dave/Generated/src/IO002/IO002.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  25:../Dave/Generated/src/IO002/IO002.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  26:../Dave/Generated/src/IO002/IO002.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  27:../Dave/Generated/src/IO002/IO002.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  28:../Dave/Generated/src/IO002/IO002.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  29:../Dave/Generated/src/IO002/IO002.c ****                                                                               **
+  30:../Dave/Generated/src/IO002/IO002.c ****  To improve the quality of the software, users are encouraged to share        **
+  31:../Dave/Generated/src/IO002/IO002.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  32:../Dave/Generated/src/IO002/IO002.c ****  dave@infineon.com).                                                          **
+  33:../Dave/Generated/src/IO002/IO002.c ****                                                                               **
+  34:../Dave/Generated/src/IO002/IO002.c **** ********************************************************************************
+  35:../Dave/Generated/src/IO002/IO002.c **** **                                                                            **
+  36:../Dave/Generated/src/IO002/IO002.c **** **                                                                            **
+  37:../Dave/Generated/src/IO002/IO002.c **** ** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+  38:../Dave/Generated/src/IO002/IO002.c **** **                                                                            **
+  39:../Dave/Generated/src/IO002/IO002.c **** ** COMPILER : Compiler Independent                                            **
+  40:../Dave/Generated/src/IO002/IO002.c **** **                                                                            **
+  41:../Dave/Generated/src/IO002/IO002.c **** ** AUTHOR   : App Developer                                                   **
+  42:../Dave/Generated/src/IO002/IO002.c **** **                                                                            **
+  43:../Dave/Generated/src/IO002/IO002.c **** ** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+  44:../Dave/Generated/src/IO002/IO002.c **** **                                                                            **
+  45:../Dave/Generated/src/IO002/IO002.c **** ** MODIFICATION DATE : Oct 10, 2013                                           **
+  46:../Dave/Generated/src/IO002/IO002.c **** **                                                                            **
+  47:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+  48:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+  49:../Dave/Generated/src/IO002/IO002.c **** **                      Author(s) Identity                                    **
+  50:../Dave/Generated/src/IO002/IO002.c **** ********************************************************************************
+  51:../Dave/Generated/src/IO002/IO002.c **** **                                                                            **
+  52:../Dave/Generated/src/IO002/IO002.c **** ** Initials     Name                                                          **
+  53:../Dave/Generated/src/IO002/IO002.c **** ** ---------------------------------------------------------------------------**
+  54:../Dave/Generated/src/IO002/IO002.c **** ** PAE        App Developer                                                   **
+  55:../Dave/Generated/src/IO002/IO002.c **** ** NSND       App Developer                                                   **
+  56:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+  57:../Dave/Generated/src/IO002/IO002.c **** /**
+  58:../Dave/Generated/src/IO002/IO002.c ****  * @file   IO002.c
+  59:../Dave/Generated/src/IO002/IO002.c ****  *
+  60:../Dave/Generated/src/IO002/IO002.c ****  * @brief  IO_Digital _IO002 App
+  61:../Dave/Generated/src/IO002/IO002.c ****  */
+  62:../Dave/Generated/src/IO002/IO002.c **** /* Revision History 
+  63:../Dave/Generated/src/IO002/IO002.c ****  *
+  64:../Dave/Generated/src/IO002/IO002.c ****  * 01 Jan 2013 v1.0.12  Added constraint for Pad driver to skip the 
+  65:../Dave/Generated/src/IO002/IO002.c ****  *                      configuration for XMC1000 devices.
+  66:../Dave/Generated/src/IO002/IO002.c ****  * 16 Mar 2013 v1.0.14  1.Modified OMR register configuration (Direct assignment 
+  67:../Dave/Generated/src/IO002/IO002.c ****  *                      without reading) to upgrade performance.                       
+  68:../Dave/Generated/src/IO002/IO002.c ****  * 19 Jun 2013 v1.0.18  1.Conditional code generation for OMR & PDR registers 
+  69:../Dave/Generated/src/IO002/IO002.c ****  *                      configuration if Output Driver is enabled.
+  70:../Dave/Generated/src/IO002/IO002.c ****  *                      2. Removed IO002_DisableOutputDriver() & 
+  71:../Dave/Generated/src/IO002/IO002.c ****  *                      IO002_EnableOutputDriver() API definitions, as output 
+  72:../Dave/Generated/src/IO002/IO002.c ****  *                      port pin configuration shall be done by higher level 
+  73:../Dave/Generated/src/IO002/IO002.c ****  *                      APP connections.
+  74:../Dave/Generated/src/IO002/IO002.c ****  * 15 Jul 2013 v1.0.20  1. Pad Hysteresis Control register configuration added
+  75:../Dave/Generated/src/IO002/IO002.c ****  *                      for XMC1000 devices to configure Standard/Large 
+  76:../Dave/Generated/src/IO002/IO002.c ****  *                      Hysteresis on user selection basis.     
+  77:../Dave/Generated/src/IO002/IO002.c ****  * 10 Oct 2013 v1.0.24  Separated static and dynamic C code. Added inline functions
+  78:../Dave/Generated/src/IO002/IO002.c ****  *                      instead of function like macros. 
+  79:../Dave/Generated/src/IO002/IO002.c ****  * 06 Jan 2014 v1.0.28  Updated the io002 init for handling issue with port 14 
+  80:../Dave/Generated/src/IO002/IO002.c ****  * pad register access.
+  81:../Dave/Generated/src/IO002/IO002.c ****  */
+  82:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+  83:../Dave/Generated/src/IO002/IO002.c ****  ** INCLUDE FILES                                                             **
+  84:../Dave/Generated/src/IO002/IO002.c ****  ******************************************************************************/
+  85:../Dave/Generated/src/IO002/IO002.c **** 
+  86:../Dave/Generated/src/IO002/IO002.c **** /** Inclusion of header file */
+  87:../Dave/Generated/src/IO002/IO002.c **** #include "../../inc/IO002/IO002.h"
+  88:../Dave/Generated/src/IO002/IO002.c **** 
+  89:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+  90:../Dave/Generated/src/IO002/IO002.c **** **                      Private Macro Definitions                             **
+  91:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+  92:../Dave/Generated/src/IO002/IO002.c **** 
+  93:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+  94:../Dave/Generated/src/IO002/IO002.c **** **                      Private Type Definitions                              **
+  95:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+  96:../Dave/Generated/src/IO002/IO002.c **** 
+  97:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+  98:../Dave/Generated/src/IO002/IO002.c **** **                 Private Function Declarations:
+  99:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+ 100:../Dave/Generated/src/IO002/IO002.c **** static void IO002_lInit(const IO002_HandleType * handle);
+ 101:../Dave/Generated/src/IO002/IO002.c **** static void IO002_IOCR_OE_Enabled_lInit(const IO002_HandleType * handle,
+ 102:../Dave/Generated/src/IO002/IO002.c **** 		                                                      uint32_t Pin);
+ 103:../Dave/Generated/src/IO002/IO002.c **** static void IO002_IOCR_OE_Disabled_lInit(const IO002_HandleType * handle,
+ 104:../Dave/Generated/src/IO002/IO002.c **** 		                                                      uint32_t Pin);
+ 105:../Dave/Generated/src/IO002/IO002.c **** #if(UC_FAMILY == XMC4)
+ 106:../Dave/Generated/src/IO002/IO002.c **** static void IO002_XMC4_lInit(const IO002_HandleType * handle,uint32_t Pin);
+ 107:../Dave/Generated/src/IO002/IO002.c **** #endif
+ 108:../Dave/Generated/src/IO002/IO002.c **** #if(UC_FAMILY == XMC1)
+ 109:../Dave/Generated/src/IO002/IO002.c **** static void IO002_XMC1_lInit(const IO002_HandleType * handle,uint32_t Pin);
+ 110:../Dave/Generated/src/IO002/IO002.c **** #endif
+ 111:../Dave/Generated/src/IO002/IO002.c **** 
+ 112:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+ 113:../Dave/Generated/src/IO002/IO002.c **** **                      Global Constant Definitions                           **
+ 114:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+ 115:../Dave/Generated/src/IO002/IO002.c **** 
+ 116:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+ 117:../Dave/Generated/src/IO002/IO002.c **** **                      Global Variable Definitions                           **
+ 118:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+ 119:../Dave/Generated/src/IO002/IO002.c **** 
+ 120:../Dave/Generated/src/IO002/IO002.c **** 
+ 121:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+ 122:../Dave/Generated/src/IO002/IO002.c **** **                      Private Constant Definitions                          **
+ 123:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+ 124:../Dave/Generated/src/IO002/IO002.c **** 
+ 125:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+ 126:../Dave/Generated/src/IO002/IO002.c **** **                 Function like macro definitions                            **
+ 127:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+ 128:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+ 129:../Dave/Generated/src/IO002/IO002.c **** **                      Private Function Definitions                          **
+ 130:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+ 131:../Dave/Generated/src/IO002/IO002.c **** /*
+ 132:../Dave/Generated/src/IO002/IO002.c **** *The function initialises the provided instance of IO002 app.
+ 133:../Dave/Generated/src/IO002/IO002.c **** */
+ 134:../Dave/Generated/src/IO002/IO002.c **** static void IO002_lInit(const IO002_HandleType * handle)
+ 135:../Dave/Generated/src/IO002/IO002.c **** {
+  27              		.loc 1 135 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 16
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 84B0     		sub	sp, sp, #16
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 24
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+ 136:../Dave/Generated/src/IO002/IO002.c **** 	/*Get the port pin assigned for the particular instance of IO002 handle*/
+ 137:../Dave/Generated/src/IO002/IO002.c **** 	uint32_t Pin = handle->PortPin;
+  43              		.loc 1 137 0
+  44 0008 7B68     		ldr	r3, [r7, #4]
+  45 000a 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+  46 000c FB60     		str	r3, [r7, #12]
+ 138:../Dave/Generated/src/IO002/IO002.c **** 		
+ 139:../Dave/Generated/src/IO002/IO002.c **** 	/* Configuration of port pins based on User configuration */
+ 140:../Dave/Generated/src/IO002/IO002.c **** 	if(handle->IOCR_OE == 1U )
+  47              		.loc 1 140 0
+  48 000e 7B68     		ldr	r3, [r7, #4]
+  49 0010 DB69     		ldr	r3, [r3, #28]
+  50 0012 012B     		cmp	r3, #1
+  51 0014 07D1     		bne	.L2
+ 141:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 142:../Dave/Generated/src/IO002/IO002.c **** 		handle->PortRegs->OMR = (handle->OMR_PS << Pin);
+  52              		.loc 1 142 0
+  53 0016 7B68     		ldr	r3, [r7, #4]
+  54 0018 1B6C     		ldr	r3, [r3, #64]
+  55 001a 7A68     		ldr	r2, [r7, #4]
+  56 001c 5168     		ldr	r1, [r2, #4]
+  57 001e FA68     		ldr	r2, [r7, #12]
+  58 0020 01FA02F2 		lsl	r2, r1, r2
+  59 0024 5A60     		str	r2, [r3, #4]
+  60              	.L2:
+ 143:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 144:../Dave/Generated/src/IO002/IO002.c ****   
+ 145:../Dave/Generated/src/IO002/IO002.c **** #if(UC_FAMILY == 4) 
+ 146:../Dave/Generated/src/IO002/IO002.c **** 	/*XMC 4 family specific initialisation*/
+ 147:../Dave/Generated/src/IO002/IO002.c **** 	IO002_XMC4_lInit(handle,Pin);
+  61              		.loc 1 147 0
+  62 0026 7868     		ldr	r0, [r7, #4]
+  63 0028 F968     		ldr	r1, [r7, #12]
+  64 002a FFF7FEFF 		bl	IO002_XMC4_lInit
+ 148:../Dave/Generated/src/IO002/IO002.c **** #endif
+ 149:../Dave/Generated/src/IO002/IO002.c **** 
+ 150:../Dave/Generated/src/IO002/IO002.c **** 	/*Hardware control configuration*/
+ 151:../Dave/Generated/src/IO002/IO002.c **** 	if(handle->HW_SEL == 1U )
+  65              		.loc 1 151 0
+  66 002e 7B68     		ldr	r3, [r7, #4]
+  67 0030 DB68     		ldr	r3, [r3, #12]
+  68 0032 012B     		cmp	r3, #1
+  69 0034 0BD1     		bne	.L3
+ 152:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 153:../Dave/Generated/src/IO002/IO002.c **** 		handle->PortRegs->HWSEL  |= ((uint32_t)2U << Pin);
+  70              		.loc 1 153 0
+  71 0036 7B68     		ldr	r3, [r7, #4]
+  72 0038 1B6C     		ldr	r3, [r3, #64]
+  73 003a 7A68     		ldr	r2, [r7, #4]
+  74 003c 126C     		ldr	r2, [r2, #64]
+  75 003e 516F     		ldr	r1, [r2, #116]
+  76 0040 FA68     		ldr	r2, [r7, #12]
+  77 0042 4FF00200 		mov	r0, #2
+  78 0046 00FA02F2 		lsl	r2, r0, r2
+  79 004a 0A43     		orrs	r2, r2, r1
+  80 004c 5A67     		str	r2, [r3, #116]
+  81              	.L3:
+ 154:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 155:../Dave/Generated/src/IO002/IO002.c **** 
+ 156:../Dave/Generated/src/IO002/IO002.c **** 	/*Check input/output control output enable is true*/
+ 157:../Dave/Generated/src/IO002/IO002.c **** 	if(handle->IOCR_OE == 1U )
+  82              		.loc 1 157 0
+  83 004e 7B68     		ldr	r3, [r7, #4]
+  84 0050 DB69     		ldr	r3, [r3, #28]
+  85 0052 012B     		cmp	r3, #1
+  86 0054 03D1     		bne	.L4
+ 158:../Dave/Generated/src/IO002/IO002.c ****     {
+ 159:../Dave/Generated/src/IO002/IO002.c **** 	    IO002_IOCR_OE_Enabled_lInit(handle,Pin);
+  87              		.loc 1 159 0
+  88 0056 7868     		ldr	r0, [r7, #4]
+  89 0058 F968     		ldr	r1, [r7, #12]
+  90 005a FFF7FEFF 		bl	IO002_IOCR_OE_Enabled_lInit
+  91              	.L4:
+ 160:../Dave/Generated/src/IO002/IO002.c ****     }
+ 161:../Dave/Generated/src/IO002/IO002.c **** 
+ 162:../Dave/Generated/src/IO002/IO002.c **** 	/*If output enable is false*/
+ 163:../Dave/Generated/src/IO002/IO002.c **** 	if(handle->IOCR_OE == (uint32_t)0 )
+  92              		.loc 1 163 0
+  93 005e 7B68     		ldr	r3, [r7, #4]
+  94 0060 DB69     		ldr	r3, [r3, #28]
+  95 0062 002B     		cmp	r3, #0
+  96 0064 03D1     		bne	.L1
+ 164:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 165:../Dave/Generated/src/IO002/IO002.c **** #if(UC_FAMILY == 1)
+ 166:../Dave/Generated/src/IO002/IO002.c **** 		IO002_XMC1_lInit(handle,Pin);
+ 167:../Dave/Generated/src/IO002/IO002.c **** #endif
+ 168:../Dave/Generated/src/IO002/IO002.c **** 
+ 169:../Dave/Generated/src/IO002/IO002.c **** 		IO002_IOCR_OE_Disabled_lInit(handle,Pin);
+  97              		.loc 1 169 0
+  98 0066 7868     		ldr	r0, [r7, #4]
+  99 0068 F968     		ldr	r1, [r7, #12]
+ 100 006a FFF7FEFF 		bl	IO002_IOCR_OE_Disabled_lInit
+ 101              	.L1:
+ 170:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 171:../Dave/Generated/src/IO002/IO002.c **** }
+ 102              		.loc 1 171 0
+ 103 006e 07F11007 		add	r7, r7, #16
+ 104 0072 BD46     		mov	sp, r7
+ 105 0074 80BD     		pop	{r7, pc}
+ 106              		.cfi_endproc
+ 107              	.LFE112:
+ 109 0076 00BF     		.section	.text.IO002_XMC4_lInit,"ax",%progbits
+ 110              		.align	2
+ 111              		.thumb
+ 112              		.thumb_func
+ 114              	IO002_XMC4_lInit:
+ 115              	.LFB113:
+ 172:../Dave/Generated/src/IO002/IO002.c **** 
+ 173:../Dave/Generated/src/IO002/IO002.c **** #if(UC_FAMILY == 1)
+ 174:../Dave/Generated/src/IO002/IO002.c **** /*This function initialises the hysteresis control register for XMC1000 
+ 175:../Dave/Generated/src/IO002/IO002.c **** devices*/
+ 176:../Dave/Generated/src/IO002/IO002.c **** static void IO002_XMC1_lInit(const IO002_HandleType * handle,uint32_t Pin)
+ 177:../Dave/Generated/src/IO002/IO002.c **** {
+ 178:../Dave/Generated/src/IO002/IO002.c **** 	if (handle->PHCR_EN == 1U)
+ 179:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 180:../Dave/Generated/src/IO002/IO002.c **** 		if (Pin < 8U)
+ 181:../Dave/Generated/src/IO002/IO002.c **** 		{
+ 182:../Dave/Generated/src/IO002/IO002.c **** 			handle->PortRegs->PHCR0 |= handle->PHCR0_MSK;
+ 183:../Dave/Generated/src/IO002/IO002.c **** 		}
+ 184:../Dave/Generated/src/IO002/IO002.c **** 		else if ((Pin >= 8U) && (Pin <= 15U))
+ 185:../Dave/Generated/src/IO002/IO002.c **** 		{
+ 186:../Dave/Generated/src/IO002/IO002.c **** 			handle->PortRegs->PHCR1 |= handle->PHCR1_MSK;
+ 187:../Dave/Generated/src/IO002/IO002.c **** 		}
+ 188:../Dave/Generated/src/IO002/IO002.c **** 		else
+ 189:../Dave/Generated/src/IO002/IO002.c **** 		{
+ 190:../Dave/Generated/src/IO002/IO002.c **** 		}
+ 191:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 192:../Dave/Generated/src/IO002/IO002.c **** 	else
+ 193:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 194:../Dave/Generated/src/IO002/IO002.c **** 		if (Pin < 8U)
+ 195:../Dave/Generated/src/IO002/IO002.c **** 		{
+ 196:../Dave/Generated/src/IO002/IO002.c **** 			handle->PortRegs->PHCR0 &= ~(handle->PHCR0_MSK);
+ 197:../Dave/Generated/src/IO002/IO002.c **** 		}
+ 198:../Dave/Generated/src/IO002/IO002.c **** 		else if ((Pin >= 8U) && (Pin <= 15U))
+ 199:../Dave/Generated/src/IO002/IO002.c **** 		{
+ 200:../Dave/Generated/src/IO002/IO002.c **** 			handle->PortRegs->PHCR1 &= ~(handle->PHCR1_MSK);
+ 201:../Dave/Generated/src/IO002/IO002.c **** 		}
+ 202:../Dave/Generated/src/IO002/IO002.c **** 		else
+ 203:../Dave/Generated/src/IO002/IO002.c **** 		{
+ 204:../Dave/Generated/src/IO002/IO002.c **** 		}
+ 205:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 206:../Dave/Generated/src/IO002/IO002.c **** }
+ 207:../Dave/Generated/src/IO002/IO002.c **** #endif
+ 208:../Dave/Generated/src/IO002/IO002.c **** 
+ 209:../Dave/Generated/src/IO002/IO002.c **** #if(UC_FAMILY == 4)
+ 210:../Dave/Generated/src/IO002/IO002.c **** /*
+ 211:../Dave/Generated/src/IO002/IO002.c **** *This function initialises the pad driver register for XMC4000 devices.
+ 212:../Dave/Generated/src/IO002/IO002.c **** */
+ 213:../Dave/Generated/src/IO002/IO002.c **** static void IO002_XMC4_lInit(const IO002_HandleType * handle,uint32_t Pin)
+ 214:../Dave/Generated/src/IO002/IO002.c **** {
+ 116              		.loc 1 214 0
+ 117              		.cfi_startproc
+ 118              		@ args = 0, pretend = 0, frame = 8
+ 119              		@ frame_needed = 1, uses_anonymous_args = 0
+ 120              		@ link register save eliminated.
+ 121 0000 80B4     		push	{r7}
+ 122              	.LCFI3:
+ 123              		.cfi_def_cfa_offset 4
+ 124              		.cfi_offset 7, -4
+ 125 0002 83B0     		sub	sp, sp, #12
+ 126              	.LCFI4:
+ 127              		.cfi_def_cfa_offset 16
+ 128 0004 00AF     		add	r7, sp, #0
+ 129              	.LCFI5:
+ 130              		.cfi_def_cfa_register 7
+ 131 0006 7860     		str	r0, [r7, #4]
+ 132 0008 3960     		str	r1, [r7, #0]
+ 215:../Dave/Generated/src/IO002/IO002.c **** 	if(handle->IOCR_OE == 1U )
+ 133              		.loc 1 215 0
+ 134 000a 7B68     		ldr	r3, [r7, #4]
+ 135 000c DB69     		ldr	r3, [r3, #28]
+ 136 000e 012B     		cmp	r3, #1
+ 137 0010 41D1     		bne	.L6
+ 216:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 217:../Dave/Generated/src/IO002/IO002.c **** 		if(Pin < 8U)
+ 138              		.loc 1 217 0
+ 139 0012 3B68     		ldr	r3, [r7, #0]
+ 140 0014 072B     		cmp	r3, #7
+ 141 0016 1FD8     		bhi	.L8
+ 218:../Dave/Generated/src/IO002/IO002.c **** 		{
+ 219:../Dave/Generated/src/IO002/IO002.c **** 		  if(handle->pdr0_ptr != NULL)
+ 142              		.loc 1 219 0
+ 143 0018 7B68     		ldr	r3, [r7, #4]
+ 144 001a 5B6C     		ldr	r3, [r3, #68]
+ 145 001c 002B     		cmp	r3, #0
+ 146 001e 3AD0     		beq	.L6
+ 220:../Dave/Generated/src/IO002/IO002.c **** 		  {
+ 221:../Dave/Generated/src/IO002/IO002.c **** 			  *handle->pdr0_ptr &= (uint32_t)(~(handle->PDR0_MSK));
+ 147              		.loc 1 221 0
+ 148 0020 7B68     		ldr	r3, [r7, #4]
+ 149 0022 5B6C     		ldr	r3, [r3, #68]
+ 150 0024 7A68     		ldr	r2, [r7, #4]
+ 151 0026 526C     		ldr	r2, [r2, #68]
+ 152 0028 1168     		ldr	r1, [r2, #0]
+ 153 002a 7A68     		ldr	r2, [r7, #4]
+ 154 002c 926A     		ldr	r2, [r2, #40]
+ 155 002e 6FEA0202 		mvn	r2, r2
+ 156 0032 0A40     		ands	r2, r2, r1
+ 157 0034 1A60     		str	r2, [r3, #0]
+ 222:../Dave/Generated/src/IO002/IO002.c **** 			  *handle->pdr0_ptr |= (uint32_t)((handle->PDR_PD << handle->PDR0_POS)
+ 158              		.loc 1 222 0
+ 159 0036 7B68     		ldr	r3, [r7, #4]
+ 160 0038 5B6C     		ldr	r3, [r3, #68]
+ 161 003a 7A68     		ldr	r2, [r7, #4]
+ 162 003c 526C     		ldr	r2, [r2, #68]
+ 163 003e 1168     		ldr	r1, [r2, #0]
+ 164 0040 7A68     		ldr	r2, [r7, #4]
+ 165 0042 9068     		ldr	r0, [r2, #8]
+ 166 0044 7A68     		ldr	r2, [r7, #4]
+ 167 0046 D26A     		ldr	r2, [r2, #44]
+ 168 0048 00FA02F0 		lsl	r0, r0, r2
+ 223:../Dave/Generated/src/IO002/IO002.c **** 														  & handle->PDR0_MSK);
+ 169              		.loc 1 223 0
+ 170 004c 7A68     		ldr	r2, [r7, #4]
+ 171 004e 926A     		ldr	r2, [r2, #40]
+ 222:../Dave/Generated/src/IO002/IO002.c **** 			  *handle->pdr0_ptr |= (uint32_t)((handle->PDR_PD << handle->PDR0_POS)
+ 172              		.loc 1 222 0
+ 173 0050 0240     		ands	r2, r2, r0
+ 174 0052 0A43     		orrs	r2, r2, r1
+ 175 0054 1A60     		str	r2, [r3, #0]
+ 176 0056 1EE0     		b	.L6
+ 177              	.L8:
+ 224:../Dave/Generated/src/IO002/IO002.c **** 		  }
+ 225:../Dave/Generated/src/IO002/IO002.c **** 		}
+ 226:../Dave/Generated/src/IO002/IO002.c **** 		else
+ 227:../Dave/Generated/src/IO002/IO002.c **** 		{
+ 228:../Dave/Generated/src/IO002/IO002.c **** 		  if(handle->pdr1_ptr != NULL)
+ 178              		.loc 1 228 0
+ 179 0058 7B68     		ldr	r3, [r7, #4]
+ 180 005a 9B6C     		ldr	r3, [r3, #72]
+ 181 005c 002B     		cmp	r3, #0
+ 182 005e 1AD0     		beq	.L6
+ 229:../Dave/Generated/src/IO002/IO002.c **** 		  {
+ 230:../Dave/Generated/src/IO002/IO002.c **** 			  *handle->pdr1_ptr  &= (uint32_t)(~(handle->PDR1_MSK));
+ 183              		.loc 1 230 0
+ 184 0060 7B68     		ldr	r3, [r7, #4]
+ 185 0062 9B6C     		ldr	r3, [r3, #72]
+ 186 0064 7A68     		ldr	r2, [r7, #4]
+ 187 0066 926C     		ldr	r2, [r2, #72]
+ 188 0068 1168     		ldr	r1, [r2, #0]
+ 189 006a 7A68     		ldr	r2, [r7, #4]
+ 190 006c 126B     		ldr	r2, [r2, #48]
+ 191 006e 6FEA0202 		mvn	r2, r2
+ 192 0072 0A40     		ands	r2, r2, r1
+ 193 0074 1A60     		str	r2, [r3, #0]
+ 231:../Dave/Generated/src/IO002/IO002.c **** 			  *handle->pdr1_ptr  |= (uint32_t)((handle->PDR_PD << handle->PDR1_POS)
+ 194              		.loc 1 231 0
+ 195 0076 7B68     		ldr	r3, [r7, #4]
+ 196 0078 9B6C     		ldr	r3, [r3, #72]
+ 197 007a 7A68     		ldr	r2, [r7, #4]
+ 198 007c 926C     		ldr	r2, [r2, #72]
+ 199 007e 1168     		ldr	r1, [r2, #0]
+ 200 0080 7A68     		ldr	r2, [r7, #4]
+ 201 0082 9068     		ldr	r0, [r2, #8]
+ 202 0084 7A68     		ldr	r2, [r7, #4]
+ 203 0086 526B     		ldr	r2, [r2, #52]
+ 204 0088 00FA02F0 		lsl	r0, r0, r2
+ 232:../Dave/Generated/src/IO002/IO002.c **** 														   & handle->PDR1_MSK);
+ 205              		.loc 1 232 0
+ 206 008c 7A68     		ldr	r2, [r7, #4]
+ 207 008e 126B     		ldr	r2, [r2, #48]
+ 231:../Dave/Generated/src/IO002/IO002.c **** 			  *handle->pdr1_ptr  |= (uint32_t)((handle->PDR_PD << handle->PDR1_POS)
+ 208              		.loc 1 231 0
+ 209 0090 0240     		ands	r2, r2, r0
+ 210 0092 0A43     		orrs	r2, r2, r1
+ 211 0094 1A60     		str	r2, [r3, #0]
+ 212              	.L6:
+ 233:../Dave/Generated/src/IO002/IO002.c **** 		  }
+ 234:../Dave/Generated/src/IO002/IO002.c **** 		}
+ 235:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 236:../Dave/Generated/src/IO002/IO002.c **** }
+ 213              		.loc 1 236 0
+ 214 0096 07F10C07 		add	r7, r7, #12
+ 215 009a BD46     		mov	sp, r7
+ 216 009c 80BC     		pop	{r7}
+ 217 009e 7047     		bx	lr
+ 218              		.cfi_endproc
+ 219              	.LFE113:
+ 221              		.section	.text.IO002_IOCR_OE_Enabled_lInit,"ax",%progbits
+ 222              		.align	2
+ 223              		.thumb
+ 224              		.thumb_func
+ 226              	IO002_IOCR_OE_Enabled_lInit:
+ 227              	.LFB114:
+ 237:../Dave/Generated/src/IO002/IO002.c **** #endif
+ 238:../Dave/Generated/src/IO002/IO002.c **** 
+ 239:../Dave/Generated/src/IO002/IO002.c **** /*This function initialises the input/output control registers.*/
+ 240:../Dave/Generated/src/IO002/IO002.c **** static void IO002_IOCR_OE_Enabled_lInit(const IO002_HandleType * handle,
+ 241:../Dave/Generated/src/IO002/IO002.c **** 		                                                      uint32_t Pin)
+ 242:../Dave/Generated/src/IO002/IO002.c **** {
+ 228              		.loc 1 242 0
+ 229              		.cfi_startproc
+ 230              		@ args = 0, pretend = 0, frame = 8
+ 231              		@ frame_needed = 1, uses_anonymous_args = 0
+ 232              		@ link register save eliminated.
+ 233 0000 80B4     		push	{r7}
+ 234              	.LCFI6:
+ 235              		.cfi_def_cfa_offset 4
+ 236              		.cfi_offset 7, -4
+ 237 0002 83B0     		sub	sp, sp, #12
+ 238              	.LCFI7:
+ 239              		.cfi_def_cfa_offset 16
+ 240 0004 00AF     		add	r7, sp, #0
+ 241              	.LCFI8:
+ 242              		.cfi_def_cfa_register 7
+ 243 0006 7860     		str	r0, [r7, #4]
+ 244 0008 3960     		str	r1, [r7, #0]
+ 243:../Dave/Generated/src/IO002/IO002.c **** 	if(Pin < 4U)
+ 245              		.loc 1 243 0
+ 246 000a 3B68     		ldr	r3, [r7, #0]
+ 247 000c 032B     		cmp	r3, #3
+ 248 000e 10D8     		bhi	.L10
+ 244:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 245:../Dave/Generated/src/IO002/IO002.c **** 		handle->PortRegs->IOCR0 |= (handle->IOCR << (3U+(Pin*8U)));
+ 249              		.loc 1 245 0
+ 250 0010 7B68     		ldr	r3, [r7, #4]
+ 251 0012 1B6C     		ldr	r3, [r3, #64]
+ 252 0014 7A68     		ldr	r2, [r7, #4]
+ 253 0016 126C     		ldr	r2, [r2, #64]
+ 254 0018 1169     		ldr	r1, [r2, #16]
+ 255 001a 7A68     		ldr	r2, [r7, #4]
+ 256 001c 506A     		ldr	r0, [r2, #36]
+ 257 001e 3A68     		ldr	r2, [r7, #0]
+ 258 0020 4FEAC202 		lsl	r2, r2, #3
+ 259 0024 02F10302 		add	r2, r2, #3
+ 260 0028 00FA02F2 		lsl	r2, r0, r2
+ 261 002c 0A43     		orrs	r2, r2, r1
+ 262 002e 1A61     		str	r2, [r3, #16]
+ 263 0030 4FE0     		b	.L9
+ 264              	.L10:
+ 246:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 247:../Dave/Generated/src/IO002/IO002.c **** 	else if ((Pin >= 4U) && (Pin <= 7U))
+ 265              		.loc 1 247 0
+ 266 0032 3B68     		ldr	r3, [r7, #0]
+ 267 0034 032B     		cmp	r3, #3
+ 268 0036 17D9     		bls	.L12
+ 269              		.loc 1 247 0 is_stmt 0 discriminator 1
+ 270 0038 3B68     		ldr	r3, [r7, #0]
+ 271 003a 072B     		cmp	r3, #7
+ 272 003c 14D8     		bhi	.L12
+ 248:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 249:../Dave/Generated/src/IO002/IO002.c **** 		Pin = (Pin - 4U);
+ 273              		.loc 1 249 0 is_stmt 1
+ 274 003e 3B68     		ldr	r3, [r7, #0]
+ 275 0040 A3F10403 		sub	r3, r3, #4
+ 276 0044 3B60     		str	r3, [r7, #0]
+ 250:../Dave/Generated/src/IO002/IO002.c **** 		handle->PortRegs->IOCR4 |= (handle->IOCR << (3U+(Pin*8U)));
+ 277              		.loc 1 250 0
+ 278 0046 7B68     		ldr	r3, [r7, #4]
+ 279 0048 1B6C     		ldr	r3, [r3, #64]
+ 280 004a 7A68     		ldr	r2, [r7, #4]
+ 281 004c 126C     		ldr	r2, [r2, #64]
+ 282 004e 5169     		ldr	r1, [r2, #20]
+ 283 0050 7A68     		ldr	r2, [r7, #4]
+ 284 0052 506A     		ldr	r0, [r2, #36]
+ 285 0054 3A68     		ldr	r2, [r7, #0]
+ 286 0056 4FEAC202 		lsl	r2, r2, #3
+ 287 005a 02F10302 		add	r2, r2, #3
+ 288 005e 00FA02F2 		lsl	r2, r0, r2
+ 289 0062 0A43     		orrs	r2, r2, r1
+ 290 0064 5A61     		str	r2, [r3, #20]
+ 291 0066 34E0     		b	.L9
+ 292              	.L12:
+ 251:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 252:../Dave/Generated/src/IO002/IO002.c **** 	else if ((Pin >= 8U) && (Pin <= 11U))
+ 293              		.loc 1 252 0
+ 294 0068 3B68     		ldr	r3, [r7, #0]
+ 295 006a 072B     		cmp	r3, #7
+ 296 006c 17D9     		bls	.L13
+ 297              		.loc 1 252 0 is_stmt 0 discriminator 1
+ 298 006e 3B68     		ldr	r3, [r7, #0]
+ 299 0070 0B2B     		cmp	r3, #11
+ 300 0072 14D8     		bhi	.L13
+ 253:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 254:../Dave/Generated/src/IO002/IO002.c **** 		Pin = (Pin - 8U);
+ 301              		.loc 1 254 0 is_stmt 1
+ 302 0074 3B68     		ldr	r3, [r7, #0]
+ 303 0076 A3F10803 		sub	r3, r3, #8
+ 304 007a 3B60     		str	r3, [r7, #0]
+ 255:../Dave/Generated/src/IO002/IO002.c **** 		handle->PortRegs->IOCR8 |= (handle->IOCR << (3U+(Pin*8U)));
+ 305              		.loc 1 255 0
+ 306 007c 7B68     		ldr	r3, [r7, #4]
+ 307 007e 1B6C     		ldr	r3, [r3, #64]
+ 308 0080 7A68     		ldr	r2, [r7, #4]
+ 309 0082 126C     		ldr	r2, [r2, #64]
+ 310 0084 9169     		ldr	r1, [r2, #24]
+ 311 0086 7A68     		ldr	r2, [r7, #4]
+ 312 0088 506A     		ldr	r0, [r2, #36]
+ 313 008a 3A68     		ldr	r2, [r7, #0]
+ 314 008c 4FEAC202 		lsl	r2, r2, #3
+ 315 0090 02F10302 		add	r2, r2, #3
+ 316 0094 00FA02F2 		lsl	r2, r0, r2
+ 317 0098 0A43     		orrs	r2, r2, r1
+ 318 009a 9A61     		str	r2, [r3, #24]
+ 319 009c 19E0     		b	.L9
+ 320              	.L13:
+ 256:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 257:../Dave/Generated/src/IO002/IO002.c **** 	else if ((Pin >= 12U) && (Pin <= 15U))
+ 321              		.loc 1 257 0
+ 322 009e 3B68     		ldr	r3, [r7, #0]
+ 323 00a0 0B2B     		cmp	r3, #11
+ 324 00a2 16D9     		bls	.L9
+ 325              		.loc 1 257 0 is_stmt 0 discriminator 1
+ 326 00a4 3B68     		ldr	r3, [r7, #0]
+ 327 00a6 0F2B     		cmp	r3, #15
+ 328 00a8 13D8     		bhi	.L9
+ 258:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 259:../Dave/Generated/src/IO002/IO002.c **** 		Pin = (Pin - 12U);
+ 329              		.loc 1 259 0 is_stmt 1
+ 330 00aa 3B68     		ldr	r3, [r7, #0]
+ 331 00ac A3F10C03 		sub	r3, r3, #12
+ 332 00b0 3B60     		str	r3, [r7, #0]
+ 260:../Dave/Generated/src/IO002/IO002.c **** 		handle->PortRegs->IOCR12 |= (handle->IOCR << (3U+(Pin*8U)));
+ 333              		.loc 1 260 0
+ 334 00b2 7B68     		ldr	r3, [r7, #4]
+ 335 00b4 1B6C     		ldr	r3, [r3, #64]
+ 336 00b6 7A68     		ldr	r2, [r7, #4]
+ 337 00b8 126C     		ldr	r2, [r2, #64]
+ 338 00ba D169     		ldr	r1, [r2, #28]
+ 339 00bc 7A68     		ldr	r2, [r7, #4]
+ 340 00be 506A     		ldr	r0, [r2, #36]
+ 341 00c0 3A68     		ldr	r2, [r7, #0]
+ 342 00c2 4FEAC202 		lsl	r2, r2, #3
+ 343 00c6 02F10302 		add	r2, r2, #3
+ 344 00ca 00FA02F2 		lsl	r2, r0, r2
+ 345 00ce 0A43     		orrs	r2, r2, r1
+ 346 00d0 DA61     		str	r2, [r3, #28]
+ 347              	.L9:
+ 261:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 262:../Dave/Generated/src/IO002/IO002.c **** 	else
+ 263:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 264:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 265:../Dave/Generated/src/IO002/IO002.c **** 
+ 266:../Dave/Generated/src/IO002/IO002.c **** }
+ 348              		.loc 1 266 0
+ 349 00d2 07F10C07 		add	r7, r7, #12
+ 350 00d6 BD46     		mov	sp, r7
+ 351 00d8 80BC     		pop	{r7}
+ 352 00da 7047     		bx	lr
+ 353              		.cfi_endproc
+ 354              	.LFE114:
+ 356              		.section	.text.IO002_IOCR_OE_Disabled_lInit,"ax",%progbits
+ 357              		.align	2
+ 358              		.thumb
+ 359              		.thumb_func
+ 361              	IO002_IOCR_OE_Disabled_lInit:
+ 362              	.LFB115:
+ 267:../Dave/Generated/src/IO002/IO002.c **** 
+ 268:../Dave/Generated/src/IO002/IO002.c **** /*This function initialises the input/output control registers when output 
+ 269:../Dave/Generated/src/IO002/IO002.c **** enable is false*/
+ 270:../Dave/Generated/src/IO002/IO002.c **** static void IO002_IOCR_OE_Disabled_lInit(const IO002_HandleType * handle,
+ 271:../Dave/Generated/src/IO002/IO002.c **** 		                                                      uint32_t Pin)
+ 272:../Dave/Generated/src/IO002/IO002.c **** {
+ 363              		.loc 1 272 0
+ 364              		.cfi_startproc
+ 365              		@ args = 0, pretend = 0, frame = 8
+ 366              		@ frame_needed = 1, uses_anonymous_args = 0
+ 367              		@ link register save eliminated.
+ 368 0000 80B4     		push	{r7}
+ 369              	.LCFI9:
+ 370              		.cfi_def_cfa_offset 4
+ 371              		.cfi_offset 7, -4
+ 372 0002 83B0     		sub	sp, sp, #12
+ 373              	.LCFI10:
+ 374              		.cfi_def_cfa_offset 16
+ 375 0004 00AF     		add	r7, sp, #0
+ 376              	.LCFI11:
+ 377              		.cfi_def_cfa_register 7
+ 378 0006 7860     		str	r0, [r7, #4]
+ 379 0008 3960     		str	r1, [r7, #0]
+ 273:../Dave/Generated/src/IO002/IO002.c **** 	if(Pin < 4U)
+ 380              		.loc 1 273 0
+ 381 000a 3B68     		ldr	r3, [r7, #0]
+ 382 000c 032B     		cmp	r3, #3
+ 383 000e 10D8     		bhi	.L15
+ 274:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 275:../Dave/Generated/src/IO002/IO002.c **** 		handle->PortRegs->IOCR0 |= (handle->IOCR_PCR2 << (3U+(Pin*8U)));
+ 384              		.loc 1 275 0
+ 385 0010 7B68     		ldr	r3, [r7, #4]
+ 386 0012 1B6C     		ldr	r3, [r3, #64]
+ 387 0014 7A68     		ldr	r2, [r7, #4]
+ 388 0016 126C     		ldr	r2, [r2, #64]
+ 389 0018 1169     		ldr	r1, [r2, #16]
+ 390 001a 7A68     		ldr	r2, [r7, #4]
+ 391 001c 5069     		ldr	r0, [r2, #20]
+ 392 001e 3A68     		ldr	r2, [r7, #0]
+ 393 0020 4FEAC202 		lsl	r2, r2, #3
+ 394 0024 02F10302 		add	r2, r2, #3
+ 395 0028 00FA02F2 		lsl	r2, r0, r2
+ 396 002c 0A43     		orrs	r2, r2, r1
+ 397 002e 1A61     		str	r2, [r3, #16]
+ 398 0030 4FE0     		b	.L14
+ 399              	.L15:
+ 276:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 277:../Dave/Generated/src/IO002/IO002.c **** 	else if ((Pin >= 4U) && (Pin <= 7U))
+ 400              		.loc 1 277 0
+ 401 0032 3B68     		ldr	r3, [r7, #0]
+ 402 0034 032B     		cmp	r3, #3
+ 403 0036 17D9     		bls	.L17
+ 404              		.loc 1 277 0 is_stmt 0 discriminator 1
+ 405 0038 3B68     		ldr	r3, [r7, #0]
+ 406 003a 072B     		cmp	r3, #7
+ 407 003c 14D8     		bhi	.L17
+ 278:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 279:../Dave/Generated/src/IO002/IO002.c **** 		Pin = (Pin - 4U);
+ 408              		.loc 1 279 0 is_stmt 1
+ 409 003e 3B68     		ldr	r3, [r7, #0]
+ 410 0040 A3F10403 		sub	r3, r3, #4
+ 411 0044 3B60     		str	r3, [r7, #0]
+ 280:../Dave/Generated/src/IO002/IO002.c **** 		handle->PortRegs->IOCR4 |= (handle->IOCR_PCR2 << (3U+(Pin*8U)));
+ 412              		.loc 1 280 0
+ 413 0046 7B68     		ldr	r3, [r7, #4]
+ 414 0048 1B6C     		ldr	r3, [r3, #64]
+ 415 004a 7A68     		ldr	r2, [r7, #4]
+ 416 004c 126C     		ldr	r2, [r2, #64]
+ 417 004e 5169     		ldr	r1, [r2, #20]
+ 418 0050 7A68     		ldr	r2, [r7, #4]
+ 419 0052 5069     		ldr	r0, [r2, #20]
+ 420 0054 3A68     		ldr	r2, [r7, #0]
+ 421 0056 4FEAC202 		lsl	r2, r2, #3
+ 422 005a 02F10302 		add	r2, r2, #3
+ 423 005e 00FA02F2 		lsl	r2, r0, r2
+ 424 0062 0A43     		orrs	r2, r2, r1
+ 425 0064 5A61     		str	r2, [r3, #20]
+ 426 0066 34E0     		b	.L14
+ 427              	.L17:
+ 281:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 282:../Dave/Generated/src/IO002/IO002.c **** 	else if ((Pin >= 8U) && (Pin <= 11U))
+ 428              		.loc 1 282 0
+ 429 0068 3B68     		ldr	r3, [r7, #0]
+ 430 006a 072B     		cmp	r3, #7
+ 431 006c 17D9     		bls	.L18
+ 432              		.loc 1 282 0 is_stmt 0 discriminator 1
+ 433 006e 3B68     		ldr	r3, [r7, #0]
+ 434 0070 0B2B     		cmp	r3, #11
+ 435 0072 14D8     		bhi	.L18
+ 283:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 284:../Dave/Generated/src/IO002/IO002.c **** 		Pin = (Pin - 8U);
+ 436              		.loc 1 284 0 is_stmt 1
+ 437 0074 3B68     		ldr	r3, [r7, #0]
+ 438 0076 A3F10803 		sub	r3, r3, #8
+ 439 007a 3B60     		str	r3, [r7, #0]
+ 285:../Dave/Generated/src/IO002/IO002.c **** 		handle->PortRegs->IOCR8 |= (handle->IOCR_PCR2 << (3U+(Pin*8U)));
+ 440              		.loc 1 285 0
+ 441 007c 7B68     		ldr	r3, [r7, #4]
+ 442 007e 1B6C     		ldr	r3, [r3, #64]
+ 443 0080 7A68     		ldr	r2, [r7, #4]
+ 444 0082 126C     		ldr	r2, [r2, #64]
+ 445 0084 9169     		ldr	r1, [r2, #24]
+ 446 0086 7A68     		ldr	r2, [r7, #4]
+ 447 0088 5069     		ldr	r0, [r2, #20]
+ 448 008a 3A68     		ldr	r2, [r7, #0]
+ 449 008c 4FEAC202 		lsl	r2, r2, #3
+ 450 0090 02F10302 		add	r2, r2, #3
+ 451 0094 00FA02F2 		lsl	r2, r0, r2
+ 452 0098 0A43     		orrs	r2, r2, r1
+ 453 009a 9A61     		str	r2, [r3, #24]
+ 454 009c 19E0     		b	.L14
+ 455              	.L18:
+ 286:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 287:../Dave/Generated/src/IO002/IO002.c **** 	else if ((Pin >= 12U) && (Pin <= 15U))
+ 456              		.loc 1 287 0
+ 457 009e 3B68     		ldr	r3, [r7, #0]
+ 458 00a0 0B2B     		cmp	r3, #11
+ 459 00a2 16D9     		bls	.L14
+ 460              		.loc 1 287 0 is_stmt 0 discriminator 1
+ 461 00a4 3B68     		ldr	r3, [r7, #0]
+ 462 00a6 0F2B     		cmp	r3, #15
+ 463 00a8 13D8     		bhi	.L14
+ 288:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 289:../Dave/Generated/src/IO002/IO002.c **** 		Pin = (Pin - 12U);
+ 464              		.loc 1 289 0 is_stmt 1
+ 465 00aa 3B68     		ldr	r3, [r7, #0]
+ 466 00ac A3F10C03 		sub	r3, r3, #12
+ 467 00b0 3B60     		str	r3, [r7, #0]
+ 290:../Dave/Generated/src/IO002/IO002.c **** 		handle->PortRegs->IOCR12 |= (handle->IOCR_PCR2 << (3U+(Pin*8U)));
+ 468              		.loc 1 290 0
+ 469 00b2 7B68     		ldr	r3, [r7, #4]
+ 470 00b4 1B6C     		ldr	r3, [r3, #64]
+ 471 00b6 7A68     		ldr	r2, [r7, #4]
+ 472 00b8 126C     		ldr	r2, [r2, #64]
+ 473 00ba D169     		ldr	r1, [r2, #28]
+ 474 00bc 7A68     		ldr	r2, [r7, #4]
+ 475 00be 5069     		ldr	r0, [r2, #20]
+ 476 00c0 3A68     		ldr	r2, [r7, #0]
+ 477 00c2 4FEAC202 		lsl	r2, r2, #3
+ 478 00c6 02F10302 		add	r2, r2, #3
+ 479 00ca 00FA02F2 		lsl	r2, r0, r2
+ 480 00ce 0A43     		orrs	r2, r2, r1
+ 481 00d0 DA61     		str	r2, [r3, #28]
+ 482              	.L14:
+ 291:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 292:../Dave/Generated/src/IO002/IO002.c **** 	else
+ 293:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 294:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 295:../Dave/Generated/src/IO002/IO002.c **** }
+ 483              		.loc 1 295 0
+ 484 00d2 07F10C07 		add	r7, r7, #12
+ 485 00d6 BD46     		mov	sp, r7
+ 486 00d8 80BC     		pop	{r7}
+ 487 00da 7047     		bx	lr
+ 488              		.cfi_endproc
+ 489              	.LFE115:
+ 491              		.section	.text.IO002_Init,"ax",%progbits
+ 492              		.align	2
+ 493              		.global	IO002_Init
+ 494              		.thumb
+ 495              		.thumb_func
+ 497              	IO002_Init:
+ 498              	.LFB116:
+ 296:../Dave/Generated/src/IO002/IO002.c **** 
+ 297:../Dave/Generated/src/IO002/IO002.c **** 
+ 298:../Dave/Generated/src/IO002/IO002.c **** /*******************************************************************************
+ 299:../Dave/Generated/src/IO002/IO002.c **** **                      Public Function Definitions                           **
+ 300:../Dave/Generated/src/IO002/IO002.c **** *******************************************************************************/
+ 301:../Dave/Generated/src/IO002/IO002.c **** 
+ 302:../Dave/Generated/src/IO002/IO002.c **** /* Function to configure Port Pins based on user configuration & Higher App 
+ 303:../Dave/Generated/src/IO002/IO002.c ****  * configurations.
+ 304:../Dave/Generated/src/IO002/IO002.c ****  */
+ 305:../Dave/Generated/src/IO002/IO002.c **** void IO002_Init(void)
+ 306:../Dave/Generated/src/IO002/IO002.c **** {
+ 499              		.loc 1 306 0
+ 500              		.cfi_startproc
+ 501              		@ args = 0, pretend = 0, frame = 8
+ 502              		@ frame_needed = 1, uses_anonymous_args = 0
+ 503 0000 80B5     		push	{r7, lr}
+ 504              	.LCFI12:
+ 505              		.cfi_def_cfa_offset 8
+ 506              		.cfi_offset 7, -8
+ 507              		.cfi_offset 14, -4
+ 508 0002 82B0     		sub	sp, sp, #8
+ 509              	.LCFI13:
+ 510              		.cfi_def_cfa_offset 16
+ 511 0004 00AF     		add	r7, sp, #0
+ 512              	.LCFI14:
+ 513              		.cfi_def_cfa_register 7
+ 307:../Dave/Generated/src/IO002/IO002.c **** 	uint32_t i = (uint32_t)0;
+ 514              		.loc 1 307 0
+ 515 0006 4FF00003 		mov	r3, #0
+ 516 000a 7B60     		str	r3, [r7, #4]
+ 308:../Dave/Generated/src/IO002/IO002.c **** 	/*Initialize IO for number of instances*/
+ 309:../Dave/Generated/src/IO002/IO002.c **** 	for(; i < IO002_NUM_INSTANCES;i++ )
+ 517              		.loc 1 309 0
+ 518 000c 0DE0     		b	.L20
+ 519              	.L21:
+ 310:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 311:../Dave/Generated/src/IO002/IO002.c **** 		IO002_lInit(IO002_HandleArr[i]);
+ 520              		.loc 1 311 0 discriminator 2
+ 521 000e 40F20003 		movw	r3, #:lower16:IO002_HandleArr
+ 522 0012 C0F20003 		movt	r3, #:upper16:IO002_HandleArr
+ 523 0016 7A68     		ldr	r2, [r7, #4]
+ 524 0018 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 525 001c 1846     		mov	r0, r3
+ 526 001e FFF7FEFF 		bl	IO002_lInit
+ 309:../Dave/Generated/src/IO002/IO002.c **** 	for(; i < IO002_NUM_INSTANCES;i++ )
+ 527              		.loc 1 309 0 discriminator 2
+ 528 0022 7B68     		ldr	r3, [r7, #4]
+ 529 0024 03F10103 		add	r3, r3, #1
+ 530 0028 7B60     		str	r3, [r7, #4]
+ 531              	.L20:
+ 309:../Dave/Generated/src/IO002/IO002.c **** 	for(; i < IO002_NUM_INSTANCES;i++ )
+ 532              		.loc 1 309 0 is_stmt 0 discriminator 1
+ 533 002a 7B68     		ldr	r3, [r7, #4]
+ 534 002c 002B     		cmp	r3, #0
+ 535 002e EED0     		beq	.L21
+ 312:../Dave/Generated/src/IO002/IO002.c **** 	}  
+ 313:../Dave/Generated/src/IO002/IO002.c **** }
+ 536              		.loc 1 313 0 is_stmt 1
+ 537 0030 07F10807 		add	r7, r7, #8
+ 538 0034 BD46     		mov	sp, r7
+ 539 0036 80BD     		pop	{r7, pc}
+ 540              		.cfi_endproc
+ 541              	.LFE116:
+ 543              		.section	.text.IO002_ReadPin,"ax",%progbits
+ 544              		.align	2
+ 545              		.global	IO002_ReadPin
+ 546              		.thumb
+ 547              		.thumb_func
+ 549              	IO002_ReadPin:
+ 550              	.LFB117:
+ 314:../Dave/Generated/src/IO002/IO002.c **** 
+ 315:../Dave/Generated/src/IO002/IO002.c **** /* 
+ 316:../Dave/Generated/src/IO002/IO002.c **** *Function to read the Port Pin.
+ 317:../Dave/Generated/src/IO002/IO002.c **** */
+ 318:../Dave/Generated/src/IO002/IO002.c **** inline uint32_t IO002_ReadPin(IO002_HandleType Handle)
+ 319:../Dave/Generated/src/IO002/IO002.c **** {
+ 551              		.loc 1 319 0
+ 552              		.cfi_startproc
+ 553              		@ args = 76, pretend = 16, frame = 0
+ 554              		@ frame_needed = 1, uses_anonymous_args = 0
+ 555              		@ link register save eliminated.
+ 556 0000 84B0     		sub	sp, sp, #16
+ 557              	.LCFI15:
+ 558              		.cfi_def_cfa_offset 16
+ 559 0002 80B4     		push	{r7}
+ 560              	.LCFI16:
+ 561              		.cfi_def_cfa_offset 20
+ 562              		.cfi_offset 7, -20
+ 563 0004 00AF     		add	r7, sp, #0
+ 564              	.LCFI17:
+ 565              		.cfi_def_cfa_register 7
+ 566 0006 07F1040C 		add	ip, r7, #4
+ 567 000a 8CE80F00 		stmia	ip, {r0, r1, r2, r3}
+ 320:../Dave/Generated/src/IO002/IO002.c **** 	return ((Handle.PortRegs->IN >> Handle.PortPin) & (uint32_t)1U);
+ 568              		.loc 1 320 0
+ 569 000e 7B6C     		ldr	r3, [r7, #68]
+ 570 0010 5A6A     		ldr	r2, [r3, #36]
+ 571 0012 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 572 0014 22FA03F3 		lsr	r3, r2, r3
+ 573 0018 03F00103 		and	r3, r3, #1
+ 321:../Dave/Generated/src/IO002/IO002.c **** 	
+ 322:../Dave/Generated/src/IO002/IO002.c **** }
+ 574              		.loc 1 322 0
+ 575 001c 1846     		mov	r0, r3
+ 576 001e BD46     		mov	sp, r7
+ 577 0020 80BC     		pop	{r7}
+ 578 0022 04B0     		add	sp, sp, #16
+ 579 0024 7047     		bx	lr
+ 580              		.cfi_endproc
+ 581              	.LFE117:
+ 583 0026 00BF     		.section	.text.IO002_SetPin,"ax",%progbits
+ 584              		.align	2
+ 585              		.global	IO002_SetPin
+ 586              		.thumb
+ 587              		.thumb_func
+ 589              	IO002_SetPin:
+ 590              	.LFB118:
+ 323:../Dave/Generated/src/IO002/IO002.c **** 
+ 324:../Dave/Generated/src/IO002/IO002.c **** /*
+ 325:../Dave/Generated/src/IO002/IO002.c **** * The function to set the chosen port pin to '1'
+ 326:../Dave/Generated/src/IO002/IO002.c **** */
+ 327:../Dave/Generated/src/IO002/IO002.c **** inline void IO002_SetPin(IO002_HandleType Handle)
+ 328:../Dave/Generated/src/IO002/IO002.c **** {
+ 591              		.loc 1 328 0
+ 592              		.cfi_startproc
+ 593              		@ args = 76, pretend = 16, frame = 0
+ 594              		@ frame_needed = 1, uses_anonymous_args = 0
+ 595              		@ link register save eliminated.
+ 596 0000 84B0     		sub	sp, sp, #16
+ 597              	.LCFI18:
+ 598              		.cfi_def_cfa_offset 16
+ 599 0002 80B4     		push	{r7}
+ 600              	.LCFI19:
+ 601              		.cfi_def_cfa_offset 20
+ 602              		.cfi_offset 7, -20
+ 603 0004 00AF     		add	r7, sp, #0
+ 604              	.LCFI20:
+ 605              		.cfi_def_cfa_register 7
+ 606 0006 07F1040C 		add	ip, r7, #4
+ 607 000a 8CE80F00 		stmia	ip, {r0, r1, r2, r3}
+ 329:../Dave/Generated/src/IO002/IO002.c **** 	Handle.PortRegs->OMR = ((uint32_t)1U << Handle.PortPin);
+ 608              		.loc 1 329 0
+ 609 000e 7B6C     		ldr	r3, [r7, #68]
+ 610 0010 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
+ 611 0012 4FF00101 		mov	r1, #1
+ 612 0016 01FA02F2 		lsl	r2, r1, r2
+ 613 001a 5A60     		str	r2, [r3, #4]
+ 330:../Dave/Generated/src/IO002/IO002.c **** }
+ 614              		.loc 1 330 0
+ 615 001c BD46     		mov	sp, r7
+ 616 001e 80BC     		pop	{r7}
+ 617 0020 04B0     		add	sp, sp, #16
+ 618 0022 7047     		bx	lr
+ 619              		.cfi_endproc
+ 620              	.LFE118:
+ 622              		.section	.text.IO002_ResetPin,"ax",%progbits
+ 623              		.align	2
+ 624              		.global	IO002_ResetPin
+ 625              		.thumb
+ 626              		.thumb_func
+ 628              	IO002_ResetPin:
+ 629              	.LFB119:
+ 331:../Dave/Generated/src/IO002/IO002.c **** 
+ 332:../Dave/Generated/src/IO002/IO002.c **** /*
+ 333:../Dave/Generated/src/IO002/IO002.c **** *The function to set the chosen port pin to '0'
+ 334:../Dave/Generated/src/IO002/IO002.c **** */
+ 335:../Dave/Generated/src/IO002/IO002.c **** inline void IO002_ResetPin(IO002_HandleType Handle)
+ 336:../Dave/Generated/src/IO002/IO002.c **** {
+ 630              		.loc 1 336 0
+ 631              		.cfi_startproc
+ 632              		@ args = 76, pretend = 16, frame = 0
+ 633              		@ frame_needed = 1, uses_anonymous_args = 0
+ 634              		@ link register save eliminated.
+ 635 0000 84B0     		sub	sp, sp, #16
+ 636              	.LCFI21:
+ 637              		.cfi_def_cfa_offset 16
+ 638 0002 80B4     		push	{r7}
+ 639              	.LCFI22:
+ 640              		.cfi_def_cfa_offset 20
+ 641              		.cfi_offset 7, -20
+ 642 0004 00AF     		add	r7, sp, #0
+ 643              	.LCFI23:
+ 644              		.cfi_def_cfa_register 7
+ 645 0006 07F1040C 		add	ip, r7, #4
+ 646 000a 8CE80F00 		stmia	ip, {r0, r1, r2, r3}
+ 337:../Dave/Generated/src/IO002/IO002.c **** 	Handle.PortRegs->OMR  = (0x10000UL << Handle.PortPin);
+ 647              		.loc 1 337 0
+ 648 000e 7B6C     		ldr	r3, [r7, #68]
+ 649 0010 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
+ 650 0012 4FF48031 		mov	r1, #65536
+ 651 0016 01FA02F2 		lsl	r2, r1, r2
+ 652 001a 5A60     		str	r2, [r3, #4]
+ 338:../Dave/Generated/src/IO002/IO002.c **** }
+ 653              		.loc 1 338 0
+ 654 001c BD46     		mov	sp, r7
+ 655 001e 80BC     		pop	{r7}
+ 656 0020 04B0     		add	sp, sp, #16
+ 657 0022 7047     		bx	lr
+ 658              		.cfi_endproc
+ 659              	.LFE119:
+ 661              		.section	.text.IO002_SetOutputValue,"ax",%progbits
+ 662              		.align	2
+ 663              		.global	IO002_SetOutputValue
+ 664              		.thumb
+ 665              		.thumb_func
+ 667              	IO002_SetOutputValue:
+ 668              	.LFB120:
+ 339:../Dave/Generated/src/IO002/IO002.c **** 
+ 340:../Dave/Generated/src/IO002/IO002.c **** /*
+ 341:../Dave/Generated/src/IO002/IO002.c **** *This function sets the chosen port pin with the boolean 'value' provided
+ 342:../Dave/Generated/src/IO002/IO002.c **** */
+ 343:../Dave/Generated/src/IO002/IO002.c **** inline void IO002_SetOutputValue(IO002_HandleType Handle,uint32_t Value)
+ 344:../Dave/Generated/src/IO002/IO002.c **** {
+ 669              		.loc 1 344 0
+ 670              		.cfi_startproc
+ 671              		@ args = 80, pretend = 16, frame = 0
+ 672              		@ frame_needed = 1, uses_anonymous_args = 0
+ 673              		@ link register save eliminated.
+ 674 0000 84B0     		sub	sp, sp, #16
+ 675              	.LCFI24:
+ 676              		.cfi_def_cfa_offset 16
+ 677 0002 80B4     		push	{r7}
+ 678              	.LCFI25:
+ 679              		.cfi_def_cfa_offset 20
+ 680              		.cfi_offset 7, -20
+ 681 0004 00AF     		add	r7, sp, #0
+ 682              	.LCFI26:
+ 683              		.cfi_def_cfa_register 7
+ 684 0006 07F1040C 		add	ip, r7, #4
+ 685 000a 8CE80F00 		stmia	ip, {r0, r1, r2, r3}
+ 345:../Dave/Generated/src/IO002/IO002.c **** 	if(Value > (uint32_t)0)
+ 686              		.loc 1 345 0
+ 687 000e 3B6D     		ldr	r3, [r7, #80]
+ 688 0010 002B     		cmp	r3, #0
+ 689 0012 07D0     		beq	.L27
+ 346:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 347:../Dave/Generated/src/IO002/IO002.c **** 		Handle.PortRegs->OMR = ((uint32_t)1U << Handle.PortPin);
+ 690              		.loc 1 347 0
+ 691 0014 7B6C     		ldr	r3, [r7, #68]
+ 692 0016 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
+ 693 0018 4FF00101 		mov	r1, #1
+ 694 001c 01FA02F2 		lsl	r2, r1, r2
+ 695 0020 5A60     		str	r2, [r3, #4]
+ 696 0022 06E0     		b	.L26
+ 697              	.L27:
+ 348:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 349:../Dave/Generated/src/IO002/IO002.c **** 	else
+ 350:../Dave/Generated/src/IO002/IO002.c **** 	{
+ 351:../Dave/Generated/src/IO002/IO002.c **** 		Handle.PortRegs->OMR = (0x10000UL << Handle.PortPin);
+ 698              		.loc 1 351 0
+ 699 0024 7B6C     		ldr	r3, [r7, #68]
+ 700 0026 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
+ 701 0028 4FF48031 		mov	r1, #65536
+ 702 002c 01FA02F2 		lsl	r2, r1, r2
+ 703 0030 5A60     		str	r2, [r3, #4]
+ 704              	.L26:
+ 352:../Dave/Generated/src/IO002/IO002.c **** 	}
+ 353:../Dave/Generated/src/IO002/IO002.c **** }
+ 705              		.loc 1 353 0
+ 706 0032 BD46     		mov	sp, r7
+ 707 0034 80BC     		pop	{r7}
+ 708 0036 04B0     		add	sp, sp, #16
+ 709 0038 7047     		bx	lr
+ 710              		.cfi_endproc
+ 711              	.LFE120:
+ 713 003a 00BF     		.section	.text.IO002_TogglePin,"ax",%progbits
+ 714              		.align	2
+ 715              		.global	IO002_TogglePin
+ 716              		.thumb
+ 717              		.thumb_func
+ 719              	IO002_TogglePin:
+ 720              	.LFB121:
+ 354:../Dave/Generated/src/IO002/IO002.c **** 
+ 355:../Dave/Generated/src/IO002/IO002.c **** /*
+ 356:../Dave/Generated/src/IO002/IO002.c **** * The function to toggle the chosen port pin.
+ 357:../Dave/Generated/src/IO002/IO002.c **** */
+ 358:../Dave/Generated/src/IO002/IO002.c **** inline void IO002_TogglePin(IO002_HandleType Handle)
+ 359:../Dave/Generated/src/IO002/IO002.c **** {
+ 721              		.loc 1 359 0
+ 722              		.cfi_startproc
+ 723              		@ args = 76, pretend = 16, frame = 0
+ 724              		@ frame_needed = 1, uses_anonymous_args = 0
+ 725              		@ link register save eliminated.
+ 726 0000 84B0     		sub	sp, sp, #16
+ 727              	.LCFI27:
+ 728              		.cfi_def_cfa_offset 16
+ 729 0002 80B4     		push	{r7}
+ 730              	.LCFI28:
+ 731              		.cfi_def_cfa_offset 20
+ 732              		.cfi_offset 7, -20
+ 733 0004 00AF     		add	r7, sp, #0
+ 734              	.LCFI29:
+ 735              		.cfi_def_cfa_register 7
+ 736 0006 07F1040C 		add	ip, r7, #4
+ 737 000a 8CE80F00 		stmia	ip, {r0, r1, r2, r3}
+ 360:../Dave/Generated/src/IO002/IO002.c **** 	Handle.PortRegs->OMR  = (0x10001UL << Handle.PortPin);
+ 738              		.loc 1 360 0
+ 739 000e 7B6C     		ldr	r3, [r7, #68]
+ 740 0010 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
+ 741 0012 4FF00111 		mov	r1, #65537
+ 742 0016 01FA02F2 		lsl	r2, r1, r2
+ 743 001a 5A60     		str	r2, [r3, #4]
+ 361:../Dave/Generated/src/IO002/IO002.c **** }
+ 744              		.loc 1 361 0
+ 745 001c BD46     		mov	sp, r7
+ 746 001e 80BC     		pop	{r7}
+ 747 0020 04B0     		add	sp, sp, #16
+ 748 0022 7047     		bx	lr
+ 749              		.cfi_endproc
+ 750              	.LFE121:
+ 752              		.section	.text.IO002_DisableOutputDriver,"ax",%progbits
+ 753              		.align	2
+ 754              		.global	IO002_DisableOutputDriver
+ 755              		.thumb
+ 756              		.thumb_func
+ 758              	IO002_DisableOutputDriver:
+ 759              	.LFB122:
+ 362:../Dave/Generated/src/IO002/IO002.c **** 
+ 363:../Dave/Generated/src/IO002/IO002.c **** /*This function is a dummy definition for back ward compatibility*/
+ 364:../Dave/Generated/src/IO002/IO002.c **** void IO002_DisableOutputDriver(const IO002_HandleType* Handle,
+ 365:../Dave/Generated/src/IO002/IO002.c ****                                              IO002_InputModeType Mode)
+ 366:../Dave/Generated/src/IO002/IO002.c **** {
+ 760              		.loc 1 366 0
+ 761              		.cfi_startproc
+ 762              		@ args = 0, pretend = 0, frame = 8
+ 763              		@ frame_needed = 1, uses_anonymous_args = 0
+ 764              		@ link register save eliminated.
+ 765 0000 80B4     		push	{r7}
+ 766              	.LCFI30:
+ 767              		.cfi_def_cfa_offset 4
+ 768              		.cfi_offset 7, -4
+ 769 0002 83B0     		sub	sp, sp, #12
+ 770              	.LCFI31:
+ 771              		.cfi_def_cfa_offset 16
+ 772 0004 00AF     		add	r7, sp, #0
+ 773              	.LCFI32:
+ 774              		.cfi_def_cfa_register 7
+ 775 0006 7860     		str	r0, [r7, #4]
+ 776 0008 0B46     		mov	r3, r1
+ 777 000a FB70     		strb	r3, [r7, #3]
+ 367:../Dave/Generated/src/IO002/IO002.c **** 	  /* Removed the definition of this API in v1.0.18 Release, 
+ 368:../Dave/Generated/src/IO002/IO002.c **** 	  as output port pin configuration shall be done by higher level App */
+ 369:../Dave/Generated/src/IO002/IO002.c **** }
+ 778              		.loc 1 369 0
+ 779 000c 07F10C07 		add	r7, r7, #12
+ 780 0010 BD46     		mov	sp, r7
+ 781 0012 80BC     		pop	{r7}
+ 782 0014 7047     		bx	lr
+ 783              		.cfi_endproc
+ 784              	.LFE122:
+ 786 0016 00BF     		.section	.text.IO002_EnableOutputDriver,"ax",%progbits
+ 787              		.align	2
+ 788              		.global	IO002_EnableOutputDriver
+ 789              		.thumb
+ 790              		.thumb_func
+ 792              	IO002_EnableOutputDriver:
+ 793              	.LFB123:
+ 370:../Dave/Generated/src/IO002/IO002.c **** 
+ 371:../Dave/Generated/src/IO002/IO002.c **** /*This function is a dummy definition for back ward compatibility*/
+ 372:../Dave/Generated/src/IO002/IO002.c **** void IO002_EnableOutputDriver(const IO002_HandleType* Handle,IO002_OutputModeType Mode)
+ 373:../Dave/Generated/src/IO002/IO002.c **** {
+ 794              		.loc 1 373 0
+ 795              		.cfi_startproc
+ 796              		@ args = 0, pretend = 0, frame = 8
+ 797              		@ frame_needed = 1, uses_anonymous_args = 0
+ 798              		@ link register save eliminated.
+ 799 0000 80B4     		push	{r7}
+ 800              	.LCFI33:
+ 801              		.cfi_def_cfa_offset 4
+ 802              		.cfi_offset 7, -4
+ 803 0002 83B0     		sub	sp, sp, #12
+ 804              	.LCFI34:
+ 805              		.cfi_def_cfa_offset 16
+ 806 0004 00AF     		add	r7, sp, #0
+ 807              	.LCFI35:
+ 808              		.cfi_def_cfa_register 7
+ 809 0006 7860     		str	r0, [r7, #4]
+ 810 0008 0B46     		mov	r3, r1
+ 811 000a FB70     		strb	r3, [r7, #3]
+ 374:../Dave/Generated/src/IO002/IO002.c ****    /* Removed the definition of this API in v1.0.18 Release, as output port pin 
+ 375:../Dave/Generated/src/IO002/IO002.c **** 	  configuration shall be done by higher level App */
+ 376:../Dave/Generated/src/IO002/IO002.c **** }
+ 812              		.loc 1 376 0
+ 813 000c 07F10C07 		add	r7, r7, #12
+ 814 0010 BD46     		mov	sp, r7
+ 815 0012 80BC     		pop	{r7}
+ 816 0014 7047     		bx	lr
+ 817              		.cfi_endproc
+ 818              	.LFE123:
+ 820 0016 00BF     		.text
+ 821              	.Letext0:
+ 822              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 823              		.file 3 "../Dave/Generated/src/IO002/../../inc/IO002/IO002.h"
+ 824              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 825              		.file 5 "../Dave/Generated/src/IO002/../../inc/IO002/IO002_Extern.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO002.c
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:20     .text.IO002_lInit:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:24     .text.IO002_lInit:00000000 IO002_lInit
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:114    .text.IO002_XMC4_lInit:00000000 IO002_XMC4_lInit
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:226    .text.IO002_IOCR_OE_Enabled_lInit:00000000 IO002_IOCR_OE_Enabled_lInit
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:361    .text.IO002_IOCR_OE_Disabled_lInit:00000000 IO002_IOCR_OE_Disabled_lInit
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:110    .text.IO002_XMC4_lInit:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:222    .text.IO002_IOCR_OE_Enabled_lInit:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:357    .text.IO002_IOCR_OE_Disabled_lInit:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:492    .text.IO002_Init:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:497    .text.IO002_Init:00000000 IO002_Init
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:544    .text.IO002_ReadPin:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:549    .text.IO002_ReadPin:00000000 IO002_ReadPin
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:584    .text.IO002_SetPin:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:589    .text.IO002_SetPin:00000000 IO002_SetPin
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:623    .text.IO002_ResetPin:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:628    .text.IO002_ResetPin:00000000 IO002_ResetPin
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:662    .text.IO002_SetOutputValue:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:667    .text.IO002_SetOutputValue:00000000 IO002_SetOutputValue
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:714    .text.IO002_TogglePin:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:719    .text.IO002_TogglePin:00000000 IO002_TogglePin
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:753    .text.IO002_DisableOutputDriver:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:758    .text.IO002_DisableOutputDriver:00000000 IO002_DisableOutputDriver
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:787    .text.IO002_EnableOutputDriver:00000000 $t
+C:\Users\Andreas\AppData\Local\Temp\cczI4S4j.s:792    .text.IO002_EnableOutputDriver:00000000 IO002_EnableOutputDriver
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.IO002_Conf.h.51.be0baad511cf66771895fab0bf90f390
+
+UNDEFINED SYMBOLS
+IO002_HandleArr

@@ -1,0 +1,317 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"IO002.c"
+  16              		.section	.text.IO002_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	IO002_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	IO002_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 494B     		ldr	r3, .L28
+  26 0002 30B5     		push	{r4, r5, lr}
+  27 0004 1B68     		ldr	r3, [r3, #0]
+  28 0006 D969     		ldr	r1, [r3, #28]
+  29 0008 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
+  30 000a 0129     		cmp	r1, #1
+  31 000c 24D1     		bne	.L3
+  32 000e 5868     		ldr	r0, [r3, #4]
+  33 0010 196C     		ldr	r1, [r3, #64]
+  34 0012 00FA02F0 		lsl	r0, r0, r2
+  35 0016 072A     		cmp	r2, #7
+  36 0018 4860     		str	r0, [r1, #4]
+  37 001a 0DD8     		bhi	.L4
+  38 001c 596C     		ldr	r1, [r3, #68]
+  39 001e D9B1     		cbz	r1, .L3
+  40 0020 0D68     		ldr	r5, [r1, #0]
+  41 0022 9C6A     		ldr	r4, [r3, #40]
+  42 0024 25EA0400 		bic	r0, r5, r4
+  43 0028 0860     		str	r0, [r1, #0]
+  44 002a 9868     		ldr	r0, [r3, #8]
+  45 002c DC6A     		ldr	r4, [r3, #44]
+  46 002e 0D68     		ldr	r5, [r1, #0]
+  47 0030 00FA04F4 		lsl	r4, r0, r4
+  48 0034 986A     		ldr	r0, [r3, #40]
+  49 0036 0CE0     		b	.L22
+  50              	.L4:
+  51 0038 996C     		ldr	r1, [r3, #72]
+  52 003a 69B1     		cbz	r1, .L3
+  53 003c 0C68     		ldr	r4, [r1, #0]
+  54 003e 1D6B     		ldr	r5, [r3, #48]
+  55 0040 24EA0500 		bic	r0, r4, r5
+  56 0044 0860     		str	r0, [r1, #0]
+  57 0046 9868     		ldr	r0, [r3, #8]
+  58 0048 5C6B     		ldr	r4, [r3, #52]
+  59 004a 0D68     		ldr	r5, [r1, #0]
+  60 004c 00FA04F4 		lsl	r4, r0, r4
+  61 0050 186B     		ldr	r0, [r3, #48]
+  62              	.L22:
+  63 0052 2040     		ands	r0, r0, r4
+  64 0054 2843     		orrs	r0, r0, r5
+  65 0056 0860     		str	r0, [r1, #0]
+  66              	.L3:
+  67 0058 D968     		ldr	r1, [r3, #12]
+  68 005a 0129     		cmp	r1, #1
+  69 005c 06D1     		bne	.L6
+  70 005e 196C     		ldr	r1, [r3, #64]
+  71 0060 0220     		movs	r0, #2
+  72 0062 4C6F     		ldr	r4, [r1, #116]
+  73 0064 00FA02F0 		lsl	r0, r0, r2
+  74 0068 2043     		orrs	r0, r0, r4
+  75 006a 4867     		str	r0, [r1, #116]
+  76              	.L6:
+  77 006c D969     		ldr	r1, [r3, #28]
+  78 006e 0129     		cmp	r1, #1
+  79 0070 23D1     		bne	.L7
+  80 0072 032A     		cmp	r2, #3
+  81 0074 05D8     		bhi	.L8
+  82 0076 196C     		ldr	r1, [r3, #64]
+  83 0078 5B6A     		ldr	r3, [r3, #36]
+  84 007a 0869     		ldr	r0, [r1, #16]
+  85 007c D200     		lsls	r2, r2, #3
+  86 007e 0332     		adds	r2, r2, #3
+  87 0080 24E0     		b	.L23
+  88              	.L8:
+  89 0082 111F     		subs	r1, r2, #4
+  90 0084 0329     		cmp	r1, #3
+  91 0086 05D8     		bhi	.L10
+  92 0088 1A6C     		ldr	r2, [r3, #64]
+  93 008a 5B6A     		ldr	r3, [r3, #36]
+  94 008c 5069     		ldr	r0, [r2, #20]
+  95 008e C900     		lsls	r1, r1, #3
+  96 0090 0331     		adds	r1, r1, #3
+  97 0092 28E0     		b	.L24
+  98              	.L10:
+  99 0094 A2F10801 		sub	r1, r2, #8
+ 100 0098 0329     		cmp	r1, #3
+ 101 009a 05D8     		bhi	.L11
+ 102 009c 1A6C     		ldr	r2, [r3, #64]
+ 103 009e 5B6A     		ldr	r3, [r3, #36]
+ 104 00a0 9069     		ldr	r0, [r2, #24]
+ 105 00a2 C900     		lsls	r1, r1, #3
+ 106 00a4 0331     		adds	r1, r1, #3
+ 107 00a6 2CE0     		b	.L25
+ 108              	.L11:
+ 109 00a8 0C3A     		subs	r2, r2, #12
+ 110 00aa 032A     		cmp	r2, #3
+ 111 00ac 3AD8     		bhi	.L1
+ 112 00ae 196C     		ldr	r1, [r3, #64]
+ 113 00b0 5B6A     		ldr	r3, [r3, #36]
+ 114 00b2 C869     		ldr	r0, [r1, #28]
+ 115 00b4 D200     		lsls	r2, r2, #3
+ 116 00b6 0332     		adds	r2, r2, #3
+ 117 00b8 30E0     		b	.L26
+ 118              	.L7:
+ 119 00ba 0029     		cmp	r1, #0
+ 120 00bc 32D1     		bne	.L1
+ 121 00be 032A     		cmp	r2, #3
+ 122 00c0 09D8     		bhi	.L13
+ 123 00c2 196C     		ldr	r1, [r3, #64]
+ 124 00c4 5B69     		ldr	r3, [r3, #20]
+ 125 00c6 0869     		ldr	r0, [r1, #16]
+ 126 00c8 D200     		lsls	r2, r2, #3
+ 127 00ca 0332     		adds	r2, r2, #3
+ 128              	.L23:
+ 129 00cc 03FA02F3 		lsl	r3, r3, r2
+ 130 00d0 0343     		orrs	r3, r3, r0
+ 131 00d2 0B61     		str	r3, [r1, #16]
+ 132 00d4 30BD     		pop	{r4, r5, pc}
+ 133              	.L13:
+ 134 00d6 111F     		subs	r1, r2, #4
+ 135 00d8 0329     		cmp	r1, #3
+ 136 00da 09D8     		bhi	.L14
+ 137 00dc 1A6C     		ldr	r2, [r3, #64]
+ 138 00de 5B69     		ldr	r3, [r3, #20]
+ 139 00e0 5069     		ldr	r0, [r2, #20]
+ 140 00e2 C900     		lsls	r1, r1, #3
+ 141 00e4 0331     		adds	r1, r1, #3
+ 142              	.L24:
+ 143 00e6 03FA01F3 		lsl	r3, r3, r1
+ 144 00ea 0343     		orrs	r3, r3, r0
+ 145 00ec 5361     		str	r3, [r2, #20]
+ 146 00ee 30BD     		pop	{r4, r5, pc}
+ 147              	.L14:
+ 148 00f0 A2F10801 		sub	r1, r2, #8
+ 149 00f4 0329     		cmp	r1, #3
+ 150 00f6 09D8     		bhi	.L15
+ 151 00f8 1A6C     		ldr	r2, [r3, #64]
+ 152 00fa 5B69     		ldr	r3, [r3, #20]
+ 153 00fc 9069     		ldr	r0, [r2, #24]
+ 154 00fe C900     		lsls	r1, r1, #3
+ 155 0100 0331     		adds	r1, r1, #3
+ 156              	.L25:
+ 157 0102 03FA01F3 		lsl	r3, r3, r1
+ 158 0106 0343     		orrs	r3, r3, r0
+ 159 0108 9361     		str	r3, [r2, #24]
+ 160 010a 30BD     		pop	{r4, r5, pc}
+ 161              	.L15:
+ 162 010c 0C3A     		subs	r2, r2, #12
+ 163 010e 032A     		cmp	r2, #3
+ 164 0110 08D8     		bhi	.L1
+ 165 0112 196C     		ldr	r1, [r3, #64]
+ 166 0114 5B69     		ldr	r3, [r3, #20]
+ 167 0116 C869     		ldr	r0, [r1, #28]
+ 168 0118 D200     		lsls	r2, r2, #3
+ 169 011a 0332     		adds	r2, r2, #3
+ 170              	.L26:
+ 171 011c 03FA02F3 		lsl	r3, r3, r2
+ 172 0120 0343     		orrs	r3, r3, r0
+ 173 0122 CB61     		str	r3, [r1, #28]
+ 174              	.L1:
+ 175 0124 30BD     		pop	{r4, r5, pc}
+ 176              	.L29:
+ 177 0126 00BF     		.align	2
+ 178              	.L28:
+ 179 0128 00000000 		.word	IO002_HandleArr
+ 181              		.section	.text.IO002_ReadPin,"ax",%progbits
+ 182              		.align	1
+ 183              		.global	IO002_ReadPin
+ 184              		.thumb
+ 185              		.thumb_func
+ 187              	IO002_ReadPin:
+ 188              		@ args = 76, pretend = 16, frame = 0
+ 189              		@ frame_needed = 0, uses_anonymous_args = 0
+ 190              		@ link register save eliminated.
+ 191 0000 84B0     		sub	sp, sp, #16
+ 192 0002 8DE80F00 		stmia	sp, {r0, r1, r2, r3}
+ 193 0006 109B     		ldr	r3, [sp, #64]
+ 194 0008 9DF80110 		ldrb	r1, [sp, #1]	@ zero_extendqisi2
+ 195 000c 586A     		ldr	r0, [r3, #36]
+ 196 000e 20FA01F0 		lsr	r0, r0, r1
+ 197 0012 00F00100 		and	r0, r0, #1
+ 198 0016 04B0     		add	sp, sp, #16
+ 199 0018 7047     		bx	lr
+ 201              		.section	.text.IO002_SetPin,"ax",%progbits
+ 202              		.align	1
+ 203              		.global	IO002_SetPin
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	IO002_SetPin:
+ 208              		@ args = 76, pretend = 16, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210              		@ link register save eliminated.
+ 211 0000 84B0     		sub	sp, sp, #16
+ 212 0002 8DE80F00 		stmia	sp, {r0, r1, r2, r3}
+ 213 0006 9DF80130 		ldrb	r3, [sp, #1]	@ zero_extendqisi2
+ 214 000a 1098     		ldr	r0, [sp, #64]
+ 215 000c 0122     		movs	r2, #1
+ 216 000e 02FA03F2 		lsl	r2, r2, r3
+ 217 0012 4260     		str	r2, [r0, #4]
+ 218 0014 04B0     		add	sp, sp, #16
+ 219 0016 7047     		bx	lr
+ 221              		.section	.text.IO002_ResetPin,"ax",%progbits
+ 222              		.align	1
+ 223              		.global	IO002_ResetPin
+ 224              		.thumb
+ 225              		.thumb_func
+ 227              	IO002_ResetPin:
+ 228              		@ args = 76, pretend = 16, frame = 0
+ 229              		@ frame_needed = 0, uses_anonymous_args = 0
+ 230              		@ link register save eliminated.
+ 231 0000 84B0     		sub	sp, sp, #16
+ 232 0002 8DE80F00 		stmia	sp, {r0, r1, r2, r3}
+ 233 0006 9DF80130 		ldrb	r3, [sp, #1]	@ zero_extendqisi2
+ 234 000a 1098     		ldr	r0, [sp, #64]
+ 235 000c 4FF48032 		mov	r2, #65536
+ 236 0010 02FA03F2 		lsl	r2, r2, r3
+ 237 0014 4260     		str	r2, [r0, #4]
+ 238 0016 04B0     		add	sp, sp, #16
+ 239 0018 7047     		bx	lr
+ 241              		.section	.text.IO002_SetOutputValue,"ax",%progbits
+ 242              		.align	1
+ 243              		.global	IO002_SetOutputValue
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	IO002_SetOutputValue:
+ 248              		@ args = 80, pretend = 16, frame = 0
+ 249              		@ frame_needed = 0, uses_anonymous_args = 0
+ 250              		@ link register save eliminated.
+ 251 0000 84B0     		sub	sp, sp, #16
+ 252 0002 8DE80F00 		stmia	sp, {r0, r1, r2, r3}
+ 253 0006 1399     		ldr	r1, [sp, #76]
+ 254 0008 9DF80120 		ldrb	r2, [sp, #1]	@ zero_extendqisi2
+ 255 000c 109B     		ldr	r3, [sp, #64]
+ 256 000e 09B1     		cbz	r1, .L34
+ 257 0010 0120     		movs	r0, #1
+ 258 0012 01E0     		b	.L36
+ 259              	.L34:
+ 260 0014 4FF48030 		mov	r0, #65536
+ 261              	.L36:
+ 262 0018 00FA02F2 		lsl	r2, r0, r2
+ 263 001c 5A60     		str	r2, [r3, #4]
+ 264 001e 04B0     		add	sp, sp, #16
+ 265 0020 7047     		bx	lr
+ 267              		.section	.text.IO002_TogglePin,"ax",%progbits
+ 268              		.align	1
+ 269              		.global	IO002_TogglePin
+ 270              		.thumb
+ 271              		.thumb_func
+ 273              	IO002_TogglePin:
+ 274              		@ args = 76, pretend = 16, frame = 0
+ 275              		@ frame_needed = 0, uses_anonymous_args = 0
+ 276              		@ link register save eliminated.
+ 277 0000 84B0     		sub	sp, sp, #16
+ 278 0002 8DE80F00 		stmia	sp, {r0, r1, r2, r3}
+ 279 0006 9DF80130 		ldrb	r3, [sp, #1]	@ zero_extendqisi2
+ 280 000a 1098     		ldr	r0, [sp, #64]
+ 281 000c 4FF00112 		mov	r2, #65537
+ 282 0010 02FA03F2 		lsl	r2, r2, r3
+ 283 0014 4260     		str	r2, [r0, #4]
+ 284 0016 04B0     		add	sp, sp, #16
+ 285 0018 7047     		bx	lr
+ 287              		.section	.text.IO002_DisableOutputDriver,"ax",%progbits
+ 288              		.align	1
+ 289              		.global	IO002_DisableOutputDriver
+ 290              		.thumb
+ 291              		.thumb_func
+ 293              	IO002_DisableOutputDriver:
+ 294              		@ args = 0, pretend = 0, frame = 0
+ 295              		@ frame_needed = 0, uses_anonymous_args = 0
+ 296              		@ link register save eliminated.
+ 297 0000 7047     		bx	lr
+ 299              		.section	.text.IO002_EnableOutputDriver,"ax",%progbits
+ 300              		.align	1
+ 301              		.global	IO002_EnableOutputDriver
+ 302              		.thumb
+ 303              		.thumb_func
+ 305              	IO002_EnableOutputDriver:
+ 306              		@ args = 0, pretend = 0, frame = 0
+ 307              		@ frame_needed = 0, uses_anonymous_args = 0
+ 308              		@ link register save eliminated.
+ 309 0000 7047     		bx	lr
+ 311              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO002.c
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:17     .text.IO002_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:22     .text.IO002_Init:00000000 IO002_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:179    .text.IO002_Init:00000128 $d
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:182    .text.IO002_ReadPin:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:187    .text.IO002_ReadPin:00000000 IO002_ReadPin
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:202    .text.IO002_SetPin:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:207    .text.IO002_SetPin:00000000 IO002_SetPin
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:222    .text.IO002_ResetPin:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:227    .text.IO002_ResetPin:00000000 IO002_ResetPin
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:242    .text.IO002_SetOutputValue:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:247    .text.IO002_SetOutputValue:00000000 IO002_SetOutputValue
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:268    .text.IO002_TogglePin:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:273    .text.IO002_TogglePin:00000000 IO002_TogglePin
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:288    .text.IO002_DisableOutputDriver:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:293    .text.IO002_DisableOutputDriver:00000000 IO002_DisableOutputDriver
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:300    .text.IO002_EnableOutputDriver:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\cc8MWsV1.s:305    .text.IO002_EnableOutputDriver:00000000 IO002_EnableOutputDriver
+
+UNDEFINED SYMBOLS
+IO002_HandleArr

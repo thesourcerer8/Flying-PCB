@@ -1,0 +1,201 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"kalman.c"
+  16              		.section	.text.KALMAN_getAngle,"ax",%progbits
+  17              		.align	1
+  18              		.global	KALMAN_getAngle
+  19              		.thumb
+  20              		.thumb_func
+  22              	KALMAN_getAngle:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 06EE903A 		fmsr	s13, r3
+  27 0004 90ED095A 		flds	s10, [r0, #36]
+  28 0008 90ED076A 		flds	s12, [r0, #28]
+  29 000c 66EE855A 		fmuls	s11, s13, s10
+  30 0010 D0ED084A 		flds	s9, [r0, #32]
+  31 0014 75EEC63A 		fsubs	s7, s11, s12
+  32 0018 D0ED000A 		flds	s1, [r0, #0]
+  33 001c 33EEE40A 		fsubs	s0, s7, s9
+  34 0020 90ED044A 		flds	s8, [r0, #16]
+  35 0024 D0ED061A 		flds	s3, [r0, #24]
+  36 0028 03EE102A 		fmsr	s6, r2
+  37 002c 30EE201A 		fadds	s2, s0, s1
+  38 0030 73EE447A 		fsubs	s15, s6, s8
+  39 0034 46EE811A 		fmacs	s3, s13, s2
+  40 0038 90ED037A 		flds	s14, [r0, #12]
+  41 003c C0ED057A 		fsts	s15, [r0, #20]
+  42 0040 06EEA77A 		fmacs	s14, s13, s15
+  43 0044 D0ED027A 		flds	s15, [r0, #8]
+  44 0048 36EE652A 		fsubs	s4, s12, s11
+  45 004c 74EEE52A 		fsubs	s5, s9, s11
+  46 0050 71EEA75A 		fadds	s11, s3, s15
+  47 0054 90ED013A 		flds	s6, [r0, #4]
+  48 0058 82EEA56A 		fdivs	s12, s5, s11
+  49 005c 06EE835A 		fmacs	s10, s13, s6
+  50 0060 04EE901A 		fmsr	s9, r1
+  51 0064 F0EE456A 		fcpys	s13, s10
+  52 0068 81EEA55A 		fdivs	s10, s3, s11
+  53 006c 74EEC73A 		fsubs	s7, s9, s14
+  54 0070 B0EE420A 		fcpys	s0, s4
+  55 0074 06EE234A 		fmacs	s8, s12, s7
+  56 0078 05EE237A 		fmacs	s14, s10, s7
+  57 007c 80ED044A 		fsts	s8, [r0, #16]
+  58 0080 B0EE614A 		fcpys	s8, s3
+  59 0084 05EE614A 		fnmacs	s8, s10, s3
+  60 0088 05EE420A 		fnmacs	s0, s10, s4
+  61 008c 46EE612A 		fnmacs	s5, s12, s3
+  62 0090 46EE426A 		fnmacs	s13, s12, s4
+  63 0094 80ED037A 		fsts	s14, [r0, #12]
+  64 0098 80ED064A 		fsts	s8, [r0, #24]
+  65 009c 80ED070A 		fsts	s0, [r0, #28]
+  66 00a0 C0ED082A 		fsts	s5, [r0, #32]
+  67 00a4 C0ED096A 		fsts	s13, [r0, #36]
+  68 00a8 17EE100A 		fmrs	r0, s14
+  69 00ac 7047     		bx	lr
+  71              		.section	.text.KALMAN_Init,"ax",%progbits
+  72              		.align	1
+  73              		.global	KALMAN_Init
+  74              		.thumb
+  75              		.thumb_func
+  77              	KALMAN_Init:
+  78              		@ args = 0, pretend = 0, frame = 0
+  79              		@ frame_needed = 0, uses_anonymous_args = 0
+  80              		@ link register save eliminated.
+  81 0000 8360     		str	r3, [r0, #8]	@ float
+  82 0002 0023     		movs	r3, #0
+  83 0004 0160     		str	r1, [r0, #0]	@ float
+  84 0006 4260     		str	r2, [r0, #4]	@ float
+  85 0008 C360     		str	r3, [r0, #12]	@ float
+  86 000a 0361     		str	r3, [r0, #16]	@ float
+  87 000c 8361     		str	r3, [r0, #24]	@ float
+  88 000e C361     		str	r3, [r0, #28]	@ float
+  89 0010 0362     		str	r3, [r0, #32]	@ float
+  90 0012 4362     		str	r3, [r0, #36]	@ float
+  91 0014 7047     		bx	lr
+  93              		.section	.text.KALMAN_setAngle,"ax",%progbits
+  94              		.align	1
+  95              		.global	KALMAN_setAngle
+  96              		.thumb
+  97              		.thumb_func
+  99              	KALMAN_setAngle:
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102              		@ link register save eliminated.
+ 103 0000 C160     		str	r1, [r0, #12]	@ float
+ 104 0002 7047     		bx	lr
+ 106              		.section	.text.KALMAN_getRate,"ax",%progbits
+ 107              		.align	1
+ 108              		.global	KALMAN_getRate
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	KALMAN_getRate:
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115              		@ link register save eliminated.
+ 116 0000 4069     		ldr	r0, [r0, #20]	@ float
+ 117 0002 7047     		bx	lr
+ 119              		.section	.text.KALMAN_setQangle,"ax",%progbits
+ 120              		.align	1
+ 121              		.global	KALMAN_setQangle
+ 122              		.thumb
+ 123              		.thumb_func
+ 125              	KALMAN_setQangle:
+ 126              		@ args = 0, pretend = 0, frame = 0
+ 127              		@ frame_needed = 0, uses_anonymous_args = 0
+ 128              		@ link register save eliminated.
+ 129 0000 0160     		str	r1, [r0, #0]	@ float
+ 130 0002 7047     		bx	lr
+ 132              		.section	.text.KALMAN_setQbias,"ax",%progbits
+ 133              		.align	1
+ 134              		.global	KALMAN_setQbias
+ 135              		.thumb
+ 136              		.thumb_func
+ 138              	KALMAN_setQbias:
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141              		@ link register save eliminated.
+ 142 0000 4160     		str	r1, [r0, #4]	@ float
+ 143 0002 7047     		bx	lr
+ 145              		.section	.text.KALMAN_setRmeasure,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	KALMAN_setRmeasure
+ 148              		.thumb
+ 149              		.thumb_func
+ 151              	KALMAN_setRmeasure:
+ 152              		@ args = 0, pretend = 0, frame = 0
+ 153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 154              		@ link register save eliminated.
+ 155 0000 8160     		str	r1, [r0, #8]	@ float
+ 156 0002 7047     		bx	lr
+ 158              		.section	.text.KALMAN_getQangle,"ax",%progbits
+ 159              		.align	1
+ 160              		.global	KALMAN_getQangle
+ 161              		.thumb
+ 162              		.thumb_func
+ 164              	KALMAN_getQangle:
+ 165              		@ args = 0, pretend = 0, frame = 0
+ 166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167              		@ link register save eliminated.
+ 168 0000 0068     		ldr	r0, [r0, #0]	@ float
+ 169 0002 7047     		bx	lr
+ 171              		.section	.text.KALMAN_getQbias,"ax",%progbits
+ 172              		.align	1
+ 173              		.global	KALMAN_getQbias
+ 174              		.thumb
+ 175              		.thumb_func
+ 177              	KALMAN_getQbias:
+ 178              		@ args = 0, pretend = 0, frame = 0
+ 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180              		@ link register save eliminated.
+ 181 0000 4068     		ldr	r0, [r0, #4]	@ float
+ 182 0002 7047     		bx	lr
+ 184              		.section	.text.KALMAN_getRmeasure,"ax",%progbits
+ 185              		.align	1
+ 186              		.global	KALMAN_getRmeasure
+ 187              		.thumb
+ 188              		.thumb_func
+ 190              	KALMAN_getRmeasure:
+ 191              		@ args = 0, pretend = 0, frame = 0
+ 192              		@ frame_needed = 0, uses_anonymous_args = 0
+ 193              		@ link register save eliminated.
+ 194 0000 8068     		ldr	r0, [r0, #8]	@ float
+ 195 0002 7047     		bx	lr
+ 197              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 kalman.c
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:17     .text.KALMAN_getAngle:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:22     .text.KALMAN_getAngle:00000000 KALMAN_getAngle
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:72     .text.KALMAN_Init:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:77     .text.KALMAN_Init:00000000 KALMAN_Init
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:94     .text.KALMAN_setAngle:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:99     .text.KALMAN_setAngle:00000000 KALMAN_setAngle
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:107    .text.KALMAN_getRate:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:112    .text.KALMAN_getRate:00000000 KALMAN_getRate
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:120    .text.KALMAN_setQangle:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:125    .text.KALMAN_setQangle:00000000 KALMAN_setQangle
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:133    .text.KALMAN_setQbias:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:138    .text.KALMAN_setQbias:00000000 KALMAN_setQbias
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:146    .text.KALMAN_setRmeasure:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:151    .text.KALMAN_setRmeasure:00000000 KALMAN_setRmeasure
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:159    .text.KALMAN_getQangle:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:164    .text.KALMAN_getQangle:00000000 KALMAN_getQangle
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:172    .text.KALMAN_getQbias:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:177    .text.KALMAN_getQbias:00000000 KALMAN_getQbias
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:185    .text.KALMAN_getRmeasure:00000000 $t
+C:\Users\TOGABL~1\AppData\Local\Temp\ccgC51th.s:190    .text.KALMAN_getRmeasure:00000000 KALMAN_getRmeasure
+
+NO UNDEFINED SYMBOLS

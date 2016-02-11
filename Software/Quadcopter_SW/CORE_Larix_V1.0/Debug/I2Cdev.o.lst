@@ -1,0 +1,1027 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"I2Cdev.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.I2Cdev_writeBytes,"ax",%progbits
+  20              		.align	2
+  21              		.global	I2Cdev_writeBytes
+  22              		.thumb
+  23              		.thumb_func
+  25              	I2Cdev_writeBytes:
+  26              	.LFB153:
+  27              		.file 1 "../I2Cdev.c"
+   1:../I2Cdev.c   **** /*
+   2:../I2Cdev.c   ****  * i2c_e.c
+   3:../I2Cdev.c   ****  *
+   4:../I2Cdev.c   ****  *  Created on: 25.02.2014
+   5:../I2Cdev.c   ****  *      Author: WielandD
+   6:../I2Cdev.c   ****  */
+   7:../I2Cdev.c   **** 
+   8:../I2Cdev.c   **** #include "I2Cdev.h"
+   9:../I2Cdev.c   **** 
+  10:../I2Cdev.c   **** bool I2Cdev_writeBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t* data)
+  11:../I2Cdev.c   **** {
+  28              		.loc 1 11 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 88B0     		sub	sp, sp, #32
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 40
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 3B60     		str	r3, [r7, #0]
+  44 0008 0346     		mov	r3, r0
+  45 000a FB71     		strb	r3, [r7, #7]
+  46 000c 0B46     		mov	r3, r1
+  47 000e BB71     		strb	r3, [r7, #6]
+  48 0010 1346     		mov	r3, r2
+  49 0012 7B71     		strb	r3, [r7, #5]
+  12:../I2Cdev.c   **** 	I2C001_DataType data1;
+  13:../I2Cdev.c   **** 
+  14:../I2Cdev.c   **** 	data1.Data1.TDF_Type = I2C_TDF_MStart;
+  50              		.loc 1 14 0
+  51 0014 4FF00403 		mov	r3, #4
+  52 0018 7B72     		strb	r3, [r7, #9]
+  15:../I2Cdev.c   **** 	data1.Data1.Data = (devAddr | I2C_WRITE);
+  53              		.loc 1 15 0
+  54 001a FB79     		ldrb	r3, [r7, #7]
+  55 001c 3B72     		strb	r3, [r7, #8]
+  56              	.LBB2:
+  16:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+  57              		.loc 1 16 0
+  58 001e 4FF00103 		mov	r3, #1
+  59 0022 FB61     		str	r3, [r7, #28]
+  60 0024 19E0     		b	.L2
+  61              	.L5:
+  17:../I2Cdev.c   **** 	{
+  18:../I2Cdev.c   **** 		if (cnt%I2C_TimeOut==0)
+  62              		.loc 1 18 0
+  63 0026 FA69     		ldr	r2, [r7, #28]
+  64 0028 48F6AD33 		movw	r3, #35757
+  65 002c C6F6DB03 		movt	r3, 26843
+  66 0030 83FB0213 		smull	r1, r3, r3, r2
+  67 0034 4FEAE321 		asr	r1, r3, #11
+  68 0038 4FEAE273 		asr	r3, r2, #31
+  69 003c CB1A     		subs	r3, r1, r3
+  70 003e 41F28831 		movw	r1, #5000
+  71 0042 01FB03F3 		mul	r3, r1, r3
+  72 0046 D31A     		subs	r3, r2, r3
+  73 0048 002B     		cmp	r3, #0
+  74 004a 02D1     		bne	.L3
+  19:../I2Cdev.c   **** 			return (bool)FALSE;
+  75              		.loc 1 19 0
+  76 004c 4FF00003 		mov	r3, #0
+  77 0050 AEE0     		b	.L17
+  78              	.L3:
+  16:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+  79              		.loc 1 16 0
+  80 0052 FB69     		ldr	r3, [r7, #28]
+  81 0054 03F10103 		add	r3, r3, #1
+  82 0058 FB61     		str	r3, [r7, #28]
+  83              	.L2:
+  16:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+  84              		.loc 1 16 0 is_stmt 0 discriminator 1
+  85 005a 07F10803 		add	r3, r7, #8
+  86 005e 40F20000 		movw	r0, #:lower16:I2C001_Handle0
+  87 0062 C0F20000 		movt	r0, #:upper16:I2C001_Handle0
+  88 0066 1946     		mov	r1, r3
+  89 0068 FFF7FEFF 		bl	I2C001_WriteData
+  90 006c 0346     		mov	r3, r0
+  91 006e 002B     		cmp	r3, #0
+  92 0070 D9D0     		beq	.L5
+  93              	.LBE2:
+  20:../I2Cdev.c   **** 	}
+  21:../I2Cdev.c   **** 
+  22:../I2Cdev.c   **** 	data1.Data1.TDF_Type = I2C_TDF_MTxData;
+  94              		.loc 1 22 0 is_stmt 1
+  95 0072 4FF00003 		mov	r3, #0
+  96 0076 7B72     		strb	r3, [r7, #9]
+  23:../I2Cdev.c   **** 	data1.Data1.Data = regAddr;
+  97              		.loc 1 23 0
+  98 0078 BB79     		ldrb	r3, [r7, #6]
+  99 007a 3B72     		strb	r3, [r7, #8]
+ 100              	.LBB3:
+  24:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 101              		.loc 1 24 0
+ 102 007c 4FF00103 		mov	r3, #1
+ 103 0080 BB61     		str	r3, [r7, #24]
+ 104 0082 19E0     		b	.L6
+ 105              	.L8:
+  25:../I2Cdev.c   **** 	{
+  26:../I2Cdev.c   **** 		if (cnt%I2C_TimeOut==0)
+ 106              		.loc 1 26 0
+ 107 0084 BA69     		ldr	r2, [r7, #24]
+ 108 0086 48F6AD33 		movw	r3, #35757
+ 109 008a C6F6DB03 		movt	r3, 26843
+ 110 008e 83FB0213 		smull	r1, r3, r3, r2
+ 111 0092 4FEAE321 		asr	r1, r3, #11
+ 112 0096 4FEAE273 		asr	r3, r2, #31
+ 113 009a CB1A     		subs	r3, r1, r3
+ 114 009c 41F28831 		movw	r1, #5000
+ 115 00a0 01FB03F3 		mul	r3, r1, r3
+ 116 00a4 D31A     		subs	r3, r2, r3
+ 117 00a6 002B     		cmp	r3, #0
+ 118 00a8 02D1     		bne	.L7
+  27:../I2Cdev.c   **** 			return (bool)FALSE;
+ 119              		.loc 1 27 0
+ 120 00aa 4FF00003 		mov	r3, #0
+ 121 00ae 7FE0     		b	.L17
+ 122              	.L7:
+  24:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 123              		.loc 1 24 0
+ 124 00b0 BB69     		ldr	r3, [r7, #24]
+ 125 00b2 03F10103 		add	r3, r3, #1
+ 126 00b6 BB61     		str	r3, [r7, #24]
+ 127              	.L6:
+  24:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 128              		.loc 1 24 0 is_stmt 0 discriminator 1
+ 129 00b8 07F10803 		add	r3, r7, #8
+ 130 00bc 40F20000 		movw	r0, #:lower16:I2C001_Handle0
+ 131 00c0 C0F20000 		movt	r0, #:upper16:I2C001_Handle0
+ 132 00c4 1946     		mov	r1, r3
+ 133 00c6 FFF7FEFF 		bl	I2C001_WriteData
+ 134 00ca 0346     		mov	r3, r0
+ 135 00cc 002B     		cmp	r3, #0
+ 136 00ce D9D0     		beq	.L8
+ 137              	.LBE3:
+ 138              	.LBB4:
+  28:../I2Cdev.c   **** 	}
+  29:../I2Cdev.c   **** 
+  30:../I2Cdev.c   **** 	for(int i=0; i<length; i++)
+ 139              		.loc 1 30 0 is_stmt 1
+ 140 00d0 4FF00003 		mov	r3, #0
+ 141 00d4 7B61     		str	r3, [r7, #20]
+ 142 00d6 35E0     		b	.L9
+ 143              	.L13:
+  31:../I2Cdev.c   **** 	{
+  32:../I2Cdev.c   **** 		data1.Data1.TDF_Type = I2C_TDF_MTxData;
+ 144              		.loc 1 32 0
+ 145 00d8 4FF00003 		mov	r3, #0
+ 146 00dc 7B72     		strb	r3, [r7, #9]
+  33:../I2Cdev.c   **** 		data1.Data1.Data = data[i];
+ 147              		.loc 1 33 0
+ 148 00de 7B69     		ldr	r3, [r7, #20]
+ 149 00e0 3A68     		ldr	r2, [r7, #0]
+ 150 00e2 D318     		adds	r3, r2, r3
+ 151 00e4 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 152 00e6 3B72     		strb	r3, [r7, #8]
+ 153              	.LBB5:
+  34:../I2Cdev.c   **** 		for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 154              		.loc 1 34 0
+ 155 00e8 4FF00103 		mov	r3, #1
+ 156 00ec 3B61     		str	r3, [r7, #16]
+ 157 00ee 19E0     		b	.L10
+ 158              	.L12:
+  35:../I2Cdev.c   **** 		{
+  36:../I2Cdev.c   **** 			if (cnt%I2C_TimeOut==0)
+ 159              		.loc 1 36 0
+ 160 00f0 3A69     		ldr	r2, [r7, #16]
+ 161 00f2 48F6AD33 		movw	r3, #35757
+ 162 00f6 C6F6DB03 		movt	r3, 26843
+ 163 00fa 83FB0213 		smull	r1, r3, r3, r2
+ 164 00fe 4FEAE321 		asr	r1, r3, #11
+ 165 0102 4FEAE273 		asr	r3, r2, #31
+ 166 0106 CB1A     		subs	r3, r1, r3
+ 167 0108 41F28831 		movw	r1, #5000
+ 168 010c 01FB03F3 		mul	r3, r1, r3
+ 169 0110 D31A     		subs	r3, r2, r3
+ 170 0112 002B     		cmp	r3, #0
+ 171 0114 02D1     		bne	.L11
+  37:../I2Cdev.c   **** 				return (bool)FALSE;
+ 172              		.loc 1 37 0
+ 173 0116 4FF00003 		mov	r3, #0
+ 174 011a 49E0     		b	.L17
+ 175              	.L11:
+  34:../I2Cdev.c   **** 		for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 176              		.loc 1 34 0
+ 177 011c 3B69     		ldr	r3, [r7, #16]
+ 178 011e 03F10103 		add	r3, r3, #1
+ 179 0122 3B61     		str	r3, [r7, #16]
+ 180              	.L10:
+  34:../I2Cdev.c   **** 		for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 181              		.loc 1 34 0 is_stmt 0 discriminator 1
+ 182 0124 07F10803 		add	r3, r7, #8
+ 183 0128 40F20000 		movw	r0, #:lower16:I2C001_Handle0
+ 184 012c C0F20000 		movt	r0, #:upper16:I2C001_Handle0
+ 185 0130 1946     		mov	r1, r3
+ 186 0132 FFF7FEFF 		bl	I2C001_WriteData
+ 187 0136 0346     		mov	r3, r0
+ 188 0138 002B     		cmp	r3, #0
+ 189 013a D9D0     		beq	.L12
+ 190              	.LBE5:
+  30:../I2Cdev.c   **** 	for(int i=0; i<length; i++)
+ 191              		.loc 1 30 0 is_stmt 1
+ 192 013c 7B69     		ldr	r3, [r7, #20]
+ 193 013e 03F10103 		add	r3, r3, #1
+ 194 0142 7B61     		str	r3, [r7, #20]
+ 195              	.L9:
+  30:../I2Cdev.c   **** 	for(int i=0; i<length; i++)
+ 196              		.loc 1 30 0 is_stmt 0 discriminator 1
+ 197 0144 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
+ 198 0146 7B69     		ldr	r3, [r7, #20]
+ 199 0148 9A42     		cmp	r2, r3
+ 200 014a C5DC     		bgt	.L13
+ 201              	.LBE4:
+  38:../I2Cdev.c   **** 		}
+  39:../I2Cdev.c   **** 	}
+  40:../I2Cdev.c   **** 	data1.Data1.TDF_Type = I2C_TDF_MStop;
+ 202              		.loc 1 40 0 is_stmt 1
+ 203 014c 4FF00603 		mov	r3, #6
+ 204 0150 7B72     		strb	r3, [r7, #9]
+  41:../I2Cdev.c   **** 	data1.Data1.Data = ubyteFF;
+ 205              		.loc 1 41 0
+ 206 0152 4FF0FF03 		mov	r3, #255
+ 207 0156 3B72     		strb	r3, [r7, #8]
+ 208              	.LBB6:
+  42:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 209              		.loc 1 42 0
+ 210 0158 4FF00103 		mov	r3, #1
+ 211 015c FB60     		str	r3, [r7, #12]
+ 212 015e 19E0     		b	.L14
+ 213              	.L16:
+  43:../I2Cdev.c   **** 	{
+  44:../I2Cdev.c   **** 		if (cnt%I2C_TimeOut==0)
+ 214              		.loc 1 44 0
+ 215 0160 FA68     		ldr	r2, [r7, #12]
+ 216 0162 48F6AD33 		movw	r3, #35757
+ 217 0166 C6F6DB03 		movt	r3, 26843
+ 218 016a 83FB0213 		smull	r1, r3, r3, r2
+ 219 016e 4FEAE321 		asr	r1, r3, #11
+ 220 0172 4FEAE273 		asr	r3, r2, #31
+ 221 0176 CB1A     		subs	r3, r1, r3
+ 222 0178 41F28831 		movw	r1, #5000
+ 223 017c 01FB03F3 		mul	r3, r1, r3
+ 224 0180 D31A     		subs	r3, r2, r3
+ 225 0182 002B     		cmp	r3, #0
+ 226 0184 02D1     		bne	.L15
+  45:../I2Cdev.c   **** 			return (bool)FALSE;
+ 227              		.loc 1 45 0
+ 228 0186 4FF00003 		mov	r3, #0
+ 229 018a 11E0     		b	.L17
+ 230              	.L15:
+  42:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 231              		.loc 1 42 0
+ 232 018c FB68     		ldr	r3, [r7, #12]
+ 233 018e 03F10103 		add	r3, r3, #1
+ 234 0192 FB60     		str	r3, [r7, #12]
+ 235              	.L14:
+  42:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 236              		.loc 1 42 0 is_stmt 0 discriminator 1
+ 237 0194 07F10803 		add	r3, r7, #8
+ 238 0198 40F20000 		movw	r0, #:lower16:I2C001_Handle0
+ 239 019c C0F20000 		movt	r0, #:upper16:I2C001_Handle0
+ 240 01a0 1946     		mov	r1, r3
+ 241 01a2 FFF7FEFF 		bl	I2C001_WriteData
+ 242 01a6 0346     		mov	r3, r0
+ 243 01a8 002B     		cmp	r3, #0
+ 244 01aa D9D0     		beq	.L16
+ 245              	.LBE6:
+  46:../I2Cdev.c   **** 	}
+  47:../I2Cdev.c   **** 
+  48:../I2Cdev.c   **** 	return (bool)TRUE;
+ 246              		.loc 1 48 0 is_stmt 1
+ 247 01ac 4FF00103 		mov	r3, #1
+ 248              	.L17:
+  49:../I2Cdev.c   **** }
+ 249              		.loc 1 49 0
+ 250 01b0 1846     		mov	r0, r3
+ 251 01b2 07F12007 		add	r7, r7, #32
+ 252 01b6 BD46     		mov	sp, r7
+ 253 01b8 80BD     		pop	{r7, pc}
+ 254              		.cfi_endproc
+ 255              	.LFE153:
+ 257 01ba 00BF     		.section	.text.I2Cdev_writeByte,"ax",%progbits
+ 258              		.align	2
+ 259              		.global	I2Cdev_writeByte
+ 260              		.thumb
+ 261              		.thumb_func
+ 263              	I2Cdev_writeByte:
+ 264              	.LFB154:
+  50:../I2Cdev.c   **** 
+  51:../I2Cdev.c   **** bool I2Cdev_writeByte(uint8_t devAddr, uint8_t regAddr, uint8_t data)
+  52:../I2Cdev.c   **** {
+ 265              		.loc 1 52 0
+ 266              		.cfi_startproc
+ 267              		@ args = 0, pretend = 0, frame = 8
+ 268              		@ frame_needed = 1, uses_anonymous_args = 0
+ 269 0000 80B5     		push	{r7, lr}
+ 270              	.LCFI3:
+ 271              		.cfi_def_cfa_offset 8
+ 272              		.cfi_offset 7, -8
+ 273              		.cfi_offset 14, -4
+ 274 0002 82B0     		sub	sp, sp, #8
+ 275              	.LCFI4:
+ 276              		.cfi_def_cfa_offset 16
+ 277 0004 00AF     		add	r7, sp, #0
+ 278              	.LCFI5:
+ 279              		.cfi_def_cfa_register 7
+ 280 0006 1346     		mov	r3, r2
+ 281 0008 0246     		mov	r2, r0
+ 282 000a FA71     		strb	r2, [r7, #7]
+ 283 000c 0A46     		mov	r2, r1
+ 284 000e BA71     		strb	r2, [r7, #6]
+ 285 0010 7B71     		strb	r3, [r7, #5]
+  53:../I2Cdev.c   **** 	return I2Cdev_writeBytes(devAddr, regAddr, 1, &data);
+ 286              		.loc 1 53 0
+ 287 0012 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 288 0014 BA79     		ldrb	r2, [r7, #6]	@ zero_extendqisi2
+ 289 0016 07F10503 		add	r3, r7, #5
+ 290 001a 0846     		mov	r0, r1
+ 291 001c 1146     		mov	r1, r2
+ 292 001e 4FF00102 		mov	r2, #1
+ 293 0022 FFF7FEFF 		bl	I2Cdev_writeBytes
+ 294 0026 0346     		mov	r3, r0
+  54:../I2Cdev.c   **** }
+ 295              		.loc 1 54 0
+ 296 0028 1846     		mov	r0, r3
+ 297 002a 07F10807 		add	r7, r7, #8
+ 298 002e BD46     		mov	sp, r7
+ 299 0030 80BD     		pop	{r7, pc}
+ 300              		.cfi_endproc
+ 301              	.LFE154:
+ 303 0032 00BF     		.section	.text.I2Cdev_readBytes,"ax",%progbits
+ 304              		.align	2
+ 305              		.global	I2Cdev_readBytes
+ 306              		.thumb
+ 307              		.thumb_func
+ 309              	I2Cdev_readBytes:
+ 310              	.LFB155:
+  55:../I2Cdev.c   **** 
+  56:../I2Cdev.c   **** int8_t I2Cdev_readBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t* data)
+  57:../I2Cdev.c   **** {
+ 311              		.loc 1 57 0
+ 312              		.cfi_startproc
+ 313              		@ args = 0, pretend = 0, frame = 48
+ 314              		@ frame_needed = 1, uses_anonymous_args = 0
+ 315 0000 80B5     		push	{r7, lr}
+ 316              	.LCFI6:
+ 317              		.cfi_def_cfa_offset 8
+ 318              		.cfi_offset 7, -8
+ 319              		.cfi_offset 14, -4
+ 320 0002 8CB0     		sub	sp, sp, #48
+ 321              	.LCFI7:
+ 322              		.cfi_def_cfa_offset 56
+ 323 0004 00AF     		add	r7, sp, #0
+ 324              	.LCFI8:
+ 325              		.cfi_def_cfa_register 7
+ 326 0006 3B60     		str	r3, [r7, #0]
+ 327 0008 0346     		mov	r3, r0
+ 328 000a FB71     		strb	r3, [r7, #7]
+ 329 000c 0B46     		mov	r3, r1
+ 330 000e BB71     		strb	r3, [r7, #6]
+ 331 0010 1346     		mov	r3, r2
+ 332 0012 7B71     		strb	r3, [r7, #5]
+  58:../I2Cdev.c   **** 	I2C001_DataType data1;
+  59:../I2Cdev.c   **** 	uint16_t rec=0x00;
+ 333              		.loc 1 59 0
+ 334 0014 4FF00003 		mov	r3, #0
+ 335 0018 FB81     		strh	r3, [r7, #14]	@ movhi
+  60:../I2Cdev.c   **** 	int i=0;
+ 336              		.loc 1 60 0
+ 337 001a 4FF00003 		mov	r3, #0
+ 338 001e FB62     		str	r3, [r7, #44]
+  61:../I2Cdev.c   **** 
+  62:../I2Cdev.c   **** 	data1.Data1.TDF_Type = I2C_TDF_MStart;
+ 339              		.loc 1 62 0
+ 340 0020 4FF00403 		mov	r3, #4
+ 341 0024 7B74     		strb	r3, [r7, #17]
+  63:../I2Cdev.c   **** 	data1.Data1.Data = (devAddr | I2C_WRITE);
+ 342              		.loc 1 63 0
+ 343 0026 FB79     		ldrb	r3, [r7, #7]
+ 344 0028 3B74     		strb	r3, [r7, #16]
+ 345              	.LBB7:
+  64:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 346              		.loc 1 64 0
+ 347 002a 4FF00103 		mov	r3, #1
+ 348 002e BB62     		str	r3, [r7, #40]
+ 349 0030 19E0     		b	.L21
+ 350              	.L24:
+  65:../I2Cdev.c   **** 	{
+  66:../I2Cdev.c   **** 		if (cnt%I2C_TimeOut==0)
+ 351              		.loc 1 66 0
+ 352 0032 BA6A     		ldr	r2, [r7, #40]
+ 353 0034 48F6AD33 		movw	r3, #35757
+ 354 0038 C6F6DB03 		movt	r3, 26843
+ 355 003c 83FB0213 		smull	r1, r3, r3, r2
+ 356 0040 4FEAE321 		asr	r1, r3, #11
+ 357 0044 4FEAE273 		asr	r3, r2, #31
+ 358 0048 CB1A     		subs	r3, r1, r3
+ 359 004a 41F28831 		movw	r1, #5000
+ 360 004e 01FB03F3 		mul	r3, r1, r3
+ 361 0052 D31A     		subs	r3, r2, r3
+ 362 0054 002B     		cmp	r3, #0
+ 363 0056 02D1     		bne	.L22
+  67:../I2Cdev.c   **** 			return 0;
+ 364              		.loc 1 67 0
+ 365 0058 4FF00003 		mov	r3, #0
+ 366 005c 24E1     		b	.L46
+ 367              	.L22:
+  64:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 368              		.loc 1 64 0
+ 369 005e BB6A     		ldr	r3, [r7, #40]
+ 370 0060 03F10103 		add	r3, r3, #1
+ 371 0064 BB62     		str	r3, [r7, #40]
+ 372              	.L21:
+  64:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 373              		.loc 1 64 0 is_stmt 0 discriminator 1
+ 374 0066 07F11003 		add	r3, r7, #16
+ 375 006a 40F20000 		movw	r0, #:lower16:I2C001_Handle0
+ 376 006e C0F20000 		movt	r0, #:upper16:I2C001_Handle0
+ 377 0072 1946     		mov	r1, r3
+ 378 0074 FFF7FEFF 		bl	I2C001_WriteData
+ 379 0078 0346     		mov	r3, r0
+ 380 007a 002B     		cmp	r3, #0
+ 381 007c D9D0     		beq	.L24
+ 382              	.LBE7:
+  68:../I2Cdev.c   **** 	}
+  69:../I2Cdev.c   **** 
+  70:../I2Cdev.c   **** 	data1.Data1.TDF_Type = I2C_TDF_MTxData;
+ 383              		.loc 1 70 0 is_stmt 1
+ 384 007e 4FF00003 		mov	r3, #0
+ 385 0082 7B74     		strb	r3, [r7, #17]
+  71:../I2Cdev.c   **** 	data1.Data1.Data = regAddr;
+ 386              		.loc 1 71 0
+ 387 0084 BB79     		ldrb	r3, [r7, #6]
+ 388 0086 3B74     		strb	r3, [r7, #16]
+ 389              	.LBB8:
+  72:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 390              		.loc 1 72 0
+ 391 0088 4FF00103 		mov	r3, #1
+ 392 008c 7B62     		str	r3, [r7, #36]
+ 393 008e 19E0     		b	.L25
+ 394              	.L27:
+  73:../I2Cdev.c   **** 	{
+  74:../I2Cdev.c   **** 		if (cnt%I2C_TimeOut==0)
+ 395              		.loc 1 74 0
+ 396 0090 7A6A     		ldr	r2, [r7, #36]
+ 397 0092 48F6AD33 		movw	r3, #35757
+ 398 0096 C6F6DB03 		movt	r3, 26843
+ 399 009a 83FB0213 		smull	r1, r3, r3, r2
+ 400 009e 4FEAE321 		asr	r1, r3, #11
+ 401 00a2 4FEAE273 		asr	r3, r2, #31
+ 402 00a6 CB1A     		subs	r3, r1, r3
+ 403 00a8 41F28831 		movw	r1, #5000
+ 404 00ac 01FB03F3 		mul	r3, r1, r3
+ 405 00b0 D31A     		subs	r3, r2, r3
+ 406 00b2 002B     		cmp	r3, #0
+ 407 00b4 02D1     		bne	.L26
+  75:../I2Cdev.c   **** 			return 0;
+ 408              		.loc 1 75 0
+ 409 00b6 4FF00003 		mov	r3, #0
+ 410 00ba F5E0     		b	.L46
+ 411              	.L26:
+  72:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 412              		.loc 1 72 0
+ 413 00bc 7B6A     		ldr	r3, [r7, #36]
+ 414 00be 03F10103 		add	r3, r3, #1
+ 415 00c2 7B62     		str	r3, [r7, #36]
+ 416              	.L25:
+  72:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 417              		.loc 1 72 0 is_stmt 0 discriminator 1
+ 418 00c4 07F11003 		add	r3, r7, #16
+ 419 00c8 40F20000 		movw	r0, #:lower16:I2C001_Handle0
+ 420 00cc C0F20000 		movt	r0, #:upper16:I2C001_Handle0
+ 421 00d0 1946     		mov	r1, r3
+ 422 00d2 FFF7FEFF 		bl	I2C001_WriteData
+ 423 00d6 0346     		mov	r3, r0
+ 424 00d8 002B     		cmp	r3, #0
+ 425 00da D9D0     		beq	.L27
+ 426              	.LBE8:
+  76:../I2Cdev.c   **** 	}
+  77:../I2Cdev.c   **** 
+  78:../I2Cdev.c   **** 	data1.Data1.TDF_Type = I2C_TDF_MRStart;
+ 427              		.loc 1 78 0 is_stmt 1
+ 428 00dc 4FF00503 		mov	r3, #5
+ 429 00e0 7B74     		strb	r3, [r7, #17]
+  79:../I2Cdev.c   **** 	data1.Data1.Data = devAddr | I2C_READ;
+ 430              		.loc 1 79 0
+ 431 00e2 FB79     		ldrb	r3, [r7, #7]
+ 432 00e4 43F00103 		orr	r3, r3, #1
+ 433 00e8 DBB2     		uxtb	r3, r3
+ 434 00ea 3B74     		strb	r3, [r7, #16]
+ 435              	.LBB9:
+  80:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 436              		.loc 1 80 0
+ 437 00ec 4FF00103 		mov	r3, #1
+ 438 00f0 3B62     		str	r3, [r7, #32]
+ 439 00f2 19E0     		b	.L28
+ 440              	.L30:
+  81:../I2Cdev.c   **** 	{
+  82:../I2Cdev.c   **** 		if (cnt%I2C_TimeOut==0)
+ 441              		.loc 1 82 0
+ 442 00f4 3A6A     		ldr	r2, [r7, #32]
+ 443 00f6 48F6AD33 		movw	r3, #35757
+ 444 00fa C6F6DB03 		movt	r3, 26843
+ 445 00fe 83FB0213 		smull	r1, r3, r3, r2
+ 446 0102 4FEAE321 		asr	r1, r3, #11
+ 447 0106 4FEAE273 		asr	r3, r2, #31
+ 448 010a CB1A     		subs	r3, r1, r3
+ 449 010c 41F28831 		movw	r1, #5000
+ 450 0110 01FB03F3 		mul	r3, r1, r3
+ 451 0114 D31A     		subs	r3, r2, r3
+ 452 0116 002B     		cmp	r3, #0
+ 453 0118 02D1     		bne	.L29
+  83:../I2Cdev.c   **** 			return 0;
+ 454              		.loc 1 83 0
+ 455 011a 4FF00003 		mov	r3, #0
+ 456 011e C3E0     		b	.L46
+ 457              	.L29:
+  80:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 458              		.loc 1 80 0
+ 459 0120 3B6A     		ldr	r3, [r7, #32]
+ 460 0122 03F10103 		add	r3, r3, #1
+ 461 0126 3B62     		str	r3, [r7, #32]
+ 462              	.L28:
+  80:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 463              		.loc 1 80 0 is_stmt 0 discriminator 1
+ 464 0128 07F11003 		add	r3, r7, #16
+ 465 012c 40F20000 		movw	r0, #:lower16:I2C001_Handle0
+ 466 0130 C0F20000 		movt	r0, #:upper16:I2C001_Handle0
+ 467 0134 1946     		mov	r1, r3
+ 468 0136 FFF7FEFF 		bl	I2C001_WriteData
+ 469 013a 0346     		mov	r3, r0
+ 470 013c 002B     		cmp	r3, #0
+ 471 013e D9D0     		beq	.L30
+ 472              	.LBE9:
+  84:../I2Cdev.c   **** 	}
+  85:../I2Cdev.c   **** 
+  86:../I2Cdev.c   **** 	for (i=0; i<length; i++)
+ 473              		.loc 1 86 0 is_stmt 1
+ 474 0140 4FF00003 		mov	r3, #0
+ 475 0144 FB62     		str	r3, [r7, #44]
+ 476 0146 3DE0     		b	.L31
+ 477              	.L37:
+  87:../I2Cdev.c   **** 	{
+  88:../I2Cdev.c   **** 		if (i<length-1)
+ 478              		.loc 1 88 0
+ 479 0148 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 480 014a 03F1FF32 		add	r2, r3, #-1
+ 481 014e FB6A     		ldr	r3, [r7, #44]
+ 482 0150 9A42     		cmp	r2, r3
+ 483 0152 03DD     		ble	.L32
+  89:../I2Cdev.c   **** 			data1.Data1.TDF_Type = I2C_TDF_MRxAck0;
+ 484              		.loc 1 89 0
+ 485 0154 4FF00203 		mov	r3, #2
+ 486 0158 7B74     		strb	r3, [r7, #17]
+ 487 015a 02E0     		b	.L33
+ 488              	.L32:
+  90:../I2Cdev.c   **** 		else
+  91:../I2Cdev.c   **** 			data1.Data1.TDF_Type = I2C_TDF_MRxAck1;
+ 489              		.loc 1 91 0
+ 490 015c 4FF00303 		mov	r3, #3
+ 491 0160 7B74     		strb	r3, [r7, #17]
+ 492              	.L33:
+  92:../I2Cdev.c   **** 
+  93:../I2Cdev.c   **** 		data1.Data1.Data = ubyteFF;
+ 493              		.loc 1 93 0
+ 494 0162 4FF0FF03 		mov	r3, #255
+ 495 0166 3B74     		strb	r3, [r7, #16]
+ 496              	.LBB10:
+  94:../I2Cdev.c   **** 		for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 497              		.loc 1 94 0
+ 498 0168 4FF00103 		mov	r3, #1
+ 499 016c FB61     		str	r3, [r7, #28]
+ 500 016e 19E0     		b	.L34
+ 501              	.L36:
+  95:../I2Cdev.c   **** 		{
+  96:../I2Cdev.c   **** 			if (cnt%I2C_TimeOut==0)
+ 502              		.loc 1 96 0
+ 503 0170 FA69     		ldr	r2, [r7, #28]
+ 504 0172 48F6AD33 		movw	r3, #35757
+ 505 0176 C6F6DB03 		movt	r3, 26843
+ 506 017a 83FB0213 		smull	r1, r3, r3, r2
+ 507 017e 4FEAE321 		asr	r1, r3, #11
+ 508 0182 4FEAE273 		asr	r3, r2, #31
+ 509 0186 CB1A     		subs	r3, r1, r3
+ 510 0188 41F28831 		movw	r1, #5000
+ 511 018c 01FB03F3 		mul	r3, r1, r3
+ 512 0190 D31A     		subs	r3, r2, r3
+ 513 0192 002B     		cmp	r3, #0
+ 514 0194 02D1     		bne	.L35
+  97:../I2Cdev.c   **** 				return 0;
+ 515              		.loc 1 97 0
+ 516 0196 4FF00003 		mov	r3, #0
+ 517 019a 85E0     		b	.L46
+ 518              	.L35:
+  94:../I2Cdev.c   **** 		for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 519              		.loc 1 94 0
+ 520 019c FB69     		ldr	r3, [r7, #28]
+ 521 019e 03F10103 		add	r3, r3, #1
+ 522 01a2 FB61     		str	r3, [r7, #28]
+ 523              	.L34:
+  94:../I2Cdev.c   **** 		for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 524              		.loc 1 94 0 is_stmt 0 discriminator 1
+ 525 01a4 07F11003 		add	r3, r7, #16
+ 526 01a8 40F20000 		movw	r0, #:lower16:I2C001_Handle0
+ 527 01ac C0F20000 		movt	r0, #:upper16:I2C001_Handle0
+ 528 01b0 1946     		mov	r1, r3
+ 529 01b2 FFF7FEFF 		bl	I2C001_WriteData
+ 530 01b6 0346     		mov	r3, r0
+ 531 01b8 002B     		cmp	r3, #0
+ 532 01ba D9D0     		beq	.L36
+ 533              	.LBE10:
+  86:../I2Cdev.c   **** 	for (i=0; i<length; i++)
+ 534              		.loc 1 86 0 is_stmt 1
+ 535 01bc FB6A     		ldr	r3, [r7, #44]
+ 536 01be 03F10103 		add	r3, r3, #1
+ 537 01c2 FB62     		str	r3, [r7, #44]
+ 538              	.L31:
+  86:../I2Cdev.c   **** 	for (i=0; i<length; i++)
+ 539              		.loc 1 86 0 is_stmt 0 discriminator 1
+ 540 01c4 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
+ 541 01c6 FB6A     		ldr	r3, [r7, #44]
+ 542 01c8 9A42     		cmp	r2, r3
+ 543 01ca BDDC     		bgt	.L37
+  98:../I2Cdev.c   **** 		}
+  99:../I2Cdev.c   **** 	}
+ 100:../I2Cdev.c   **** 
+ 101:../I2Cdev.c   **** 	data1.Data1.TDF_Type = I2C_TDF_MStop;
+ 544              		.loc 1 101 0 is_stmt 1
+ 545 01cc 4FF00603 		mov	r3, #6
+ 546 01d0 7B74     		strb	r3, [r7, #17]
+ 102:../I2Cdev.c   **** 	data1.Data1.Data = ubyteFF;
+ 547              		.loc 1 102 0
+ 548 01d2 4FF0FF03 		mov	r3, #255
+ 549 01d6 3B74     		strb	r3, [r7, #16]
+ 550              	.LBB11:
+ 103:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 551              		.loc 1 103 0
+ 552 01d8 4FF00103 		mov	r3, #1
+ 553 01dc BB61     		str	r3, [r7, #24]
+ 554 01de 19E0     		b	.L38
+ 555              	.L40:
+ 104:../I2Cdev.c   **** 	{
+ 105:../I2Cdev.c   **** 		if (cnt%I2C_TimeOut==0)
+ 556              		.loc 1 105 0
+ 557 01e0 BA69     		ldr	r2, [r7, #24]
+ 558 01e2 48F6AD33 		movw	r3, #35757
+ 559 01e6 C6F6DB03 		movt	r3, 26843
+ 560 01ea 83FB0213 		smull	r1, r3, r3, r2
+ 561 01ee 4FEAE321 		asr	r1, r3, #11
+ 562 01f2 4FEAE273 		asr	r3, r2, #31
+ 563 01f6 CB1A     		subs	r3, r1, r3
+ 564 01f8 41F28831 		movw	r1, #5000
+ 565 01fc 01FB03F3 		mul	r3, r1, r3
+ 566 0200 D31A     		subs	r3, r2, r3
+ 567 0202 002B     		cmp	r3, #0
+ 568 0204 02D1     		bne	.L39
+ 106:../I2Cdev.c   **** 			return 0;
+ 569              		.loc 1 106 0
+ 570 0206 4FF00003 		mov	r3, #0
+ 571 020a 4DE0     		b	.L46
+ 572              	.L39:
+ 103:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 573              		.loc 1 103 0
+ 574 020c BB69     		ldr	r3, [r7, #24]
+ 575 020e 03F10103 		add	r3, r3, #1
+ 576 0212 BB61     		str	r3, [r7, #24]
+ 577              	.L38:
+ 103:../I2Cdev.c   **** 	for (int cnt=1; !I2C001_WriteData(&I2C001_Handle0, &data1); cnt++)
+ 578              		.loc 1 103 0 is_stmt 0 discriminator 1
+ 579 0214 07F11003 		add	r3, r7, #16
+ 580 0218 40F20000 		movw	r0, #:lower16:I2C001_Handle0
+ 581 021c C0F20000 		movt	r0, #:upper16:I2C001_Handle0
+ 582 0220 1946     		mov	r1, r3
+ 583 0222 FFF7FEFF 		bl	I2C001_WriteData
+ 584 0226 0346     		mov	r3, r0
+ 585 0228 002B     		cmp	r3, #0
+ 586 022a D9D0     		beq	.L40
+ 587              	.LBE11:
+ 107:../I2Cdev.c   **** 	}
+ 108:../I2Cdev.c   **** 
+ 109:../I2Cdev.c   **** 	for(i=0; i<length; i++)
+ 588              		.loc 1 109 0 is_stmt 1
+ 589 022c 4FF00003 		mov	r3, #0
+ 590 0230 FB62     		str	r3, [r7, #44]
+ 591 0232 33E0     		b	.L41
+ 592              	.L45:
+ 593              	.LBB12:
+ 110:../I2Cdev.c   **** 	{
+ 111:../I2Cdev.c   **** 		for (int cnt=1; !I2C001_ReadData(&I2C001_Handle0, &rec); cnt++)
+ 594              		.loc 1 111 0
+ 595 0234 4FF00103 		mov	r3, #1
+ 596 0238 7B61     		str	r3, [r7, #20]
+ 597 023a 19E0     		b	.L42
+ 598              	.L44:
+ 112:../I2Cdev.c   **** 		{
+ 113:../I2Cdev.c   **** 			if (cnt%I2C_TimeOut==0)
+ 599              		.loc 1 113 0
+ 600 023c 7A69     		ldr	r2, [r7, #20]
+ 601 023e 48F6AD33 		movw	r3, #35757
+ 602 0242 C6F6DB03 		movt	r3, 26843
+ 603 0246 83FB0213 		smull	r1, r3, r3, r2
+ 604 024a 4FEAE321 		asr	r1, r3, #11
+ 605 024e 4FEAE273 		asr	r3, r2, #31
+ 606 0252 CB1A     		subs	r3, r1, r3
+ 607 0254 41F28831 		movw	r1, #5000
+ 608 0258 01FB03F3 		mul	r3, r1, r3
+ 609 025c D31A     		subs	r3, r2, r3
+ 610 025e 002B     		cmp	r3, #0
+ 611 0260 02D1     		bne	.L43
+ 114:../I2Cdev.c   **** 				return 0;
+ 612              		.loc 1 114 0
+ 613 0262 4FF00003 		mov	r3, #0
+ 614 0266 1FE0     		b	.L46
+ 615              	.L43:
+ 111:../I2Cdev.c   **** 		for (int cnt=1; !I2C001_ReadData(&I2C001_Handle0, &rec); cnt++)
+ 616              		.loc 1 111 0
+ 617 0268 7B69     		ldr	r3, [r7, #20]
+ 618 026a 03F10103 		add	r3, r3, #1
+ 619 026e 7B61     		str	r3, [r7, #20]
+ 620              	.L42:
+ 111:../I2Cdev.c   **** 		for (int cnt=1; !I2C001_ReadData(&I2C001_Handle0, &rec); cnt++)
+ 621              		.loc 1 111 0 is_stmt 0 discriminator 1
+ 622 0270 07F10E03 		add	r3, r7, #14
+ 623 0274 40F20000 		movw	r0, #:lower16:I2C001_Handle0
+ 624 0278 C0F20000 		movt	r0, #:upper16:I2C001_Handle0
+ 625 027c 1946     		mov	r1, r3
+ 626 027e FFF7FEFF 		bl	I2C001_ReadData
+ 627 0282 0346     		mov	r3, r0
+ 628 0284 002B     		cmp	r3, #0
+ 629 0286 D9D0     		beq	.L44
+ 630              	.LBE12:
+ 115:../I2Cdev.c   **** 		}
+ 116:../I2Cdev.c   **** 		data[i]=rec;
+ 631              		.loc 1 116 0 is_stmt 1
+ 632 0288 FB6A     		ldr	r3, [r7, #44]
+ 633 028a 3A68     		ldr	r2, [r7, #0]
+ 634 028c D318     		adds	r3, r2, r3
+ 635 028e FA89     		ldrh	r2, [r7, #14]
+ 636 0290 D2B2     		uxtb	r2, r2
+ 637 0292 1A70     		strb	r2, [r3, #0]
+ 109:../I2Cdev.c   **** 	for(i=0; i<length; i++)
+ 638              		.loc 1 109 0
+ 639 0294 FB6A     		ldr	r3, [r7, #44]
+ 640 0296 03F10103 		add	r3, r3, #1
+ 641 029a FB62     		str	r3, [r7, #44]
+ 642              	.L41:
+ 109:../I2Cdev.c   **** 	for(i=0; i<length; i++)
+ 643              		.loc 1 109 0 is_stmt 0 discriminator 1
+ 644 029c 7A79     		ldrb	r2, [r7, #5]	@ zero_extendqisi2
+ 645 029e FB6A     		ldr	r3, [r7, #44]
+ 646 02a0 9A42     		cmp	r2, r3
+ 647 02a2 C7DC     		bgt	.L45
+ 117:../I2Cdev.c   **** 	}
+ 118:../I2Cdev.c   **** 
+ 119:../I2Cdev.c   **** 	return i;
+ 648              		.loc 1 119 0 is_stmt 1
+ 649 02a4 FB6A     		ldr	r3, [r7, #44]
+ 650 02a6 DBB2     		uxtb	r3, r3
+ 651              	.L46:
+ 652 02a8 5BB2     		sxtb	r3, r3
+ 120:../I2Cdev.c   **** }
+ 653              		.loc 1 120 0
+ 654 02aa 1846     		mov	r0, r3
+ 655 02ac 07F13007 		add	r7, r7, #48
+ 656 02b0 BD46     		mov	sp, r7
+ 657 02b2 80BD     		pop	{r7, pc}
+ 658              		.cfi_endproc
+ 659              	.LFE155:
+ 661              		.section	.text.I2Cdev_readByte,"ax",%progbits
+ 662              		.align	2
+ 663              		.global	I2Cdev_readByte
+ 664              		.thumb
+ 665              		.thumb_func
+ 667              	I2Cdev_readByte:
+ 668              	.LFB156:
+ 121:../I2Cdev.c   **** 
+ 122:../I2Cdev.c   **** uint8_t I2Cdev_readByte(uint8_t devAddr, uint8_t regAddr)
+ 123:../I2Cdev.c   **** {
+ 669              		.loc 1 123 0
+ 670              		.cfi_startproc
+ 671              		@ args = 0, pretend = 0, frame = 16
+ 672              		@ frame_needed = 1, uses_anonymous_args = 0
+ 673 0000 80B5     		push	{r7, lr}
+ 674              	.LCFI9:
+ 675              		.cfi_def_cfa_offset 8
+ 676              		.cfi_offset 7, -8
+ 677              		.cfi_offset 14, -4
+ 678 0002 84B0     		sub	sp, sp, #16
+ 679              	.LCFI10:
+ 680              		.cfi_def_cfa_offset 24
+ 681 0004 00AF     		add	r7, sp, #0
+ 682              	.LCFI11:
+ 683              		.cfi_def_cfa_register 7
+ 684 0006 0246     		mov	r2, r0
+ 685 0008 0B46     		mov	r3, r1
+ 686 000a FA71     		strb	r2, [r7, #7]
+ 687 000c BB71     		strb	r3, [r7, #6]
+ 124:../I2Cdev.c   **** 	uint8_t data=0x00;
+ 688              		.loc 1 124 0
+ 689 000e 4FF00003 		mov	r3, #0
+ 690 0012 FB73     		strb	r3, [r7, #15]
+ 125:../I2Cdev.c   **** 	if (I2Cdev_readBytes(devAddr, regAddr, 1, &data))
+ 691              		.loc 1 125 0
+ 692 0014 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 693 0016 BA79     		ldrb	r2, [r7, #6]	@ zero_extendqisi2
+ 694 0018 07F10F03 		add	r3, r7, #15
+ 695 001c 0846     		mov	r0, r1
+ 696 001e 1146     		mov	r1, r2
+ 697 0020 4FF00102 		mov	r2, #1
+ 698 0024 FFF7FEFF 		bl	I2Cdev_readBytes
+ 699 0028 0346     		mov	r3, r0
+ 700 002a 002B     		cmp	r3, #0
+ 701 002c 01D0     		beq	.L48
+ 126:../I2Cdev.c   **** 		return data;
+ 702              		.loc 1 126 0
+ 703 002e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 704 0030 01E0     		b	.L50
+ 705              	.L48:
+ 127:../I2Cdev.c   **** 	else
+ 128:../I2Cdev.c   **** 		return 0;
+ 706              		.loc 1 128 0
+ 707 0032 4FF00003 		mov	r3, #0
+ 708              	.L50:
+ 129:../I2Cdev.c   **** }
+ 709              		.loc 1 129 0
+ 710 0036 1846     		mov	r0, r3
+ 711 0038 07F11007 		add	r7, r7, #16
+ 712 003c BD46     		mov	sp, r7
+ 713 003e 80BD     		pop	{r7, pc}
+ 714              		.cfi_endproc
+ 715              	.LFE156:
+ 717              		.section	.text.I2C_Prot_Int_Handler,"ax",%progbits
+ 718              		.align	2
+ 719              		.global	I2C_Prot_Int_Handler
+ 720              		.thumb
+ 721              		.thumb_func
+ 723              	I2C_Prot_Int_Handler:
+ 724              	.LFB157:
+ 130:../I2Cdev.c   **** 
+ 131:../I2Cdev.c   **** void I2C_Prot_Int_Handler(void)
+ 132:../I2Cdev.c   **** {
+ 725              		.loc 1 132 0
+ 726              		.cfi_startproc
+ 727              		@ args = 0, pretend = 0, frame = 0
+ 728              		@ frame_needed = 1, uses_anonymous_args = 0
+ 729              		@ link register save eliminated.
+ 730 0000 80B4     		push	{r7}
+ 731              	.LCFI12:
+ 732              		.cfi_def_cfa_offset 4
+ 733              		.cfi_offset 7, -4
+ 734 0002 00AF     		add	r7, sp, #0
+ 735              	.LCFI13:
+ 736              		.cfi_def_cfa_register 7
+ 133:../I2Cdev.c   **** 	// no acknowledge received --> error, turn on LED
+ 134:../I2Cdev.c   **** 	I2C001_Handle0.I2CRegs->FMR = 0x00000002U << USIC_CH_FMR_MTDV_Pos; // clear TDV and TE
+ 737              		.loc 1 134 0
+ 738 0004 40F20003 		movw	r3, #:lower16:I2C001_Handle0
+ 739 0008 C0F20003 		movt	r3, #:upper16:I2C001_Handle0
+ 740 000c 5B68     		ldr	r3, [r3, #4]
+ 741 000e 4FF00202 		mov	r2, #2
+ 742 0012 9A66     		str	r2, [r3, #104]
+ 135:../I2Cdev.c   **** 	I2C001_Handle0.I2CRegs->TRBSCR = USIC_CH_TRBSCR_FLUSHTB_Msk; // flush FIFO transmit buffer
+ 743              		.loc 1 135 0
+ 744 0014 40F20003 		movw	r3, #:lower16:I2C001_Handle0
+ 745 0018 C0F20003 		movt	r3, #:upper16:I2C001_Handle0
+ 746 001c 5B68     		ldr	r3, [r3, #4]
+ 747 001e 4FF40042 		mov	r2, #32768
+ 748 0022 C3F81821 		str	r2, [r3, #280]
+ 136:../I2Cdev.c   **** 	I2C001_Handle0.I2CRegs->PSCR |= USIC_CH_PSCR_CST5_Msk; // clear PSR.NACK flag
+ 749              		.loc 1 136 0
+ 750 0026 40F20003 		movw	r3, #:lower16:I2C001_Handle0
+ 751 002a C0F20003 		movt	r3, #:upper16:I2C001_Handle0
+ 752 002e 5A68     		ldr	r2, [r3, #4]
+ 753 0030 40F20003 		movw	r3, #:lower16:I2C001_Handle0
+ 754 0034 C0F20003 		movt	r3, #:upper16:I2C001_Handle0
+ 755 0038 5B68     		ldr	r3, [r3, #4]
+ 756 003a DB6C     		ldr	r3, [r3, #76]
+ 757 003c 43F02003 		orr	r3, r3, #32
+ 758 0040 D364     		str	r3, [r2, #76]
+ 137:../I2Cdev.c   **** }
+ 759              		.loc 1 137 0
+ 760 0042 BD46     		mov	sp, r7
+ 761 0044 80BC     		pop	{r7}
+ 762 0046 7047     		bx	lr
+ 763              		.cfi_endproc
+ 764              	.LFE157:
+ 766              		.text
+ 767              	.Letext0:
+ 768              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 769              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 770              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVESupport/../../i
+ 771              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVESupport/../../i
+ 772              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVESupport/../../i
+ 773              		.file 7 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 774              		.file 8 "C:\\DAVE3_workspace\\ws3.1.10\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVESupport/../../i
+DEFINED SYMBOLS
+                            *ABS*:00000000 I2Cdev.c
+C:\Users\maan\AppData\Local\Temp\cc4K4TWn.s:20     .text.I2Cdev_writeBytes:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc4K4TWn.s:25     .text.I2Cdev_writeBytes:00000000 I2Cdev_writeBytes
+C:\Users\maan\AppData\Local\Temp\cc4K4TWn.s:258    .text.I2Cdev_writeByte:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc4K4TWn.s:263    .text.I2Cdev_writeByte:00000000 I2Cdev_writeByte
+C:\Users\maan\AppData\Local\Temp\cc4K4TWn.s:304    .text.I2Cdev_readBytes:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc4K4TWn.s:309    .text.I2Cdev_readBytes:00000000 I2Cdev_readBytes
+C:\Users\maan\AppData\Local\Temp\cc4K4TWn.s:662    .text.I2Cdev_readByte:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc4K4TWn.s:667    .text.I2Cdev_readByte:00000000 I2Cdev_readByte
+C:\Users\maan\AppData\Local\Temp\cc4K4TWn.s:718    .text.I2C_Prot_Int_Handler:00000000 $t
+C:\Users\maan\AppData\Local\Temp\cc4K4TWn.s:723    .text.I2C_Prot_Int_Handler:00000000 I2C_Prot_Int_Handler
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.RTC001.h.113.715d6fcab1863c6656b238bddd304166
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.reent.h.11.a39e4126dcf3c6afd3054e0622577bae
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.LMM001.h.45.fa2df8bae969f45df5071221ac433ffa
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.104.05371e300b30617373255b3cdb4765a2
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.stdarg.h.31.fa591a4b1df9e413e9f5b8097f9ae89d
+                           .group:00000000 wm4.Type_CM.h.61.3660c940695d7d5fef91de9c4081d0f0
+                           .group:00000000 wm4.dwc_os.h.82.db2ca40c41e2f648d146b8942e5157d9
+                           .group:00000000 wm4.dwc_otg_core_if.h.95.37e41eee47e9a4502e4044edf60ea92d
+                           .group:00000000 wm4.usbcore001_device.h.107.6c032c9c28ac6c3f4e5e24a068720cd7
+                           .group:00000000 wm4.USB.h.399.44a2bec94122294f06c4d854450494d3
+                           .group:00000000 wm4.Common.h.102.bc881ac788d1d7ce84e651cbaa40f2c2
+                           .group:00000000 wm4.Common.h.134.5069b632a0407201156f18fde915b80c
+                           .group:00000000 wm4.USBMode.h.234.0cc9e23131c025605bb7c0db3ebb8ac9
+                           .group:00000000 wm4.StdRequestType.h.93.4e19c7c655f990c2abedbb76a546fcde
+                           .group:00000000 wm4.Endpoint.h.116.4ef46b127c9047ed49fe1e0df19e09b8
+                           .group:00000000 wm4.StdDescriptors.h.120.0ce817e16dcc91b8cf4a79ba0e0e19b6
+                           .group:00000000 wm4.CDC.h.103.7ce3e4692dde29e827f8736493eef7ef
+                           .group:00000000 wm4.CDC.h.115.c83a7d6c5b6c8644b3dec6212d4ced09
+                           .group:00000000 wm4.Descriptors.h.91.5cf84c2489ee54d154cabfe9e14b5c19
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.2bb5ea9bb71ee763bf6e76b6ab83e6b4
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.a52fac0daa39b5f58343578312b4eb54
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.1c36d067cc7a6ac3b9658ba6083fe89f
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.e471e519f7471a50493b6f4fe912ee0d
+                           .group:00000000 wm4.ERU001_Conf.h.69.6d7c31a774e428b1dc8770c7c31047dd
+                           .group:00000000 wm4.ERU002_Conf.h.49.47045c766c6d22ab1185285e9d568758
+                           .group:00000000 wm4.IO002_Conf.h.51.be0baad511cf66771895fab0bf90f390
+                           .group:00000000 wm4.arm_math.h.258.4f811f2034dd4ca295ea6f28c00c3d1e
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.290.40597f98fb862d9752cedcde2b37d26a
+
+UNDEFINED SYMBOLS
+I2C001_Handle0
+I2C001_WriteData
+I2C001_ReadData
