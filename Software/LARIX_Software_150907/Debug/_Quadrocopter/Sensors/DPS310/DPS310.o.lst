@@ -1,0 +1,673 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"DPS310.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	pressure
+  20              		.bss
+  21              		.align	2
+  24              	pressure:
+  25 0000 00000000 		.space	4
+  26              		.global	temperature
+  27              		.align	2
+  30              	temperature:
+  31 0004 00000000 		.space	4
+  32              		.comm	arr,400,4
+  33              		.global	DPS310_INT_counter
+  34              		.align	1
+  37              	DPS310_INT_counter:
+  38 0008 0000     		.space	2
+  39 000a 0000     		.section	.text.ERU1_3_IRQHandler,"ax",%progbits
+  40              		.align	2
+  41              		.global	ERU1_3_IRQHandler
+  42              		.thumb
+  43              		.thumb_func
+  45              	ERU1_3_IRQHandler:
+  46              	.LFB168:
+  47              		.file 1 "../_Quadrocopter/Sensors/DPS310/DPS310.c"
+   1:../_Quadrocopter/Sensors/DPS310/DPS310.c **** /*
+   2:../_Quadrocopter/Sensors/DPS310/DPS310.c ****  * DPS310.c
+   3:../_Quadrocopter/Sensors/DPS310/DPS310.c ****  *
+   4:../_Quadrocopter/Sensors/DPS310/DPS310.c ****  *  Created on: 01.09.2015
+   5:../_Quadrocopter/Sensors/DPS310/DPS310.c ****  *      Author: SteurerE
+   6:../_Quadrocopter/Sensors/DPS310/DPS310.c ****  */
+   7:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+   8:../_Quadrocopter/Sensors/DPS310/DPS310.c **** #include "DPS310.h"
+   9:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  10:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  11:../_Quadrocopter/Sensors/DPS310/DPS310.c **** uint32_t pressure = 0;
+  12:../_Quadrocopter/Sensors/DPS310/DPS310.c **** uint32_t temperature = 0;
+  13:../_Quadrocopter/Sensors/DPS310/DPS310.c **** uint32_t arr[100];
+  14:../_Quadrocopter/Sensors/DPS310/DPS310.c **** uint16_t DPS310_INT_counter = 0;
+  15:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  16:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  17:../_Quadrocopter/Sensors/DPS310/DPS310.c **** void DPS_EXT_INT_ISR(void)
+  18:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  19:../_Quadrocopter/Sensors/DPS310/DPS310.c **** {
+  48              		.loc 1 19 0
+  49              		.cfi_startproc
+  50              		@ args = 0, pretend = 0, frame = 0
+  51              		@ frame_needed = 1, uses_anonymous_args = 0
+  52 0000 80B5     		push	{r7, lr}
+  53              	.LCFI0:
+  54              		.cfi_def_cfa_offset 8
+  55              		.cfi_offset 7, -8
+  56              		.cfi_offset 14, -4
+  57 0002 00AF     		add	r7, sp, #0
+  58              	.LCFI1:
+  59              		.cfi_def_cfa_register 7
+  20:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	pressure = getPressure();
+  60              		.loc 1 20 0
+  61 0004 FFF7FEFF 		bl	getPressure
+  62 0008 0246     		mov	r2, r0
+  63 000a 40F20003 		movw	r3, #:lower16:pressure
+  64 000e C0F20003 		movt	r3, #:upper16:pressure
+  65 0012 1A60     		str	r2, [r3, #0]
+  21:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	temperature = getTemperature();
+  66              		.loc 1 21 0
+  67 0014 FFF7FEFF 		bl	getTemperature
+  68 0018 0246     		mov	r2, r0
+  69 001a 40F20003 		movw	r3, #:lower16:temperature
+  70 001e C0F20003 		movt	r3, #:upper16:temperature
+  71 0022 1A60     		str	r2, [r3, #0]
+  22:../_Quadrocopter/Sensors/DPS310/DPS310.c ****     I2Cdev_readByte((const I2C001Handle_type*)&DPS310_I2C_Handle,DPS310_Address,0x0A);
+  72              		.loc 1 22 0
+  73 0024 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+  74 0028 C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+  75 002c 4FF0EE01 		mov	r1, #238
+  76 0030 4FF00A02 		mov	r2, #10
+  77 0034 FFF7FEFF 		bl	I2Cdev_readByte
+  23:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	arr[DPS310_INT_counter] = pressure;
+  78              		.loc 1 23 0
+  79 0038 40F20003 		movw	r3, #:lower16:DPS310_INT_counter
+  80 003c C0F20003 		movt	r3, #:upper16:DPS310_INT_counter
+  81 0040 1B88     		ldrh	r3, [r3, #0]
+  82 0042 1A46     		mov	r2, r3
+  83 0044 40F20003 		movw	r3, #:lower16:pressure
+  84 0048 C0F20003 		movt	r3, #:upper16:pressure
+  85 004c 1968     		ldr	r1, [r3, #0]
+  86 004e 40F20003 		movw	r3, #:lower16:arr
+  87 0052 C0F20003 		movt	r3, #:upper16:arr
+  88 0056 43F82210 		str	r1, [r3, r2, lsl #2]
+  24:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	DPS310_INT_counter++;
+  89              		.loc 1 24 0
+  90 005a 40F20003 		movw	r3, #:lower16:DPS310_INT_counter
+  91 005e C0F20003 		movt	r3, #:upper16:DPS310_INT_counter
+  92 0062 1B88     		ldrh	r3, [r3, #0]
+  93 0064 03F10103 		add	r3, r3, #1
+  94 0068 9AB2     		uxth	r2, r3
+  95 006a 40F20003 		movw	r3, #:lower16:DPS310_INT_counter
+  96 006e C0F20003 		movt	r3, #:upper16:DPS310_INT_counter
+  97 0072 1A80     		strh	r2, [r3, #0]	@ movhi
+  25:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  26:../_Quadrocopter/Sensors/DPS310/DPS310.c **** }
+  98              		.loc 1 26 0
+  99 0074 80BD     		pop	{r7, pc}
+ 100              		.cfi_endproc
+ 101              	.LFE168:
+ 103 0076 00BF     		.section	.text.updateValues,"ax",%progbits
+ 104              		.align	2
+ 105              		.global	updateValues
+ 106              		.thumb
+ 107              		.thumb_func
+ 109              	updateValues:
+ 110              	.LFB169:
+  27:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  28:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  29:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  30:../_Quadrocopter/Sensors/DPS310/DPS310.c **** void updateValues(uint32_t *press,uint32_t *temp)
+  31:../_Quadrocopter/Sensors/DPS310/DPS310.c **** {
+ 111              		.loc 1 31 0
+ 112              		.cfi_startproc
+ 113              		@ args = 0, pretend = 0, frame = 8
+ 114              		@ frame_needed = 1, uses_anonymous_args = 0
+ 115              		@ link register save eliminated.
+ 116 0000 80B4     		push	{r7}
+ 117              	.LCFI2:
+ 118              		.cfi_def_cfa_offset 4
+ 119              		.cfi_offset 7, -4
+ 120 0002 83B0     		sub	sp, sp, #12
+ 121              	.LCFI3:
+ 122              		.cfi_def_cfa_offset 16
+ 123 0004 00AF     		add	r7, sp, #0
+ 124              	.LCFI4:
+ 125              		.cfi_def_cfa_register 7
+ 126 0006 7860     		str	r0, [r7, #4]
+ 127 0008 3960     		str	r1, [r7, #0]
+  32:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	*press = pressure;
+ 128              		.loc 1 32 0
+ 129 000a 40F20003 		movw	r3, #:lower16:pressure
+ 130 000e C0F20003 		movt	r3, #:upper16:pressure
+ 131 0012 1A68     		ldr	r2, [r3, #0]
+ 132 0014 7B68     		ldr	r3, [r7, #4]
+ 133 0016 1A60     		str	r2, [r3, #0]
+  33:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	*temp = temperature;
+ 134              		.loc 1 33 0
+ 135 0018 40F20003 		movw	r3, #:lower16:temperature
+ 136 001c C0F20003 		movt	r3, #:upper16:temperature
+ 137 0020 1A68     		ldr	r2, [r3, #0]
+ 138 0022 3B68     		ldr	r3, [r7, #0]
+ 139 0024 1A60     		str	r2, [r3, #0]
+  34:../_Quadrocopter/Sensors/DPS310/DPS310.c **** }
+ 140              		.loc 1 34 0
+ 141 0026 07F10C07 		add	r7, r7, #12
+ 142 002a BD46     		mov	sp, r7
+ 143 002c 80BC     		pop	{r7}
+ 144 002e 7047     		bx	lr
+ 145              		.cfi_endproc
+ 146              	.LFE169:
+ 148              		.section	.text.setupDPS310,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	setupDPS310
+ 151              		.thumb
+ 152              		.thumb_func
+ 154              	setupDPS310:
+ 155              	.LFB170:
+  35:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  36:../_Quadrocopter/Sensors/DPS310/DPS310.c ****  SensorError setupDPS310()
+  37:../_Quadrocopter/Sensors/DPS310/DPS310.c **** {
+ 156              		.loc 1 37 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 8
+ 159              		@ frame_needed = 1, uses_anonymous_args = 0
+ 160 0000 80B5     		push	{r7, lr}
+ 161              	.LCFI5:
+ 162              		.cfi_def_cfa_offset 8
+ 163              		.cfi_offset 7, -8
+ 164              		.cfi_offset 14, -4
+ 165 0002 82B0     		sub	sp, sp, #8
+ 166              	.LCFI6:
+ 167              		.cfi_def_cfa_offset 16
+ 168 0004 00AF     		add	r7, sp, #0
+ 169              	.LCFI7:
+ 170              		.cfi_def_cfa_register 7
+  38:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  39:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		SensorError result = I2Cdev_writeByte((const I2C001Handle_type*)&DPS310_I2C_Handle,DPS310_Address
+ 171              		.loc 1 39 0
+ 172 0006 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+ 173 000a C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+ 174 000e 4FF0EE01 		mov	r1, #238
+ 175 0012 4FF00C02 		mov	r2, #12
+ 176 0016 4FF00903 		mov	r3, #9
+ 177 001a FFF7FEFF 		bl	I2Cdev_writeByte
+ 178 001e 0346     		mov	r3, r0
+ 179 0020 FB71     		strb	r3, [r7, #7]
+  40:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		delay(100);
+ 180              		.loc 1 40 0
+ 181 0022 4FF06400 		mov	r0, #100
+ 182 0026 FFF7FEFF 		bl	delay
+  41:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		result = setRegister(DPS310_Address,0x06,0x77); // Pressure Configuration
+ 183              		.loc 1 41 0
+ 184 002a 4FF0EE00 		mov	r0, #238
+ 185 002e 4FF00601 		mov	r1, #6
+ 186 0032 4FF07702 		mov	r2, #119
+ 187 0036 FFF7FEFF 		bl	setRegister
+ 188 003a 0346     		mov	r3, r0
+ 189 003c FB71     		strb	r3, [r7, #7]
+  42:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		if(result)return result;
+ 190              		.loc 1 42 0
+ 191 003e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 192 0040 002B     		cmp	r3, #0
+ 193 0042 01D0     		beq	.L4
+ 194              		.loc 1 42 0 is_stmt 0 discriminator 1
+ 195 0044 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 196 0046 32E0     		b	.L5
+ 197              	.L4:
+  43:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		result = setRegister(DPS310_Address,0x07,0x77); // Temperature Configuration
+ 198              		.loc 1 43 0 is_stmt 1
+ 199 0048 4FF0EE00 		mov	r0, #238
+ 200 004c 4FF00701 		mov	r1, #7
+ 201 0050 4FF07702 		mov	r2, #119
+ 202 0054 FFF7FEFF 		bl	setRegister
+ 203 0058 0346     		mov	r3, r0
+ 204 005a FB71     		strb	r3, [r7, #7]
+  44:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		if(result)return result;
+ 205              		.loc 1 44 0
+ 206 005c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 207 005e 002B     		cmp	r3, #0
+ 208 0060 01D0     		beq	.L6
+ 209              		.loc 1 44 0 is_stmt 0 discriminator 1
+ 210 0062 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 211 0064 23E0     		b	.L5
+ 212              	.L6:
+  45:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		result = setRegister(DPS310_Address,0x08,0xc7); // Bit 4 -7 only read, Bit 0-2 Continous pressure
+ 213              		.loc 1 45 0 is_stmt 1
+ 214 0066 4FF0EE00 		mov	r0, #238
+ 215 006a 4FF00801 		mov	r1, #8
+ 216 006e 4FF0C702 		mov	r2, #199
+ 217 0072 FFF7FEFF 		bl	setRegister
+ 218 0076 0346     		mov	r3, r0
+ 219 0078 FB71     		strb	r3, [r7, #7]
+  46:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		if(result)return result;
+ 220              		.loc 1 46 0
+ 221 007a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 222 007c 002B     		cmp	r3, #0
+ 223 007e 01D0     		beq	.L7
+ 224              		.loc 1 46 0 is_stmt 0 discriminator 1
+ 225 0080 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 226 0082 14E0     		b	.L5
+ 227              	.L7:
+  47:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		result = setRegister(DPS310_Address,0x09,0x2C); // Interrupt configuration, pressure interrupt/ a
+ 228              		.loc 1 47 0 is_stmt 1
+ 229 0084 4FF0EE00 		mov	r0, #238
+ 230 0088 4FF00901 		mov	r1, #9
+ 231 008c 4FF02C02 		mov	r2, #44
+ 232 0090 FFF7FEFF 		bl	setRegister
+ 233 0094 0346     		mov	r3, r0
+ 234 0096 FB71     		strb	r3, [r7, #7]
+  48:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		I2Cdev_readByte((const I2C001Handle_type*)&DPS310_I2C_Handle,DPS310_Address,0x0A);//Todo: wird be
+ 235              		.loc 1 48 0
+ 236 0098 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+ 237 009c C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+ 238 00a0 4FF0EE01 		mov	r1, #238
+ 239 00a4 4FF00A02 		mov	r2, #10
+ 240 00a8 FFF7FEFF 		bl	I2Cdev_readByte
+  49:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 		return result;
+ 241              		.loc 1 49 0
+ 242 00ac FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 243              	.L5:
+  50:../_Quadrocopter/Sensors/DPS310/DPS310.c **** }
+ 244              		.loc 1 50 0
+ 245 00ae 1846     		mov	r0, r3
+ 246 00b0 07F10807 		add	r7, r7, #8
+ 247 00b4 BD46     		mov	sp, r7
+ 248 00b6 80BD     		pop	{r7, pc}
+ 249              		.cfi_endproc
+ 250              	.LFE170:
+ 252              		.section	.text.getPressure,"ax",%progbits
+ 253              		.align	2
+ 254              		.global	getPressure
+ 255              		.thumb
+ 256              		.thumb_func
+ 258              	getPressure:
+ 259              	.LFB171:
+  51:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  52:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  53:../_Quadrocopter/Sensors/DPS310/DPS310.c **** uint32_t getPressure()
+  54:../_Quadrocopter/Sensors/DPS310/DPS310.c **** {
+ 260              		.loc 1 54 0
+ 261              		.cfi_startproc
+ 262              		@ args = 0, pretend = 0, frame = 8
+ 263              		@ frame_needed = 1, uses_anonymous_args = 0
+ 264 0000 80B5     		push	{r7, lr}
+ 265              	.LCFI8:
+ 266              		.cfi_def_cfa_offset 8
+ 267              		.cfi_offset 7, -8
+ 268              		.cfi_offset 14, -4
+ 269 0002 82B0     		sub	sp, sp, #8
+ 270              	.LCFI9:
+ 271              		.cfi_def_cfa_offset 16
+ 272 0004 00AF     		add	r7, sp, #0
+ 273              	.LCFI10:
+ 274              		.cfi_def_cfa_register 7
+  55:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	//Read Pressure start-----------------------------------------------------------------------------
+  56:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	uint8_t register0 = I2Cdev_readByte((const I2C001Handle_type*)&DPS310_I2C_Handle, DPS310_Address,0
+ 275              		.loc 1 56 0
+ 276 0006 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+ 277 000a C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+ 278 000e 4FF0EE01 		mov	r1, #238
+ 279 0012 4FF00002 		mov	r2, #0
+ 280 0016 FFF7FEFF 		bl	I2Cdev_readByte
+ 281 001a 0346     		mov	r3, r0
+ 282 001c FB71     		strb	r3, [r7, #7]
+  57:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	uint8_t register1 = I2Cdev_readByte((const I2C001Handle_type*)&DPS310_I2C_Handle, DPS310_Address,0
+ 283              		.loc 1 57 0
+ 284 001e 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+ 285 0022 C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+ 286 0026 4FF0EE01 		mov	r1, #238
+ 287 002a 4FF00102 		mov	r2, #1
+ 288 002e FFF7FEFF 		bl	I2Cdev_readByte
+ 289 0032 0346     		mov	r3, r0
+ 290 0034 BB71     		strb	r3, [r7, #6]
+  58:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	uint8_t register2 = I2Cdev_readByte((const I2C001Handle_type*)&DPS310_I2C_Handle, DPS310_Address,0
+ 291              		.loc 1 58 0
+ 292 0036 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+ 293 003a C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+ 294 003e 4FF0EE01 		mov	r1, #238
+ 295 0042 4FF00202 		mov	r2, #2
+ 296 0046 FFF7FEFF 		bl	I2Cdev_readByte
+ 297 004a 0346     		mov	r3, r0
+ 298 004c 7B71     		strb	r3, [r7, #5]
+  59:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	//Read Pressure end-------------------------------------------------------------------------------
+  60:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	return ((uint32_t)(register0<<16)) | ((uint32_t)(register1<<8)) | ((uint32_t)register2);
+ 299              		.loc 1 60 0
+ 300 004e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 301 0050 4FEA0343 		lsl	r3, r3, #16
+ 302 0054 1A46     		mov	r2, r3
+ 303 0056 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 304 0058 4FEA0323 		lsl	r3, r3, #8
+ 305 005c 1A43     		orrs	r2, r2, r3
+ 306 005e 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 307 0060 1343     		orrs	r3, r3, r2
+  61:../_Quadrocopter/Sensors/DPS310/DPS310.c **** }
+ 308              		.loc 1 61 0
+ 309 0062 1846     		mov	r0, r3
+ 310 0064 07F10807 		add	r7, r7, #8
+ 311 0068 BD46     		mov	sp, r7
+ 312 006a 80BD     		pop	{r7, pc}
+ 313              		.cfi_endproc
+ 314              	.LFE171:
+ 316              		.section	.text.getTemperature,"ax",%progbits
+ 317              		.align	2
+ 318              		.global	getTemperature
+ 319              		.thumb
+ 320              		.thumb_func
+ 322              	getTemperature:
+ 323              	.LFB172:
+  62:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  63:../_Quadrocopter/Sensors/DPS310/DPS310.c **** uint32_t getTemperature()
+  64:../_Quadrocopter/Sensors/DPS310/DPS310.c **** {
+ 324              		.loc 1 64 0
+ 325              		.cfi_startproc
+ 326              		@ args = 0, pretend = 0, frame = 8
+ 327              		@ frame_needed = 1, uses_anonymous_args = 0
+ 328 0000 80B5     		push	{r7, lr}
+ 329              	.LCFI11:
+ 330              		.cfi_def_cfa_offset 8
+ 331              		.cfi_offset 7, -8
+ 332              		.cfi_offset 14, -4
+ 333 0002 82B0     		sub	sp, sp, #8
+ 334              	.LCFI12:
+ 335              		.cfi_def_cfa_offset 16
+ 336 0004 00AF     		add	r7, sp, #0
+ 337              	.LCFI13:
+ 338              		.cfi_def_cfa_register 7
+  65:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	//Read Temp start---------------------------------------------------------------------------------
+  66:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	uint8_t register3 = I2Cdev_readByte((const I2C001Handle_type*)&DPS310_I2C_Handle, DPS310_Address,0
+ 339              		.loc 1 66 0
+ 340 0006 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+ 341 000a C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+ 342 000e 4FF0EE01 		mov	r1, #238
+ 343 0012 4FF00302 		mov	r2, #3
+ 344 0016 FFF7FEFF 		bl	I2Cdev_readByte
+ 345 001a 0346     		mov	r3, r0
+ 346 001c FB71     		strb	r3, [r7, #7]
+  67:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	uint8_t register4 = I2Cdev_readByte((const I2C001Handle_type*)&DPS310_I2C_Handle, DPS310_Address,0
+ 347              		.loc 1 67 0
+ 348 001e 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+ 349 0022 C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+ 350 0026 4FF0EE01 		mov	r1, #238
+ 351 002a 4FF00402 		mov	r2, #4
+ 352 002e FFF7FEFF 		bl	I2Cdev_readByte
+ 353 0032 0346     		mov	r3, r0
+ 354 0034 BB71     		strb	r3, [r7, #6]
+  68:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	uint8_t register5 = I2Cdev_readByte((const I2C001Handle_type*)&DPS310_I2C_Handle, DPS310_Address,0
+ 355              		.loc 1 68 0
+ 356 0036 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+ 357 003a C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+ 358 003e 4FF0EE01 		mov	r1, #238
+ 359 0042 4FF00502 		mov	r2, #5
+ 360 0046 FFF7FEFF 		bl	I2Cdev_readByte
+ 361 004a 0346     		mov	r3, r0
+ 362 004c 7B71     		strb	r3, [r7, #5]
+  69:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	//Read Temp end-----------------------------------------------------------------------------------
+  70:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 	return ((uint32_t)(register3<<16)) | ((uint32_t)(register4<<8)) | ((uint32_t)register5);
+ 363              		.loc 1 70 0
+ 364 004e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 365 0050 4FEA0343 		lsl	r3, r3, #16
+ 366 0054 1A46     		mov	r2, r3
+ 367 0056 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 368 0058 4FEA0323 		lsl	r3, r3, #8
+ 369 005c 1A43     		orrs	r2, r2, r3
+ 370 005e 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 371 0060 1343     		orrs	r3, r3, r2
+  71:../_Quadrocopter/Sensors/DPS310/DPS310.c **** }
+ 372              		.loc 1 71 0
+ 373 0062 1846     		mov	r0, r3
+ 374 0064 07F10807 		add	r7, r7, #8
+ 375 0068 BD46     		mov	sp, r7
+ 376 006a 80BD     		pop	{r7, pc}
+ 377              		.cfi_endproc
+ 378              	.LFE172:
+ 380              		.section	.text.setRegister,"ax",%progbits
+ 381              		.align	2
+ 382              		.global	setRegister
+ 383              		.thumb
+ 384              		.thumb_func
+ 386              	setRegister:
+ 387              	.LFB173:
+  72:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  73:../_Quadrocopter/Sensors/DPS310/DPS310.c **** SensorError setRegister(uint8_t DPS310Address, uint8_t registerAdress, uint8_t setValue)
+  74:../_Quadrocopter/Sensors/DPS310/DPS310.c **** {
+ 388              		.loc 1 74 0
+ 389              		.cfi_startproc
+ 390              		@ args = 0, pretend = 0, frame = 16
+ 391              		@ frame_needed = 1, uses_anonymous_args = 0
+ 392 0000 90B5     		push	{r4, r7, lr}
+ 393              	.LCFI14:
+ 394              		.cfi_def_cfa_offset 12
+ 395              		.cfi_offset 4, -12
+ 396              		.cfi_offset 7, -8
+ 397              		.cfi_offset 14, -4
+ 398 0002 85B0     		sub	sp, sp, #20
+ 399              	.LCFI15:
+ 400              		.cfi_def_cfa_offset 32
+ 401 0004 00AF     		add	r7, sp, #0
+ 402              	.LCFI16:
+ 403              		.cfi_def_cfa_register 7
+ 404 0006 1346     		mov	r3, r2
+ 405 0008 0246     		mov	r2, r0
+ 406 000a FA71     		strb	r2, [r7, #7]
+ 407 000c 0A46     		mov	r2, r1
+ 408 000e BA71     		strb	r2, [r7, #6]
+ 409 0010 7B71     		strb	r3, [r7, #5]
+  75:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  76:../_Quadrocopter/Sensors/DPS310/DPS310.c **** SensorError	worked = NO_ERROR;
+ 410              		.loc 1 76 0
+ 411 0012 4FF00003 		mov	r3, #0
+ 412 0016 FB73     		strb	r3, [r7, #15]
+  77:../_Quadrocopter/Sensors/DPS310/DPS310.c **** I2Cdev_writeByte((const I2C001Handle_type*)&DPS310_I2C_Handle,DPS310Address,registerAdress,setValue
+ 413              		.loc 1 77 0
+ 414 0018 F979     		ldrb	r1, [r7, #7]	@ zero_extendqisi2
+ 415 001a BA79     		ldrb	r2, [r7, #6]	@ zero_extendqisi2
+ 416 001c 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 417 001e 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+ 418 0022 C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+ 419 0026 FFF7FEFF 		bl	I2Cdev_writeByte
+  78:../_Quadrocopter/Sensors/DPS310/DPS310.c **** if(setValue != I2Cdev_readByte((const I2C001Handle_type*)&DPS310_I2C_Handle,DPS310Address,registerA
+ 420              		.loc 1 78 0
+ 421 002a 7C79     		ldrb	r4, [r7, #5]	@ zero_extendqisi2
+ 422 002c FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 423 002e BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 424 0030 40F20000 		movw	r0, #:lower16:I2C001_Handle1
+ 425 0034 C0F20000 		movt	r0, #:upper16:I2C001_Handle1
+ 426 0038 1146     		mov	r1, r2
+ 427 003a 1A46     		mov	r2, r3
+ 428 003c FFF7FEFF 		bl	I2Cdev_readByte
+ 429 0040 0346     		mov	r3, r0
+ 430 0042 9C42     		cmp	r4, r3
+ 431 0044 20D0     		beq	.L13
+  79:../_Quadrocopter/Sensors/DPS310/DPS310.c **** {
+  80:../_Quadrocopter/Sensors/DPS310/DPS310.c **** switch(registerAdress)
+ 432              		.loc 1 80 0
+ 433 0046 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 434 0048 A3F10603 		sub	r3, r3, #6
+ 435 004c 032B     		cmp	r3, #3
+ 436 004e 1BD8     		bhi	.L13
+ 437 0050 01A2     		adr	r2, .L18
+ 438 0052 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 439 0056 00BF     		.align	2
+ 440              	.L18:
+ 441 0058 69000000 		.word	.L14+1
+ 442 005c 71000000 		.word	.L15+1
+ 443 0060 79000000 		.word	.L16+1
+ 444 0064 81000000 		.word	.L17+1
+ 445              	.L14:
+  81:../_Quadrocopter/Sensors/DPS310/DPS310.c **** {
+  82:../_Quadrocopter/Sensors/DPS310/DPS310.c **** case 0x06:
+  83:../_Quadrocopter/Sensors/DPS310/DPS310.c **** worked = PRESSURE_CONFIG;
+ 446              		.loc 1 83 0
+ 447 0068 4FF00103 		mov	r3, #1
+ 448 006c FB73     		strb	r3, [r7, #15]
+  84:../_Quadrocopter/Sensors/DPS310/DPS310.c **** break;
+ 449              		.loc 1 84 0
+ 450 006e 0BE0     		b	.L13
+ 451              	.L15:
+  85:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  86:../_Quadrocopter/Sensors/DPS310/DPS310.c **** case 0x07:
+  87:../_Quadrocopter/Sensors/DPS310/DPS310.c **** worked = TEMPERATURE_CONFIG;
+ 452              		.loc 1 87 0
+ 453 0070 4FF00203 		mov	r3, #2
+ 454 0074 FB73     		strb	r3, [r7, #15]
+  88:../_Quadrocopter/Sensors/DPS310/DPS310.c **** break;
+ 455              		.loc 1 88 0
+ 456 0076 07E0     		b	.L13
+ 457              	.L16:
+  89:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  90:../_Quadrocopter/Sensors/DPS310/DPS310.c **** case 0x08:
+  91:../_Quadrocopter/Sensors/DPS310/DPS310.c **** worked = SET_CONTINOUS;
+ 458              		.loc 1 91 0
+ 459 0078 4FF00303 		mov	r3, #3
+ 460 007c FB73     		strb	r3, [r7, #15]
+  92:../_Quadrocopter/Sensors/DPS310/DPS310.c **** break;
+ 461              		.loc 1 92 0
+ 462 007e 03E0     		b	.L13
+ 463              	.L17:
+  93:../_Quadrocopter/Sensors/DPS310/DPS310.c **** 
+  94:../_Quadrocopter/Sensors/DPS310/DPS310.c **** case 0x09:
+  95:../_Quadrocopter/Sensors/DPS310/DPS310.c **** worked = IR_CONFIG;
+ 464              		.loc 1 95 0
+ 465 0080 4FF00403 		mov	r3, #4
+ 466 0084 FB73     		strb	r3, [r7, #15]
+  96:../_Quadrocopter/Sensors/DPS310/DPS310.c **** break;
+ 467              		.loc 1 96 0
+ 468 0086 00BF     		nop
+ 469              	.L13:
+  97:../_Quadrocopter/Sensors/DPS310/DPS310.c **** }
+  98:../_Quadrocopter/Sensors/DPS310/DPS310.c **** }
+  99:../_Quadrocopter/Sensors/DPS310/DPS310.c **** return worked;
+ 470              		.loc 1 99 0
+ 471 0088 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 100:../_Quadrocopter/Sensors/DPS310/DPS310.c **** }
+ 472              		.loc 1 100 0
+ 473 008a 1846     		mov	r0, r3
+ 474 008c 07F11407 		add	r7, r7, #20
+ 475 0090 BD46     		mov	sp, r7
+ 476 0092 90BD     		pop	{r4, r7, pc}
+ 477              		.cfi_endproc
+ 478              	.LFE173:
+ 480              		.text
+ 481              	.Letext0:
+ 482              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 483              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 484              		.file 4 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/..
+ 485              		.file 5 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/..
+ 486              		.file 6 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/..
+ 487              		.file 7 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/..
+ 488              		.file 8 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/..
+ 489              		.file 9 "../_Quadrocopter/Sensors/DPS310/DPS310.h"
+ 490              		.file 10 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 491              		.file 11 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/.
+DEFINED SYMBOLS
+                            *ABS*:00000000 DPS310.c
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:24     .bss:00000000 pressure
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:21     .bss:00000000 $d
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:30     .bss:00000004 temperature
+                            *COM*:00000190 arr
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:37     .bss:00000008 DPS310_INT_counter
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:40     .text.ERU1_3_IRQHandler:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:45     .text.ERU1_3_IRQHandler:00000000 ERU1_3_IRQHandler
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:258    .text.getPressure:00000000 getPressure
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:322    .text.getTemperature:00000000 getTemperature
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:104    .text.updateValues:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:109    .text.updateValues:00000000 updateValues
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:149    .text.setupDPS310:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:154    .text.setupDPS310:00000000 setupDPS310
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:386    .text.setRegister:00000000 setRegister
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:253    .text.getPressure:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:317    .text.getTemperature:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:381    .text.setRegister:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:441    .text.setRegister:00000058 $d
+C:\Users\Herbert\AppData\Local\Temp\ccDhC9R7.s:447    .text.setRegister:00000068 $t
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4.NVIC002_Conf.h.63.9993755b03eb421826d0e4532aa15204
+                           .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415
+                           .group:00000000 wm4.ERU002_Conf.h.49.449ecc05b9e62e9b43f2dc6ead06a5ce
+                           .group:00000000 wm4.IO002_Conf.h.51.87e2c8c60b647393fe9ced2cae198f63
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.31fc52a43d60ddd963b759dbc8ccb910
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.3185b28f5d60dcacb47ae61d590330d9
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.usbd_config.h.64.bd01b2d6be88400f5b6095cc78dd2cee
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.stdbool.h.29.1c9ee6859ce8145f7838a4f2549ccec2
+                           .group:00000000 wm4.xmc4_usb.h.86.0df8e4bc81775a7befde6c395bcdee4c
+                           .group:00000000 wm4.dwc_otg_regs.h.96.602358b1a0ef2f2c6d02620a154f0cfc
+                           .group:00000000 wm4.xmc4_usb.h.97.59ae14584bb42292696e2197b500e282
+                           .group:00000000 wm4.CDCClass.h.89.7fca95873b1cbf8116f62fa27fd7c792
+                           .group:00000000 wm4.Common.h.87.ed9fec00c6f9ec3cf5c2ac4c6cfcb530
+                           .group:00000000 wm4.Attributes.h.96.1b4ef8adf80de3cb4f8c62843bfaf7bf
+                           .group:00000000 wm4.StdDescriptors.h.107.d2322ff0c138acada78976933b16bf7b
+                           .group:00000000 wm4.Endpoint.h.111.e7536b4385918c15b4c37aa69fbe94e3
+                           .group:00000000 wm4.USBController.h.105.7da122fb9e42a1d4ae2ea1662b47f042
+                           .group:00000000 wm4.StdRequestType.h.87.0e2654a6e33ff7aef3db3461e4efa272
+                           .group:00000000 wm4.CDCClassCommon.h.122.d15a1de5444b7c9e23eadf1dd367720e
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.Descriptors.h.92.e858ef8e2efa6b5ed9d1d80dd9b38006
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.2b816ac2c964c55a6c88f9c406d78c9f
+                           .group:00000000 wm4.CCU8GLOBAL_Conf.h.82.76c6b1bf357180d1e8ea1f462a66deb8
+                           .group:00000000 wm4.PWMMP001.h.74.edfb025e8ccafbe02203b521c6030af5
+                           .group:00000000 wm4.PWMSP003_Conf.h.49.d7c9ed31921edf4893f02e6f1d6268b4
+                           .group:00000000 wm4.PWMSP003.h.103.903071678b9af5683776405c5b299fbb
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.258.4f811f2034dd4ca295ea6f28c00c3d1e
+                           .group:00000000 wm4.arm_math.h.277.3c36979cd3767d76e13a76d35d605b04
+                           .group:00000000 wm4.I2Cdev.h.14.f8691519f66653930a002c194805c1eb
+
+UNDEFINED SYMBOLS
+I2C001_Handle1
+I2Cdev_readByte
+I2Cdev_writeByte
+delay

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage75" displayName="Basic PWM Configuration" className="IfxGroupBox" controlId="1370425252012">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group22" displayName="General" className="IfxGroupBox" controlId="1370425315268">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_irclock" displayName="Clock Frequency" readonly="true" className="IntegerType" paramName="app/pwmsp003/0/pwmsp003_irclock:Clock Frequency" controlId="1370425269921" defaultType="MHz" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="LEFT"/>
+        <conversionType>MHz</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group11" displayName="Timer Control Configuration" className="IfxGroupBox" controlId="1370425438004">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group20" displayName="Mode Settings" className="IfxGroupBox" controlId="1373452159387">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwcountingmode" displayName="Counting Mode" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwcountingmode:Counting Mode" controlId="1370425531060">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwtimermode" displayName="Single Shot Mode" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwtimermode:Timer Mode" controlId="1370425504194">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwoutpassivelevel" displayName="Passive Level of Output" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwoutpassivelevel:Passive Level of the output" controlId="1370427325243">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwstart" displayName="Start During Initialization" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwstart:Start during Initialization" controlId="1378793471993">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="5"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group30" displayName="Timer Settings" className="IfxGroupBox" controlId="1373452205257">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_irwresolution" displayName="Required resolution" className="IntegerType" paramName="app/pwmsp003/0/pwmsp003_irwresolution:CCU4 clock resolution" controlId="1370425775284" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+          <conversionType>usec</conversionType>
+          <conversionType>msec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_irselresolution" displayName="Actual Resolution" readonly="true" className="IntegerType" paramName="app/pwmsp003/0/pwmsp003_irselresolution:Selected Resolution" controlId="1370425826997" defaultType="nsec" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>nsec</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_irwfreq" displayName="PWM frequency" className="IntegerType" paramName="app/pwmsp003/0/pwmsp003_irwfreq:PWM frequency" controlId="1370425674195" defaultType="Hz" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>Hz</conversionType>
+          <conversionType>KHz</conversionType>
+          <conversionType>MHz</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_irperiodval" displayName="Period value" readonly="true" className="IntegerType" paramName="app/pwmsp003/0/pwmsp003_irperiodval:Period value" controlId="1370425958770" defaultType="hex">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>hex</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_irwdutycycle" displayName="Duty Cycle" className="IntegerType" paramName="app/pwmsp003/0/pwmsp003_irwdutycycle:Duty Cycle in %" controlId="1370425861478" defaultType="percentage" customControl="true">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>percentage</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_ircompareval" displayName="Compare value" readonly="true" className="IntegerType" paramName="app/pwmsp003/0/pwmsp003_ircompareval:Compare value" controlId="1370425912825" defaultType="hex">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>hex</conversionType>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_irSelprescaler" displayName="Selected Prescaler" readonly="true" className="IntegerType" paramName="app/pwmsp003/0/pwmsp003_irSelprescaler:Selected Prescaler" controlId="1371551653186">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+          <conversionType>dec</conversionType>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page34" displayName="External Event Inputs" className="IfxGroupBox" controlId="1373373909452">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group37" displayName="Event Assignment" className="IfxGroupBox" controlId="1373373951022">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group77" displayName="Event 0" className="IfxGroupBox" controlId="1373454191063">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwevent0input" displayName="Function" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwevent0input:Event 0 Input" controlId="1373374681163">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwlpfev0" displayName="Low Pass Filter" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent0selection&quot;) == &quot;0&quot;)&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(false);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;   }" paramName="app/pwmsp003/0/pwmsp003_erwlpfev0:Low Pass Filter for Event 0" controlId="1373392835652">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group54" displayName="Event 1" className="IfxGroupBox" controlId="1373454215633">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwevent1input" displayName="Function" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwevent1input:Event 1 Input" controlId="1373374684243">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwlpfev1" displayName="Low Pass Filter" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent1selection&quot;) == &quot;0&quot;)&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(false);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;   }" paramName="app/pwmsp003/0/pwmsp003_erwlpfev1:Low Pass Filter for Event 1" controlId="1373392841452">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group89" displayName="Event 2" className="IfxGroupBox" controlId="1373454254134">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwevent2input" displayName="Function" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwevent2input:Event 2 Input" controlId="1373374687493">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwlpfev2" displayName="Low Pass Filter" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;0&quot;)&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(false);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;   }" paramName="app/pwmsp003/0/pwmsp003_erwlpfev2:Low Pass Filter for Event 2" controlId="1373392845322">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="3"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group47" displayName="Event Configuration" className="IfxGroupBox" controlId="1373374917388">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group79" displayName="External Start" className="IfxGroupBox" constraint="if((CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent0selection&quot;) == &quot;1&quot;) &#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent1selection&quot;) == &quot;1&quot;)&#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;1&quot;))&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }" controlId="1373374770745">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwstartedge" displayName="Edge Selection" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwstartedge:External Start Trigger Edge" controlId="1373374734224">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwextstartconf" displayName="Active Edge Configuration" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwextstartconf:External Start Active Edge Configuration" controlId="1373374809195">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group51" displayName="External Stop" className="IfxGroupBox" constraint="if((CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent0selection&quot;) == &quot;2&quot;) &#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent1selection&quot;) == &quot;2&quot;)&#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;2&quot;))&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }" controlId="1373374840516">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwstopedge" displayName="Edge Selection" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwstopedge:External Stop Trigger Edge" controlId="1373374851836">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwextstopconf" displayName="Active Edge Configurations" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwextstopconf:External Stop Active Edge Configurations" controlId="1373374859596">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group80" displayName="External Load" className="IfxGroupBox" constraint="if((CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent0selection&quot;) == &quot;6&quot;) &#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent1selection&quot;) == &quot;6&quot;)&#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;6&quot;))&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }" controlId="1381224502235">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwloadedge" displayName="Edge Selection" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwloadedge:External Load Edge Selection" controlId="1381224648868">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group73" displayName="External Counting" className="IfxGroupBox" constraint="if((CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent0selection&quot;) == &quot;7&quot;) &#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent1selection&quot;) == &quot;7&quot;)&#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;7&quot;))&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }" controlId="1381223065805">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwcountedge" displayName="Edge Selection" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwcountedge:Count Signal Trigger Edge" controlId="1381223234315">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group22" displayName="External Modulation" className="IfxGroupBox" constraint="if((CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent0selection&quot;) == &quot;3&quot;) &#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent1selection&quot;) == &quot;3&quot;)&#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;3&quot;))&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }" controlId="1373391134461">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwExtModActivelevel" displayName="Active Level" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwExtModActivelevel:Active level for External Modulation" controlId="1373391266202">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwExtModMode" displayName="Mode" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwExtModMode:External Modulation Mode" controlId="1373391251342">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwextmodsync" displayName="Synchronization with PWM signal" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwextmodsync:External Modulation Synchronization" controlId="1373391303062">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group13" displayName="External Override" className="IfxGroupBox" controlId="1381228101893">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwextoverridevallevel" displayName="Override Value (External Event 2)" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;8&quot;)&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }" paramName="app/pwmsp003/0/pwmsp003_erwextoverridevallevel:External Override Value Active Level" controlId="1381228120677">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwoverridetriggeredge" displayName="Override Trigger (External Event 1)" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent1selection&quot;) == &quot;8&quot;)&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }" paramName="app/pwmsp003/0/pwmsp003_erwoverridetriggeredge:External Override Trigger Edge" controlId="1381228135469">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group9" displayName="External Gating" className="IfxGroupBox" constraint="if((CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent0selection&quot;) == &quot;5&quot;) &#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent1selection&quot;) == &quot;5&quot;)&#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;5&quot;))&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }" controlId="1381225342900">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwextgateactivelevel" displayName="Active level for External Gating" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwextgateactivelevel:Active level for External Gating" controlId="1381225402398">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group85" displayName="External Count Direction" className="IfxGroupBox" constraint="if((CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent0selection&quot;) == &quot;4&quot;) &#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent1selection&quot;) == &quot;4&quot;)&#xD;&#xA;|| (CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;4&quot;))&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }" controlId="1373392377143">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwextcntdir" displayName="Level Selection" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwextcntdir:External signal for Count Direction" controlId="1373392400373">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group43" displayName="Trap Function" className="IfxGroupBox" constraint="if((CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;9&quot;))&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }" controlId="1373374954538">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwenabletrap" displayName="" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwenabletrap:Trap Enable" controlId="1373448971653">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwtraplevel" displayName="Trap level" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwtraplevel:Trap level" controlId="1373374970349">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwtrapexittime" displayName="Synchronization Enable" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwtrapexittime:Synchronization Enable" controlId="1373374981769">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwtrapexit" displayName="Trap Exit Control" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwtrapexit:Trap Exit Control" controlId="1373374989089">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="4"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page37" displayName="Advanced Settings" className="IfxGroupBox" controlId="1373369228993">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group50" displayName="PreScaler Settings" className="IfxGroupBox" controlId="1373452601767">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwprescalermode" displayName="Prescaler Mode" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwprescalermode:Prescaler Mode" controlId="1380783726847">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_irfloatprescalerPCMP" displayName="Floating prescaler PCMP value" className="IntegerType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_erwprescalermode/1&quot;) == &quot;1&quot;)&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(false); &#xD;&#xA;   }&#xD;&#xA;   " paramName="app/pwmsp003/0/pwmsp003_irfloatprescalerPCMP:Floating prescaler PCMP value" controlId="1380783752308">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group64" displayName="Multi Channel Mode Configuration" className="IfxGroupBox" controlId="1373369255974">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwmultichannelsupport" displayName="Multi Channel Support" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwmultichannelsupport:Multi Channel Support" controlId="1373369285464">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwmcmshadowsupport" displayName="Multi Channel Shadow Transfer" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_erwmultichannelsupport&quot;) == &quot;1&quot;)&#xD;&#xA;{&#xD;&#xA;     CM.setVisible(true);&#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true);&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;}" paramName="app/pwmsp003/0/pwmsp003_erwmcmshadowsupport:Multi Channel Shadow Transfer" controlId="1380798432810">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwmcmshadowtransconf" displayName="Multi Channel Shadow Transfer Request Configuration" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_erwmultichannelsupport&quot;) == &quot;1&quot;)&#xD;&#xA;{&#xD;&#xA;     CM.setVisible(true);&#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true);&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;}" paramName="app/pwmsp003/0/pwmsp003_erwmcmshadowtransconf:Multi Channel Shadow Transfer Request Configuration" controlId="1380798484485">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group53" displayName=" Dither Configuration" className="IfxGroupBox" controlId="1373373697257">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwdithermode" displayName="Dither Mode" className="EnumerationType" constraint="" paramName="app/pwmsp003/0/pwmsp003_erwdithermode:Dither Mode" controlId="1373373712988">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_irwdithercomp" displayName="Dither Compare Value" className="IntegerType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_erwdithermode&quot;) != &quot;0&quot;)&#xD;&#xA;{&#xD;&#xA;     CM.setVisible(true);&#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true);&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;}" paramName="app/pwmsp003/0/pwmsp003_irwdithercomp:Dither Compare Value" controlId="1380798523415">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <conversionType>dec</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page72" displayName="Interrupts" className="IfxGroupBox" controlId="1380801407765">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="CENTER"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group60" displayName="Interrupt Configuration" className="IfxGroupBox" controlId="1380801499922">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwperiodmatch" displayName="Period Match Interrupt" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwperiodmatch:Period Match Interrupt While Counting Up" controlId="1380797796500">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwonematch" displayName="One Match Interrupt While Counting Down" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_erwcountingmode&quot;) == &quot;1&quot;)&#xD;&#xA;{&#xD;&#xA;     CM.setVisible(true);&#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true);&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;" paramName="app/pwmsp003/0/pwmsp003_erwonematch:One Match Interrupt While Counting Down" controlId="1380797812147">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwcomparematchup" displayName="Compare Match Interrupt While Counting Up" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_erwcountingmode&quot;) == &quot;1&quot;)&#xD;&#xA;{&#xD;&#xA;//     CM.setVisible(true);&#xD;&#xA;//     CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;//    CM.setVisible(true);&#xD;&#xA;//    CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;" paramName="app/pwmsp003/0/pwmsp003_erwcomparematchup:Compare Match Interrupt While Counting Up" controlId="1380797763070">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwcomparematchdown" displayName="Compare Match Interrupt While Counting Down" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_erwcountingmode&quot;) == &quot;1&quot;)&#xD;&#xA;{&#xD;&#xA;     CM.setVisible(true);&#xD;&#xA;     CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setVisible(true);&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;" paramName="app/pwmsp003/0/pwmsp003_erwcomparematchdown:Compare Match Interrupt While Counting Down" controlId="1380797825890">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwevent0interrupt" displayName="Event 0 Interrupt" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent0selection&quot;) == &quot;0&quot;)&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(false);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;   }" paramName="app/pwmsp003/0/pwmsp003_erwevent0interrupt:Event 0 Interrupt" controlId="1381210925642">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwevent1interrupt" displayName="Event 1 Interrupt" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent1selection&quot;) == &quot;0&quot;)&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(false);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;   }" paramName="app/pwmsp003/0/pwmsp003_erwevent1interrupt:Event 1 Interrupt" controlId="1381210920692">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwevent2interrupt" displayName="Event 2 Interrupt" className="EnumerationType" constraint="if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_tempevent2selection&quot;) == &quot;0&quot;)&#xD;&#xA;  {&#xD;&#xA;     CM.setVisible(true); &#xD;&#xA;     CM.setEnable(false);&#xD;&#xA;  }&#xD;&#xA;  else&#xD;&#xA;  {&#xD;&#xA;    CM.setVisible(true); &#xD;&#xA;    CM.setEnable(true); &#xD;&#xA;   }" paramName="app/pwmsp003/0/pwmsp003_erwevent2interrupt:Event 2 Interrupt" controlId="1381210932612">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page10" displayName="Pin Configuration" className="IfxGroupBox" controlId="1373450044724">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group58" displayName="Direct Output pin Configuration" className="IfxGroupBox" controlId="1373450116715">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwdirectoutputpadenable" displayName="Output Enable" className="EnumerationType" paramName="app/pwmsp003/0/pwmsp003_erwdirectoutputpadenable:Output Enable" controlId="1373450215065">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwdirectoutputpadclass" displayName="Pad Class" className="EnumerationType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;)==0)&#xD;&#xA;{&#xD;&#xA;CM.setEnable(false);&#xD;&#xA;CM.setVisible(false);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{ &#xD;&#xA;if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_erwdirectoutputpadenable/0&quot;) == &quot;1&quot;)&#xD;&#xA;{&#xD;&#xA;&#x9;CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;}" paramName="app/pwmsp003/0/pwmsp003_erwdirectoutputpadclass:Pad Class" controlId="1373450182825">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwdirectoutputpaddrivermode" displayName="Driver Mode" className="EnumerationType" constraint="if(CM.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;)==0)&#xD;&#xA;{&#xD;&#xA;&#x9;CM.setEnable(false);&#xD;&#xA;&#x9;CM.setVisible(false);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{ &#xD;&#xA;if(CM.getParamValue(&quot;app/pwmsp003/0/pwmsp003_erwdirectoutputpadenable/0&quot;) == &quot;1&quot;)&#xD;&#xA;{&#xD;&#xA;&#x9;CM.setEnable(true);&#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;}&#xD;&#xA;}" paramName="app/pwmsp003/0/pwmsp003_erwdirectoutputpaddrivermode:Driver Mode" controlId="1373450192375">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/pwmsp003/0/pwmsp003_erwdirectoutputpadchar" displayName="Output Characteristics" className="EnumerationType" constraint="" paramName="app/pwmsp003/0/pwmsp003_erwdirectoutputpadchar:Output Characteristics" controlId="1373450162825">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

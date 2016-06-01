@@ -1,0 +1,587 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"BluetoothProtocol.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	u,4,4
+  20              		.section	.text.maintainBluetoothInputBuffer,"ax",%progbits
+  21              		.align	2
+  22              		.global	maintainBluetoothInputBuffer
+  23              		.thumb
+  24              		.thumb_func
+  26              	maintainBluetoothInputBuffer:
+  27              	.LFB0:
+  28              		.file 1 "../BluetoothProtocol.c"
+   1:../BluetoothProtocol.c **** /*
+   2:../BluetoothProtocol.c ****  * Serial_Cmd.c
+   3:../BluetoothProtocol.c ****  *
+   4:../BluetoothProtocol.c ****  *  Created on: 30.01.2015
+   5:../BluetoothProtocol.c ****  *      Author: SteurerE
+   6:../BluetoothProtocol.c ****  */
+   7:../BluetoothProtocol.c **** #include "BluetoothProtocol.h"
+   8:../BluetoothProtocol.c **** 
+   9:../BluetoothProtocol.c **** //Helper to get Float values out of integer-bytes//
+  10:../BluetoothProtocol.c **** union
+  11:../BluetoothProtocol.c **** {
+  12:../BluetoothProtocol.c **** 	int i;
+  13:../BluetoothProtocol.c **** 	float f;
+  14:../BluetoothProtocol.c **** } u;
+  15:../BluetoothProtocol.c **** 
+  16:../BluetoothProtocol.c **** status_t maintainBluetoothInputBuffer(
+  17:../BluetoothProtocol.c **** 		uint8_t input_buffer[BLUETOOTH_INPUT_BUFFER],
+  18:../BluetoothProtocol.c **** 		ControlValue *control_value, DataPacket* packet)
+  19:../BluetoothProtocol.c **** {
+  29              		.loc 1 19 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 32
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 80B5     		push	{r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 88B0     		sub	sp, sp, #32
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_offset 40
+  41 0004 00AF     		add	r7, sp, #0
+  42              	.LCFI2:
+  43              		.cfi_def_cfa_register 7
+  44 0006 F860     		str	r0, [r7, #12]
+  45 0008 B960     		str	r1, [r7, #8]
+  46 000a 7A60     		str	r2, [r7, #4]
+  20:../BluetoothProtocol.c **** 
+  21:../BluetoothProtocol.c **** 	static int packet_counter = 0;
+  22:../BluetoothProtocol.c **** 	static int packets_to_be_received = 0;
+  23:../BluetoothProtocol.c **** 
+  24:../BluetoothProtocol.c **** 	control_value->header = 0;
+  47              		.loc 1 24 0
+  48 000c BB68     		ldr	r3, [r7, #8]
+  49 000e 4FF00002 		mov	r2, #0
+  50 0012 1A70     		strb	r2, [r3, #0]
+  25:../BluetoothProtocol.c **** 	control_value->speed = 0;
+  51              		.loc 1 25 0
+  52 0014 BB68     		ldr	r3, [r7, #8]
+  53 0016 4FF00002 		mov	r2, #0
+  54 001a 5A70     		strb	r2, [r3, #1]
+  55 001c 4FF00002 		mov	r2, #0
+  56 0020 9A70     		strb	r2, [r3, #2]
+  26:../BluetoothProtocol.c **** 	control_value->z_rotate = 0.0;
+  57              		.loc 1 26 0
+  58 0022 BB68     		ldr	r3, [r7, #8]
+  59 0024 4FF00002 		mov	r2, #0
+  60 0028 C3F80320 		str	r2, [r3, #3]	@ unaligned
+  27:../BluetoothProtocol.c **** 	control_value->x_pitch = 0.0;
+  61              		.loc 1 27 0
+  62 002c BB68     		ldr	r3, [r7, #8]
+  63 002e 4FF00002 		mov	r2, #0
+  64 0032 C3F80720 		str	r2, [r3, #7]	@ unaligned
+  28:../BluetoothProtocol.c **** 	control_value->y_roll = 0.0;
+  65              		.loc 1 28 0
+  66 0036 BB68     		ldr	r3, [r7, #8]
+  67 0038 4FF00002 		mov	r2, #0
+  68 003c C3F80B20 		str	r2, [r3, #11]	@ unaligned
+  29:../BluetoothProtocol.c **** 	control_value->checksum = 0;
+  69              		.loc 1 29 0
+  70 0040 BB68     		ldr	r3, [r7, #8]
+  71 0042 4FF00002 		mov	r2, #0
+  72 0046 DA73     		strb	r2, [r3, #15]
+  73 0048 4FF00002 		mov	r2, #0
+  74 004c 1A74     		strb	r2, [r3, #16]
+  75 004e 4FF00002 		mov	r2, #0
+  76 0052 5A74     		strb	r2, [r3, #17]
+  77 0054 4FF00002 		mov	r2, #0
+  78 0058 9A74     		strb	r2, [r3, #18]
+  30:../BluetoothProtocol.c **** 
+  31:../BluetoothProtocol.c **** 	uint32_t checksum;
+  32:../BluetoothProtocol.c **** 
+  33:../BluetoothProtocol.c **** 	checksum = input_buffer[0];
+  79              		.loc 1 33 0
+  80 005a FB68     		ldr	r3, [r7, #12]
+  81 005c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  82 005e FB61     		str	r3, [r7, #28]
+  34:../BluetoothProtocol.c **** 	checksum ^= ((input_buffer[1] << 8 | input_buffer[2]) & 0xFFFF);
+  83              		.loc 1 34 0
+  84 0060 FB68     		ldr	r3, [r7, #12]
+  85 0062 03F10103 		add	r3, r3, #1
+  86 0066 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  87 0068 4FEA0322 		lsl	r2, r3, #8
+  88 006c FB68     		ldr	r3, [r7, #12]
+  89 006e 03F10203 		add	r3, r3, #2
+  90 0072 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  91 0074 1343     		orrs	r3, r3, r2
+  92 0076 4FEA0343 		lsl	r3, r3, #16
+  93 007a 4FEA1343 		lsr	r3, r3, #16
+  94 007e FA69     		ldr	r2, [r7, #28]
+  95 0080 5340     		eors	r3, r3, r2
+  96 0082 FB61     		str	r3, [r7, #28]
+  97              	.LBB2:
+  35:../BluetoothProtocol.c **** 
+  36:../BluetoothProtocol.c **** 	for (int i = 3; i < (PACKET_SIZE - PACKET_CHECKSUM) - 1; i += 4)
+  98              		.loc 1 36 0
+  99 0084 4FF00303 		mov	r3, #3
+ 100 0088 BB61     		str	r3, [r7, #24]
+ 101 008a 25E0     		b	.L2
+ 102              	.L3:
+  37:../BluetoothProtocol.c **** 	{
+  38:../BluetoothProtocol.c **** 
+  39:../BluetoothProtocol.c **** 		checksum ^= (input_buffer[i] << 24 | input_buffer[i + 1] << 16
+ 103              		.loc 1 39 0 discriminator 2
+ 104 008c BB69     		ldr	r3, [r7, #24]
+ 105 008e FA68     		ldr	r2, [r7, #12]
+ 106 0090 D318     		adds	r3, r2, r3
+ 107 0092 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 108 0094 4FEA0362 		lsl	r2, r3, #24
+ 109 0098 BB69     		ldr	r3, [r7, #24]
+ 110 009a 03F10103 		add	r3, r3, #1
+ 111 009e F968     		ldr	r1, [r7, #12]
+ 112 00a0 CB18     		adds	r3, r1, r3
+ 113 00a2 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 114 00a4 4FEA0343 		lsl	r3, r3, #16
+ 115 00a8 1A43     		orrs	r2, r2, r3
+  40:../BluetoothProtocol.c **** 				| input_buffer[i + 2] << 8 | input_buffer[i + 3]);
+ 116              		.loc 1 40 0 discriminator 2
+ 117 00aa BB69     		ldr	r3, [r7, #24]
+ 118 00ac 03F10203 		add	r3, r3, #2
+ 119 00b0 F968     		ldr	r1, [r7, #12]
+ 120 00b2 CB18     		adds	r3, r1, r3
+ 121 00b4 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 122 00b6 4FEA0323 		lsl	r3, r3, #8
+ 123 00ba 1A43     		orrs	r2, r2, r3
+ 124 00bc BB69     		ldr	r3, [r7, #24]
+ 125 00be 03F10303 		add	r3, r3, #3
+ 126 00c2 F968     		ldr	r1, [r7, #12]
+ 127 00c4 CB18     		adds	r3, r1, r3
+ 128 00c6 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 129 00c8 1343     		orrs	r3, r3, r2
+  39:../BluetoothProtocol.c **** 		checksum ^= (input_buffer[i] << 24 | input_buffer[i + 1] << 16
+ 130              		.loc 1 39 0 discriminator 2
+ 131 00ca FA69     		ldr	r2, [r7, #28]
+ 132 00cc 5340     		eors	r3, r3, r2
+ 133 00ce FB61     		str	r3, [r7, #28]
+  36:../BluetoothProtocol.c **** 	for (int i = 3; i < (PACKET_SIZE - PACKET_CHECKSUM) - 1; i += 4)
+ 134              		.loc 1 36 0 discriminator 2
+ 135 00d0 BB69     		ldr	r3, [r7, #24]
+ 136 00d2 03F10403 		add	r3, r3, #4
+ 137 00d6 BB61     		str	r3, [r7, #24]
+ 138              	.L2:
+  36:../BluetoothProtocol.c **** 	for (int i = 3; i < (PACKET_SIZE - PACKET_CHECKSUM) - 1; i += 4)
+ 139              		.loc 1 36 0 is_stmt 0 discriminator 1
+ 140 00d8 BB69     		ldr	r3, [r7, #24]
+ 141 00da 0D2B     		cmp	r3, #13
+ 142 00dc D6DD     		ble	.L3
+ 143              	.LBE2:
+  41:../BluetoothProtocol.c **** 
+  42:../BluetoothProtocol.c **** 	}
+  43:../BluetoothProtocol.c **** 
+  44:../BluetoothProtocol.c **** 	control_value->checksum = input_buffer[15] << 24 | input_buffer[16] << 16
+ 144              		.loc 1 44 0 is_stmt 1
+ 145 00de FB68     		ldr	r3, [r7, #12]
+ 146 00e0 03F10F03 		add	r3, r3, #15
+ 147 00e4 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 148 00e6 4FEA0362 		lsl	r2, r3, #24
+ 149 00ea FB68     		ldr	r3, [r7, #12]
+ 150 00ec 03F11003 		add	r3, r3, #16
+ 151 00f0 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 152 00f2 4FEA0343 		lsl	r3, r3, #16
+ 153 00f6 1A43     		orrs	r2, r2, r3
+  45:../BluetoothProtocol.c **** 			| input_buffer[17] << 8 | input_buffer[18];
+ 154              		.loc 1 45 0
+ 155 00f8 FB68     		ldr	r3, [r7, #12]
+ 156 00fa 03F11103 		add	r3, r3, #17
+ 157 00fe 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 158 0100 4FEA0323 		lsl	r3, r3, #8
+ 159 0104 1A43     		orrs	r2, r2, r3
+ 160 0106 FB68     		ldr	r3, [r7, #12]
+ 161 0108 03F11203 		add	r3, r3, #18
+ 162 010c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 163 010e 1343     		orrs	r3, r3, r2
+  44:../BluetoothProtocol.c **** 	control_value->checksum = input_buffer[15] << 24 | input_buffer[16] << 16
+ 164              		.loc 1 44 0
+ 165 0110 1A46     		mov	r2, r3
+ 166 0112 BB68     		ldr	r3, [r7, #8]
+ 167 0114 C3F80F20 		str	r2, [r3, #15]	@ unaligned
+  46:../BluetoothProtocol.c **** 
+  47:../BluetoothProtocol.c **** 	if (control_value->checksum == checksum)
+ 168              		.loc 1 47 0
+ 169 0118 BB68     		ldr	r3, [r7, #8]
+ 170 011a D3F80F20 		ldr	r2, [r3, #15]	@ unaligned
+ 171 011e FB69     		ldr	r3, [r7, #28]
+ 172 0120 9A42     		cmp	r2, r3
+ 173 0122 40F00381 		bne	.L4
+  48:../BluetoothProtocol.c **** 	{
+  49:../BluetoothProtocol.c **** 
+  50:../BluetoothProtocol.c **** 		if (input_buffer[0])
+ 174              		.loc 1 50 0
+ 175 0126 FB68     		ldr	r3, [r7, #12]
+ 176 0128 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 177 012a 002B     		cmp	r3, #0
+ 178 012c 6DD0     		beq	.L5
+ 179              	.LBB3:
+  51:../BluetoothProtocol.c **** 			{ //Got a valid Data-Package
+  52:../BluetoothProtocol.c **** 
+  53:../BluetoothProtocol.c **** 			if (packets_to_be_received == 0)
+ 180              		.loc 1 53 0
+ 181 012e 40F20003 		movw	r3, #:lower16:packets_to_be_received.4861
+ 182 0132 C0F20003 		movt	r3, #:upper16:packets_to_be_received.4861
+ 183 0136 1B68     		ldr	r3, [r3, #0]
+ 184 0138 002B     		cmp	r3, #0
+ 185 013a 07D1     		bne	.L6
+  54:../BluetoothProtocol.c **** 			{
+  55:../BluetoothProtocol.c **** 
+  56:../BluetoothProtocol.c **** 				packets_to_be_received = input_buffer[0];
+ 186              		.loc 1 56 0
+ 187 013c FB68     		ldr	r3, [r7, #12]
+ 188 013e 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 189 0140 1A46     		mov	r2, r3
+ 190 0142 40F20003 		movw	r3, #:lower16:packets_to_be_received.4861
+ 191 0146 C0F20003 		movt	r3, #:upper16:packets_to_be_received.4861
+ 192 014a 1A60     		str	r2, [r3, #0]
+ 193              	.L6:
+  57:../BluetoothProtocol.c **** 
+  58:../BluetoothProtocol.c **** 			}
+  59:../BluetoothProtocol.c **** 
+  60:../BluetoothProtocol.c **** 			int current_val = packet_counter;
+ 194              		.loc 1 60 0
+ 195 014c 40F20003 		movw	r3, #:lower16:packet_counter.4860
+ 196 0150 C0F20003 		movt	r3, #:upper16:packet_counter.4860
+ 197 0154 1B68     		ldr	r3, [r3, #0]
+ 198 0156 7B61     		str	r3, [r7, #20]
+  61:../BluetoothProtocol.c **** 
+  62:../BluetoothProtocol.c **** 			for (; packet_counter < (current_val + DATA_SIZE);
+ 199              		.loc 1 62 0
+ 200 0158 1EE0     		b	.L7
+ 201              	.L8:
+  63:../BluetoothProtocol.c **** 					packet_counter++)
+  64:../BluetoothProtocol.c **** 			{
+  65:../BluetoothProtocol.c **** 
+  66:../BluetoothProtocol.c **** 				packet->cmd[packet_counter] = input_buffer[packet_counter
+ 202              		.loc 1 66 0
+ 203 015a 40F20003 		movw	r3, #:lower16:packet_counter.4860
+ 204 015e C0F20003 		movt	r3, #:upper16:packet_counter.4860
+ 205 0162 1A68     		ldr	r2, [r3, #0]
+  67:../BluetoothProtocol.c **** 						- current_val + PACKET_HEADER];
+ 206              		.loc 1 67 0
+ 207 0164 40F20003 		movw	r3, #:lower16:packet_counter.4860
+ 208 0168 C0F20003 		movt	r3, #:upper16:packet_counter.4860
+ 209 016c 1968     		ldr	r1, [r3, #0]
+ 210 016e 7B69     		ldr	r3, [r7, #20]
+ 211 0170 CB1A     		subs	r3, r1, r3
+  66:../BluetoothProtocol.c **** 				packet->cmd[packet_counter] = input_buffer[packet_counter
+ 212              		.loc 1 66 0
+ 213 0172 03F10103 		add	r3, r3, #1
+ 214 0176 F968     		ldr	r1, [r7, #12]
+ 215 0178 CB18     		adds	r3, r1, r3
+ 216 017a 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 217 017c 7B68     		ldr	r3, [r7, #4]
+ 218 017e 9954     		strb	r1, [r3, r2]
+  63:../BluetoothProtocol.c **** 					packet_counter++)
+ 219              		.loc 1 63 0
+ 220 0180 40F20003 		movw	r3, #:lower16:packet_counter.4860
+ 221 0184 C0F20003 		movt	r3, #:upper16:packet_counter.4860
+ 222 0188 1B68     		ldr	r3, [r3, #0]
+ 223 018a 03F10102 		add	r2, r3, #1
+ 224 018e 40F20003 		movw	r3, #:lower16:packet_counter.4860
+ 225 0192 C0F20003 		movt	r3, #:upper16:packet_counter.4860
+ 226 0196 1A60     		str	r2, [r3, #0]
+ 227              	.L7:
+  62:../BluetoothProtocol.c **** 			for (; packet_counter < (current_val + DATA_SIZE);
+ 228              		.loc 1 62 0 discriminator 1
+ 229 0198 7B69     		ldr	r3, [r7, #20]
+ 230 019a 03F10E02 		add	r2, r3, #14
+ 231 019e 40F20003 		movw	r3, #:lower16:packet_counter.4860
+ 232 01a2 C0F20003 		movt	r3, #:upper16:packet_counter.4860
+ 233 01a6 1B68     		ldr	r3, [r3, #0]
+ 234 01a8 9A42     		cmp	r2, r3
+ 235 01aa D6DC     		bgt	.L8
+  68:../BluetoothProtocol.c **** 
+  69:../BluetoothProtocol.c **** 			}
+  70:../BluetoothProtocol.c **** 
+  71:../BluetoothProtocol.c **** 			if ((input_buffer[0]
+ 236              		.loc 1 71 0
+ 237 01ac FB68     		ldr	r3, [r7, #12]
+ 238 01ae 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 239 01b0 0E2B     		cmp	r3, #14
+ 240 01b2 20D8     		bhi	.L9
+  72:../BluetoothProtocol.c **** 					<= (PACKET_SIZE - PACKET_HEADER - PACKET_CHECKSUM)))
+  73:../BluetoothProtocol.c **** 			{ //all cmd-bytes are within this data-package
+  74:../BluetoothProtocol.c **** 
+  75:../BluetoothProtocol.c **** 				//Cleanup Buffer//
+  76:../BluetoothProtocol.c **** 				memset(input_buffer, 0x00, sizeof(input_buffer));
+ 241              		.loc 1 76 0
+ 242 01b4 F868     		ldr	r0, [r7, #12]
+ 243 01b6 4FF00001 		mov	r1, #0
+ 244 01ba 4FF00402 		mov	r2, #4
+ 245 01be FFF7FEFF 		bl	memset
+  77:../BluetoothProtocol.c **** 
+  78:../BluetoothProtocol.c **** 				packet->character_count = packets_to_be_received;
+ 246              		.loc 1 78 0
+ 247 01c2 40F20003 		movw	r3, #:lower16:packets_to_be_received.4861
+ 248 01c6 C0F20003 		movt	r3, #:upper16:packets_to_be_received.4861
+ 249 01ca 1B68     		ldr	r3, [r3, #0]
+ 250 01cc DAB2     		uxtb	r2, r3
+ 251 01ce 7B68     		ldr	r3, [r7, #4]
+ 252 01d0 83F86420 		strb	r2, [r3, #100]
+  79:../BluetoothProtocol.c **** 				packet_counter = 0;
+ 253              		.loc 1 79 0
+ 254 01d4 40F20003 		movw	r3, #:lower16:packet_counter.4860
+ 255 01d8 C0F20003 		movt	r3, #:upper16:packet_counter.4860
+ 256 01dc 4FF00002 		mov	r2, #0
+ 257 01e0 1A60     		str	r2, [r3, #0]
+  80:../BluetoothProtocol.c **** 				packets_to_be_received = 0;
+ 258              		.loc 1 80 0
+ 259 01e2 40F20003 		movw	r3, #:lower16:packets_to_be_received.4861
+ 260 01e6 C0F20003 		movt	r3, #:upper16:packets_to_be_received.4861
+ 261 01ea 4FF00002 		mov	r2, #0
+ 262 01ee 1A60     		str	r2, [r3, #0]
+  81:../BluetoothProtocol.c **** 
+  82:../BluetoothProtocol.c **** 				return RECEIVED_DATA_PACKET; //Got a complete and valid Data-Package
+ 263              		.loc 1 82 0
+ 264 01f0 4FF00103 		mov	r3, #1
+ 265 01f4 A3E0     		b	.L10
+ 266              	.L9:
+  83:../BluetoothProtocol.c **** 
+  84:../BluetoothProtocol.c **** 			} else {
+  85:../BluetoothProtocol.c **** 
+  86:../BluetoothProtocol.c **** //Cleanup Buffer//
+  87:../BluetoothProtocol.c **** 				memset(input_buffer, 0x00, sizeof(input_buffer));
+ 267              		.loc 1 87 0
+ 268 01f6 F868     		ldr	r0, [r7, #12]
+ 269 01f8 4FF00001 		mov	r1, #0
+ 270 01fc 4FF00402 		mov	r2, #4
+ 271 0200 FFF7FEFF 		bl	memset
+  88:../BluetoothProtocol.c **** 				return RECEIVED_DATA_PACKET_N_C; //must do another read operation
+ 272              		.loc 1 88 0
+ 273 0204 4FF00203 		mov	r3, #2
+ 274 0208 99E0     		b	.L10
+ 275              	.L5:
+ 276              	.LBE3:
+  89:../BluetoothProtocol.c **** 
+  90:../BluetoothProtocol.c **** 			}
+  91:../BluetoothProtocol.c **** 
+  92:../BluetoothProtocol.c **** 		} else
+  93:../BluetoothProtocol.c **** 		{
+  94:../BluetoothProtocol.c **** 
+  95:../BluetoothProtocol.c **** 			control_value->header = input_buffer[0];
+ 277              		.loc 1 95 0
+ 278 020a FB68     		ldr	r3, [r7, #12]
+ 279 020c 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 280 020e BB68     		ldr	r3, [r7, #8]
+ 281 0210 1A70     		strb	r2, [r3, #0]
+  96:../BluetoothProtocol.c **** 			control_value->speed = (input_buffer[1] << 8 | input_buffer[2]);
+ 282              		.loc 1 96 0
+ 283 0212 FB68     		ldr	r3, [r7, #12]
+ 284 0214 03F10103 		add	r3, r3, #1
+ 285 0218 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 286 021a 4FEA0323 		lsl	r3, r3, #8
+ 287 021e 9AB2     		uxth	r2, r3
+ 288 0220 FB68     		ldr	r3, [r7, #12]
+ 289 0222 03F10203 		add	r3, r3, #2
+ 290 0226 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 291 0228 1343     		orrs	r3, r3, r2
+ 292 022a 9BB2     		uxth	r3, r3
+ 293 022c 9AB2     		uxth	r2, r3
+ 294 022e BB68     		ldr	r3, [r7, #8]
+ 295 0230 A3F80120 		strh	r2, [r3, #1]	@ unaligned
+  97:../BluetoothProtocol.c **** 			u.i = ((input_buffer[3] << 24 | input_buffer[4] << 16
+ 296              		.loc 1 97 0
+ 297 0234 FB68     		ldr	r3, [r7, #12]
+ 298 0236 03F10303 		add	r3, r3, #3
+ 299 023a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 300 023c 4FEA0362 		lsl	r2, r3, #24
+ 301 0240 FB68     		ldr	r3, [r7, #12]
+ 302 0242 03F10403 		add	r3, r3, #4
+ 303 0246 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 304 0248 4FEA0343 		lsl	r3, r3, #16
+ 305 024c 1A43     		orrs	r2, r2, r3
+  98:../BluetoothProtocol.c **** 					| input_buffer[5] << 8 | input_buffer[6]));
+ 306              		.loc 1 98 0
+ 307 024e FB68     		ldr	r3, [r7, #12]
+ 308 0250 03F10503 		add	r3, r3, #5
+ 309 0254 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 310 0256 4FEA0323 		lsl	r3, r3, #8
+ 311 025a 1A43     		orrs	r2, r2, r3
+ 312 025c FB68     		ldr	r3, [r7, #12]
+ 313 025e 03F10603 		add	r3, r3, #6
+ 314 0262 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 315 0264 1A43     		orrs	r2, r2, r3
+  97:../BluetoothProtocol.c **** 			u.i = ((input_buffer[3] << 24 | input_buffer[4] << 16
+ 316              		.loc 1 97 0
+ 317 0266 40F20003 		movw	r3, #:lower16:u
+ 318 026a C0F20003 		movt	r3, #:upper16:u
+ 319 026e 1A60     		str	r2, [r3, #0]
+  99:../BluetoothProtocol.c **** 			control_value->z_rotate = u.f;
+ 320              		.loc 1 99 0
+ 321 0270 40F20003 		movw	r3, #:lower16:u
+ 322 0274 C0F20003 		movt	r3, #:upper16:u
+ 323 0278 1A68     		ldr	r2, [r3, #0]	@ float
+ 324 027a BB68     		ldr	r3, [r7, #8]
+ 325 027c C3F80320 		str	r2, [r3, #3]	@ unaligned
+ 100:../BluetoothProtocol.c **** 			u.i = (input_buffer[7] << 24 | input_buffer[8] << 16
+ 326              		.loc 1 100 0
+ 327 0280 FB68     		ldr	r3, [r7, #12]
+ 328 0282 03F10703 		add	r3, r3, #7
+ 329 0286 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 330 0288 4FEA0362 		lsl	r2, r3, #24
+ 331 028c FB68     		ldr	r3, [r7, #12]
+ 332 028e 03F10803 		add	r3, r3, #8
+ 333 0292 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 334 0294 4FEA0343 		lsl	r3, r3, #16
+ 335 0298 1A43     		orrs	r2, r2, r3
+ 101:../BluetoothProtocol.c **** 					| input_buffer[9] << 8 | input_buffer[10]);
+ 336              		.loc 1 101 0
+ 337 029a FB68     		ldr	r3, [r7, #12]
+ 338 029c 03F10903 		add	r3, r3, #9
+ 339 02a0 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 340 02a2 4FEA0323 		lsl	r3, r3, #8
+ 341 02a6 1A43     		orrs	r2, r2, r3
+ 342 02a8 FB68     		ldr	r3, [r7, #12]
+ 343 02aa 03F10A03 		add	r3, r3, #10
+ 344 02ae 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 345 02b0 1A43     		orrs	r2, r2, r3
+ 100:../BluetoothProtocol.c **** 			u.i = (input_buffer[7] << 24 | input_buffer[8] << 16
+ 346              		.loc 1 100 0
+ 347 02b2 40F20003 		movw	r3, #:lower16:u
+ 348 02b6 C0F20003 		movt	r3, #:upper16:u
+ 349 02ba 1A60     		str	r2, [r3, #0]
+ 102:../BluetoothProtocol.c **** 			control_value->x_pitch = u.f;
+ 350              		.loc 1 102 0
+ 351 02bc 40F20003 		movw	r3, #:lower16:u
+ 352 02c0 C0F20003 		movt	r3, #:upper16:u
+ 353 02c4 1A68     		ldr	r2, [r3, #0]	@ float
+ 354 02c6 BB68     		ldr	r3, [r7, #8]
+ 355 02c8 C3F80720 		str	r2, [r3, #7]	@ unaligned
+ 103:../BluetoothProtocol.c **** 			u.i = (input_buffer[11] << 24 | input_buffer[12] << 16
+ 356              		.loc 1 103 0
+ 357 02cc FB68     		ldr	r3, [r7, #12]
+ 358 02ce 03F10B03 		add	r3, r3, #11
+ 359 02d2 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 360 02d4 4FEA0362 		lsl	r2, r3, #24
+ 361 02d8 FB68     		ldr	r3, [r7, #12]
+ 362 02da 03F10C03 		add	r3, r3, #12
+ 363 02de 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 364 02e0 4FEA0343 		lsl	r3, r3, #16
+ 365 02e4 1A43     		orrs	r2, r2, r3
+ 104:../BluetoothProtocol.c **** 					| input_buffer[13] << 8 | input_buffer[14]);
+ 366              		.loc 1 104 0
+ 367 02e6 FB68     		ldr	r3, [r7, #12]
+ 368 02e8 03F10D03 		add	r3, r3, #13
+ 369 02ec 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 370 02ee 4FEA0323 		lsl	r3, r3, #8
+ 371 02f2 1A43     		orrs	r2, r2, r3
+ 372 02f4 FB68     		ldr	r3, [r7, #12]
+ 373 02f6 03F10E03 		add	r3, r3, #14
+ 374 02fa 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 375 02fc 1A43     		orrs	r2, r2, r3
+ 103:../BluetoothProtocol.c **** 			u.i = (input_buffer[11] << 24 | input_buffer[12] << 16
+ 376              		.loc 1 103 0
+ 377 02fe 40F20003 		movw	r3, #:lower16:u
+ 378 0302 C0F20003 		movt	r3, #:upper16:u
+ 379 0306 1A60     		str	r2, [r3, #0]
+ 105:../BluetoothProtocol.c **** 			control_value->y_roll = u.f;
+ 380              		.loc 1 105 0
+ 381 0308 40F20003 		movw	r3, #:lower16:u
+ 382 030c C0F20003 		movt	r3, #:upper16:u
+ 383 0310 1A68     		ldr	r2, [r3, #0]	@ float
+ 384 0312 BB68     		ldr	r3, [r7, #8]
+ 385 0314 C3F80B20 		str	r2, [r3, #11]	@ unaligned
+ 106:../BluetoothProtocol.c **** 
+ 107:../BluetoothProtocol.c **** 		    //Cleanup Buffer//
+ 108:../BluetoothProtocol.c **** 			memset(input_buffer, 0x00, sizeof(input_buffer));
+ 386              		.loc 1 108 0
+ 387 0318 F868     		ldr	r0, [r7, #12]
+ 388 031a 4FF00001 		mov	r1, #0
+ 389 031e 4FF00402 		mov	r2, #4
+ 390 0322 FFF7FEFF 		bl	memset
+ 109:../BluetoothProtocol.c **** 
+ 110:../BluetoothProtocol.c **** 			return RECEIVED_CONTROL_PACKET; //Got a valid Control-Package
+ 391              		.loc 1 110 0
+ 392 0326 4FF00003 		mov	r3, #0
+ 393 032a 08E0     		b	.L10
+ 394              	.L4:
+ 111:../BluetoothProtocol.c **** 
+ 112:../BluetoothProtocol.c **** 		}
+ 113:../BluetoothProtocol.c **** 
+ 114:../BluetoothProtocol.c **** 	} else {
+ 115:../BluetoothProtocol.c **** 
+ 116:../BluetoothProtocol.c **** 		packet_counter = 0; //if it happens between data-packages...
+ 395              		.loc 1 116 0
+ 396 032c 40F20003 		movw	r3, #:lower16:packet_counter.4860
+ 397 0330 C0F20003 		movt	r3, #:upper16:packet_counter.4860
+ 398 0334 4FF00002 		mov	r2, #0
+ 399 0338 1A60     		str	r2, [r3, #0]
+ 117:../BluetoothProtocol.c **** 
+ 118:../BluetoothProtocol.c **** 		return CHECKSUM_ERROR; //Wrong checksum
+ 400              		.loc 1 118 0
+ 401 033a 4FF0FF33 		mov	r3, #-1
+ 402              	.L10:
+ 119:../BluetoothProtocol.c **** 
+ 120:../BluetoothProtocol.c **** 	}
+ 121:../BluetoothProtocol.c **** 
+ 122:../BluetoothProtocol.c **** 	//Cleanup Buffer//
+ 123:../BluetoothProtocol.c **** 	memset(input_buffer, 0x00, sizeof(input_buffer));
+ 124:../BluetoothProtocol.c **** 
+ 125:../BluetoothProtocol.c **** 	return UNDEFINED_ERROR; //Error by default
+ 126:../BluetoothProtocol.c **** 
+ 127:../BluetoothProtocol.c **** }
+ 403              		.loc 1 127 0
+ 404 033e 1846     		mov	r0, r3
+ 405 0340 07F12007 		add	r7, r7, #32
+ 406 0344 BD46     		mov	sp, r7
+ 407 0346 80BD     		pop	{r7, pc}
+ 408              		.cfi_endproc
+ 409              	.LFE0:
+ 411              		.bss
+ 412              		.align	2
+ 413              	packets_to_be_received.4861:
+ 414 0000 00000000 		.space	4
+ 415              		.align	2
+ 416              	packet_counter.4860:
+ 417 0004 00000000 		.space	4
+ 418              		.text
+ 419              	.Letext0:
+ 420              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 421              		.file 3 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\MOTORLIB
+ 422              		.file 4 "../BluetoothProtocol.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 BluetoothProtocol.c
+                            *COM*:00000004 u
+C:\Users\WielandD\AppData\Local\Temp\ccTvFCS1.s:21     .text.maintainBluetoothInputBuffer:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\ccTvFCS1.s:26     .text.maintainBluetoothInputBuffer:00000000 maintainBluetoothInputBuffer
+C:\Users\WielandD\AppData\Local\Temp\ccTvFCS1.s:413    .bss:00000000 packets_to_be_received.4861
+C:\Users\WielandD\AppData\Local\Temp\ccTvFCS1.s:416    .bss:00000004 packet_counter.4860
+C:\Users\WielandD\AppData\Local\Temp\ccTvFCS1.s:412    .bss:00000000 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.BluetoothProtocol.h.15.8ef7c10eba5516b04a4e2961bc1e97bc
+
+UNDEFINED SYMBOLS
+memset

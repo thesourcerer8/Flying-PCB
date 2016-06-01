@@ -1,0 +1,2987 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"usbd.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	device,324,4
+  20              		.comm	usb_init,8,4
+  21              		.comm	endpoint0_in_buffer,256,4
+  22              		.comm	endpoint0_out_buffer,256,4
+  23              		.comm	usb_preemption_priority,4,4
+  24              		.comm	usb_sub_priority,4,4
+  25              		.section	.text.USBD_HandleEP0_Stall,"ax",%progbits
+  26              		.align	2
+  27              		.global	USBD_HandleEP0_Stall
+  28              		.thumb
+  29              		.thumb_func
+  31              	USBD_HandleEP0_Stall:
+  32              	.LFB130:
+  33              		.file 1 "../Dave/Generated/src/USBD/usbd/usbd.c"
+   1:../Dave/Generated/src/USBD/usbd/usbd.c **** /*******************************************************************************
+   2:../Dave/Generated/src/USBD/usbd/usbd.c ****  Copyright (c) 2014, Infineon Technologies AG                                 **
+   3:../Dave/Generated/src/USBD/usbd/usbd.c ****  All rights reserved.                                                         **
+   4:../Dave/Generated/src/USBD/usbd/usbd.c ****                                                                               **
+   5:../Dave/Generated/src/USBD/usbd/usbd.c ****  Redistribution and use in source and binary forms, with or without           **
+   6:../Dave/Generated/src/USBD/usbd/usbd.c ****  modification,are permitted provided that the following conditions are met:   **
+   7:../Dave/Generated/src/USBD/usbd/usbd.c ****                                                                               **
+   8:../Dave/Generated/src/USBD/usbd/usbd.c ****  *Redistributions of source code must retain the above copyright notice,      **
+   9:../Dave/Generated/src/USBD/usbd/usbd.c ****  this list of conditions and the following disclaimer.                        **
+  10:../Dave/Generated/src/USBD/usbd/usbd.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  11:../Dave/Generated/src/USBD/usbd/usbd.c ****  this list of conditions and the following disclaimer in the documentation    **
+  12:../Dave/Generated/src/USBD/usbd/usbd.c ****  and/or other materials provided with the distribution.                       **
+  13:../Dave/Generated/src/USBD/usbd/usbd.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  14:../Dave/Generated/src/USBD/usbd/usbd.c ****  may be used to endorse or promote products derived from this software without**
+  15:../Dave/Generated/src/USBD/usbd/usbd.c ****  specific prior written permission.                                           **
+  16:../Dave/Generated/src/USBD/usbd/usbd.c ****                                                                               **
+  17:../Dave/Generated/src/USBD/usbd/usbd.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  18:../Dave/Generated/src/USBD/usbd/usbd.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  19:../Dave/Generated/src/USBD/usbd/usbd.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  20:../Dave/Generated/src/USBD/usbd/usbd.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  21:../Dave/Generated/src/USBD/usbd/usbd.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  22:../Dave/Generated/src/USBD/usbd/usbd.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  23:../Dave/Generated/src/USBD/usbd/usbd.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  24:../Dave/Generated/src/USBD/usbd/usbd.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  25:../Dave/Generated/src/USBD/usbd/usbd.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  26:../Dave/Generated/src/USBD/usbd/usbd.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  27:../Dave/Generated/src/USBD/usbd/usbd.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  28:../Dave/Generated/src/USBD/usbd/usbd.c ****                                                                               **
+  29:../Dave/Generated/src/USBD/usbd/usbd.c ****  To improve the quality of the software, users are encouraged to share        **
+  30:../Dave/Generated/src/USBD/usbd/usbd.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  31:../Dave/Generated/src/USBD/usbd/usbd.c ****  dave@infineon.com).                                                          **
+  32:../Dave/Generated/src/USBD/usbd/usbd.c ****                                                                               **
+  33:../Dave/Generated/src/USBD/usbd/usbd.c **** ********************************************************************************
+  34:../Dave/Generated/src/USBD/usbd/usbd.c **** **                                                                            **
+  35:../Dave/Generated/src/USBD/usbd/usbd.c **** **                                                                            **
+  36:../Dave/Generated/src/USBD/usbd/usbd.c **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  37:../Dave/Generated/src/USBD/usbd/usbd.c **** **                                                                            **
+  38:../Dave/Generated/src/USBD/usbd/usbd.c **** ** COMPILER : Compiler Independent                                            **
+  39:../Dave/Generated/src/USBD/usbd/usbd.c **** **                                                                            **
+  40:../Dave/Generated/src/USBD/usbd/usbd.c **** ** AUTHOR : App Developer                                                     **
+  41:../Dave/Generated/src/USBD/usbd/usbd.c **** **                                                                            **
+  42:../Dave/Generated/src/USBD/usbd/usbd.c **** ** MAY BE CHANGED BY USER [yes/no]: No                                        **
+  43:../Dave/Generated/src/USBD/usbd/usbd.c **** **                                                                            **
+  44:../Dave/Generated/src/USBD/usbd/usbd.c **** ** MODIFICATION DATE : Feb 21, 2014     		                              **
+  45:../Dave/Generated/src/USBD/usbd/usbd.c **** **                                                                            **
+  46:../Dave/Generated/src/USBD/usbd/usbd.c **** *******************************************************************************/
+  47:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+  48:../Dave/Generated/src/USBD/usbd/usbd.c **** /*******************************************************************************
+  49:../Dave/Generated/src/USBD/usbd/usbd.c **** **                       Author(s) Identity                                   **
+  50:../Dave/Generated/src/USBD/usbd/usbd.c **** ********************************************************************************
+  51:../Dave/Generated/src/USBD/usbd/usbd.c **** **                                                                            **
+  52:../Dave/Generated/src/USBD/usbd/usbd.c **** ** Initials    Name                                                           **
+  53:../Dave/Generated/src/USBD/usbd/usbd.c **** ** ---------------------------------------------------------------------------**
+  54:../Dave/Generated/src/USBD/usbd/usbd.c **** ** NSND          App Developer                                                **
+  55:../Dave/Generated/src/USBD/usbd/usbd.c **** *******************************************************************************/
+  56:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+  57:../Dave/Generated/src/USBD/usbd/usbd.c ****  * @file   usbd.c
+  58:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+  59:../Dave/Generated/src/USBD/usbd/usbd.c ****  * @brief Source file for Device driver protocol layer
+  60:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+  61:../Dave/Generated/src/USBD/usbd/usbd.c ****  * It provides functions to handle Endpoint 0 control requests and setting up
+  62:../Dave/Generated/src/USBD/usbd/usbd.c ****  * the usb device.
+  63:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+  64:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+  65:../Dave/Generated/src/USBD/usbd/usbd.c **** #include <stdlib.h>
+  66:../Dave/Generated/src/USBD/usbd/usbd.c **** #include "../usb/Core/Events.h"
+  67:../Dave/Generated/src/USBD/usbd/usbd.c **** #include "../usb/Core/USBTask.h"
+  68:../Dave/Generated/src/USBD/usbd/usbd.c **** #include "usbd_config.h"
+  69:../Dave/Generated/src/USBD/usbd/usbd.c **** #include "usbd.h"
+  70:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+  71:../Dave/Generated/src/USBD/usbd/usbd.c **** USBD_Device_t device;
+  72:../Dave/Generated/src/USBD/usbd/usbd.c **** USB_INIT_t usb_init;
+  73:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+  74:../Dave/Generated/src/USBD/usbd/usbd.c **** /*endpoint point 0 buffer allocation*/
+  75:../Dave/Generated/src/USBD/usbd/usbd.c **** uint8_t endpoint0_in_buffer[256];
+  76:../Dave/Generated/src/USBD/usbd/usbd.c **** uint8_t endpoint0_out_buffer[256];
+  77:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+  78:../Dave/Generated/src/USBD/usbd/usbd.c **** /*Variables to hold the USB priority and sub priority*/
+  79:../Dave/Generated/src/USBD/usbd/usbd.c **** uint32_t usb_preemption_priority;
+  80:../Dave/Generated/src/USBD/usbd/usbd.c **** uint32_t usb_sub_priority;
+  81:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+  82:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+  83:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+  84:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+  85:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Handle protocol stall on EP0
+  86:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+  87:../Dave/Generated/src/USBD/usbd/usbd.c ****  * Stalls EP0 and then restarts a new transfer including setting state to
+  88:../Dave/Generated/src/USBD/usbd/usbd.c ****  * 																\ref IDLE.
+  89:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+  90:../Dave/Generated/src/USBD/usbd/usbd.c **** void USBD_HandleEP0_Stall() {
+  34              		.loc 1 90 0
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 8
+  41              		.cfi_offset 7, -8
+  42              		.cfi_offset 14, -4
+  43 0002 00AF     		add	r7, sp, #0
+  44              	.LCFI1:
+  45              		.cfi_def_cfa_register 7
+  91:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* When we stall ep0 as protocol stall, we go back into idle state and
+  92:../Dave/Generated/src/USBD/usbd/usbd.c **** 	 * start a new read */
+  93:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Driver->EndpointStall(ENDPOINT_DIR_IN | 0,1);
+  46              		.loc 1 93 0
+  47 0004 40F20003 		movw	r3, #:lower16:device
+  48 0008 C0F20003 		movt	r3, #:upper16:device
+  49 000c 1B68     		ldr	r3, [r3, #0]
+  50 000e 5B6A     		ldr	r3, [r3, #36]
+  51 0010 4FF08000 		mov	r0, #128
+  52 0014 4FF00101 		mov	r1, #1
+  53 0018 9847     		blx	r3
+  94:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.EP0_State = IDLE;
+  54              		.loc 1 94 0
+  55 001a 40F20003 		movw	r3, #:lower16:device
+  56 001e C0F20003 		movt	r3, #:upper16:device
+  57 0022 4FF00102 		mov	r2, #1
+  58 0026 83F83B21 		strb	r2, [r3, #315]
+  95:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Driver->EndpointReadStart(0,0,24);
+  59              		.loc 1 95 0
+  60 002a 40F20003 		movw	r3, #:lower16:device
+  61 002e C0F20003 		movt	r3, #:upper16:device
+  62 0032 1B68     		ldr	r3, [r3, #0]
+  63 0034 9B6A     		ldr	r3, [r3, #40]
+  64 0036 4FF00000 		mov	r0, #0
+  65 003a 4FF00001 		mov	r1, #0
+  66 003e 4FF01802 		mov	r2, #24
+  67 0042 9847     		blx	r3
+  96:../Dave/Generated/src/USBD/usbd/usbd.c **** }
+  68              		.loc 1 96 0
+  69 0044 80BD     		pop	{r7, pc}
+  70              		.cfi_endproc
+  71              	.LFE130:
+  73 0046 00BF     		.section	.text.USBD_Handle_DeviceRequest,"ax",%progbits
+  74              		.align	2
+  75              		.global	USBD_Handle_DeviceRequest
+  76              		.thumb
+  77              		.thumb_func
+  79              	USBD_Handle_DeviceRequest:
+  80              	.LFB131:
+  97:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+  98:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+  99:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Handle device request on endpoint 0
+ 100:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 101:../Dave/Generated/src/USBD/usbd/usbd.c ****  * By default any USB device has to support a subset of device control request
+ 102:../Dave/Generated/src/USBD/usbd/usbd.c ****  * defiened by the USB specification. All request required by the spec are
+ 103:../Dave/Generated/src/USBD/usbd/usbd.c ****  * handle within this function.Before a handling of the request is done by this
+ 104:../Dave/Generated/src/USBD/usbd/usbd.c ****  * function, it dispatches it to the \ref EVENT_USB_Device_ControlRequest
+ 105:../Dave/Generated/src/USBD/usbd/usbd.c ****  * function. There the user has the chance to complete some custom request or
+ 106:../Dave/Generated/src/USBD/usbd/usbd.c ****  * override the handling of this function. If the user has handled the
+ 107:../Dave/Generated/src/USBD/usbd/usbd.c ****  * request, he has to call \ref Endpoint_ClearSETUP.
+ 108:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 109:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+ 110:../Dave/Generated/src/USBD/usbd/usbd.c **** void USBD_Handle_DeviceRequest() {
+  81              		.loc 1 110 0
+  82              		.cfi_startproc
+  83              		@ args = 0, pretend = 0, frame = 24
+  84              		@ frame_needed = 1, uses_anonymous_args = 0
+  85 0000 90B5     		push	{r4, r7, lr}
+  86              	.LCFI2:
+  87              		.cfi_def_cfa_offset 12
+  88              		.cfi_offset 4, -12
+  89              		.cfi_offset 7, -8
+  90              		.cfi_offset 14, -4
+  91 0002 87B0     		sub	sp, sp, #28
+  92              	.LCFI3:
+  93              		.cfi_def_cfa_offset 40
+  94 0004 00AF     		add	r7, sp, #0
+  95              	.LCFI4:
+  96              		.cfi_def_cfa_register 7
+ 111:../Dave/Generated/src/USBD/usbd/usbd.c **** 	uint32_t length = 0,ret;
+  97              		.loc 1 111 0
+  98 0006 4FF00003 		mov	r3, #0
+  99 000a 7B61     		str	r3, [r7, #20]
+ 112:../Dave/Generated/src/USBD/usbd/usbd.c **** 	uint16_t status = 0;
+ 100              		.loc 1 112 0
+ 101 000c 4FF00003 		mov	r3, #0
+ 102 0010 7B81     		strh	r3, [r7, #10]	@ movhi
+ 113:../Dave/Generated/src/USBD/usbd/usbd.c **** 	void *buffer;
+ 114:../Dave/Generated/src/USBD/usbd/usbd.c **** 	uint8_t Value;
+ 115:../Dave/Generated/src/USBD/usbd/usbd.c **** 	uint16_t Index;
+ 116:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 117:../Dave/Generated/src/USBD/usbd/usbd.c **** 	Value = USB_ControlRequest.wValue & 0x00FF;
+ 103              		.loc 1 117 0
+ 104 0012 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 105 0016 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 106 001a 5B88     		ldrh	r3, [r3, #2]	@ movhi
+ 107 001c 9BB2     		uxth	r3, r3
+ 108 001e FB74     		strb	r3, [r7, #19]
+ 118:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 119:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* Handling of class/vendor requests */
+ 120:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if(device.evnts->ControlRequest != NULL)
+ 109              		.loc 1 120 0
+ 110 0020 40F20003 		movw	r3, #:lower16:device
+ 111 0024 C0F20003 		movt	r3, #:upper16:device
+ 112 0028 D3F84031 		ldr	r3, [r3, #320]
+ 113 002c DB68     		ldr	r3, [r3, #12]
+ 114 002e 002B     		cmp	r3, #0
+ 115 0030 07D0     		beq	.L3
+ 121:../Dave/Generated/src/USBD/usbd/usbd.c **** 	{
+ 122:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.evnts->ControlRequest();
+ 116              		.loc 1 122 0
+ 117 0032 40F20003 		movw	r3, #:lower16:device
+ 118 0036 C0F20003 		movt	r3, #:upper16:device
+ 119 003a D3F84031 		ldr	r3, [r3, #320]
+ 120 003e DB68     		ldr	r3, [r3, #12]
+ 121 0040 9847     		blx	r3
+ 122              	.L3:
+ 123:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 124:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 125:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (!device.IsSetupRecieved)
+ 123              		.loc 1 125 0
+ 124 0042 40F20003 		movw	r3, #:lower16:device
+ 125 0046 C0F20003 		movt	r3, #:upper16:device
+ 126 004a 93F83E31 		ldrb	r3, [r3, #318]
+ 127 004e DBB2     		uxtb	r3, r3
+ 128 0050 03F00203 		and	r3, r3, #2
+ 129 0054 DBB2     		uxtb	r3, r3
+ 130 0056 002B     		cmp	r3, #0
+ 131 0058 00F00A83 		beq	.L2
+ 126:../Dave/Generated/src/USBD/usbd/usbd.c **** 		return;
+ 127:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 128:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* default request handling */
+ 129:../Dave/Generated/src/USBD/usbd/usbd.c **** 	switch (USB_ControlRequest.bRequest) {
+ 132              		.loc 1 129 0
+ 133 005c 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 134 0060 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 135 0064 5B78     		ldrb	r3, [r3, #1]
+ 136 0066 DBB2     		uxtb	r3, r3
+ 137 0068 0C2B     		cmp	r3, #12
+ 138 006a 00F2EF82 		bhi	.L5
+ 139 006e 01A2     		adr	r2, .L17
+ 140 0070 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 141              		.align	2
+ 142              	.L17:
+ 143 0074 B3020000 		.word	.L6+1
+ 144 0078 A9000000 		.word	.L7+1
+ 145 007c 4D060000 		.word	.L5+1
+ 146 0080 39050000 		.word	.L8+1
+ 147 0084 4D060000 		.word	.L5+1
+ 148 0088 07040000 		.word	.L9+1
+ 149 008c 9F010000 		.word	.L10+1
+ 150 0090 DF040000 		.word	.L11+1
+ 151 0094 85010000 		.word	.L12+1
+ 152 0098 6D040000 		.word	.L13+1
+ 153 009c 57020000 		.word	.L14+1
+ 154 00a0 E5040000 		.word	.L15+1
+ 155 00a4 47060000 		.word	.L16+1
+ 156              	.L7:
+ 130:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_ClearFeature:
+ 131:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if ((USB_ControlRequest.bmRequestType & REQ_RECIPIENT_MASK) ==
+ 157              		.loc 1 131 0
+ 158 00a8 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 159 00ac C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 160 00b0 1B78     		ldrb	r3, [r3, #0]
+ 161 00b2 DBB2     		uxtb	r3, r3
+ 162 00b4 03F00303 		and	r3, r3, #3
+ 163 00b8 022B     		cmp	r3, #2
+ 164 00ba 4BD1     		bne	.L18
+ 132:../Dave/Generated/src/USBD/usbd/usbd.c **** 														REQREC_ENDPOINT)
+ 133:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 134:../Dave/Generated/src/USBD/usbd/usbd.c **** 			Index = USB_ControlRequest.wIndex & ENDPOINT_EPNUM_MASK;
+ 165              		.loc 1 134 0
+ 166 00bc 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 167 00c0 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 168 00c4 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 169 00c6 9BB2     		uxth	r3, r3
+ 170 00c8 03F00F03 		and	r3, r3, #15
+ 171 00cc 3B82     		strh	r3, [r7, #16]	@ movhi
+ 135:../Dave/Generated/src/USBD/usbd/usbd.c **** 			if ((USB_DeviceState == DEVICE_STATE_Configured ||
+ 172              		.loc 1 135 0
+ 173 00ce 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 174 00d2 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 175 00d6 1B78     		ldrb	r3, [r3, #0]
+ 176 00d8 DBB2     		uxtb	r3, r3
+ 177 00da 042B     		cmp	r3, #4
+ 178 00dc 07D0     		beq	.L19
+ 136:../Dave/Generated/src/USBD/usbd/usbd.c **** 							USB_ControlRequest.wIndex==0)  &&
+ 179              		.loc 1 136 0 discriminator 1
+ 180 00de 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 181 00e2 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 182 00e6 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 183 00e8 9BB2     		uxth	r3, r3
+ 135:../Dave/Generated/src/USBD/usbd/usbd.c **** 			if ((USB_DeviceState == DEVICE_STATE_Configured ||
+ 184              		.loc 1 135 0 discriminator 1
+ 185 00ea 002B     		cmp	r3, #0
+ 186 00ec 2FD1     		bne	.L20
+ 187              	.L19:
+ 137:../Dave/Generated/src/USBD/usbd/usbd.c **** 							device.Endpoints[Index].IsConfigured==1)
+ 188              		.loc 1 137 0
+ 189 00ee 3A8A     		ldrh	r2, [r7, #16]
+ 190 00f0 40F20003 		movw	r3, #:lower16:device
+ 191 00f4 C0F20003 		movt	r3, #:upper16:device
+ 192 00f8 4FF02C01 		mov	r1, #44
+ 193 00fc 01FB02F2 		mul	r2, r1, r2
+ 194 0100 9B18     		adds	r3, r3, r2
+ 195 0102 1B7A     		ldrb	r3, [r3, #8]
+ 196 0104 C3F30003 		ubfx	r3, r3, #0, #1
+ 197 0108 DBB2     		uxtb	r3, r3
+ 136:../Dave/Generated/src/USBD/usbd/usbd.c **** 							USB_ControlRequest.wIndex==0)  &&
+ 198              		.loc 1 136 0
+ 199 010a 012B     		cmp	r3, #1
+ 200 010c 1FD1     		bne	.L20
+ 138:../Dave/Generated/src/USBD/usbd/usbd.c **** 			{
+ 139:../Dave/Generated/src/USBD/usbd/usbd.c **** 				device.Endpoints[Index].IsHalted = 0;
+ 201              		.loc 1 139 0
+ 202 010e 3A8A     		ldrh	r2, [r7, #16]
+ 203 0110 40F20003 		movw	r3, #:lower16:device
+ 204 0114 C0F20003 		movt	r3, #:upper16:device
+ 205 0118 4FF02C01 		mov	r1, #44
+ 206 011c 01FB02F2 		mul	r2, r1, r2
+ 207 0120 9A18     		adds	r2, r3, r2
+ 208 0122 137A     		ldrb	r3, [r2, #8]
+ 209 0124 6FF38203 		bfc	r3, #2, #1
+ 210 0128 1372     		strb	r3, [r2, #8]
+ 140:../Dave/Generated/src/USBD/usbd/usbd.c **** 				device.Driver->EndpointStall(USB_ControlRequest.wIndex,0);
+ 211              		.loc 1 140 0
+ 212 012a 40F20003 		movw	r3, #:lower16:device
+ 213 012e C0F20003 		movt	r3, #:upper16:device
+ 214 0132 1B68     		ldr	r3, [r3, #0]
+ 215 0134 5A6A     		ldr	r2, [r3, #36]
+ 216 0136 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 217 013a C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 218 013e 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 219 0140 9BB2     		uxth	r3, r3
+ 220 0142 DBB2     		uxtb	r3, r3
+ 221 0144 1846     		mov	r0, r3
+ 222 0146 4FF00001 		mov	r1, #0
+ 223 014a 9047     		blx	r2
+ 141:../Dave/Generated/src/USBD/usbd/usbd.c **** 			} else {
+ 142:../Dave/Generated/src/USBD/usbd/usbd.c **** 				USBD_HandleEP0_Stall();
+ 143:../Dave/Generated/src/USBD/usbd/usbd.c **** 			}
+ 144:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 224              		.loc 1 144 0
+ 225 014c 86E2     		b	.L22
+ 226              	.L20:
+ 142:../Dave/Generated/src/USBD/usbd/usbd.c **** 				USBD_HandleEP0_Stall();
+ 227              		.loc 1 142 0
+ 228 014e FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 229              		.loc 1 144 0
+ 230 0152 83E2     		b	.L22
+ 231              	.L18:
+ 145:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 146:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if ((USB_ControlRequest.bmRequestType & REQ_RECIPIENT_MASK) ==
+ 232              		.loc 1 146 0
+ 233 0154 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 234 0158 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 235 015c 1B78     		ldrb	r3, [r3, #0]
+ 236 015e DBB2     		uxtb	r3, r3
+ 237 0160 03F00303 		and	r3, r3, #3
+ 238 0164 002B     		cmp	r3, #0
+ 239 0166 0AD1     		bne	.L23
+ 147:../Dave/Generated/src/USBD/usbd/usbd.c **** 														REQREC_DEVICE)
+ 148:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 149:../Dave/Generated/src/USBD/usbd/usbd.c **** 			 device.RemoteWakeUp = 0;
+ 240              		.loc 1 149 0
+ 241 0168 40F20003 		movw	r3, #:lower16:device
+ 242 016c C0F20003 		movt	r3, #:upper16:device
+ 243 0170 93F83E21 		ldrb	r2, [r3, #318]
+ 244 0174 6FF38202 		bfc	r2, #2, #1
+ 245 0178 83F83E21 		strb	r2, [r3, #318]
+ 150:../Dave/Generated/src/USBD/usbd/usbd.c **** 			 break;
+ 246              		.loc 1 150 0
+ 247 017c 6EE2     		b	.L22
+ 248              	.L23:
+ 151:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 152:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USBD_HandleEP0_Stall();
+ 249              		.loc 1 152 0
+ 250 017e FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 153:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 251              		.loc 1 153 0
+ 252 0182 6BE2     		b	.L22
+ 253              	.L12:
+ 154:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 155:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_GetConfiguration:
+ 156:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Driver->EndpointWrite(0,&device.Configuration,1);
+ 254              		.loc 1 156 0
+ 255 0184 40F20003 		movw	r3, #:lower16:device
+ 256 0188 C0F20003 		movt	r3, #:upper16:device
+ 257 018c 1B68     		ldr	r3, [r3, #0]
+ 258 018e 1B6B     		ldr	r3, [r3, #48]
+ 259 0190 4FF00000 		mov	r0, #0
+ 260 0194 B449     		ldr	r1, .L58
+ 261 0196 4FF00102 		mov	r2, #1
+ 262 019a 9847     		blx	r3
+ 157:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 263              		.loc 1 157 0
+ 264 019c 5EE2     		b	.L22
+ 265              	.L10:
+ 158:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 159:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_GetDescriptor:
+ 160:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if(device.evnts->GetDescriptor != NULL)
+ 266              		.loc 1 160 0
+ 267 019e 40F20003 		movw	r3, #:lower16:device
+ 268 01a2 C0F20003 		movt	r3, #:upper16:device
+ 269 01a6 D3F84031 		ldr	r3, [r3, #320]
+ 270 01aa 5B69     		ldr	r3, [r3, #20]
+ 271 01ac 002B     		cmp	r3, #0
+ 272 01ae 1AD0     		beq	.L24
+ 161:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 162:../Dave/Generated/src/USBD/usbd/usbd.c **** 			length = device.evnts->GetDescriptor(USB_ControlRequest.wValue,
+ 273              		.loc 1 162 0
+ 274 01b0 40F20003 		movw	r3, #:lower16:device
+ 275 01b4 C0F20003 		movt	r3, #:upper16:device
+ 276 01b8 D3F84031 		ldr	r3, [r3, #320]
+ 277 01bc 5C69     		ldr	r4, [r3, #20]
+ 278 01be 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 279 01c2 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 280 01c6 5B88     		ldrh	r3, [r3, #2]	@ movhi
+ 281 01c8 99B2     		uxth	r1, r3
+ 282 01ca 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 283 01ce C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 284 01d2 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 285 01d4 9AB2     		uxth	r2, r3
+ 286 01d6 07F10403 		add	r3, r7, #4
+ 287 01da 0846     		mov	r0, r1
+ 288 01dc 1146     		mov	r1, r2
+ 289 01de 1A46     		mov	r2, r3
+ 290 01e0 A047     		blx	r4
+ 291 01e2 0346     		mov	r3, r0
+ 292 01e4 7B61     		str	r3, [r7, #20]
+ 293              	.L24:
+ 163:../Dave/Generated/src/USBD/usbd/usbd.c **** 								USB_ControlRequest.wIndex,(void*)&buffer);
+ 164:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 165:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 166:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (length==0)
+ 294              		.loc 1 166 0
+ 295 01e6 7B69     		ldr	r3, [r7, #20]
+ 296 01e8 002B     		cmp	r3, #0
+ 297 01ea 02D1     		bne	.L25
+ 167:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USBD_HandleEP0_Stall();
+ 298              		.loc 1 167 0
+ 299 01ec FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 168:../Dave/Generated/src/USBD/usbd/usbd.c **** 		else {
+ 169:../Dave/Generated/src/USBD/usbd/usbd.c **** 			if(length < USB_ControlRequest.wLength)
+ 170:../Dave/Generated/src/USBD/usbd/usbd.c **** 			{
+ 171:../Dave/Generated/src/USBD/usbd/usbd.c **** 				length = length;
+ 172:../Dave/Generated/src/USBD/usbd/usbd.c **** 			}
+ 173:../Dave/Generated/src/USBD/usbd/usbd.c **** 			else
+ 174:../Dave/Generated/src/USBD/usbd/usbd.c **** 			{
+ 175:../Dave/Generated/src/USBD/usbd/usbd.c **** 				length = USB_ControlRequest.wLength;
+ 176:../Dave/Generated/src/USBD/usbd/usbd.c **** 			}
+ 177:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 178:../Dave/Generated/src/USBD/usbd/usbd.c **** 			ret = device.Driver->EndpointWrite(0,buffer,length);
+ 179:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Endpoints[0].InDataLeft = length - ret;
+ 180:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Endpoints[0].InDataBuffer = (uint8_t *)buffer + ret;
+ 181:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 182:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 300              		.loc 1 182 0
+ 301 01f0 34E2     		b	.L22
+ 302              	.L25:
+ 169:../Dave/Generated/src/USBD/usbd/usbd.c **** 			if(length < USB_ControlRequest.wLength)
+ 303              		.loc 1 169 0
+ 304 01f2 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 305 01f6 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 306 01fa DB88     		ldrh	r3, [r3, #6]	@ movhi
+ 307 01fc 9BB2     		uxth	r3, r3
+ 308 01fe 1A46     		mov	r2, r3
+ 309 0200 7B69     		ldr	r3, [r7, #20]
+ 310 0202 9A42     		cmp	r2, r3
+ 311 0204 07D8     		bhi	.L53
+ 312              	.L27:
+ 175:../Dave/Generated/src/USBD/usbd/usbd.c **** 				length = USB_ControlRequest.wLength;
+ 313              		.loc 1 175 0
+ 314 0206 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 315 020a C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 316 020e DB88     		ldrh	r3, [r3, #6]	@ movhi
+ 317 0210 9BB2     		uxth	r3, r3
+ 318 0212 7B61     		str	r3, [r7, #20]
+ 319 0214 00E0     		b	.L28
+ 320              	.L53:
+ 171:../Dave/Generated/src/USBD/usbd/usbd.c **** 				length = length;
+ 321              		.loc 1 171 0
+ 322 0216 00BF     		nop
+ 323              	.L28:
+ 178:../Dave/Generated/src/USBD/usbd/usbd.c **** 			ret = device.Driver->EndpointWrite(0,buffer,length);
+ 324              		.loc 1 178 0
+ 325 0218 40F20003 		movw	r3, #:lower16:device
+ 326 021c C0F20003 		movt	r3, #:upper16:device
+ 327 0220 1B68     		ldr	r3, [r3, #0]
+ 328 0222 1B6B     		ldr	r3, [r3, #48]
+ 329 0224 7A68     		ldr	r2, [r7, #4]
+ 330 0226 4FF00000 		mov	r0, #0
+ 331 022a 1146     		mov	r1, r2
+ 332 022c 7A69     		ldr	r2, [r7, #20]
+ 333 022e 9847     		blx	r3
+ 334 0230 0346     		mov	r3, r0
+ 335 0232 FB60     		str	r3, [r7, #12]
+ 179:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Endpoints[0].InDataLeft = length - ret;
+ 336              		.loc 1 179 0
+ 337 0234 7A69     		ldr	r2, [r7, #20]
+ 338 0236 FB68     		ldr	r3, [r7, #12]
+ 339 0238 D21A     		subs	r2, r2, r3
+ 340 023a 40F20003 		movw	r3, #:lower16:device
+ 341 023e C0F20003 		movt	r3, #:upper16:device
+ 342 0242 9A62     		str	r2, [r3, #40]
+ 180:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Endpoints[0].InDataBuffer = (uint8_t *)buffer + ret;
+ 343              		.loc 1 180 0
+ 344 0244 7A68     		ldr	r2, [r7, #4]
+ 345 0246 FB68     		ldr	r3, [r7, #12]
+ 346 0248 D218     		adds	r2, r2, r3
+ 347 024a 40F20003 		movw	r3, #:lower16:device
+ 348 024e C0F20003 		movt	r3, #:upper16:device
+ 349 0252 DA62     		str	r2, [r3, #44]
+ 350              		.loc 1 182 0
+ 351 0254 02E2     		b	.L22
+ 352              	.L14:
+ 183:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 184:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_GetInterface:
+ 185:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (USB_DeviceState == DEVICE_STATE_Configured) {
+ 353              		.loc 1 185 0
+ 354 0256 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 355 025a C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 356 025e 1B78     		ldrb	r3, [r3, #0]
+ 357 0260 DBB2     		uxtb	r3, r3
+ 358 0262 042B     		cmp	r3, #4
+ 359 0264 19D1     		bne	.L29
+ 186:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Driver->EndpointWrite(0,
+ 360              		.loc 1 186 0
+ 361 0266 40F20003 		movw	r3, #:lower16:device
+ 362 026a C0F20003 		movt	r3, #:upper16:device
+ 363 026e 1B68     		ldr	r3, [r3, #0]
+ 364 0270 1C6B     		ldr	r4, [r3, #48]
+ 187:../Dave/Generated/src/USBD/usbd/usbd.c **** 					&device.InterfaceSettings[USB_ControlRequest.wIndex],1);
+ 365              		.loc 1 187 0
+ 366 0272 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 367 0276 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 368 027a 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 369 027c 9BB2     		uxth	r3, r3
+ 370 027e 03F59C72 		add	r2, r3, #312
+ 371 0282 40F20003 		movw	r3, #:lower16:device
+ 372 0286 C0F20003 		movt	r3, #:upper16:device
+ 373 028a D318     		adds	r3, r2, r3
+ 186:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Driver->EndpointWrite(0,
+ 374              		.loc 1 186 0
+ 375 028c 4FF00000 		mov	r0, #0
+ 376 0290 1946     		mov	r1, r3
+ 377 0292 4FF00102 		mov	r2, #1
+ 378 0296 A047     		blx	r4
+ 188:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 379              		.loc 1 188 0
+ 380 0298 E0E1     		b	.L22
+ 381              	.L29:
+ 189:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 190:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (USB_DeviceState == DEVICE_STATE_Addressed) {
+ 382              		.loc 1 190 0
+ 383 029a 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 384 029e C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 385 02a2 1B78     		ldrb	r3, [r3, #0]
+ 386 02a4 DBB2     		uxtb	r3, r3
+ 387 02a6 032B     		cmp	r3, #3
+ 388 02a8 40F0D381 		bne	.L54
+ 191:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USBD_HandleEP0_Stall();
+ 389              		.loc 1 191 0
+ 390 02ac FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 192:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 391              		.loc 1 192 0
+ 392 02b0 D4E1     		b	.L22
+ 393              	.L6:
+ 193:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 194:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 195:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 196:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_GetStatus:
+ 197:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if ((USB_ControlRequest.bmRequestType & REQ_RECIPIENT_MASK) ==
+ 394              		.loc 1 197 0
+ 395 02b2 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 396 02b6 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 397 02ba 1B78     		ldrb	r3, [r3, #0]
+ 398 02bc DBB2     		uxtb	r3, r3
+ 399 02be 03F00303 		and	r3, r3, #3
+ 400 02c2 002B     		cmp	r3, #0
+ 401 02c4 27D1     		bne	.L31
+ 198:../Dave/Generated/src/USBD/usbd/usbd.c **** 														REQREC_DEVICE)
+ 199:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 200:../Dave/Generated/src/USBD/usbd/usbd.c **** 			status = device.RemoteWakeUp << 1 | device.SelfPowered;
+ 402              		.loc 1 200 0
+ 403 02c6 40F20003 		movw	r3, #:lower16:device
+ 404 02ca C0F20003 		movt	r3, #:upper16:device
+ 405 02ce 93F83E31 		ldrb	r3, [r3, #318]
+ 406 02d2 C3F38003 		ubfx	r3, r3, #2, #1
+ 407 02d6 DBB2     		uxtb	r3, r3
+ 408 02d8 4FEA4303 		lsl	r3, r3, #1
+ 409 02dc 9AB2     		uxth	r2, r3
+ 410 02de 40F20003 		movw	r3, #:lower16:device
+ 411 02e2 C0F20003 		movt	r3, #:upper16:device
+ 412 02e6 93F83E31 		ldrb	r3, [r3, #318]
+ 413 02ea C3F3C003 		ubfx	r3, r3, #3, #1
+ 414 02ee DBB2     		uxtb	r3, r3
+ 415 02f0 1343     		orrs	r3, r3, r2
+ 416 02f2 9BB2     		uxth	r3, r3
+ 417 02f4 9BB2     		uxth	r3, r3
+ 418 02f6 7B81     		strh	r3, [r7, #10]	@ movhi
+ 201:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Driver->EndpointWrite(0,(uint8_t*)&status,2);
+ 419              		.loc 1 201 0
+ 420 02f8 40F20003 		movw	r3, #:lower16:device
+ 421 02fc C0F20003 		movt	r3, #:upper16:device
+ 422 0300 1B68     		ldr	r3, [r3, #0]
+ 423 0302 1B6B     		ldr	r3, [r3, #48]
+ 424 0304 07F10A02 		add	r2, r7, #10
+ 425 0308 4FF00000 		mov	r0, #0
+ 426 030c 1146     		mov	r1, r2
+ 427 030e 4FF00202 		mov	r2, #2
+ 428 0312 9847     		blx	r3
+ 202:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 429              		.loc 1 202 0
+ 430 0314 A2E1     		b	.L22
+ 431              	.L31:
+ 203:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 204:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (((USB_ControlRequest.bmRequestType & REQ_RECIPIENT_MASK)
+ 432              		.loc 1 204 0
+ 433 0316 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 434 031a C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 435 031e 1B78     		ldrb	r3, [r3, #0]
+ 436 0320 DBB2     		uxtb	r3, r3
+ 437 0322 03F00303 		and	r3, r3, #3
+ 438 0326 012B     		cmp	r3, #1
+ 439 0328 19D1     		bne	.L32
+ 205:../Dave/Generated/src/USBD/usbd/usbd.c **** 				== REQREC_INTERFACE) &&
+ 206:../Dave/Generated/src/USBD/usbd/usbd.c **** 				(USB_DeviceState == DEVICE_STATE_Configured))
+ 440              		.loc 1 206 0
+ 441 032a 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 442 032e C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 443 0332 1B78     		ldrb	r3, [r3, #0]
+ 444 0334 DBB2     		uxtb	r3, r3
+ 205:../Dave/Generated/src/USBD/usbd/usbd.c **** 				== REQREC_INTERFACE) &&
+ 445              		.loc 1 205 0
+ 446 0336 042B     		cmp	r3, #4
+ 447 0338 11D1     		bne	.L32
+ 207:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 208:../Dave/Generated/src/USBD/usbd/usbd.c **** 			status = 0;
+ 448              		.loc 1 208 0
+ 449 033a 4FF00003 		mov	r3, #0
+ 450 033e 7B81     		strh	r3, [r7, #10]	@ movhi
+ 209:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Driver->EndpointWrite(0,(uint8_t*)&status,2);
+ 451              		.loc 1 209 0
+ 452 0340 40F20003 		movw	r3, #:lower16:device
+ 453 0344 C0F20003 		movt	r3, #:upper16:device
+ 454 0348 1B68     		ldr	r3, [r3, #0]
+ 455 034a 1B6B     		ldr	r3, [r3, #48]
+ 456 034c 07F10A02 		add	r2, r7, #10
+ 457 0350 4FF00000 		mov	r0, #0
+ 458 0354 1146     		mov	r1, r2
+ 459 0356 4FF00202 		mov	r2, #2
+ 460 035a 9847     		blx	r3
+ 210:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 461              		.loc 1 210 0
+ 462 035c 7EE1     		b	.L22
+ 463              	.L32:
+ 211:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 212:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* print endpoint status only when(or):
+ 213:../Dave/Generated/src/USBD/usbd/usbd.c **** 		 * - Device_Address_state and ep == 0
+ 214:../Dave/Generated/src/USBD/usbd/usbd.c **** 		 * - Device_configured_state and ep is configured
+ 215:../Dave/Generated/src/USBD/usbd/usbd.c **** 		 */
+ 216:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if ((USB_ControlRequest.bmRequestType & REQ_RECIPIENT_MASK) ==
+ 464              		.loc 1 216 0
+ 465 035e 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 466 0362 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 467 0366 1B78     		ldrb	r3, [r3, #0]
+ 468 0368 DBB2     		uxtb	r3, r3
+ 469 036a 03F00303 		and	r3, r3, #3
+ 470 036e 022B     		cmp	r3, #2
+ 471 0370 46D1     		bne	.L33
+ 217:../Dave/Generated/src/USBD/usbd/usbd.c **** 													REQREC_ENDPOINT)
+ 218:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 219:../Dave/Generated/src/USBD/usbd/usbd.c **** 			Index = USB_ControlRequest.wIndex & 0xFF & ENDPOINT_EPNUM_MASK;
+ 472              		.loc 1 219 0
+ 473 0372 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 474 0376 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 475 037a 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 476 037c 9BB2     		uxth	r3, r3
+ 477 037e 03F00F03 		and	r3, r3, #15
+ 478 0382 3B82     		strh	r3, [r7, #16]	@ movhi
+ 220:../Dave/Generated/src/USBD/usbd/usbd.c **** 			if ((USB_DeviceState == DEVICE_STATE_Configured ||
+ 479              		.loc 1 220 0
+ 480 0384 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 481 0388 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 482 038c 1B78     		ldrb	r3, [r3, #0]
+ 483 038e DBB2     		uxtb	r3, r3
+ 484 0390 042B     		cmp	r3, #4
+ 485 0392 07D0     		beq	.L34
+ 221:../Dave/Generated/src/USBD/usbd/usbd.c **** 					USB_ControlRequest.wIndex==0) &&
+ 486              		.loc 1 221 0 discriminator 1
+ 487 0394 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 488 0398 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 489 039c 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 490 039e 9BB2     		uxth	r3, r3
+ 220:../Dave/Generated/src/USBD/usbd/usbd.c **** 			if ((USB_DeviceState == DEVICE_STATE_Configured ||
+ 491              		.loc 1 220 0 discriminator 1
+ 492 03a0 002B     		cmp	r3, #0
+ 493 03a2 2DD1     		bne	.L33
+ 494              	.L34:
+ 222:../Dave/Generated/src/USBD/usbd/usbd.c **** 					device.Endpoints[Index].IsConfigured==1)
+ 495              		.loc 1 222 0
+ 496 03a4 3A8A     		ldrh	r2, [r7, #16]
+ 497 03a6 40F20003 		movw	r3, #:lower16:device
+ 498 03aa C0F20003 		movt	r3, #:upper16:device
+ 499 03ae 4FF02C01 		mov	r1, #44
+ 500 03b2 01FB02F2 		mul	r2, r1, r2
+ 501 03b6 9B18     		adds	r3, r3, r2
+ 502 03b8 1B7A     		ldrb	r3, [r3, #8]
+ 503 03ba C3F30003 		ubfx	r3, r3, #0, #1
+ 504 03be DBB2     		uxtb	r3, r3
+ 221:../Dave/Generated/src/USBD/usbd/usbd.c **** 					USB_ControlRequest.wIndex==0) &&
+ 505              		.loc 1 221 0
+ 506 03c0 012B     		cmp	r3, #1
+ 507 03c2 1DD1     		bne	.L33
+ 223:../Dave/Generated/src/USBD/usbd/usbd.c **** 			{
+ 224:../Dave/Generated/src/USBD/usbd/usbd.c **** 				status = device.Endpoints[Index].IsHalted;
+ 508              		.loc 1 224 0
+ 509 03c4 3A8A     		ldrh	r2, [r7, #16]
+ 510 03c6 40F20003 		movw	r3, #:lower16:device
+ 511 03ca C0F20003 		movt	r3, #:upper16:device
+ 512 03ce 4FF02C01 		mov	r1, #44
+ 513 03d2 01FB02F2 		mul	r2, r1, r2
+ 514 03d6 9B18     		adds	r3, r3, r2
+ 515 03d8 1B7A     		ldrb	r3, [r3, #8]
+ 516 03da C3F38003 		ubfx	r3, r3, #2, #1
+ 517 03de DBB2     		uxtb	r3, r3
+ 518 03e0 7B81     		strh	r3, [r7, #10]	@ movhi
+ 225:../Dave/Generated/src/USBD/usbd/usbd.c **** 				device.Driver->EndpointWrite(0,(uint8_t*)&status,2);
+ 519              		.loc 1 225 0
+ 520 03e2 40F20003 		movw	r3, #:lower16:device
+ 521 03e6 C0F20003 		movt	r3, #:upper16:device
+ 522 03ea 1B68     		ldr	r3, [r3, #0]
+ 523 03ec 1B6B     		ldr	r3, [r3, #48]
+ 524 03ee 07F10A02 		add	r2, r7, #10
+ 525 03f2 4FF00000 		mov	r0, #0
+ 526 03f6 1146     		mov	r1, r2
+ 527 03f8 4FF00202 		mov	r2, #2
+ 528 03fc 9847     		blx	r3
+ 226:../Dave/Generated/src/USBD/usbd/usbd.c **** 				break;
+ 529              		.loc 1 226 0
+ 530 03fe 2DE1     		b	.L22
+ 531              	.L33:
+ 227:../Dave/Generated/src/USBD/usbd/usbd.c **** 			}
+ 228:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 229:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* default stall */
+ 230:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USBD_HandleEP0_Stall();
+ 532              		.loc 1 230 0
+ 533 0400 FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 231:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 534              		.loc 1 231 0
+ 535 0404 2AE1     		b	.L22
+ 536              	.L9:
+ 232:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 233:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_SetAddress:
+ 234:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (Value == 0)
+ 537              		.loc 1 234 0
+ 538 0406 FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 539 0408 002B     		cmp	r3, #0
+ 540 040a 07D1     		bne	.L35
+ 235:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USB_DeviceState = DEVICE_STATE_Default;
+ 541              		.loc 1 235 0
+ 542 040c 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 543 0410 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 544 0414 4FF00202 		mov	r2, #2
+ 545 0418 1A70     		strb	r2, [r3, #0]
+ 546 041a 06E0     		b	.L36
+ 547              	.L35:
+ 236:../Dave/Generated/src/USBD/usbd/usbd.c **** 		else
+ 237:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USB_DeviceState = DEVICE_STATE_Addressed;
+ 548              		.loc 1 237 0
+ 549 041c 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 550 0420 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 551 0424 4FF00302 		mov	r2, #3
+ 552 0428 1A70     		strb	r2, [r3, #0]
+ 553              	.L36:
+ 238:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Driver->DeviceSetAddress(Value,USB_USBD_SET_ADDRESS_SETUP);
+ 554              		.loc 1 238 0
+ 555 042a 40F20003 		movw	r3, #:lower16:device
+ 556 042e C0F20003 		movt	r3, #:upper16:device
+ 557 0432 1B68     		ldr	r3, [r3, #0]
+ 558 0434 9B69     		ldr	r3, [r3, #24]
+ 559 0436 FA7C     		ldrb	r2, [r7, #19]	@ zero_extendqisi2
+ 560 0438 1046     		mov	r0, r2
+ 561 043a 4FF00001 		mov	r1, #0
+ 562 043e 9847     		blx	r3
+ 239:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if(device.evnts->AddressSet != NULL)
+ 563              		.loc 1 239 0
+ 564 0440 40F20003 		movw	r3, #:lower16:device
+ 565 0444 C0F20003 		movt	r3, #:upper16:device
+ 566 0448 D3F84031 		ldr	r3, [r3, #320]
+ 567 044c 1B69     		ldr	r3, [r3, #16]
+ 568 044e 002B     		cmp	r3, #0
+ 569 0450 00F00181 		beq	.L55
+ 240:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 241:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.evnts->AddressSet();
+ 570              		.loc 1 241 0
+ 571 0454 40F20003 		movw	r3, #:lower16:device
+ 572 0458 C0F20003 		movt	r3, #:upper16:device
+ 573 045c D3F84031 		ldr	r3, [r3, #320]
+ 574 0460 1B69     		ldr	r3, [r3, #16]
+ 575 0462 9847     		blx	r3
+ 242:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 243:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 576              		.loc 1 243 0
+ 577 0464 F7E0     		b	.L55
+ 578              	.L59:
+ 579 0466 00BF     		.align	2
+ 580              	.L58:
+ 581 0468 39010000 		.word	device+313
+ 582              	.L13:
+ 244:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 245:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_SetConfiguration:
+ 246:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* Regardless the state update the configuration to unconfigure
+ 247:../Dave/Generated/src/USBD/usbd/usbd.c **** 		 * endpoints */
+ 248:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Configuration = Value;
+ 583              		.loc 1 248 0
+ 584 046c 40F20003 		movw	r3, #:lower16:device
+ 585 0470 C0F20003 		movt	r3, #:upper16:device
+ 586 0474 FA7C     		ldrb	r2, [r7, #19]
+ 587 0476 83F83921 		strb	r2, [r3, #313]
+ 249:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if(device.evnts->ConfigChanged != NULL)
+ 588              		.loc 1 249 0
+ 589 047a 40F20003 		movw	r3, #:lower16:device
+ 590 047e C0F20003 		movt	r3, #:upper16:device
+ 591 0482 D3F84031 		ldr	r3, [r3, #320]
+ 592 0486 9B68     		ldr	r3, [r3, #8]
+ 593 0488 002B     		cmp	r3, #0
+ 594 048a 07D0     		beq	.L38
+ 250:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 251:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.evnts->ConfigChanged();
+ 595              		.loc 1 251 0
+ 596 048c 40F20003 		movw	r3, #:lower16:device
+ 597 0490 C0F20003 		movt	r3, #:upper16:device
+ 598 0494 D3F84031 		ldr	r3, [r3, #320]
+ 599 0498 9B68     		ldr	r3, [r3, #8]
+ 600 049a 9847     		blx	r3
+ 601              	.L38:
+ 252:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 253:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 254:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* when config 0 is choosen, we are back in address state */
+ 255:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (Value == 0) {
+ 602              		.loc 1 255 0
+ 603 049c FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 604 049e 002B     		cmp	r3, #0
+ 605 04a0 07D1     		bne	.L39
+ 256:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USB_DeviceState = DEVICE_STATE_Addressed;
+ 606              		.loc 1 256 0
+ 607 04a2 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 608 04a6 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 609 04aa 4FF00302 		mov	r2, #3
+ 610 04ae 1A70     		strb	r2, [r3, #0]
+ 257:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 611              		.loc 1 257 0
+ 612 04b0 D4E0     		b	.L22
+ 613              	.L39:
+ 258:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 259:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* go ahead only with vailid config. (must be set in event) */
+ 260:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (device.IsConfigured == 1)
+ 614              		.loc 1 260 0
+ 615 04b2 40F20003 		movw	r3, #:lower16:device
+ 616 04b6 C0F20003 		movt	r3, #:upper16:device
+ 617 04ba 93F83E31 		ldrb	r3, [r3, #318]	@ zero_extendqisi2
+ 618 04be 03F00103 		and	r3, r3, #1
+ 619 04c2 DBB2     		uxtb	r3, r3
+ 620 04c4 002B     		cmp	r3, #0
+ 621 04c6 07D0     		beq	.L40
+ 261:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USB_DeviceState = DEVICE_STATE_Configured;
+ 622              		.loc 1 261 0
+ 623 04c8 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 624 04cc C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 625 04d0 4FF00402 		mov	r2, #4
+ 626 04d4 1A70     		strb	r2, [r3, #0]
+ 262:../Dave/Generated/src/USBD/usbd/usbd.c **** 		else
+ 263:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USBD_HandleEP0_Stall();
+ 264:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 627              		.loc 1 264 0
+ 628 04d6 C1E0     		b	.L22
+ 629              	.L40:
+ 263:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USBD_HandleEP0_Stall();
+ 630              		.loc 1 263 0
+ 631 04d8 FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 632              		.loc 1 264 0
+ 633 04dc BEE0     		b	.L22
+ 634              	.L11:
+ 265:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 266:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_SetDescriptor:
+ 267:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* Set Descriptor not supported, so stall */
+ 268:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USBD_HandleEP0_Stall();
+ 635              		.loc 1 268 0
+ 636 04de FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 269:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 637              		.loc 1 269 0
+ 638 04e2 BBE0     		b	.L22
+ 639              	.L15:
+ 270:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 271:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_SetInterface:
+ 272:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (USB_DeviceState == DEVICE_STATE_Configured) {
+ 640              		.loc 1 272 0
+ 641 04e4 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 642 04e8 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 643 04ec 1B78     		ldrb	r3, [r3, #0]
+ 644 04ee DBB2     		uxtb	r3, r3
+ 645 04f0 042B     		cmp	r3, #4
+ 646 04f2 15D1     		bne	.L42
+ 273:../Dave/Generated/src/USBD/usbd/usbd.c **** 			/* TODO: Check if interface and altsetting exists and configuration
+ 274:../Dave/Generated/src/USBD/usbd/usbd.c **** 			 * is allowed, else stall */
+ 275:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.InterfaceSettings[USB_ControlRequest.wIndex] =
+ 647              		.loc 1 275 0
+ 648 04f4 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 649 04f8 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 650 04fc 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 651 04fe 9BB2     		uxth	r3, r3
+ 652 0500 1946     		mov	r1, r3
+ 276:../Dave/Generated/src/USBD/usbd/usbd.c **** 											USB_ControlRequest.wValue;
+ 653              		.loc 1 276 0
+ 654 0502 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 655 0506 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 656 050a 5B88     		ldrh	r3, [r3, #2]	@ movhi
+ 657 050c 9BB2     		uxth	r3, r3
+ 275:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.InterfaceSettings[USB_ControlRequest.wIndex] =
+ 658              		.loc 1 275 0
+ 659 050e DAB2     		uxtb	r2, r3
+ 660 0510 40F20003 		movw	r3, #:lower16:device
+ 661 0514 C0F20003 		movt	r3, #:upper16:device
+ 662 0518 5B18     		adds	r3, r3, r1
+ 663 051a 83F83821 		strb	r2, [r3, #312]
+ 277:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 664              		.loc 1 277 0
+ 665 051e 9DE0     		b	.L22
+ 666              	.L42:
+ 278:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 279:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (USB_DeviceState == DEVICE_STATE_Addressed) {
+ 667              		.loc 1 279 0
+ 668 0520 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 669 0524 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 670 0528 1B78     		ldrb	r3, [r3, #0]
+ 671 052a DBB2     		uxtb	r3, r3
+ 672 052c 032B     		cmp	r3, #3
+ 673 052e 40F09480 		bne	.L56
+ 280:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USBD_HandleEP0_Stall();
+ 674              		.loc 1 280 0
+ 675 0532 FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 281:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 676              		.loc 1 281 0
+ 677 0536 91E0     		b	.L22
+ 678              	.L8:
+ 282:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 283:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 284:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 285:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_SetFeature:
+ 286:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* we do not support test mode */
+ 287:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (Value == FEATURE_SEL_TestMode) {
+ 679              		.loc 1 287 0
+ 680 0538 FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 681 053a 022B     		cmp	r3, #2
+ 682 053c 02D1     		bne	.L44
+ 288:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USBD_HandleEP0_Stall();
+ 683              		.loc 1 288 0
+ 684 053e FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 289:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 685              		.loc 1 289 0
+ 686 0542 8BE0     		b	.L22
+ 687              	.L44:
+ 290:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 291:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* configured state */
+ 292:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (USB_DeviceState == DEVICE_STATE_Configured) {
+ 688              		.loc 1 292 0
+ 689 0544 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 690 0548 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 691 054c 1B78     		ldrb	r3, [r3, #0]
+ 692 054e DBB2     		uxtb	r3, r3
+ 693 0550 042B     		cmp	r3, #4
+ 694 0552 4CD1     		bne	.L45
+ 293:../Dave/Generated/src/USBD/usbd/usbd.c **** 			switch (Value) {
+ 695              		.loc 1 293 0
+ 696 0554 FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 697 0556 002B     		cmp	r3, #0
+ 698 0558 0CD0     		beq	.L47
+ 699 055a 012B     		cmp	r3, #1
+ 700 055c 46D1     		bne	.L46
+ 701              	.L48:
+ 294:../Dave/Generated/src/USBD/usbd/usbd.c **** 			case FEATURE_SEL_DeviceRemoteWakeup:
+ 295:../Dave/Generated/src/USBD/usbd/usbd.c **** 				device.RemoteWakeUp = 1;
+ 702              		.loc 1 295 0
+ 703 055e 40F20003 		movw	r3, #:lower16:device
+ 704 0562 C0F20003 		movt	r3, #:upper16:device
+ 705 0566 93F83E21 		ldrb	r2, [r3, #318]
+ 706 056a 42F00402 		orr	r2, r2, #4
+ 707 056e 83F83E21 		strb	r2, [r3, #318]
+ 296:../Dave/Generated/src/USBD/usbd/usbd.c **** 				break;
+ 708              		.loc 1 296 0
+ 709 0572 3BE0     		b	.L46
+ 710              	.L47:
+ 297:../Dave/Generated/src/USBD/usbd/usbd.c **** 			case FEATURE_SEL_EndpointHalt:
+ 298:../Dave/Generated/src/USBD/usbd/usbd.c **** 				Index = USB_ControlRequest.wIndex & 0xFF & USB_EP_NUM_MASK;
+ 711              		.loc 1 298 0
+ 712 0574 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 713 0578 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 714 057c 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 715 057e 9BB2     		uxth	r3, r3
+ 716 0580 03F00F03 		and	r3, r3, #15
+ 717 0584 3B82     		strh	r3, [r7, #16]	@ movhi
+ 299:../Dave/Generated/src/USBD/usbd/usbd.c **** 				if (device.Endpoints[Index].IsConfigured == 0)
+ 718              		.loc 1 299 0
+ 719 0586 3A8A     		ldrh	r2, [r7, #16]
+ 720 0588 40F20003 		movw	r3, #:lower16:device
+ 721 058c C0F20003 		movt	r3, #:upper16:device
+ 722 0590 4FF02C01 		mov	r1, #44
+ 723 0594 01FB02F2 		mul	r2, r1, r2
+ 724 0598 9B18     		adds	r3, r3, r2
+ 725 059a 1B7A     		ldrb	r3, [r3, #8]
+ 726 059c C3F30003 		ubfx	r3, r3, #0, #1
+ 727 05a0 DBB2     		uxtb	r3, r3
+ 728 05a2 002B     		cmp	r3, #0
+ 729 05a4 02D1     		bne	.L49
+ 300:../Dave/Generated/src/USBD/usbd/usbd.c **** 					USBD_HandleEP0_Stall();
+ 730              		.loc 1 300 0
+ 731 05a6 FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 301:../Dave/Generated/src/USBD/usbd/usbd.c **** 				else {
+ 302:../Dave/Generated/src/USBD/usbd/usbd.c **** 					device.Endpoints[Index].IsHalted = 1;
+ 303:../Dave/Generated/src/USBD/usbd/usbd.c **** 					device.Driver->EndpointStall(USB_ControlRequest.wIndex,1);
+ 304:../Dave/Generated/src/USBD/usbd/usbd.c **** 				}
+ 305:../Dave/Generated/src/USBD/usbd/usbd.c **** 				break;
+ 732              		.loc 1 305 0
+ 733 05aa 1EE0     		b	.L57
+ 734              	.L49:
+ 302:../Dave/Generated/src/USBD/usbd/usbd.c **** 					device.Endpoints[Index].IsHalted = 1;
+ 735              		.loc 1 302 0
+ 736 05ac 3A8A     		ldrh	r2, [r7, #16]
+ 737 05ae 40F20003 		movw	r3, #:lower16:device
+ 738 05b2 C0F20003 		movt	r3, #:upper16:device
+ 739 05b6 4FF02C01 		mov	r1, #44
+ 740 05ba 01FB02F2 		mul	r2, r1, r2
+ 741 05be 9A18     		adds	r2, r3, r2
+ 742 05c0 137A     		ldrb	r3, [r2, #8]
+ 743 05c2 43F00403 		orr	r3, r3, #4
+ 744 05c6 1372     		strb	r3, [r2, #8]
+ 303:../Dave/Generated/src/USBD/usbd/usbd.c **** 					device.Driver->EndpointStall(USB_ControlRequest.wIndex,1);
+ 745              		.loc 1 303 0
+ 746 05c8 40F20003 		movw	r3, #:lower16:device
+ 747 05cc C0F20003 		movt	r3, #:upper16:device
+ 748 05d0 1B68     		ldr	r3, [r3, #0]
+ 749 05d2 5A6A     		ldr	r2, [r3, #36]
+ 750 05d4 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 751 05d8 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 752 05dc 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 753 05de 9BB2     		uxth	r3, r3
+ 754 05e0 DBB2     		uxtb	r3, r3
+ 755 05e2 1846     		mov	r0, r3
+ 756 05e4 4FF00101 		mov	r1, #1
+ 757 05e8 9047     		blx	r2
+ 758              	.L57:
+ 759              		.loc 1 305 0
+ 760 05ea 00BF     		nop
+ 761              	.L46:
+ 306:../Dave/Generated/src/USBD/usbd/usbd.c **** 			}
+ 307:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 762              		.loc 1 307 0
+ 763 05ec 36E0     		b	.L22
+ 764              	.L45:
+ 308:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 309:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* when addressed, only ep0 can be halted */
+ 310:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (USB_DeviceState == DEVICE_STATE_Addressed) {
+ 765              		.loc 1 310 0
+ 766 05ee 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 767 05f2 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 768 05f6 1B78     		ldrb	r3, [r3, #0]
+ 769 05f8 DBB2     		uxtb	r3, r3
+ 770 05fa 032B     		cmp	r3, #3
+ 771 05fc 20D1     		bne	.L51
+ 311:../Dave/Generated/src/USBD/usbd/usbd.c **** 			if (Value == FEATURE_SEL_EndpointHalt &&
+ 772              		.loc 1 311 0
+ 773 05fe FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 774 0600 002B     		cmp	r3, #0
+ 775 0602 1DD1     		bne	.L51
+ 312:../Dave/Generated/src/USBD/usbd/usbd.c **** 					(USB_ControlRequest.bmRequestType & REQ_RECIPIENT_MASK) ==
+ 776              		.loc 1 312 0 discriminator 1
+ 777 0604 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 778 0608 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 779 060c 1B78     		ldrb	r3, [r3, #0]
+ 780 060e DBB2     		uxtb	r3, r3
+ 781 0610 03F00303 		and	r3, r3, #3
+ 311:../Dave/Generated/src/USBD/usbd/usbd.c **** 			if (Value == FEATURE_SEL_EndpointHalt &&
+ 782              		.loc 1 311 0 discriminator 1
+ 783 0614 022B     		cmp	r3, #2
+ 784 0616 13D1     		bne	.L51
+ 313:../Dave/Generated/src/USBD/usbd/usbd.c **** 											REQREC_ENDPOINT &&
+ 314:../Dave/Generated/src/USBD/usbd/usbd.c **** 					(USB_ControlRequest.wIndex & 0x00FF) == 0x0) {
+ 785              		.loc 1 314 0
+ 786 0618 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 787 061c C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 788 0620 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 789 0622 9BB2     		uxth	r3, r3
+ 790 0624 DBB2     		uxtb	r3, r3
+ 313:../Dave/Generated/src/USBD/usbd/usbd.c **** 											REQREC_ENDPOINT &&
+ 791              		.loc 1 313 0
+ 792 0626 002B     		cmp	r3, #0
+ 793 0628 0AD1     		bne	.L51
+ 315:../Dave/Generated/src/USBD/usbd/usbd.c **** 				device.Endpoints[0].IsHalted = 1;
+ 794              		.loc 1 315 0
+ 795 062a 40F20003 		movw	r3, #:lower16:device
+ 796 062e C0F20003 		movt	r3, #:upper16:device
+ 797 0632 1A7A     		ldrb	r2, [r3, #8]
+ 798 0634 42F00402 		orr	r2, r2, #4
+ 799 0638 1A72     		strb	r2, [r3, #8]
+ 316:../Dave/Generated/src/USBD/usbd/usbd.c **** 				USBD_HandleEP0_Stall();
+ 800              		.loc 1 316 0
+ 801 063a FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 317:../Dave/Generated/src/USBD/usbd/usbd.c **** 				break;
+ 802              		.loc 1 317 0
+ 803 063e 0DE0     		b	.L22
+ 804              	.L51:
+ 318:../Dave/Generated/src/USBD/usbd/usbd.c **** 			}
+ 319:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 320:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* default behaviour is stall */
+ 321:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USBD_HandleEP0_Stall();
+ 805              		.loc 1 321 0
+ 806 0640 FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 322:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 807              		.loc 1 322 0
+ 808 0644 0AE0     		b	.L22
+ 809              	.L16:
+ 323:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 324:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case REQ_SynchFrame:
+ 325:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* Not yet supported */
+ 326:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USBD_HandleEP0_Stall();
+ 810              		.loc 1 326 0
+ 811 0646 FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 327:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 812              		.loc 1 327 0
+ 813 064a 07E0     		b	.L22
+ 814              	.L5:
+ 328:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 329:../Dave/Generated/src/USBD/usbd/usbd.c **** 	default:
+ 330:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USBD_HandleEP0_Stall();
+ 815              		.loc 1 330 0
+ 816 064c FFF7FEFF 		bl	USBD_HandleEP0_Stall
+ 817 0650 04E0     		b	.L22
+ 818              	.L54:
+ 194:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 819              		.loc 1 194 0
+ 820 0652 00BF     		nop
+ 821 0654 02E0     		b	.L22
+ 822              	.L55:
+ 243:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 823              		.loc 1 243 0
+ 824 0656 00BF     		nop
+ 825 0658 00E0     		b	.L22
+ 826              	.L56:
+ 283:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 827              		.loc 1 283 0
+ 828 065a 00BF     		nop
+ 829              	.L22:
+ 331:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 332:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.IsSetupRecieved = 0;
+ 830              		.loc 1 332 0
+ 831 065c 40F20003 		movw	r3, #:lower16:device
+ 832 0660 C0F20003 		movt	r3, #:upper16:device
+ 833 0664 93F83E21 		ldrb	r2, [r3, #318]
+ 834 0668 6FF34102 		bfc	r2, #1, #1
+ 835 066c 83F83E21 		strb	r2, [r3, #318]
+ 836              	.L2:
+ 333:../Dave/Generated/src/USBD/usbd/usbd.c **** }
+ 837              		.loc 1 333 0
+ 838 0670 07F11C07 		add	r7, r7, #28
+ 839 0674 BD46     		mov	sp, r7
+ 840 0676 90BD     		pop	{r4, r7, pc}
+ 841              		.cfi_endproc
+ 842              	.LFE131:
+ 844              		.section	.text.USBD_HandleEP0_IN,"ax",%progbits
+ 845              		.align	2
+ 846              		.global	USBD_HandleEP0_IN
+ 847              		.thumb
+ 848              		.thumb_func
+ 850              	USBD_HandleEP0_IN:
+ 851              	.LFB132:
+ 334:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 335:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+ 336:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Handle complete IN transfer on EP0
+ 337:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 338:../Dave/Generated/src/USBD/usbd/usbd.c ****  * In \ref IN_DATA state it starts a receive and switches to \ref OUT_STATUS
+ 339:../Dave/Generated/src/USBD/usbd/usbd.c ****  * state.
+ 340:../Dave/Generated/src/USBD/usbd/usbd.c ****  * In \ref IN_STATUS state its starts a new read of setup packets and switches
+ 341:../Dave/Generated/src/USBD/usbd/usbd.c ****  * to \ref IDLE.
+ 342:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+ 343:../Dave/Generated/src/USBD/usbd/usbd.c **** void USBD_HandleEP0_IN() {
+ 852              		.loc 1 343 0
+ 853              		.cfi_startproc
+ 854              		@ args = 0, pretend = 0, frame = 0
+ 855              		@ frame_needed = 1, uses_anonymous_args = 0
+ 856 0000 98B5     		push	{r3, r4, r7, lr}
+ 857              	.LCFI5:
+ 858              		.cfi_def_cfa_offset 16
+ 859              		.cfi_offset 3, -16
+ 860              		.cfi_offset 4, -12
+ 861              		.cfi_offset 7, -8
+ 862              		.cfi_offset 14, -4
+ 863 0002 00AF     		add	r7, sp, #0
+ 864              	.LCFI6:
+ 865              		.cfi_def_cfa_register 7
+ 344:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (device.EP0_State == IN_DATA) {
+ 866              		.loc 1 344 0
+ 867 0004 40F20003 		movw	r3, #:lower16:device
+ 868 0008 C0F20003 		movt	r3, #:upper16:device
+ 869 000c 93F83B31 		ldrb	r3, [r3, #315]	@ zero_extendqisi2
+ 870 0010 022B     		cmp	r3, #2
+ 871 0012 14D1     		bne	.L61
+ 345:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* Read zero length out data packet */
+ 346:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Driver->EndpointReadStart(0,0,0);
+ 872              		.loc 1 346 0
+ 873 0014 40F20003 		movw	r3, #:lower16:device
+ 874 0018 C0F20003 		movt	r3, #:upper16:device
+ 875 001c 1B68     		ldr	r3, [r3, #0]
+ 876 001e 9B6A     		ldr	r3, [r3, #40]
+ 877 0020 4FF00000 		mov	r0, #0
+ 878 0024 4FF00001 		mov	r1, #0
+ 879 0028 4FF00002 		mov	r2, #0
+ 880 002c 9847     		blx	r3
+ 347:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.EP0_State = OUT_STATUS;
+ 881              		.loc 1 347 0
+ 882 002e 40F20003 		movw	r3, #:lower16:device
+ 883 0032 C0F20003 		movt	r3, #:upper16:device
+ 884 0036 4FF00502 		mov	r2, #5
+ 885 003a 83F83B21 		strb	r2, [r3, #315]
+ 886              	.L61:
+ 348:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 349:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (device.EP0_State == IN_STATUS) {
+ 887              		.loc 1 349 0
+ 888 003e 40F20003 		movw	r3, #:lower16:device
+ 889 0042 C0F20003 		movt	r3, #:upper16:device
+ 890 0046 93F83B31 		ldrb	r3, [r3, #315]	@ zero_extendqisi2
+ 891 004a 032B     		cmp	r3, #3
+ 892 004c 1CD1     		bne	.L60
+ 350:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* Request new setup packet */
+ 351:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Driver->EndpointReadStart(device.Endpoints[0].Address,
+ 893              		.loc 1 351 0
+ 894 004e 40F20003 		movw	r3, #:lower16:device
+ 895 0052 C0F20003 		movt	r3, #:upper16:device
+ 896 0056 1B68     		ldr	r3, [r3, #0]
+ 897 0058 9C6A     		ldr	r4, [r3, #40]
+ 898 005a 40F20003 		movw	r3, #:lower16:device
+ 899 005e C0F20003 		movt	r3, #:upper16:device
+ 900 0062 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 901 0064 40F20003 		movw	r3, #:lower16:device
+ 902 0068 C0F20003 		movt	r3, #:upper16:device
+ 903 006c 5B69     		ldr	r3, [r3, #20]
+ 904 006e 1046     		mov	r0, r2
+ 905 0070 1946     		mov	r1, r3
+ 906 0072 4FF01802 		mov	r2, #24
+ 907 0076 A047     		blx	r4
+ 352:../Dave/Generated/src/USBD/usbd/usbd.c **** 										device.Endpoints[0].OutBuffer,24);
+ 353:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.EP0_State = IDLE;
+ 908              		.loc 1 353 0
+ 909 0078 40F20003 		movw	r3, #:lower16:device
+ 910 007c C0F20003 		movt	r3, #:upper16:device
+ 911 0080 4FF00102 		mov	r2, #1
+ 912 0084 83F83B21 		strb	r2, [r3, #315]
+ 913              	.L60:
+ 354:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 355:../Dave/Generated/src/USBD/usbd/usbd.c **** }
+ 914              		.loc 1 355 0
+ 915 0088 98BD     		pop	{r3, r4, r7, pc}
+ 916              		.cfi_endproc
+ 917              	.LFE132:
+ 919 008a 00BF     		.section	.text.USBD_HandleEP0_OUT,"ax",%progbits
+ 920              		.align	2
+ 921              		.global	USBD_HandleEP0_OUT
+ 922              		.thumb
+ 923              		.thumb_func
+ 925              	USBD_HandleEP0_OUT:
+ 926              	.LFB133:
+ 356:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 357:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 358:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+ 359:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Handle complete OUT transfer on EP0
+ 360:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 361:../Dave/Generated/src/USBD/usbd/usbd.c ****  * Handles the OUT packet based on the state of endpoint 0. Starts a new read
+ 362:../Dave/Generated/src/USBD/usbd/usbd.c ****  * for new SETUP packets, when in \ref OUT_STATUS. When endpoint 0 is in
+ 363:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \ref OUT_DATA state, it handles the received data and starts a write
+ 364:../Dave/Generated/src/USBD/usbd/usbd.c ****  * transaction for \ref IN_STATUS.
+ 365:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+ 366:../Dave/Generated/src/USBD/usbd/usbd.c **** void USBD_HandleEP0_OUT() {
+ 927              		.loc 1 366 0
+ 928              		.cfi_startproc
+ 929              		@ args = 0, pretend = 0, frame = 0
+ 930              		@ frame_needed = 1, uses_anonymous_args = 0
+ 931 0000 98B5     		push	{r3, r4, r7, lr}
+ 932              	.LCFI7:
+ 933              		.cfi_def_cfa_offset 16
+ 934              		.cfi_offset 3, -16
+ 935              		.cfi_offset 4, -12
+ 936              		.cfi_offset 7, -8
+ 937              		.cfi_offset 14, -4
+ 938 0002 00AF     		add	r7, sp, #0
+ 939              	.LCFI8:
+ 940              		.cfi_def_cfa_register 7
+ 367:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (device.EP0_State == OUT_DATA) {
+ 941              		.loc 1 367 0
+ 942 0004 40F20003 		movw	r3, #:lower16:device
+ 943 0008 C0F20003 		movt	r3, #:upper16:device
+ 944 000c 93F83B31 		ldrb	r3, [r3, #315]	@ zero_extendqisi2
+ 945 0010 042B     		cmp	r3, #4
+ 946 0012 16D1     		bne	.L64
+ 368:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* Now we have the data for handling the request */
+ 369:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USBD_Handle_DeviceRequest();
+ 947              		.loc 1 369 0
+ 948 0014 FFF7FEFF 		bl	USBD_Handle_DeviceRequest
+ 370:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* Zero length packet for status stage */
+ 371:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Driver->EndpointWrite(ENDPOINT_DIR_MASK & 0,0,0);
+ 949              		.loc 1 371 0
+ 950 0018 40F20003 		movw	r3, #:lower16:device
+ 951 001c C0F20003 		movt	r3, #:upper16:device
+ 952 0020 1B68     		ldr	r3, [r3, #0]
+ 953 0022 1B6B     		ldr	r3, [r3, #48]
+ 954 0024 4FF00000 		mov	r0, #0
+ 955 0028 4FF00001 		mov	r1, #0
+ 956 002c 4FF00002 		mov	r2, #0
+ 957 0030 9847     		blx	r3
+ 372:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.EP0_State = IN_STATUS;
+ 958              		.loc 1 372 0
+ 959 0032 40F20003 		movw	r3, #:lower16:device
+ 960 0036 C0F20003 		movt	r3, #:upper16:device
+ 961 003a 4FF00302 		mov	r2, #3
+ 962 003e 83F83B21 		strb	r2, [r3, #315]
+ 963              	.L64:
+ 373:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 374:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (device.EP0_State == OUT_STATUS) {
+ 964              		.loc 1 374 0
+ 965 0042 40F20003 		movw	r3, #:lower16:device
+ 966 0046 C0F20003 		movt	r3, #:upper16:device
+ 967 004a 93F83B31 		ldrb	r3, [r3, #315]	@ zero_extendqisi2
+ 968 004e 052B     		cmp	r3, #5
+ 969 0050 1CD1     		bne	.L63
+ 375:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* Request new setup packet */
+ 376:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Driver->EndpointReadStart(device.Endpoints[0].Address,
+ 970              		.loc 1 376 0
+ 971 0052 40F20003 		movw	r3, #:lower16:device
+ 972 0056 C0F20003 		movt	r3, #:upper16:device
+ 973 005a 1B68     		ldr	r3, [r3, #0]
+ 974 005c 9C6A     		ldr	r4, [r3, #40]
+ 975 005e 40F20003 		movw	r3, #:lower16:device
+ 976 0062 C0F20003 		movt	r3, #:upper16:device
+ 977 0066 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 978 0068 40F20003 		movw	r3, #:lower16:device
+ 979 006c C0F20003 		movt	r3, #:upper16:device
+ 980 0070 5B69     		ldr	r3, [r3, #20]
+ 981 0072 1046     		mov	r0, r2
+ 982 0074 1946     		mov	r1, r3
+ 983 0076 4FF01802 		mov	r2, #24
+ 984 007a A047     		blx	r4
+ 377:../Dave/Generated/src/USBD/usbd/usbd.c **** 											device.Endpoints[0].OutBuffer,24);
+ 378:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.EP0_State = IDLE;
+ 985              		.loc 1 378 0
+ 986 007c 40F20003 		movw	r3, #:lower16:device
+ 987 0080 C0F20003 		movt	r3, #:upper16:device
+ 988 0084 4FF00102 		mov	r2, #1
+ 989 0088 83F83B21 		strb	r2, [r3, #315]
+ 990              	.L63:
+ 379:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 380:../Dave/Generated/src/USBD/usbd/usbd.c **** }
+ 991              		.loc 1 380 0
+ 992 008c 98BD     		pop	{r3, r4, r7, pc}
+ 993              		.cfi_endproc
+ 994              	.LFE133:
+ 996 008e 00BF     		.section	.text.USBD_HandleEP0_SETUP,"ax",%progbits
+ 997              		.align	2
+ 998              		.global	USBD_HandleEP0_SETUP
+ 999              		.thumb
+ 1000              		.thumb_func
+ 1002              	USBD_HandleEP0_SETUP:
+ 1003              	.LFB134:
+ 381:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 382:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+ 383:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Handle SETUP packet on EP0
+ 384:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 385:../Dave/Generated/src/USBD/usbd/usbd.c ****  * Handles the setup package an switches to correct state. If data is send from
+ 386:../Dave/Generated/src/USBD/usbd/usbd.c ****  * host to device it switches into \ref OUT_DATA state. When the hosts sends all
+ 387:../Dave/Generated/src/USBD/usbd/usbd.c ****  *  data within the setup package and \ref wLength equals zero, starts
+ 388:../Dave/Generated/src/USBD/usbd/usbd.c ****  *  processing the request and sends a in status reponse including the switch
+ 389:../Dave/Generated/src/USBD/usbd/usbd.c ****  *  to \ref IN_STATUS. When the host expects data from the device, the function
+ 390:../Dave/Generated/src/USBD/usbd/usbd.c ****  *  processes the control request and switches to \ref IN_DATA state.
+ 391:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+ 392:../Dave/Generated/src/USBD/usbd/usbd.c **** void USBD_HandleEP0_SETUP() {
+ 1004              		.loc 1 392 0
+ 1005              		.cfi_startproc
+ 1006              		@ args = 0, pretend = 0, frame = 8
+ 1007              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1008 0000 90B5     		push	{r4, r7, lr}
+ 1009              	.LCFI9:
+ 1010              		.cfi_def_cfa_offset 12
+ 1011              		.cfi_offset 4, -12
+ 1012              		.cfi_offset 7, -8
+ 1013              		.cfi_offset 14, -4
+ 1014 0002 83B0     		sub	sp, sp, #12
+ 1015              	.LCFI10:
+ 1016              		.cfi_def_cfa_offset 24
+ 1017 0004 00AF     		add	r7, sp, #0
+ 1018              	.LCFI11:
+ 1019              		.cfi_def_cfa_register 7
+ 393:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* read setup package from ep0 */
+ 394:../Dave/Generated/src/USBD/usbd/usbd.c **** 	int32_t ret_val = device.Driver->EndpointRead(0,
+ 1020              		.loc 1 394 0
+ 1021 0006 40F20003 		movw	r3, #:lower16:device
+ 1022 000a C0F20003 		movt	r3, #:upper16:device
+ 1023 000e 1B68     		ldr	r3, [r3, #0]
+ 1024 0010 DB6A     		ldr	r3, [r3, #44]
+ 1025 0012 4FF00000 		mov	r0, #0
+ 1026 0016 40F20001 		movw	r1, #:lower16:USB_ControlRequest
+ 1027 001a C0F20001 		movt	r1, #:upper16:USB_ControlRequest
+ 1028 001e 4FF00802 		mov	r2, #8
+ 1029 0022 9847     		blx	r3
+ 1030 0024 7860     		str	r0, [r7, #4]
+ 395:../Dave/Generated/src/USBD/usbd/usbd.c **** 			(void*)&USB_ControlRequest,8);
+ 396:../Dave/Generated/src/USBD/usbd/usbd.c **** #if NO_COPY_DRIVER
+ 397:../Dave/Generated/src/USBD/usbd/usbd.c **** 	memcpy(&USB_ControlRequest,device.Endpoints[0].OutBuffer,
+ 398:../Dave/Generated/src/USBD/usbd/usbd.c **** 												sizeof(USB_ControlRequest));
+ 399:../Dave/Generated/src/USBD/usbd/usbd.c **** #endif
+ 400:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.IsSetupRecieved = true;
+ 1031              		.loc 1 400 0
+ 1032 0026 40F20003 		movw	r3, #:lower16:device
+ 1033 002a C0F20003 		movt	r3, #:upper16:device
+ 1034 002e 93F83E21 		ldrb	r2, [r3, #318]
+ 1035 0032 42F00202 		orr	r2, r2, #2
+ 1036 0036 83F83E21 		strb	r2, [r3, #318]
+ 401:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (ret_val != 8 )
+ 1037              		.loc 1 401 0
+ 1038 003a 7B68     		ldr	r3, [r7, #4]
+ 1039 003c 082B     		cmp	r3, #8
+ 1040 003e 53D1     		bne	.L71
+ 1041              	.L67:
+ 402:../Dave/Generated/src/USBD/usbd/usbd.c **** 		return;
+ 403:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 404:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* preprocess */
+ 405:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* if length is zero we have only a in_status phase */
+ 406:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (USB_ControlRequest.wLength==0) {
+ 1042              		.loc 1 406 0
+ 1043 0040 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 1044 0044 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 1045 0048 DB88     		ldrh	r3, [r3, #6]	@ movhi
+ 1046 004a 9BB2     		uxth	r3, r3
+ 1047 004c 002B     		cmp	r3, #0
+ 1048 004e 17D1     		bne	.L69
+ 407:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.EP0_State = IN_STATUS;
+ 1049              		.loc 1 407 0
+ 1050 0050 40F20003 		movw	r3, #:lower16:device
+ 1051 0054 C0F20003 		movt	r3, #:upper16:device
+ 1052 0058 4FF00302 		mov	r2, #3
+ 1053 005c 83F83B21 		strb	r2, [r3, #315]
+ 408:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USBD_Handle_DeviceRequest();
+ 1054              		.loc 1 408 0
+ 1055 0060 FFF7FEFF 		bl	USBD_Handle_DeviceRequest
+ 409:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Driver->EndpointWrite(0,0,0);
+ 1056              		.loc 1 409 0
+ 1057 0064 40F20003 		movw	r3, #:lower16:device
+ 1058 0068 C0F20003 		movt	r3, #:upper16:device
+ 1059 006c 1B68     		ldr	r3, [r3, #0]
+ 1060 006e 1B6B     		ldr	r3, [r3, #48]
+ 1061 0070 4FF00000 		mov	r0, #0
+ 1062 0074 4FF00001 		mov	r1, #0
+ 1063 0078 4FF00002 		mov	r2, #0
+ 1064 007c 9847     		blx	r3
+ 1065 007e 34E0     		b	.L66
+ 1066              	.L69:
+ 410:../Dave/Generated/src/USBD/usbd/usbd.c **** 	} else {
+ 411:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (USB_ControlRequest.bmRequestType & CONTROL_REQTYPE_DIRECTION) {
+ 1067              		.loc 1 411 0
+ 1068 0080 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 1069 0084 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 1070 0088 1B78     		ldrb	r3, [r3, #0]
+ 1071 008a DBB2     		uxtb	r3, r3
+ 1072 008c DBB2     		uxtb	r3, r3
+ 1073 008e 5BB2     		sxtb	r3, r3
+ 1074 0090 002B     		cmp	r3, #0
+ 1075 0092 0ADA     		bge	.L70
+ 412:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.EP0_State = IN_DATA;
+ 1076              		.loc 1 412 0
+ 1077 0094 40F20003 		movw	r3, #:lower16:device
+ 1078 0098 C0F20003 		movt	r3, #:upper16:device
+ 1079 009c 4FF00202 		mov	r2, #2
+ 1080 00a0 83F83B21 		strb	r2, [r3, #315]
+ 413:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USBD_Handle_DeviceRequest();
+ 1081              		.loc 1 413 0
+ 1082 00a4 FFF7FEFF 		bl	USBD_Handle_DeviceRequest
+ 1083 00a8 1FE0     		b	.L66
+ 1084              	.L70:
+ 414:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 415:../Dave/Generated/src/USBD/usbd/usbd.c **** 		else {
+ 416:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.EP0_State = OUT_DATA;
+ 1085              		.loc 1 416 0
+ 1086 00aa 40F20003 		movw	r3, #:lower16:device
+ 1087 00ae C0F20003 		movt	r3, #:upper16:device
+ 1088 00b2 4FF00402 		mov	r2, #4
+ 1089 00b6 83F83B21 		strb	r2, [r3, #315]
+ 417:../Dave/Generated/src/USBD/usbd/usbd.c **** 			/* Do not process request here, first read data */
+ 418:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Driver->EndpointReadStart(0,device.Endpoints[0].OutBuffer,
+ 1090              		.loc 1 418 0
+ 1091 00ba 40F20003 		movw	r3, #:lower16:device
+ 1092 00be C0F20003 		movt	r3, #:upper16:device
+ 1093 00c2 1B68     		ldr	r3, [r3, #0]
+ 1094 00c4 9C6A     		ldr	r4, [r3, #40]
+ 1095 00c6 40F20003 		movw	r3, #:lower16:device
+ 1096 00ca C0F20003 		movt	r3, #:upper16:device
+ 1097 00ce 5A69     		ldr	r2, [r3, #20]
+ 419:../Dave/Generated/src/USBD/usbd/usbd.c **** 													USB_ControlRequest.wLength);
+ 1098              		.loc 1 419 0
+ 1099 00d0 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 1100 00d4 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 1101 00d8 DB88     		ldrh	r3, [r3, #6]	@ movhi
+ 1102 00da 9BB2     		uxth	r3, r3
+ 418:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Driver->EndpointReadStart(0,device.Endpoints[0].OutBuffer,
+ 1103              		.loc 1 418 0
+ 1104 00dc 4FF00000 		mov	r0, #0
+ 1105 00e0 1146     		mov	r1, r2
+ 1106 00e2 1A46     		mov	r2, r3
+ 1107 00e4 A047     		blx	r4
+ 1108 00e6 00E0     		b	.L66
+ 1109              	.L71:
+ 402:../Dave/Generated/src/USBD/usbd/usbd.c **** 		return;
+ 1110              		.loc 1 402 0
+ 1111 00e8 00BF     		nop
+ 1112              	.L66:
+ 420:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 421:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 422:../Dave/Generated/src/USBD/usbd/usbd.c **** }
+ 1113              		.loc 1 422 0
+ 1114 00ea 07F10C07 		add	r7, r7, #12
+ 1115 00ee BD46     		mov	sp, r7
+ 1116 00f0 90BD     		pop	{r4, r7, pc}
+ 1117              		.cfi_endproc
+ 1118              	.LFE134:
+ 1120 00f2 00BF     		.section	.text.USBD_SignalDeviceEventHandler,"ax",%progbits
+ 1121              		.align	2
+ 1122              		.global	USBD_SignalDeviceEventHandler
+ 1123              		.thumb
+ 1124              		.thumb_func
+ 1126              	USBD_SignalDeviceEventHandler:
+ 1127              	.LFB135:
+ 423:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 424:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 425:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 426:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+ 427:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Device event handler for XMC Driver
+ 428:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 429:../Dave/Generated/src/USBD/usbd/usbd.c ****  * The device can have several events, where it notifies the application about.
+ 430:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 431:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \note Not all events are available on all chip series. (Power Events are
+ 432:../Dave/Generated/src/USBD/usbd/usbd.c ****  * only supported on XMC4500)
+ 433:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \see USB_USBD_EVENT
+ 434:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+ 435:../Dave/Generated/src/USBD/usbd/usbd.c **** void USBD_SignalDeviceEventHandler(USB_USBD_EVENT_t event) {
+ 1128              		.loc 1 435 0
+ 1129              		.cfi_startproc
+ 1130              		@ args = 0, pretend = 0, frame = 16
+ 1131              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1132 0000 90B5     		push	{r4, r7, lr}
+ 1133              	.LCFI12:
+ 1134              		.cfi_def_cfa_offset 12
+ 1135              		.cfi_offset 4, -12
+ 1136              		.cfi_offset 7, -8
+ 1137              		.cfi_offset 14, -4
+ 1138 0002 85B0     		sub	sp, sp, #20
+ 1139              	.LCFI13:
+ 1140              		.cfi_def_cfa_offset 32
+ 1141 0004 00AF     		add	r7, sp, #0
+ 1142              	.LCFI14:
+ 1143              		.cfi_def_cfa_register 7
+ 1144 0006 0346     		mov	r3, r0
+ 1145 0008 FB71     		strb	r3, [r7, #7]
+ 436:../Dave/Generated/src/USBD/usbd/usbd.c **** 	int i;
+ 437:../Dave/Generated/src/USBD/usbd/usbd.c **** 	switch (event) {
+ 1146              		.loc 1 437 0
+ 1147 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1148 000c 092B     		cmp	r3, #9
+ 1149 000e 00F27D81 		bhi	.L96
+ 1150 0012 01A2     		adr	r2, .L83
+ 1151 0014 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 1152              		.align	2
+ 1153              	.L83:
+ 1154 0018 79020000 		.word	.L74+1
+ 1155 001c 47020000 		.word	.L75+1
+ 1156 0020 EF010000 		.word	.L76+1
+ 1157 0024 15020000 		.word	.L77+1
+ 1158 0028 41000000 		.word	.L78+1
+ 1159 002c 0D030000 		.word	.L96+1
+ 1160 0030 C3020000 		.word	.L79+1
+ 1161 0034 89020000 		.word	.L80+1
+ 1162 0038 0D030000 		.word	.L96+1
+ 1163 003c C9010000 		.word	.L82+1
+ 1164              	.L78:
+ 438:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EVENT_RESET:
+ 439:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USB_DeviceState = DEVICE_STATE_Default;
+ 1165              		.loc 1 439 0
+ 1166 0040 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1167 0044 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1168 0048 4FF00202 		mov	r2, #2
+ 1169 004c 1A70     		strb	r2, [r3, #0]
+ 440:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.EP0_State = IDLE;
+ 1170              		.loc 1 440 0
+ 1171 004e 40F20003 		movw	r3, #:lower16:device
+ 1172 0052 C0F20003 		movt	r3, #:upper16:device
+ 1173 0056 4FF00102 		mov	r2, #1
+ 1174 005a 83F83B21 		strb	r2, [r3, #315]
+ 441:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.RemoteWakeUp = 0;
+ 1175              		.loc 1 441 0
+ 1176 005e 40F20003 		movw	r3, #:lower16:device
+ 1177 0062 C0F20003 		movt	r3, #:upper16:device
+ 1178 0066 93F83E21 		ldrb	r2, [r3, #318]
+ 1179 006a 6FF38202 		bfc	r2, #2, #1
+ 1180 006e 83F83E21 		strb	r2, [r3, #318]
+ 442:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* Reset endpoints and configuration */
+ 443:../Dave/Generated/src/USBD/usbd/usbd.c **** 		for (i=0;i<USB_NUM_EPS; i++) {
+ 1181              		.loc 1 443 0
+ 1182 0072 4FF00003 		mov	r3, #0
+ 1183 0076 FB60     		str	r3, [r7, #12]
+ 1184 0078 6FE0     		b	.L84
+ 1185              	.L86:
+ 444:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Endpoints[i].InInUse = 0;
+ 1186              		.loc 1 444 0
+ 1187 007a 40F20003 		movw	r3, #:lower16:device
+ 1188 007e C0F20003 		movt	r3, #:upper16:device
+ 1189 0082 FA68     		ldr	r2, [r7, #12]
+ 1190 0084 4FF02C01 		mov	r1, #44
+ 1191 0088 01FB02F2 		mul	r2, r1, r2
+ 1192 008c 9B18     		adds	r3, r3, r2
+ 1193 008e 1A89     		ldrh	r2, [r3, #8]	@ movhi
+ 1194 0090 22F01002 		bic	r2, r2, #16
+ 1195 0094 1A81     		strh	r2, [r3, #8]	@ movhi
+ 445:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Endpoints[i].OutInUse = 0;
+ 1196              		.loc 1 445 0
+ 1197 0096 40F20003 		movw	r3, #:lower16:device
+ 1198 009a C0F20003 		movt	r3, #:upper16:device
+ 1199 009e FA68     		ldr	r2, [r7, #12]
+ 1200 00a0 4FF02C01 		mov	r1, #44
+ 1201 00a4 01FB02F2 		mul	r2, r1, r2
+ 1202 00a8 9B18     		adds	r3, r3, r2
+ 1203 00aa 1A89     		ldrh	r2, [r3, #8]	@ movhi
+ 1204 00ac 22F00802 		bic	r2, r2, #8
+ 1205 00b0 1A81     		strh	r2, [r3, #8]	@ movhi
+ 446:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Endpoints[i].IsHalted = 0;
+ 1206              		.loc 1 446 0
+ 1207 00b2 40F20003 		movw	r3, #:lower16:device
+ 1208 00b6 C0F20003 		movt	r3, #:upper16:device
+ 1209 00ba FA68     		ldr	r2, [r7, #12]
+ 1210 00bc 4FF02C01 		mov	r1, #44
+ 1211 00c0 01FB02F2 		mul	r2, r1, r2
+ 1212 00c4 9A18     		adds	r2, r3, r2
+ 1213 00c6 137A     		ldrb	r3, [r2, #8]
+ 1214 00c8 6FF38203 		bfc	r3, #2, #1
+ 1215 00cc 1372     		strb	r3, [r2, #8]
+ 447:../Dave/Generated/src/USBD/usbd/usbd.c **** 			if (i!=0 && device.Endpoints[i].IsConfigured) {
+ 1216              		.loc 1 447 0
+ 1217 00ce FB68     		ldr	r3, [r7, #12]
+ 1218 00d0 002B     		cmp	r3, #0
+ 1219 00d2 3ED0     		beq	.L85
+ 1220              		.loc 1 447 0 is_stmt 0 discriminator 1
+ 1221 00d4 40F20003 		movw	r3, #:lower16:device
+ 1222 00d8 C0F20003 		movt	r3, #:upper16:device
+ 1223 00dc FA68     		ldr	r2, [r7, #12]
+ 1224 00de 4FF02C01 		mov	r1, #44
+ 1225 00e2 01FB02F2 		mul	r2, r1, r2
+ 1226 00e6 9B18     		adds	r3, r3, r2
+ 1227 00e8 1B7A     		ldrb	r3, [r3, #8]
+ 1228 00ea C3F30003 		ubfx	r3, r3, #0, #1
+ 1229 00ee DBB2     		uxtb	r3, r3
+ 1230 00f0 002B     		cmp	r3, #0
+ 1231 00f2 2ED0     		beq	.L85
+ 448:../Dave/Generated/src/USBD/usbd/usbd.c **** 				device.Driver->EndpointUnconfigure(device.Endpoints[i].Address);
+ 1232              		.loc 1 448 0 is_stmt 1
+ 1233 00f4 40F20003 		movw	r3, #:lower16:device
+ 1234 00f8 C0F20003 		movt	r3, #:upper16:device
+ 1235 00fc 1B68     		ldr	r3, [r3, #0]
+ 1236 00fe 1A6A     		ldr	r2, [r3, #32]
+ 1237 0100 40F20003 		movw	r3, #:lower16:device
+ 1238 0104 C0F20003 		movt	r3, #:upper16:device
+ 1239 0108 F968     		ldr	r1, [r7, #12]
+ 1240 010a 4FF02C00 		mov	r0, #44
+ 1241 010e 00FB01F1 		mul	r1, r0, r1
+ 1242 0112 5B18     		adds	r3, r3, r1
+ 1243 0114 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1244 0116 1846     		mov	r0, r3
+ 1245 0118 9047     		blx	r2
+ 449:../Dave/Generated/src/USBD/usbd/usbd.c **** 				device.Endpoints[i].IsConfigured = 0;
+ 1246              		.loc 1 449 0
+ 1247 011a 40F20003 		movw	r3, #:lower16:device
+ 1248 011e C0F20003 		movt	r3, #:upper16:device
+ 1249 0122 FA68     		ldr	r2, [r7, #12]
+ 1250 0124 4FF02C01 		mov	r1, #44
+ 1251 0128 01FB02F2 		mul	r2, r1, r2
+ 1252 012c 9A18     		adds	r2, r3, r2
+ 1253 012e 137A     		ldrb	r3, [r2, #8]
+ 1254 0130 6FF30003 		bfc	r3, #0, #1
+ 1255 0134 1372     		strb	r3, [r2, #8]
+ 450:../Dave/Generated/src/USBD/usbd/usbd.c **** 				device.Endpoints[i].IsEnabled = 0;
+ 1256              		.loc 1 450 0
+ 1257 0136 40F20003 		movw	r3, #:lower16:device
+ 1258 013a C0F20003 		movt	r3, #:upper16:device
+ 1259 013e FA68     		ldr	r2, [r7, #12]
+ 1260 0140 4FF02C01 		mov	r1, #44
+ 1261 0144 01FB02F2 		mul	r2, r1, r2
+ 1262 0148 9A18     		adds	r2, r3, r2
+ 1263 014a 137A     		ldrb	r3, [r2, #8]
+ 1264 014c 6FF34103 		bfc	r3, #1, #1
+ 1265 0150 1372     		strb	r3, [r2, #8]
+ 1266              	.L85:
+ 443:../Dave/Generated/src/USBD/usbd/usbd.c **** 		for (i=0;i<USB_NUM_EPS; i++) {
+ 1267              		.loc 1 443 0
+ 1268 0152 FB68     		ldr	r3, [r7, #12]
+ 1269 0154 03F10103 		add	r3, r3, #1
+ 1270 0158 FB60     		str	r3, [r7, #12]
+ 1271              	.L84:
+ 443:../Dave/Generated/src/USBD/usbd/usbd.c **** 		for (i=0;i<USB_NUM_EPS; i++) {
+ 1272              		.loc 1 443 0 is_stmt 0 discriminator 1
+ 1273 015a FB68     		ldr	r3, [r7, #12]
+ 1274 015c 062B     		cmp	r3, #6
+ 1275 015e 8CD9     		bls	.L86
+ 451:../Dave/Generated/src/USBD/usbd/usbd.c **** 			}
+ 452:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 453:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Configuration = 0;
+ 1276              		.loc 1 453 0 is_stmt 1
+ 1277 0160 40F20003 		movw	r3, #:lower16:device
+ 1278 0164 C0F20003 		movt	r3, #:upper16:device
+ 1279 0168 4FF00002 		mov	r2, #0
+ 1280 016c 83F83921 		strb	r2, [r3, #313]
+ 454:../Dave/Generated/src/USBD/usbd/usbd.c **** 		for (i=0;i<NUM_INTERFACES;i++) {
+ 1281              		.loc 1 454 0
+ 1282 0170 4FF00003 		mov	r3, #0
+ 1283 0174 FB60     		str	r3, [r7, #12]
+ 1284 0176 0EE0     		b	.L87
+ 1285              	.L88:
+ 455:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.InterfaceSettings[i] = 0;
+ 1286              		.loc 1 455 0 discriminator 2
+ 1287 0178 40F20003 		movw	r3, #:lower16:device
+ 1288 017c C0F20003 		movt	r3, #:upper16:device
+ 1289 0180 FA68     		ldr	r2, [r7, #12]
+ 1290 0182 9B18     		adds	r3, r3, r2
+ 1291 0184 03F59C73 		add	r3, r3, #312
+ 1292 0188 4FF00002 		mov	r2, #0
+ 1293 018c 1A70     		strb	r2, [r3, #0]
+ 454:../Dave/Generated/src/USBD/usbd/usbd.c **** 		for (i=0;i<NUM_INTERFACES;i++) {
+ 1294              		.loc 1 454 0 discriminator 2
+ 1295 018e FB68     		ldr	r3, [r7, #12]
+ 1296 0190 03F10103 		add	r3, r3, #1
+ 1297 0194 FB60     		str	r3, [r7, #12]
+ 1298              	.L87:
+ 454:../Dave/Generated/src/USBD/usbd/usbd.c **** 		for (i=0;i<NUM_INTERFACES;i++) {
+ 1299              		.loc 1 454 0 is_stmt 0 discriminator 1
+ 1300 0196 FB68     		ldr	r3, [r7, #12]
+ 1301 0198 002B     		cmp	r3, #0
+ 1302 019a EDD0     		beq	.L88
+ 456:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 457:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Driver->EndpointReadStart(device.Endpoints[0].Address,
+ 1303              		.loc 1 457 0 is_stmt 1
+ 1304 019c 40F20003 		movw	r3, #:lower16:device
+ 1305 01a0 C0F20003 		movt	r3, #:upper16:device
+ 1306 01a4 1B68     		ldr	r3, [r3, #0]
+ 1307 01a6 9C6A     		ldr	r4, [r3, #40]
+ 1308 01a8 40F20003 		movw	r3, #:lower16:device
+ 1309 01ac C0F20003 		movt	r3, #:upper16:device
+ 1310 01b0 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 1311 01b2 40F20003 		movw	r3, #:lower16:device
+ 1312 01b6 C0F20003 		movt	r3, #:upper16:device
+ 1313 01ba 5B69     		ldr	r3, [r3, #20]
+ 1314 01bc 1046     		mov	r0, r2
+ 1315 01be 1946     		mov	r1, r3
+ 1316 01c0 4FF01802 		mov	r2, #24
+ 1317 01c4 A047     		blx	r4
+ 458:../Dave/Generated/src/USBD/usbd/usbd.c **** 										device.Endpoints[0].OutBuffer,24);
+ 459:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1318              		.loc 1 459 0
+ 1319 01c6 AEE0     		b	.L72
+ 1320              	.L82:
+ 460:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EVENT_SOF:
+ 461:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if(device.evnts->sof != NULL)
+ 1321              		.loc 1 461 0
+ 1322 01c8 40F20003 		movw	r3, #:lower16:device
+ 1323 01cc C0F20003 		movt	r3, #:upper16:device
+ 1324 01d0 D3F84031 		ldr	r3, [r3, #320]
+ 1325 01d4 1B6A     		ldr	r3, [r3, #32]
+ 1326 01d6 002B     		cmp	r3, #0
+ 1327 01d8 00F09A80 		beq	.L97
+ 462:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 463:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.evnts->sof();
+ 1328              		.loc 1 463 0
+ 1329 01dc 40F20003 		movw	r3, #:lower16:device
+ 1330 01e0 C0F20003 		movt	r3, #:upper16:device
+ 1331 01e4 D3F84031 		ldr	r3, [r3, #320]
+ 1332 01e8 1B6A     		ldr	r3, [r3, #32]
+ 1333 01ea 9847     		blx	r3
+ 464:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 465:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1334              		.loc 1 465 0
+ 1335 01ec 90E0     		b	.L97
+ 1336              	.L76:
+ 466:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EVENT_CONNECT:
+ 467:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if(device.evnts->Connect != NULL)
+ 1337              		.loc 1 467 0
+ 1338 01ee 40F20003 		movw	r3, #:lower16:device
+ 1339 01f2 C0F20003 		movt	r3, #:upper16:device
+ 1340 01f6 D3F84031 		ldr	r3, [r3, #320]
+ 1341 01fa 1B68     		ldr	r3, [r3, #0]
+ 1342 01fc 002B     		cmp	r3, #0
+ 1343 01fe 00F08980 		beq	.L98
+ 468:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 469:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.evnts->Connect();
+ 1344              		.loc 1 469 0
+ 1345 0202 40F20003 		movw	r3, #:lower16:device
+ 1346 0206 C0F20003 		movt	r3, #:upper16:device
+ 1347 020a D3F84031 		ldr	r3, [r3, #320]
+ 1348 020e 1B68     		ldr	r3, [r3, #0]
+ 1349 0210 9847     		blx	r3
+ 470:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 471:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1350              		.loc 1 471 0
+ 1351 0212 7FE0     		b	.L98
+ 1352              	.L77:
+ 472:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EVENT_DISCONNECT:
+ 473:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USB_DeviceState = DEVICE_STATE_Powered;
+ 1353              		.loc 1 473 0
+ 1354 0214 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1355 0218 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1356 021c 4FF00102 		mov	r2, #1
+ 1357 0220 1A70     		strb	r2, [r3, #0]
+ 474:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if(device.evnts->Disconnect != NULL)
+ 1358              		.loc 1 474 0
+ 1359 0222 40F20003 		movw	r3, #:lower16:device
+ 1360 0226 C0F20003 		movt	r3, #:upper16:device
+ 1361 022a D3F84031 		ldr	r3, [r3, #320]
+ 1362 022e 5B68     		ldr	r3, [r3, #4]
+ 1363 0230 002B     		cmp	r3, #0
+ 1364 0232 71D0     		beq	.L99
+ 475:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 476:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.evnts->Disconnect();
+ 1365              		.loc 1 476 0
+ 1366 0234 40F20003 		movw	r3, #:lower16:device
+ 1367 0238 C0F20003 		movt	r3, #:upper16:device
+ 1368 023c D3F84031 		ldr	r3, [r3, #320]
+ 1369 0240 5B68     		ldr	r3, [r3, #4]
+ 1370 0242 9847     		blx	r3
+ 477:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 478:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1371              		.loc 1 478 0
+ 1372 0244 68E0     		b	.L99
+ 1373              	.L75:
+ 479:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EVENT_POWER_OFF:
+ 480:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USB_DeviceState = DEVICE_STATE_Unattached;
+ 1374              		.loc 1 480 0
+ 1375 0246 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1376 024a C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1377 024e 4FF00002 		mov	r2, #0
+ 1378 0252 1A70     		strb	r2, [r3, #0]
+ 481:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if(device.evnts->Disconnect != NULL)
+ 1379              		.loc 1 481 0
+ 1380 0254 40F20003 		movw	r3, #:lower16:device
+ 1381 0258 C0F20003 		movt	r3, #:upper16:device
+ 1382 025c D3F84031 		ldr	r3, [r3, #320]
+ 1383 0260 5B68     		ldr	r3, [r3, #4]
+ 1384 0262 002B     		cmp	r3, #0
+ 1385 0264 5AD0     		beq	.L100
+ 482:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 483:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.evnts->Disconnect();
+ 1386              		.loc 1 483 0
+ 1387 0266 40F20003 		movw	r3, #:lower16:device
+ 1388 026a C0F20003 		movt	r3, #:upper16:device
+ 1389 026e D3F84031 		ldr	r3, [r3, #320]
+ 1390 0272 5B68     		ldr	r3, [r3, #4]
+ 1391 0274 9847     		blx	r3
+ 484:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 485:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1392              		.loc 1 485 0
+ 1393 0276 51E0     		b	.L100
+ 1394              	.L74:
+ 486:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EVENT_POWER_ON:
+ 487:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USB_DeviceState = DEVICE_STATE_Powered;
+ 1395              		.loc 1 487 0
+ 1396 0278 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1397 027c C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1398 0280 4FF00102 		mov	r2, #1
+ 1399 0284 1A70     		strb	r2, [r3, #0]
+ 488:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1400              		.loc 1 488 0
+ 1401 0286 4EE0     		b	.L72
+ 1402              	.L80:
+ 489:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EVENT_REMOTE_WAKEUP:
+ 490:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 491:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EVENT_RESUME:
+ 492:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USB_DeviceState = device.PreSuspendDeviceState;
+ 1403              		.loc 1 492 0
+ 1404 0288 40F20003 		movw	r3, #:lower16:device
+ 1405 028c C0F20003 		movt	r3, #:upper16:device
+ 1406 0290 93F83A21 		ldrb	r2, [r3, #314]	@ zero_extendqisi2
+ 1407 0294 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1408 0298 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1409 029c 1A70     		strb	r2, [r3, #0]
+ 493:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if(device.evnts->WakeUp != NULL)
+ 1410              		.loc 1 493 0
+ 1411 029e 40F20003 		movw	r3, #:lower16:device
+ 1412 02a2 C0F20003 		movt	r3, #:upper16:device
+ 1413 02a6 D3F84031 		ldr	r3, [r3, #320]
+ 1414 02aa 9B69     		ldr	r3, [r3, #24]
+ 1415 02ac 002B     		cmp	r3, #0
+ 1416 02ae 37D0     		beq	.L101
+ 494:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 495:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.evnts->WakeUp();
+ 1417              		.loc 1 495 0
+ 1418 02b0 40F20003 		movw	r3, #:lower16:device
+ 1419 02b4 C0F20003 		movt	r3, #:upper16:device
+ 1420 02b8 D3F84031 		ldr	r3, [r3, #320]
+ 1421 02bc 9B69     		ldr	r3, [r3, #24]
+ 1422 02be 9847     		blx	r3
+ 496:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 497:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1423              		.loc 1 497 0
+ 1424 02c0 2EE0     		b	.L101
+ 1425              	.L79:
+ 498:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EVENT_SUSPEND:
+ 499:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.PreSuspendDeviceState = USB_DeviceState;
+ 1426              		.loc 1 499 0
+ 1427 02c2 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1428 02c6 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1429 02ca 1B78     		ldrb	r3, [r3, #0]
+ 1430 02cc DAB2     		uxtb	r2, r3
+ 1431 02ce 40F20003 		movw	r3, #:lower16:device
+ 1432 02d2 C0F20003 		movt	r3, #:upper16:device
+ 1433 02d6 83F83A21 		strb	r2, [r3, #314]
+ 500:../Dave/Generated/src/USBD/usbd/usbd.c **** 		USB_DeviceState = DEVICE_STATE_Suspended;
+ 1434              		.loc 1 500 0
+ 1435 02da 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1436 02de C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1437 02e2 4FF00502 		mov	r2, #5
+ 1438 02e6 1A70     		strb	r2, [r3, #0]
+ 501:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if(device.evnts->Suspend != NULL)
+ 1439              		.loc 1 501 0
+ 1440 02e8 40F20003 		movw	r3, #:lower16:device
+ 1441 02ec C0F20003 		movt	r3, #:upper16:device
+ 1442 02f0 D3F84031 		ldr	r3, [r3, #320]
+ 1443 02f4 DB69     		ldr	r3, [r3, #28]
+ 1444 02f6 002B     		cmp	r3, #0
+ 1445 02f8 14D0     		beq	.L102
+ 502:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 503:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.evnts->Suspend();
+ 1446              		.loc 1 503 0
+ 1447 02fa 40F20003 		movw	r3, #:lower16:device
+ 1448 02fe C0F20003 		movt	r3, #:upper16:device
+ 1449 0302 D3F84031 		ldr	r3, [r3, #320]
+ 1450 0306 DB69     		ldr	r3, [r3, #28]
+ 1451 0308 9847     		blx	r3
+ 504:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 505:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1452              		.loc 1 505 0
+ 1453 030a 0BE0     		b	.L102
+ 1454              	.L96:
+ 506:../Dave/Generated/src/USBD/usbd/usbd.c **** 	default:
+ 507:../Dave/Generated/src/USBD/usbd/usbd.c **** 		return;
+ 1455              		.loc 1 507 0
+ 1456 030c 00BF     		nop
+ 1457 030e 0AE0     		b	.L72
+ 1458              	.L97:
+ 465:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1459              		.loc 1 465 0
+ 1460 0310 00BF     		nop
+ 1461 0312 08E0     		b	.L72
+ 1462              	.L98:
+ 471:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1463              		.loc 1 471 0
+ 1464 0314 00BF     		nop
+ 1465 0316 06E0     		b	.L72
+ 1466              	.L99:
+ 478:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1467              		.loc 1 478 0
+ 1468 0318 00BF     		nop
+ 1469 031a 04E0     		b	.L72
+ 1470              	.L100:
+ 485:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1471              		.loc 1 485 0
+ 1472 031c 00BF     		nop
+ 1473 031e 02E0     		b	.L72
+ 1474              	.L101:
+ 497:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1475              		.loc 1 497 0
+ 1476 0320 00BF     		nop
+ 1477 0322 00E0     		b	.L72
+ 1478              	.L102:
+ 505:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1479              		.loc 1 505 0
+ 1480 0324 00BF     		nop
+ 1481              	.L72:
+ 508:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 509:../Dave/Generated/src/USBD/usbd/usbd.c **** }
+ 1482              		.loc 1 509 0
+ 1483 0326 07F11407 		add	r7, r7, #20
+ 1484 032a BD46     		mov	sp, r7
+ 1485 032c 90BD     		pop	{r4, r7, pc}
+ 1486              		.cfi_endproc
+ 1487              	.LFE135:
+ 1489 032e 00BF     		.section	.text.USBD_SignalEndpointEvent_Handler,"ax",%progbits
+ 1490              		.align	2
+ 1491              		.global	USBD_SignalEndpointEvent_Handler
+ 1492              		.thumb
+ 1493              		.thumb_func
+ 1495              	USBD_SignalEndpointEvent_Handler:
+ 1496              	.LFB136:
+ 510:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 511:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+ 512:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Endpoint event handler for the XMC driver
+ 513:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 514:../Dave/Generated/src/USBD/usbd/usbd.c ****  * If the driver detects an event (See \ref USB_USBD_EP_EVENT) for a specified
+ 515:../Dave/Generated/src/USBD/usbd/usbd.c ****  * endpoint it calls this function. Based on the event some further action is
+ 516:../Dave/Generated/src/USBD/usbd/usbd.c ****  * taken, e.g. process control request or update transfer information and read
+ 517:../Dave/Generated/src/USBD/usbd/usbd.c ****  * data from the driver into the core buffer.
+ 518:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 519:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \param[in] ep_addr Endpoint address
+ 520:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \param[in] ep_event Endpoint event type
+ 521:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 522:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+ 523:../Dave/Generated/src/USBD/usbd/usbd.c **** void USBD_SignalEndpointEvent_Handler (uint8_t ep_addr,
+ 524:../Dave/Generated/src/USBD/usbd/usbd.c **** 										USB_USBD_EP_EVENT_t ep_event)
+ 525:../Dave/Generated/src/USBD/usbd/usbd.c **** {
+ 1497              		.loc 1 525 0
+ 1498              		.cfi_startproc
+ 1499              		@ args = 0, pretend = 0, frame = 24
+ 1500              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1501 0000 80B5     		push	{r7, lr}
+ 1502              	.LCFI15:
+ 1503              		.cfi_def_cfa_offset 8
+ 1504              		.cfi_offset 7, -8
+ 1505              		.cfi_offset 14, -4
+ 1506 0002 86B0     		sub	sp, sp, #24
+ 1507              	.LCFI16:
+ 1508              		.cfi_def_cfa_offset 32
+ 1509 0004 00AF     		add	r7, sp, #0
+ 1510              	.LCFI17:
+ 1511              		.cfi_def_cfa_register 7
+ 1512 0006 0246     		mov	r2, r0
+ 1513 0008 0B46     		mov	r3, r1
+ 1514 000a FA71     		strb	r2, [r7, #7]
+ 1515 000c BB71     		strb	r3, [r7, #6]
+ 526:../Dave/Generated/src/USBD/usbd/usbd.c **** 	USBD_Endpoint_t *ep =  &device.Endpoints[ep_addr & ENDPOINT_EPNUM_MASK];
+ 1516              		.loc 1 526 0
+ 1517 000e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 1518 0010 03F00F03 		and	r3, r3, #15
+ 1519 0014 4FF02C02 		mov	r2, #44
+ 1520 0018 02FB03F2 		mul	r2, r2, r3
+ 1521 001c 40F20003 		movw	r3, #:lower16:device
+ 1522 0020 C0F20003 		movt	r3, #:upper16:device
+ 1523 0024 D318     		adds	r3, r2, r3
+ 1524 0026 03F10403 		add	r3, r3, #4
+ 1525 002a 7B61     		str	r3, [r7, #20]
+ 527:../Dave/Generated/src/USBD/usbd/usbd.c **** 	uint8_t temp_num,temp_dir;
+ 528:../Dave/Generated/src/USBD/usbd/usbd.c **** 	int32_t data_count;
+ 529:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* store CurrentEndpoint and direction for restore after handling */
+ 530:../Dave/Generated/src/USBD/usbd/usbd.c **** 	temp_num = device.CurrentEndpoint;
+ 1526              		.loc 1 530 0
+ 1527 002c 40F20003 		movw	r3, #:lower16:device
+ 1528 0030 C0F20003 		movt	r3, #:upper16:device
+ 1529 0034 93F83C31 		ldrb	r3, [r3, #316]
+ 1530 0038 FB74     		strb	r3, [r7, #19]
+ 531:../Dave/Generated/src/USBD/usbd/usbd.c **** 	temp_dir = device.CurrentDirection;
+ 1531              		.loc 1 531 0
+ 1532 003a 40F20003 		movw	r3, #:lower16:device
+ 1533 003e C0F20003 		movt	r3, #:upper16:device
+ 1534 0042 93F83D31 		ldrb	r3, [r3, #317]
+ 1535 0046 BB74     		strb	r3, [r7, #18]
+ 532:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* select the given endpoint */
+ 533:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.CurrentEndpoint = ep_addr & ENDPOINT_EPNUM_MASK;
+ 1536              		.loc 1 533 0
+ 1537 0048 FB79     		ldrb	r3, [r7, #7]
+ 1538 004a 03F00F03 		and	r3, r3, #15
+ 1539 004e DAB2     		uxtb	r2, r3
+ 1540 0050 40F20003 		movw	r3, #:lower16:device
+ 1541 0054 C0F20003 		movt	r3, #:upper16:device
+ 1542 0058 83F83C21 		strb	r2, [r3, #316]
+ 534:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.CurrentDirection = ep_addr & ENDPOINT_DIR_MASK;
+ 1543              		.loc 1 534 0
+ 1544 005c FB79     		ldrb	r3, [r7, #7]
+ 1545 005e 23F07F03 		bic	r3, r3, #127
+ 1546 0062 DAB2     		uxtb	r2, r3
+ 1547 0064 40F20003 		movw	r3, #:lower16:device
+ 1548 0068 C0F20003 		movt	r3, #:upper16:device
+ 1549 006c 83F83D21 		strb	r2, [r3, #317]
+ 535:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* choose what to do based on the event */
+ 536:../Dave/Generated/src/USBD/usbd/usbd.c **** 	switch (ep_event) {
+ 1550              		.loc 1 536 0
+ 1551 0070 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 1552 0072 012B     		cmp	r3, #1
+ 1553 0074 16D0     		beq	.L106
+ 1554 0076 022B     		cmp	r3, #2
+ 1555 0078 44D0     		beq	.L107
+ 1556 007a 002B     		cmp	r3, #0
+ 1557 007c 40F0A880 		bne	.L104
+ 1558              	.L105:
+ 537:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EP_EVENT_SETUP:
+ 538:../Dave/Generated/src/USBD/usbd/usbd.c **** 		ep->OutInUse = 0;
+ 1559              		.loc 1 538 0
+ 1560 0080 7B69     		ldr	r3, [r7, #20]
+ 1561 0082 9A88     		ldrh	r2, [r3, #4]	@ movhi
+ 1562 0084 22F00802 		bic	r2, r2, #8
+ 1563 0088 9A80     		strh	r2, [r3, #4]	@ movhi
+ 539:../Dave/Generated/src/USBD/usbd/usbd.c **** 		switch(device.CurrentEndpoint) {
+ 1564              		.loc 1 539 0
+ 1565 008a 40F20003 		movw	r3, #:lower16:device
+ 1566 008e C0F20003 		movt	r3, #:upper16:device
+ 1567 0092 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+ 1568 0096 002B     		cmp	r3, #0
+ 1569 0098 02D1     		bne	.L121
+ 1570              	.L109:
+ 540:../Dave/Generated/src/USBD/usbd/usbd.c **** 		case 0:
+ 541:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USBD_HandleEP0_SETUP();
+ 1571              		.loc 1 541 0
+ 1572 009a FFF7FEFF 		bl	USBD_HandleEP0_SETUP
+ 542:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 1573              		.loc 1 542 0
+ 1574 009e 00E0     		b	.L110
+ 1575              	.L121:
+ 543:../Dave/Generated/src/USBD/usbd/usbd.c **** 		default:
+ 544:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 1576              		.loc 1 544 0
+ 1577 00a0 00BF     		nop
+ 1578              	.L110:
+ 545:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 546:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1579              		.loc 1 546 0
+ 1580 00a2 95E0     		b	.L104
+ 1581              	.L106:
+ 547:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EP_EVENT_OUT:
+ 548:../Dave/Generated/src/USBD/usbd/usbd.c **** 		ep->IsOutRecieved = 1;
+ 1582              		.loc 1 548 0
+ 1583 00a4 7B69     		ldr	r3, [r7, #20]
+ 1584 00a6 9A88     		ldrh	r2, [r3, #4]	@ movhi
+ 1585 00a8 42F02002 		orr	r2, r2, #32
+ 1586 00ac 9A80     		strh	r2, [r3, #4]	@ movhi
+ 549:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (ep->OutBytesAvailable == 0) {
+ 1587              		.loc 1 549 0
+ 1588 00ae 7B69     		ldr	r3, [r7, #20]
+ 1589 00b0 9B68     		ldr	r3, [r3, #8]
+ 1590 00b2 002B     		cmp	r3, #0
+ 1591 00b4 14D1     		bne	.L111
+ 550:../Dave/Generated/src/USBD/usbd/usbd.c **** 			ep->OutOffset = 0; /* clear offset, new data is there */
+ 1592              		.loc 1 550 0
+ 1593 00b6 7B69     		ldr	r3, [r7, #20]
+ 1594 00b8 4FF00002 		mov	r2, #0
+ 1595 00bc DA60     		str	r2, [r3, #12]
+ 551:../Dave/Generated/src/USBD/usbd/usbd.c **** 			ep->OutBytesAvailable = device.Driver->EndpointRead(ep->Address,
+ 1596              		.loc 1 551 0
+ 1597 00be 40F20003 		movw	r3, #:lower16:device
+ 1598 00c2 C0F20003 		movt	r3, #:upper16:device
+ 1599 00c6 1B68     		ldr	r3, [r3, #0]
+ 1600 00c8 DB6A     		ldr	r3, [r3, #44]
+ 1601 00ca 7A69     		ldr	r2, [r7, #20]
+ 1602 00cc 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 552:../Dave/Generated/src/USBD/usbd/usbd.c **** 										ep->OutBuffer,ep->OutBufferLength);
+ 1603              		.loc 1 552 0
+ 1604 00ce 7A69     		ldr	r2, [r7, #20]
+ 551:../Dave/Generated/src/USBD/usbd/usbd.c **** 			ep->OutBytesAvailable = device.Driver->EndpointRead(ep->Address,
+ 1605              		.loc 1 551 0
+ 1606 00d0 1169     		ldr	r1, [r2, #16]
+ 1607              		.loc 1 552 0
+ 1608 00d2 7A69     		ldr	r2, [r7, #20]
+ 551:../Dave/Generated/src/USBD/usbd/usbd.c **** 			ep->OutBytesAvailable = device.Driver->EndpointRead(ep->Address,
+ 1609              		.loc 1 551 0
+ 1610 00d4 5269     		ldr	r2, [r2, #20]
+ 1611 00d6 9847     		blx	r3
+ 1612 00d8 0346     		mov	r3, r0
+ 1613 00da 1A46     		mov	r2, r3
+ 1614 00dc 7B69     		ldr	r3, [r7, #20]
+ 1615 00de 9A60     		str	r2, [r3, #8]
+ 1616              	.L111:
+ 553:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 554:../Dave/Generated/src/USBD/usbd/usbd.c **** 		ep->OutInUse = 0;
+ 1617              		.loc 1 554 0
+ 1618 00e0 7B69     		ldr	r3, [r7, #20]
+ 1619 00e2 9A88     		ldrh	r2, [r3, #4]	@ movhi
+ 1620 00e4 22F00802 		bic	r2, r2, #8
+ 1621 00e8 9A80     		strh	r2, [r3, #4]	@ movhi
+ 555:../Dave/Generated/src/USBD/usbd/usbd.c **** 		switch(device.CurrentEndpoint) {
+ 1622              		.loc 1 555 0
+ 1623 00ea 40F20003 		movw	r3, #:lower16:device
+ 1624 00ee C0F20003 		movt	r3, #:upper16:device
+ 1625 00f2 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+ 1626 00f6 002B     		cmp	r3, #0
+ 1627 00f8 02D1     		bne	.L122
+ 1628              	.L113:
+ 556:../Dave/Generated/src/USBD/usbd/usbd.c **** 		case 0:
+ 557:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USBD_HandleEP0_OUT();
+ 1629              		.loc 1 557 0
+ 1630 00fa FFF7FEFF 		bl	USBD_HandleEP0_OUT
+ 558:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 1631              		.loc 1 558 0
+ 1632 00fe 00E0     		b	.L114
+ 1633              	.L122:
+ 559:../Dave/Generated/src/USBD/usbd/usbd.c **** 		default:
+ 560:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 1634              		.loc 1 560 0
+ 1635 0100 00BF     		nop
+ 1636              	.L114:
+ 561:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 562:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1637              		.loc 1 562 0
+ 1638 0102 65E0     		b	.L104
+ 1639              	.L107:
+ 563:../Dave/Generated/src/USBD/usbd/usbd.c **** 	case USB_USBD_EP_EVENT_IN:
+ 564:../Dave/Generated/src/USBD/usbd/usbd.c **** 		/* loop write transfers */
+ 565:../Dave/Generated/src/USBD/usbd/usbd.c **** 		if (ep->InDataLeft> 0) {
+ 1640              		.loc 1 565 0
+ 1641 0104 7B69     		ldr	r3, [r7, #20]
+ 1642 0106 5B6A     		ldr	r3, [r3, #36]
+ 1643 0108 002B     		cmp	r3, #0
+ 1644 010a 1AD0     		beq	.L115
+ 566:../Dave/Generated/src/USBD/usbd/usbd.c **** 			data_count = device.Driver->EndpointWrite(ep->Address,
+ 1645              		.loc 1 566 0
+ 1646 010c 40F20003 		movw	r3, #:lower16:device
+ 1647 0110 C0F20003 		movt	r3, #:upper16:device
+ 1648 0114 1B68     		ldr	r3, [r3, #0]
+ 1649 0116 1B6B     		ldr	r3, [r3, #48]
+ 1650 0118 7A69     		ldr	r2, [r7, #20]
+ 1651 011a 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 567:../Dave/Generated/src/USBD/usbd/usbd.c **** 									ep->InDataBuffer,ep->InDataLeft);
+ 1652              		.loc 1 567 0
+ 1653 011c 7A69     		ldr	r2, [r7, #20]
+ 1654 011e 916A     		ldr	r1, [r2, #40]
+ 1655 0120 7A69     		ldr	r2, [r7, #20]
+ 566:../Dave/Generated/src/USBD/usbd/usbd.c **** 			data_count = device.Driver->EndpointWrite(ep->Address,
+ 1656              		.loc 1 566 0
+ 1657 0122 526A     		ldr	r2, [r2, #36]
+ 1658 0124 9847     		blx	r3
+ 1659 0126 F860     		str	r0, [r7, #12]
+ 568:../Dave/Generated/src/USBD/usbd/usbd.c **** 			ep->InDataLeft -= data_count;
+ 1660              		.loc 1 568 0
+ 1661 0128 7B69     		ldr	r3, [r7, #20]
+ 1662 012a 5A6A     		ldr	r2, [r3, #36]
+ 1663 012c FB68     		ldr	r3, [r7, #12]
+ 1664 012e D21A     		subs	r2, r2, r3
+ 1665 0130 7B69     		ldr	r3, [r7, #20]
+ 1666 0132 5A62     		str	r2, [r3, #36]
+ 569:../Dave/Generated/src/USBD/usbd/usbd.c **** 			ep->InDataBuffer+= data_count;
+ 1667              		.loc 1 569 0
+ 1668 0134 7B69     		ldr	r3, [r7, #20]
+ 1669 0136 9A6A     		ldr	r2, [r3, #40]
+ 1670 0138 FB68     		ldr	r3, [r7, #12]
+ 1671 013a D218     		adds	r2, r2, r3
+ 1672 013c 7B69     		ldr	r3, [r7, #20]
+ 1673 013e 9A62     		str	r2, [r3, #40]
+ 570:../Dave/Generated/src/USBD/usbd/usbd.c **** 			return;
+ 1674              		.loc 1 570 0
+ 1675 0140 54E0     		b	.L103
+ 1676              	.L115:
+ 571:../Dave/Generated/src/USBD/usbd/usbd.c **** 		} else if (ep->Number == 0 && ep->InBytesAvailable > 0 &&
+ 1677              		.loc 1 571 0
+ 1678 0142 7B69     		ldr	r3, [r7, #20]
+ 1679 0144 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1680 0146 03F00F03 		and	r3, r3, #15
+ 1681 014a DBB2     		uxtb	r3, r3
+ 1682 014c 002B     		cmp	r3, #0
+ 1683 014e 29D1     		bne	.L117
+ 1684              		.loc 1 571 0 is_stmt 0 discriminator 1
+ 1685 0150 7B69     		ldr	r3, [r7, #20]
+ 1686 0152 9B69     		ldr	r3, [r3, #24]
+ 1687 0154 002B     		cmp	r3, #0
+ 1688 0156 25D0     		beq	.L117
+ 572:../Dave/Generated/src/USBD/usbd/usbd.c **** 						ep->InBytesAvailable!=USB_ControlRequest.wLength &&
+ 1689              		.loc 1 572 0 is_stmt 1 discriminator 1
+ 1690 0158 7B69     		ldr	r3, [r7, #20]
+ 1691 015a 9A69     		ldr	r2, [r3, #24]
+ 1692 015c 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 1693 0160 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 1694 0164 DB88     		ldrh	r3, [r3, #6]	@ movhi
+ 1695 0166 9BB2     		uxth	r3, r3
+ 571:../Dave/Generated/src/USBD/usbd/usbd.c **** 		} else if (ep->Number == 0 && ep->InBytesAvailable > 0 &&
+ 1696              		.loc 1 571 0 discriminator 1
+ 1697 0168 9A42     		cmp	r2, r3
+ 1698 016a 1BD0     		beq	.L117
+ 573:../Dave/Generated/src/USBD/usbd/usbd.c **** 						ep->InBytesAvailable % ep->MaxPacketSize == 0)
+ 1699              		.loc 1 573 0
+ 1700 016c 7B69     		ldr	r3, [r7, #20]
+ 1701 016e 9B69     		ldr	r3, [r3, #24]
+ 1702 0170 7A69     		ldr	r2, [r7, #20]
+ 1703 0172 9288     		ldrh	r2, [r2, #4]	@ movhi
+ 1704 0174 C2F38612 		ubfx	r2, r2, #6, #7
+ 1705 0178 D2B2     		uxtb	r2, r2
+ 1706 017a B3FBF2F1 		udiv	r1, r3, r2
+ 1707 017e 02FB01F2 		mul	r2, r2, r1
+ 1708 0182 9B1A     		subs	r3, r3, r2
+ 572:../Dave/Generated/src/USBD/usbd/usbd.c **** 						ep->InBytesAvailable!=USB_ControlRequest.wLength &&
+ 1709              		.loc 1 572 0
+ 1710 0184 002B     		cmp	r3, #0
+ 1711 0186 0DD1     		bne	.L117
+ 574:../Dave/Generated/src/USBD/usbd/usbd.c **** 		{
+ 575:../Dave/Generated/src/USBD/usbd/usbd.c **** 			/* if the amount of data for endpoint 0 is exact the requested
+ 576:../Dave/Generated/src/USBD/usbd/usbd.c **** 			 * amount, then no zlp has to be send */
+ 577:../Dave/Generated/src/USBD/usbd/usbd.c **** 			device.Driver->EndpointWrite(ep->Address,0,0);
+ 1712              		.loc 1 577 0
+ 1713 0188 40F20003 		movw	r3, #:lower16:device
+ 1714 018c C0F20003 		movt	r3, #:upper16:device
+ 1715 0190 1B68     		ldr	r3, [r3, #0]
+ 1716 0192 1B6B     		ldr	r3, [r3, #48]
+ 1717 0194 7A69     		ldr	r2, [r7, #20]
+ 1718 0196 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 1719 0198 1046     		mov	r0, r2
+ 1720 019a 4FF00001 		mov	r1, #0
+ 1721 019e 4FF00002 		mov	r2, #0
+ 1722 01a2 9847     		blx	r3
+ 1723              	.L117:
+ 578:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 579:../Dave/Generated/src/USBD/usbd/usbd.c **** 		ep->InBytesAvailable = 0;
+ 1724              		.loc 1 579 0
+ 1725 01a4 7B69     		ldr	r3, [r7, #20]
+ 1726 01a6 4FF00002 		mov	r2, #0
+ 1727 01aa 9A61     		str	r2, [r3, #24]
+ 580:../Dave/Generated/src/USBD/usbd/usbd.c **** 		ep->InInUse = 0;
+ 1728              		.loc 1 580 0
+ 1729 01ac 7B69     		ldr	r3, [r7, #20]
+ 1730 01ae 9A88     		ldrh	r2, [r3, #4]	@ movhi
+ 1731 01b0 22F01002 		bic	r2, r2, #16
+ 1732 01b4 9A80     		strh	r2, [r3, #4]	@ movhi
+ 581:../Dave/Generated/src/USBD/usbd/usbd.c **** 		switch(device.CurrentEndpoint) {
+ 1733              		.loc 1 581 0
+ 1734 01b6 40F20003 		movw	r3, #:lower16:device
+ 1735 01ba C0F20003 		movt	r3, #:upper16:device
+ 1736 01be 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+ 1737 01c2 002B     		cmp	r3, #0
+ 1738 01c4 02D1     		bne	.L123
+ 1739              	.L119:
+ 582:../Dave/Generated/src/USBD/usbd/usbd.c **** 		case 0:
+ 583:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USBD_HandleEP0_IN();
+ 1740              		.loc 1 583 0
+ 1741 01c6 FFF7FEFF 		bl	USBD_HandleEP0_IN
+ 584:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 1742              		.loc 1 584 0
+ 1743 01ca 00E0     		b	.L120
+ 1744              	.L123:
+ 585:../Dave/Generated/src/USBD/usbd/usbd.c **** 		default:
+ 586:../Dave/Generated/src/USBD/usbd/usbd.c **** 			break;
+ 1745              		.loc 1 586 0
+ 1746 01cc 00BF     		nop
+ 1747              	.L120:
+ 587:../Dave/Generated/src/USBD/usbd/usbd.c **** 		}
+ 588:../Dave/Generated/src/USBD/usbd/usbd.c **** 		break;
+ 1748              		.loc 1 588 0
+ 1749 01ce 00BF     		nop
+ 1750              	.L104:
+ 589:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 590:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.CurrentEndpoint = temp_num;
+ 1751              		.loc 1 590 0
+ 1752 01d0 40F20003 		movw	r3, #:lower16:device
+ 1753 01d4 C0F20003 		movt	r3, #:upper16:device
+ 1754 01d8 FA7C     		ldrb	r2, [r7, #19]
+ 1755 01da 83F83C21 		strb	r2, [r3, #316]
+ 591:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.CurrentDirection = temp_dir;
+ 1756              		.loc 1 591 0
+ 1757 01de 40F20003 		movw	r3, #:lower16:device
+ 1758 01e2 C0F20003 		movt	r3, #:upper16:device
+ 1759 01e6 BA7C     		ldrb	r2, [r7, #18]
+ 1760 01e8 83F83D21 		strb	r2, [r3, #317]
+ 1761              	.L103:
+ 592:../Dave/Generated/src/USBD/usbd/usbd.c **** }
+ 1762              		.loc 1 592 0
+ 1763 01ec 07F11807 		add	r7, r7, #24
+ 1764 01f0 BD46     		mov	sp, r7
+ 1765 01f2 80BD     		pop	{r7, pc}
+ 1766              		.cfi_endproc
+ 1767              	.LFE136:
+ 1769              		.section	.text.USBD_Initialize,"ax",%progbits
+ 1770              		.align	2
+ 1771              		.global	USBD_Initialize
+ 1772              		.thumb
+ 1773              		.thumb_func
+ 1775              	USBD_Initialize:
+ 1776              	.LFB137:
+ 593:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 594:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+ 595:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Initialize driver core and driver
+ 596:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 597:../Dave/Generated/src/USBD/usbd/usbd.c ****  * Intializes the USB driver core data structures and sets it into default
+ 598:../Dave/Generated/src/USBD/usbd/usbd.c ****  * state. Afterwards it initializes the USB device controller driver and prepare
+ 599:../Dave/Generated/src/USBD/usbd/usbd.c ****  *  it for connection via \ref USBD_Connect.
+ 600:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+ 601:../Dave/Generated/src/USBD/usbd/usbd.c **** int USBD_Initialize(USBD_event_CB_t *evnt_CB) {
+ 1777              		.loc 1 601 0
+ 1778              		.cfi_startproc
+ 1779              		@ args = 0, pretend = 0, frame = 16
+ 1780              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1781 0000 90B5     		push	{r4, r7, lr}
+ 1782              	.LCFI18:
+ 1783              		.cfi_def_cfa_offset 12
+ 1784              		.cfi_offset 4, -12
+ 1785              		.cfi_offset 7, -8
+ 1786              		.cfi_offset 14, -4
+ 1787 0002 87B0     		sub	sp, sp, #28
+ 1788              	.LCFI19:
+ 1789              		.cfi_def_cfa_offset 40
+ 1790 0004 02AF     		add	r7, sp, #8
+ 1791              	.LCFI20:
+ 1792              		.cfi_def_cfa 7, 32
+ 1793 0006 7860     		str	r0, [r7, #4]
+ 602:../Dave/Generated/src/USBD/usbd/usbd.c **** 	int32_t status = 0;
+ 1794              		.loc 1 602 0
+ 1795 0008 4FF00003 		mov	r3, #0
+ 1796 000c FB60     		str	r3, [r7, #12]
+ 603:../Dave/Generated/src/USBD/usbd/usbd.c **** 	memset(&device,0x0,sizeof(USBD_Device_t));
+ 1797              		.loc 1 603 0
+ 1798 000e 40F20000 		movw	r0, #:lower16:device
+ 1799 0012 C0F20000 		movt	r0, #:upper16:device
+ 1800 0016 4FF00001 		mov	r1, #0
+ 1801 001a 4FF4A272 		mov	r2, #324
+ 1802 001e FFF7FEFF 		bl	memset
+ 604:../Dave/Generated/src/USBD/usbd/usbd.c **** 	USB_DeviceState = DEVICE_STATE_Unattached;
+ 1803              		.loc 1 604 0
+ 1804 0022 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1805 0026 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1806 002a 4FF00002 		mov	r2, #0
+ 1807 002e 1A70     		strb	r2, [r3, #0]
+ 605:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Driver = &Driver_USBD0;
+ 1808              		.loc 1 605 0
+ 1809 0030 40F20003 		movw	r3, #:lower16:device
+ 1810 0034 C0F20003 		movt	r3, #:upper16:device
+ 1811 0038 40F20002 		movw	r2, #:lower16:Driver_USBD0
+ 1812 003c C0F20002 		movt	r2, #:upper16:Driver_USBD0
+ 1813 0040 1A60     		str	r2, [r3, #0]
+ 606:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.EP0_State = IDLE;
+ 1814              		.loc 1 606 0
+ 1815 0042 40F20003 		movw	r3, #:lower16:device
+ 1816 0046 C0F20003 		movt	r3, #:upper16:device
+ 1817 004a 4FF00102 		mov	r2, #1
+ 1818 004e 83F83B21 		strb	r2, [r3, #315]
+ 607:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Endpoints[0].InBuffer = endpoint0_in_buffer;
+ 1819              		.loc 1 607 0
+ 1820 0052 40F20003 		movw	r3, #:lower16:device
+ 1821 0056 C0F20003 		movt	r3, #:upper16:device
+ 1822 005a 40F20002 		movw	r2, #:lower16:endpoint0_in_buffer
+ 1823 005e C0F20002 		movt	r2, #:upper16:endpoint0_in_buffer
+ 1824 0062 1A62     		str	r2, [r3, #32]
+ 608:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Endpoints[0].InBufferLength = 256;
+ 1825              		.loc 1 608 0
+ 1826 0064 40F20003 		movw	r3, #:lower16:device
+ 1827 0068 C0F20003 		movt	r3, #:upper16:device
+ 1828 006c 4FF48072 		mov	r2, #256
+ 1829 0070 5A62     		str	r2, [r3, #36]
+ 609:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Endpoints[0].OutBuffer = endpoint0_out_buffer;
+ 1830              		.loc 1 609 0
+ 1831 0072 40F20003 		movw	r3, #:lower16:device
+ 1832 0076 C0F20003 		movt	r3, #:upper16:device
+ 1833 007a 40F20002 		movw	r2, #:lower16:endpoint0_out_buffer
+ 1834 007e C0F20002 		movt	r2, #:upper16:endpoint0_out_buffer
+ 1835 0082 5A61     		str	r2, [r3, #20]
+ 610:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Endpoints[0].OutBufferLength = 256;
+ 1836              		.loc 1 610 0
+ 1837 0084 40F20003 		movw	r3, #:lower16:device
+ 1838 0088 C0F20003 		movt	r3, #:upper16:device
+ 1839 008c 4FF48072 		mov	r2, #256
+ 1840 0090 9A61     		str	r2, [r3, #24]
+ 611:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Endpoints[0].Direction = 0;
+ 1841              		.loc 1 611 0
+ 1842 0092 40F20003 		movw	r3, #:lower16:device
+ 1843 0096 C0F20003 		movt	r3, #:upper16:device
+ 1844 009a 1A79     		ldrb	r2, [r3, #4]
+ 1845 009c 6FF3C712 		bfc	r2, #7, #1
+ 1846 00a0 1A71     		strb	r2, [r3, #4]
+ 612:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Endpoints[0].IsConfigured = 1;
+ 1847              		.loc 1 612 0
+ 1848 00a2 40F20003 		movw	r3, #:lower16:device
+ 1849 00a6 C0F20003 		movt	r3, #:upper16:device
+ 1850 00aa 1A7A     		ldrb	r2, [r3, #8]
+ 1851 00ac 42F00102 		orr	r2, r2, #1
+ 1852 00b0 1A72     		strb	r2, [r3, #8]
+ 613:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Endpoints[0].IsEnabled = 1;
+ 1853              		.loc 1 613 0
+ 1854 00b2 40F20003 		movw	r3, #:lower16:device
+ 1855 00b6 C0F20003 		movt	r3, #:upper16:device
+ 1856 00ba 1A7A     		ldrb	r2, [r3, #8]
+ 1857 00bc 42F00202 		orr	r2, r2, #2
+ 1858 00c0 1A72     		strb	r2, [r3, #8]
+ 614:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Endpoints[0].MaxPacketSize = 64;
+ 1859              		.loc 1 614 0
+ 1860 00c2 40F20003 		movw	r3, #:lower16:device
+ 1861 00c6 C0F20003 		movt	r3, #:upper16:device
+ 1862 00ca 1A89     		ldrh	r2, [r3, #8]	@ movhi
+ 1863 00cc 4FF04001 		mov	r1, #64
+ 1864 00d0 61F38C12 		bfi	r2, r1, #6, #7
+ 1865 00d4 1A81     		strh	r2, [r3, #8]	@ movhi
+ 615:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 616:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.evnts = evnt_CB;
+ 1866              		.loc 1 616 0
+ 1867 00d6 40F20003 		movw	r3, #:lower16:device
+ 1868 00da C0F20003 		movt	r3, #:upper16:device
+ 1869 00de 7A68     		ldr	r2, [r7, #4]
+ 1870 00e0 C3F84021 		str	r2, [r3, #320]
+ 617:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 618:../Dave/Generated/src/USBD/usbd/usbd.c **** 	usb_init.usb_max_num_packets_in_rx_fifo = MAX_PKTS_RXFIFO;
+ 1871              		.loc 1 618 0
+ 1872 00e4 40F20003 		movw	r3, #:lower16:usb_init
+ 1873 00e8 C0F20003 		movt	r3, #:upper16:usb_init
+ 1874 00ec 4FF00402 		mov	r2, #4
+ 1875 00f0 9A80     		strh	r2, [r3, #4]	@ movhi
+ 619:../Dave/Generated/src/USBD/usbd/usbd.c **** 	usb_init.usb_max_num_control_eps =
+ 1876              		.loc 1 619 0
+ 1877 00f2 40F20003 		movw	r3, #:lower16:usb_init
+ 1878 00f6 C0F20003 		movt	r3, #:upper16:usb_init
+ 1879 00fa 4FF00102 		mov	r2, #1
+ 1880 00fe 1A70     		strb	r2, [r3, #0]
+ 620:../Dave/Generated/src/USBD/usbd/usbd.c **** 						(USB_MAX_NUM_CONTROL_EPS_t)NUM_CONTROL_EPS;
+ 621:../Dave/Generated/src/USBD/usbd/usbd.c **** 	usb_init.usb_max_num_in_eps = (USB_MAX_NUM_IN_EPS_t)NUM_IN_EPS;
+ 1881              		.loc 1 621 0
+ 1882 0100 40F20003 		movw	r3, #:lower16:usb_init
+ 1883 0104 C0F20003 		movt	r3, #:upper16:usb_init
+ 1884 0108 4FF00102 		mov	r2, #1
+ 1885 010c 9A70     		strb	r2, [r3, #2]
+ 622:../Dave/Generated/src/USBD/usbd/usbd.c **** 	usb_init.usb_max_num_out_eps = (USB_MAX_NUM_OUT_EPS_t)NUM_OUT_EPS;
+ 1886              		.loc 1 622 0
+ 1887 010e 40F20003 		movw	r3, #:lower16:usb_init
+ 1888 0112 C0F20003 		movt	r3, #:upper16:usb_init
+ 1889 0116 4FF00102 		mov	r2, #1
+ 1890 011a 5A70     		strb	r2, [r3, #1]
+ 623:../Dave/Generated/src/USBD/usbd/usbd.c **** 	usb_init.usb_max_num_eps = (USB_MAX_NUM_EPS_t)(usb_init.usb_max_num_in_eps+
+ 1891              		.loc 1 623 0
+ 1892 011c 40F20003 		movw	r3, #:lower16:usb_init
+ 1893 0120 C0F20003 		movt	r3, #:upper16:usb_init
+ 1894 0124 9A78     		ldrb	r2, [r3, #2]	@ zero_extendqisi2
+ 624:../Dave/Generated/src/USBD/usbd/usbd.c **** 								usb_init.usb_max_num_out_eps+
+ 1895              		.loc 1 624 0
+ 1896 0126 40F20003 		movw	r3, #:lower16:usb_init
+ 1897 012a C0F20003 		movt	r3, #:upper16:usb_init
+ 1898 012e 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 623:../Dave/Generated/src/USBD/usbd/usbd.c **** 	usb_init.usb_max_num_eps = (USB_MAX_NUM_EPS_t)(usb_init.usb_max_num_in_eps+
+ 1899              		.loc 1 623 0
+ 1900 0130 D318     		adds	r3, r2, r3
+ 1901 0132 DAB2     		uxtb	r2, r3
+ 625:../Dave/Generated/src/USBD/usbd/usbd.c **** 								usb_init.usb_max_num_control_eps+1);
+ 1902              		.loc 1 625 0
+ 1903 0134 40F20003 		movw	r3, #:lower16:usb_init
+ 1904 0138 C0F20003 		movt	r3, #:upper16:usb_init
+ 1905 013c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 623:../Dave/Generated/src/USBD/usbd/usbd.c **** 	usb_init.usb_max_num_eps = (USB_MAX_NUM_EPS_t)(usb_init.usb_max_num_in_eps+
+ 1906              		.loc 1 623 0
+ 1907 013e D318     		adds	r3, r2, r3
+ 1908 0140 DBB2     		uxtb	r3, r3
+ 1909 0142 03F10103 		add	r3, r3, #1
+ 1910 0146 DAB2     		uxtb	r2, r3
+ 1911 0148 40F20003 		movw	r3, #:lower16:usb_init
+ 1912 014c C0F20003 		movt	r3, #:upper16:usb_init
+ 1913 0150 DA70     		strb	r2, [r3, #3]
+ 626:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 627:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/*The following values for priority, USB transfer mode should be
+ 628:../Dave/Generated/src/USBD/usbd/usbd.c **** 	 * replaced with the values from UI*/
+ 629:../Dave/Generated/src/USBD/usbd/usbd.c **** 	usb_preemption_priority = USB_PRE_PRIORITY;
+ 1914              		.loc 1 629 0
+ 1915 0152 40F20003 		movw	r3, #:lower16:usb_preemption_priority
+ 1916 0156 C0F20003 		movt	r3, #:upper16:usb_preemption_priority
+ 1917 015a 4FF03F02 		mov	r2, #63
+ 1918 015e 1A60     		str	r2, [r3, #0]
+ 630:../Dave/Generated/src/USBD/usbd/usbd.c **** 	usb_sub_priority = USB_SUB_PRIORITY;
+ 1919              		.loc 1 630 0
+ 1920 0160 40F20003 		movw	r3, #:lower16:usb_sub_priority
+ 1921 0164 C0F20003 		movt	r3, #:upper16:usb_sub_priority
+ 1922 0168 4FF00002 		mov	r2, #0
+ 1923 016c 1A60     		str	r2, [r3, #0]
+ 631:../Dave/Generated/src/USBD/usbd/usbd.c **** 	usb_init.usb_transfer_mode = (USB_TRANSFER_MODE_t)USB_XFER_FIFO_MODE;
+ 1924              		.loc 1 631 0
+ 1925 016e 40F20003 		movw	r3, #:lower16:usb_init
+ 1926 0172 C0F20003 		movt	r3, #:upper16:usb_init
+ 1927 0176 4FF00002 		mov	r2, #0
+ 1928 017a 9A71     		strb	r2, [r3, #6]
+ 632:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 633:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/*Enable clock gating*/
+ 634:../Dave/Generated/src/USBD/usbd/usbd.c **** 	#if(UC_SERIES == XMC44||UC_SERIES == XMC42)
+ 635:../Dave/Generated/src/USBD/usbd/usbd.c **** 	SCU_CLK->CGATCLR2 |=SCU_CLK_CGATCLR2_USB_Msk;
+ 636:../Dave/Generated/src/USBD/usbd/usbd.c **** 	#endif
+ 637:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* Disable Reset and power up */
+ 638:../Dave/Generated/src/USBD/usbd/usbd.c **** 	SCU_RESET->PRCLR2 = SCU_RESET_PRCLR2_USBRS_Msk;
+ 1929              		.loc 1 638 0
+ 1930 017c 4FF48843 		mov	r3, #17408
+ 1931 0180 C5F20003 		movt	r3, 20480
+ 1932 0184 4FF08002 		mov	r2, #128
+ 1933 0188 DA62     		str	r2, [r3, #44]
+ 639:../Dave/Generated/src/USBD/usbd/usbd.c **** #if (UC_SERIES == XMC42) || (UC_SERIES == XMC41)
+ 640:../Dave/Generated/src/USBD/usbd/usbd.c **** 	SCU_POWER->PWRSET |= SCU_POWER_PWRSET_USBPHYPDQ_Msk;
+ 641:../Dave/Generated/src/USBD/usbd/usbd.c **** #else
+ 642:../Dave/Generated/src/USBD/usbd/usbd.c **** 	SCU_POWER->PWRSET |= SCU_POWER_PWRSET_USBOTGEN_Msk
+ 1934              		.loc 1 642 0
+ 1935 018a 4FF48443 		mov	r3, #16896
+ 1936 018e C5F20003 		movt	r3, 20480
+ 1937 0192 4FF48442 		mov	r2, #16896
+ 1938 0196 C5F20002 		movt	r2, 20480
+ 1939 019a 5268     		ldr	r2, [r2, #4]
+ 1940 019c 42F44032 		orr	r2, r2, #196608
+ 1941 01a0 5A60     		str	r2, [r3, #4]
+ 643:../Dave/Generated/src/USBD/usbd/usbd.c **** 			| SCU_POWER_PWRSET_USBPHYPDQ_Msk;
+ 644:../Dave/Generated/src/USBD/usbd/usbd.c **** #endif
+ 645:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 646:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* First initalize the device */
+ 647:../Dave/Generated/src/USBD/usbd/usbd.c **** 	status = device.Driver->Initialize(&USBD_SignalDeviceEventHandler,
+ 1942              		.loc 1 647 0
+ 1943 01a2 40F20003 		movw	r3, #:lower16:device
+ 1944 01a6 C0F20003 		movt	r3, #:upper16:device
+ 1945 01aa 1B68     		ldr	r3, [r3, #0]
+ 1946 01ac 5C68     		ldr	r4, [r3, #4]
+ 1947 01ae 40F20003 		movw	r3, #:lower16:usb_init
+ 1948 01b2 C0F20003 		movt	r3, #:upper16:usb_init
+ 1949 01b6 40F20000 		movw	r0, #:lower16:USBD_SignalDeviceEventHandler
+ 1950 01ba C0F20000 		movt	r0, #:upper16:USBD_SignalDeviceEventHandler
+ 1951 01be 40F20001 		movw	r1, #:lower16:USBD_SignalEndpointEvent_Handler
+ 1952 01c2 C0F20001 		movt	r1, #:upper16:USBD_SignalEndpointEvent_Handler
+ 1953 01c6 0CCB     		ldmia	r3, {r2, r3}
+ 1954 01c8 A047     		blx	r4
+ 1955 01ca 0346     		mov	r3, r0
+ 1956 01cc FB60     		str	r3, [r7, #12]
+ 648:../Dave/Generated/src/USBD/usbd/usbd.c **** 							&USBD_SignalEndpointEvent_Handler,usb_init);
+ 649:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (status != USB_USBD_OK)
+ 1957              		.loc 1 649 0
+ 1958 01ce FB68     		ldr	r3, [r7, #12]
+ 1959 01d0 002B     		cmp	r3, #0
+ 1960 01d2 02D0     		beq	.L125
+ 650:../Dave/Generated/src/USBD/usbd/usbd.c **** 		return -1;
+ 1961              		.loc 1 650 0
+ 1962 01d4 4FF0FF33 		mov	r3, #-1
+ 1963 01d8 22E0     		b	.L126
+ 1964              	.L125:
+ 651:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 652:../Dave/Generated/src/USBD/usbd/usbd.c **** 	/* then configure endpoint 0 */
+ 653:../Dave/Generated/src/USBD/usbd/usbd.c **** 	device.Driver->EndpointConfigure(0,USB_ENDPOINT_CONTROL,
+ 1965              		.loc 1 653 0
+ 1966 01da 40F20003 		movw	r3, #:lower16:device
+ 1967 01de C0F20003 		movt	r3, #:upper16:device
+ 1968 01e2 1B68     		ldr	r3, [r3, #0]
+ 1969 01e4 DC69     		ldr	r4, [r3, #28]
+ 1970 01e6 40F20003 		movw	r3, #:lower16:usb_init
+ 1971 01ea C0F20003 		movt	r3, #:upper16:usb_init
+ 1972 01ee 5A68     		ldr	r2, [r3, #4]
+ 1973 01f0 0092     		str	r2, [sp, #0]
+ 1974 01f2 1B68     		ldr	r3, [r3, #0]
+ 1975 01f4 4FF00000 		mov	r0, #0
+ 1976 01f8 4FF00001 		mov	r1, #0
+ 1977 01fc 4FF04002 		mov	r2, #64
+ 1978 0200 A047     		blx	r4
+ 654:../Dave/Generated/src/USBD/usbd/usbd.c **** 			USB_MAX_PACKET_SIZE,usb_init);
+ 655:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (status != USB_USBD_OK) {
+ 1979              		.loc 1 655 0
+ 1980 0202 FB68     		ldr	r3, [r7, #12]
+ 1981 0204 002B     		cmp	r3, #0
+ 1982 0206 09D0     		beq	.L127
+ 656:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Driver->Uninitialize();
+ 1983              		.loc 1 656 0
+ 1984 0208 40F20003 		movw	r3, #:lower16:device
+ 1985 020c C0F20003 		movt	r3, #:upper16:device
+ 1986 0210 1B68     		ldr	r3, [r3, #0]
+ 1987 0212 9B68     		ldr	r3, [r3, #8]
+ 1988 0214 9847     		blx	r3
+ 657:../Dave/Generated/src/USBD/usbd/usbd.c **** 		return -1;
+ 1989              		.loc 1 657 0
+ 1990 0216 4FF0FF33 		mov	r3, #-1
+ 1991 021a 01E0     		b	.L126
+ 1992              	.L127:
+ 658:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 659:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 660:../Dave/Generated/src/USBD/usbd/usbd.c **** 	return 0;
+ 1993              		.loc 1 660 0
+ 1994 021c 4FF00003 		mov	r3, #0
+ 1995              	.L126:
+ 661:../Dave/Generated/src/USBD/usbd/usbd.c **** }
+ 1996              		.loc 1 661 0
+ 1997 0220 1846     		mov	r0, r3
+ 1998 0222 07F11407 		add	r7, r7, #20
+ 1999 0226 BD46     		mov	sp, r7
+ 2000 0228 90BD     		pop	{r4, r7, pc}
+ 2001              		.cfi_endproc
+ 2002              	.LFE137:
+ 2004 022a 00BF     		.section	.text.USBD_Connect,"ax",%progbits
+ 2005              		.align	2
+ 2006              		.global	USBD_Connect
+ 2007              		.thumb
+ 2008              		.thumb_func
+ 2010              	USBD_Connect:
+ 2011              	.LFB138:
+ 662:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 663:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+ 664:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Connect the device to the bus
+ 665:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 666:../Dave/Generated/src/USBD/usbd/usbd.c ****  * Tell the USB device controller driver to conect to the bus. Successful
+ 667:../Dave/Generated/src/USBD/usbd/usbd.c ****  * connection will be shown through update of the device status
+ 668:../Dave/Generated/src/USBD/usbd/usbd.c ****  * (\ref USB_DeviceState) and a firing of the \ref EVENT_USB_Device_Connect.
+ 669:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+ 670:../Dave/Generated/src/USBD/usbd/usbd.c **** int USBD_Connect() {
+ 2012              		.loc 1 670 0
+ 2013              		.cfi_startproc
+ 2014              		@ args = 0, pretend = 0, frame = 0
+ 2015              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2016 0000 80B5     		push	{r7, lr}
+ 2017              	.LCFI21:
+ 2018              		.cfi_def_cfa_offset 8
+ 2019              		.cfi_offset 7, -8
+ 2020              		.cfi_offset 14, -4
+ 2021 0002 00AF     		add	r7, sp, #0
+ 2022              	.LCFI22:
+ 2023              		.cfi_def_cfa_register 7
+ 671:../Dave/Generated/src/USBD/usbd/usbd.c **** 	return device.Driver->DeviceConnect();
+ 2024              		.loc 1 671 0
+ 2025 0004 40F20003 		movw	r3, #:lower16:device
+ 2026 0008 C0F20003 		movt	r3, #:upper16:device
+ 2027 000c 1B68     		ldr	r3, [r3, #0]
+ 2028 000e DB68     		ldr	r3, [r3, #12]
+ 2029 0010 9847     		blx	r3
+ 2030 0012 0346     		mov	r3, r0
+ 672:../Dave/Generated/src/USBD/usbd/usbd.c **** }
+ 2031              		.loc 1 672 0
+ 2032 0014 1846     		mov	r0, r3
+ 2033 0016 80BD     		pop	{r7, pc}
+ 2034              		.cfi_endproc
+ 2035              	.LFE138:
+ 2037              		.section	.text.USBD_IsEnumDone,"ax",%progbits
+ 2038              		.align	2
+ 2039              		.global	USBD_IsEnumDone
+ 2040              		.thumb
+ 2041              		.thumb_func
+ 2043              	USBD_IsEnumDone:
+ 2044              	.LFB139:
+ 673:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 674:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+ 675:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Is the enumeration finished?
+ 676:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 677:../Dave/Generated/src/USBD/usbd/usbd.c ****  * Tell the USB device controller driver if the enumeration interrupt have been
+ 678:../Dave/Generated/src/USBD/usbd/usbd.c ****  * reached
+ 679:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+ 680:../Dave/Generated/src/USBD/usbd/usbd.c **** int USBD_IsEnumDone(){
+ 2045              		.loc 1 680 0
+ 2046              		.cfi_startproc
+ 2047              		@ args = 0, pretend = 0, frame = 0
+ 2048              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2049 0000 80B5     		push	{r7, lr}
+ 2050              	.LCFI23:
+ 2051              		.cfi_def_cfa_offset 8
+ 2052              		.cfi_offset 7, -8
+ 2053              		.cfi_offset 14, -4
+ 2054 0002 00AF     		add	r7, sp, #0
+ 2055              	.LCFI24:
+ 2056              		.cfi_def_cfa_register 7
+ 681:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (device.Driver->IsEnumDone())
+ 2057              		.loc 1 681 0
+ 2058 0004 40F20003 		movw	r3, #:lower16:device
+ 2059 0008 C0F20003 		movt	r3, #:upper16:device
+ 2060 000c 1B68     		ldr	r3, [r3, #0]
+ 2061 000e DB6B     		ldr	r3, [r3, #60]
+ 2062 0010 9847     		blx	r3
+ 2063 0012 0346     		mov	r3, r0
+ 2064 0014 002B     		cmp	r3, #0
+ 2065 0016 02D0     		beq	.L131
+ 682:../Dave/Generated/src/USBD/usbd/usbd.c **** 		return 1;
+ 2066              		.loc 1 682 0
+ 2067 0018 4FF00103 		mov	r3, #1
+ 2068 001c 01E0     		b	.L132
+ 2069              	.L131:
+ 683:../Dave/Generated/src/USBD/usbd/usbd.c **** 	else
+ 684:../Dave/Generated/src/USBD/usbd/usbd.c **** 		return 0;
+ 2070              		.loc 1 684 0
+ 2071 001e 4FF00003 		mov	r3, #0
+ 2072              	.L132:
+ 685:../Dave/Generated/src/USBD/usbd/usbd.c ****  }
+ 2073              		.loc 1 685 0
+ 2074 0022 1846     		mov	r0, r3
+ 2075 0024 80BD     		pop	{r7, pc}
+ 2076              		.cfi_endproc
+ 2077              	.LFE139:
+ 2079 0026 00BF     		.section	.text.USBD_SetEndpointBuffer,"ax",%progbits
+ 2080              		.align	2
+ 2081              		.global	USBD_SetEndpointBuffer
+ 2082              		.thumb
+ 2083              		.thumb_func
+ 2085              	USBD_SetEndpointBuffer:
+ 2086              	.LFB140:
+ 686:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 687:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 688:../Dave/Generated/src/USBD/usbd/usbd.c **** /**
+ 689:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \brief Set the buffer for an endpoint
+ 690:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 691:../Dave/Generated/src/USBD/usbd/usbd.c ****  * The user has to ensure the an endpoint has a valid buffer set
+ 692:../Dave/Generated/src/USBD/usbd/usbd.c ****  * in order to ensure proper work.
+ 693:../Dave/Generated/src/USBD/usbd/usbd.c ****  *
+ 694:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \param[in] addr Endpoint address
+ 695:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \param[in] buf Buffer pointer
+ 696:../Dave/Generated/src/USBD/usbd/usbd.c ****  * \param[in] len Buffer length
+ 697:../Dave/Generated/src/USBD/usbd/usbd.c ****  */
+ 698:../Dave/Generated/src/USBD/usbd/usbd.c **** void USBD_SetEndpointBuffer(uint8_t addr,uint8_t *buf,uint16_t len)
+ 699:../Dave/Generated/src/USBD/usbd/usbd.c **** {
+ 2087              		.loc 1 699 0
+ 2088              		.cfi_startproc
+ 2089              		@ args = 0, pretend = 0, frame = 16
+ 2090              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2091              		@ link register save eliminated.
+ 2092 0000 80B4     		push	{r7}
+ 2093              	.LCFI25:
+ 2094              		.cfi_def_cfa_offset 4
+ 2095              		.cfi_offset 7, -4
+ 2096 0002 85B0     		sub	sp, sp, #20
+ 2097              	.LCFI26:
+ 2098              		.cfi_def_cfa_offset 24
+ 2099 0004 00AF     		add	r7, sp, #0
+ 2100              	.LCFI27:
+ 2101              		.cfi_def_cfa_register 7
+ 2102 0006 3960     		str	r1, [r7, #0]
+ 2103 0008 1346     		mov	r3, r2
+ 2104 000a 0246     		mov	r2, r0
+ 2105 000c FA71     		strb	r2, [r7, #7]
+ 2106 000e BB80     		strh	r3, [r7, #4]	@ movhi
+ 700:../Dave/Generated/src/USBD/usbd/usbd.c **** 	uint8_t number  = addr & ENDPOINT_EPNUM_MASK;
+ 2107              		.loc 1 700 0
+ 2108 0010 FB79     		ldrb	r3, [r7, #7]
+ 2109 0012 03F00F03 		and	r3, r3, #15
+ 2110 0016 FB73     		strb	r3, [r7, #15]
+ 701:../Dave/Generated/src/USBD/usbd/usbd.c **** 	if (addr & ENDPOINT_DIR_MASK) {
+ 2111              		.loc 1 701 0
+ 2112 0018 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 2113 001a 5BB2     		sxtb	r3, r3
+ 2114 001c 002B     		cmp	r3, #0
+ 2115 001e 1CDA     		bge	.L134
+ 702:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Endpoints[number].InBuffer = buf;
+ 2116              		.loc 1 702 0
+ 2117 0020 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 2118 0022 40F20003 		movw	r3, #:lower16:device
+ 2119 0026 C0F20003 		movt	r3, #:upper16:device
+ 2120 002a 4FF02C01 		mov	r1, #44
+ 2121 002e 01FB02F2 		mul	r2, r1, r2
+ 2122 0032 9B18     		adds	r3, r3, r2
+ 2123 0034 03F12003 		add	r3, r3, #32
+ 2124 0038 3A68     		ldr	r2, [r7, #0]
+ 2125 003a 1A60     		str	r2, [r3, #0]
+ 703:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Endpoints[number].InBufferLength = len;
+ 2126              		.loc 1 703 0
+ 2127 003c F97B     		ldrb	r1, [r7, #15]	@ zero_extendqisi2
+ 2128 003e BA88     		ldrh	r2, [r7, #4]
+ 2129 0040 40F20003 		movw	r3, #:lower16:device
+ 2130 0044 C0F20003 		movt	r3, #:upper16:device
+ 2131 0048 4FF02C00 		mov	r0, #44
+ 2132 004c 00FB01F1 		mul	r1, r0, r1
+ 2133 0050 5B18     		adds	r3, r3, r1
+ 2134 0052 03F12403 		add	r3, r3, #36
+ 2135 0056 1A60     		str	r2, [r3, #0]
+ 2136 0058 1BE0     		b	.L133
+ 2137              	.L134:
+ 704:../Dave/Generated/src/USBD/usbd/usbd.c **** 	} else {
+ 705:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Endpoints[number].OutBuffer = buf;
+ 2138              		.loc 1 705 0
+ 2139 005a FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 2140 005c 40F20003 		movw	r3, #:lower16:device
+ 2141 0060 C0F20003 		movt	r3, #:upper16:device
+ 2142 0064 4FF02C01 		mov	r1, #44
+ 2143 0068 01FB02F2 		mul	r2, r1, r2
+ 2144 006c 9B18     		adds	r3, r3, r2
+ 2145 006e 03F11403 		add	r3, r3, #20
+ 2146 0072 3A68     		ldr	r2, [r7, #0]
+ 2147 0074 1A60     		str	r2, [r3, #0]
+ 706:../Dave/Generated/src/USBD/usbd/usbd.c **** 		device.Endpoints[number].OutBufferLength = len;
+ 2148              		.loc 1 706 0
+ 2149 0076 F97B     		ldrb	r1, [r7, #15]	@ zero_extendqisi2
+ 2150 0078 BA88     		ldrh	r2, [r7, #4]
+ 2151 007a 40F20003 		movw	r3, #:lower16:device
+ 2152 007e C0F20003 		movt	r3, #:upper16:device
+ 2153 0082 4FF02C00 		mov	r0, #44
+ 2154 0086 00FB01F1 		mul	r1, r0, r1
+ 2155 008a 5B18     		adds	r3, r3, r1
+ 2156 008c 03F11803 		add	r3, r3, #24
+ 2157 0090 1A60     		str	r2, [r3, #0]
+ 2158              	.L133:
+ 707:../Dave/Generated/src/USBD/usbd/usbd.c **** 	}
+ 708:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 709:../Dave/Generated/src/USBD/usbd/usbd.c **** 
+ 710:../Dave/Generated/src/USBD/usbd/usbd.c **** }
+ 2159              		.loc 1 710 0
+ 2160 0092 07F11407 		add	r7, r7, #20
+ 2161 0096 BD46     		mov	sp, r7
+ 2162 0098 80BC     		pop	{r7}
+ 2163 009a 7047     		bx	lr
+ 2164              		.cfi_endproc
+ 2165              	.LFE140:
+ 2167              		.text
+ 2168              	.Letext0:
+ 2169              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 2170              		.file 3 "../Dave/Generated/src/USBD/usbd/../usb/Core/StdRequestType.h"
+ 2171              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 2172              		.file 5 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\MOTORLIBS/../.
+ 2173              		.file 6 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\MOTORLIBS/../.
+ 2174              		.file 7 "../Dave/Generated/src/USBD/usbd/../usb/Core/../../usbd/usbd.h"
+ 2175              		.file 8 "../Dave/Generated/src/USBD/usbd/../usb/Core/Device.h"
+ 2176              		.file 9 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 2177              		.file 10 "../Dave/Generated/src/USBD/usbd/../usb/Core/USBTask.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 usbd.c
+                            *COM*:00000144 device
+                            *COM*:00000008 usb_init
+                            *COM*:00000100 endpoint0_in_buffer
+                            *COM*:00000100 endpoint0_out_buffer
+                            *COM*:00000004 usb_preemption_priority
+                            *COM*:00000004 usb_sub_priority
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:26     .text.USBD_HandleEP0_Stall:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:31     .text.USBD_HandleEP0_Stall:00000000 USBD_HandleEP0_Stall
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:74     .text.USBD_Handle_DeviceRequest:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:79     .text.USBD_Handle_DeviceRequest:00000000 USBD_Handle_DeviceRequest
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:143    .text.USBD_Handle_DeviceRequest:00000074 $d
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:158    .text.USBD_Handle_DeviceRequest:000000a8 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:581    .text.USBD_Handle_DeviceRequest:00000468 $d
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:584    .text.USBD_Handle_DeviceRequest:0000046c $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:845    .text.USBD_HandleEP0_IN:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:850    .text.USBD_HandleEP0_IN:00000000 USBD_HandleEP0_IN
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:920    .text.USBD_HandleEP0_OUT:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:925    .text.USBD_HandleEP0_OUT:00000000 USBD_HandleEP0_OUT
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:997    .text.USBD_HandleEP0_SETUP:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:1002   .text.USBD_HandleEP0_SETUP:00000000 USBD_HandleEP0_SETUP
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:1121   .text.USBD_SignalDeviceEventHandler:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:1126   .text.USBD_SignalDeviceEventHandler:00000000 USBD_SignalDeviceEventHandler
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:1154   .text.USBD_SignalDeviceEventHandler:00000018 $d
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:1166   .text.USBD_SignalDeviceEventHandler:00000040 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:1490   .text.USBD_SignalEndpointEvent_Handler:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:1495   .text.USBD_SignalEndpointEvent_Handler:00000000 USBD_SignalEndpointEvent_Handler
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:1770   .text.USBD_Initialize:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:1775   .text.USBD_Initialize:00000000 USBD_Initialize
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:2005   .text.USBD_Connect:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:2010   .text.USBD_Connect:00000000 USBD_Connect
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:2038   .text.USBD_IsEnumDone:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:2043   .text.USBD_IsEnumDone:00000000 USBD_IsEnumDone
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:2080   .text.USBD_SetEndpointBuffer:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccx0e6pa.s:2085   .text.USBD_SetEndpointBuffer:00000000 USBD_SetEndpointBuffer
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.187.40b3a084f9bc2c020a9e00b9eabe9c14
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.50.f5923f1950ced340a337f4676566f65a
+                           .group:00000000 wm4.Common.h.87.ed9fec00c6f9ec3cf5c2ac4c6cfcb530
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.stddef.h.40.b60a1c1ee3f272eef5327a730cbabca6
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.Attributes.h.96.1b4ef8adf80de3cb4f8c62843bfaf7bf
+                           .group:00000000 wm4.USBMode.h.77.4e4e8a02b05a3ac3cc68fd5ff175067b
+                           .group:00000000 wm4.USBController.h.86.f72895e5eac4294c0bf6a3fd6a9cf96d
+                           .group:00000000 wm4.StdRequestType.h.87.0e2654a6e33ff7aef3db3461e4efa272
+                           .group:00000000 wm4.StdDescriptors.h.87.6540a3103989657a1b3a4dd6f8d55529
+                           .group:00000000 wm4.Endpoint.h.111.e7536b4385918c15b4c37aa69fbe94e3
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.usbd_config.h.64.bd01b2d6be88400f5b6095cc78dd2cee
+                           .group:00000000 wm4.stdbool.h.29.1c9ee6859ce8145f7838a4f2549ccec2
+                           .group:00000000 wm4.xmc4_usb.h.86.0df8e4bc81775a7befde6c395bcdee4c
+                           .group:00000000 wm4.dwc_otg_regs.h.96.602358b1a0ef2f2c6d02620a154f0cfc
+                           .group:00000000 wm4.xmc4_usb.h.97.59ae14584bb42292696e2197b500e282
+
+UNDEFINED SYMBOLS
+USB_ControlRequest
+USB_DeviceState
+memset
+Driver_USBD0

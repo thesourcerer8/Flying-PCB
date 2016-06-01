@@ -1,0 +1,711 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"Descriptors.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	DeviceDescriptor
+  20              		.section	.rodata
+  21              		.align	2
+  24              	DeviceDescriptor:
+  25 0000 12       		.byte	18
+  26 0001 01       		.byte	1
+  27 0002 1001     		.short	272
+  28 0004 02       		.byte	2
+  29 0005 00       		.byte	0
+  30 0006 00       		.byte	0
+  31 0007 40       		.byte	64
+  32 0008 8B05     		.short	1419
+  33 000a 5800     		.short	88
+  34 000c 0100     		.short	1
+  35 000e 01       		.byte	1
+  36 000f 02       		.byte	2
+  37 0010 00       		.byte	0
+  38 0011 01       		.byte	1
+  39              		.global	ConfigurationDescriptor
+  40 0012 0000     		.align	2
+  43              	ConfigurationDescriptor:
+  44 0014 09       		.byte	9
+  45 0015 02       		.byte	2
+  46 0016 3E00     		.short	62
+  47 0018 02       		.byte	2
+  48 0019 01       		.byte	1
+  49 001a 00       		.byte	0
+  50 001b 80       		.byte	-128
+  51 001c 32       		.byte	50
+  52 001d 09       		.byte	9
+  53 001e 04       		.byte	4
+  54 001f 00       		.byte	0
+  55 0020 00       		.byte	0
+  56 0021 01       		.byte	1
+  57 0022 02       		.byte	2
+  58 0023 02       		.byte	2
+  59 0024 01       		.byte	1
+  60 0025 00       		.byte	0
+  61 0026 05       		.byte	5
+  62 0027 24       		.byte	36
+  63 0028 00       		.byte	0
+  64 0029 1001     		.2byte	272
+  65 002b 04       		.byte	4
+  66 002c 24       		.byte	36
+  67 002d 02       		.byte	2
+  68 002e 06       		.byte	6
+  69 002f 05       		.byte	5
+  70 0030 24       		.byte	36
+  71 0031 06       		.byte	6
+  72 0032 00       		.byte	0
+  73 0033 01       		.byte	1
+  74 0034 07       		.byte	7
+  75 0035 05       		.byte	5
+  76 0036 81       		.byte	-127
+  77 0037 03       		.byte	3
+  78 0038 0800     		.short	8
+  79 003a FF       		.byte	-1
+  80 003b 09       		.byte	9
+  81 003c 04       		.byte	4
+  82 003d 01       		.byte	1
+  83 003e 00       		.byte	0
+  84 003f 02       		.byte	2
+  85 0040 0A       		.byte	10
+  86 0041 00       		.byte	0
+  87 0042 00       		.byte	0
+  88 0043 00       		.byte	0
+  89 0044 07       		.byte	7
+  90 0045 05       		.byte	5
+  91 0046 03       		.byte	3
+  92 0047 02       		.byte	2
+  93 0048 4000     		.short	64
+  94 004a 01       		.byte	1
+  95 004b 07       		.byte	7
+  96 004c 05       		.byte	5
+  97 004d 82       		.byte	-126
+  98 004e 02       		.byte	2
+  99 004f 4000     		.2byte	64
+ 100 0051 01       		.byte	1
+ 101              		.global	LanguageString
+ 102 0052 0000     		.align	2
+ 105              	LanguageString:
+ 106 0054 04       		.byte	4
+ 107 0055 03       		.byte	3
+ 108 0056 0904     		.short	1033
+ 109 0058 00000000 		.space	98
+ 109      00000000 
+ 109      00000000 
+ 109      00000000 
+ 109      00000000 
+ 110              		.global	ManufacturerString
+ 111 00ba 0000     		.align	2
+ 114              	ManufacturerString:
+ 115 00bc 18       		.byte	24
+ 116 00bd 03       		.byte	3
+ 117 00be 4900     		.short	73
+ 118 00c0 6E00     		.short	110
+ 119 00c2 6600     		.short	102
+ 120 00c4 6900     		.short	105
+ 121 00c6 6E00     		.short	110
+ 122 00c8 6500     		.short	101
+ 123 00ca 6F00     		.short	111
+ 124 00cc 6E00     		.short	110
+ 125 00ce 00000000 		.space	84
+ 125      00000000 
+ 125      00000000 
+ 125      00000000 
+ 125      00000000 
+ 126              		.global	ProductString
+ 127 0122 0000     		.align	2
+ 130              	ProductString:
+ 131 0124 1C       		.byte	28
+ 132 0125 03       		.byte	3
+ 133 0126 4900     		.short	73
+ 134 0128 4600     		.short	70
+ 135 012a 5800     		.short	88
+ 136 012c 2000     		.short	32
+ 137 012e 4300     		.short	67
+ 138 0130 4400     		.short	68
+ 139 0132 4300     		.short	67
+ 140 0134 00000000 		.space	86
+ 140      00000000 
+ 140      00000000 
+ 140      00000000 
+ 140      00000000 
+ 141 018a 0000     		.section	.text.CALLBACK_USB_GetDescriptor,"ax",%progbits
+ 142              		.align	2
+ 143              		.global	CALLBACK_USB_GetDescriptor
+ 144              		.thumb
+ 145              		.thumb_func
+ 147              	CALLBACK_USB_GetDescriptor:
+ 148              	.LFB130:
+ 149              		.file 1 "../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c"
+   1:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /* CODE_BLOCK_BEGIN[Descriptors.c] */
+   2:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+   3:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /*******************************************************************************
+   4:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  Copyright (c) 2014, Infineon Technologies AG                                 **
+   5:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  All rights reserved.                                                         **
+   6:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****                                                                               **
+   7:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  Redistribution and use in source and binary forms, with or without           **
+   8:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  modification,are permitted provided that the following conditions are met:   **
+   9:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****                                                                               **
+  10:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *Redistributions of source code must retain the above copyright notice,      **
+  11:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  this list of conditions and the following disclaimer.                        **
+  12:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  13:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  this list of conditions and the following disclaimer in the documentation    **
+  14:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  and/or other materials provided with the distribution.                       **
+  15:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  16:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  may be used to endorse or promote products derived from this software without**
+  17:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  specific prior written permission.                                           **
+  18:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****                                                                               **
+  19:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  20:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  21:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  22:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  23:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  24:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  25:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  26:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  27:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  28:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  29:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  30:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****                                                                               **
+  31:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  To improve the quality of the software, users are encouraged to share        **
+  32:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  33:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  dave@infineon.com).                                                          **
+  34:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****                                                                               **
+  35:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** ********************************************************************************
+  36:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** **                                                                            **
+  37:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** **                                                                            **
+  38:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  39:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** **                                                                            **
+  40:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** ** COMPILER : Compiler Independent                                            **
+  41:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** **                                                                            **
+  42:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** ** AUTHOR   : App Developer                                                   **
+  43:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** **                                                                            **
+  44:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** ** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+  45:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** **                                                                            **
+  46:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** ** MODIFICATION DATE : Feb 17, 2014                                           **
+  47:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** **                                                                            **
+  48:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** *******************************************************************************/
+  49:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /*******************************************************************************
+  50:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** **                      Author(s) Identity                                    **
+  51:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** ********************************************************************************
+  52:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** **                                                                            **
+  53:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** ** Initials     Name                                                          **
+  54:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** ** ---------------------------------------------------------------------------**
+  55:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** ** NSND       App Developer                                                   **
+  56:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** *******************************************************************************/
+  57:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /*
+  58:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****              LUFA Library
+  59:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****      Copyright (C) Dean Camera, 2011.
+  60:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+  61:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   dean [at] fourwalledcubicle [dot] com
+  62:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****            www.lufa-lib.org
+  63:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** */
+  64:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+  65:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /*
+  66:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  67:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+  68:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   Permission to use, copy, modify, distribute, and sell this
+  69:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   software and its documentation for any purpose is hereby granted
+  70:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   without fee, provided that the above copyright notice appear in
+  71:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   all copies and that both that the copyright notice and this
+  72:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   permission notice and warranty disclaimer appear in supporting
+  73:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   documentation, and that the name of the author not be used in
+  74:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   advertising or publicity pertaining to distribution of the
+  75:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   software without specific, written prior permission.
+  76:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+  77:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   The author disclaim all warranties with regard to this
+  78:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   software, including all implied warranties of merchantability
+  79:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   and fitness.  In no event shall the author be liable for any
+  80:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   special, indirect or consequential damages or any damages
+  81:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   whatsoever resulting from loss of use, data or profits, whether
+  82:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   in an action of contract, negligence or other tortious action,
+  83:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   arising out of or in connection with the use or performance of
+  84:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****   this software.
+  85:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** */
+  86:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+  87:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /** \file Descriptors.c
+  88:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *
+  89:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  USB Device Descriptors, for library use when in USB device mode. Descriptors
+  90:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *   are special computer-readable structures which the host requests upon
+  91:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *   device enumeration, to determine the device's capabilities and functions.
+  92:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  */
+  93:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** #include "../../../inc/USBD_VCOM/usbd_vcom.h"
+  94:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** #include "Descriptors.h"
+  95:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** #include  "../../USBD/usb/Core/Device.h"
+  96:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** #include  "../../USBD/usb/Core/StdDescriptors.h"
+  97:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** #include  "../../USBD/usb/Common/Endianness.h"
+  98:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+  99:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /* On some devices, there is a factory set internal serial number which can be
+ 100:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * automatically sent to the host as the device's serial number when the Device
+ 101:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * Descriptor's .SerialNumStrIndex entry is set to USE_INTERNAL_SERIAL.
+ 102:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * This allows the host to track a device across insertions on different ports,
+ 103:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * allowing them to retain allocated resources like COM port numbers and
+ 104:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * drivers. On demos using this feature, give a warning on unsupported devices
+ 105:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * so that the user can supply their own serial number descriptor instead or
+ 106:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * remove the USE_INTERNAL_SERIAL value from the Device Descriptor (forcing the
+ 107:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * host to generate a serial number for each device from the VID, PID and
+ 108:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * port location).
+ 109:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  */
+ 110:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 111:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 112:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /** Device descriptor structure. This descriptor, located in FLASH memory,
+ 113:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * describes the overall device characteristics, including the supported USB
+ 114:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * version, control endpoint size and the number of device configurations.
+ 115:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  * The descriptor is read out by the USB host when the enumeration
+ 116:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  process begins.
+ 117:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  */
+ 118:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** #define PROGMEM
+ 119:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** const USB_Descriptor_Device_t PROGMEM DeviceDescriptor =
+ 120:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** {
+ 121:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.Header                 = {
+ 122:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Size = sizeof(USB_Descriptor_Device_t), .Type = DTYPE_Device},
+ 123:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 124:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.USBSpecification       = 0x0110,
+ 125:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.Class                  = CDC_CSCP_CDCClass,
+ 126:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.SubClass               = CDC_CSCP_NoSpecificSubclass,
+ 127:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.Protocol               = CDC_CSCP_NoSpecificProtocol,
+ 128:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 129:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.Endpoint0Size          = 64,
+ 130:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 131:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.VendorID               = 0x058B,
+ 132:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.ProductID              = 0x0058,
+ 133:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.ReleaseNumber          = 0x0001,
+ 134:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 135:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.ManufacturerStrIndex   = 0x01,
+ 136:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.ProductStrIndex        = 0x02,
+ 137:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.SerialNumStrIndex      = 0,
+ 138:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 139:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.NumberOfConfigurations = 1
+ 140:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** };
+ 141:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 142:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /** Configuration descriptor structure. This descriptor, located in FLASH
+ 143:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  memory, describes the usage of the device in one of its supported
+ 144:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  configurations, including information about any device interfaces and
+ 145:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  endpoints. The descriptor is read out by the USB host during the enumeration
+ 146:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *   process when selecting a configuration so that the host may correctly
+ 147:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *   communicate with the USB device.
+ 148:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  */
+ 149:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** const USB_Descriptor_Configuration_t PROGMEM ConfigurationDescriptor =
+ 150:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** {
+ 151:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.Config =
+ 152:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		{
+ 153:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Header                 = {
+ 154:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Size = sizeof(USB_Descriptor_Configuration_Header_t),
+ 155:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Type = DTYPE_Configuration},
+ 156:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 157:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.TotalConfigurationSize = sizeof(USB_Descriptor_Configuration_t),
+ 158:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.TotalInterfaces        = 2,
+ 159:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 160:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.ConfigurationNumber    = 1,
+ 161:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.ConfigurationStrIndex  = NO_DESCRIPTOR,
+ 162:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 163:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.ConfigAttributes       = (USB_CONFIG_ATTR_RESERVED),
+ 164:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 165:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.MaxPowerConsumption    = USB_CONFIG_POWER_MA(100)
+ 166:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		},
+ 167:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 168:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.CDC_CCI_Interface =
+ 169:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		{
+ 170:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Header                 = {
+ 171:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Size = sizeof(USB_Descriptor_Interface_t),
+ 172:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Type = DTYPE_Interface},
+ 173:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 174:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.InterfaceNumber        = 0,
+ 175:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.AlternateSetting       = 0,
+ 176:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 177:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.TotalEndpoints         = 1,
+ 178:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 179:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Class                  = CDC_CSCP_CDCClass,
+ 180:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.SubClass               = CDC_CSCP_ACMSubclass,
+ 181:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Protocol               = CDC_CSCP_ATCommandProtocol,
+ 182:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 183:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.InterfaceStrIndex      = NO_DESCRIPTOR
+ 184:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		},
+ 185:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 186:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.CDC_Functional_Header =
+ 187:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		{
+ 188:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Header                 = {
+ 189:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Size = sizeof(USB_CDC_Descriptor_FunctionalHeader_t),
+ 190:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Type = DTYPE_CSInterface},
+ 191:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Subtype                = CDC_DSUBTYPE_CSInterface_Header,
+ 192:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 193:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.CDCSpecification       = 0x0110,//VERSION_BCD(01.10),
+ 194:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		},
+ 195:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 196:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.CDC_Functional_ACM =
+ 197:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		{
+ 198:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Header                 = {
+ 199:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Size = sizeof(USB_CDC_Descriptor_FunctionalACM_t),
+ 200:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Type = DTYPE_CSInterface},
+ 201:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Subtype                = CDC_DSUBTYPE_CSInterface_ACM,
+ 202:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 203:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Capabilities           = 0x06,
+ 204:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		},
+ 205:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 206:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.CDC_Functional_Union =
+ 207:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		{
+ 208:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Header                 = {
+ 209:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Size = sizeof(USB_CDC_Descriptor_FunctionalUnion_t),
+ 210:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Type = DTYPE_CSInterface},
+ 211:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Subtype                = CDC_DSUBTYPE_CSInterface_Union,
+ 212:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 213:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.MasterInterfaceNumber  = 0,
+ 214:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.SlaveInterfaceNumber   = 1,
+ 215:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		},
+ 216:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 217:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.CDC_NotificationEndpoint =
+ 218:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		{
+ 219:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Header                 = {
+ 220:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Size = sizeof(USB_Descriptor_Endpoint_t),
+ 221:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Type = DTYPE_Endpoint},
+ 222:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 223:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.EndpointAddress        = (ENDPOINT_DIR_IN| CDC_NOTIFICATION_EPNUM),
+ 224:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Attributes             = (EP_TYPE_INTERRUPT | ENDPOINT_ATTR_NO_SYNC
+ 225:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 											| ENDPOINT_USAGE_DATA),
+ 226:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.EndpointSize           = CDC_NOTIFICATION_EPSIZE,
+ 227:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.PollingIntervalMS      = 0xFF
+ 228:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		},
+ 229:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 230:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.CDC_DCI_Interface =
+ 231:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		{
+ 232:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Header                 = {
+ 233:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Size = sizeof(USB_Descriptor_Interface_t),
+ 234:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Type = DTYPE_Interface},
+ 235:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 236:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.InterfaceNumber        = 1,
+ 237:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.AlternateSetting       = 0,
+ 238:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 239:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.TotalEndpoints         = 2,
+ 240:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 241:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Class                  = CDC_CSCP_CDCDataClass,
+ 242:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.SubClass               = CDC_CSCP_NoDataSubclass,
+ 243:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Protocol               = CDC_CSCP_NoDataProtocol,
+ 244:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 245:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.InterfaceStrIndex      = NO_DESCRIPTOR
+ 246:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		},
+ 247:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 248:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.CDC_DataOutEndpoint =
+ 249:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		{
+ 250:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Header                 = {
+ 251:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Size = sizeof(USB_Descriptor_Endpoint_t),
+ 252:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Type = DTYPE_Endpoint},
+ 253:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 254:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.EndpointAddress        = (ENDPOINT_DIR_OUT | CDC_RX_EPNUM),
+ 255:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Attributes             = (EP_TYPE_BULK | ENDPOINT_ATTR_NO_SYNC |
+ 256:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 														ENDPOINT_USAGE_DATA),
+ 257:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.EndpointSize           = CDC_TXRX_EPSIZE,
+ 258:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.PollingIntervalMS      = 0x01
+ 259:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		},
+ 260:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 261:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.CDC_DataInEndpoint =
+ 262:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		{
+ 263:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Header                 = {
+ 264:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Size = sizeof(USB_Descriptor_Endpoint_t),
+ 265:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					.Type = DTYPE_Endpoint},
+ 266:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 267:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.EndpointAddress        = (ENDPOINT_DIR_IN | CDC_TX_EPNUM),
+ 268:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.Attributes             = (EP_TYPE_BULK | ENDPOINT_ATTR_NO_SYNC |
+ 269:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 												ENDPOINT_USAGE_DATA),
+ 270:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.EndpointSize           = CDC_TXRX_EPSIZE,
+ 271:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			.PollingIntervalMS      = 0x01
+ 272:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		}
+ 273:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** };
+ 274:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 275:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /** Language descriptor structure. This descriptor, located in FLASH memory, is
+ 276:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  returned when the host requests the string descriptor with index 0 (the
+ 277:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  first index). It is actually an array of 16-bit integers, which indicate
+ 278:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  via the language ID table available at USB.org what languages the device
+ 279:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  supports for its string descriptors.
+ 280:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  */
+ 281:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** const USB_Descriptor_String_t PROGMEM LanguageString =
+ 282:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** {
+ 283:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.Header                 = {.Size = USB_STRING_LEN(1), .Type = DTYPE_String},
+ 284:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 285:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.UnicodeString          = {LANGUAGE_ID_ENG}
+ 286:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** };
+ 287:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 288:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /** Manufacturer descriptor string. This is a Unicode string containing the
+ 289:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  manufacturer's details in human readable  form, and is read out upon request
+ 290:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *   by the host when the appropriate string ID is requested, listed in the
+ 291:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *   Device Descriptor.
+ 292:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  */
+ 293:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** const USB_Descriptor_String_t PROGMEM ManufacturerString =
+ 294:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** {
+ 295:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.Header                 =
+ 296:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 						{.Size = USB_STRING_LEN(11), .Type = DTYPE_String},
+ 297:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 298:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.UnicodeString          = { 'I','n','f','i','n','e','o','n'}
+ 299:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** };
+ 300:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 301:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /** Product descriptor string. This is a Unicode string containing the product's
+ 302:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  details in human readable form, and is read out upon request by the host
+ 303:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  when the appropriate string ID is requested, listed in the Device
+ 304:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  Descriptor.
+ 305:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  */
+ 306:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** const USB_Descriptor_String_t PROGMEM ProductString =
+ 307:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** {
+ 308:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.Header                 =
+ 309:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 						{.Size = USB_STRING_LEN(13), .Type = DTYPE_String},
+ 310:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 311:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	.UnicodeString          = {'I','F','X',' ','C','D','C'}
+ 312:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** };
+ 313:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 314:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** /** This function is called by the library when in device mode, and must be
+ 315:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  overridden (see library "USB Descriptors" documentation) by the application
+ 316:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *   code so that the address and size of a requested descriptor can be given
+ 317:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  to the USB library. When the device receives a Get Descriptor request on
+ 318:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *  the control endpoint, this function is called so that the descriptor details
+ 319:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *   can be passed back and the appropriate descriptor sent back to the USB
+ 320:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  *   host.
+ 321:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****  */
+ 322:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** uint16_t CALLBACK_USB_GetDescriptor(const uint16_t wValue,
+ 323:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****                                     const uint16_t wIndex,
+ 324:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c ****                                     const void** const DescriptorAddress)
+ 325:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** {
+ 150              		.loc 1 325 0
+ 151              		.cfi_startproc
+ 152              		@ args = 0, pretend = 0, frame = 16
+ 153              		@ frame_needed = 1, uses_anonymous_args = 0
+ 154              		@ link register save eliminated.
+ 155 0000 80B4     		push	{r7}
+ 156              	.LCFI0:
+ 157              		.cfi_def_cfa_offset 4
+ 158              		.cfi_offset 7, -4
+ 159 0002 85B0     		sub	sp, sp, #20
+ 160              	.LCFI1:
+ 161              		.cfi_def_cfa_offset 24
+ 162 0004 00AF     		add	r7, sp, #0
+ 163              	.LCFI2:
+ 164              		.cfi_def_cfa_register 7
+ 165 0006 0B46     		mov	r3, r1
+ 166 0008 3A60     		str	r2, [r7, #0]
+ 167 000a 0246     		mov	r2, r0	@ movhi
+ 168 000c FA80     		strh	r2, [r7, #6]	@ movhi
+ 169 000e BB80     		strh	r3, [r7, #4]	@ movhi
+ 326:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	const uint8_t  DescriptorType   = (wValue >> 8);
+ 170              		.loc 1 326 0
+ 171 0010 FB88     		ldrh	r3, [r7, #6]
+ 172 0012 4FEA1323 		lsr	r3, r3, #8
+ 173 0016 9BB2     		uxth	r3, r3
+ 174 0018 7B72     		strb	r3, [r7, #9]
+ 327:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	
+ 328:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** #ifndef USE_IFX_DEV
+ 329:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	const uint8_t  DescriptorNumber = (wValue & 0xFF);
+ 175              		.loc 1 329 0
+ 176 001a FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 177 001c 3B72     		strb	r3, [r7, #8]
+ 330:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** #endif
+ 331:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 332:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	const void* Address = NULL;
+ 178              		.loc 1 332 0
+ 179 001e 4FF00003 		mov	r3, #0
+ 180 0022 FB60     		str	r3, [r7, #12]
+ 333:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	uint16_t    Size    = NO_DESCRIPTOR;
+ 181              		.loc 1 333 0
+ 182 0024 4FF00003 		mov	r3, #0
+ 183 0028 7B81     		strh	r3, [r7, #10]	@ movhi
+ 334:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 335:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	switch (DescriptorType)
+ 184              		.loc 1 335 0
+ 185 002a 7B7A     		ldrb	r3, [r7, #9]	@ zero_extendqisi2
+ 186 002c 022B     		cmp	r3, #2
+ 187 002e 0CD0     		beq	.L4
+ 188 0030 032B     		cmp	r3, #3
+ 189 0032 13D0     		beq	.L5
+ 190 0034 012B     		cmp	r3, #1
+ 191 0036 3DD1     		bne	.L2
+ 192              	.L3:
+ 336:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	{
+ 337:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		case DTYPE_Device:
+ 338:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			Address = &DeviceDescriptor;
+ 193              		.loc 1 338 0
+ 194 0038 40F20003 		movw	r3, #:lower16:DeviceDescriptor
+ 195 003c C0F20003 		movt	r3, #:upper16:DeviceDescriptor
+ 196 0040 FB60     		str	r3, [r7, #12]
+ 339:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			Size    = sizeof(USB_Descriptor_Device_t);
+ 197              		.loc 1 339 0
+ 198 0042 4FF01203 		mov	r3, #18
+ 199 0046 7B81     		strh	r3, [r7, #10]	@ movhi
+ 340:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			break;
+ 200              		.loc 1 340 0
+ 201 0048 34E0     		b	.L2
+ 202              	.L4:
+ 341:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		case DTYPE_Configuration:
+ 342:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			Address = &ConfigurationDescriptor;
+ 203              		.loc 1 342 0
+ 204 004a 40F20003 		movw	r3, #:lower16:ConfigurationDescriptor
+ 205 004e C0F20003 		movt	r3, #:upper16:ConfigurationDescriptor
+ 206 0052 FB60     		str	r3, [r7, #12]
+ 343:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			Size    = sizeof(USB_Descriptor_Configuration_t);
+ 207              		.loc 1 343 0
+ 208 0054 4FF03E03 		mov	r3, #62
+ 209 0058 7B81     		strh	r3, [r7, #10]	@ movhi
+ 344:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			break;
+ 210              		.loc 1 344 0
+ 211 005a 2BE0     		b	.L2
+ 212              	.L5:
+ 345:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 		case DTYPE_String:
+ 346:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** #ifndef USE_IFX_DEV
+ 347:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			switch (DescriptorNumber)
+ 213              		.loc 1 347 0
+ 214 005c 3B7A     		ldrb	r3, [r7, #8]	@ zero_extendqisi2
+ 215 005e 012B     		cmp	r3, #1
+ 216 0060 0FD0     		beq	.L8
+ 217 0062 022B     		cmp	r3, #2
+ 218 0064 19D0     		beq	.L9
+ 219 0066 002B     		cmp	r3, #0
+ 220 0068 23D1     		bne	.L6
+ 221              	.L7:
+ 348:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			{
+ 349:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 				case 0x00:
+ 350:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					Address = &LanguageString;
+ 222              		.loc 1 350 0
+ 223 006a 40F20003 		movw	r3, #:lower16:LanguageString
+ 224 006e C0F20003 		movt	r3, #:upper16:LanguageString
+ 225 0072 FB60     		str	r3, [r7, #12]
+ 351:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					Size    = LanguageString.Header.Size;
+ 226              		.loc 1 351 0
+ 227 0074 40F20003 		movw	r3, #:lower16:LanguageString
+ 228 0078 C0F20003 		movt	r3, #:upper16:LanguageString
+ 229 007c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 230 007e 7B81     		strh	r3, [r7, #10]	@ movhi
+ 352:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					break;
+ 231              		.loc 1 352 0
+ 232 0080 17E0     		b	.L6
+ 233              	.L8:
+ 353:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 				case 0x01:
+ 354:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					Address = &ManufacturerString;
+ 234              		.loc 1 354 0
+ 235 0082 40F20003 		movw	r3, #:lower16:ManufacturerString
+ 236 0086 C0F20003 		movt	r3, #:upper16:ManufacturerString
+ 237 008a FB60     		str	r3, [r7, #12]
+ 355:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					Size    = ManufacturerString.Header.Size;
+ 238              		.loc 1 355 0
+ 239 008c 40F20003 		movw	r3, #:lower16:ManufacturerString
+ 240 0090 C0F20003 		movt	r3, #:upper16:ManufacturerString
+ 241 0094 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 242 0096 7B81     		strh	r3, [r7, #10]	@ movhi
+ 356:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					break;
+ 243              		.loc 1 356 0
+ 244 0098 0BE0     		b	.L6
+ 245              	.L9:
+ 357:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 				case 0x02:
+ 358:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					Address = &ProductString;
+ 246              		.loc 1 358 0
+ 247 009a 40F20003 		movw	r3, #:lower16:ProductString
+ 248 009e C0F20003 		movt	r3, #:upper16:ProductString
+ 249 00a2 FB60     		str	r3, [r7, #12]
+ 359:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					Size    = ProductString.Header.Size;
+ 250              		.loc 1 359 0
+ 251 00a4 40F20003 		movw	r3, #:lower16:ProductString
+ 252 00a8 C0F20003 		movt	r3, #:upper16:ProductString
+ 253 00ac 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 254 00ae 7B81     		strh	r3, [r7, #10]	@ movhi
+ 360:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 					break;
+ 255              		.loc 1 360 0
+ 256 00b0 00BF     		nop
+ 257              	.L6:
+ 361:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			}
+ 362:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** #endif
+ 363:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 			break;
+ 258              		.loc 1 363 0
+ 259 00b2 00BF     		nop
+ 260              	.L2:
+ 364:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	}
+ 365:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 
+ 366:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	*DescriptorAddress = Address;
+ 261              		.loc 1 366 0
+ 262 00b4 3B68     		ldr	r3, [r7, #0]
+ 263 00b6 FA68     		ldr	r2, [r7, #12]
+ 264 00b8 1A60     		str	r2, [r3, #0]
+ 367:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** 	return Size;
+ 265              		.loc 1 367 0
+ 266 00ba 7B89     		ldrh	r3, [r7, #10]
+ 368:../Dave/Generated/src/USBD_VCOM/vc/Descriptors.c **** }
+ 267              		.loc 1 368 0
+ 268 00bc 1846     		mov	r0, r3
+ 269 00be 07F11407 		add	r7, r7, #20
+ 270 00c2 BD46     		mov	sp, r7
+ 271 00c4 80BC     		pop	{r7}
+ 272 00c6 7047     		bx	lr
+ 273              		.cfi_endproc
+ 274              	.LFE130:
+ 276              		.text
+ 277              	.Letext0:
+ 278              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 279              		.file 3 "../Dave/Generated/src/USBD_VCOM/vc/../../../inc/USBD_VCOM/../../src/USBD_VCOM/cdc/Device/
+ 280              		.file 4 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\MOTORLIBS/../.
+ 281              		.file 5 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\MOTORLIBS/../.
+ 282              		.file 6 "../Dave/Generated/src/USBD_VCOM/vc/../../../inc/USBD_VCOM/../../src/USBD_VCOM/cdc/Device/
+ 283              		.file 7 "../Dave/Generated/src/USBD_VCOM/vc/../../../inc/USBD_VCOM/../../src/USBD_VCOM/cdc/Device/
+ 284              		.file 8 "../Dave/Generated/src/USBD_VCOM/vc/../../../inc/USBD_VCOM/../../src/USBD_VCOM/vc/Descript
+ 285              		.file 9 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 Descriptors.c
+C:\Users\Herbert\AppData\Local\Temp\ccLuit4d.s:24     .rodata:00000000 DeviceDescriptor
+C:\Users\Herbert\AppData\Local\Temp\ccLuit4d.s:21     .rodata:00000000 $d
+C:\Users\Herbert\AppData\Local\Temp\ccLuit4d.s:43     .rodata:00000014 ConfigurationDescriptor
+C:\Users\Herbert\AppData\Local\Temp\ccLuit4d.s:105    .rodata:00000054 LanguageString
+C:\Users\Herbert\AppData\Local\Temp\ccLuit4d.s:114    .rodata:000000bc ManufacturerString
+C:\Users\Herbert\AppData\Local\Temp\ccLuit4d.s:130    .rodata:00000124 ProductString
+C:\Users\Herbert\AppData\Local\Temp\ccLuit4d.s:142    .text.CALLBACK_USB_GetDescriptor:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccLuit4d.s:147    .text.CALLBACK_USB_GetDescriptor:00000000 CALLBACK_USB_GetDescriptor
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.CDCClass.h.89.7fca95873b1cbf8116f62fa27fd7c792
+                           .group:00000000 wm4.Common.h.87.ed9fec00c6f9ec3cf5c2ac4c6cfcb530
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.Attributes.h.96.1b4ef8adf80de3cb4f8c62843bfaf7bf
+                           .group:00000000 wm4.StdDescriptors.h.107.d2322ff0c138acada78976933b16bf7b
+                           .group:00000000 wm4.Endpoint.h.111.e7536b4385918c15b4c37aa69fbe94e3
+                           .group:00000000 wm4.USBController.h.105.7da122fb9e42a1d4ae2ea1662b47f042
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.usbd_config.h.64.bd01b2d6be88400f5b6095cc78dd2cee
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.stdbool.h.29.1c9ee6859ce8145f7838a4f2549ccec2
+                           .group:00000000 wm4.xmc4_usb.h.86.0df8e4bc81775a7befde6c395bcdee4c
+                           .group:00000000 wm4.dwc_otg_regs.h.96.602358b1a0ef2f2c6d02620a154f0cfc
+                           .group:00000000 wm4.xmc4_usb.h.97.59ae14584bb42292696e2197b500e282
+                           .group:00000000 wm4.StdRequestType.h.87.0e2654a6e33ff7aef3db3461e4efa272
+                           .group:00000000 wm4.CDCClassCommon.h.122.d15a1de5444b7c9e23eadf1dd367720e
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.Descriptors.h.92.e858ef8e2efa6b5ed9d1d80dd9b38006
+
+NO UNDEFINED SYMBOLS

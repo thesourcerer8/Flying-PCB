@@ -1,0 +1,792 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"AttitudeController.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	FLY
+  20              		.bss
+  21              		.align	2
+  24              	FLY:
+  25 0000 00000000 		.space	4
+  26              		.global	__aeabi_f2d
+  27              		.global	__aeabi_dmul
+  28              		.global	__aeabi_ddiv
+  29              		.global	__aeabi_d2f
+  30              		.section	.text.AngleController,"ax",%progbits
+  31              		.align	2
+  32              		.global	AngleController
+  33              		.thumb
+  34              		.thumb_func
+  36              	AngleController:
+  37              	.LFB128:
+  38              		.file 1 "../_Quadrocopter/Attitude_Control/AttitudeController.c"
+   1:../_Quadrocopter/Attitude_Control/AttitudeController.c **** /*
+   2:../_Quadrocopter/Attitude_Control/AttitudeController.c ****  * AttitudeController.c
+   3:../_Quadrocopter/Attitude_Control/AttitudeController.c ****  *
+   4:../_Quadrocopter/Attitude_Control/AttitudeController.c ****  *  Created on: 29.12.2014
+   5:../_Quadrocopter/Attitude_Control/AttitudeController.c ****  *      Author: maan
+   6:../_Quadrocopter/Attitude_Control/AttitudeController.c ****  */
+   7:../_Quadrocopter/Attitude_Control/AttitudeController.c **** #include "AttitudeController.h"
+   8:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+   9:../_Quadrocopter/Attitude_Control/AttitudeController.c **** float FLY = 0.0;
+  10:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  11:../_Quadrocopter/Attitude_Control/AttitudeController.c **** void AngleController(float *r, float *y, int n, const float *a, const float *b, float *x, float *u)
+  12:../_Quadrocopter/Attitude_Control/AttitudeController.c **** {
+  39              		.loc 1 12 0
+  40              		.cfi_startproc
+  41              		@ args = 12, pretend = 0, frame = 24
+  42              		@ frame_needed = 1, uses_anonymous_args = 0
+  43 0000 80B5     		push	{r7, lr}
+  44              	.LCFI0:
+  45              		.cfi_def_cfa_offset 8
+  46              		.cfi_offset 7, -8
+  47              		.cfi_offset 14, -4
+  48 0002 86B0     		sub	sp, sp, #24
+  49              	.LCFI1:
+  50              		.cfi_def_cfa_offset 32
+  51 0004 00AF     		add	r7, sp, #0
+  52              	.LCFI2:
+  53              		.cfi_def_cfa_register 7
+  54 0006 F860     		str	r0, [r7, #12]
+  55 0008 B960     		str	r1, [r7, #8]
+  56 000a 7A60     		str	r2, [r7, #4]
+  57 000c 3B60     		str	r3, [r7, #0]
+  13:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	//PID-Controller
+  14:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  15:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	//control error
+  16:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	float e = (*r - *y)*M_PI/180.0;
+  58              		.loc 1 16 0
+  59 000e FB68     		ldr	r3, [r7, #12]
+  60 0010 93ED007A 		flds	s14, [r3, #0]
+  61 0014 BB68     		ldr	r3, [r7, #8]
+  62 0016 D3ED007A 		flds	s15, [r3, #0]
+  63 001a 77EE677A 		fsubs	s15, s14, s15
+  64 001e 17EE900A 		fmrs	r0, s15
+  65 0022 FFF7FEFF 		bl	__aeabi_f2d
+  66 0026 0246     		mov	r2, r0
+  67 0028 0B46     		mov	r3, r1
+  68 002a 1046     		mov	r0, r2
+  69 002c 1946     		mov	r1, r3
+  70 002e 46A3     		adr	r3, .L4
+  71 0030 D3E90023 		ldrd	r2, [r3]
+  72 0034 FFF7FEFF 		bl	__aeabi_dmul
+  73 0038 0246     		mov	r2, r0
+  74 003a 0B46     		mov	r3, r1
+  75 003c 1046     		mov	r0, r2
+  76 003e 1946     		mov	r1, r3
+  77 0040 4FF00002 		mov	r2, #0
+  78 0044 4FF40043 		mov	r3, #32768
+  79 0048 C4F26603 		movt	r3, 16486
+  80 004c FFF7FEFF 		bl	__aeabi_ddiv
+  81 0050 0246     		mov	r2, r0
+  82 0052 0B46     		mov	r3, r1
+  83 0054 1046     		mov	r0, r2
+  84 0056 1946     		mov	r1, r3
+  85 0058 FFF7FEFF 		bl	__aeabi_d2f
+  86 005c 0346     		mov	r3, r0	@ float
+  87 005e 3B61     		str	r3, [r7, #16]	@ float
+  17:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  18:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	//calculate plant input
+  19:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	*u = x[n-1]+b[n]*e;
+  88              		.loc 1 19 0
+  89 0060 7B68     		ldr	r3, [r7, #4]
+  90 0062 03F1FF33 		add	r3, r3, #-1
+  91 0066 4FEA8303 		lsl	r3, r3, #2
+  92 006a 7A6A     		ldr	r2, [r7, #36]
+  93 006c D318     		adds	r3, r2, r3
+  94 006e 93ED007A 		flds	s14, [r3, #0]
+  95 0072 7B68     		ldr	r3, [r7, #4]
+  96 0074 4FEA8303 		lsl	r3, r3, #2
+  97 0078 3A6A     		ldr	r2, [r7, #32]
+  98 007a D318     		adds	r3, r2, r3
+  99 007c D3ED006A 		flds	s13, [r3, #0]
+ 100 0080 D7ED047A 		flds	s15, [r7, #16]
+ 101 0084 66EEA77A 		fmuls	s15, s13, s15
+ 102 0088 77EE277A 		fadds	s15, s14, s15
+ 103 008c BB6A     		ldr	r3, [r7, #40]
+ 104 008e C3ED007A 		fsts	s15, [r3, #0]
+ 105              	.LBB2:
+  20:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  21:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	//calculate new coefficients
+  22:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	for (int i=n-1; i>0; i--)
+ 106              		.loc 1 22 0
+ 107 0092 7B68     		ldr	r3, [r7, #4]
+ 108 0094 03F1FF33 		add	r3, r3, #-1
+ 109 0098 7B61     		str	r3, [r7, #20]
+ 110 009a 2EE0     		b	.L2
+ 111              	.L3:
+  23:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		x[i]=b[i]*e-a[i]*(*u)+x[i-1];
+ 112              		.loc 1 23 0 discriminator 2
+ 113 009c 7B69     		ldr	r3, [r7, #20]
+ 114 009e 4FEA8303 		lsl	r3, r3, #2
+ 115 00a2 7A6A     		ldr	r2, [r7, #36]
+ 116 00a4 D318     		adds	r3, r2, r3
+ 117 00a6 7A69     		ldr	r2, [r7, #20]
+ 118 00a8 4FEA8202 		lsl	r2, r2, #2
+ 119 00ac 396A     		ldr	r1, [r7, #32]
+ 120 00ae 8A18     		adds	r2, r1, r2
+ 121 00b0 92ED007A 		flds	s14, [r2, #0]
+ 122 00b4 D7ED047A 		flds	s15, [r7, #16]
+ 123 00b8 27EE277A 		fmuls	s14, s14, s15
+ 124 00bc 7A69     		ldr	r2, [r7, #20]
+ 125 00be 4FEA8202 		lsl	r2, r2, #2
+ 126 00c2 3968     		ldr	r1, [r7, #0]
+ 127 00c4 8A18     		adds	r2, r1, r2
+ 128 00c6 D2ED006A 		flds	s13, [r2, #0]
+ 129 00ca BA6A     		ldr	r2, [r7, #40]
+ 130 00cc D2ED007A 		flds	s15, [r2, #0]
+ 131 00d0 66EEA77A 		fmuls	s15, s13, s15
+ 132 00d4 37EE677A 		fsubs	s14, s14, s15
+ 133 00d8 7A69     		ldr	r2, [r7, #20]
+ 134 00da 02F1FF32 		add	r2, r2, #-1
+ 135 00de 4FEA8202 		lsl	r2, r2, #2
+ 136 00e2 796A     		ldr	r1, [r7, #36]
+ 137 00e4 8A18     		adds	r2, r1, r2
+ 138 00e6 D2ED007A 		flds	s15, [r2, #0]
+ 139 00ea 77EE277A 		fadds	s15, s14, s15
+ 140 00ee C3ED007A 		fsts	s15, [r3, #0]
+  22:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	for (int i=n-1; i>0; i--)
+ 141              		.loc 1 22 0 discriminator 2
+ 142 00f2 7B69     		ldr	r3, [r7, #20]
+ 143 00f4 03F1FF33 		add	r3, r3, #-1
+ 144 00f8 7B61     		str	r3, [r7, #20]
+ 145              	.L2:
+  22:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	for (int i=n-1; i>0; i--)
+ 146              		.loc 1 22 0 is_stmt 0 discriminator 1
+ 147 00fa 7B69     		ldr	r3, [r7, #20]
+ 148 00fc 002B     		cmp	r3, #0
+ 149 00fe CDDC     		bgt	.L3
+ 150              	.LBE2:
+  24:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  25:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	x[0]=b[0]*e-a[0]*(*u);
+ 151              		.loc 1 25 0 is_stmt 1
+ 152 0100 3B6A     		ldr	r3, [r7, #32]
+ 153 0102 93ED007A 		flds	s14, [r3, #0]
+ 154 0106 D7ED047A 		flds	s15, [r7, #16]
+ 155 010a 27EE277A 		fmuls	s14, s14, s15
+ 156 010e 3B68     		ldr	r3, [r7, #0]
+ 157 0110 D3ED006A 		flds	s13, [r3, #0]
+ 158 0114 BB6A     		ldr	r3, [r7, #40]
+ 159 0116 D3ED007A 		flds	s15, [r3, #0]
+ 160 011a 66EEA77A 		fmuls	s15, s13, s15
+ 161 011e 77EE677A 		fsubs	s15, s14, s15
+ 162 0122 7B6A     		ldr	r3, [r7, #36]
+ 163 0124 C3ED007A 		fsts	s15, [r3, #0]
+  26:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  27:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	*u/=4.0;
+ 164              		.loc 1 27 0
+ 165 0128 BB6A     		ldr	r3, [r7, #40]
+ 166 012a 93ED007A 		flds	s14, [r3, #0]
+ 167 012e F1EE007A 		fconsts	s15, #16
+ 168 0132 C7EE277A 		fdivs	s15, s14, s15
+ 169 0136 BB6A     		ldr	r3, [r7, #40]
+ 170 0138 C3ED007A 		fsts	s15, [r3, #0]
+  28:../_Quadrocopter/Attitude_Control/AttitudeController.c **** }
+ 171              		.loc 1 28 0
+ 172 013c 07F11807 		add	r7, r7, #24
+ 173 0140 BD46     		mov	sp, r7
+ 174 0142 80BD     		pop	{r7, pc}
+ 175              	.L5:
+ 176 0144 AFF30080 		.align	3
+ 177              	.L4:
+ 178 0148 182D4454 		.word	1413754136
+ 179 014c FB210940 		.word	1074340347
+ 180              		.cfi_endproc
+ 181              	.LFE128:
+ 183              		.section	.text.AngleRateController,"ax",%progbits
+ 184              		.align	2
+ 185              		.global	AngleRateController
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	AngleRateController:
+ 190              	.LFB129:
+  29:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  30:../_Quadrocopter/Attitude_Control/AttitudeController.c **** void AngleRateController(float *r, float *y, const float *P, float *u)
+  31:../_Quadrocopter/Attitude_Control/AttitudeController.c **** {
+ 191              		.loc 1 31 0
+ 192              		.cfi_startproc
+ 193              		@ args = 0, pretend = 0, frame = 16
+ 194              		@ frame_needed = 1, uses_anonymous_args = 0
+ 195 0000 B0B5     		push	{r4, r5, r7, lr}
+ 196              	.LCFI3:
+ 197              		.cfi_def_cfa_offset 16
+ 198              		.cfi_offset 4, -16
+ 199              		.cfi_offset 5, -12
+ 200              		.cfi_offset 7, -8
+ 201              		.cfi_offset 14, -4
+ 202 0002 84B0     		sub	sp, sp, #16
+ 203              	.LCFI4:
+ 204              		.cfi_def_cfa_offset 32
+ 205 0004 00AF     		add	r7, sp, #0
+ 206              	.LCFI5:
+ 207              		.cfi_def_cfa_register 7
+ 208 0006 F860     		str	r0, [r7, #12]
+ 209 0008 B960     		str	r1, [r7, #8]
+ 210 000a 7A60     		str	r2, [r7, #4]
+ 211 000c 3B60     		str	r3, [r7, #0]
+  32:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	//P-Controller
+  33:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	*u=(*r - *y)*M_PI/(180.0*4) * *P;
+ 212              		.loc 1 33 0
+ 213 000e FB68     		ldr	r3, [r7, #12]
+ 214 0010 93ED007A 		flds	s14, [r3, #0]
+ 215 0014 BB68     		ldr	r3, [r7, #8]
+ 216 0016 D3ED007A 		flds	s15, [r3, #0]
+ 217 001a 77EE677A 		fsubs	s15, s14, s15
+ 218 001e 17EE900A 		fmrs	r0, s15
+ 219 0022 FFF7FEFF 		bl	__aeabi_f2d
+ 220 0026 0246     		mov	r2, r0
+ 221 0028 0B46     		mov	r3, r1
+ 222 002a 1046     		mov	r0, r2
+ 223 002c 1946     		mov	r1, r3
+ 224 002e 16A3     		adr	r3, .L7
+ 225 0030 D3E90023 		ldrd	r2, [r3]
+ 226 0034 FFF7FEFF 		bl	__aeabi_dmul
+ 227 0038 0246     		mov	r2, r0
+ 228 003a 0B46     		mov	r3, r1
+ 229 003c 1046     		mov	r0, r2
+ 230 003e 1946     		mov	r1, r3
+ 231 0040 4FF00002 		mov	r2, #0
+ 232 0044 4FF40043 		mov	r3, #32768
+ 233 0048 C4F28603 		movt	r3, 16518
+ 234 004c FFF7FEFF 		bl	__aeabi_ddiv
+ 235 0050 0246     		mov	r2, r0
+ 236 0052 0B46     		mov	r3, r1
+ 237 0054 1446     		mov	r4, r2
+ 238 0056 1D46     		mov	r5, r3
+ 239 0058 7B68     		ldr	r3, [r7, #4]
+ 240 005a 1B68     		ldr	r3, [r3, #0]	@ float
+ 241 005c 1846     		mov	r0, r3	@ float
+ 242 005e FFF7FEFF 		bl	__aeabi_f2d
+ 243 0062 0246     		mov	r2, r0
+ 244 0064 0B46     		mov	r3, r1
+ 245 0066 2046     		mov	r0, r4
+ 246 0068 2946     		mov	r1, r5
+ 247 006a FFF7FEFF 		bl	__aeabi_dmul
+ 248 006e 0246     		mov	r2, r0
+ 249 0070 0B46     		mov	r3, r1
+ 250 0072 1046     		mov	r0, r2
+ 251 0074 1946     		mov	r1, r3
+ 252 0076 FFF7FEFF 		bl	__aeabi_d2f
+ 253 007a 0246     		mov	r2, r0	@ float
+ 254 007c 3B68     		ldr	r3, [r7, #0]
+ 255 007e 1A60     		str	r2, [r3, #0]	@ float
+  34:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  35:../_Quadrocopter/Attitude_Control/AttitudeController.c **** }
+ 256              		.loc 1 35 0
+ 257 0080 07F11007 		add	r7, r7, #16
+ 258 0084 BD46     		mov	sp, r7
+ 259 0086 B0BD     		pop	{r4, r5, r7, pc}
+ 260              	.L8:
+ 261              		.align	3
+ 262              	.L7:
+ 263 0088 182D4454 		.word	1413754136
+ 264 008c FB210940 		.word	1074340347
+ 265              		.cfi_endproc
+ 266              	.LFE129:
+ 268              		.section	.text.CalculateActuatorSpeed_Percent,"ax",%progbits
+ 269              		.align	2
+ 270              		.global	CalculateActuatorSpeed_Percent
+ 271              		.thumb
+ 272              		.thumb_func
+ 274              	CalculateActuatorSpeed_Percent:
+ 275              	.LFB130:
+  36:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  37:../_Quadrocopter/Attitude_Control/AttitudeController.c **** void CalculateActuatorSpeed_Percent(float *u_phi, float *u_deta, float *u_psi_dot, float *u_hover, 
+  38:../_Quadrocopter/Attitude_Control/AttitudeController.c **** {
+ 276              		.loc 1 38 0
+ 277              		.cfi_startproc
+ 278              		@ args = 12, pretend = 0, frame = 24
+ 279              		@ frame_needed = 1, uses_anonymous_args = 0
+ 280 0000 B0B5     		push	{r4, r5, r7, lr}
+ 281              	.LCFI6:
+ 282              		.cfi_def_cfa_offset 16
+ 283              		.cfi_offset 4, -16
+ 284              		.cfi_offset 5, -12
+ 285              		.cfi_offset 7, -8
+ 286              		.cfi_offset 14, -4
+ 287 0002 86B0     		sub	sp, sp, #24
+ 288              	.LCFI7:
+ 289              		.cfi_def_cfa_offset 40
+ 290 0004 00AF     		add	r7, sp, #0
+ 291              	.LCFI8:
+ 292              		.cfi_def_cfa_register 7
+ 293 0006 F860     		str	r0, [r7, #12]
+ 294 0008 B960     		str	r1, [r7, #8]
+ 295 000a 7A60     		str	r2, [r7, #4]
+ 296 000c 3B60     		str	r3, [r7, #0]
+  39:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	float saturation=100;
+ 297              		.loc 1 39 0
+ 298 000e 4FF00003 		mov	r3, #0
+ 299 0012 C4F2C823 		movt	r3, 17096
+ 300 0016 7B61     		str	r3, [r7, #20]	@ float
+  40:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  41:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	//*u_psi_dot = 0;
+  42:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	//*u_phi = 0;
+  43:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	//*u_deta = 0;
+  44:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  45:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	if (*u_hover > 5.0)
+ 301              		.loc 1 45 0
+ 302 0018 3B68     		ldr	r3, [r7, #0]
+ 303 001a 93ED007A 		flds	s14, [r3, #0]
+ 304 001e F1EE047A 		fconsts	s15, #20
+ 305 0022 B4EEE77A 		fcmpes	s14, s15
+ 306 0026 F1EE10FA 		fmstat
+ 307 002a 5CDD     		ble	.L52
+ 308              	.L38:
+  46:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	{
+  47:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[0]=*u_phi+*u_deta-*u_psi_dot+*u_hover;
+ 309              		.loc 1 47 0
+ 310 002c FB68     		ldr	r3, [r7, #12]
+ 311 002e 93ED007A 		flds	s14, [r3, #0]
+ 312 0032 BB68     		ldr	r3, [r7, #8]
+ 313 0034 D3ED007A 		flds	s15, [r3, #0]
+ 314 0038 37EE277A 		fadds	s14, s14, s15
+ 315 003c 7B68     		ldr	r3, [r7, #4]
+ 316 003e D3ED007A 		flds	s15, [r3, #0]
+ 317 0042 37EE677A 		fsubs	s14, s14, s15
+ 318 0046 3B68     		ldr	r3, [r7, #0]
+ 319 0048 D3ED007A 		flds	s15, [r3, #0]
+ 320 004c 77EE277A 		fadds	s15, s14, s15
+ 321 0050 BB6A     		ldr	r3, [r7, #40]
+ 322 0052 C3ED007A 		fsts	s15, [r3, #0]
+  48:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[1]=*u_phi-*u_deta+*u_psi_dot+*u_hover;
+ 323              		.loc 1 48 0
+ 324 0056 BB6A     		ldr	r3, [r7, #40]
+ 325 0058 03F10403 		add	r3, r3, #4
+ 326 005c FA68     		ldr	r2, [r7, #12]
+ 327 005e 92ED007A 		flds	s14, [r2, #0]
+ 328 0062 BA68     		ldr	r2, [r7, #8]
+ 329 0064 D2ED007A 		flds	s15, [r2, #0]
+ 330 0068 37EE677A 		fsubs	s14, s14, s15
+ 331 006c 7A68     		ldr	r2, [r7, #4]
+ 332 006e D2ED007A 		flds	s15, [r2, #0]
+ 333 0072 37EE277A 		fadds	s14, s14, s15
+ 334 0076 3A68     		ldr	r2, [r7, #0]
+ 335 0078 D2ED007A 		flds	s15, [r2, #0]
+ 336 007c 77EE277A 		fadds	s15, s14, s15
+ 337 0080 C3ED007A 		fsts	s15, [r3, #0]
+  49:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[2]=-*u_phi+*u_deta+*u_psi_dot+*u_hover;
+ 338              		.loc 1 49 0
+ 339 0084 BB6A     		ldr	r3, [r7, #40]
+ 340 0086 03F10803 		add	r3, r3, #8
+ 341 008a BA68     		ldr	r2, [r7, #8]
+ 342 008c 92ED007A 		flds	s14, [r2, #0]
+ 343 0090 FA68     		ldr	r2, [r7, #12]
+ 344 0092 D2ED007A 		flds	s15, [r2, #0]
+ 345 0096 37EE677A 		fsubs	s14, s14, s15
+ 346 009a 7A68     		ldr	r2, [r7, #4]
+ 347 009c D2ED007A 		flds	s15, [r2, #0]
+ 348 00a0 37EE277A 		fadds	s14, s14, s15
+ 349 00a4 3A68     		ldr	r2, [r7, #0]
+ 350 00a6 D2ED007A 		flds	s15, [r2, #0]
+ 351 00aa 77EE277A 		fadds	s15, s14, s15
+ 352 00ae C3ED007A 		fsts	s15, [r3, #0]
+  50:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[3]=-*u_phi-*u_deta-*u_psi_dot+*u_hover;
+ 353              		.loc 1 50 0
+ 354 00b2 BB6A     		ldr	r3, [r7, #40]
+ 355 00b4 03F10C03 		add	r3, r3, #12
+ 356 00b8 FA68     		ldr	r2, [r7, #12]
+ 357 00ba D2ED007A 		flds	s15, [r2, #0]
+ 358 00be B1EE677A 		fnegs	s14, s15
+ 359 00c2 BA68     		ldr	r2, [r7, #8]
+ 360 00c4 D2ED007A 		flds	s15, [r2, #0]
+ 361 00c8 37EE677A 		fsubs	s14, s14, s15
+ 362 00cc 7A68     		ldr	r2, [r7, #4]
+ 363 00ce D2ED007A 		flds	s15, [r2, #0]
+ 364 00d2 37EE677A 		fsubs	s14, s14, s15
+ 365 00d6 3A68     		ldr	r2, [r7, #0]
+ 366 00d8 D2ED007A 		flds	s15, [r2, #0]
+ 367 00dc 77EE277A 		fadds	s15, s14, s15
+ 368 00e0 C3ED007A 		fsts	s15, [r3, #0]
+ 369 00e4 15E0     		b	.L12
+ 370              	.L52:
+  51:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	}
+  52:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  53:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	else
+  54:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	{
+  55:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[0]=*u_hover;
+ 371              		.loc 1 55 0
+ 372 00e6 3B68     		ldr	r3, [r7, #0]
+ 373 00e8 1A68     		ldr	r2, [r3, #0]	@ float
+ 374 00ea BB6A     		ldr	r3, [r7, #40]
+ 375 00ec 1A60     		str	r2, [r3, #0]	@ float
+  56:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[1]=*u_hover;
+ 376              		.loc 1 56 0
+ 377 00ee BB6A     		ldr	r3, [r7, #40]
+ 378 00f0 03F10403 		add	r3, r3, #4
+ 379 00f4 3A68     		ldr	r2, [r7, #0]
+ 380 00f6 1268     		ldr	r2, [r2, #0]	@ float
+ 381 00f8 1A60     		str	r2, [r3, #0]	@ float
+  57:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[2]=*u_hover;
+ 382              		.loc 1 57 0
+ 383 00fa BB6A     		ldr	r3, [r7, #40]
+ 384 00fc 03F10803 		add	r3, r3, #8
+ 385 0100 3A68     		ldr	r2, [r7, #0]
+ 386 0102 1268     		ldr	r2, [r2, #0]	@ float
+ 387 0104 1A60     		str	r2, [r3, #0]	@ float
+  58:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[3]=*u_hover;
+ 388              		.loc 1 58 0
+ 389 0106 BB6A     		ldr	r3, [r7, #40]
+ 390 0108 03F10C03 		add	r3, r3, #12
+ 391 010c 3A68     		ldr	r2, [r7, #0]
+ 392 010e 1268     		ldr	r2, [r2, #0]	@ float
+ 393 0110 1A60     		str	r2, [r3, #0]	@ float
+ 394              	.L12:
+  59:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	}
+  60:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  61:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  62:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	// Calculate vertical PWM rate of each rotor
+  63:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	// Calculate the hover force of all rotors
+  64:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	FLY=(PWM_width[0]+PWM_width[1]+PWM_width[2]+PWM_width[3])*cos(*anglePitch)*cos(*angleRoll);
+ 395              		.loc 1 64 0
+ 396 0112 BB6A     		ldr	r3, [r7, #40]
+ 397 0114 93ED007A 		flds	s14, [r3, #0]
+ 398 0118 BB6A     		ldr	r3, [r7, #40]
+ 399 011a 03F10403 		add	r3, r3, #4
+ 400 011e D3ED007A 		flds	s15, [r3, #0]
+ 401 0122 37EE277A 		fadds	s14, s14, s15
+ 402 0126 BB6A     		ldr	r3, [r7, #40]
+ 403 0128 03F10803 		add	r3, r3, #8
+ 404 012c D3ED007A 		flds	s15, [r3, #0]
+ 405 0130 37EE277A 		fadds	s14, s14, s15
+ 406 0134 BB6A     		ldr	r3, [r7, #40]
+ 407 0136 03F10C03 		add	r3, r3, #12
+ 408 013a D3ED007A 		flds	s15, [r3, #0]
+ 409 013e 77EE277A 		fadds	s15, s14, s15
+ 410 0142 17EE900A 		fmrs	r0, s15
+ 411 0146 FFF7FEFF 		bl	__aeabi_f2d
+ 412 014a 0446     		mov	r4, r0
+ 413 014c 0D46     		mov	r5, r1
+ 414 014e FB6A     		ldr	r3, [r7, #44]
+ 415 0150 1B68     		ldr	r3, [r3, #0]	@ float
+ 416 0152 1846     		mov	r0, r3	@ float
+ 417 0154 FFF7FEFF 		bl	__aeabi_f2d
+ 418 0158 0246     		mov	r2, r0
+ 419 015a 0B46     		mov	r3, r1
+ 420 015c 1046     		mov	r0, r2
+ 421 015e 1946     		mov	r1, r3
+ 422 0160 FFF7FEFF 		bl	cos
+ 423 0164 0246     		mov	r2, r0
+ 424 0166 0B46     		mov	r3, r1
+ 425 0168 2046     		mov	r0, r4
+ 426 016a 2946     		mov	r1, r5
+ 427 016c FFF7FEFF 		bl	__aeabi_dmul
+ 428 0170 0246     		mov	r2, r0
+ 429 0172 0B46     		mov	r3, r1
+ 430 0174 1446     		mov	r4, r2
+ 431 0176 1D46     		mov	r5, r3
+ 432 0178 3B6B     		ldr	r3, [r7, #48]
+ 433 017a 1B68     		ldr	r3, [r3, #0]	@ float
+ 434 017c 1846     		mov	r0, r3	@ float
+ 435 017e FFF7FEFF 		bl	__aeabi_f2d
+ 436 0182 0246     		mov	r2, r0
+ 437 0184 0B46     		mov	r3, r1
+ 438 0186 1046     		mov	r0, r2
+ 439 0188 1946     		mov	r1, r3
+ 440 018a FFF7FEFF 		bl	cos
+ 441 018e 0246     		mov	r2, r0
+ 442 0190 0B46     		mov	r3, r1
+ 443 0192 2046     		mov	r0, r4
+ 444 0194 2946     		mov	r1, r5
+ 445 0196 FFF7FEFF 		bl	__aeabi_dmul
+ 446 019a 0246     		mov	r2, r0
+ 447 019c 0B46     		mov	r3, r1
+ 448 019e 1046     		mov	r0, r2
+ 449 01a0 1946     		mov	r1, r3
+ 450 01a2 FFF7FEFF 		bl	__aeabi_d2f
+ 451 01a6 0246     		mov	r2, r0	@ float
+ 452 01a8 40F20003 		movw	r3, #:lower16:FLY
+ 453 01ac C0F20003 		movt	r3, #:upper16:FLY
+ 454 01b0 1A60     		str	r2, [r3, #0]	@ float
+  65:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  66:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	if (PWM_width[0]>saturation)
+ 455              		.loc 1 66 0
+ 456 01b2 BB6A     		ldr	r3, [r7, #40]
+ 457 01b4 93ED007A 		flds	s14, [r3, #0]
+ 458 01b8 D7ED057A 		flds	s15, [r7, #20]
+ 459 01bc B4EEE77A 		fcmpes	s14, s15
+ 460 01c0 F1EE10FA 		fmstat
+ 461 01c4 02DD     		ble	.L13
+ 462              	.L39:
+  67:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[0]=saturation;
+ 463              		.loc 1 67 0
+ 464 01c6 BB6A     		ldr	r3, [r7, #40]
+ 465 01c8 7A69     		ldr	r2, [r7, #20]	@ float
+ 466 01ca 1A60     		str	r2, [r3, #0]	@ float
+ 467              	.L13:
+  68:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  69:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	if (PWM_width[1]>saturation)
+ 468              		.loc 1 69 0
+ 469 01cc BB6A     		ldr	r3, [r7, #40]
+ 470 01ce 03F10403 		add	r3, r3, #4
+ 471 01d2 93ED007A 		flds	s14, [r3, #0]
+ 472 01d6 D7ED057A 		flds	s15, [r7, #20]
+ 473 01da B4EEE77A 		fcmpes	s14, s15
+ 474 01de F1EE10FA 		fmstat
+ 475 01e2 04DD     		ble	.L15
+ 476              	.L40:
+  70:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[1]=saturation;
+ 477              		.loc 1 70 0
+ 478 01e4 BB6A     		ldr	r3, [r7, #40]
+ 479 01e6 03F10403 		add	r3, r3, #4
+ 480 01ea 7A69     		ldr	r2, [r7, #20]	@ float
+ 481 01ec 1A60     		str	r2, [r3, #0]	@ float
+ 482              	.L15:
+  71:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  72:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	if (PWM_width[2]>saturation)
+ 483              		.loc 1 72 0
+ 484 01ee BB6A     		ldr	r3, [r7, #40]
+ 485 01f0 03F10803 		add	r3, r3, #8
+ 486 01f4 93ED007A 		flds	s14, [r3, #0]
+ 487 01f8 D7ED057A 		flds	s15, [r7, #20]
+ 488 01fc B4EEE77A 		fcmpes	s14, s15
+ 489 0200 F1EE10FA 		fmstat
+ 490 0204 04DD     		ble	.L17
+ 491              	.L41:
+  73:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[2]=saturation;
+ 492              		.loc 1 73 0
+ 493 0206 BB6A     		ldr	r3, [r7, #40]
+ 494 0208 03F10803 		add	r3, r3, #8
+ 495 020c 7A69     		ldr	r2, [r7, #20]	@ float
+ 496 020e 1A60     		str	r2, [r3, #0]	@ float
+ 497              	.L17:
+  74:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  75:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	if (PWM_width[3]>saturation)
+ 498              		.loc 1 75 0
+ 499 0210 BB6A     		ldr	r3, [r7, #40]
+ 500 0212 03F10C03 		add	r3, r3, #12
+ 501 0216 93ED007A 		flds	s14, [r3, #0]
+ 502 021a D7ED057A 		flds	s15, [r7, #20]
+ 503 021e B4EEE77A 		fcmpes	s14, s15
+ 504 0222 F1EE10FA 		fmstat
+ 505 0226 04DD     		ble	.L19
+ 506              	.L42:
+  76:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		PWM_width[3]=saturation;
+ 507              		.loc 1 76 0
+ 508 0228 BB6A     		ldr	r3, [r7, #40]
+ 509 022a 03F10C03 		add	r3, r3, #12
+ 510 022e 7A69     		ldr	r2, [r7, #20]	@ float
+ 511 0230 1A60     		str	r2, [r3, #0]	@ float
+ 512              	.L19:
+  77:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  78:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	if (FLY < 4*MIN_SPEED)
+ 513              		.loc 1 78 0
+ 514 0232 40F20003 		movw	r3, #:lower16:FLY
+ 515 0236 C0F20003 		movt	r3, #:upper16:FLY
+ 516 023a 93ED007A 		flds	s14, [r3, #0]
+ 517 023e DFED4A7A 		flds	s15, .L54
+ 518 0242 B4EEE77A 		fcmpes	s14, s15
+ 519 0246 F1EE10FA 		fmstat
+ 520 024a 3CD5     		bpl	.L53
+ 521              	.L43:
+  79:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	{
+  80:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		if (PWM_width[0]<0)
+ 522              		.loc 1 80 0
+ 523 024c BB6A     		ldr	r3, [r7, #40]
+ 524 024e D3ED007A 		flds	s15, [r3, #0]
+ 525 0252 F5EEC07A 		fcmpezs	s15
+ 526 0256 F1EE10FA 		fmstat
+ 527 025a 03D5     		bpl	.L23
+ 528              	.L44:
+  81:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 			PWM_width[0]=0;
+ 529              		.loc 1 81 0
+ 530 025c BB6A     		ldr	r3, [r7, #40]
+ 531 025e 4FF00002 		mov	r2, #0
+ 532 0262 1A60     		str	r2, [r3, #0]	@ float
+ 533              	.L23:
+  82:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  83:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		if (PWM_width[1]<0)
+ 534              		.loc 1 83 0
+ 535 0264 BB6A     		ldr	r3, [r7, #40]
+ 536 0266 03F10403 		add	r3, r3, #4
+ 537 026a D3ED007A 		flds	s15, [r3, #0]
+ 538 026e F5EEC07A 		fcmpezs	s15
+ 539 0272 F1EE10FA 		fmstat
+ 540 0276 05D5     		bpl	.L25
+ 541              	.L45:
+  84:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 			PWM_width[1]=0;
+ 542              		.loc 1 84 0
+ 543 0278 BB6A     		ldr	r3, [r7, #40]
+ 544 027a 03F10403 		add	r3, r3, #4
+ 545 027e 4FF00002 		mov	r2, #0
+ 546 0282 1A60     		str	r2, [r3, #0]	@ float
+ 547              	.L25:
+  85:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  86:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		if (PWM_width[2]<0)
+ 548              		.loc 1 86 0
+ 549 0284 BB6A     		ldr	r3, [r7, #40]
+ 550 0286 03F10803 		add	r3, r3, #8
+ 551 028a D3ED007A 		flds	s15, [r3, #0]
+ 552 028e F5EEC07A 		fcmpezs	s15
+ 553 0292 F1EE10FA 		fmstat
+ 554 0296 05D5     		bpl	.L27
+ 555              	.L46:
+  87:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 			PWM_width[2]=0;
+ 556              		.loc 1 87 0
+ 557 0298 BB6A     		ldr	r3, [r7, #40]
+ 558 029a 03F10803 		add	r3, r3, #8
+ 559 029e 4FF00002 		mov	r2, #0
+ 560 02a2 1A60     		str	r2, [r3, #0]	@ float
+ 561              	.L27:
+  88:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  89:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		if (PWM_width[3]<0)
+ 562              		.loc 1 89 0
+ 563 02a4 BB6A     		ldr	r3, [r7, #40]
+ 564 02a6 03F10C03 		add	r3, r3, #12
+ 565 02aa D3ED007A 		flds	s15, [r3, #0]
+ 566 02ae F5EEC07A 		fcmpezs	s15
+ 567 02b2 F1EE10FA 		fmstat
+ 568 02b6 52D5     		bpl	.L9
+ 569              	.L47:
+  90:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 			PWM_width[3]=0;
+ 570              		.loc 1 90 0
+ 571 02b8 BB6A     		ldr	r3, [r7, #40]
+ 572 02ba 03F10C03 		add	r3, r3, #12
+ 573 02be 4FF00002 		mov	r2, #0
+ 574 02c2 1A60     		str	r2, [r3, #0]	@ float
+ 575 02c4 4BE0     		b	.L9
+ 576              	.L53:
+  91:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	}
+  92:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	else
+  93:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	{
+  94:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		// preventing that motors turn off during a flight in case of tilting
+  95:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		if (PWM_width[0]<MIN_SPEED)
+ 577              		.loc 1 95 0
+ 578 02c6 BB6A     		ldr	r3, [r7, #40]
+ 579 02c8 93ED007A 		flds	s14, [r3, #0]
+ 580 02cc F2EE0E7A 		fconsts	s15, #46
+ 581 02d0 B4EEE77A 		fcmpes	s14, s15
+ 582 02d4 F1EE10FA 		fmstat
+ 583 02d8 05D5     		bpl	.L31
+ 584              	.L48:
+  96:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 			PWM_width[0]=MIN_SPEED;
+ 585              		.loc 1 96 0
+ 586 02da BB6A     		ldr	r3, [r7, #40]
+ 587 02dc 4FF00002 		mov	r2, #0
+ 588 02e0 C4F27012 		movt	r2, 16752
+ 589 02e4 1A60     		str	r2, [r3, #0]	@ float
+ 590              	.L31:
+  97:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+  98:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		if (PWM_width[1]<MIN_SPEED)
+ 591              		.loc 1 98 0
+ 592 02e6 BB6A     		ldr	r3, [r7, #40]
+ 593 02e8 03F10403 		add	r3, r3, #4
+ 594 02ec 93ED007A 		flds	s14, [r3, #0]
+ 595 02f0 F2EE0E7A 		fconsts	s15, #46
+ 596 02f4 B4EEE77A 		fcmpes	s14, s15
+ 597 02f8 F1EE10FA 		fmstat
+ 598 02fc 07D5     		bpl	.L33
+ 599              	.L49:
+  99:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 			PWM_width[1]=MIN_SPEED;
+ 600              		.loc 1 99 0
+ 601 02fe BB6A     		ldr	r3, [r7, #40]
+ 602 0300 03F10403 		add	r3, r3, #4
+ 603 0304 4FF00002 		mov	r2, #0
+ 604 0308 C4F27012 		movt	r2, 16752
+ 605 030c 1A60     		str	r2, [r3, #0]	@ float
+ 606              	.L33:
+ 100:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+ 101:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		if (PWM_width[2]<MIN_SPEED)
+ 607              		.loc 1 101 0
+ 608 030e BB6A     		ldr	r3, [r7, #40]
+ 609 0310 03F10803 		add	r3, r3, #8
+ 610 0314 93ED007A 		flds	s14, [r3, #0]
+ 611 0318 F2EE0E7A 		fconsts	s15, #46
+ 612 031c B4EEE77A 		fcmpes	s14, s15
+ 613 0320 F1EE10FA 		fmstat
+ 614 0324 07D5     		bpl	.L35
+ 615              	.L50:
+ 102:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 			PWM_width[2]=MIN_SPEED;
+ 616              		.loc 1 102 0
+ 617 0326 BB6A     		ldr	r3, [r7, #40]
+ 618 0328 03F10803 		add	r3, r3, #8
+ 619 032c 4FF00002 		mov	r2, #0
+ 620 0330 C4F27012 		movt	r2, 16752
+ 621 0334 1A60     		str	r2, [r3, #0]	@ float
+ 622              	.L35:
+ 103:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+ 104:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 		if (PWM_width[3]<MIN_SPEED)
+ 623              		.loc 1 104 0
+ 624 0336 BB6A     		ldr	r3, [r7, #40]
+ 625 0338 03F10C03 		add	r3, r3, #12
+ 626 033c 93ED007A 		flds	s14, [r3, #0]
+ 627 0340 F2EE0E7A 		fconsts	s15, #46
+ 628 0344 B4EEE77A 		fcmpes	s14, s15
+ 629 0348 F1EE10FA 		fmstat
+ 630 034c 07D5     		bpl	.L9
+ 631              	.L51:
+ 105:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 			PWM_width[3]=MIN_SPEED;
+ 632              		.loc 1 105 0
+ 633 034e BB6A     		ldr	r3, [r7, #40]
+ 634 0350 03F10C03 		add	r3, r3, #12
+ 635 0354 4FF00002 		mov	r2, #0
+ 636 0358 C4F27012 		movt	r2, 16752
+ 637 035c 1A60     		str	r2, [r3, #0]	@ float
+ 638              	.L9:
+ 106:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 	}
+ 107:../_Quadrocopter/Attitude_Control/AttitudeController.c **** 
+ 108:../_Quadrocopter/Attitude_Control/AttitudeController.c **** }
+ 639              		.loc 1 108 0
+ 640 035e 07F11807 		add	r7, r7, #24
+ 641 0362 BD46     		mov	sp, r7
+ 642 0364 B0BD     		pop	{r4, r5, r7, pc}
+ 643              	.L55:
+ 644 0366 00BF     		.align	2
+ 645              	.L54:
+ 646 0368 00007042 		.word	1114636288
+ 647              		.cfi_endproc
+ 648              	.LFE130:
+ 650              		.text
+ 651              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 AttitudeController.c
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:24     .bss:00000000 FLY
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:21     .bss:00000000 $d
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:31     .text.AngleController:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:36     .text.AngleController:00000000 AngleController
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:178    .text.AngleController:00000148 $d
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:184    .text.AngleRateController:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:189    .text.AngleRateController:00000000 AngleRateController
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:263    .text.AngleRateController:00000088 $d
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:269    .text.CalculateActuatorSpeed_Percent:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:274    .text.CalculateActuatorSpeed_Percent:00000000 CalculateActuatorSpeed_Percent
+C:\Users\Herbert\AppData\Local\Temp\ccNCUaOw.s:646    .text.CalculateActuatorSpeed_Percent:00000368 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.AttitudeController.h.9.6cb7be45cccf8a37836b97a0e07fb8db
+                           .group:00000000 wm4.arm_math.h.258.4f811f2034dd4ca295ea6f28c00c3d1e
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.string.h.17.f8d12df81104836a3f2a5d589ae830d8
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.290.40597f98fb862d9752cedcde2b37d26a
+
+UNDEFINED SYMBOLS
+__aeabi_f2d
+__aeabi_dmul
+__aeabi_ddiv
+__aeabi_d2f
+cos

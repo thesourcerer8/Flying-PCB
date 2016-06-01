@@ -1,0 +1,1084 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"I2Cdev.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.I2Cdev_writeBytes,"ax",%progbits
+  20              		.align	2
+  21              		.global	I2Cdev_writeBytes
+  22              		.thumb
+  23              		.thumb_func
+  25              	I2Cdev_writeBytes:
+  26              	.LFB168:
+  27              		.file 1 "../_Quadrocopter/HAL/I2C/I2Cdev.c"
+   1:../_Quadrocopter/HAL/I2C/I2Cdev.c **** /*
+   2:../_Quadrocopter/HAL/I2C/I2Cdev.c ****  * i2c_e.c
+   3:../_Quadrocopter/HAL/I2C/I2Cdev.c ****  *
+   4:../_Quadrocopter/HAL/I2C/I2Cdev.c ****  *  Created on: 25.02.2014
+   5:../_Quadrocopter/HAL/I2C/I2Cdev.c ****  *      Author: WielandD
+   6:../_Quadrocopter/HAL/I2C/I2Cdev.c ****  */
+   7:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+   8:../_Quadrocopter/HAL/I2C/I2Cdev.c **** #include "I2Cdev.h"
+   9:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  10:../_Quadrocopter/HAL/I2C/I2Cdev.c **** bool I2Cdev_writeBytes(const I2C001Handle_type *handle,uint8_t devAddr, uint8_t regAddr, uint8_t le
+  11:../_Quadrocopter/HAL/I2C/I2Cdev.c **** {
+  28              		.loc 1 11 0
+  29              		.cfi_startproc
+  30              		@ args = 4, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 88B0     		sub	sp, sp, #32
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 40
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  44 0008 F970     		strb	r1, [r7, #3]
+  45 000a BA70     		strb	r2, [r7, #2]
+  46 000c 7B70     		strb	r3, [r7, #1]
+  12:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	I2C001_DataType data1;
+  13:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  14:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.TDF_Type = I2C_TDF_MStart;
+  47              		.loc 1 14 0
+  48 000e 4FF00403 		mov	r3, #4
+  49 0012 7B72     		strb	r3, [r7, #9]
+  15:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.Data = (devAddr | I2C_WRITE);
+  50              		.loc 1 15 0
+  51 0014 FB78     		ldrb	r3, [r7, #3]
+  52 0016 3B72     		strb	r3, [r7, #8]
+  53              	.LBB2:
+  16:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+  54              		.loc 1 16 0
+  55 0018 4FF00103 		mov	r3, #1
+  56 001c FB61     		str	r3, [r7, #28]
+  57 001e 19E0     		b	.L2
+  58              	.L5:
+  17:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	{
+  18:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		if (cnt%I2C_TimeOut==0)
+  59              		.loc 1 18 0
+  60 0020 FA69     		ldr	r2, [r7, #28]
+  61 0022 48F6AD33 		movw	r3, #35757
+  62 0026 C6F6DB03 		movt	r3, 26843
+  63 002a 83FB0213 		smull	r1, r3, r3, r2
+  64 002e 4FEAE321 		asr	r1, r3, #11
+  65 0032 4FEAE273 		asr	r3, r2, #31
+  66 0036 CB1A     		subs	r3, r1, r3
+  67 0038 41F28831 		movw	r1, #5000
+  68 003c 01FB03F3 		mul	r3, r1, r3
+  69 0040 D31A     		subs	r3, r2, r3
+  70 0042 002B     		cmp	r3, #0
+  71 0044 02D1     		bne	.L3
+  19:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			return (bool)FALSE;
+  72              		.loc 1 19 0
+  73 0046 4FF00003 		mov	r3, #0
+  74 004a AEE0     		b	.L17
+  75              	.L3:
+  16:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+  76              		.loc 1 16 0
+  77 004c FB69     		ldr	r3, [r7, #28]
+  78 004e 03F10103 		add	r3, r3, #1
+  79 0052 FB61     		str	r3, [r7, #28]
+  80              	.L2:
+  16:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+  81              		.loc 1 16 0 is_stmt 0 discriminator 1
+  82 0054 07F10803 		add	r3, r7, #8
+  83 0058 7868     		ldr	r0, [r7, #4]
+  84 005a 1946     		mov	r1, r3
+  85 005c FFF7FEFF 		bl	I2C001_WriteData
+  86 0060 0346     		mov	r3, r0
+  87 0062 83F00103 		eor	r3, r3, #1
+  88 0066 DBB2     		uxtb	r3, r3
+  89 0068 002B     		cmp	r3, #0
+  90 006a D9D1     		bne	.L5
+  91              	.LBE2:
+  20:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	}
+  21:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  22:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.TDF_Type = I2C_TDF_MTxData;
+  92              		.loc 1 22 0 is_stmt 1
+  93 006c 4FF00003 		mov	r3, #0
+  94 0070 7B72     		strb	r3, [r7, #9]
+  23:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.Data = regAddr;
+  95              		.loc 1 23 0
+  96 0072 BB78     		ldrb	r3, [r7, #2]
+  97 0074 3B72     		strb	r3, [r7, #8]
+  98              	.LBB3:
+  24:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+  99              		.loc 1 24 0
+ 100 0076 4FF00103 		mov	r3, #1
+ 101 007a BB61     		str	r3, [r7, #24]
+ 102 007c 19E0     		b	.L6
+ 103              	.L8:
+  25:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	{
+  26:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		if (cnt%I2C_TimeOut==0)
+ 104              		.loc 1 26 0
+ 105 007e BA69     		ldr	r2, [r7, #24]
+ 106 0080 48F6AD33 		movw	r3, #35757
+ 107 0084 C6F6DB03 		movt	r3, 26843
+ 108 0088 83FB0213 		smull	r1, r3, r3, r2
+ 109 008c 4FEAE321 		asr	r1, r3, #11
+ 110 0090 4FEAE273 		asr	r3, r2, #31
+ 111 0094 CB1A     		subs	r3, r1, r3
+ 112 0096 41F28831 		movw	r1, #5000
+ 113 009a 01FB03F3 		mul	r3, r1, r3
+ 114 009e D31A     		subs	r3, r2, r3
+ 115 00a0 002B     		cmp	r3, #0
+ 116 00a2 02D1     		bne	.L7
+  27:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			return (bool)FALSE;
+ 117              		.loc 1 27 0
+ 118 00a4 4FF00003 		mov	r3, #0
+ 119 00a8 7FE0     		b	.L17
+ 120              	.L7:
+  24:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 121              		.loc 1 24 0
+ 122 00aa BB69     		ldr	r3, [r7, #24]
+ 123 00ac 03F10103 		add	r3, r3, #1
+ 124 00b0 BB61     		str	r3, [r7, #24]
+ 125              	.L6:
+  24:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 126              		.loc 1 24 0 is_stmt 0 discriminator 1
+ 127 00b2 07F10803 		add	r3, r7, #8
+ 128 00b6 7868     		ldr	r0, [r7, #4]
+ 129 00b8 1946     		mov	r1, r3
+ 130 00ba FFF7FEFF 		bl	I2C001_WriteData
+ 131 00be 0346     		mov	r3, r0
+ 132 00c0 83F00103 		eor	r3, r3, #1
+ 133 00c4 DBB2     		uxtb	r3, r3
+ 134 00c6 002B     		cmp	r3, #0
+ 135 00c8 D9D1     		bne	.L8
+ 136              	.LBE3:
+ 137              	.LBB4:
+  28:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	}
+  29:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  30:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for(int i=0; i<length; i++)
+ 138              		.loc 1 30 0 is_stmt 1
+ 139 00ca 4FF00003 		mov	r3, #0
+ 140 00ce 7B61     		str	r3, [r7, #20]
+ 141 00d0 35E0     		b	.L9
+ 142              	.L13:
+  31:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	{
+  32:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		data1.Data1.TDF_Type = I2C_TDF_MTxData;
+ 143              		.loc 1 32 0
+ 144 00d2 4FF00003 		mov	r3, #0
+ 145 00d6 7B72     		strb	r3, [r7, #9]
+  33:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		data1.Data1.Data = data[i];
+ 146              		.loc 1 33 0
+ 147 00d8 7B69     		ldr	r3, [r7, #20]
+ 148 00da BA6A     		ldr	r2, [r7, #40]
+ 149 00dc D318     		adds	r3, r2, r3
+ 150 00de 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 151 00e0 3B72     		strb	r3, [r7, #8]
+ 152              	.LBB5:
+  34:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 153              		.loc 1 34 0
+ 154 00e2 4FF00103 		mov	r3, #1
+ 155 00e6 3B61     		str	r3, [r7, #16]
+ 156 00e8 19E0     		b	.L10
+ 157              	.L12:
+  35:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		{
+  36:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			if (cnt%I2C_TimeOut==0)
+ 158              		.loc 1 36 0
+ 159 00ea 3A69     		ldr	r2, [r7, #16]
+ 160 00ec 48F6AD33 		movw	r3, #35757
+ 161 00f0 C6F6DB03 		movt	r3, 26843
+ 162 00f4 83FB0213 		smull	r1, r3, r3, r2
+ 163 00f8 4FEAE321 		asr	r1, r3, #11
+ 164 00fc 4FEAE273 		asr	r3, r2, #31
+ 165 0100 CB1A     		subs	r3, r1, r3
+ 166 0102 41F28831 		movw	r1, #5000
+ 167 0106 01FB03F3 		mul	r3, r1, r3
+ 168 010a D31A     		subs	r3, r2, r3
+ 169 010c 002B     		cmp	r3, #0
+ 170 010e 02D1     		bne	.L11
+  37:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 				return (bool)FALSE;
+ 171              		.loc 1 37 0
+ 172 0110 4FF00003 		mov	r3, #0
+ 173 0114 49E0     		b	.L17
+ 174              	.L11:
+  34:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 175              		.loc 1 34 0
+ 176 0116 3B69     		ldr	r3, [r7, #16]
+ 177 0118 03F10103 		add	r3, r3, #1
+ 178 011c 3B61     		str	r3, [r7, #16]
+ 179              	.L10:
+  34:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 180              		.loc 1 34 0 is_stmt 0 discriminator 1
+ 181 011e 07F10803 		add	r3, r7, #8
+ 182 0122 7868     		ldr	r0, [r7, #4]
+ 183 0124 1946     		mov	r1, r3
+ 184 0126 FFF7FEFF 		bl	I2C001_WriteData
+ 185 012a 0346     		mov	r3, r0
+ 186 012c 83F00103 		eor	r3, r3, #1
+ 187 0130 DBB2     		uxtb	r3, r3
+ 188 0132 002B     		cmp	r3, #0
+ 189 0134 D9D1     		bne	.L12
+ 190              	.LBE5:
+  30:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for(int i=0; i<length; i++)
+ 191              		.loc 1 30 0 is_stmt 1
+ 192 0136 7B69     		ldr	r3, [r7, #20]
+ 193 0138 03F10103 		add	r3, r3, #1
+ 194 013c 7B61     		str	r3, [r7, #20]
+ 195              	.L9:
+  30:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for(int i=0; i<length; i++)
+ 196              		.loc 1 30 0 is_stmt 0 discriminator 1
+ 197 013e 7A78     		ldrb	r2, [r7, #1]	@ zero_extendqisi2
+ 198 0140 7B69     		ldr	r3, [r7, #20]
+ 199 0142 9A42     		cmp	r2, r3
+ 200 0144 C5DC     		bgt	.L13
+ 201              	.LBE4:
+  38:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		}
+  39:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	}
+  40:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.TDF_Type = I2C_TDF_MStop;
+ 202              		.loc 1 40 0 is_stmt 1
+ 203 0146 4FF00603 		mov	r3, #6
+ 204 014a 7B72     		strb	r3, [r7, #9]
+  41:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.Data = ubyteFF;
+ 205              		.loc 1 41 0
+ 206 014c 4FF0FF03 		mov	r3, #255
+ 207 0150 3B72     		strb	r3, [r7, #8]
+ 208              	.LBB6:
+  42:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 209              		.loc 1 42 0
+ 210 0152 4FF00103 		mov	r3, #1
+ 211 0156 FB60     		str	r3, [r7, #12]
+ 212 0158 19E0     		b	.L14
+ 213              	.L16:
+  43:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	{
+  44:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		if (cnt%I2C_TimeOut==0)
+ 214              		.loc 1 44 0
+ 215 015a FA68     		ldr	r2, [r7, #12]
+ 216 015c 48F6AD33 		movw	r3, #35757
+ 217 0160 C6F6DB03 		movt	r3, 26843
+ 218 0164 83FB0213 		smull	r1, r3, r3, r2
+ 219 0168 4FEAE321 		asr	r1, r3, #11
+ 220 016c 4FEAE273 		asr	r3, r2, #31
+ 221 0170 CB1A     		subs	r3, r1, r3
+ 222 0172 41F28831 		movw	r1, #5000
+ 223 0176 01FB03F3 		mul	r3, r1, r3
+ 224 017a D31A     		subs	r3, r2, r3
+ 225 017c 002B     		cmp	r3, #0
+ 226 017e 02D1     		bne	.L15
+  45:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			return (bool)FALSE;
+ 227              		.loc 1 45 0
+ 228 0180 4FF00003 		mov	r3, #0
+ 229 0184 11E0     		b	.L17
+ 230              	.L15:
+  42:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 231              		.loc 1 42 0
+ 232 0186 FB68     		ldr	r3, [r7, #12]
+ 233 0188 03F10103 		add	r3, r3, #1
+ 234 018c FB60     		str	r3, [r7, #12]
+ 235              	.L14:
+  42:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 236              		.loc 1 42 0 is_stmt 0 discriminator 1
+ 237 018e 07F10803 		add	r3, r7, #8
+ 238 0192 7868     		ldr	r0, [r7, #4]
+ 239 0194 1946     		mov	r1, r3
+ 240 0196 FFF7FEFF 		bl	I2C001_WriteData
+ 241 019a 0346     		mov	r3, r0
+ 242 019c 83F00103 		eor	r3, r3, #1
+ 243 01a0 DBB2     		uxtb	r3, r3
+ 244 01a2 002B     		cmp	r3, #0
+ 245 01a4 D9D1     		bne	.L16
+ 246              	.LBE6:
+  46:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	}
+  47:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  48:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	return (bool)TRUE;
+ 247              		.loc 1 48 0 is_stmt 1
+ 248 01a6 4FF00103 		mov	r3, #1
+ 249              	.L17:
+  49:../_Quadrocopter/HAL/I2C/I2Cdev.c **** }
+ 250              		.loc 1 49 0
+ 251 01aa 1846     		mov	r0, r3
+ 252 01ac 07F12007 		add	r7, r7, #32
+ 253 01b0 BD46     		mov	sp, r7
+ 254 01b2 80BD     		pop	{r7, pc}
+ 255              		.cfi_endproc
+ 256              	.LFE168:
+ 258              		.section	.text.I2Cdev_writeByte,"ax",%progbits
+ 259              		.align	2
+ 260              		.global	I2Cdev_writeByte
+ 261              		.thumb
+ 262              		.thumb_func
+ 264              	I2Cdev_writeByte:
+ 265              	.LFB169:
+  50:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  51:../_Quadrocopter/HAL/I2C/I2Cdev.c **** bool I2Cdev_writeByte(const I2C001Handle_type *handle,uint8_t devAddr, uint8_t regAddr, uint8_t dat
+  52:../_Quadrocopter/HAL/I2C/I2Cdev.c **** {
+ 266              		.loc 1 52 0
+ 267              		.cfi_startproc
+ 268              		@ args = 0, pretend = 0, frame = 8
+ 269              		@ frame_needed = 1, uses_anonymous_args = 0
+ 270 0000 80B5     		push	{r7, lr}
+ 271              	.LCFI3:
+ 272              		.cfi_def_cfa_offset 8
+ 273              		.cfi_offset 7, -8
+ 274              		.cfi_offset 14, -4
+ 275 0002 84B0     		sub	sp, sp, #16
+ 276              	.LCFI4:
+ 277              		.cfi_def_cfa_offset 24
+ 278 0004 02AF     		add	r7, sp, #8
+ 279              	.LCFI5:
+ 280              		.cfi_def_cfa 7, 16
+ 281 0006 7860     		str	r0, [r7, #4]
+ 282 0008 F970     		strb	r1, [r7, #3]
+ 283 000a BA70     		strb	r2, [r7, #2]
+ 284 000c 7B70     		strb	r3, [r7, #1]
+  53:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	return I2Cdev_writeBytes(handle,devAddr, regAddr, 1, &data);
+ 285              		.loc 1 53 0
+ 286 000e FA78     		ldrb	r2, [r7, #3]	@ zero_extendqisi2
+ 287 0010 BB78     		ldrb	r3, [r7, #2]	@ zero_extendqisi2
+ 288 0012 07F10101 		add	r1, r7, #1
+ 289 0016 0091     		str	r1, [sp, #0]
+ 290 0018 7868     		ldr	r0, [r7, #4]
+ 291 001a 1146     		mov	r1, r2
+ 292 001c 1A46     		mov	r2, r3
+ 293 001e 4FF00103 		mov	r3, #1
+ 294 0022 FFF7FEFF 		bl	I2Cdev_writeBytes
+ 295 0026 0346     		mov	r3, r0
+  54:../_Quadrocopter/HAL/I2C/I2Cdev.c **** }
+ 296              		.loc 1 54 0
+ 297 0028 1846     		mov	r0, r3
+ 298 002a 07F10807 		add	r7, r7, #8
+ 299 002e BD46     		mov	sp, r7
+ 300 0030 80BD     		pop	{r7, pc}
+ 301              		.cfi_endproc
+ 302              	.LFE169:
+ 304 0032 00BF     		.section	.text.I2Cdev_readBytes,"ax",%progbits
+ 305              		.align	2
+ 306              		.global	I2Cdev_readBytes
+ 307              		.thumb
+ 308              		.thumb_func
+ 310              	I2Cdev_readBytes:
+ 311              	.LFB170:
+  55:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  56:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  57:../_Quadrocopter/HAL/I2C/I2Cdev.c **** int16_t I2Cdev_readBytes(const I2C001Handle_type *handle,uint8_t devAddr, uint8_t regAddr, uint8_t 
+  58:../_Quadrocopter/HAL/I2C/I2Cdev.c **** {
+ 312              		.loc 1 58 0
+ 313              		.cfi_startproc
+ 314              		@ args = 4, pretend = 0, frame = 48
+ 315              		@ frame_needed = 1, uses_anonymous_args = 0
+ 316 0000 80B5     		push	{r7, lr}
+ 317              	.LCFI6:
+ 318              		.cfi_def_cfa_offset 8
+ 319              		.cfi_offset 7, -8
+ 320              		.cfi_offset 14, -4
+ 321 0002 8CB0     		sub	sp, sp, #48
+ 322              	.LCFI7:
+ 323              		.cfi_def_cfa_offset 56
+ 324 0004 00AF     		add	r7, sp, #0
+ 325              	.LCFI8:
+ 326              		.cfi_def_cfa_register 7
+ 327 0006 7860     		str	r0, [r7, #4]
+ 328 0008 F970     		strb	r1, [r7, #3]
+ 329 000a BA70     		strb	r2, [r7, #2]
+ 330 000c 7B70     		strb	r3, [r7, #1]
+  59:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	I2C001_DataType data1;
+  60:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	uint16_t rec=0x00;
+ 331              		.loc 1 60 0
+ 332 000e 4FF00003 		mov	r3, #0
+ 333 0012 FB81     		strh	r3, [r7, #14]	@ movhi
+  61:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	int16_t i=0;
+ 334              		.loc 1 61 0
+ 335 0014 4FF00003 		mov	r3, #0
+ 336 0018 FB85     		strh	r3, [r7, #46]	@ movhi
+  62:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  63:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.TDF_Type = I2C_TDF_MStart;
+ 337              		.loc 1 63 0
+ 338 001a 4FF00403 		mov	r3, #4
+ 339 001e 7B74     		strb	r3, [r7, #17]
+  64:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.Data = (devAddr | I2C_WRITE);
+ 340              		.loc 1 64 0
+ 341 0020 FB78     		ldrb	r3, [r7, #3]
+ 342 0022 3B74     		strb	r3, [r7, #16]
+ 343              	.LBB7:
+  65:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 344              		.loc 1 65 0
+ 345 0024 4FF00103 		mov	r3, #1
+ 346 0028 BB62     		str	r3, [r7, #40]
+ 347 002a 19E0     		b	.L21
+ 348              	.L24:
+  66:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	{
+  67:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		if (cnt%I2C_TimeOut==0)
+ 349              		.loc 1 67 0
+ 350 002c BA6A     		ldr	r2, [r7, #40]
+ 351 002e 48F6AD33 		movw	r3, #35757
+ 352 0032 C6F6DB03 		movt	r3, 26843
+ 353 0036 83FB0213 		smull	r1, r3, r3, r2
+ 354 003a 4FEAE321 		asr	r1, r3, #11
+ 355 003e 4FEAE273 		asr	r3, r2, #31
+ 356 0042 CB1A     		subs	r3, r1, r3
+ 357 0044 41F28831 		movw	r1, #5000
+ 358 0048 01FB03F3 		mul	r3, r1, r3
+ 359 004c D31A     		subs	r3, r2, r3
+ 360 004e 002B     		cmp	r3, #0
+ 361 0050 02D1     		bne	.L22
+  68:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			return 0;
+ 362              		.loc 1 68 0
+ 363 0052 4FF00003 		mov	r3, #0
+ 364 0056 27E1     		b	.L46
+ 365              	.L22:
+  65:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 366              		.loc 1 65 0
+ 367 0058 BB6A     		ldr	r3, [r7, #40]
+ 368 005a 03F10103 		add	r3, r3, #1
+ 369 005e BB62     		str	r3, [r7, #40]
+ 370              	.L21:
+  65:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 371              		.loc 1 65 0 is_stmt 0 discriminator 1
+ 372 0060 07F11003 		add	r3, r7, #16
+ 373 0064 7868     		ldr	r0, [r7, #4]
+ 374 0066 1946     		mov	r1, r3
+ 375 0068 FFF7FEFF 		bl	I2C001_WriteData
+ 376 006c 0346     		mov	r3, r0
+ 377 006e 83F00103 		eor	r3, r3, #1
+ 378 0072 DBB2     		uxtb	r3, r3
+ 379 0074 002B     		cmp	r3, #0
+ 380 0076 D9D1     		bne	.L24
+ 381              	.LBE7:
+  69:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	}
+  70:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  71:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.TDF_Type = I2C_TDF_MTxData;
+ 382              		.loc 1 71 0 is_stmt 1
+ 383 0078 4FF00003 		mov	r3, #0
+ 384 007c 7B74     		strb	r3, [r7, #17]
+  72:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.Data = regAddr;
+ 385              		.loc 1 72 0
+ 386 007e BB78     		ldrb	r3, [r7, #2]
+ 387 0080 3B74     		strb	r3, [r7, #16]
+ 388              	.LBB8:
+  73:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 389              		.loc 1 73 0
+ 390 0082 4FF00103 		mov	r3, #1
+ 391 0086 7B62     		str	r3, [r7, #36]
+ 392 0088 19E0     		b	.L25
+ 393              	.L27:
+  74:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	{
+  75:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		if (cnt%I2C_TimeOut==0)
+ 394              		.loc 1 75 0
+ 395 008a 7A6A     		ldr	r2, [r7, #36]
+ 396 008c 48F6AD33 		movw	r3, #35757
+ 397 0090 C6F6DB03 		movt	r3, 26843
+ 398 0094 83FB0213 		smull	r1, r3, r3, r2
+ 399 0098 4FEAE321 		asr	r1, r3, #11
+ 400 009c 4FEAE273 		asr	r3, r2, #31
+ 401 00a0 CB1A     		subs	r3, r1, r3
+ 402 00a2 41F28831 		movw	r1, #5000
+ 403 00a6 01FB03F3 		mul	r3, r1, r3
+ 404 00aa D31A     		subs	r3, r2, r3
+ 405 00ac 002B     		cmp	r3, #0
+ 406 00ae 02D1     		bne	.L26
+  76:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			return 0;
+ 407              		.loc 1 76 0
+ 408 00b0 4FF00003 		mov	r3, #0
+ 409 00b4 F8E0     		b	.L46
+ 410              	.L26:
+  73:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 411              		.loc 1 73 0
+ 412 00b6 7B6A     		ldr	r3, [r7, #36]
+ 413 00b8 03F10103 		add	r3, r3, #1
+ 414 00bc 7B62     		str	r3, [r7, #36]
+ 415              	.L25:
+  73:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 416              		.loc 1 73 0 is_stmt 0 discriminator 1
+ 417 00be 07F11003 		add	r3, r7, #16
+ 418 00c2 7868     		ldr	r0, [r7, #4]
+ 419 00c4 1946     		mov	r1, r3
+ 420 00c6 FFF7FEFF 		bl	I2C001_WriteData
+ 421 00ca 0346     		mov	r3, r0
+ 422 00cc 83F00103 		eor	r3, r3, #1
+ 423 00d0 DBB2     		uxtb	r3, r3
+ 424 00d2 002B     		cmp	r3, #0
+ 425 00d4 D9D1     		bne	.L27
+ 426              	.LBE8:
+  77:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	}
+  78:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  79:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.TDF_Type = I2C_TDF_MRStart;
+ 427              		.loc 1 79 0 is_stmt 1
+ 428 00d6 4FF00503 		mov	r3, #5
+ 429 00da 7B74     		strb	r3, [r7, #17]
+  80:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.Data = devAddr | I2C_READ;
+ 430              		.loc 1 80 0
+ 431 00dc FB78     		ldrb	r3, [r7, #3]
+ 432 00de 43F00103 		orr	r3, r3, #1
+ 433 00e2 DBB2     		uxtb	r3, r3
+ 434 00e4 3B74     		strb	r3, [r7, #16]
+ 435              	.LBB9:
+  81:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 436              		.loc 1 81 0
+ 437 00e6 4FF00103 		mov	r3, #1
+ 438 00ea 3B62     		str	r3, [r7, #32]
+ 439 00ec 19E0     		b	.L28
+ 440              	.L30:
+  82:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	{
+  83:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		if (cnt%I2C_TimeOut==0)
+ 441              		.loc 1 83 0
+ 442 00ee 3A6A     		ldr	r2, [r7, #32]
+ 443 00f0 48F6AD33 		movw	r3, #35757
+ 444 00f4 C6F6DB03 		movt	r3, 26843
+ 445 00f8 83FB0213 		smull	r1, r3, r3, r2
+ 446 00fc 4FEAE321 		asr	r1, r3, #11
+ 447 0100 4FEAE273 		asr	r3, r2, #31
+ 448 0104 CB1A     		subs	r3, r1, r3
+ 449 0106 41F28831 		movw	r1, #5000
+ 450 010a 01FB03F3 		mul	r3, r1, r3
+ 451 010e D31A     		subs	r3, r2, r3
+ 452 0110 002B     		cmp	r3, #0
+ 453 0112 02D1     		bne	.L29
+  84:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			return 0;
+ 454              		.loc 1 84 0
+ 455 0114 4FF00003 		mov	r3, #0
+ 456 0118 C6E0     		b	.L46
+ 457              	.L29:
+  81:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 458              		.loc 1 81 0
+ 459 011a 3B6A     		ldr	r3, [r7, #32]
+ 460 011c 03F10103 		add	r3, r3, #1
+ 461 0120 3B62     		str	r3, [r7, #32]
+ 462              	.L28:
+  81:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 463              		.loc 1 81 0 is_stmt 0 discriminator 1
+ 464 0122 07F11003 		add	r3, r7, #16
+ 465 0126 7868     		ldr	r0, [r7, #4]
+ 466 0128 1946     		mov	r1, r3
+ 467 012a FFF7FEFF 		bl	I2C001_WriteData
+ 468 012e 0346     		mov	r3, r0
+ 469 0130 83F00103 		eor	r3, r3, #1
+ 470 0134 DBB2     		uxtb	r3, r3
+ 471 0136 002B     		cmp	r3, #0
+ 472 0138 D9D1     		bne	.L30
+ 473              	.LBE9:
+  85:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	}
+  86:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  87:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (i=0; i<length; i++)
+ 474              		.loc 1 87 0 is_stmt 1
+ 475 013a 4FF00003 		mov	r3, #0
+ 476 013e FB85     		strh	r3, [r7, #46]	@ movhi
+ 477 0140 3EE0     		b	.L31
+ 478              	.L37:
+  88:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	{
+  89:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		if (i<length-1)
+ 479              		.loc 1 89 0
+ 480 0142 B7F92E20 		ldrsh	r2, [r7, #46]
+ 481 0146 7B78     		ldrb	r3, [r7, #1]	@ zero_extendqisi2
+ 482 0148 03F1FF33 		add	r3, r3, #-1
+ 483 014c 9A42     		cmp	r2, r3
+ 484 014e 03DA     		bge	.L32
+  90:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			data1.Data1.TDF_Type = I2C_TDF_MRxAck0;
+ 485              		.loc 1 90 0
+ 486 0150 4FF00203 		mov	r3, #2
+ 487 0154 7B74     		strb	r3, [r7, #17]
+ 488 0156 02E0     		b	.L33
+ 489              	.L32:
+  91:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		else
+  92:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			data1.Data1.TDF_Type = I2C_TDF_MRxAck1;
+ 490              		.loc 1 92 0
+ 491 0158 4FF00303 		mov	r3, #3
+ 492 015c 7B74     		strb	r3, [r7, #17]
+ 493              	.L33:
+  93:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+  94:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		data1.Data1.Data = ubyteFF;
+ 494              		.loc 1 94 0
+ 495 015e 4FF0FF03 		mov	r3, #255
+ 496 0162 3B74     		strb	r3, [r7, #16]
+ 497              	.LBB10:
+  95:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 498              		.loc 1 95 0
+ 499 0164 4FF00103 		mov	r3, #1
+ 500 0168 FB61     		str	r3, [r7, #28]
+ 501 016a 19E0     		b	.L34
+ 502              	.L36:
+  96:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		{
+  97:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			if (cnt%I2C_TimeOut==0)
+ 503              		.loc 1 97 0
+ 504 016c FA69     		ldr	r2, [r7, #28]
+ 505 016e 48F6AD33 		movw	r3, #35757
+ 506 0172 C6F6DB03 		movt	r3, 26843
+ 507 0176 83FB0213 		smull	r1, r3, r3, r2
+ 508 017a 4FEAE321 		asr	r1, r3, #11
+ 509 017e 4FEAE273 		asr	r3, r2, #31
+ 510 0182 CB1A     		subs	r3, r1, r3
+ 511 0184 41F28831 		movw	r1, #5000
+ 512 0188 01FB03F3 		mul	r3, r1, r3
+ 513 018c D31A     		subs	r3, r2, r3
+ 514 018e 002B     		cmp	r3, #0
+ 515 0190 02D1     		bne	.L35
+  98:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 				return 0;
+ 516              		.loc 1 98 0
+ 517 0192 4FF00003 		mov	r3, #0
+ 518 0196 87E0     		b	.L46
+ 519              	.L35:
+  95:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 520              		.loc 1 95 0
+ 521 0198 FB69     		ldr	r3, [r7, #28]
+ 522 019a 03F10103 		add	r3, r3, #1
+ 523 019e FB61     		str	r3, [r7, #28]
+ 524              	.L34:
+  95:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 525              		.loc 1 95 0 is_stmt 0 discriminator 1
+ 526 01a0 07F11003 		add	r3, r7, #16
+ 527 01a4 7868     		ldr	r0, [r7, #4]
+ 528 01a6 1946     		mov	r1, r3
+ 529 01a8 FFF7FEFF 		bl	I2C001_WriteData
+ 530 01ac 0346     		mov	r3, r0
+ 531 01ae 83F00103 		eor	r3, r3, #1
+ 532 01b2 DBB2     		uxtb	r3, r3
+ 533 01b4 002B     		cmp	r3, #0
+ 534 01b6 D9D1     		bne	.L36
+ 535              	.LBE10:
+  87:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (i=0; i<length; i++)
+ 536              		.loc 1 87 0 is_stmt 1
+ 537 01b8 FB8D     		ldrh	r3, [r7, #46]	@ movhi
+ 538 01ba 03F10103 		add	r3, r3, #1
+ 539 01be FB85     		strh	r3, [r7, #46]	@ movhi
+ 540              	.L31:
+  87:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (i=0; i<length; i++)
+ 541              		.loc 1 87 0 is_stmt 0 discriminator 1
+ 542 01c0 B7F92E20 		ldrsh	r2, [r7, #46]
+ 543 01c4 7B78     		ldrb	r3, [r7, #1]	@ zero_extendqisi2
+ 544 01c6 9A42     		cmp	r2, r3
+ 545 01c8 BBDB     		blt	.L37
+  99:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		}
+ 100:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	}
+ 101:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+ 102:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.TDF_Type = I2C_TDF_MStop;
+ 546              		.loc 1 102 0 is_stmt 1
+ 547 01ca 4FF00603 		mov	r3, #6
+ 548 01ce 7B74     		strb	r3, [r7, #17]
+ 103:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	data1.Data1.Data = ubyteFF;
+ 549              		.loc 1 103 0
+ 550 01d0 4FF0FF03 		mov	r3, #255
+ 551 01d4 3B74     		strb	r3, [r7, #16]
+ 552              	.LBB11:
+ 104:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 553              		.loc 1 104 0
+ 554 01d6 4FF00103 		mov	r3, #1
+ 555 01da BB61     		str	r3, [r7, #24]
+ 556 01dc 19E0     		b	.L38
+ 557              	.L40:
+ 105:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	{
+ 106:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		if (cnt%I2C_TimeOut==0)
+ 558              		.loc 1 106 0
+ 559 01de BA69     		ldr	r2, [r7, #24]
+ 560 01e0 48F6AD33 		movw	r3, #35757
+ 561 01e4 C6F6DB03 		movt	r3, 26843
+ 562 01e8 83FB0213 		smull	r1, r3, r3, r2
+ 563 01ec 4FEAE321 		asr	r1, r3, #11
+ 564 01f0 4FEAE273 		asr	r3, r2, #31
+ 565 01f4 CB1A     		subs	r3, r1, r3
+ 566 01f6 41F28831 		movw	r1, #5000
+ 567 01fa 01FB03F3 		mul	r3, r1, r3
+ 568 01fe D31A     		subs	r3, r2, r3
+ 569 0200 002B     		cmp	r3, #0
+ 570 0202 02D1     		bne	.L39
+ 107:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			return 0;
+ 571              		.loc 1 107 0
+ 572 0204 4FF00003 		mov	r3, #0
+ 573 0208 4EE0     		b	.L46
+ 574              	.L39:
+ 104:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 575              		.loc 1 104 0
+ 576 020a BB69     		ldr	r3, [r7, #24]
+ 577 020c 03F10103 		add	r3, r3, #1
+ 578 0210 BB61     		str	r3, [r7, #24]
+ 579              	.L38:
+ 104:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for (int cnt=1; !I2C001_WriteData(handle, &data1); cnt++)
+ 580              		.loc 1 104 0 is_stmt 0 discriminator 1
+ 581 0212 07F11003 		add	r3, r7, #16
+ 582 0216 7868     		ldr	r0, [r7, #4]
+ 583 0218 1946     		mov	r1, r3
+ 584 021a FFF7FEFF 		bl	I2C001_WriteData
+ 585 021e 0346     		mov	r3, r0
+ 586 0220 83F00103 		eor	r3, r3, #1
+ 587 0224 DBB2     		uxtb	r3, r3
+ 588 0226 002B     		cmp	r3, #0
+ 589 0228 D9D1     		bne	.L40
+ 590              	.LBE11:
+ 108:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	}
+ 109:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+ 110:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for(i=0; i<length; i++)
+ 591              		.loc 1 110 0 is_stmt 1
+ 592 022a 4FF00003 		mov	r3, #0
+ 593 022e FB85     		strh	r3, [r7, #46]	@ movhi
+ 594 0230 34E0     		b	.L41
+ 595              	.L45:
+ 596              	.LBB12:
+ 111:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	{
+ 112:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		for (int cnt=1; !I2C001_ReadData(handle, &rec); cnt++)
+ 597              		.loc 1 112 0
+ 598 0232 4FF00103 		mov	r3, #1
+ 599 0236 7B61     		str	r3, [r7, #20]
+ 600 0238 19E0     		b	.L42
+ 601              	.L44:
+ 113:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		{
+ 114:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 			if (cnt%I2C_TimeOut==0)
+ 602              		.loc 1 114 0
+ 603 023a 7A69     		ldr	r2, [r7, #20]
+ 604 023c 48F6AD33 		movw	r3, #35757
+ 605 0240 C6F6DB03 		movt	r3, 26843
+ 606 0244 83FB0213 		smull	r1, r3, r3, r2
+ 607 0248 4FEAE321 		asr	r1, r3, #11
+ 608 024c 4FEAE273 		asr	r3, r2, #31
+ 609 0250 CB1A     		subs	r3, r1, r3
+ 610 0252 41F28831 		movw	r1, #5000
+ 611 0256 01FB03F3 		mul	r3, r1, r3
+ 612 025a D31A     		subs	r3, r2, r3
+ 613 025c 002B     		cmp	r3, #0
+ 614 025e 02D1     		bne	.L43
+ 115:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 				return 0;
+ 615              		.loc 1 115 0
+ 616 0260 4FF00003 		mov	r3, #0
+ 617 0264 20E0     		b	.L46
+ 618              	.L43:
+ 112:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		for (int cnt=1; !I2C001_ReadData(handle, &rec); cnt++)
+ 619              		.loc 1 112 0
+ 620 0266 7B69     		ldr	r3, [r7, #20]
+ 621 0268 03F10103 		add	r3, r3, #1
+ 622 026c 7B61     		str	r3, [r7, #20]
+ 623              	.L42:
+ 112:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		for (int cnt=1; !I2C001_ReadData(handle, &rec); cnt++)
+ 624              		.loc 1 112 0 is_stmt 0 discriminator 1
+ 625 026e 07F10E03 		add	r3, r7, #14
+ 626 0272 7868     		ldr	r0, [r7, #4]
+ 627 0274 1946     		mov	r1, r3
+ 628 0276 FFF7FEFF 		bl	I2C001_ReadData
+ 629 027a 0346     		mov	r3, r0
+ 630 027c 83F00103 		eor	r3, r3, #1
+ 631 0280 DBB2     		uxtb	r3, r3
+ 632 0282 002B     		cmp	r3, #0
+ 633 0284 D9D1     		bne	.L44
+ 634              	.LBE12:
+ 116:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		}
+ 117:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		data[i]=(uint8_t)rec;
+ 635              		.loc 1 117 0 is_stmt 1
+ 636 0286 B7F92E30 		ldrsh	r3, [r7, #46]
+ 637 028a BA6B     		ldr	r2, [r7, #56]
+ 638 028c D318     		adds	r3, r2, r3
+ 639 028e FA89     		ldrh	r2, [r7, #14]
+ 640 0290 D2B2     		uxtb	r2, r2
+ 641 0292 1A70     		strb	r2, [r3, #0]
+ 110:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for(i=0; i<length; i++)
+ 642              		.loc 1 110 0
+ 643 0294 FB8D     		ldrh	r3, [r7, #46]	@ movhi
+ 644 0296 03F10103 		add	r3, r3, #1
+ 645 029a FB85     		strh	r3, [r7, #46]	@ movhi
+ 646              	.L41:
+ 110:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	for(i=0; i<length; i++)
+ 647              		.loc 1 110 0 is_stmt 0 discriminator 1
+ 648 029c B7F92E20 		ldrsh	r2, [r7, #46]
+ 649 02a0 7B78     		ldrb	r3, [r7, #1]	@ zero_extendqisi2
+ 650 02a2 9A42     		cmp	r2, r3
+ 651 02a4 C5DB     		blt	.L45
+ 118:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		/*Todo: I2C001.c I2C001_ReadData(...) -> 16bit ausgelesen, aber 8 bit übergeben
+ 119:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		sollte ausgebessert werden
+ 120:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		*/
+ 121:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	}
+ 122:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+ 123:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	return i;
+ 652              		.loc 1 123 0 is_stmt 1
+ 653 02a6 FB8D     		ldrh	r3, [r7, #46]
+ 654              	.L46:
+ 655 02a8 1BB2     		sxth	r3, r3
+ 124:../_Quadrocopter/HAL/I2C/I2Cdev.c **** }
+ 656              		.loc 1 124 0
+ 657 02aa 1846     		mov	r0, r3
+ 658 02ac 07F13007 		add	r7, r7, #48
+ 659 02b0 BD46     		mov	sp, r7
+ 660 02b2 80BD     		pop	{r7, pc}
+ 661              		.cfi_endproc
+ 662              	.LFE170:
+ 664              		.section	.text.I2Cdev_readByte,"ax",%progbits
+ 665              		.align	2
+ 666              		.global	I2Cdev_readByte
+ 667              		.thumb
+ 668              		.thumb_func
+ 670              	I2Cdev_readByte:
+ 671              	.LFB171:
+ 125:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+ 126:../_Quadrocopter/HAL/I2C/I2Cdev.c **** int16_t I2Cdev_readByte(const I2C001Handle_type *handle, uint8_t devAddr, uint8_t regAddr)
+ 127:../_Quadrocopter/HAL/I2C/I2Cdev.c **** {
+ 672              		.loc 1 127 0
+ 673              		.cfi_startproc
+ 674              		@ args = 0, pretend = 0, frame = 16
+ 675              		@ frame_needed = 1, uses_anonymous_args = 0
+ 676 0000 80B5     		push	{r7, lr}
+ 677              	.LCFI9:
+ 678              		.cfi_def_cfa_offset 8
+ 679              		.cfi_offset 7, -8
+ 680              		.cfi_offset 14, -4
+ 681 0002 86B0     		sub	sp, sp, #24
+ 682              	.LCFI10:
+ 683              		.cfi_def_cfa_offset 32
+ 684 0004 02AF     		add	r7, sp, #8
+ 685              	.LCFI11:
+ 686              		.cfi_def_cfa 7, 24
+ 687 0006 7860     		str	r0, [r7, #4]
+ 688 0008 1346     		mov	r3, r2
+ 689 000a 0A46     		mov	r2, r1
+ 690 000c FA70     		strb	r2, [r7, #3]
+ 691 000e BB70     		strb	r3, [r7, #2]
+ 128:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	uint8_t data=0x00;
+ 692              		.loc 1 128 0
+ 693 0010 4FF00003 		mov	r3, #0
+ 694 0014 FB73     		strb	r3, [r7, #15]
+ 129:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	if (I2Cdev_readBytes(handle,devAddr, regAddr, 1, &data))
+ 695              		.loc 1 129 0
+ 696 0016 FA78     		ldrb	r2, [r7, #3]	@ zero_extendqisi2
+ 697 0018 BB78     		ldrb	r3, [r7, #2]	@ zero_extendqisi2
+ 698 001a 07F10F01 		add	r1, r7, #15
+ 699 001e 0091     		str	r1, [sp, #0]
+ 700 0020 7868     		ldr	r0, [r7, #4]
+ 701 0022 1146     		mov	r1, r2
+ 702 0024 1A46     		mov	r2, r3
+ 703 0026 4FF00103 		mov	r3, #1
+ 704 002a FFF7FEFF 		bl	I2Cdev_readBytes
+ 705 002e 0346     		mov	r3, r0
+ 706 0030 002B     		cmp	r3, #0
+ 707 0032 01D0     		beq	.L48
+ 130:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		return (int16_t)data;
+ 708              		.loc 1 130 0
+ 709 0034 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 710 0036 01E0     		b	.L50
+ 711              	.L48:
+ 131:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	else
+ 132:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 		return -1;
+ 712              		.loc 1 132 0
+ 713 0038 4FF6FF73 		movw	r3, #65535
+ 714              	.L50:
+ 715 003c 1BB2     		sxth	r3, r3
+ 133:../_Quadrocopter/HAL/I2C/I2Cdev.c **** }
+ 716              		.loc 1 133 0
+ 717 003e 1846     		mov	r0, r3
+ 718 0040 07F11007 		add	r7, r7, #16
+ 719 0044 BD46     		mov	sp, r7
+ 720 0046 80BD     		pop	{r7, pc}
+ 721              		.cfi_endproc
+ 722              	.LFE171:
+ 724              		.section	.text.USIC2_2_IRQHandler,"ax",%progbits
+ 725              		.align	2
+ 726              		.global	USIC2_2_IRQHandler
+ 727              		.thumb
+ 728              		.thumb_func
+ 730              	USIC2_2_IRQHandler:
+ 731              	.LFB172:
+ 134:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+ 135:../_Quadrocopter/HAL/I2C/I2Cdev.c **** void MPU9X50_I2C_FORMAT_ERROR_ISR(void)
+ 136:../_Quadrocopter/HAL/I2C/I2Cdev.c **** {
+ 732              		.loc 1 136 0
+ 733              		.cfi_startproc
+ 734              		@ args = 0, pretend = 0, frame = 0
+ 735              		@ frame_needed = 1, uses_anonymous_args = 0
+ 736              		@ link register save eliminated.
+ 737 0000 80B4     		push	{r7}
+ 738              	.LCFI12:
+ 739              		.cfi_def_cfa_offset 4
+ 740              		.cfi_offset 7, -4
+ 741 0002 00AF     		add	r7, sp, #0
+ 742              	.LCFI13:
+ 743              		.cfi_def_cfa_register 7
+ 137:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	// no acknowledge received --> error, turn on LED
+ 138:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	I2C001_Handle0.I2CRegs->FMR = 0x00000002U << USIC_CH_FMR_MTDV_Pos; // clear TDV and TE
+ 744              		.loc 1 138 0
+ 745 0004 40F20003 		movw	r3, #:lower16:I2C001_Handle0
+ 746 0008 C0F20003 		movt	r3, #:upper16:I2C001_Handle0
+ 747 000c 5B68     		ldr	r3, [r3, #4]
+ 748 000e 4FF00202 		mov	r2, #2
+ 749 0012 9A66     		str	r2, [r3, #104]
+ 139:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	I2C001_Handle0.I2CRegs->TRBSCR = USIC_CH_TRBSCR_FLUSHTB_Msk; // flush FIFO transmit buffer
+ 750              		.loc 1 139 0
+ 751 0014 40F20003 		movw	r3, #:lower16:I2C001_Handle0
+ 752 0018 C0F20003 		movt	r3, #:upper16:I2C001_Handle0
+ 753 001c 5B68     		ldr	r3, [r3, #4]
+ 754 001e 4FF40042 		mov	r2, #32768
+ 755 0022 C3F81821 		str	r2, [r3, #280]
+ 140:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	I2C001_Handle0.I2CRegs->PSCR |= USIC_CH_PSCR_CST5_Msk; // clear PSR.NACK flag
+ 756              		.loc 1 140 0
+ 757 0026 40F20003 		movw	r3, #:lower16:I2C001_Handle0
+ 758 002a C0F20003 		movt	r3, #:upper16:I2C001_Handle0
+ 759 002e 5A68     		ldr	r2, [r3, #4]
+ 760 0030 40F20003 		movw	r3, #:lower16:I2C001_Handle0
+ 761 0034 C0F20003 		movt	r3, #:upper16:I2C001_Handle0
+ 762 0038 5B68     		ldr	r3, [r3, #4]
+ 763 003a DB6C     		ldr	r3, [r3, #76]
+ 764 003c 43F02003 		orr	r3, r3, #32
+ 765 0040 D364     		str	r3, [r2, #76]
+ 141:../_Quadrocopter/HAL/I2C/I2Cdev.c **** }
+ 766              		.loc 1 141 0
+ 767 0042 BD46     		mov	sp, r7
+ 768 0044 80BC     		pop	{r7}
+ 769 0046 7047     		bx	lr
+ 770              		.cfi_endproc
+ 771              	.LFE172:
+ 773              		.section	.text.USIC0_3_IRQHandler,"ax",%progbits
+ 774              		.align	2
+ 775              		.global	USIC0_3_IRQHandler
+ 776              		.thumb
+ 777              		.thumb_func
+ 779              	USIC0_3_IRQHandler:
+ 780              	.LFB173:
+ 142:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 
+ 143:../_Quadrocopter/HAL/I2C/I2Cdev.c **** void DPS310_I2C_FORMAT_ERROR_ISR(void)
+ 144:../_Quadrocopter/HAL/I2C/I2Cdev.c **** {
+ 781              		.loc 1 144 0
+ 782              		.cfi_startproc
+ 783              		@ args = 0, pretend = 0, frame = 0
+ 784              		@ frame_needed = 1, uses_anonymous_args = 0
+ 785              		@ link register save eliminated.
+ 786 0000 80B4     		push	{r7}
+ 787              	.LCFI14:
+ 788              		.cfi_def_cfa_offset 4
+ 789              		.cfi_offset 7, -4
+ 790 0002 00AF     		add	r7, sp, #0
+ 791              	.LCFI15:
+ 792              		.cfi_def_cfa_register 7
+ 145:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	// no acknowledge received --> error, turn on LED
+ 146:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	I2C001_Handle1.I2CRegs->FMR = 0x00000002U << USIC_CH_FMR_MTDV_Pos; // clear TDV and TE
+ 793              		.loc 1 146 0
+ 794 0004 40F20003 		movw	r3, #:lower16:I2C001_Handle1
+ 795 0008 C0F20003 		movt	r3, #:upper16:I2C001_Handle1
+ 796 000c 5B68     		ldr	r3, [r3, #4]
+ 797 000e 4FF00202 		mov	r2, #2
+ 798 0012 9A66     		str	r2, [r3, #104]
+ 147:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	I2C001_Handle1.I2CRegs->TRBSCR = USIC_CH_TRBSCR_FLUSHTB_Msk; // flush FIFO transmit buffer
+ 799              		.loc 1 147 0
+ 800 0014 40F20003 		movw	r3, #:lower16:I2C001_Handle1
+ 801 0018 C0F20003 		movt	r3, #:upper16:I2C001_Handle1
+ 802 001c 5B68     		ldr	r3, [r3, #4]
+ 803 001e 4FF40042 		mov	r2, #32768
+ 804 0022 C3F81821 		str	r2, [r3, #280]
+ 148:../_Quadrocopter/HAL/I2C/I2Cdev.c **** 	I2C001_Handle1.I2CRegs->PSCR |= USIC_CH_PSCR_CST5_Msk; // clear PSR.NACK flag
+ 805              		.loc 1 148 0
+ 806 0026 40F20003 		movw	r3, #:lower16:I2C001_Handle1
+ 807 002a C0F20003 		movt	r3, #:upper16:I2C001_Handle1
+ 808 002e 5A68     		ldr	r2, [r3, #4]
+ 809 0030 40F20003 		movw	r3, #:lower16:I2C001_Handle1
+ 810 0034 C0F20003 		movt	r3, #:upper16:I2C001_Handle1
+ 811 0038 5B68     		ldr	r3, [r3, #4]
+ 812 003a DB6C     		ldr	r3, [r3, #76]
+ 813 003c 43F02003 		orr	r3, r3, #32
+ 814 0040 D364     		str	r3, [r2, #76]
+ 149:../_Quadrocopter/HAL/I2C/I2Cdev.c **** }
+ 815              		.loc 1 149 0
+ 816 0042 BD46     		mov	sp, r7
+ 817 0044 80BC     		pop	{r7}
+ 818 0046 7047     		bx	lr
+ 819              		.cfi_endproc
+ 820              	.LFE173:
+ 822              		.text
+ 823              	.Letext0:
+ 824              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 825              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 826              		.file 4 "C:\\DAVE3_workspace\\ws3.1.10\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/.
+ 827              		.file 5 "C:\\DAVE3_workspace\\ws3.1.10\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/.
+ 828              		.file 6 "C:\\DAVE3_workspace\\ws3.1.10\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/.
+ 829              		.file 7 "C:\\DAVE3_workspace\\ws3.1.10\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/.
+ 830              		.file 8 "C:\\DAVE3_workspace\\ws3.1.10\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/.
+ 831              		.file 9 "C:\\DAVE3_workspace\\ws3.1.10\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/.
+ 832              		.file 10 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 833              		.file 11 "C:\\DAVE3_workspace\\ws3.1.10\\LARIX_Software_150907\\Dave\\Generated\\inc\\DAVESupport/
+DEFINED SYMBOLS
+                            *ABS*:00000000 I2Cdev.c
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:20     .text.I2Cdev_writeBytes:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:25     .text.I2Cdev_writeBytes:00000000 I2Cdev_writeBytes
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:259    .text.I2Cdev_writeByte:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:264    .text.I2Cdev_writeByte:00000000 I2Cdev_writeByte
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:305    .text.I2Cdev_readBytes:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:310    .text.I2Cdev_readBytes:00000000 I2Cdev_readBytes
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:665    .text.I2Cdev_readByte:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:670    .text.I2Cdev_readByte:00000000 I2Cdev_readByte
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:725    .text.USIC2_2_IRQHandler:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:730    .text.USIC2_2_IRQHandler:00000000 USIC2_2_IRQHandler
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:774    .text.USIC0_3_IRQHandler:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoUZXFy.s:779    .text.USIC0_3_IRQHandler:00000000 USIC0_3_IRQHandler
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4.NVIC002_Conf.h.63.e0046f65d41519ed25458532a624f039
+                           .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415
+                           .group:00000000 wm4.ERU002_Conf.h.49.449ecc05b9e62e9b43f2dc6ead06a5ce
+                           .group:00000000 wm4.IO002_Conf.h.51.87e2c8c60b647393fe9ced2cae198f63
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.b11a40ec223e1dc7c2dcfbe90981605d
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.10a5fc586e1563647b9633c45b1b739e
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.usbd_config.h.64.bd01b2d6be88400f5b6095cc78dd2cee
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.stdbool.h.29.1c9ee6859ce8145f7838a4f2549ccec2
+                           .group:00000000 wm4.xmc4_usb.h.86.0df8e4bc81775a7befde6c395bcdee4c
+                           .group:00000000 wm4.dwc_otg_regs.h.96.602358b1a0ef2f2c6d02620a154f0cfc
+                           .group:00000000 wm4.xmc4_usb.h.97.59ae14584bb42292696e2197b500e282
+                           .group:00000000 wm4.CDCClass.h.89.7fca95873b1cbf8116f62fa27fd7c792
+                           .group:00000000 wm4.Common.h.87.ed9fec00c6f9ec3cf5c2ac4c6cfcb530
+                           .group:00000000 wm4.Attributes.h.96.1b4ef8adf80de3cb4f8c62843bfaf7bf
+                           .group:00000000 wm4.StdDescriptors.h.107.d2322ff0c138acada78976933b16bf7b
+                           .group:00000000 wm4.Endpoint.h.111.e7536b4385918c15b4c37aa69fbe94e3
+                           .group:00000000 wm4.USBController.h.105.7da122fb9e42a1d4ae2ea1662b47f042
+                           .group:00000000 wm4.StdRequestType.h.87.0e2654a6e33ff7aef3db3461e4efa272
+                           .group:00000000 wm4.CDCClassCommon.h.122.d15a1de5444b7c9e23eadf1dd367720e
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.Descriptors.h.92.e858ef8e2efa6b5ed9d1d80dd9b38006
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.2b816ac2c964c55a6c88f9c406d78c9f
+                           .group:00000000 wm4.arm_math.h.258.4f811f2034dd4ca295ea6f28c00c3d1e
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.290.40597f98fb862d9752cedcde2b37d26a
+
+UNDEFINED SYMBOLS
+I2C001_WriteData
+I2C001_ReadData
+I2C001_Handle0
+I2C001_Handle1

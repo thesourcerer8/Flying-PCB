@@ -1,0 +1,657 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"RESET001.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.RESET001_AssertReset,"ax",%progbits
+  20              		.align	2
+  21              		.global	RESET001_AssertReset
+  22              		.thumb
+  23              		.thumb_func
+  25              	RESET001_AssertReset:
+  26              	.LFB112:
+  27              		.file 1 "../Dave/Generated/src/RESET001/RESET001.c"
+   1:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
+   2:../Dave/Generated/src/RESET001/RESET001.c ****  Copyright (c) 2013, Infineon Technologies AG                                 **
+   3:../Dave/Generated/src/RESET001/RESET001.c ****  All rights reserved.                                                         **
+   4:../Dave/Generated/src/RESET001/RESET001.c ****                                                                               **
+   5:../Dave/Generated/src/RESET001/RESET001.c ****  Redistribution and use in source and binary forms, with or without           **
+   6:../Dave/Generated/src/RESET001/RESET001.c ****  modification,are permitted provided that the following conditions are met:   **
+   7:../Dave/Generated/src/RESET001/RESET001.c ****                                                                               **
+   8:../Dave/Generated/src/RESET001/RESET001.c ****  *Redistributions of source code must retain the above copyright notice,      **
+   9:../Dave/Generated/src/RESET001/RESET001.c ****  this list of conditions and the following disclaimer.                        **
+  10:../Dave/Generated/src/RESET001/RESET001.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  11:../Dave/Generated/src/RESET001/RESET001.c ****  this list of conditions and the following disclaimer in the documentation    **
+  12:../Dave/Generated/src/RESET001/RESET001.c ****  and/or other materials provided with the distribution.                       **
+  13:../Dave/Generated/src/RESET001/RESET001.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  14:../Dave/Generated/src/RESET001/RESET001.c ****  may be used to endorse or promote products derived from this software without** 
+  15:../Dave/Generated/src/RESET001/RESET001.c ****  specific prior written permission.                                           **
+  16:../Dave/Generated/src/RESET001/RESET001.c ****                                                                               **
+  17:../Dave/Generated/src/RESET001/RESET001.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  18:../Dave/Generated/src/RESET001/RESET001.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  19:../Dave/Generated/src/RESET001/RESET001.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  20:../Dave/Generated/src/RESET001/RESET001.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  21:../Dave/Generated/src/RESET001/RESET001.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  22:../Dave/Generated/src/RESET001/RESET001.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  23:../Dave/Generated/src/RESET001/RESET001.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  24:../Dave/Generated/src/RESET001/RESET001.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  25:../Dave/Generated/src/RESET001/RESET001.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  26:../Dave/Generated/src/RESET001/RESET001.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  27:../Dave/Generated/src/RESET001/RESET001.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  28:../Dave/Generated/src/RESET001/RESET001.c ****                                                                               **
+  29:../Dave/Generated/src/RESET001/RESET001.c ****  To improve the quality of the software, users are encouraged to share        **
+  30:../Dave/Generated/src/RESET001/RESET001.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  31:../Dave/Generated/src/RESET001/RESET001.c ****  dave@infineon.com).                                                          **
+  32:../Dave/Generated/src/RESET001/RESET001.c ****                                                                               **
+  33:../Dave/Generated/src/RESET001/RESET001.c **** ********************************************************************************
+  34:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+  35:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+  36:../Dave/Generated/src/RESET001/RESET001.c **** ** PLATFORM : Infineon XMC4000 Series   			                          **
+  37:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+  38:../Dave/Generated/src/RESET001/RESET001.c **** ** COMPILER : Compiler Independent                                            **
+  39:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+  40:../Dave/Generated/src/RESET001/RESET001.c **** ** AUTHOR   : App Developer                                                   **
+  41:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+  42:../Dave/Generated/src/RESET001/RESET001.c **** ** MAY BE CHANGED BY USER [yes/no]: No                                        **
+  43:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+  44:../Dave/Generated/src/RESET001/RESET001.c **** ** MODIFICATION DATE : Nov 18, 2013                                           **
+  45:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+  46:../Dave/Generated/src/RESET001/RESET001.c **** *******************************************************************************/
+  47:../Dave/Generated/src/RESET001/RESET001.c **** 
+  48:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
+  49:../Dave/Generated/src/RESET001/RESET001.c **** **                       Author(s) Identity                                   **
+  50:../Dave/Generated/src/RESET001/RESET001.c **** ********************************************************************************
+  51:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+  52:../Dave/Generated/src/RESET001/RESET001.c **** ** Version   Name    Comments                                                 **
+  53:../Dave/Generated/src/RESET001/RESET001.c **** ** ---------------------------------------------------------------------------**
+  54:../Dave/Generated/src/RESET001/RESET001.c **** ** V0.0.1    JBT     Initial Version Updated                                  **
+  55:../Dave/Generated/src/RESET001/RESET001.c **** ** V0.0.2    JBT     Updated for template changes from .jet to hdt and fixed  **
+  56:../Dave/Generated/src/RESET001/RESET001.c **** **                   driver functionality and updates as per Coding Guidelines** 
+  57:../Dave/Generated/src/RESET001/RESET001.c **** ** V1.0.0    JBT     Updated after review completion (ID - REV_004865)        **
+  58:../Dave/Generated/src/RESET001/RESET001.c **** **                   Additional API added, RESET001_ClearResetInfo()          **                   
+  59:../Dave/Generated/src/RESET001/RESET001.c **** *******************************************************************************/
+  60:../Dave/Generated/src/RESET001/RESET001.c **** /**
+  61:../Dave/Generated/src/RESET001/RESET001.c ****  * @file RESET001.c
+  62:../Dave/Generated/src/RESET001/RESET001.c ****  *
+  63:../Dave/Generated/src/RESET001/RESET001.c ****  * @brief  Reset App implementation Source File.
+  64:../Dave/Generated/src/RESET001/RESET001.c ****  *
+  65:../Dave/Generated/src/RESET001/RESET001.c ****  */
+  66:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
+  67:../Dave/Generated/src/RESET001/RESET001.c ****  ** INCLUDE FILES                                                             **
+  68:../Dave/Generated/src/RESET001/RESET001.c ****  ******************************************************************************/
+  69:../Dave/Generated/src/RESET001/RESET001.c **** 
+  70:../Dave/Generated/src/RESET001/RESET001.c **** 
+  71:../Dave/Generated/src/RESET001/RESET001.c **** /** Inclusion of header file */
+  72:../Dave/Generated/src/RESET001/RESET001.c **** #include "../../inc/RESET001/RESET001.h"
+  73:../Dave/Generated/src/RESET001/RESET001.c **** 
+  74:../Dave/Generated/src/RESET001/RESET001.c **** 
+  75:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
+  76:../Dave/Generated/src/RESET001/RESET001.c **** **                      Private Macro Definitions                             **
+  77:../Dave/Generated/src/RESET001/RESET001.c **** *******************************************************************************/
+  78:../Dave/Generated/src/RESET001/RESET001.c **** /* Invalid Input */
+  79:../Dave/Generated/src/RESET001/RESET001.c **** #define RESET001_RCU_INVALID_INPUT      0x0000000FU
+  80:../Dave/Generated/src/RESET001/RESET001.c **** /** To check bit value is 1 */ 
+  81:../Dave/Generated/src/RESET001/RESET001.c **** #define RESET001_RCU_SET                1U
+  82:../Dave/Generated/src/RESET001/RESET001.c **** /** To check bit value is 0 */
+  83:../Dave/Generated/src/RESET001/RESET001.c **** #define RESET001_RCU_RESET              0U
+  84:../Dave/Generated/src/RESET001/RESET001.c **** /** Clear BitMask  */
+  85:../Dave/Generated/src/RESET001/RESET001.c **** #define RESET001_CLEAR_BITMASK	        0xF0000000U
+  86:../Dave/Generated/src/RESET001/RESET001.c **** /** Reset BitMask */
+  87:../Dave/Generated/src/RESET001/RESET001.c **** #define RESET001_BITMASK                0x0FFFFFFFU
+  88:../Dave/Generated/src/RESET001/RESET001.c **** /** Shift Right Mask for moving MSB position Nibble to LSB */
+  89:../Dave/Generated/src/RESET001/RESET001.c **** #define RESET001_SHIFT_RIGHT_MASK       28U
+  90:../Dave/Generated/src/RESET001/RESET001.c **** /* Linear Address shift offset from one peripheral to other*/
+  91:../Dave/Generated/src/RESET001/RESET001.c **** #define RESET001_PERIPHERAL_ADDR_SHIFT  0x0000000CU
+  92:../Dave/Generated/src/RESET001/RESET001.c **** 
+  93:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
+  94:../Dave/Generated/src/RESET001/RESET001.c **** **                      Public Function Definitions                           **
+  95:../Dave/Generated/src/RESET001/RESET001.c **** *******************************************************************************/
+  96:../Dave/Generated/src/RESET001/RESET001.c **** void RESET001_AssertReset(RESET001_ResetnType Resetn);
+  97:../Dave/Generated/src/RESET001/RESET001.c **** void RESET001_DeassertReset(RESET001_ResetnType Resetn);
+  98:../Dave/Generated/src/RESET001/RESET001.c **** RESET001_InfoType RESET001_GetResetInfo(void);
+  99:../Dave/Generated/src/RESET001/RESET001.c **** status_t RESET001_GetStatus(RESET001_ResetnType Resetn);
+ 100:../Dave/Generated/src/RESET001/RESET001.c **** void RESET001_ClearResetInfo(void);
+ 101:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
+ 102:../Dave/Generated/src/RESET001/RESET001.c **** ** Syntax          : void RESET001_AssertReset(RESET001_ResetnType Resetn)    **
+ 103:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 104:../Dave/Generated/src/RESET001/RESET001.c **** ** Sync /Async     : Synchronous                                              **
+ 105:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 106:../Dave/Generated/src/RESET001/RESET001.c **** ** Reentrant       : Non reentrant                                            **
+ 107:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 108:../Dave/Generated/src/RESET001/RESET001.c **** ** Parameters(IN)  : Resetn  : Reset Number                                   **
+ 109:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 110:../Dave/Generated/src/RESET001/RESET001.c **** ** Parameters(OUT) : None                                                     **
+ 111:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 112:../Dave/Generated/src/RESET001/RESET001.c **** ** Return value    : None                                                     **
+ 113:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 114:../Dave/Generated/src/RESET001/RESET001.c **** ** Description     : This function is to enable reset of peripheral by        **
+ 115:../Dave/Generated/src/RESET001/RESET001.c **** **                   software                                                 **
+ 116:../Dave/Generated/src/RESET001/RESET001.c **** *******************************************************************************/
+ 117:../Dave/Generated/src/RESET001/RESET001.c ****  void RESET001_AssertReset(RESET001_ResetnType Resetn)
+ 118:../Dave/Generated/src/RESET001/RESET001.c ****  {
+  28              		.loc 1 118 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 87B0     		sub	sp, sp, #28
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+ 119:../Dave/Generated/src/RESET001/RESET001.c ****   uint32_t* RCUControlReg;
+ 120:../Dave/Generated/src/RESET001/RESET001.c ****   uint32_t  PeripheralInfo;
+ 121:../Dave/Generated/src/RESET001/RESET001.c ****   PeripheralInfo = 0U;
+  44              		.loc 1 121 0
+  45 0008 4FF00003 		mov	r3, #0
+  46 000c 7B61     		str	r3, [r7, #20]
+ 122:../Dave/Generated/src/RESET001/RESET001.c ****   RCUControlReg = 0U;
+  47              		.loc 1 122 0
+  48 000e 4FF00003 		mov	r3, #0
+  49 0012 3B61     		str	r3, [r7, #16]
+ 123:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 124:../Dave/Generated/src/RESET001/RESET001.c ****   /* <<<DD_RESET001_API_1>>> */
+ 125:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 126:../Dave/Generated/src/RESET001/RESET001.c ****   SCU_RESET_TypeDef* RCUCtrlReg = SCU_RESET;
+  50              		.loc 1 126 0
+  51 0014 4FF48843 		mov	r3, #17408
+  52 0018 C5F20003 		movt	r3, 20480
+  53 001c FB60     		str	r3, [r7, #12]
+ 127:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 128:../Dave/Generated/src/RESET001/RESET001.c ****   /* Extract the MSB to identify the peripheral in which the module is residing.
+ 129:../Dave/Generated/src/RESET001/RESET001.c ****   * Shift the MSB to LSB position and store it in a local variable Temp  */  
+ 130:../Dave/Generated/src/RESET001/RESET001.c ****   PeripheralInfo = (((uint32_t)Resetn & RESET001_CLEAR_BITMASK ) >> 
+  54              		.loc 1 130 0
+  55 001e 7B68     		ldr	r3, [r7, #4]
+  56 0020 4FEA1373 		lsr	r3, r3, #28
+  57 0024 7B61     		str	r3, [r7, #20]
+ 131:../Dave/Generated/src/RESET001/RESET001.c **** 		                                          RESET001_SHIFT_RIGHT_MASK);
+ 132:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 133:../Dave/Generated/src/RESET001/RESET001.c ****   /* Multiply the peripheral info stored in Temp variable with the corresponding
+ 134:../Dave/Generated/src/RESET001/RESET001.c ****   *  address shift value to get the offset address of RCU register.
+ 135:../Dave/Generated/src/RESET001/RESET001.c ****   *  Add the offset address with base PRSET peripheral address to get the actual 
+ 136:../Dave/Generated/src/RESET001/RESET001.c ****   *  RCU PRSET register address  */  
+ 137:../Dave/Generated/src/RESET001/RESET001.c ****   RCUControlReg = (uint32_t*)((uint32_t)(&RCUCtrlReg->PRSET0) + 
+  58              		.loc 1 137 0
+  59 0026 FB68     		ldr	r3, [r7, #12]
+  60 0028 03F11003 		add	r3, r3, #16
+  61 002c 1946     		mov	r1, r3
+ 138:../Dave/Generated/src/RESET001/RESET001.c **** 		                   ( RESET001_PERIPHERAL_ADDR_SHIFT * PeripheralInfo));
+  62              		.loc 1 138 0
+  63 002e 7A69     		ldr	r2, [r7, #20]
+  64 0030 1346     		mov	r3, r2
+  65 0032 4FEA4303 		lsl	r3, r3, #1
+  66 0036 9B18     		adds	r3, r3, r2
+  67 0038 4FEA8303 		lsl	r3, r3, #2
+ 137:../Dave/Generated/src/RESET001/RESET001.c ****   RCUControlReg = (uint32_t*)((uint32_t)(&RCUCtrlReg->PRSET0) + 
+  68              		.loc 1 137 0
+  69 003c CB18     		adds	r3, r1, r3
+  70 003e 3B61     		str	r3, [r7, #16]
+ 139:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 140:../Dave/Generated/src/RESET001/RESET001.c ****   /* Load the PRSET register with the reset value after ignoring the Most 
+ 141:../Dave/Generated/src/RESET001/RESET001.c ****    * Significant Nibble.    */  
+ 142:../Dave/Generated/src/RESET001/RESET001.c ****   *RCUControlReg = ((uint32_t)Resetn & RESET001_BITMASK );
+  71              		.loc 1 142 0
+  72 0040 7B68     		ldr	r3, [r7, #4]
+  73 0042 23F07042 		bic	r2, r3, #-268435456
+  74 0046 3B69     		ldr	r3, [r7, #16]
+  75 0048 1A60     		str	r2, [r3, #0]
+ 143:../Dave/Generated/src/RESET001/RESET001.c **** }
+  76              		.loc 1 143 0
+  77 004a 07F11C07 		add	r7, r7, #28
+  78 004e BD46     		mov	sp, r7
+  79 0050 80BC     		pop	{r7}
+  80 0052 7047     		bx	lr
+  81              		.cfi_endproc
+  82              	.LFE112:
+  84              		.section	.text.RESET001_DeassertReset,"ax",%progbits
+  85              		.align	2
+  86              		.global	RESET001_DeassertReset
+  87              		.thumb
+  88              		.thumb_func
+  90              	RESET001_DeassertReset:
+  91              	.LFB113:
+ 144:../Dave/Generated/src/RESET001/RESET001.c **** 
+ 145:../Dave/Generated/src/RESET001/RESET001.c ****  
+ 146:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
+ 147:../Dave/Generated/src/RESET001/RESET001.c **** ** Syntax          : void RESET001_DeassertReset(RESET001_ResetnType Resetn)  **
+ 148:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 149:../Dave/Generated/src/RESET001/RESET001.c **** ** Sync /Async     : Synchronous                                              **
+ 150:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 151:../Dave/Generated/src/RESET001/RESET001.c **** ** Reentrant       : Non reentrant                                            **
+ 152:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 153:../Dave/Generated/src/RESET001/RESET001.c **** ** Parameters(IN)  : Resetn  : Reset Number                                   **
+ 154:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 155:../Dave/Generated/src/RESET001/RESET001.c **** ** Parameters(OUT) : None                                                     **
+ 156:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 157:../Dave/Generated/src/RESET001/RESET001.c **** ** Return value    : None                                                     **
+ 158:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 159:../Dave/Generated/src/RESET001/RESET001.c **** ** Description     : This function is to Deassert the reset of peripheral     **
+ 160:../Dave/Generated/src/RESET001/RESET001.c **** **                    by software                                             **
+ 161:../Dave/Generated/src/RESET001/RESET001.c **** *******************************************************************************/
+ 162:../Dave/Generated/src/RESET001/RESET001.c **** void RESET001_DeassertReset(RESET001_ResetnType Resetn)
+ 163:../Dave/Generated/src/RESET001/RESET001.c **** {
+  92              		.loc 1 163 0
+  93              		.cfi_startproc
+  94              		@ args = 0, pretend = 0, frame = 24
+  95              		@ frame_needed = 1, uses_anonymous_args = 0
+  96              		@ link register save eliminated.
+  97 0000 80B4     		push	{r7}
+  98              	.LCFI3:
+  99              		.cfi_def_cfa_offset 4
+ 100              		.cfi_offset 7, -4
+ 101 0002 87B0     		sub	sp, sp, #28
+ 102              	.LCFI4:
+ 103              		.cfi_def_cfa_offset 32
+ 104 0004 00AF     		add	r7, sp, #0
+ 105              	.LCFI5:
+ 106              		.cfi_def_cfa_register 7
+ 107 0006 7860     		str	r0, [r7, #4]
+ 164:../Dave/Generated/src/RESET001/RESET001.c ****   uint32_t* RCUControlReg;
+ 165:../Dave/Generated/src/RESET001/RESET001.c ****   uint32_t  PeripheralInfo;
+ 166:../Dave/Generated/src/RESET001/RESET001.c ****   PeripheralInfo   = 0U;
+ 108              		.loc 1 166 0
+ 109 0008 4FF00003 		mov	r3, #0
+ 110 000c 7B61     		str	r3, [r7, #20]
+ 167:../Dave/Generated/src/RESET001/RESET001.c ****   RCUControlReg    = 0U;
+ 111              		.loc 1 167 0
+ 112 000e 4FF00003 		mov	r3, #0
+ 113 0012 3B61     		str	r3, [r7, #16]
+ 168:../Dave/Generated/src/RESET001/RESET001.c **** 
+ 169:../Dave/Generated/src/RESET001/RESET001.c ****   /* <<<DD_RESET001_API_2>>> */
+ 170:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 171:../Dave/Generated/src/RESET001/RESET001.c ****   SCU_RESET_TypeDef* RCUCtrlReg = SCU_RESET;  
+ 114              		.loc 1 171 0
+ 115 0014 4FF48843 		mov	r3, #17408
+ 116 0018 C5F20003 		movt	r3, 20480
+ 117 001c FB60     		str	r3, [r7, #12]
+ 172:../Dave/Generated/src/RESET001/RESET001.c ****   /* Extract the MSB to identify the peripheral in which the module is residing.
+ 173:../Dave/Generated/src/RESET001/RESET001.c ****    * Shift the MSB to LSB position and store it in a local variable Temp   */    
+ 174:../Dave/Generated/src/RESET001/RESET001.c ****   PeripheralInfo = (((uint32_t)Resetn & RESET001_CLEAR_BITMASK) >> 
+ 118              		.loc 1 174 0
+ 119 001e 7B68     		ldr	r3, [r7, #4]
+ 120 0020 4FEA1373 		lsr	r3, r3, #28
+ 121 0024 7B61     		str	r3, [r7, #20]
+ 175:../Dave/Generated/src/RESET001/RESET001.c ****                                                    RESET001_SHIFT_RIGHT_MASK);
+ 176:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 177:../Dave/Generated/src/RESET001/RESET001.c ****   /* Multiply the peripheral info stored in Temp variable with the corresponding
+ 178:../Dave/Generated/src/RESET001/RESET001.c ****   * address shift value to get the offset address of RCU register.
+ 179:../Dave/Generated/src/RESET001/RESET001.c ****   *  Add the offset address with base PRCLR peripheral address to get the actual 
+ 180:../Dave/Generated/src/RESET001/RESET001.c ****   *  RCU PRCLR register address  */  
+ 181:../Dave/Generated/src/RESET001/RESET001.c ****   RCUControlReg = (uint32_t*)((uint32_t)(&RCUCtrlReg->PRCLR0) + 
+ 122              		.loc 1 181 0
+ 123 0026 FB68     		ldr	r3, [r7, #12]
+ 124 0028 03F11403 		add	r3, r3, #20
+ 125 002c 1946     		mov	r1, r3
+ 182:../Dave/Generated/src/RESET001/RESET001.c **** 		                    ( RESET001_PERIPHERAL_ADDR_SHIFT * PeripheralInfo));
+ 126              		.loc 1 182 0
+ 127 002e 7A69     		ldr	r2, [r7, #20]
+ 128 0030 1346     		mov	r3, r2
+ 129 0032 4FEA4303 		lsl	r3, r3, #1
+ 130 0036 9B18     		adds	r3, r3, r2
+ 131 0038 4FEA8303 		lsl	r3, r3, #2
+ 181:../Dave/Generated/src/RESET001/RESET001.c ****   RCUControlReg = (uint32_t*)((uint32_t)(&RCUCtrlReg->PRCLR0) + 
+ 132              		.loc 1 181 0
+ 133 003c CB18     		adds	r3, r1, r3
+ 134 003e 3B61     		str	r3, [r7, #16]
+ 183:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 184:../Dave/Generated/src/RESET001/RESET001.c ****   /* Load the PRCLR register with the reset value after ignoring the Most 
+ 185:../Dave/Generated/src/RESET001/RESET001.c ****    * Significant Nibble.    */   
+ 186:../Dave/Generated/src/RESET001/RESET001.c ****   *RCUControlReg = ((uint32_t)Resetn & RESET001_BITMASK) ;
+ 135              		.loc 1 186 0
+ 136 0040 7B68     		ldr	r3, [r7, #4]
+ 137 0042 23F07042 		bic	r2, r3, #-268435456
+ 138 0046 3B69     		ldr	r3, [r7, #16]
+ 139 0048 1A60     		str	r2, [r3, #0]
+ 187:../Dave/Generated/src/RESET001/RESET001.c **** }
+ 140              		.loc 1 187 0
+ 141 004a 07F11C07 		add	r7, r7, #28
+ 142 004e BD46     		mov	sp, r7
+ 143 0050 80BC     		pop	{r7}
+ 144 0052 7047     		bx	lr
+ 145              		.cfi_endproc
+ 146              	.LFE113:
+ 148              		.section	.text.RESET001_GetResetInfo,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	RESET001_GetResetInfo
+ 151              		.thumb
+ 152              		.thumb_func
+ 154              	RESET001_GetResetInfo:
+ 155              	.LFB114:
+ 188:../Dave/Generated/src/RESET001/RESET001.c **** 
+ 189:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
+ 190:../Dave/Generated/src/RESET001/RESET001.c **** ** Syntax          : RESET001_InfoType RESET001_GetResetInfo(void)            **
+ 191:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 192:../Dave/Generated/src/RESET001/RESET001.c **** ** Sync /Async     : Synchronous                                              **
+ 193:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 194:../Dave/Generated/src/RESET001/RESET001.c **** ** Reentrant       : Non reentrant                                            **
+ 195:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 196:../Dave/Generated/src/RESET001/RESET001.c **** ** Parameters(IN)  : None                                                     **
+ 197:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 198:../Dave/Generated/src/RESET001/RESET001.c **** ** Parameters(OUT) : Reset Info Status                                        **
+ 199:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 200:../Dave/Generated/src/RESET001/RESET001.c **** ** Return value    : None                                                     **
+ 201:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 202:../Dave/Generated/src/RESET001/RESET001.c **** ** Description     : This API is to get the  reason of last reset             **
+ 203:../Dave/Generated/src/RESET001/RESET001.c **** *******************************************************************************/	
+ 204:../Dave/Generated/src/RESET001/RESET001.c **** RESET001_InfoType RESET001_GetResetInfo(void)
+ 205:../Dave/Generated/src/RESET001/RESET001.c **** {
+ 156              		.loc 1 205 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 8
+ 159              		@ frame_needed = 1, uses_anonymous_args = 0
+ 160              		@ link register save eliminated.
+ 161 0000 80B4     		push	{r7}
+ 162              	.LCFI6:
+ 163              		.cfi_def_cfa_offset 4
+ 164              		.cfi_offset 7, -4
+ 165 0002 83B0     		sub	sp, sp, #12
+ 166              	.LCFI7:
+ 167              		.cfi_def_cfa_offset 16
+ 168 0004 00AF     		add	r7, sp, #0
+ 169              	.LCFI8:
+ 170              		.cfi_def_cfa_register 7
+ 206:../Dave/Generated/src/RESET001/RESET001.c ****   SCU_RESET_TypeDef* RCUCtrlReg;  
+ 207:../Dave/Generated/src/RESET001/RESET001.c ****   RESET001_InfoType ResetInfo;
+ 208:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 209:../Dave/Generated/src/RESET001/RESET001.c ****   RCUCtrlReg = SCU_RESET;
+ 171              		.loc 1 209 0
+ 172 0006 4FF48843 		mov	r3, #17408
+ 173 000a C5F20003 		movt	r3, 20480
+ 174 000e 7B60     		str	r3, [r7, #4]
+ 210:../Dave/Generated/src/RESET001/RESET001.c ****   ResetInfo  = (RESET001_InfoType)0x00000000;
+ 175              		.loc 1 210 0
+ 176 0010 4FF00003 		mov	r3, #0
+ 177 0014 FB70     		strb	r3, [r7, #3]
+ 211:../Dave/Generated/src/RESET001/RESET001.c ****   /* <<<DD_RESET001_API_4>>> */
+ 212:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 213:../Dave/Generated/src/RESET001/RESET001.c ****   /* Read the Last reset status info from RSTSTAT register*/  
+ 214:../Dave/Generated/src/RESET001/RESET001.c ****   ResetInfo = (RESET001_InfoType)(RCUCtrlReg->RSTSTAT & 
+ 178              		.loc 1 214 0
+ 179 0016 7B68     		ldr	r3, [r7, #4]
+ 180 0018 1B68     		ldr	r3, [r3, #0]
+ 181 001a FB70     		strb	r3, [r7, #3]
+ 215:../Dave/Generated/src/RESET001/RESET001.c **** 		                                      SCU_RESET_RSTSTAT_RSTSTAT_Msk);
+ 216:../Dave/Generated/src/RESET001/RESET001.c ****           
+ 217:../Dave/Generated/src/RESET001/RESET001.c ****   return ResetInfo;
+ 182              		.loc 1 217 0
+ 183 001c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 218:../Dave/Generated/src/RESET001/RESET001.c **** }
+ 184              		.loc 1 218 0
+ 185 001e 1846     		mov	r0, r3
+ 186 0020 07F10C07 		add	r7, r7, #12
+ 187 0024 BD46     		mov	sp, r7
+ 188 0026 80BC     		pop	{r7}
+ 189 0028 7047     		bx	lr
+ 190              		.cfi_endproc
+ 191              	.LFE114:
+ 193 002a 00BF     		.section	.text.RESET001_GetStatus,"ax",%progbits
+ 194              		.align	2
+ 195              		.global	RESET001_GetStatus
+ 196              		.thumb
+ 197              		.thumb_func
+ 199              	RESET001_GetStatus:
+ 200              	.LFB115:
+ 219:../Dave/Generated/src/RESET001/RESET001.c **** 
+ 220:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
+ 221:../Dave/Generated/src/RESET001/RESET001.c **** ** Syntax          : status_t RESET001_GetStatus(RESET001_ResetnType Resetn)  **
+ 222:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 223:../Dave/Generated/src/RESET001/RESET001.c **** ** Sync /Async     : Synchronous                                              **
+ 224:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 225:../Dave/Generated/src/RESET001/RESET001.c **** ** Reentrant       : Non reentrant                                            **
+ 226:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 227:../Dave/Generated/src/RESET001/RESET001.c **** ** Parameters(IN)  : Resetn  : Reset Number                                   **
+ 228:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 229:../Dave/Generated/src/RESET001/RESET001.c **** ** Parameters(OUT) : None                                                     **
+ 230:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 231:../Dave/Generated/src/RESET001/RESET001.c **** ** Return value    : status_t                                                 **
+ 232:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 233:../Dave/Generated/src/RESET001/RESET001.c **** ** Description     : This API is to get the reset status of the peripheral    **
+ 234:../Dave/Generated/src/RESET001/RESET001.c **** *******************************************************************************/		
+ 235:../Dave/Generated/src/RESET001/RESET001.c **** 	
+ 236:../Dave/Generated/src/RESET001/RESET001.c **** status_t RESET001_GetStatus(RESET001_ResetnType Resetn)
+ 237:../Dave/Generated/src/RESET001/RESET001.c **** {
+ 201              		.loc 1 237 0
+ 202              		.cfi_startproc
+ 203              		@ args = 0, pretend = 0, frame = 32
+ 204              		@ frame_needed = 1, uses_anonymous_args = 0
+ 205              		@ link register save eliminated.
+ 206 0000 80B4     		push	{r7}
+ 207              	.LCFI9:
+ 208              		.cfi_def_cfa_offset 4
+ 209              		.cfi_offset 7, -4
+ 210 0002 89B0     		sub	sp, sp, #36
+ 211              	.LCFI10:
+ 212              		.cfi_def_cfa_offset 40
+ 213 0004 00AF     		add	r7, sp, #0
+ 214              	.LCFI11:
+ 215              		.cfi_def_cfa_register 7
+ 216 0006 7860     		str	r0, [r7, #4]
+ 238:../Dave/Generated/src/RESET001/RESET001.c ****   uint32_t  status ;
+ 239:../Dave/Generated/src/RESET001/RESET001.c ****   uint32_t* RCUControlReg;
+ 240:../Dave/Generated/src/RESET001/RESET001.c ****   uint32_t  PeripheralInfo;
+ 241:../Dave/Generated/src/RESET001/RESET001.c ****   uint32_t  Getstatus;
+ 242:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 243:../Dave/Generated/src/RESET001/RESET001.c ****   status        = RESET001_RCU_INVALID_INPUT;
+ 217              		.loc 1 243 0
+ 218 0008 4FF00F03 		mov	r3, #15
+ 219 000c FB61     		str	r3, [r7, #28]
+ 244:../Dave/Generated/src/RESET001/RESET001.c ****   PeripheralInfo= 0U;
+ 220              		.loc 1 244 0
+ 221 000e 4FF00003 		mov	r3, #0
+ 222 0012 BB61     		str	r3, [r7, #24]
+ 245:../Dave/Generated/src/RESET001/RESET001.c ****   RCUControlReg = 0U;  
+ 223              		.loc 1 245 0
+ 224 0014 4FF00003 		mov	r3, #0
+ 225 0018 7B61     		str	r3, [r7, #20]
+ 246:../Dave/Generated/src/RESET001/RESET001.c ****   Getstatus     = 0U;
+ 226              		.loc 1 246 0
+ 227 001a 4FF00003 		mov	r3, #0
+ 228 001e 3B61     		str	r3, [r7, #16]
+ 247:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 248:../Dave/Generated/src/RESET001/RESET001.c ****   /* <<<DD_RESET001_API_3>>> */
+ 249:../Dave/Generated/src/RESET001/RESET001.c ****   SCU_RESET_TypeDef* RCUCtrlReg = SCU_RESET;
+ 229              		.loc 1 249 0
+ 230 0020 4FF48843 		mov	r3, #17408
+ 231 0024 C5F20003 		movt	r3, 20480
+ 232 0028 FB60     		str	r3, [r7, #12]
+ 250:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 251:../Dave/Generated/src/RESET001/RESET001.c ****   /* Extract the MSB to identify the peripheral in which the module is residing.
+ 252:../Dave/Generated/src/RESET001/RESET001.c ****    * Shift the MSB to LSB position and store it in a local variable Temp */     
+ 253:../Dave/Generated/src/RESET001/RESET001.c ****   PeripheralInfo = (((uint32_t)Resetn & RESET001_CLEAR_BITMASK) >> 
+ 233              		.loc 1 253 0
+ 234 002a 7B68     		ldr	r3, [r7, #4]
+ 235 002c 4FEA1373 		lsr	r3, r3, #28
+ 236 0030 BB61     		str	r3, [r7, #24]
+ 254:../Dave/Generated/src/RESET001/RESET001.c **** 		                                          RESET001_SHIFT_RIGHT_MASK);
+ 255:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 256:../Dave/Generated/src/RESET001/RESET001.c ****   /* Multiply the peripheral info stored in Temp variable with the corresponding
+ 257:../Dave/Generated/src/RESET001/RESET001.c ****   * address shift value to get the offset address of RCU register.
+ 258:../Dave/Generated/src/RESET001/RESET001.c ****   *  Add the offset address with base PRSTAT peripheral address to get actual 
+ 259:../Dave/Generated/src/RESET001/RESET001.c ****   *  RCU PRSTAT register address  */   
+ 260:../Dave/Generated/src/RESET001/RESET001.c ****   RCUControlReg = (uint32_t*)((uint32_t)(&RCUCtrlReg->PRSTAT0) + 
+ 237              		.loc 1 260 0
+ 238 0032 FB68     		ldr	r3, [r7, #12]
+ 239 0034 03F10C03 		add	r3, r3, #12
+ 240 0038 1946     		mov	r1, r3
+ 261:../Dave/Generated/src/RESET001/RESET001.c **** 		                  ( RESET001_PERIPHERAL_ADDR_SHIFT * PeripheralInfo));
+ 241              		.loc 1 261 0
+ 242 003a BA69     		ldr	r2, [r7, #24]
+ 243 003c 1346     		mov	r3, r2
+ 244 003e 4FEA4303 		lsl	r3, r3, #1
+ 245 0042 9B18     		adds	r3, r3, r2
+ 246 0044 4FEA8303 		lsl	r3, r3, #2
+ 260:../Dave/Generated/src/RESET001/RESET001.c ****   RCUControlReg = (uint32_t*)((uint32_t)(&RCUCtrlReg->PRSTAT0) + 
+ 247              		.loc 1 260 0
+ 248 0048 CB18     		adds	r3, r1, r3
+ 249 004a 7B61     		str	r3, [r7, #20]
+ 262:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 263:../Dave/Generated/src/RESET001/RESET001.c ****   /* Read the PRCLR register with the masked reset value after ignoring the Most 
+ 264:../Dave/Generated/src/RESET001/RESET001.c ****    * Significant Nibble.    */   
+ 265:../Dave/Generated/src/RESET001/RESET001.c ****   Getstatus	 = (uint32_t)((*RCUControlReg) & 
+ 250              		.loc 1 265 0
+ 251 004c 7B69     		ldr	r3, [r7, #20]
+ 252 004e 1A68     		ldr	r2, [r3, #0]
+ 253 0050 7B68     		ldr	r3, [r7, #4]
+ 254 0052 1340     		ands	r3, r3, r2
+ 255 0054 23F07043 		bic	r3, r3, #-268435456
+ 256 0058 3B61     		str	r3, [r7, #16]
+ 266:../Dave/Generated/src/RESET001/RESET001.c **** 		                               (uint32_t)Resetn & RESET001_BITMASK);
+ 267:../Dave/Generated/src/RESET001/RESET001.c ****   
+ 268:../Dave/Generated/src/RESET001/RESET001.c ****   /* If the register return value is set then return SET else return RESET 
+ 269:../Dave/Generated/src/RESET001/RESET001.c ****    * status   */   
+ 270:../Dave/Generated/src/RESET001/RESET001.c ****   if(0U != Getstatus)
+ 257              		.loc 1 270 0
+ 258 005a 3B69     		ldr	r3, [r7, #16]
+ 259 005c 002B     		cmp	r3, #0
+ 260 005e 03D0     		beq	.L6
+ 271:../Dave/Generated/src/RESET001/RESET001.c ****   {
+ 272:../Dave/Generated/src/RESET001/RESET001.c **** 	  status = RESET001_RCU_SET;
+ 261              		.loc 1 272 0
+ 262 0060 4FF00103 		mov	r3, #1
+ 263 0064 FB61     		str	r3, [r7, #28]
+ 264 0066 02E0     		b	.L7
+ 265              	.L6:
+ 273:../Dave/Generated/src/RESET001/RESET001.c ****   }
+ 274:../Dave/Generated/src/RESET001/RESET001.c ****   else
+ 275:../Dave/Generated/src/RESET001/RESET001.c ****   {
+ 276:../Dave/Generated/src/RESET001/RESET001.c **** 	  status = RESET001_RCU_RESET;
+ 266              		.loc 1 276 0
+ 267 0068 4FF00003 		mov	r3, #0
+ 268 006c FB61     		str	r3, [r7, #28]
+ 269              	.L7:
+ 277:../Dave/Generated/src/RESET001/RESET001.c ****   }
+ 278:../Dave/Generated/src/RESET001/RESET001.c ****   return status;
+ 270              		.loc 1 278 0
+ 271 006e FB69     		ldr	r3, [r7, #28]
+ 279:../Dave/Generated/src/RESET001/RESET001.c **** }
+ 272              		.loc 1 279 0
+ 273 0070 1846     		mov	r0, r3
+ 274 0072 07F12407 		add	r7, r7, #36
+ 275 0076 BD46     		mov	sp, r7
+ 276 0078 80BC     		pop	{r7}
+ 277 007a 7047     		bx	lr
+ 278              		.cfi_endproc
+ 279              	.LFE115:
+ 281              		.section	.text.RESET001_ClearResetInfo,"ax",%progbits
+ 282              		.align	2
+ 283              		.global	RESET001_ClearResetInfo
+ 284              		.thumb
+ 285              		.thumb_func
+ 287              	RESET001_ClearResetInfo:
+ 288              	.LFB116:
+ 280:../Dave/Generated/src/RESET001/RESET001.c **** 
+ 281:../Dave/Generated/src/RESET001/RESET001.c **** /*******************************************************************************
+ 282:../Dave/Generated/src/RESET001/RESET001.c **** ** Syntax          : void RESET001_ClearResetInfo(void)                       **
+ 283:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 284:../Dave/Generated/src/RESET001/RESET001.c **** ** Sync /Async     : Synchronous                                              **
+ 285:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 286:../Dave/Generated/src/RESET001/RESET001.c **** ** Reentrant       : Non reentrant                                            **
+ 287:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 288:../Dave/Generated/src/RESET001/RESET001.c **** ** Parameters(IN)  : None                                                     **
+ 289:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 290:../Dave/Generated/src/RESET001/RESET001.c **** ** Parameters(OUT) : None                                                     **
+ 291:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 292:../Dave/Generated/src/RESET001/RESET001.c **** ** Return value    : None                                                     **
+ 293:../Dave/Generated/src/RESET001/RESET001.c **** **                                                                            **
+ 294:../Dave/Generated/src/RESET001/RESET001.c **** ** Description     : This API is to clear the  reset info status              **
+ 295:../Dave/Generated/src/RESET001/RESET001.c **** *******************************************************************************/
+ 296:../Dave/Generated/src/RESET001/RESET001.c **** void RESET001_ClearResetInfo(void)
+ 297:../Dave/Generated/src/RESET001/RESET001.c **** {
+ 289              		.loc 1 297 0
+ 290              		.cfi_startproc
+ 291              		@ args = 0, pretend = 0, frame = 8
+ 292              		@ frame_needed = 1, uses_anonymous_args = 0
+ 293              		@ link register save eliminated.
+ 294 0000 80B4     		push	{r7}
+ 295              	.LCFI12:
+ 296              		.cfi_def_cfa_offset 4
+ 297              		.cfi_offset 7, -4
+ 298 0002 83B0     		sub	sp, sp, #12
+ 299              	.LCFI13:
+ 300              		.cfi_def_cfa_offset 16
+ 301 0004 00AF     		add	r7, sp, #0
+ 302              	.LCFI14:
+ 303              		.cfi_def_cfa_register 7
+ 298:../Dave/Generated/src/RESET001/RESET001.c ****    SCU_RESET_TypeDef* RCUCtrlReg;
+ 299:../Dave/Generated/src/RESET001/RESET001.c **** 
+ 300:../Dave/Generated/src/RESET001/RESET001.c ****    RCUCtrlReg = SCU_RESET;
+ 304              		.loc 1 300 0
+ 305 0006 4FF48843 		mov	r3, #17408
+ 306 000a C5F20003 		movt	r3, 20480
+ 307 000e 7B60     		str	r3, [r7, #4]
+ 301:../Dave/Generated/src/RESET001/RESET001.c ****    /* <<<DD_RESET001_API_5>>> */
+ 302:../Dave/Generated/src/RESET001/RESET001.c **** 
+ 303:../Dave/Generated/src/RESET001/RESET001.c ****    /* Clear the last reset status info by setting RSCLR bit in RSTCLR register*/
+ 304:../Dave/Generated/src/RESET001/RESET001.c ****    RCUCtrlReg->RSTCLR |=  (uint32_t)(SCU_RESET_RSTCLR_RSCLR_Msk);
+ 308              		.loc 1 304 0
+ 309 0010 7B68     		ldr	r3, [r7, #4]
+ 310 0012 9B68     		ldr	r3, [r3, #8]
+ 311 0014 43F00102 		orr	r2, r3, #1
+ 312 0018 7B68     		ldr	r3, [r7, #4]
+ 313 001a 9A60     		str	r2, [r3, #8]
+ 305:../Dave/Generated/src/RESET001/RESET001.c **** 
+ 306:../Dave/Generated/src/RESET001/RESET001.c **** }
+ 314              		.loc 1 306 0
+ 315 001c 07F10C07 		add	r7, r7, #12
+ 316 0020 BD46     		mov	sp, r7
+ 317 0022 80BC     		pop	{r7}
+ 318 0024 7047     		bx	lr
+ 319              		.cfi_endproc
+ 320              	.LFE116:
+ 322 0026 00BF     		.text
+ 323              	.Letext0:
+ 324              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 325              		.file 3 "../Dave/Generated/src/RESET001/../../inc/RESET001/../../inc/LIBS/types.h"
+ 326              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 327              		.file 5 "../Dave/Generated/src/RESET001/../../inc/RESET001/RESET001.h"
+ 328              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 RESET001.c
+C:\Users\Herbert\AppData\Local\Temp\ccSspf9t.s:20     .text.RESET001_AssertReset:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccSspf9t.s:25     .text.RESET001_AssertReset:00000000 RESET001_AssertReset
+C:\Users\Herbert\AppData\Local\Temp\ccSspf9t.s:85     .text.RESET001_DeassertReset:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccSspf9t.s:90     .text.RESET001_DeassertReset:00000000 RESET001_DeassertReset
+C:\Users\Herbert\AppData\Local\Temp\ccSspf9t.s:149    .text.RESET001_GetResetInfo:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccSspf9t.s:154    .text.RESET001_GetResetInfo:00000000 RESET001_GetResetInfo
+C:\Users\Herbert\AppData\Local\Temp\ccSspf9t.s:194    .text.RESET001_GetStatus:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccSspf9t.s:199    .text.RESET001_GetStatus:00000000 RESET001_GetStatus
+C:\Users\Herbert\AppData\Local\Temp\ccSspf9t.s:282    .text.RESET001_ClearResetInfo:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccSspf9t.s:287    .text.RESET001_ClearResetInfo:00000000 RESET001_ClearResetInfo
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,1753 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"USBD_EndpointStream_XMC4000.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	zlp_flag
+  20              		.bss
+  23              	zlp_flag:
+  24 0000 00       		.space	1
+  25              		.section	.text.Endpoint_Write_Stream_LE,"ax",%progbits
+  26              		.align	2
+  27              		.global	Endpoint_Write_Stream_LE
+  28              		.thumb
+  29              		.thumb_func
+  31              	Endpoint_Write_Stream_LE:
+  32              	.LFB129:
+  33              		.file 1 "../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c"
+   1:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** /*
+   2:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   Copyright 2013  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+   3:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+   4:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   Permission to use, copy, modify, distribute, and sell this
+   5:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   software and its documentation for any purpose is hereby granted
+   6:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   without fee, provided that the above copyright notice appear in
+   7:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   all copies and that both that the copyright notice and this
+   8:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   permission notice and warranty disclaimer appear in supporting
+   9:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   documentation, and that the name of the author not be used in
+  10:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   advertising or publicity pertaining to distribution of the
+  11:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   software without specific, written prior permission.
+  12:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+  13:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   The author disclaims all warranties with regard to this
+  14:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   software, including all implied warranties of merchantability
+  15:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   and fitness.  In no event shall the author be liable for any
+  16:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   special, indirect or consequential damages or any damages
+  17:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   whatsoever resulting from loss of use, data or profits, whether
+  18:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   in an action of contract, negligence or other tortious action,
+  19:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   arising out of or in connection with the use or performance of
+  20:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****   this software.
+  21:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** */
+  22:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** /*******************************************************************************
+  23:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  Copyright (c) 2014, Infineon Technologies AG                                 **
+  24:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  All rights reserved.                                                         **
+  25:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****                                                                               **
+  26:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  Redistribution and use in source and binary forms, with or without           **
+  27:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  modification,are permitted provided that the following conditions are met:   **
+  28:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****                                                                               **
+  29:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  *Redistributions of source code must retain the above copyright notice,      **
+  30:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  this list of conditions and the following disclaimer.                        **
+  31:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  32:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  this list of conditions and the following disclaimer in the documentation    **
+  33:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  and/or other materials provided with the distribution.                       **
+  34:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  35:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  may be used to endorse or promote products derived from this software without**
+  36:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  specific prior written permission.                                           **
+  37:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****                                                                               **
+  38:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  39:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  40:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  41:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  42:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  43:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  44:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  45:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  46:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  47:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  48:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  49:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****                                                                               **
+  50:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  To improve the quality of the software, users are encouraged to share        **
+  51:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  52:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  dave@infineon.com).                                                          **
+  53:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****                                                                               **
+  54:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** ********************************************************************************
+  55:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** **                                                                            **
+  56:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** **                                                                            **
+  57:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  58:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** **                                                                            **
+  59:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** ** COMPILER : Compiler Independent                                            **
+  60:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** **                                                                            **
+  61:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** ** AUTHOR : App Developer                                                     **
+  62:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** **                                                                            **
+  63:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** ** MAY BE CHANGED BY USER [yes/no]: No                                        **
+  64:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** **                                                                            **
+  65:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** ** MODIFICATION DATE : Feb 21, 2014     		                              **
+  66:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** **                                                                            **
+  67:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** *******************************************************************************/
+  68:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+  69:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** /*******************************************************************************
+  70:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** **                       Author(s) Identity                                   **
+  71:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** ********************************************************************************
+  72:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** **                                                                            **
+  73:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** ** Initials    Name                                                           **
+  74:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** ** ---------------------------------------------------------------------------**
+  75:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** ** NSND          App Developer                                                **
+  76:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** *******************************************************************************/
+  77:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** /**
+  78:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  * @file   USBD_EndpointStream_XMC4000.c
+  79:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  *
+  80:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  * @brief Source file for USB device end point streaming functions.
+  81:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  *
+  82:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  * It provides functions to handle End point data streaming.
+  83:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c ****  */
+  84:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+  85:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** #include "usbd.h"
+  86:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** #include "USBD_EndpointStream_XMC4000.h"
+  87:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** #include "../usb/Core/EndpointStream.h"
+  88:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** #include "../usb/Core/Endpoint.h"
+  89:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+  90:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** /*Flag to indicate the zlp to be sent or not*/
+  91:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** volatile uint8_t zlp_flag = 0;
+  92:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+  93:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** uint8_t Endpoint_Write_Stream_LE (const void *const Buffer, uint16_t Length,
+  94:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 											uint16_t *const BytesProcessed)
+  95:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** {
+  34              		.loc 1 95 0
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 32
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 8
+  41              		.cfi_offset 7, -8
+  42              		.cfi_offset 14, -4
+  43 0002 88B0     		sub	sp, sp, #32
+  44              	.LCFI1:
+  45              		.cfi_def_cfa_offset 40
+  46 0004 00AF     		add	r7, sp, #0
+  47              	.LCFI2:
+  48              		.cfi_def_cfa_register 7
+  49 0006 F860     		str	r0, [r7, #12]
+  50 0008 0B46     		mov	r3, r1
+  51 000a 7A60     		str	r2, [r7, #4]
+  52 000c 7B81     		strh	r3, [r7, #10]	@ movhi
+  96:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	USBD_Endpoint_t* ep = &device.Endpoints[device.CurrentEndpoint];
+  53              		.loc 1 96 0
+  54 000e 40F20003 		movw	r3, #:lower16:device
+  55 0012 C0F20003 		movt	r3, #:upper16:device
+  56 0016 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+  57 001a 4FF02C02 		mov	r2, #44
+  58 001e 02FB03F2 		mul	r2, r2, r3
+  59 0022 40F20003 		movw	r3, #:lower16:device
+  60 0026 C0F20003 		movt	r3, #:upper16:device
+  61 002a D318     		adds	r3, r2, r3
+  62 002c 03F10403 		add	r3, r3, #4
+  63 0030 7B61     		str	r3, [r7, #20]
+  97:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t Bytes = 0;
+  64              		.loc 1 97 0
+  65 0032 4FF00003 		mov	r3, #0
+  66 0036 FB83     		strh	r3, [r7, #30]	@ movhi
+  98:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t BytesTransfered = 0;
+  67              		.loc 1 98 0
+  68 0038 4FF00003 		mov	r3, #0
+  69 003c BB83     		strh	r3, [r7, #28]	@ movhi
+  99:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint8_t ErrorCode;
+ 100:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t prev_length = 0;
+  70              		.loc 1 100 0
+  71 003e 4FF00003 		mov	r3, #0
+  72 0042 7B83     		strh	r3, [r7, #26]	@ movhi
+ 101:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 102:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	if (BytesProcessed!=NULL) {
+  73              		.loc 1 102 0
+  74 0044 7B68     		ldr	r3, [r7, #4]
+  75 0046 002B     		cmp	r3, #0
+  76 0048 62D0     		beq	.L3
+ 103:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		Length -= *BytesProcessed;
+  77              		.loc 1 103 0
+  78 004a 7B68     		ldr	r3, [r7, #4]
+  79 004c 1B88     		ldrh	r3, [r3, #0]
+  80 004e 7A89     		ldrh	r2, [r7, #10]	@ movhi
+  81 0050 D31A     		subs	r3, r2, r3
+  82 0052 7B81     		strh	r3, [r7, #10]	@ movhi
+ 104:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		BytesTransfered = *BytesProcessed;
+  83              		.loc 1 104 0
+  84 0054 7B68     		ldr	r3, [r7, #4]
+  85 0056 1B88     		ldrh	r3, [r3, #0]	@ movhi
+  86 0058 BB83     		strh	r3, [r7, #28]	@ movhi
+ 105:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 106:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 107:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+  87              		.loc 1 107 0
+  88 005a 59E0     		b	.L3
+  89              	.L10:
+ 108:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (ep->InInUse)
+  90              		.loc 1 108 0
+  91 005c 7B69     		ldr	r3, [r7, #20]
+  92 005e 5B68     		ldr	r3, [r3, #4]
+  93 0060 03F01003 		and	r3, r3, #16
+  94 0064 002B     		cmp	r3, #0
+  95 0066 52D1     		bne	.L12
+  96              	.L4:
+ 109:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			continue;
+ 110:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (Endpoint_IsReadWriteAllowed()) {
+  97              		.loc 1 110 0
+  98 0068 FFF7FEFF 		bl	Endpoint_IsReadWriteAllowed
+  99 006c 0346     		mov	r3, r0
+ 100 006e 002B     		cmp	r3, #0
+ 101 0070 31D0     		beq	.L5
+ 111:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if((ep->InBufferLength - ep->InBytesAvailable)  > Length)
+ 102              		.loc 1 111 0
+ 103 0072 7B69     		ldr	r3, [r7, #20]
+ 104 0074 1A6A     		ldr	r2, [r3, #32]
+ 105 0076 7B69     		ldr	r3, [r7, #20]
+ 106 0078 9B69     		ldr	r3, [r3, #24]
+ 107 007a D21A     		subs	r2, r2, r3
+ 108 007c 7B89     		ldrh	r3, [r7, #10]
+ 109 007e 9A42     		cmp	r2, r3
+ 110 0080 02D9     		bls	.L6
+ 112:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			{
+ 113:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = Length;
+ 111              		.loc 1 113 0
+ 112 0082 7B89     		ldrh	r3, [r7, #10]	@ movhi
+ 113 0084 FB83     		strh	r3, [r7, #30]	@ movhi
+ 114 0086 07E0     		b	.L7
+ 115              	.L6:
+ 114:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 115:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			else
+ 116:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			{
+ 117:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = (ep->InBufferLength - ep->InBytesAvailable);
+ 116              		.loc 1 117 0
+ 117 0088 7B69     		ldr	r3, [r7, #20]
+ 118 008a 1B6A     		ldr	r3, [r3, #32]
+ 119 008c 9AB2     		uxth	r2, r3
+ 120 008e 7B69     		ldr	r3, [r7, #20]
+ 121 0090 9B69     		ldr	r3, [r3, #24]
+ 122 0092 9BB2     		uxth	r3, r3
+ 123 0094 D31A     		subs	r3, r2, r3
+ 124 0096 FB83     		strh	r3, [r7, #30]	@ movhi
+ 125              	.L7:
+ 118:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 119:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			memcpy(ep->InBuffer + ep->InBytesAvailable,
+ 126              		.loc 1 119 0
+ 127 0098 7B69     		ldr	r3, [r7, #20]
+ 128 009a DA69     		ldr	r2, [r3, #28]
+ 129 009c 7B69     		ldr	r3, [r7, #20]
+ 130 009e 9B69     		ldr	r3, [r3, #24]
+ 131 00a0 D118     		adds	r1, r2, r3
+ 132 00a2 BB8B     		ldrh	r3, [r7, #28]
+ 133 00a4 FA68     		ldr	r2, [r7, #12]
+ 134 00a6 D218     		adds	r2, r2, r3
+ 135 00a8 FB8B     		ldrh	r3, [r7, #30]
+ 136 00aa 0846     		mov	r0, r1
+ 137 00ac 1146     		mov	r1, r2
+ 138 00ae 1A46     		mov	r2, r3
+ 139 00b0 FFF7FEFF 		bl	memcpy
+ 120:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 								(uint8_t*)Buffer + BytesTransfered,Bytes);
+ 121:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ep->InBytesAvailable += Bytes;
+ 140              		.loc 1 121 0
+ 141 00b4 7B69     		ldr	r3, [r7, #20]
+ 142 00b6 9A69     		ldr	r2, [r3, #24]
+ 143 00b8 FB8B     		ldrh	r3, [r7, #30]
+ 144 00ba D218     		adds	r2, r2, r3
+ 145 00bc 7B69     		ldr	r3, [r7, #20]
+ 146 00be 9A61     		str	r2, [r3, #24]
+ 122:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			BytesTransfered += Bytes;
+ 147              		.loc 1 122 0
+ 148 00c0 BA8B     		ldrh	r2, [r7, #28]	@ movhi
+ 149 00c2 FB8B     		ldrh	r3, [r7, #30]	@ movhi
+ 150 00c4 D318     		adds	r3, r2, r3
+ 151 00c6 BB83     		strh	r3, [r7, #28]	@ movhi
+ 123:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			prev_length = Length;
+ 152              		.loc 1 123 0
+ 153 00c8 7B89     		ldrh	r3, [r7, #10]	@ movhi
+ 154 00ca 7B83     		strh	r3, [r7, #26]	@ movhi
+ 124:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Length -= Bytes;
+ 155              		.loc 1 124 0
+ 156 00cc 7A89     		ldrh	r2, [r7, #10]	@ movhi
+ 157 00ce FB8B     		ldrh	r3, [r7, #30]	@ movhi
+ 158 00d0 D31A     		subs	r3, r2, r3
+ 159 00d2 7B81     		strh	r3, [r7, #10]	@ movhi
+ 160 00d4 1CE0     		b	.L3
+ 161              	.L5:
+ 125:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 126:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		else {
+ 127:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Endpoint_ClearIN();
+ 162              		.loc 1 127 0
+ 163 00d6 FFF7FEFF 		bl	Endpoint_ClearIN
+ 128:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			 if(Length < ep->MaxPacketSize)
+ 164              		.loc 1 128 0
+ 165 00da 7A89     		ldrh	r2, [r7, #10]
+ 166 00dc 7B69     		ldr	r3, [r7, #20]
+ 167 00de 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 168 00e0 C3F38613 		ubfx	r3, r3, #6, #7
+ 169 00e4 DBB2     		uxtb	r3, r3
+ 170 00e6 9A42     		cmp	r2, r3
+ 171 00e8 08DA     		bge	.L8
+ 129:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			 {
+ 130:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				if (BytesProcessed!=NULL) {
+ 172              		.loc 1 130 0
+ 173 00ea 7B68     		ldr	r3, [r7, #4]
+ 174 00ec 002B     		cmp	r3, #0
+ 175 00ee 05D0     		beq	.L8
+ 131:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 					*BytesProcessed = BytesTransfered;
+ 176              		.loc 1 131 0
+ 177 00f0 7B68     		ldr	r3, [r7, #4]
+ 178 00f2 BA8B     		ldrh	r2, [r7, #28]	@ movhi
+ 179 00f4 1A80     		strh	r2, [r3, #0]	@ movhi
+ 132:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 					return ENDPOINT_RWSTREAM_IncompleteTransfer;
+ 180              		.loc 1 132 0
+ 181 00f6 4FF00503 		mov	r3, #5
+ 182 00fa 20E0     		b	.L9
+ 183              	.L8:
+ 133:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				}
+ 134:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			 }
+ 135:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 136:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ErrorCode = Endpoint_WaitUntilReady();
+ 184              		.loc 1 136 0
+ 185 00fc FFF7FEFF 		bl	Endpoint_WaitUntilReady
+ 186 0100 0346     		mov	r3, r0
+ 187 0102 FB74     		strb	r3, [r7, #19]
+ 137:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (ErrorCode) {
+ 188              		.loc 1 137 0
+ 189 0104 FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 190 0106 002B     		cmp	r3, #0
+ 191 0108 02D0     		beq	.L3
+ 138:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				return ErrorCode;
+ 192              		.loc 1 138 0
+ 193 010a FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 194 010c 17E0     		b	.L9
+ 195              	.L12:
+ 109:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			continue;
+ 196              		.loc 1 109 0
+ 197 010e 00BF     		nop
+ 198              	.L3:
+ 107:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 199              		.loc 1 107 0 discriminator 1
+ 200 0110 7B89     		ldrh	r3, [r7, #10]
+ 201 0112 002B     		cmp	r3, #0
+ 202 0114 A2D1     		bne	.L10
+ 139:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 140:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 141:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 142:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 143:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 144:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 145:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	if((Length == 0) && (prev_length == ep->MaxPacketSize))
+ 203              		.loc 1 145 0
+ 204 0116 7B89     		ldrh	r3, [r7, #10]
+ 205 0118 002B     		cmp	r3, #0
+ 206 011a 0ED1     		bne	.L11
+ 207              		.loc 1 145 0 is_stmt 0 discriminator 1
+ 208 011c 7B69     		ldr	r3, [r7, #20]
+ 209 011e 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 210 0120 C3F38613 		ubfx	r3, r3, #6, #7
+ 211 0124 DBB2     		uxtb	r3, r3
+ 212 0126 7A8B     		ldrh	r2, [r7, #26]
+ 213 0128 9A42     		cmp	r2, r3
+ 214 012a 06D1     		bne	.L11
+ 146:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	{
+ 147:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** #if (SEND_ZLP_FROM_APP == 1)
+ 148:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	zlp_flag = false;
+ 149:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** #else
+ 150:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	zlp_flag = true;
+ 215              		.loc 1 150 0 is_stmt 1
+ 216 012c 40F20003 		movw	r3, #:lower16:zlp_flag
+ 217 0130 C0F20003 		movt	r3, #:upper16:zlp_flag
+ 218 0134 4FF00102 		mov	r2, #1
+ 219 0138 1A70     		strb	r2, [r3, #0]
+ 220              	.L11:
+ 151:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** #endif
+ 152:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 153:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	return ENDPOINT_RWSTREAM_NoError;
+ 221              		.loc 1 153 0
+ 222 013a 4FF00003 		mov	r3, #0
+ 223              	.L9:
+ 154:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** }
+ 224              		.loc 1 154 0
+ 225 013e 1846     		mov	r0, r3
+ 226 0140 07F12007 		add	r7, r7, #32
+ 227 0144 BD46     		mov	sp, r7
+ 228 0146 80BD     		pop	{r7, pc}
+ 229              		.cfi_endproc
+ 230              	.LFE129:
+ 232              		.section	.text.SwapCopy,"ax",%progbits
+ 233              		.align	2
+ 234              		.global	SwapCopy
+ 235              		.thumb
+ 236              		.thumb_func
+ 238              	SwapCopy:
+ 239              	.LFB130:
+ 155:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 156:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** void SwapCopy(void *const Dest, const void *const Src,uint32_t Length) {
+ 240              		.loc 1 156 0
+ 241              		.cfi_startproc
+ 242              		@ args = 0, pretend = 0, frame = 24
+ 243              		@ frame_needed = 1, uses_anonymous_args = 0
+ 244              		@ link register save eliminated.
+ 245 0000 80B4     		push	{r7}
+ 246              	.LCFI3:
+ 247              		.cfi_def_cfa_offset 4
+ 248              		.cfi_offset 7, -4
+ 249 0002 87B0     		sub	sp, sp, #28
+ 250              	.LCFI4:
+ 251              		.cfi_def_cfa_offset 32
+ 252 0004 00AF     		add	r7, sp, #0
+ 253              	.LCFI5:
+ 254              		.cfi_def_cfa_register 7
+ 255 0006 F860     		str	r0, [r7, #12]
+ 256 0008 B960     		str	r1, [r7, #8]
+ 257 000a 7A60     		str	r2, [r7, #4]
+ 157:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint32_t i = 0;
+ 258              		.loc 1 157 0
+ 259 000c 4FF00003 		mov	r3, #0
+ 260 0010 7B61     		str	r3, [r7, #20]
+ 158:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while(i<Length) {
+ 261              		.loc 1 158 0
+ 262 0012 0FE0     		b	.L14
+ 263              	.L15:
+ 159:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		*(uint8_t*)((uint8_t*)Dest + (Length - 1 - i)) =
+ 264              		.loc 1 159 0
+ 265 0014 7A68     		ldr	r2, [r7, #4]
+ 266 0016 7B69     		ldr	r3, [r7, #20]
+ 267 0018 D31A     		subs	r3, r2, r3
+ 268 001a 03F1FF33 		add	r3, r3, #-1
+ 269 001e FA68     		ldr	r2, [r7, #12]
+ 270 0020 D318     		adds	r3, r2, r3
+ 160:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 											*(uint8_t*)((uint8_t*)Src + i);
+ 271              		.loc 1 160 0
+ 272 0022 B968     		ldr	r1, [r7, #8]
+ 273 0024 7A69     		ldr	r2, [r7, #20]
+ 274 0026 8A18     		adds	r2, r1, r2
+ 275 0028 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 159:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		*(uint8_t*)((uint8_t*)Dest + (Length - 1 - i)) =
+ 276              		.loc 1 159 0
+ 277 002a 1A70     		strb	r2, [r3, #0]
+ 161:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		i++;
+ 278              		.loc 1 161 0
+ 279 002c 7B69     		ldr	r3, [r7, #20]
+ 280 002e 03F10103 		add	r3, r3, #1
+ 281 0032 7B61     		str	r3, [r7, #20]
+ 282              	.L14:
+ 158:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while(i<Length) {
+ 283              		.loc 1 158 0 discriminator 1
+ 284 0034 7A69     		ldr	r2, [r7, #20]
+ 285 0036 7B68     		ldr	r3, [r7, #4]
+ 286 0038 9A42     		cmp	r2, r3
+ 287 003a EBD3     		bcc	.L15
+ 162:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 163:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** }
+ 288              		.loc 1 163 0
+ 289 003c 07F11C07 		add	r7, r7, #28
+ 290 0040 BD46     		mov	sp, r7
+ 291 0042 80BC     		pop	{r7}
+ 292 0044 7047     		bx	lr
+ 293              		.cfi_endproc
+ 294              	.LFE130:
+ 296 0046 00BF     		.section	.text.Endpoint_Write_Stream_BE,"ax",%progbits
+ 297              		.align	2
+ 298              		.global	Endpoint_Write_Stream_BE
+ 299              		.thumb
+ 300              		.thumb_func
+ 302              	Endpoint_Write_Stream_BE:
+ 303              	.LFB131:
+ 164:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** uint8_t	Endpoint_Write_Stream_BE (const void *const Buffer, uint16_t Length,
+ 165:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 											uint16_t *const BytesProcessed)
+ 166:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** {
+ 304              		.loc 1 166 0
+ 305              		.cfi_startproc
+ 306              		@ args = 0, pretend = 0, frame = 32
+ 307              		@ frame_needed = 1, uses_anonymous_args = 0
+ 308 0000 80B5     		push	{r7, lr}
+ 309              	.LCFI6:
+ 310              		.cfi_def_cfa_offset 8
+ 311              		.cfi_offset 7, -8
+ 312              		.cfi_offset 14, -4
+ 313 0002 88B0     		sub	sp, sp, #32
+ 314              	.LCFI7:
+ 315              		.cfi_def_cfa_offset 40
+ 316 0004 00AF     		add	r7, sp, #0
+ 317              	.LCFI8:
+ 318              		.cfi_def_cfa_register 7
+ 319 0006 F860     		str	r0, [r7, #12]
+ 320 0008 0B46     		mov	r3, r1
+ 321 000a 7A60     		str	r2, [r7, #4]
+ 322 000c 7B81     		strh	r3, [r7, #10]	@ movhi
+ 167:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	USBD_Endpoint_t* ep = &device.Endpoints[device.CurrentEndpoint];
+ 323              		.loc 1 167 0
+ 324 000e 40F20003 		movw	r3, #:lower16:device
+ 325 0012 C0F20003 		movt	r3, #:upper16:device
+ 326 0016 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+ 327 001a 4FF02C02 		mov	r2, #44
+ 328 001e 02FB03F2 		mul	r2, r2, r3
+ 329 0022 40F20003 		movw	r3, #:lower16:device
+ 330 0026 C0F20003 		movt	r3, #:upper16:device
+ 331 002a D318     		adds	r3, r2, r3
+ 332 002c 03F10403 		add	r3, r3, #4
+ 333 0030 BB61     		str	r3, [r7, #24]
+ 168:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t Bytes = 0;
+ 334              		.loc 1 168 0
+ 335 0032 4FF00003 		mov	r3, #0
+ 336 0036 FB83     		strh	r3, [r7, #30]	@ movhi
+ 169:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t BytesTransfered = 0;
+ 337              		.loc 1 169 0
+ 338 0038 4FF00003 		mov	r3, #0
+ 339 003c BB83     		strh	r3, [r7, #28]	@ movhi
+ 170:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint8_t ErrorCode;
+ 171:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 172:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	if (BytesProcessed!=NULL) {
+ 340              		.loc 1 172 0
+ 341 003e 7B68     		ldr	r3, [r7, #4]
+ 342 0040 002B     		cmp	r3, #0
+ 343 0042 58D0     		beq	.L18
+ 173:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		Length -= *BytesProcessed;
+ 344              		.loc 1 173 0
+ 345 0044 7B68     		ldr	r3, [r7, #4]
+ 346 0046 1B88     		ldrh	r3, [r3, #0]
+ 347 0048 7A89     		ldrh	r2, [r7, #10]	@ movhi
+ 348 004a D31A     		subs	r3, r2, r3
+ 349 004c 7B81     		strh	r3, [r7, #10]	@ movhi
+ 174:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		BytesTransfered = *BytesProcessed;
+ 350              		.loc 1 174 0
+ 351 004e 7B68     		ldr	r3, [r7, #4]
+ 352 0050 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 353 0052 BB83     		strh	r3, [r7, #28]	@ movhi
+ 175:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 176:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 177:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 354              		.loc 1 177 0
+ 355 0054 4FE0     		b	.L18
+ 356              	.L25:
+ 178:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (ep->InInUse)
+ 357              		.loc 1 178 0
+ 358 0056 BB69     		ldr	r3, [r7, #24]
+ 359 0058 5B68     		ldr	r3, [r3, #4]
+ 360 005a 03F01003 		and	r3, r3, #16
+ 361 005e 002B     		cmp	r3, #0
+ 362 0060 48D1     		bne	.L26
+ 363              	.L19:
+ 179:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			continue;
+ 180:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (Endpoint_IsReadWriteAllowed()) {
+ 364              		.loc 1 180 0
+ 365 0062 FFF7FEFF 		bl	Endpoint_IsReadWriteAllowed
+ 366 0066 0346     		mov	r3, r0
+ 367 0068 002B     		cmp	r3, #0
+ 368 006a 2FD0     		beq	.L20
+ 181:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if((ep->InBufferLength - ep->InBytesAvailable)  > Length)
+ 369              		.loc 1 181 0
+ 370 006c BB69     		ldr	r3, [r7, #24]
+ 371 006e 1A6A     		ldr	r2, [r3, #32]
+ 372 0070 BB69     		ldr	r3, [r7, #24]
+ 373 0072 9B69     		ldr	r3, [r3, #24]
+ 374 0074 D21A     		subs	r2, r2, r3
+ 375 0076 7B89     		ldrh	r3, [r7, #10]
+ 376 0078 9A42     		cmp	r2, r3
+ 377 007a 02D9     		bls	.L21
+ 182:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			{
+ 183:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = Length;
+ 378              		.loc 1 183 0
+ 379 007c 7B89     		ldrh	r3, [r7, #10]	@ movhi
+ 380 007e FB83     		strh	r3, [r7, #30]	@ movhi
+ 381 0080 07E0     		b	.L22
+ 382              	.L21:
+ 184:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 185:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			else
+ 186:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			{
+ 187:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = (ep->InBufferLength - ep->InBytesAvailable);
+ 383              		.loc 1 187 0
+ 384 0082 BB69     		ldr	r3, [r7, #24]
+ 385 0084 1B6A     		ldr	r3, [r3, #32]
+ 386 0086 9AB2     		uxth	r2, r3
+ 387 0088 BB69     		ldr	r3, [r7, #24]
+ 388 008a 9B69     		ldr	r3, [r3, #24]
+ 389 008c 9BB2     		uxth	r3, r3
+ 390 008e D31A     		subs	r3, r2, r3
+ 391 0090 FB83     		strh	r3, [r7, #30]	@ movhi
+ 392              	.L22:
+ 188:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 189:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 190:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			SwapCopy(ep->InBuffer + ep->InBytesAvailable,
+ 393              		.loc 1 190 0
+ 394 0092 BB69     		ldr	r3, [r7, #24]
+ 395 0094 DA69     		ldr	r2, [r3, #28]
+ 396 0096 BB69     		ldr	r3, [r7, #24]
+ 397 0098 9B69     		ldr	r3, [r3, #24]
+ 398 009a D118     		adds	r1, r2, r3
+ 399 009c BB8B     		ldrh	r3, [r7, #28]
+ 400 009e FA68     		ldr	r2, [r7, #12]
+ 401 00a0 D218     		adds	r2, r2, r3
+ 402 00a2 FB8B     		ldrh	r3, [r7, #30]
+ 403 00a4 0846     		mov	r0, r1
+ 404 00a6 1146     		mov	r1, r2
+ 405 00a8 1A46     		mov	r2, r3
+ 406 00aa FFF7FEFF 		bl	SwapCopy
+ 191:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 								(uint8_t*)Buffer + BytesTransfered,Bytes);
+ 192:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ep->InBytesAvailable += Bytes;
+ 407              		.loc 1 192 0
+ 408 00ae BB69     		ldr	r3, [r7, #24]
+ 409 00b0 9A69     		ldr	r2, [r3, #24]
+ 410 00b2 FB8B     		ldrh	r3, [r7, #30]
+ 411 00b4 D218     		adds	r2, r2, r3
+ 412 00b6 BB69     		ldr	r3, [r7, #24]
+ 413 00b8 9A61     		str	r2, [r3, #24]
+ 193:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			BytesTransfered += Bytes;
+ 414              		.loc 1 193 0
+ 415 00ba BA8B     		ldrh	r2, [r7, #28]	@ movhi
+ 416 00bc FB8B     		ldrh	r3, [r7, #30]	@ movhi
+ 417 00be D318     		adds	r3, r2, r3
+ 418 00c0 BB83     		strh	r3, [r7, #28]	@ movhi
+ 194:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Length -= Bytes;
+ 419              		.loc 1 194 0
+ 420 00c2 7A89     		ldrh	r2, [r7, #10]	@ movhi
+ 421 00c4 FB8B     		ldrh	r3, [r7, #30]	@ movhi
+ 422 00c6 D31A     		subs	r3, r2, r3
+ 423 00c8 7B81     		strh	r3, [r7, #10]	@ movhi
+ 424 00ca 14E0     		b	.L18
+ 425              	.L20:
+ 195:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 196:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		else {
+ 197:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Endpoint_ClearIN();
+ 426              		.loc 1 197 0
+ 427 00cc FFF7FEFF 		bl	Endpoint_ClearIN
+ 198:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (BytesProcessed!=NULL) {
+ 428              		.loc 1 198 0
+ 429 00d0 7B68     		ldr	r3, [r7, #4]
+ 430 00d2 002B     		cmp	r3, #0
+ 431 00d4 05D0     		beq	.L23
+ 199:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				*BytesProcessed = BytesTransfered;
+ 432              		.loc 1 199 0
+ 433 00d6 7B68     		ldr	r3, [r7, #4]
+ 434 00d8 BA8B     		ldrh	r2, [r7, #28]	@ movhi
+ 435 00da 1A80     		strh	r2, [r3, #0]	@ movhi
+ 200:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				return ENDPOINT_RWSTREAM_IncompleteTransfer;
+ 436              		.loc 1 200 0
+ 437 00dc 4FF00503 		mov	r3, #5
+ 438 00e0 0EE0     		b	.L24
+ 439              	.L23:
+ 201:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 202:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 203:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ErrorCode = Endpoint_WaitUntilReady();
+ 440              		.loc 1 203 0
+ 441 00e2 FFF7FEFF 		bl	Endpoint_WaitUntilReady
+ 442 00e6 0346     		mov	r3, r0
+ 443 00e8 FB75     		strb	r3, [r7, #23]
+ 204:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (ErrorCode) {
+ 444              		.loc 1 204 0
+ 445 00ea FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 446 00ec 002B     		cmp	r3, #0
+ 447 00ee 02D0     		beq	.L18
+ 205:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				return ErrorCode;
+ 448              		.loc 1 205 0
+ 449 00f0 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 450 00f2 05E0     		b	.L24
+ 451              	.L26:
+ 179:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			continue;
+ 452              		.loc 1 179 0
+ 453 00f4 00BF     		nop
+ 454              	.L18:
+ 177:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 455              		.loc 1 177 0 discriminator 1
+ 456 00f6 7B89     		ldrh	r3, [r7, #10]
+ 457 00f8 002B     		cmp	r3, #0
+ 458 00fa ACD1     		bne	.L25
+ 206:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 207:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 208:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 209:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 210:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 211:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	return ENDPOINT_RWSTREAM_NoError;
+ 459              		.loc 1 211 0
+ 460 00fc 4FF00003 		mov	r3, #0
+ 461              	.L24:
+ 212:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** }
+ 462              		.loc 1 212 0
+ 463 0100 1846     		mov	r0, r3
+ 464 0102 07F12007 		add	r7, r7, #32
+ 465 0106 BD46     		mov	sp, r7
+ 466 0108 80BD     		pop	{r7, pc}
+ 467              		.cfi_endproc
+ 468              	.LFE131:
+ 470 010a 00BF     		.section	.text.Endpoint_Read_Stream_LE,"ax",%progbits
+ 471              		.align	2
+ 472              		.global	Endpoint_Read_Stream_LE
+ 473              		.thumb
+ 474              		.thumb_func
+ 476              	Endpoint_Read_Stream_LE:
+ 477              	.LFB132:
+ 213:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 214:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** uint8_t	Endpoint_Read_Stream_LE (void *const Buffer, uint16_t Length,
+ 215:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 									uint16_t *const BytesProcessed)
+ 216:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** {
+ 478              		.loc 1 216 0
+ 479              		.cfi_startproc
+ 480              		@ args = 0, pretend = 0, frame = 32
+ 481              		@ frame_needed = 1, uses_anonymous_args = 0
+ 482 0000 80B5     		push	{r7, lr}
+ 483              	.LCFI9:
+ 484              		.cfi_def_cfa_offset 8
+ 485              		.cfi_offset 7, -8
+ 486              		.cfi_offset 14, -4
+ 487 0002 88B0     		sub	sp, sp, #32
+ 488              	.LCFI10:
+ 489              		.cfi_def_cfa_offset 40
+ 490 0004 00AF     		add	r7, sp, #0
+ 491              	.LCFI11:
+ 492              		.cfi_def_cfa_register 7
+ 493 0006 F860     		str	r0, [r7, #12]
+ 494 0008 0B46     		mov	r3, r1
+ 495 000a 7A60     		str	r2, [r7, #4]
+ 496 000c 7B81     		strh	r3, [r7, #10]	@ movhi
+ 217:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	USBD_Endpoint_t* ep = &device.Endpoints[device.CurrentEndpoint];
+ 497              		.loc 1 217 0
+ 498 000e 40F20003 		movw	r3, #:lower16:device
+ 499 0012 C0F20003 		movt	r3, #:upper16:device
+ 500 0016 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+ 501 001a 4FF02C02 		mov	r2, #44
+ 502 001e 02FB03F2 		mul	r2, r2, r3
+ 503 0022 40F20003 		movw	r3, #:lower16:device
+ 504 0026 C0F20003 		movt	r3, #:upper16:device
+ 505 002a D318     		adds	r3, r2, r3
+ 506 002c 03F10403 		add	r3, r3, #4
+ 507 0030 BB61     		str	r3, [r7, #24]
+ 218:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t Bytes = 0;
+ 508              		.loc 1 218 0
+ 509 0032 4FF00003 		mov	r3, #0
+ 510 0036 FB83     		strh	r3, [r7, #30]	@ movhi
+ 219:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t BytesTransfered = 0;
+ 511              		.loc 1 219 0
+ 512 0038 4FF00003 		mov	r3, #0
+ 513 003c BB83     		strh	r3, [r7, #28]	@ movhi
+ 220:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint8_t ErrorCode;
+ 221:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 222:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	if (BytesProcessed!=NULL) {
+ 514              		.loc 1 222 0
+ 515 003e 7B68     		ldr	r3, [r7, #4]
+ 516 0040 002B     		cmp	r3, #0
+ 517 0042 56D0     		beq	.L29
+ 223:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		Length -= *BytesProcessed;
+ 518              		.loc 1 223 0
+ 519 0044 7B68     		ldr	r3, [r7, #4]
+ 520 0046 1B88     		ldrh	r3, [r3, #0]
+ 521 0048 7A89     		ldrh	r2, [r7, #10]	@ movhi
+ 522 004a D31A     		subs	r3, r2, r3
+ 523 004c 7B81     		strh	r3, [r7, #10]	@ movhi
+ 224:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		BytesTransfered = *BytesProcessed;
+ 524              		.loc 1 224 0
+ 525 004e 7B68     		ldr	r3, [r7, #4]
+ 526 0050 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 527 0052 BB83     		strh	r3, [r7, #28]	@ movhi
+ 225:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 226:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 227:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 528              		.loc 1 227 0
+ 529 0054 4DE0     		b	.L29
+ 530              	.L36:
+ 228:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (ep->OutInUse)
+ 531              		.loc 1 228 0
+ 532 0056 BB69     		ldr	r3, [r7, #24]
+ 533 0058 5B68     		ldr	r3, [r3, #4]
+ 534 005a 03F00803 		and	r3, r3, #8
+ 535 005e 002B     		cmp	r3, #0
+ 536 0060 46D1     		bne	.L37
+ 537              	.L30:
+ 229:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			continue;
+ 230:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (Endpoint_IsReadWriteAllowed()) {
+ 538              		.loc 1 230 0
+ 539 0062 FFF7FEFF 		bl	Endpoint_IsReadWriteAllowed
+ 540 0066 0346     		mov	r3, r0
+ 541 0068 002B     		cmp	r3, #0
+ 542 006a 2DD0     		beq	.L31
+ 231:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if(ep->OutBytesAvailable  > Length)
+ 543              		.loc 1 231 0
+ 544 006c BB69     		ldr	r3, [r7, #24]
+ 545 006e 9A68     		ldr	r2, [r3, #8]
+ 546 0070 7B89     		ldrh	r3, [r7, #10]
+ 547 0072 9A42     		cmp	r2, r3
+ 548 0074 02D9     		bls	.L32
+ 232:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			{
+ 233:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = Length;
+ 549              		.loc 1 233 0
+ 550 0076 7B89     		ldrh	r3, [r7, #10]	@ movhi
+ 551 0078 FB83     		strh	r3, [r7, #30]	@ movhi
+ 552 007a 02E0     		b	.L33
+ 553              	.L32:
+ 234:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 235:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			else
+ 236:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			{
+ 237:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes =  ep->OutBytesAvailable;
+ 554              		.loc 1 237 0
+ 555 007c BB69     		ldr	r3, [r7, #24]
+ 556 007e 9B68     		ldr	r3, [r3, #8]
+ 557 0080 FB83     		strh	r3, [r7, #30]	@ movhi
+ 558              	.L33:
+ 238:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 239:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 240:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			memcpy((uint8_t*)Buffer + BytesTransfered,
+ 559              		.loc 1 240 0
+ 560 0082 BB8B     		ldrh	r3, [r7, #28]
+ 561 0084 FA68     		ldr	r2, [r7, #12]
+ 562 0086 D118     		adds	r1, r2, r3
+ 241:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 									ep->OutBuffer + ep->OutOffset,Bytes);
+ 563              		.loc 1 241 0
+ 564 0088 BB69     		ldr	r3, [r7, #24]
+ 565 008a 1A69     		ldr	r2, [r3, #16]
+ 566 008c BB69     		ldr	r3, [r7, #24]
+ 567 008e DB68     		ldr	r3, [r3, #12]
+ 240:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			memcpy((uint8_t*)Buffer + BytesTransfered,
+ 568              		.loc 1 240 0
+ 569 0090 D218     		adds	r2, r2, r3
+ 570 0092 FB8B     		ldrh	r3, [r7, #30]
+ 571 0094 0846     		mov	r0, r1
+ 572 0096 1146     		mov	r1, r2
+ 573 0098 1A46     		mov	r2, r3
+ 574 009a FFF7FEFF 		bl	memcpy
+ 242:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ep->OutBytesAvailable -= Bytes;
+ 575              		.loc 1 242 0
+ 576 009e BB69     		ldr	r3, [r7, #24]
+ 577 00a0 9A68     		ldr	r2, [r3, #8]
+ 578 00a2 FB8B     		ldrh	r3, [r7, #30]
+ 579 00a4 D21A     		subs	r2, r2, r3
+ 580 00a6 BB69     		ldr	r3, [r7, #24]
+ 581 00a8 9A60     		str	r2, [r3, #8]
+ 243:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ep->OutOffset += Bytes;
+ 582              		.loc 1 243 0
+ 583 00aa BB69     		ldr	r3, [r7, #24]
+ 584 00ac DA68     		ldr	r2, [r3, #12]
+ 585 00ae FB8B     		ldrh	r3, [r7, #30]
+ 586 00b0 D218     		adds	r2, r2, r3
+ 587 00b2 BB69     		ldr	r3, [r7, #24]
+ 588 00b4 DA60     		str	r2, [r3, #12]
+ 244:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			BytesTransfered += Bytes;
+ 589              		.loc 1 244 0
+ 590 00b6 BA8B     		ldrh	r2, [r7, #28]	@ movhi
+ 591 00b8 FB8B     		ldrh	r3, [r7, #30]	@ movhi
+ 592 00ba D318     		adds	r3, r2, r3
+ 593 00bc BB83     		strh	r3, [r7, #28]	@ movhi
+ 245:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Length -= Bytes;
+ 594              		.loc 1 245 0
+ 595 00be 7A89     		ldrh	r2, [r7, #10]	@ movhi
+ 596 00c0 FB8B     		ldrh	r3, [r7, #30]	@ movhi
+ 597 00c2 D31A     		subs	r3, r2, r3
+ 598 00c4 7B81     		strh	r3, [r7, #10]	@ movhi
+ 599 00c6 14E0     		b	.L29
+ 600              	.L31:
+ 246:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 247:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		else {
+ 248:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Endpoint_ClearOUT();
+ 601              		.loc 1 248 0
+ 602 00c8 FFF7FEFF 		bl	Endpoint_ClearOUT
+ 249:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (BytesProcessed!=NULL) {
+ 603              		.loc 1 249 0
+ 604 00cc 7B68     		ldr	r3, [r7, #4]
+ 605 00ce 002B     		cmp	r3, #0
+ 606 00d0 05D0     		beq	.L34
+ 250:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				*BytesProcessed = BytesTransfered;
+ 607              		.loc 1 250 0
+ 608 00d2 7B68     		ldr	r3, [r7, #4]
+ 609 00d4 BA8B     		ldrh	r2, [r7, #28]	@ movhi
+ 610 00d6 1A80     		strh	r2, [r3, #0]	@ movhi
+ 251:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				return ENDPOINT_RWSTREAM_IncompleteTransfer;
+ 611              		.loc 1 251 0
+ 612 00d8 4FF00503 		mov	r3, #5
+ 613 00dc 0EE0     		b	.L35
+ 614              	.L34:
+ 252:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 253:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 254:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ErrorCode = Endpoint_WaitUntilReady();
+ 615              		.loc 1 254 0
+ 616 00de FFF7FEFF 		bl	Endpoint_WaitUntilReady
+ 617 00e2 0346     		mov	r3, r0
+ 618 00e4 FB75     		strb	r3, [r7, #23]
+ 255:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (ErrorCode) {
+ 619              		.loc 1 255 0
+ 620 00e6 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 621 00e8 002B     		cmp	r3, #0
+ 622 00ea 02D0     		beq	.L29
+ 256:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				return ErrorCode;
+ 623              		.loc 1 256 0
+ 624 00ec FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 625 00ee 05E0     		b	.L35
+ 626              	.L37:
+ 229:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			continue;
+ 627              		.loc 1 229 0
+ 628 00f0 00BF     		nop
+ 629              	.L29:
+ 227:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 630              		.loc 1 227 0 discriminator 1
+ 631 00f2 7B89     		ldrh	r3, [r7, #10]
+ 632 00f4 002B     		cmp	r3, #0
+ 633 00f6 AED1     		bne	.L36
+ 257:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 258:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 259:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 260:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 261:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 262:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	return ENDPOINT_RWSTREAM_NoError;
+ 634              		.loc 1 262 0
+ 635 00f8 4FF00003 		mov	r3, #0
+ 636              	.L35:
+ 263:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** }
+ 637              		.loc 1 263 0
+ 638 00fc 1846     		mov	r0, r3
+ 639 00fe 07F12007 		add	r7, r7, #32
+ 640 0102 BD46     		mov	sp, r7
+ 641 0104 80BD     		pop	{r7, pc}
+ 642              		.cfi_endproc
+ 643              	.LFE132:
+ 645 0106 00BF     		.section	.text.Endpoint_Read_Stream_BE,"ax",%progbits
+ 646              		.align	2
+ 647              		.global	Endpoint_Read_Stream_BE
+ 648              		.thumb
+ 649              		.thumb_func
+ 651              	Endpoint_Read_Stream_BE:
+ 652              	.LFB133:
+ 264:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 265:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** uint8_t	Endpoint_Read_Stream_BE (void *const Buffer, uint16_t Length,
+ 266:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 									uint16_t *const BytesProcessed)
+ 267:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** {
+ 653              		.loc 1 267 0
+ 654              		.cfi_startproc
+ 655              		@ args = 0, pretend = 0, frame = 32
+ 656              		@ frame_needed = 1, uses_anonymous_args = 0
+ 657 0000 80B5     		push	{r7, lr}
+ 658              	.LCFI12:
+ 659              		.cfi_def_cfa_offset 8
+ 660              		.cfi_offset 7, -8
+ 661              		.cfi_offset 14, -4
+ 662 0002 88B0     		sub	sp, sp, #32
+ 663              	.LCFI13:
+ 664              		.cfi_def_cfa_offset 40
+ 665 0004 00AF     		add	r7, sp, #0
+ 666              	.LCFI14:
+ 667              		.cfi_def_cfa_register 7
+ 668 0006 F860     		str	r0, [r7, #12]
+ 669 0008 0B46     		mov	r3, r1
+ 670 000a 7A60     		str	r2, [r7, #4]
+ 671 000c 7B81     		strh	r3, [r7, #10]	@ movhi
+ 268:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	USBD_Endpoint_t* ep = &device.Endpoints[device.CurrentEndpoint];
+ 672              		.loc 1 268 0
+ 673 000e 40F20003 		movw	r3, #:lower16:device
+ 674 0012 C0F20003 		movt	r3, #:upper16:device
+ 675 0016 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+ 676 001a 4FF02C02 		mov	r2, #44
+ 677 001e 02FB03F2 		mul	r2, r2, r3
+ 678 0022 40F20003 		movw	r3, #:lower16:device
+ 679 0026 C0F20003 		movt	r3, #:upper16:device
+ 680 002a D318     		adds	r3, r2, r3
+ 681 002c 03F10403 		add	r3, r3, #4
+ 682 0030 BB61     		str	r3, [r7, #24]
+ 269:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t Bytes = 0;
+ 683              		.loc 1 269 0
+ 684 0032 4FF00003 		mov	r3, #0
+ 685 0036 FB83     		strh	r3, [r7, #30]	@ movhi
+ 270:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t BytesTransfered = 0;
+ 686              		.loc 1 270 0
+ 687 0038 4FF00003 		mov	r3, #0
+ 688 003c BB83     		strh	r3, [r7, #28]	@ movhi
+ 271:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint8_t ErrorCode;
+ 272:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 273:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	if (BytesProcessed!=NULL) {
+ 689              		.loc 1 273 0
+ 690 003e 7B68     		ldr	r3, [r7, #4]
+ 691 0040 002B     		cmp	r3, #0
+ 692 0042 56D0     		beq	.L40
+ 274:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		Length -= *BytesProcessed;
+ 693              		.loc 1 274 0
+ 694 0044 7B68     		ldr	r3, [r7, #4]
+ 695 0046 1B88     		ldrh	r3, [r3, #0]
+ 696 0048 7A89     		ldrh	r2, [r7, #10]	@ movhi
+ 697 004a D31A     		subs	r3, r2, r3
+ 698 004c 7B81     		strh	r3, [r7, #10]	@ movhi
+ 275:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		BytesTransfered = *BytesProcessed;
+ 699              		.loc 1 275 0
+ 700 004e 7B68     		ldr	r3, [r7, #4]
+ 701 0050 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 702 0052 BB83     		strh	r3, [r7, #28]	@ movhi
+ 276:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 277:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 278:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 703              		.loc 1 278 0
+ 704 0054 4DE0     		b	.L40
+ 705              	.L47:
+ 279:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (ep->InInUse)
+ 706              		.loc 1 279 0
+ 707 0056 BB69     		ldr	r3, [r7, #24]
+ 708 0058 5B68     		ldr	r3, [r3, #4]
+ 709 005a 03F01003 		and	r3, r3, #16
+ 710 005e 002B     		cmp	r3, #0
+ 711 0060 46D1     		bne	.L48
+ 712              	.L41:
+ 280:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			continue;
+ 281:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (Endpoint_IsReadWriteAllowed()) {
+ 713              		.loc 1 281 0
+ 714 0062 FFF7FEFF 		bl	Endpoint_IsReadWriteAllowed
+ 715 0066 0346     		mov	r3, r0
+ 716 0068 002B     		cmp	r3, #0
+ 717 006a 2DD0     		beq	.L42
+ 282:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if(ep->OutBytesAvailable  > Length)
+ 718              		.loc 1 282 0
+ 719 006c BB69     		ldr	r3, [r7, #24]
+ 720 006e 9A68     		ldr	r2, [r3, #8]
+ 721 0070 7B89     		ldrh	r3, [r7, #10]
+ 722 0072 9A42     		cmp	r2, r3
+ 723 0074 02D9     		bls	.L43
+ 283:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			{
+ 284:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = Length;
+ 724              		.loc 1 284 0
+ 725 0076 7B89     		ldrh	r3, [r7, #10]	@ movhi
+ 726 0078 FB83     		strh	r3, [r7, #30]	@ movhi
+ 727 007a 02E0     		b	.L44
+ 728              	.L43:
+ 285:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 286:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			else
+ 287:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			{
+ 288:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = ep->OutBytesAvailable;
+ 729              		.loc 1 288 0
+ 730 007c BB69     		ldr	r3, [r7, #24]
+ 731 007e 9B68     		ldr	r3, [r3, #8]
+ 732 0080 FB83     		strh	r3, [r7, #30]	@ movhi
+ 733              	.L44:
+ 289:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 290:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 291:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			SwapCopy((uint8_t*)Buffer + BytesTransfered,
+ 734              		.loc 1 291 0
+ 735 0082 BB8B     		ldrh	r3, [r7, #28]
+ 736 0084 FA68     		ldr	r2, [r7, #12]
+ 737 0086 D118     		adds	r1, r2, r3
+ 292:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 									ep->OutBuffer + ep->OutOffset,Bytes);
+ 738              		.loc 1 292 0
+ 739 0088 BB69     		ldr	r3, [r7, #24]
+ 740 008a 1A69     		ldr	r2, [r3, #16]
+ 741 008c BB69     		ldr	r3, [r7, #24]
+ 742 008e DB68     		ldr	r3, [r3, #12]
+ 291:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			SwapCopy((uint8_t*)Buffer + BytesTransfered,
+ 743              		.loc 1 291 0
+ 744 0090 D218     		adds	r2, r2, r3
+ 745 0092 FB8B     		ldrh	r3, [r7, #30]
+ 746 0094 0846     		mov	r0, r1
+ 747 0096 1146     		mov	r1, r2
+ 748 0098 1A46     		mov	r2, r3
+ 749 009a FFF7FEFF 		bl	SwapCopy
+ 293:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ep->OutBytesAvailable -= Bytes;
+ 750              		.loc 1 293 0
+ 751 009e BB69     		ldr	r3, [r7, #24]
+ 752 00a0 9A68     		ldr	r2, [r3, #8]
+ 753 00a2 FB8B     		ldrh	r3, [r7, #30]
+ 754 00a4 D21A     		subs	r2, r2, r3
+ 755 00a6 BB69     		ldr	r3, [r7, #24]
+ 756 00a8 9A60     		str	r2, [r3, #8]
+ 294:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ep->OutOffset += Bytes;
+ 757              		.loc 1 294 0
+ 758 00aa BB69     		ldr	r3, [r7, #24]
+ 759 00ac DA68     		ldr	r2, [r3, #12]
+ 760 00ae FB8B     		ldrh	r3, [r7, #30]
+ 761 00b0 D218     		adds	r2, r2, r3
+ 762 00b2 BB69     		ldr	r3, [r7, #24]
+ 763 00b4 DA60     		str	r2, [r3, #12]
+ 295:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			BytesTransfered += Bytes;
+ 764              		.loc 1 295 0
+ 765 00b6 BA8B     		ldrh	r2, [r7, #28]	@ movhi
+ 766 00b8 FB8B     		ldrh	r3, [r7, #30]	@ movhi
+ 767 00ba D318     		adds	r3, r2, r3
+ 768 00bc BB83     		strh	r3, [r7, #28]	@ movhi
+ 296:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Length -= Bytes;
+ 769              		.loc 1 296 0
+ 770 00be 7A89     		ldrh	r2, [r7, #10]	@ movhi
+ 771 00c0 FB8B     		ldrh	r3, [r7, #30]	@ movhi
+ 772 00c2 D31A     		subs	r3, r2, r3
+ 773 00c4 7B81     		strh	r3, [r7, #10]	@ movhi
+ 774 00c6 14E0     		b	.L40
+ 775              	.L42:
+ 297:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 298:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		else {
+ 299:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Endpoint_ClearOUT();
+ 776              		.loc 1 299 0
+ 777 00c8 FFF7FEFF 		bl	Endpoint_ClearOUT
+ 300:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (BytesProcessed!=NULL) {
+ 778              		.loc 1 300 0
+ 779 00cc 7B68     		ldr	r3, [r7, #4]
+ 780 00ce 002B     		cmp	r3, #0
+ 781 00d0 05D0     		beq	.L45
+ 301:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				*BytesProcessed = BytesTransfered;
+ 782              		.loc 1 301 0
+ 783 00d2 7B68     		ldr	r3, [r7, #4]
+ 784 00d4 BA8B     		ldrh	r2, [r7, #28]	@ movhi
+ 785 00d6 1A80     		strh	r2, [r3, #0]	@ movhi
+ 302:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				return ENDPOINT_RWSTREAM_IncompleteTransfer;
+ 786              		.loc 1 302 0
+ 787 00d8 4FF00503 		mov	r3, #5
+ 788 00dc 0EE0     		b	.L46
+ 789              	.L45:
+ 303:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 304:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 305:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ErrorCode = Endpoint_WaitUntilReady();
+ 790              		.loc 1 305 0
+ 791 00de FFF7FEFF 		bl	Endpoint_WaitUntilReady
+ 792 00e2 0346     		mov	r3, r0
+ 793 00e4 FB75     		strb	r3, [r7, #23]
+ 306:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (ErrorCode) {
+ 794              		.loc 1 306 0
+ 795 00e6 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 796 00e8 002B     		cmp	r3, #0
+ 797 00ea 02D0     		beq	.L40
+ 307:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				return ErrorCode;
+ 798              		.loc 1 307 0
+ 799 00ec FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 800 00ee 05E0     		b	.L46
+ 801              	.L48:
+ 280:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			continue;
+ 802              		.loc 1 280 0
+ 803 00f0 00BF     		nop
+ 804              	.L40:
+ 278:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 805              		.loc 1 278 0 discriminator 1
+ 806 00f2 7B89     		ldrh	r3, [r7, #10]
+ 807 00f4 002B     		cmp	r3, #0
+ 808 00f6 AED1     		bne	.L47
+ 308:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 309:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 310:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 311:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 312:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 313:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	return ENDPOINT_RWSTREAM_NoError;
+ 809              		.loc 1 313 0
+ 810 00f8 4FF00003 		mov	r3, #0
+ 811              	.L46:
+ 314:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** }
+ 812              		.loc 1 314 0
+ 813 00fc 1846     		mov	r0, r3
+ 814 00fe 07F12007 		add	r7, r7, #32
+ 815 0102 BD46     		mov	sp, r7
+ 816 0104 80BD     		pop	{r7, pc}
+ 817              		.cfi_endproc
+ 818              	.LFE133:
+ 820 0106 00BF     		.section	.text.Endpoint_Write_Control_Stream_LE,"ax",%progbits
+ 821              		.align	2
+ 822              		.global	Endpoint_Write_Control_Stream_LE
+ 823              		.thumb
+ 824              		.thumb_func
+ 826              	Endpoint_Write_Control_Stream_LE:
+ 827              	.LFB134:
+ 315:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 316:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** uint8_t	Endpoint_Write_Control_Stream_LE (const void *const Buffer,
+ 317:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 													uint16_t Length)
+ 318:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** {
+ 828              		.loc 1 318 0
+ 829              		.cfi_startproc
+ 830              		@ args = 0, pretend = 0, frame = 16
+ 831              		@ frame_needed = 1, uses_anonymous_args = 0
+ 832 0000 80B5     		push	{r7, lr}
+ 833              	.LCFI15:
+ 834              		.cfi_def_cfa_offset 8
+ 835              		.cfi_offset 7, -8
+ 836              		.cfi_offset 14, -4
+ 837 0002 84B0     		sub	sp, sp, #16
+ 838              	.LCFI16:
+ 839              		.cfi_def_cfa_offset 24
+ 840 0004 00AF     		add	r7, sp, #0
+ 841              	.LCFI17:
+ 842              		.cfi_def_cfa_register 7
+ 843 0006 7860     		str	r0, [r7, #4]
+ 844 0008 0B46     		mov	r3, r1
+ 845 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 319:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	USBD_Endpoint_t *EndPoint = &device.Endpoints[0];
+ 846              		.loc 1 319 0
+ 847 000c 184B     		ldr	r3, .L55
+ 848 000e BB60     		str	r3, [r7, #8]
+ 320:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t Bytes;
+ 321:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 322:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 849              		.loc 1 322 0
+ 850 0010 24E0     		b	.L50
+ 851              	.L53:
+ 323:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (!EndPoint->InInUse) {
+ 852              		.loc 1 323 0
+ 853 0012 BB68     		ldr	r3, [r7, #8]
+ 854 0014 5B68     		ldr	r3, [r3, #4]
+ 855 0016 03F01003 		and	r3, r3, #16
+ 856 001a 002B     		cmp	r3, #0
+ 857 001c 1ED1     		bne	.L50
+ 324:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (EndPoint->InBufferLength > Length) {
+ 858              		.loc 1 324 0
+ 859 001e BB68     		ldr	r3, [r7, #8]
+ 860 0020 1A6A     		ldr	r2, [r3, #32]
+ 861 0022 7B88     		ldrh	r3, [r7, #2]
+ 862 0024 9A42     		cmp	r2, r3
+ 863 0026 02D9     		bls	.L51
+ 325:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = Length;
+ 864              		.loc 1 325 0
+ 865 0028 7B88     		ldrh	r3, [r7, #2]	@ movhi
+ 866 002a FB81     		strh	r3, [r7, #14]	@ movhi
+ 867 002c 02E0     		b	.L52
+ 868              	.L51:
+ 326:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			} else {
+ 327:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = EndPoint->InBufferLength;
+ 869              		.loc 1 327 0
+ 870 002e BB68     		ldr	r3, [r7, #8]
+ 871 0030 1B6A     		ldr	r3, [r3, #32]
+ 872 0032 FB81     		strh	r3, [r7, #14]	@ movhi
+ 873              	.L52:
+ 328:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 329:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			memcpy(EndPoint->InBuffer,Buffer,Bytes);
+ 874              		.loc 1 329 0
+ 875 0034 BB68     		ldr	r3, [r7, #8]
+ 876 0036 DA69     		ldr	r2, [r3, #28]
+ 877 0038 FB89     		ldrh	r3, [r7, #14]
+ 878 003a 1046     		mov	r0, r2
+ 879 003c 7968     		ldr	r1, [r7, #4]
+ 880 003e 1A46     		mov	r2, r3
+ 881 0040 FFF7FEFF 		bl	memcpy
+ 330:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			EndPoint->InBytesAvailable += Bytes;
+ 882              		.loc 1 330 0
+ 883 0044 BB68     		ldr	r3, [r7, #8]
+ 884 0046 9A69     		ldr	r2, [r3, #24]
+ 885 0048 FB89     		ldrh	r3, [r7, #14]
+ 886 004a D218     		adds	r2, r2, r3
+ 887 004c BB68     		ldr	r3, [r7, #8]
+ 888 004e 9A61     		str	r2, [r3, #24]
+ 331:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Length -= Bytes;
+ 889              		.loc 1 331 0
+ 890 0050 7A88     		ldrh	r2, [r7, #2]	@ movhi
+ 891 0052 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 892 0054 D31A     		subs	r3, r2, r3
+ 893 0056 7B80     		strh	r3, [r7, #2]	@ movhi
+ 332:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 333:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Endpoint_ClearIN();
+ 894              		.loc 1 333 0
+ 895 0058 FFF7FEFF 		bl	Endpoint_ClearIN
+ 896              	.L50:
+ 322:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 897              		.loc 1 322 0 discriminator 1
+ 898 005c 7B88     		ldrh	r3, [r7, #2]
+ 899 005e 002B     		cmp	r3, #0
+ 900 0060 D7D1     		bne	.L53
+ 334:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 335:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 336:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	return ENDPOINT_RWCSTREAM_NoError;
+ 901              		.loc 1 336 0
+ 902 0062 4FF00003 		mov	r3, #0
+ 337:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** }
+ 903              		.loc 1 337 0
+ 904 0066 1846     		mov	r0, r3
+ 905 0068 07F11007 		add	r7, r7, #16
+ 906 006c BD46     		mov	sp, r7
+ 907 006e 80BD     		pop	{r7, pc}
+ 908              	.L56:
+ 909              		.align	2
+ 910              	.L55:
+ 911 0070 04000000 		.word	device+4
+ 912              		.cfi_endproc
+ 913              	.LFE134:
+ 915              		.section	.text.Endpoint_Write_Control_Stream_BE,"ax",%progbits
+ 916              		.align	2
+ 917              		.global	Endpoint_Write_Control_Stream_BE
+ 918              		.thumb
+ 919              		.thumb_func
+ 921              	Endpoint_Write_Control_Stream_BE:
+ 922              	.LFB135:
+ 338:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 339:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** uint8_t	Endpoint_Write_Control_Stream_BE (const void *const Buffer,
+ 340:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 													uint16_t Length)
+ 341:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** {
+ 923              		.loc 1 341 0
+ 924              		.cfi_startproc
+ 925              		@ args = 0, pretend = 0, frame = 8
+ 926              		@ frame_needed = 1, uses_anonymous_args = 0
+ 927 0000 80B5     		push	{r7, lr}
+ 928              	.LCFI18:
+ 929              		.cfi_def_cfa_offset 8
+ 930              		.cfi_offset 7, -8
+ 931              		.cfi_offset 14, -4
+ 932 0002 82B0     		sub	sp, sp, #8
+ 933              	.LCFI19:
+ 934              		.cfi_def_cfa_offset 16
+ 935 0004 00AF     		add	r7, sp, #0
+ 936              	.LCFI20:
+ 937              		.cfi_def_cfa_register 7
+ 938 0006 7860     		str	r0, [r7, #4]
+ 939 0008 0B46     		mov	r3, r1
+ 940 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 342:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	return Endpoint_Write_Control_Stream_LE(Buffer,Length);
+ 941              		.loc 1 342 0
+ 942 000c 7B88     		ldrh	r3, [r7, #2]
+ 943 000e 7868     		ldr	r0, [r7, #4]
+ 944 0010 1946     		mov	r1, r3
+ 945 0012 FFF7FEFF 		bl	Endpoint_Write_Control_Stream_LE
+ 946 0016 0346     		mov	r3, r0
+ 343:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** }
+ 947              		.loc 1 343 0
+ 948 0018 1846     		mov	r0, r3
+ 949 001a 07F10807 		add	r7, r7, #8
+ 950 001e BD46     		mov	sp, r7
+ 951 0020 80BD     		pop	{r7, pc}
+ 952              		.cfi_endproc
+ 953              	.LFE135:
+ 955 0022 00BF     		.section	.text.Endpoint_Read_Control_Stream_LE,"ax",%progbits
+ 956              		.align	2
+ 957              		.global	Endpoint_Read_Control_Stream_LE
+ 958              		.thumb
+ 959              		.thumb_func
+ 961              	Endpoint_Read_Control_Stream_LE:
+ 962              	.LFB136:
+ 344:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 345:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** uint8_t	Endpoint_Read_Control_Stream_LE (void *const Buffer, uint16_t Length) {
+ 963              		.loc 1 345 0
+ 964              		.cfi_startproc
+ 965              		@ args = 0, pretend = 0, frame = 16
+ 966              		@ frame_needed = 1, uses_anonymous_args = 0
+ 967 0000 80B5     		push	{r7, lr}
+ 968              	.LCFI21:
+ 969              		.cfi_def_cfa_offset 8
+ 970              		.cfi_offset 7, -8
+ 971              		.cfi_offset 14, -4
+ 972 0002 84B0     		sub	sp, sp, #16
+ 973              	.LCFI22:
+ 974              		.cfi_def_cfa_offset 24
+ 975 0004 00AF     		add	r7, sp, #0
+ 976              	.LCFI23:
+ 977              		.cfi_def_cfa_register 7
+ 978 0006 7860     		str	r0, [r7, #4]
+ 979 0008 0B46     		mov	r3, r1
+ 980 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 346:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	USBD_Endpoint_t *EndPoint = &device.Endpoints[0];
+ 981              		.loc 1 346 0
+ 982 000c 184B     		ldr	r3, .L65
+ 983 000e BB60     		str	r3, [r7, #8]
+ 347:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	uint16_t Bytes;
+ 348:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 349:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 984              		.loc 1 349 0
+ 985 0010 24E0     		b	.L60
+ 986              	.L63:
+ 350:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (EndPoint->IsOutRecieved) {
+ 987              		.loc 1 350 0
+ 988 0012 BB68     		ldr	r3, [r7, #8]
+ 989 0014 5B68     		ldr	r3, [r3, #4]
+ 990 0016 03F02003 		and	r3, r3, #32
+ 991 001a 002B     		cmp	r3, #0
+ 992 001c 1ED0     		beq	.L60
+ 351:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if(EndPoint->OutBytesAvailable > Length)
+ 993              		.loc 1 351 0
+ 994 001e BB68     		ldr	r3, [r7, #8]
+ 995 0020 9A68     		ldr	r2, [r3, #8]
+ 996 0022 7B88     		ldrh	r3, [r7, #2]
+ 997 0024 9A42     		cmp	r2, r3
+ 998 0026 02D9     		bls	.L61
+ 352:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			{
+ 353:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = Length;
+ 999              		.loc 1 353 0
+ 1000 0028 7B88     		ldrh	r3, [r7, #2]	@ movhi
+ 1001 002a FB81     		strh	r3, [r7, #14]	@ movhi
+ 1002 002c 02E0     		b	.L62
+ 1003              	.L61:
+ 354:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 355:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			else
+ 356:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			{
+ 357:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Bytes = EndPoint->OutBytesAvailable;
+ 1004              		.loc 1 357 0
+ 1005 002e BB68     		ldr	r3, [r7, #8]
+ 1006 0030 9B68     		ldr	r3, [r3, #8]
+ 1007 0032 FB81     		strh	r3, [r7, #14]	@ movhi
+ 1008              	.L62:
+ 358:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 359:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 360:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			memcpy(Buffer,EndPoint->OutBuffer,Bytes);
+ 1009              		.loc 1 360 0
+ 1010 0034 BB68     		ldr	r3, [r7, #8]
+ 1011 0036 1A69     		ldr	r2, [r3, #16]
+ 1012 0038 FB89     		ldrh	r3, [r7, #14]
+ 1013 003a 7868     		ldr	r0, [r7, #4]
+ 1014 003c 1146     		mov	r1, r2
+ 1015 003e 1A46     		mov	r2, r3
+ 1016 0040 FFF7FEFF 		bl	memcpy
+ 361:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			EndPoint->OutBytesAvailable -= Bytes;
+ 1017              		.loc 1 361 0
+ 1018 0044 BB68     		ldr	r3, [r7, #8]
+ 1019 0046 9A68     		ldr	r2, [r3, #8]
+ 1020 0048 FB89     		ldrh	r3, [r7, #14]
+ 1021 004a D21A     		subs	r2, r2, r3
+ 1022 004c BB68     		ldr	r3, [r7, #8]
+ 1023 004e 9A60     		str	r2, [r3, #8]
+ 362:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Length -= Bytes;
+ 1024              		.loc 1 362 0
+ 1025 0050 7A88     		ldrh	r2, [r7, #2]	@ movhi
+ 1026 0052 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 1027 0054 D31A     		subs	r3, r2, r3
+ 1028 0056 7B80     		strh	r3, [r7, #2]	@ movhi
+ 363:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 364:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Endpoint_ClearOUT();
+ 1029              		.loc 1 364 0
+ 1030 0058 FFF7FEFF 		bl	Endpoint_ClearOUT
+ 1031              	.L60:
+ 349:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	while (Length) {
+ 1032              		.loc 1 349 0 discriminator 1
+ 1033 005c 7B88     		ldrh	r3, [r7, #2]
+ 1034 005e 002B     		cmp	r3, #0
+ 1035 0060 D7D1     		bne	.L63
+ 365:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 366:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	}
+ 367:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	return ENDPOINT_RWCSTREAM_NoError;
+ 1036              		.loc 1 367 0
+ 1037 0062 4FF00003 		mov	r3, #0
+ 368:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** }
+ 1038              		.loc 1 368 0
+ 1039 0066 1846     		mov	r0, r3
+ 1040 0068 07F11007 		add	r7, r7, #16
+ 1041 006c BD46     		mov	sp, r7
+ 1042 006e 80BD     		pop	{r7, pc}
+ 1043              	.L66:
+ 1044              		.align	2
+ 1045              	.L65:
+ 1046 0070 04000000 		.word	device+4
+ 1047              		.cfi_endproc
+ 1048              	.LFE136:
+ 1050              		.section	.text.Endpoint_Read_Control_Stream_BE,"ax",%progbits
+ 1051              		.align	2
+ 1052              		.global	Endpoint_Read_Control_Stream_BE
+ 1053              		.thumb
+ 1054              		.thumb_func
+ 1056              	Endpoint_Read_Control_Stream_BE:
+ 1057              	.LFB137:
+ 369:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 370:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** uint8_t	Endpoint_Read_Control_Stream_BE (void *const Buffer, uint16_t Length) {
+ 1058              		.loc 1 370 0
+ 1059              		.cfi_startproc
+ 1060              		@ args = 0, pretend = 0, frame = 8
+ 1061              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1062 0000 80B5     		push	{r7, lr}
+ 1063              	.LCFI24:
+ 1064              		.cfi_def_cfa_offset 8
+ 1065              		.cfi_offset 7, -8
+ 1066              		.cfi_offset 14, -4
+ 1067 0002 82B0     		sub	sp, sp, #8
+ 1068              	.LCFI25:
+ 1069              		.cfi_def_cfa_offset 16
+ 1070 0004 00AF     		add	r7, sp, #0
+ 1071              	.LCFI26:
+ 1072              		.cfi_def_cfa_register 7
+ 1073 0006 7860     		str	r0, [r7, #4]
+ 1074 0008 0B46     		mov	r3, r1
+ 1075 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 371:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	return Endpoint_Read_Control_Stream_LE(Buffer,Length);
+ 1076              		.loc 1 371 0
+ 1077 000c 7B88     		ldrh	r3, [r7, #2]
+ 1078 000e 7868     		ldr	r0, [r7, #4]
+ 1079 0010 1946     		mov	r1, r3
+ 1080 0012 FFF7FEFF 		bl	Endpoint_Read_Control_Stream_LE
+ 1081 0016 0346     		mov	r3, r0
+ 372:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** }
+ 1082              		.loc 1 372 0
+ 1083 0018 1846     		mov	r0, r3
+ 1084 001a 07F10807 		add	r7, r7, #8
+ 1085 001e BD46     		mov	sp, r7
+ 1086 0020 80BD     		pop	{r7, pc}
+ 1087              		.cfi_endproc
+ 1088              	.LFE137:
+ 1090 0022 00BF     		.section	.text.Endpoint_Null_Stream,"ax",%progbits
+ 1091              		.align	2
+ 1092              		.global	Endpoint_Null_Stream
+ 1093              		.thumb
+ 1094              		.thumb_func
+ 1096              	Endpoint_Null_Stream:
+ 1097              	.LFB138:
+ 373:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 374:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** uint8_t Endpoint_Null_Stream(uint16_t Length,
+ 375:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 								 uint16_t* const BytesProcessed) {
+ 1098              		.loc 1 375 0
+ 1099              		.cfi_startproc
+ 1100              		@ args = 0, pretend = 0, frame = 24
+ 1101              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1102 0000 80B5     		push	{r7, lr}
+ 1103              	.LCFI27:
+ 1104              		.cfi_def_cfa_offset 8
+ 1105              		.cfi_offset 7, -8
+ 1106              		.cfi_offset 14, -4
+ 1107 0002 86B0     		sub	sp, sp, #24
+ 1108              	.LCFI28:
+ 1109              		.cfi_def_cfa_offset 32
+ 1110 0004 00AF     		add	r7, sp, #0
+ 1111              	.LCFI29:
+ 1112              		.cfi_def_cfa_register 7
+ 1113 0006 0346     		mov	r3, r0
+ 1114 0008 3960     		str	r1, [r7, #0]
+ 1115 000a FB80     		strh	r3, [r7, #6]	@ movhi
+ 376:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 	USBD_Endpoint_t* ep = &device.Endpoints[device.CurrentEndpoint];
+ 1116              		.loc 1 376 0
+ 1117 000c 40F20003 		movw	r3, #:lower16:device
+ 1118 0010 C0F20003 		movt	r3, #:upper16:device
+ 1119 0014 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+ 1120 0018 4FF02C02 		mov	r2, #44
+ 1121 001c 02FB03F2 		mul	r2, r2, r3
+ 1122 0020 40F20003 		movw	r3, #:lower16:device
+ 1123 0024 C0F20003 		movt	r3, #:upper16:device
+ 1124 0028 D318     		adds	r3, r2, r3
+ 1125 002a 03F10403 		add	r3, r3, #4
+ 1126 002e 3B61     		str	r3, [r7, #16]
+ 377:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		uint16_t Bytes = 0;
+ 1127              		.loc 1 377 0
+ 1128 0030 4FF00003 		mov	r3, #0
+ 1129 0034 FB82     		strh	r3, [r7, #22]	@ movhi
+ 378:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		uint16_t BytesTransfered = 0;
+ 1130              		.loc 1 378 0
+ 1131 0036 4FF00003 		mov	r3, #0
+ 1132 003a BB82     		strh	r3, [r7, #20]	@ movhi
+ 379:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		uint8_t ErrorCode;
+ 380:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 381:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		if (BytesProcessed!=NULL) {
+ 1133              		.loc 1 381 0
+ 1134 003c 3B68     		ldr	r3, [r7, #0]
+ 1135 003e 002B     		cmp	r3, #0
+ 1136 0040 56D0     		beq	.L71
+ 382:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			Length -= *BytesProcessed;
+ 1137              		.loc 1 382 0
+ 1138 0042 3B68     		ldr	r3, [r7, #0]
+ 1139 0044 1B88     		ldrh	r3, [r3, #0]
+ 1140 0046 FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 1141 0048 D31A     		subs	r3, r2, r3
+ 1142 004a FB80     		strh	r3, [r7, #6]	@ movhi
+ 383:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			BytesTransfered = *BytesProcessed;
+ 1143              		.loc 1 383 0
+ 1144 004c 3B68     		ldr	r3, [r7, #0]
+ 1145 004e 1B88     		ldrh	r3, [r3, #0]	@ movhi
+ 1146 0050 BB82     		strh	r3, [r7, #20]	@ movhi
+ 384:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 385:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 386:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		while (Length) {
+ 1147              		.loc 1 386 0
+ 1148 0052 4DE0     		b	.L71
+ 1149              	.L78:
+ 387:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (ep->InInUse)
+ 1150              		.loc 1 387 0
+ 1151 0054 3B69     		ldr	r3, [r7, #16]
+ 1152 0056 5B68     		ldr	r3, [r3, #4]
+ 1153 0058 03F01003 		and	r3, r3, #16
+ 1154 005c 002B     		cmp	r3, #0
+ 1155 005e 46D1     		bne	.L79
+ 1156              	.L72:
+ 388:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				continue;
+ 389:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (Endpoint_IsReadWriteAllowed()) {
+ 1157              		.loc 1 389 0
+ 1158 0060 FFF7FEFF 		bl	Endpoint_IsReadWriteAllowed
+ 1159 0064 0346     		mov	r3, r0
+ 1160 0066 002B     		cmp	r3, #0
+ 1161 0068 2DD0     		beq	.L73
+ 390:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				if((ep->InBufferLength - ep->InBytesAvailable)  > Length)
+ 1162              		.loc 1 390 0
+ 1163 006a 3B69     		ldr	r3, [r7, #16]
+ 1164 006c 1A6A     		ldr	r2, [r3, #32]
+ 1165 006e 3B69     		ldr	r3, [r7, #16]
+ 1166 0070 9B69     		ldr	r3, [r3, #24]
+ 1167 0072 D21A     		subs	r2, r2, r3
+ 1168 0074 FB88     		ldrh	r3, [r7, #6]
+ 1169 0076 9A42     		cmp	r2, r3
+ 1170 0078 02D9     		bls	.L74
+ 391:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				{
+ 392:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 					Bytes = Length;
+ 1171              		.loc 1 392 0
+ 1172 007a FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 1173 007c FB82     		strh	r3, [r7, #22]	@ movhi
+ 1174 007e 07E0     		b	.L75
+ 1175              	.L74:
+ 393:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				}
+ 394:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				else
+ 395:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				{
+ 396:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 					Bytes = (ep->InBufferLength - ep->InBytesAvailable);
+ 1176              		.loc 1 396 0
+ 1177 0080 3B69     		ldr	r3, [r7, #16]
+ 1178 0082 1B6A     		ldr	r3, [r3, #32]
+ 1179 0084 9AB2     		uxth	r2, r3
+ 1180 0086 3B69     		ldr	r3, [r7, #16]
+ 1181 0088 9B69     		ldr	r3, [r3, #24]
+ 1182 008a 9BB2     		uxth	r3, r3
+ 1183 008c D31A     		subs	r3, r2, r3
+ 1184 008e FB82     		strh	r3, [r7, #22]	@ movhi
+ 1185              	.L75:
+ 397:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				}
+ 398:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 399:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				memset(ep->InBuffer + ep->InBytesAvailable,0x0,Bytes);
+ 1186              		.loc 1 399 0
+ 1187 0090 3B69     		ldr	r3, [r7, #16]
+ 1188 0092 DA69     		ldr	r2, [r3, #28]
+ 1189 0094 3B69     		ldr	r3, [r7, #16]
+ 1190 0096 9B69     		ldr	r3, [r3, #24]
+ 1191 0098 D218     		adds	r2, r2, r3
+ 1192 009a FB8A     		ldrh	r3, [r7, #22]
+ 1193 009c 1046     		mov	r0, r2
+ 1194 009e 4FF00001 		mov	r1, #0
+ 1195 00a2 1A46     		mov	r2, r3
+ 1196 00a4 FFF7FEFF 		bl	memset
+ 400:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				ep->InBytesAvailable += Bytes;
+ 1197              		.loc 1 400 0
+ 1198 00a8 3B69     		ldr	r3, [r7, #16]
+ 1199 00aa 9A69     		ldr	r2, [r3, #24]
+ 1200 00ac FB8A     		ldrh	r3, [r7, #22]
+ 1201 00ae D218     		adds	r2, r2, r3
+ 1202 00b0 3B69     		ldr	r3, [r7, #16]
+ 1203 00b2 9A61     		str	r2, [r3, #24]
+ 401:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				BytesTransfered += Bytes;
+ 1204              		.loc 1 401 0
+ 1205 00b4 BA8A     		ldrh	r2, [r7, #20]	@ movhi
+ 1206 00b6 FB8A     		ldrh	r3, [r7, #22]	@ movhi
+ 1207 00b8 D318     		adds	r3, r2, r3
+ 1208 00ba BB82     		strh	r3, [r7, #20]	@ movhi
+ 402:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Length -= Bytes;
+ 1209              		.loc 1 402 0
+ 1210 00bc FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 1211 00be FB8A     		ldrh	r3, [r7, #22]	@ movhi
+ 1212 00c0 D31A     		subs	r3, r2, r3
+ 1213 00c2 FB80     		strh	r3, [r7, #6]	@ movhi
+ 1214 00c4 14E0     		b	.L71
+ 1215              	.L73:
+ 403:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 404:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			else {
+ 405:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				Endpoint_ClearIN();
+ 1216              		.loc 1 405 0
+ 1217 00c6 FFF7FEFF 		bl	Endpoint_ClearIN
+ 406:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				if (BytesProcessed!=NULL) {
+ 1218              		.loc 1 406 0
+ 1219 00ca 3B68     		ldr	r3, [r7, #0]
+ 1220 00cc 002B     		cmp	r3, #0
+ 1221 00ce 05D0     		beq	.L76
+ 407:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 					*BytesProcessed = BytesTransfered;
+ 1222              		.loc 1 407 0
+ 1223 00d0 3B68     		ldr	r3, [r7, #0]
+ 1224 00d2 BA8A     		ldrh	r2, [r7, #20]	@ movhi
+ 1225 00d4 1A80     		strh	r2, [r3, #0]	@ movhi
+ 408:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 					return ENDPOINT_RWSTREAM_IncompleteTransfer;
+ 1226              		.loc 1 408 0
+ 1227 00d6 4FF00503 		mov	r3, #5
+ 1228 00da 0EE0     		b	.L77
+ 1229              	.L76:
+ 409:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				}
+ 410:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 411:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			ErrorCode = Endpoint_WaitUntilReady();
+ 1230              		.loc 1 411 0
+ 1231 00dc FFF7FEFF 		bl	Endpoint_WaitUntilReady
+ 1232 00e0 0346     		mov	r3, r0
+ 1233 00e2 FB73     		strb	r3, [r7, #15]
+ 412:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			if (ErrorCode) {
+ 1234              		.loc 1 412 0
+ 1235 00e4 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1236 00e6 002B     		cmp	r3, #0
+ 1237 00e8 02D0     		beq	.L71
+ 413:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				return ErrorCode;
+ 1238              		.loc 1 413 0
+ 1239 00ea FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1240 00ec 05E0     		b	.L77
+ 1241              	.L79:
+ 388:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 				continue;
+ 1242              		.loc 1 388 0
+ 1243 00ee 00BF     		nop
+ 1244              	.L71:
+ 386:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		while (Length) {
+ 1245              		.loc 1 386 0 discriminator 1
+ 1246 00f0 FB88     		ldrh	r3, [r7, #6]
+ 1247 00f2 002B     		cmp	r3, #0
+ 1248 00f4 AED1     		bne	.L78
+ 414:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 415:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 416:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 
+ 417:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 			}
+ 418:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		}
+ 419:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** 		return ENDPOINT_RWSTREAM_NoError;
+ 1249              		.loc 1 419 0
+ 1250 00f6 4FF00003 		mov	r3, #0
+ 1251              	.L77:
+ 420:../Dave/Generated/src/USBD/usbd/USBD_EndpointStream_XMC4000.c **** }
+ 1252              		.loc 1 420 0
+ 1253 00fa 1846     		mov	r0, r3
+ 1254 00fc 07F11807 		add	r7, r7, #24
+ 1255 0100 BD46     		mov	sp, r7
+ 1256 0102 80BD     		pop	{r7, pc}
+ 1257              		.cfi_endproc
+ 1258              	.LFE138:
+ 1260              		.text
+ 1261              	.Letext0:
+ 1262              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1263              		.file 3 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\MOTORLIBS/../.
+ 1264              		.file 4 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\MOTORLIBS/../.
+ 1265              		.file 5 "../Dave/Generated/src/USBD/usbd/usbd.h"
+ 1266              		.file 6 "../Dave/Generated/src/USBD/usbd/../usb/Core/EndpointStream.h"
+ 1267              		.file 7 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 USBD_EndpointStream_XMC4000.c
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:23     .bss:00000000 zlp_flag
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:24     .bss:00000000 $d
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:26     .text.Endpoint_Write_Stream_LE:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:31     .text.Endpoint_Write_Stream_LE:00000000 Endpoint_Write_Stream_LE
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:233    .text.SwapCopy:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:238    .text.SwapCopy:00000000 SwapCopy
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:297    .text.Endpoint_Write_Stream_BE:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:302    .text.Endpoint_Write_Stream_BE:00000000 Endpoint_Write_Stream_BE
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:471    .text.Endpoint_Read_Stream_LE:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:476    .text.Endpoint_Read_Stream_LE:00000000 Endpoint_Read_Stream_LE
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:646    .text.Endpoint_Read_Stream_BE:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:651    .text.Endpoint_Read_Stream_BE:00000000 Endpoint_Read_Stream_BE
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:821    .text.Endpoint_Write_Control_Stream_LE:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:826    .text.Endpoint_Write_Control_Stream_LE:00000000 Endpoint_Write_Control_Stream_LE
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:911    .text.Endpoint_Write_Control_Stream_LE:00000070 $d
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:916    .text.Endpoint_Write_Control_Stream_BE:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:921    .text.Endpoint_Write_Control_Stream_BE:00000000 Endpoint_Write_Control_Stream_BE
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:956    .text.Endpoint_Read_Control_Stream_LE:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:961    .text.Endpoint_Read_Control_Stream_LE:00000000 Endpoint_Read_Control_Stream_LE
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:1046   .text.Endpoint_Read_Control_Stream_LE:00000070 $d
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:1051   .text.Endpoint_Read_Control_Stream_BE:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:1056   .text.Endpoint_Read_Control_Stream_BE:00000000 Endpoint_Read_Control_Stream_BE
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:1091   .text.Endpoint_Null_Stream:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccWaHTO9.s:1096   .text.Endpoint_Null_Stream:00000000 Endpoint_Null_Stream
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.usbd_config.h.64.bd01b2d6be88400f5b6095cc78dd2cee
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.187.40b3a084f9bc2c020a9e00b9eabe9c14
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.50.f5923f1950ced340a337f4676566f65a
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.stddef.h.235.d9f4f80b8c4429535175712282cda6a6
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.stddef.h.40.b60a1c1ee3f272eef5327a730cbabca6
+                           .group:00000000 wm4.stdbool.h.29.1c9ee6859ce8145f7838a4f2549ccec2
+                           .group:00000000 wm4.xmc4_usb.h.86.0df8e4bc81775a7befde6c395bcdee4c
+                           .group:00000000 wm4.dwc_otg_regs.h.96.602358b1a0ef2f2c6d02620a154f0cfc
+                           .group:00000000 wm4.xmc4_usb.h.97.59ae14584bb42292696e2197b500e282
+                           .group:00000000 wm4.Common.h.87.ed9fec00c6f9ec3cf5c2ac4c6cfcb530
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.Attributes.h.96.1b4ef8adf80de3cb4f8c62843bfaf7bf
+                           .group:00000000 wm4.USBMode.h.77.4e4e8a02b05a3ac3cc68fd5ff175067b
+                           .group:00000000 wm4.Endpoint.h.111.e7536b4385918c15b4c37aa69fbe94e3
+                           .group:00000000 wm4.USBController.h.105.7da122fb9e42a1d4ae2ea1662b47f042
+
+UNDEFINED SYMBOLS
+device
+Endpoint_IsReadWriteAllowed
+memcpy
+Endpoint_ClearIN
+Endpoint_WaitUntilReady
+Endpoint_ClearOUT
+memset

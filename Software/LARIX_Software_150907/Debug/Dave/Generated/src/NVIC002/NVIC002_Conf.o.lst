@@ -1,0 +1,149 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"NVIC002_Conf.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	NVIC002_Handle0
+  20              		.section	.rodata
+  21              		.align	2
+  24              	NVIC002_Handle0:
+  25 0000 5A       		.byte	90
+  26 0001 14       		.byte	20
+  27 0002 00       		.byte	0
+  28 0003 01       		.byte	1
+  29              		.global	NVIC002_Handle1
+  30              		.align	2
+  33              	NVIC002_Handle1:
+  34 0004 05       		.byte	5
+  35 0005 0A       		.byte	10
+  36 0006 00       		.byte	0
+  37 0007 00       		.byte	0
+  38              		.global	NVIC002_Handle10
+  39              		.align	2
+  42              	NVIC002_Handle10:
+  43 0008 5B       		.byte	91
+  44 0009 3F       		.byte	63
+  45 000a 00       		.byte	0
+  46 000b 01       		.byte	1
+  47              		.global	NVIC002_Handle2
+  48              		.align	2
+  51              	NVIC002_Handle2:
+  52 000c 62       		.byte	98
+  53 000d 3F       		.byte	63
+  54 000e 00       		.byte	0
+  55 000f 01       		.byte	1
+  56              		.global	NVIC002_Handle3
+  57              		.align	2
+  60              	NVIC002_Handle3:
+  61 0010 59       		.byte	89
+  62 0011 13       		.byte	19
+  63 0012 00       		.byte	0
+  64 0013 01       		.byte	1
+  65              		.global	NVIC002_Handle4
+  66              		.align	2
+  69              	NVIC002_Handle4:
+  70 0014 35       		.byte	53
+  71 0015 05       		.byte	5
+  72 0016 00       		.byte	0
+  73 0017 01       		.byte	1
+  74              		.global	NVIC002_Handle5
+  75              		.align	2
+  78              	NVIC002_Handle5:
+  79 0018 34       		.byte	52
+  80 0019 0F       		.byte	15
+  81 001a 00       		.byte	0
+  82 001b 01       		.byte	1
+  83              		.global	NVIC002_Handle6
+  84              		.align	2
+  87              	NVIC002_Handle6:
+  88 001c 37       		.byte	55
+  89 001d 3F       		.byte	63
+  90 001e 00       		.byte	0
+  91 001f 01       		.byte	1
+  92              		.global	NVIC002_Handle7
+  93              		.align	2
+  96              	NVIC002_Handle7:
+  97 0020 36       		.byte	54
+  98 0021 3F       		.byte	63
+  99 0022 00       		.byte	0
+ 100 0023 01       		.byte	1
+ 101              		.global	NVIC002_Handle8
+ 102              		.align	2
+ 105              	NVIC002_Handle8:
+ 106 0024 08       		.byte	8
+ 107 0025 03       		.byte	3
+ 108 0026 00       		.byte	0
+ 109 0027 01       		.byte	1
+ 110              		.global	NVIC002_Handle9
+ 111              		.align	2
+ 114              	NVIC002_Handle9:
+ 115 0028 57       		.byte	87
+ 116 0029 3F       		.byte	63
+ 117 002a 00       		.byte	0
+ 118 002b 01       		.byte	1
+ 119              		.global	NVIC002_HandleArray
+ 120              		.data
+ 121              		.align	2
+ 124              	NVIC002_HandleArray:
+ 125 0000 00000000 		.word	NVIC002_Handle0
+ 126 0004 00000000 		.word	NVIC002_Handle1
+ 127 0008 00000000 		.word	NVIC002_Handle10
+ 128 000c 00000000 		.word	NVIC002_Handle2
+ 129 0010 00000000 		.word	NVIC002_Handle3
+ 130 0014 00000000 		.word	NVIC002_Handle4
+ 131 0018 00000000 		.word	NVIC002_Handle5
+ 132 001c 00000000 		.word	NVIC002_Handle6
+ 133 0020 00000000 		.word	NVIC002_Handle7
+ 134 0024 00000000 		.word	NVIC002_Handle8
+ 135 0028 00000000 		.word	NVIC002_Handle9
+ 136              		.text
+ 137              	.Letext0:
+ 138              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 139              		.file 2 "../Dave/Generated/src/NVIC002/../../inc/NVIC002/NVIC002.h"
+ 140              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 141              		.file 4 "../Dave/Generated/src/NVIC002/NVIC002_Conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 NVIC002_Conf.c
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:24     .rodata:00000000 NVIC002_Handle0
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:21     .rodata:00000000 $d
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:33     .rodata:00000004 NVIC002_Handle1
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:42     .rodata:00000008 NVIC002_Handle10
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:51     .rodata:0000000c NVIC002_Handle2
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:60     .rodata:00000010 NVIC002_Handle3
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:69     .rodata:00000014 NVIC002_Handle4
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:78     .rodata:00000018 NVIC002_Handle5
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:87     .rodata:0000001c NVIC002_Handle6
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:96     .rodata:00000020 NVIC002_Handle7
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:105    .rodata:00000024 NVIC002_Handle8
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:114    .rodata:00000028 NVIC002_Handle9
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:124    .data:00000000 NVIC002_HandleArray
+C:\Users\Herbert\AppData\Local\Temp\ccT8aRYr.s:121    .data:00000000 $d
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.NVIC002_Conf.h.63.9993755b03eb421826d0e4532aa15204
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="Configuration" className="IfxGroupBox" controlId="1320233829703">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group57" displayName="Event Request Select Configuration" className="IfxGroupBox" controlId="1320233870406">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eru001/0/eru001_erwSourceSelect" displayName="Event Request Select" className="EnumerationType" paramName="app/eru001/0/eru001_erwSourceSelect:Source select for ERSx" controlId="1320233933140">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group9" displayName="Event Trigger Logic Configuration" className="IfxGroupBox" controlId="1331186740634">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group47" displayName="Enable Edge Detection" className="IfxGroupBox" controlId="1329732999046">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eru001/0/eru001_erwEdgeDetFallEd" displayName="Falling edge" labelRequired="false" className="EnumerationType" paramName="app/eru001/0/eru001_erwEdgeDetFallEd:Falling edge" controlId="1320233940484">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eru001/0/eru001_erwEdgeDetRisEd" displayName="Rising edge" labelRequired="false" className="EnumerationType" paramName="app/eru001/0/eru001_erwEdgeDetRisEd:Rising edge" controlId="1320233947671">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eru001/0/eru001_erwClearStatus" displayName="Enable Sticky Status Flag" labelRequired="false" className="EnumerationType" paramName="app/eru001/0/eru001_erwClearStatus:Clear status flag" controlId="1320233960984">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" verticalSpan="2"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/eru001/0/eru001_eroString" displayName="Status Flag" readonly="true" className="StringType" paramName="app/eru001/0/eru001_eroString:Status Flag" controlId="1334127369874">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalSpan="25"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

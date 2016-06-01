@@ -1,0 +1,2150 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"CDCClassDevice.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Endpoint_SelectEndpoint,"ax",%progbits
+  20              		.align	2
+  21              		.thumb
+  22              		.thumb_func
+  24              	Endpoint_SelectEndpoint:
+  25              	.LFB116:
+  26              		.file 1 "../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoin
+   1:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** /*
+   2:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   Copyright 2013  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+   3:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+   4:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   Permission to use, copy, modify, distribute, and sell this
+   5:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   software and its documentation for any purpose is hereby granted
+   6:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   without fee, provided that the above copyright notice appear in
+   7:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   all copies and that both that the copyright notice and this
+   8:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   permission notice and warranty disclaimer appear in supporting
+   9:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   documentation, and that the name of the author not be used in
+  10:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   advertising or publicity pertaining to distribution of the
+  11:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   software without specific, written prior permission.
+  12:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+  13:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   The author disclaims all warranties with regard to this
+  14:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   software, including all implied warranties of merchantability
+  15:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   and fitness.  In no event shall the author be liable for any
+  16:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   special, indirect or consequential damages or any damages
+  17:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   whatsoever resulting from loss of use, data or profits, whether
+  18:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   in an action of contract, negligence or other tortious action,
+  19:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   arising out of or in connection with the use or performance of
+  20:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****   this software.
+  21:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** */
+  22:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** /*******************************************************************************
+  23:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  Copyright (c) 2014, Infineon Technologies AG                                 **
+  24:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  All rights reserved.                                                         **
+  25:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****                                                                               **
+  26:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  Redistribution and use in source and binary forms, with or without           **
+  27:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  modification,are permitted provided that the following conditions are met:   **
+  28:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****                                                                               **
+  29:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  *Redistributions of source code must retain the above copyright notice,      **
+  30:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  this list of conditions and the following disclaimer.                        **
+  31:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  32:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  this list of conditions and the following disclaimer in the documentation    **
+  33:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  and/or other materials provided with the distribution.                       **
+  34:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  *Neither the name of the copyright holders nor the names of its contributors **
+  35:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  may be used to endorse or promote products derived from this software without**
+  36:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  specific prior written permission.                                           **
+  37:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****                                                                               **
+  38:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  39:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  40:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  41:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  42:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  43:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  44:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  45:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  46:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  47:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  48:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  49:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****                                                                               **
+  50:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  To improve the quality of the software, users are encouraged to share        **
+  51:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  52:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  dave@infineon.com).                                                          **
+  53:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****                                                                               **
+  54:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** ********************************************************************************
+  55:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** **                                                                            **
+  56:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** **                                                                            **
+  57:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  58:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** **                                                                            **
+  59:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** ** COMPILER : Compiler Independent                                            **
+  60:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** **                                                                            **
+  61:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** ** AUTHOR : App Developer                                                     **
+  62:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** **                                                                            **
+  63:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** ** MAY BE CHANGED BY USER [yes/no]: No                                        **
+  64:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** **                                                                            **
+  65:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** ** MODIFICATION DATE : Feb 21, 2014     		                              **
+  66:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** **                                                                            **
+  67:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** *******************************************************************************/
+  68:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+  69:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** /*******************************************************************************
+  70:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** **                       Author(s) Identity                                   **
+  71:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** ********************************************************************************
+  72:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** **                                                                            **
+  73:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** ** Initials    Name                                                           **
+  74:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** ** ---------------------------------------------------------------------------**
+  75:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** ** NSND          App Developer                                                **
+  76:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** *******************************************************************************/
+  77:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+  78:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** /**
+  79:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  * @file   USBD_Endpoint_XMC4000.h
+  80:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  *
+  81:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  * @brief Header file for Device end point access.
+  82:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  *
+  83:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  * It provides enums,function prototypes and inline function definitions to
+  84:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  * access the USB end point.
+  85:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  *
+  86:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h ****  */
+  87:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+  88:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+  89:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+  90:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** #ifndef USBD_ENDPOINT_XMC4000_H_
+  91:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** #define USBD_ENDPOINT_XMC4000_H_
+  92:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+  93:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** #include "../usb/Common/Common.h"
+  94:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** #include "../usb/Core/Endpoint.h"
+  95:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** #include "../usb/Core/USBController.h"
+  96:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** #include "usbd.h" /* IXF */
+  97:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+  98:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+  99:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** /* Enable C linkage for C++ Compilers: */
+ 100:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** #if defined(__cplusplus)
+ 101:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	extern "C" {
+ 102:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** #endif
+ 103:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/**
+ 104:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * @ingroup USBD_enumerations
+ 105:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * @{
+ 106:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 107:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 108:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/** Enum for the possible error return codes of the
+ 109:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * \ref Endpoint_WaitUntilReady() function.
+ 110:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	*
+ 111:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	*/
+ 112:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	enum Endpoint_WaitUntilReady_ErrorCodes_t
+ 113:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	{
+ 114:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		ENDPOINT_READYWAIT_NoError                 = 0, /**< Endpoint is ready for next packet, no error.
+ 115:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		ENDPOINT_READYWAIT_EndpointStalled         = 1, /**< The endpoint was stalled during the stream
+ 116:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 														 *   transfer by the host or device.
+ 117:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 														 */
+ 118:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		ENDPOINT_READYWAIT_DeviceDisconnected      = 2,	/**< Device was disconnected from the host while
+ 119:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 														 *   waiting for the endpoint to become ready.
+ 120:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 														 */
+ 121:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		ENDPOINT_READYWAIT_BusSuspended            = 3, /**< The USB bus has been suspended by the host a
+ 122:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 														 *   no USB endpoint traffic can occur until the bus
+ 123:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 														 *   has resumed.
+ 124:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 														 */
+ 125:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		ENDPOINT_READYWAIT_Timeout                 = 4, /**< The host failed to accept or send the next p
+ 126:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 														 *   within the software timeout period set by the
+ 127:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 														 *   \ref USB_STREAM_TIMEOUT_MS macro.
+ 128:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 														 */
+ 129:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	};
+ 130:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/**
+ 131:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * @}
+ 132:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 133:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 134:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/**
+ 135:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * @ingroup USBD_apidoc
+ 136:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * @{
+ 137:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 138:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/** Get the endpoint address of the currently selected endpoint. This is
+ 139:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * typically used to save the currently selected endpoint so that it can be
+ 140:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * restored after another endpoint has been  manipulated.
+ 141:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 142:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \return Index of the currently selected endpoint.
+ 143:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 144:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline uint8_t Endpoint_GetCurrentEndpoint(void);
+ 145:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline uint8_t Endpoint_GetCurrentEndpoint(void)
+ 146:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	{
+ 147:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		return device.CurrentDirection | device.CurrentEndpoint;
+ 148:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	}
+ 149:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 150:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/** Selects the given endpoint address.
+ 151:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 152:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  Any endpoint operations which do not require the endpoint address to be
+ 153:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  indicated will operate on
+ 154:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  the currently selected endpoint.
+ 155:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 156:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \param[in] Address Endpoint address to select.
+ 157:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 158:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline void Endpoint_SelectEndpoint(const uint8_t Address);
+ 159:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline void Endpoint_SelectEndpoint(const uint8_t Address)
+ 160:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	{
+  27              		.loc 1 160 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 0346     		mov	r3, r0
+  43 0008 FB71     		strb	r3, [r7, #7]
+ 161:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		device.CurrentEndpoint = Address & ENDPOINT_EPNUM_MASK;
+  44              		.loc 1 161 0
+  45 000a FB79     		ldrb	r3, [r7, #7]
+  46 000c 03F00F03 		and	r3, r3, #15
+  47 0010 DAB2     		uxtb	r2, r3
+  48 0012 40F20003 		movw	r3, #:lower16:device
+  49 0016 C0F20003 		movt	r3, #:upper16:device
+  50 001a 83F83C21 		strb	r2, [r3, #316]
+ 162:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		device.CurrentDirection = (Address & ENDPOINT_DIR_MASK);
+  51              		.loc 1 162 0
+  52 001e FB79     		ldrb	r3, [r7, #7]
+  53 0020 23F07F03 		bic	r3, r3, #127
+  54 0024 DAB2     		uxtb	r2, r3
+  55 0026 40F20003 		movw	r3, #:lower16:device
+  56 002a C0F20003 		movt	r3, #:upper16:device
+  57 002e 83F83D21 		strb	r2, [r3, #317]
+ 163:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	}
+  58              		.loc 1 163 0
+  59 0032 07F10C07 		add	r7, r7, #12
+  60 0036 BD46     		mov	sp, r7
+  61 0038 80BC     		pop	{r7}
+  62 003a 7047     		bx	lr
+  63              		.cfi_endproc
+  64              	.LFE116:
+  66              		.section	.text.Endpoint_IsSETUPReceived,"ax",%progbits
+  67              		.align	2
+  68              		.thumb
+  69              		.thumb_func
+  71              	Endpoint_IsSETUPReceived:
+  72              	.LFB117:
+ 164:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 165:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/** Determines if the current CONTROL type endpoint has received a SETUP
+ 166:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * packet.
+ 167:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 168:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \ingroup Group_EndpointPacketManagement_AVR8
+ 169:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 170:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \return Boolean \c true if the selected endpoint has received a SETUP
+ 171:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  packet, \c false otherwise.
+ 172:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 173:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline bool Endpoint_IsSETUPReceived(void);
+ 174:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline bool Endpoint_IsSETUPReceived(void)
+ 175:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	{
+  73              		.loc 1 175 0
+  74              		.cfi_startproc
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 1, uses_anonymous_args = 0
+  77              		@ link register save eliminated.
+  78 0000 80B4     		push	{r7}
+  79              	.LCFI3:
+  80              		.cfi_def_cfa_offset 4
+  81              		.cfi_offset 7, -4
+  82 0002 00AF     		add	r7, sp, #0
+  83              	.LCFI4:
+  84              		.cfi_def_cfa_register 7
+ 176:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		return device.IsSetupRecieved;
+  85              		.loc 1 176 0
+  86 0004 40F20003 		movw	r3, #:lower16:device
+  87 0008 C0F20003 		movt	r3, #:upper16:device
+  88 000c 93F83E31 		ldrb	r3, [r3, #318]
+  89 0010 C3F34003 		ubfx	r3, r3, #1, #1
+  90 0014 DBB2     		uxtb	r3, r3
+  91 0016 002B     		cmp	r3, #0
+  92 0018 0CBF     		ite	eq
+  93 001a 0023     		moveq	r3, #0
+  94 001c 0123     		movne	r3, #1
+  95 001e DBB2     		uxtb	r3, r3
+ 177:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	}
+  96              		.loc 1 177 0
+  97 0020 1846     		mov	r0, r3
+  98 0022 BD46     		mov	sp, r7
+  99 0024 80BC     		pop	{r7}
+ 100 0026 7047     		bx	lr
+ 101              		.cfi_endproc
+ 102              	.LFE117:
+ 104              		.section	.text.Endpoint_ClearSETUP,"ax",%progbits
+ 105              		.align	2
+ 106              		.thumb
+ 107              		.thumb_func
+ 109              	Endpoint_ClearSETUP:
+ 110              	.LFB118:
+ 178:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 179:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 180:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/** Clears a received SETUP packet on the currently selected CONTROL type
+ 181:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * endpoint, freeing up the
+ 182:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  endpoint for the next packet.
+ 183:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 184:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \ingroup Group_EndpointPacketManagement_AVR8
+ 185:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 186:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \note This is not applicable for non CONTROL type endpoints.
+ 187:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 188:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline void Endpoint_ClearSETUP(void);
+ 189:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline void Endpoint_ClearSETUP(void)
+ 190:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	{
+ 111              		.loc 1 190 0
+ 112              		.cfi_startproc
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 1, uses_anonymous_args = 0
+ 115              		@ link register save eliminated.
+ 116 0000 80B4     		push	{r7}
+ 117              	.LCFI5:
+ 118              		.cfi_def_cfa_offset 4
+ 119              		.cfi_offset 7, -4
+ 120 0002 00AF     		add	r7, sp, #0
+ 121              	.LCFI6:
+ 122              		.cfi_def_cfa_register 7
+ 191:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		device.IsSetupRecieved = 0;
+ 123              		.loc 1 191 0
+ 124 0004 40F20003 		movw	r3, #:lower16:device
+ 125 0008 C0F20003 		movt	r3, #:upper16:device
+ 126 000c 93F83E21 		ldrb	r2, [r3, #318]
+ 127 0010 6FF34102 		bfc	r2, #1, #1
+ 128 0014 83F83E21 		strb	r2, [r3, #318]
+ 192:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	}
+ 129              		.loc 1 192 0
+ 130 0018 BD46     		mov	sp, r7
+ 131 001a 80BC     		pop	{r7}
+ 132 001c 7047     		bx	lr
+ 133              		.cfi_endproc
+ 134              	.LFE118:
+ 136 001e 00BF     		.section	.text.Endpoint_ClearStatusStage,"ax",%progbits
+ 137              		.align	2
+ 138              		.thumb
+ 139              		.thumb_func
+ 141              	Endpoint_ClearStatusStage:
+ 142              	.LFB119:
+ 193:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 194:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/** Nothing done in this function
+ 195:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 196:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 197:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline void Endpoint_ClearStatusStage(void);
+ 198:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline void Endpoint_ClearStatusStage(void)
+ 199:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	{
+ 143              		.loc 1 199 0
+ 144              		.cfi_startproc
+ 145              		@ args = 0, pretend = 0, frame = 0
+ 146              		@ frame_needed = 1, uses_anonymous_args = 0
+ 147              		@ link register save eliminated.
+ 148 0000 80B4     		push	{r7}
+ 149              	.LCFI7:
+ 150              		.cfi_def_cfa_offset 4
+ 151              		.cfi_offset 7, -4
+ 152 0002 00AF     		add	r7, sp, #0
+ 153              	.LCFI8:
+ 154              		.cfi_def_cfa_register 7
+ 200:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 201:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	}
+ 155              		.loc 1 201 0
+ 156 0004 BD46     		mov	sp, r7
+ 157 0006 80BC     		pop	{r7}
+ 158 0008 7047     		bx	lr
+ 159              		.cfi_endproc
+ 160              	.LFE119:
+ 162 000a 00BF     		.section	.text.Endpoint_IsINReady,"ax",%progbits
+ 163              		.align	2
+ 164              		.thumb
+ 165              		.thumb_func
+ 167              	Endpoint_IsINReady:
+ 168              	.LFB120:
+ 202:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 203:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/** Determines if the selected IN endpoint is ready for a new packet to be
+ 204:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 * sent to the host.
+ 205:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 206:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \ingroup Group_EndpointPacketManagement_AVR8
+ 207:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 208:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \return Boolean \c true if the current endpoint is ready for an IN
+ 209:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  packet, \c false otherwise.
+ 210:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 211:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline bool Endpoint_IsINReady(void);
+ 212:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline bool Endpoint_IsINReady(void)
+ 213:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	{
+ 169              		.loc 1 213 0
+ 170              		.cfi_startproc
+ 171              		@ args = 0, pretend = 0, frame = 8
+ 172              		@ frame_needed = 1, uses_anonymous_args = 0
+ 173              		@ link register save eliminated.
+ 174 0000 80B4     		push	{r7}
+ 175              	.LCFI9:
+ 176              		.cfi_def_cfa_offset 4
+ 177              		.cfi_offset 7, -4
+ 178 0002 83B0     		sub	sp, sp, #12
+ 179              	.LCFI10:
+ 180              		.cfi_def_cfa_offset 16
+ 181 0004 00AF     		add	r7, sp, #0
+ 182              	.LCFI11:
+ 183              		.cfi_def_cfa_register 7
+ 214:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		USBD_Endpoint_t *ep = &device.Endpoints[device.CurrentEndpoint];
+ 184              		.loc 1 214 0
+ 185 0006 40F20003 		movw	r3, #:lower16:device
+ 186 000a C0F20003 		movt	r3, #:upper16:device
+ 187 000e 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+ 188 0012 4FF02C02 		mov	r2, #44
+ 189 0016 02FB03F2 		mul	r2, r2, r3
+ 190 001a 40F20003 		movw	r3, #:lower16:device
+ 191 001e C0F20003 		movt	r3, #:upper16:device
+ 192 0022 D318     		adds	r3, r2, r3
+ 193 0024 03F10403 		add	r3, r3, #4
+ 194 0028 7B60     		str	r3, [r7, #4]
+ 215:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		return ep->InInUse == 0 && ep->IsEnabled;
+ 195              		.loc 1 215 0
+ 196 002a 7B68     		ldr	r3, [r7, #4]
+ 197 002c 5B68     		ldr	r3, [r3, #4]
+ 198 002e 03F01003 		and	r3, r3, #16
+ 199 0032 002B     		cmp	r3, #0
+ 200 0034 09D1     		bne	.L7
+ 201              		.loc 1 215 0 is_stmt 0 discriminator 1
+ 202 0036 7B68     		ldr	r3, [r7, #4]
+ 203 0038 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 204 003a 03F00203 		and	r3, r3, #2
+ 205 003e DBB2     		uxtb	r3, r3
+ 206 0040 002B     		cmp	r3, #0
+ 207 0042 02D0     		beq	.L7
+ 208              		.loc 1 215 0 discriminator 3
+ 209 0044 4FF00103 		mov	r3, #1
+ 210 0048 01E0     		b	.L8
+ 211              	.L7:
+ 212              		.loc 1 215 0 discriminator 2
+ 213 004a 4FF00003 		mov	r3, #0
+ 214              	.L8:
+ 215              		.loc 1 215 0 discriminator 4
+ 216 004e 03F00103 		and	r3, r3, #1
+ 217 0052 DBB2     		uxtb	r3, r3
+ 216:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	}
+ 218              		.loc 1 216 0 is_stmt 1 discriminator 4
+ 219 0054 1846     		mov	r0, r3
+ 220 0056 07F10C07 		add	r7, r7, #12
+ 221 005a BD46     		mov	sp, r7
+ 222 005c 80BC     		pop	{r7}
+ 223 005e 7047     		bx	lr
+ 224              		.cfi_endproc
+ 225              	.LFE120:
+ 227              		.section	.text.Endpoint_IsOUTReceived,"ax",%progbits
+ 228              		.align	2
+ 229              		.thumb
+ 230              		.thumb_func
+ 232              	Endpoint_IsOUTReceived:
+ 233              	.LFB121:
+ 217:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 218:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/** Determines if the selected OUT endpoint has received new packet from the
+ 219:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  host.
+ 220:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 221:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \ingroup Group_EndpointPacketManagement_AVR8
+ 222:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 223:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \return Boolean \c true if current endpoint is has received an OUT
+ 224:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  packet, \c false otherwise.
+ 225:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 226:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline bool Endpoint_IsOUTReceived(void);
+ 227:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline bool Endpoint_IsOUTReceived(void)
+ 228:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	{
+ 234              		.loc 1 228 0
+ 235              		.cfi_startproc
+ 236              		@ args = 0, pretend = 0, frame = 8
+ 237              		@ frame_needed = 1, uses_anonymous_args = 0
+ 238              		@ link register save eliminated.
+ 239 0000 80B4     		push	{r7}
+ 240              	.LCFI12:
+ 241              		.cfi_def_cfa_offset 4
+ 242              		.cfi_offset 7, -4
+ 243 0002 83B0     		sub	sp, sp, #12
+ 244              	.LCFI13:
+ 245              		.cfi_def_cfa_offset 16
+ 246 0004 00AF     		add	r7, sp, #0
+ 247              	.LCFI14:
+ 248              		.cfi_def_cfa_register 7
+ 229:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		USBD_Endpoint_t *ep = &device.Endpoints[device.CurrentEndpoint];
+ 249              		.loc 1 229 0
+ 250 0006 40F20003 		movw	r3, #:lower16:device
+ 251 000a C0F20003 		movt	r3, #:upper16:device
+ 252 000e 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+ 253 0012 4FF02C02 		mov	r2, #44
+ 254 0016 02FB03F2 		mul	r2, r2, r3
+ 255 001a 40F20003 		movw	r3, #:lower16:device
+ 256 001e C0F20003 		movt	r3, #:upper16:device
+ 257 0022 D318     		adds	r3, r2, r3
+ 258 0024 03F10403 		add	r3, r3, #4
+ 259 0028 7B60     		str	r3, [r7, #4]
+ 230:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		return ep->IsOutRecieved;
+ 260              		.loc 1 230 0
+ 261 002a 7B68     		ldr	r3, [r7, #4]
+ 262 002c 5B68     		ldr	r3, [r3, #4]
+ 263 002e C3F34013 		ubfx	r3, r3, #5, #1
+ 264 0032 DBB2     		uxtb	r3, r3
+ 265 0034 002B     		cmp	r3, #0
+ 266 0036 0CBF     		ite	eq
+ 267 0038 0023     		moveq	r3, #0
+ 268 003a 0123     		movne	r3, #1
+ 269 003c DBB2     		uxtb	r3, r3
+ 231:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	}
+ 270              		.loc 1 231 0
+ 271 003e 1846     		mov	r0, r3
+ 272 0040 07F10C07 		add	r7, r7, #12
+ 273 0044 BD46     		mov	sp, r7
+ 274 0046 80BC     		pop	{r7}
+ 275 0048 7047     		bx	lr
+ 276              		.cfi_endproc
+ 277              	.LFE121:
+ 279 004a 00BF     		.section	.text.Endpoint_BytesInEndpoint,"ax",%progbits
+ 280              		.align	2
+ 281              		.thumb
+ 282              		.thumb_func
+ 284              	Endpoint_BytesInEndpoint:
+ 285              	.LFB123:
+ 232:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 233:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/** Determines the currently selected endpoint's direction.
+ 234:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 235:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \return The currently selected endpoint's direction, as a
+ 236:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \c ENDPOINT_DIR_* mask.
+ 237:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 238:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline uint8_t Endpoint_GetEndpointDirection(void);
+ 239:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline uint8_t Endpoint_GetEndpointDirection(void)
+ 240:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	{
+ 241:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		USBD_Endpoint_t *ep = &device.Endpoints[device.CurrentEndpoint];
+ 242:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		return ep->Address & ENDPOINT_DIR_MASK;
+ 243:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	}
+ 244:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 
+ 245:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	/** Indicates the number of bytes currently stored in the current endpoint's
+ 246:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  selected bank.
+ 247:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 248:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \ingroup Group_EndpointRW_AVR8
+ 249:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *
+ 250:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  \return Total number of bytes in the currently selected Endpoint's FIFO
+ 251:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 *  buffer.
+ 252:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	 */
+ 253:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline uint16_t Endpoint_BytesInEndpoint(void);
+ 254:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	static inline uint16_t Endpoint_BytesInEndpoint(void)
+ 255:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	{
+ 286              		.loc 1 255 0
+ 287              		.cfi_startproc
+ 288              		@ args = 0, pretend = 0, frame = 8
+ 289              		@ frame_needed = 1, uses_anonymous_args = 0
+ 290              		@ link register save eliminated.
+ 291 0000 80B4     		push	{r7}
+ 292              	.LCFI15:
+ 293              		.cfi_def_cfa_offset 4
+ 294              		.cfi_offset 7, -4
+ 295 0002 83B0     		sub	sp, sp, #12
+ 296              	.LCFI16:
+ 297              		.cfi_def_cfa_offset 16
+ 298 0004 00AF     		add	r7, sp, #0
+ 299              	.LCFI17:
+ 300              		.cfi_def_cfa_register 7
+ 256:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		USBD_Endpoint_t *ep = &device.Endpoints[device.CurrentEndpoint];
+ 301              		.loc 1 256 0
+ 302 0006 40F20003 		movw	r3, #:lower16:device
+ 303 000a C0F20003 		movt	r3, #:upper16:device
+ 304 000e 93F83C31 		ldrb	r3, [r3, #316]	@ zero_extendqisi2
+ 305 0012 4FF02C02 		mov	r2, #44
+ 306 0016 02FB03F2 		mul	r2, r2, r3
+ 307 001a 40F20003 		movw	r3, #:lower16:device
+ 308 001e C0F20003 		movt	r3, #:upper16:device
+ 309 0022 D318     		adds	r3, r2, r3
+ 310 0024 03F10403 		add	r3, r3, #4
+ 311 0028 7B60     		str	r3, [r7, #4]
+ 257:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		if (ep->Direction)
+ 312              		.loc 1 257 0
+ 313 002a 7B68     		ldr	r3, [r7, #4]
+ 314 002c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 315 002e 23F07F03 		bic	r3, r3, #127
+ 316 0032 DBB2     		uxtb	r3, r3
+ 317 0034 002B     		cmp	r3, #0
+ 318 0036 03D0     		beq	.L13
+ 258:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 			return ep->InBytesAvailable;
+ 319              		.loc 1 258 0
+ 320 0038 7B68     		ldr	r3, [r7, #4]
+ 321 003a 9B69     		ldr	r3, [r3, #24]
+ 322 003c 9BB2     		uxth	r3, r3
+ 323 003e 02E0     		b	.L14
+ 324              	.L13:
+ 259:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 		else
+ 260:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 			return ep->OutBytesAvailable;
+ 325              		.loc 1 260 0
+ 326 0040 7B68     		ldr	r3, [r7, #4]
+ 327 0042 9B68     		ldr	r3, [r3, #8]
+ 328 0044 9BB2     		uxth	r3, r3
+ 329              	.L14:
+ 261:../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/USBD_Endpoint_XMC4000.h **** 	}
+ 330              		.loc 1 261 0
+ 331 0046 1846     		mov	r0, r3
+ 332 0048 07F10C07 		add	r7, r7, #12
+ 333 004c BD46     		mov	sp, r7
+ 334 004e 80BC     		pop	{r7}
+ 335 0050 7047     		bx	lr
+ 336              		.cfi_endproc
+ 337              	.LFE123:
+ 339 0052 00BF     		.section	.text.CDC_Device_ProcessControlRequest,"ax",%progbits
+ 340              		.align	2
+ 341              		.global	CDC_Device_ProcessControlRequest
+ 342              		.thumb
+ 343              		.thumb_func
+ 345              	CDC_Device_ProcessControlRequest:
+ 346              	.LFB130:
+ 347              		.file 2 "../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c"
+   1:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** /* CODE_BLOCK_BEGIN[CDCClassDevice.c] */
+   2:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** /*******************************************************************************
+   3:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  Copyright (c) 2014, Infineon Technologies AG                                 **
+   4:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  All rights reserved.                                                         **
+   5:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****                                                                               **
+   6:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  Redistribution and use in source and binary forms, with or without           **
+   7:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  modification,are permitted provided that the following conditions are met:   **
+   8:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****                                                                               **
+   9:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  *Redistributions of source code must retain the above copyright notice,      **
+  10:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  this list of conditions and the following disclaimer.                        **
+  11:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  12:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  this list of conditions and the following disclaimer in the documentation    **
+  13:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  and/or other materials provided with the distribution.                       **
+  14:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  15:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  may be used to endorse or promote products derived from this software without**
+  16:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  specific prior written permission.                                           **
+  17:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****                                                                               **
+  18:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  19:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  20:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  21:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  22:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  23:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  24:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  25:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  26:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  27:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  28:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  29:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****                                                                               **
+  30:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  To improve the quality of the software, users are encouraged to share        **
+  31:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  32:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****  dave@infineon.com).                                                          **
+  33:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****                                                                               **
+  34:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** ********************************************************************************
+  35:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** **                                                                            **
+  36:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** **                                                                            **
+  37:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** ** PLATFORM : Infineon XMC4000 Series                                         **
+  38:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** **                                                                            **
+  39:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** ** COMPILER : Compiler Independent                                            **
+  40:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** **                                                                            **
+  41:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** ** AUTHOR   : App Developer                                                   **
+  42:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** **                                                                            **
+  43:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** ** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+  44:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** **                                                                            **
+  45:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** ** MODIFICATION DATE : Feb 17, 2014                                           **
+  46:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** **                                                                            **
+  47:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** *******************************************************************************/
+  48:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** /*
+  49:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****              LUFA Library
+  50:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****      Copyright (C) Dean Camera, 2013.
+  51:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  52:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   dean [at] fourwalledcubicle [dot] com
+  53:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****            www.lufa-lib.org
+  54:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** */
+  55:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  56:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** /*
+  57:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   Copyright 2013  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  58:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  59:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   Permission to use, copy, modify, distribute, and sell this
+  60:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   software and its documentation for any purpose is hereby granted
+  61:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   without fee, provided that the above copyright notice appear in
+  62:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   all copies and that both that the copyright notice and this
+  63:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   permission notice and warranty disclaimer appear in supporting
+  64:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   documentation, and that the name of the author not be used in
+  65:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   advertising or publicity pertaining to distribution of the
+  66:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   software without specific, written prior permission.
+  67:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  68:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   The author disclaims all warranties with regard to this
+  69:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   software, including all implied warranties of merchantability
+  70:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   and fitness.  In no event shall the author be liable for any
+  71:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   special, indirect or consequential damages or any damages
+  72:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   whatsoever resulting from loss of use, data or profits, whether
+  73:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   in an action of contract, negligence or other tortious action,
+  74:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   arising out of or in connection with the use or performance of
+  75:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****   this software.
+  76:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** */
+  77:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  78:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** #define  __INCLUDE_FROM_USB_DRIVER
+  79:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  80:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** #include  "../../../USBD/usb/Core/USBMode.h" /*IFX*/
+  81:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  82:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** #if defined(USB_CAN_BE_DEVICE)
+  83:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  84:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** #define  __INCLUDE_FROM_CDC_DRIVER
+  85:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** #define  __INCLUDE_FROM_CDC_DEVICE_C
+  86:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** #include "CDCClassDevice.h"
+  87:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  88:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** void CDC_Device_ProcessControlRequest(
+  89:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 					USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+  90:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 348              		.loc 2 90 0
+ 349              		.cfi_startproc
+ 350              		@ args = 0, pretend = 0, frame = 8
+ 351              		@ frame_needed = 1, uses_anonymous_args = 0
+ 352 0000 80B5     		push	{r7, lr}
+ 353              	.LCFI18:
+ 354              		.cfi_def_cfa_offset 8
+ 355              		.cfi_offset 7, -8
+ 356              		.cfi_offset 14, -4
+ 357 0002 82B0     		sub	sp, sp, #8
+ 358              	.LCFI19:
+ 359              		.cfi_def_cfa_offset 16
+ 360 0004 00AF     		add	r7, sp, #0
+ 361              	.LCFI20:
+ 362              		.cfi_def_cfa_register 7
+ 363 0006 7860     		str	r0, [r7, #4]
+  91:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (!(Endpoint_IsSETUPReceived()))
+ 364              		.loc 2 91 0
+ 365 0008 FFF7FEFF 		bl	Endpoint_IsSETUPReceived
+ 366 000c 0346     		mov	r3, r0
+ 367 000e 83F00103 		eor	r3, r3, #1
+ 368 0012 DBB2     		uxtb	r3, r3
+ 369 0014 002B     		cmp	r3, #0
+ 370 0016 40F0B680 		bne	.L31
+ 371              	.L16:
+  92:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return;
+  93:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  94:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (USB_ControlRequest.wIndex !=
+ 372              		.loc 2 94 0
+ 373 001a 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 374 001e C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 375 0022 9B88     		ldrh	r3, [r3, #4]	@ movhi
+ 376 0024 9AB2     		uxth	r2, r3
+  95:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						CDCInterfaceInfo->Config.ControlInterfaceNumber)
+ 377              		.loc 2 95 0
+ 378 0026 7B68     		ldr	r3, [r7, #4]
+ 379 0028 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+  94:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (USB_ControlRequest.wIndex !=
+ 380              		.loc 2 94 0
+ 381 002a 9A42     		cmp	r2, r3
+ 382 002c 40F0AD80 		bne	.L32
+ 383              	.L18:
+  96:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return;
+  97:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+  98:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	switch (USB_ControlRequest.bRequest)
+ 384              		.loc 2 98 0
+ 385 0030 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 386 0034 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 387 0038 5B78     		ldrb	r3, [r3, #1]
+ 388 003a DBB2     		uxtb	r3, r3
+ 389 003c A3F12003 		sub	r3, r3, #32
+ 390 0040 032B     		cmp	r3, #3
+ 391 0042 00F2AD80 		bhi	.L15
+ 392 0046 01A2     		adr	r2, .L23
+ 393 0048 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 394              		.align	2
+ 395              	.L23:
+ 396 004c B7000000 		.word	.L19+1
+ 397 0050 5D000000 		.word	.L20+1
+ 398 0054 27010000 		.word	.L21+1
+ 399 0058 57010000 		.word	.L22+1
+ 400              	.L20:
+  99:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	{
+ 100:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		case CDC_REQ_GetLineEncoding:
+ 101:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			if (USB_ControlRequest.bmRequestType == (REQDIR_DEVICETOHOST |
+ 401              		.loc 2 101 0
+ 402 005c 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 403 0060 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 404 0064 1B78     		ldrb	r3, [r3, #0]
+ 405 0066 DBB2     		uxtb	r3, r3
+ 406 0068 A12B     		cmp	r3, #161
+ 407 006a 40F09080 		bne	.L33
+ 102:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 										REQTYPE_CLASS | REQREC_INTERFACE))
+ 103:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			{
+ 104:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_ClearSETUP();
+ 408              		.loc 2 104 0
+ 409 006e FFF7FEFF 		bl	Endpoint_ClearSETUP
+ 105:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 106:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				while (!(Endpoint_IsINReady()));
+ 410              		.loc 2 106 0
+ 411 0072 00BF     		nop
+ 412              	.L25:
+ 413              		.loc 2 106 0 is_stmt 0 discriminator 1
+ 414 0074 FFF7FEFF 		bl	Endpoint_IsINReady
+ 415 0078 0346     		mov	r3, r0
+ 416 007a 83F00103 		eor	r3, r3, #1
+ 417 007e DBB2     		uxtb	r3, r3
+ 418 0080 002B     		cmp	r3, #0
+ 419 0082 F7D1     		bne	.L25
+ 107:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 108:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_Write_32_LE(
+ 109:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						CDCInterfaceInfo->State.LineEncoding.BaudRateBPS);
+ 420              		.loc 2 109 0 is_stmt 1
+ 421 0084 7B68     		ldr	r3, [r7, #4]
+ 108:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_Write_32_LE(
+ 422              		.loc 2 108 0
+ 423 0086 9B69     		ldr	r3, [r3, #24]	@ unaligned
+ 424 0088 1846     		mov	r0, r3
+ 425 008a FFF7FEFF 		bl	Endpoint_Write_32_LE
+ 110:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_Write_8(
+ 111:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						CDCInterfaceInfo->State.LineEncoding.CharFormat);
+ 426              		.loc 2 111 0
+ 427 008e 7B68     		ldr	r3, [r7, #4]
+ 110:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_Write_8(
+ 428              		.loc 2 110 0
+ 429 0090 1B7F     		ldrb	r3, [r3, #28]	@ zero_extendqisi2
+ 430 0092 1846     		mov	r0, r3
+ 431 0094 FFF7FEFF 		bl	Endpoint_Write_8
+ 112:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_Write_8(
+ 113:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						CDCInterfaceInfo->State.LineEncoding.ParityType);
+ 432              		.loc 2 113 0
+ 433 0098 7B68     		ldr	r3, [r7, #4]
+ 112:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_Write_8(
+ 434              		.loc 2 112 0
+ 435 009a 5B7F     		ldrb	r3, [r3, #29]	@ zero_extendqisi2
+ 436 009c 1846     		mov	r0, r3
+ 437 009e FFF7FEFF 		bl	Endpoint_Write_8
+ 114:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_Write_8(
+ 115:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						CDCInterfaceInfo->State.LineEncoding.DataBits);
+ 438              		.loc 2 115 0
+ 439 00a2 7B68     		ldr	r3, [r7, #4]
+ 114:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_Write_8(
+ 440              		.loc 2 114 0
+ 441 00a4 9B7F     		ldrb	r3, [r3, #30]	@ zero_extendqisi2
+ 442 00a6 1846     		mov	r0, r3
+ 443 00a8 FFF7FEFF 		bl	Endpoint_Write_8
+ 116:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 117:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_ClearIN();
+ 444              		.loc 2 117 0
+ 445 00ac FFF7FEFF 		bl	Endpoint_ClearIN
+ 118:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_ClearStatusStage();
+ 446              		.loc 2 118 0
+ 447 00b0 FFF7FEFF 		bl	Endpoint_ClearStatusStage
+ 119:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			}
+ 120:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 121:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			break;
+ 448              		.loc 2 121 0
+ 449 00b4 6BE0     		b	.L33
+ 450              	.L19:
+ 122:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		case CDC_REQ_SetLineEncoding:
+ 123:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			if (USB_ControlRequest.bmRequestType == (REQDIR_HOSTTODEVICE |
+ 451              		.loc 2 123 0
+ 452 00b6 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 453 00ba C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 454 00be 1B78     		ldrb	r3, [r3, #0]
+ 455 00c0 DBB2     		uxtb	r3, r3
+ 456 00c2 212B     		cmp	r3, #33
+ 457 00c4 65D1     		bne	.L34
+ 124:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 										REQTYPE_CLASS | REQREC_INTERFACE))
+ 125:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			{
+ 126:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_ClearSETUP();
+ 458              		.loc 2 126 0
+ 459 00c6 FFF7FEFF 		bl	Endpoint_ClearSETUP
+ 127:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 128:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				while (!(Endpoint_IsOUTReceived()))
+ 460              		.loc 2 128 0
+ 461 00ca 07E0     		b	.L27
+ 462              	.L28:
+ 129:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				{
+ 130:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 					if (USB_DeviceState == DEVICE_STATE_Unattached)
+ 463              		.loc 2 130 0
+ 464 00cc 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 465 00d0 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 466 00d4 1B78     		ldrb	r3, [r3, #0]
+ 467 00d6 DBB2     		uxtb	r3, r3
+ 468 00d8 002B     		cmp	r3, #0
+ 469 00da 5CD0     		beq	.L35
+ 470              	.L27:
+ 128:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				while (!(Endpoint_IsOUTReceived()))
+ 471              		.loc 2 128 0 discriminator 1
+ 472 00dc FFF7FEFF 		bl	Endpoint_IsOUTReceived
+ 473 00e0 0346     		mov	r3, r0
+ 474 00e2 83F00103 		eor	r3, r3, #1
+ 475 00e6 DBB2     		uxtb	r3, r3
+ 476 00e8 002B     		cmp	r3, #0
+ 477 00ea EFD1     		bne	.L28
+ 131:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 					  return;
+ 132:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				}
+ 133:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 134:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				CDCInterfaceInfo->State.LineEncoding.BaudRateBPS =
+ 135:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 													Endpoint_Read_32_LE();
+ 478              		.loc 2 135 0
+ 479 00ec FFF7FEFF 		bl	Endpoint_Read_32_LE
+ 480 00f0 0246     		mov	r2, r0
+ 134:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				CDCInterfaceInfo->State.LineEncoding.BaudRateBPS =
+ 481              		.loc 2 134 0
+ 482 00f2 7B68     		ldr	r3, [r7, #4]
+ 483 00f4 9A61     		str	r2, [r3, #24]	@ unaligned
+ 136:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				CDCInterfaceInfo->State.LineEncoding.CharFormat  =
+ 137:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 														Endpoint_Read_8();
+ 484              		.loc 2 137 0
+ 485 00f6 FFF7FEFF 		bl	Endpoint_Read_8
+ 486 00fa 0346     		mov	r3, r0
+ 487 00fc 1A46     		mov	r2, r3
+ 136:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				CDCInterfaceInfo->State.LineEncoding.CharFormat  =
+ 488              		.loc 2 136 0
+ 489 00fe 7B68     		ldr	r3, [r7, #4]
+ 490 0100 1A77     		strb	r2, [r3, #28]
+ 138:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				CDCInterfaceInfo->State.LineEncoding.ParityType  =
+ 139:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 														Endpoint_Read_8();
+ 491              		.loc 2 139 0
+ 492 0102 FFF7FEFF 		bl	Endpoint_Read_8
+ 493 0106 0346     		mov	r3, r0
+ 494 0108 1A46     		mov	r2, r3
+ 138:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				CDCInterfaceInfo->State.LineEncoding.ParityType  =
+ 495              		.loc 2 138 0
+ 496 010a 7B68     		ldr	r3, [r7, #4]
+ 497 010c 5A77     		strb	r2, [r3, #29]
+ 140:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				CDCInterfaceInfo->State.LineEncoding.DataBits    =
+ 141:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 														Endpoint_Read_8();
+ 498              		.loc 2 141 0
+ 499 010e FFF7FEFF 		bl	Endpoint_Read_8
+ 500 0112 0346     		mov	r3, r0
+ 501 0114 1A46     		mov	r2, r3
+ 140:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				CDCInterfaceInfo->State.LineEncoding.DataBits    =
+ 502              		.loc 2 140 0
+ 503 0116 7B68     		ldr	r3, [r7, #4]
+ 504 0118 9A77     		strb	r2, [r3, #30]
+ 142:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 143:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				//Endpoint_ClearOUT();
+ 144:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_ClearStatusStage();
+ 505              		.loc 2 144 0
+ 506 011a FFF7FEFF 		bl	Endpoint_ClearStatusStage
+ 145:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 146:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				EVENT_CDC_Device_LineEncodingChanged(CDCInterfaceInfo);
+ 507              		.loc 2 146 0
+ 508 011e 7868     		ldr	r0, [r7, #4]
+ 509 0120 FFF7FEFF 		bl	EVENT_CDC_Device_LineEncodingChanged
+ 147:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			}
+ 148:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 149:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			break;
+ 510              		.loc 2 149 0
+ 511 0124 35E0     		b	.L34
+ 512              	.L21:
+ 150:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		case CDC_REQ_SetControlLineState:
+ 151:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			if (USB_ControlRequest.bmRequestType == (REQDIR_HOSTTODEVICE |
+ 513              		.loc 2 151 0
+ 514 0126 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 515 012a C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 516 012e 1B78     		ldrb	r3, [r3, #0]
+ 517 0130 DBB2     		uxtb	r3, r3
+ 518 0132 212B     		cmp	r3, #33
+ 519 0134 31D1     		bne	.L36
+ 152:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 										REQTYPE_CLASS | REQREC_INTERFACE))
+ 153:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			{
+ 154:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_ClearSETUP();
+ 520              		.loc 2 154 0
+ 521 0136 FFF7FEFF 		bl	Endpoint_ClearSETUP
+ 155:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_ClearStatusStage();
+ 522              		.loc 2 155 0
+ 523 013a FFF7FEFF 		bl	Endpoint_ClearStatusStage
+ 156:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 157:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				CDCInterfaceInfo->State.ControlLineStates.HostToDevice =
+ 158:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 												USB_ControlRequest.wValue;
+ 524              		.loc 2 158 0
+ 525 013e 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 526 0142 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 527 0146 5B88     		ldrh	r3, [r3, #2]	@ movhi
+ 528 0148 9AB2     		uxth	r2, r3
+ 157:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				CDCInterfaceInfo->State.ControlLineStates.HostToDevice =
+ 529              		.loc 2 157 0
+ 530 014a 7B68     		ldr	r3, [r7, #4]
+ 531 014c 9A82     		strh	r2, [r3, #20]	@ movhi
+ 159:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 160:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				EVENT_CDC_Device_ControLineStateChanged(CDCInterfaceInfo);
+ 532              		.loc 2 160 0
+ 533 014e 7868     		ldr	r0, [r7, #4]
+ 534 0150 FFF7FEFF 		bl	EVENT_CDC_Device_ControLineStateChanged
+ 161:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			}
+ 162:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 163:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			break;
+ 535              		.loc 2 163 0
+ 536 0154 21E0     		b	.L36
+ 537              	.L22:
+ 164:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		case CDC_REQ_SendBreak:
+ 165:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			if (USB_ControlRequest.bmRequestType == (REQDIR_HOSTTODEVICE |
+ 538              		.loc 2 165 0
+ 539 0156 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 540 015a C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 541 015e 1B78     		ldrb	r3, [r3, #0]
+ 542 0160 DBB2     		uxtb	r3, r3
+ 543 0162 212B     		cmp	r3, #33
+ 544 0164 1BD1     		bne	.L37
+ 166:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 										REQTYPE_CLASS | REQREC_INTERFACE))
+ 167:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			{
+ 168:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_ClearSETUP();
+ 545              		.loc 2 168 0
+ 546 0166 FFF7FEFF 		bl	Endpoint_ClearSETUP
+ 169:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				Endpoint_ClearStatusStage();
+ 547              		.loc 2 169 0
+ 548 016a FFF7FEFF 		bl	Endpoint_ClearStatusStage
+ 170:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 171:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				EVENT_CDC_Device_BreakSent(CDCInterfaceInfo,
+ 172:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 										(uint8_t)USB_ControlRequest.wValue);
+ 549              		.loc 2 172 0
+ 550 016e 40F20003 		movw	r3, #:lower16:USB_ControlRequest
+ 551 0172 C0F20003 		movt	r3, #:upper16:USB_ControlRequest
+ 552 0176 5B88     		ldrh	r3, [r3, #2]	@ movhi
+ 553 0178 9BB2     		uxth	r3, r3
+ 171:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				EVENT_CDC_Device_BreakSent(CDCInterfaceInfo,
+ 554              		.loc 2 171 0
+ 555 017a DBB2     		uxtb	r3, r3
+ 556 017c 7868     		ldr	r0, [r7, #4]
+ 557 017e 1946     		mov	r1, r3
+ 558 0180 FFF7FEFF 		bl	EVENT_CDC_Device_BreakSent
+ 173:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			}
+ 174:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 175:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			break;
+ 559              		.loc 2 175 0
+ 560 0184 0BE0     		b	.L37
+ 561              	.L31:
+  92:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return;
+ 562              		.loc 2 92 0
+ 563 0186 00BF     		nop
+ 564 0188 0AE0     		b	.L15
+ 565              	.L32:
+  96:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return;
+ 566              		.loc 2 96 0
+ 567 018a 00BF     		nop
+ 568 018c 08E0     		b	.L15
+ 569              	.L33:
+ 121:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			break;
+ 570              		.loc 2 121 0
+ 571 018e 00BF     		nop
+ 572 0190 06E0     		b	.L15
+ 573              	.L34:
+ 149:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			break;
+ 574              		.loc 2 149 0
+ 575 0192 00BF     		nop
+ 576 0194 04E0     		b	.L15
+ 577              	.L35:
+ 131:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 					  return;
+ 578              		.loc 2 131 0
+ 579 0196 00BF     		nop
+ 580 0198 02E0     		b	.L15
+ 581              	.L36:
+ 163:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			break;
+ 582              		.loc 2 163 0
+ 583 019a 00BF     		nop
+ 584 019c 00E0     		b	.L15
+ 585              	.L37:
+ 586              		.loc 2 175 0
+ 587 019e 00BF     		nop
+ 588              	.L15:
+ 176:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	}
+ 177:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 589              		.loc 2 177 0
+ 590 01a0 07F10807 		add	r7, r7, #8
+ 591 01a4 BD46     		mov	sp, r7
+ 592 01a6 80BD     		pop	{r7, pc}
+ 593              		.cfi_endproc
+ 594              	.LFE130:
+ 596              		.section	.text.EVENT_CDC_Device_LineEncodingChanged,"ax",%progbits
+ 597              		.align	2
+ 598              		.global	EVENT_CDC_Device_LineEncodingChanged
+ 599              		.thumb
+ 600              		.thumb_func
+ 602              	EVENT_CDC_Device_LineEncodingChanged:
+ 603              	.LFB131:
+ 178:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 179:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** void EVENT_CDC_Device_LineEncodingChanged(
+ 180:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+ 181:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 604              		.loc 2 181 0
+ 605              		.cfi_startproc
+ 606              		@ args = 0, pretend = 0, frame = 8
+ 607              		@ frame_needed = 1, uses_anonymous_args = 0
+ 608              		@ link register save eliminated.
+ 609 0000 80B4     		push	{r7}
+ 610              	.LCFI21:
+ 611              		.cfi_def_cfa_offset 4
+ 612              		.cfi_offset 7, -4
+ 613 0002 83B0     		sub	sp, sp, #12
+ 614              	.LCFI22:
+ 615              		.cfi_def_cfa_offset 16
+ 616 0004 00AF     		add	r7, sp, #0
+ 617              	.LCFI23:
+ 618              		.cfi_def_cfa_register 7
+ 619 0006 7860     		str	r0, [r7, #4]
+ 182:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 183:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 620              		.loc 2 183 0
+ 621 0008 07F10C07 		add	r7, r7, #12
+ 622 000c BD46     		mov	sp, r7
+ 623 000e 80BC     		pop	{r7}
+ 624 0010 7047     		bx	lr
+ 625              		.cfi_endproc
+ 626              	.LFE131:
+ 628 0012 00BF     		.section	.text.EVENT_CDC_Device_ControLineStateChanged,"ax",%progbits
+ 629              		.align	2
+ 630              		.global	EVENT_CDC_Device_ControLineStateChanged
+ 631              		.thumb
+ 632              		.thumb_func
+ 634              	EVENT_CDC_Device_ControLineStateChanged:
+ 635              	.LFB132:
+ 184:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 185:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** void EVENT_CDC_Device_ControLineStateChanged(
+ 186:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+ 187:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 636              		.loc 2 187 0
+ 637              		.cfi_startproc
+ 638              		@ args = 0, pretend = 0, frame = 8
+ 639              		@ frame_needed = 1, uses_anonymous_args = 0
+ 640              		@ link register save eliminated.
+ 641 0000 80B4     		push	{r7}
+ 642              	.LCFI24:
+ 643              		.cfi_def_cfa_offset 4
+ 644              		.cfi_offset 7, -4
+ 645 0002 83B0     		sub	sp, sp, #12
+ 646              	.LCFI25:
+ 647              		.cfi_def_cfa_offset 16
+ 648 0004 00AF     		add	r7, sp, #0
+ 649              	.LCFI26:
+ 650              		.cfi_def_cfa_register 7
+ 651 0006 7860     		str	r0, [r7, #4]
+ 188:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 189:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 652              		.loc 2 189 0
+ 653 0008 07F10C07 		add	r7, r7, #12
+ 654 000c BD46     		mov	sp, r7
+ 655 000e 80BC     		pop	{r7}
+ 656 0010 7047     		bx	lr
+ 657              		.cfi_endproc
+ 658              	.LFE132:
+ 660 0012 00BF     		.section	.text.EVENT_CDC_Device_BreakSent,"ax",%progbits
+ 661              		.align	2
+ 662              		.global	EVENT_CDC_Device_BreakSent
+ 663              		.thumb
+ 664              		.thumb_func
+ 666              	EVENT_CDC_Device_BreakSent:
+ 667              	.LFB133:
+ 190:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 191:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** void EVENT_CDC_Device_BreakSent(
+ 192:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo,
+ 193:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 								const uint8_t Duration)
+ 194:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 668              		.loc 2 194 0
+ 669              		.cfi_startproc
+ 670              		@ args = 0, pretend = 0, frame = 8
+ 671              		@ frame_needed = 1, uses_anonymous_args = 0
+ 672              		@ link register save eliminated.
+ 673 0000 80B4     		push	{r7}
+ 674              	.LCFI27:
+ 675              		.cfi_def_cfa_offset 4
+ 676              		.cfi_offset 7, -4
+ 677 0002 83B0     		sub	sp, sp, #12
+ 678              	.LCFI28:
+ 679              		.cfi_def_cfa_offset 16
+ 680 0004 00AF     		add	r7, sp, #0
+ 681              	.LCFI29:
+ 682              		.cfi_def_cfa_register 7
+ 683 0006 7860     		str	r0, [r7, #4]
+ 684 0008 0B46     		mov	r3, r1
+ 685 000a FB70     		strb	r3, [r7, #3]
+ 195:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 196:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 686              		.loc 2 196 0
+ 687 000c 07F10C07 		add	r7, r7, #12
+ 688 0010 BD46     		mov	sp, r7
+ 689 0012 80BC     		pop	{r7}
+ 690 0014 7047     		bx	lr
+ 691              		.cfi_endproc
+ 692              	.LFE133:
+ 694 0016 00BF     		.section	.text.CDC_Device_ConfigureEndpoints,"ax",%progbits
+ 695              		.align	2
+ 696              		.global	CDC_Device_ConfigureEndpoints
+ 697              		.thumb
+ 698              		.thumb_func
+ 700              	CDC_Device_ConfigureEndpoints:
+ 701              	.LFB134:
+ 197:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 198:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 199:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** bool CDC_Device_ConfigureEndpoints(
+ 200:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+ 201:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 702              		.loc 2 201 0
+ 703              		.cfi_startproc
+ 704              		@ args = 0, pretend = 0, frame = 8
+ 705              		@ frame_needed = 1, uses_anonymous_args = 0
+ 706 0000 80B5     		push	{r7, lr}
+ 707              	.LCFI30:
+ 708              		.cfi_def_cfa_offset 8
+ 709              		.cfi_offset 7, -8
+ 710              		.cfi_offset 14, -4
+ 711 0002 82B0     		sub	sp, sp, #8
+ 712              	.LCFI31:
+ 713              		.cfi_def_cfa_offset 16
+ 714 0004 00AF     		add	r7, sp, #0
+ 715              	.LCFI32:
+ 716              		.cfi_def_cfa_register 7
+ 717 0006 7860     		str	r0, [r7, #4]
+ 202:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	memset(&CDCInterfaceInfo->State, 0x00, sizeof(CDCInterfaceInfo->State));
+ 718              		.loc 2 202 0
+ 719 0008 7B68     		ldr	r3, [r7, #4]
+ 720 000a 03F11403 		add	r3, r3, #20
+ 721 000e 1846     		mov	r0, r3
+ 722 0010 4FF00001 		mov	r1, #0
+ 723 0014 4FF00C02 		mov	r2, #12
+ 724 0018 FFF7FEFF 		bl	memset
+ 203:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 204:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	CDCInterfaceInfo->Config.DataINEndpoint.Type       = EP_TYPE_BULK;
+ 725              		.loc 2 204 0
+ 726 001c 7B68     		ldr	r3, [r7, #4]
+ 727 001e 4FF00202 		mov	r2, #2
+ 728 0022 9A71     		strb	r2, [r3, #6]
+ 205:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	CDCInterfaceInfo->Config.DataOUTEndpoint.Type      = EP_TYPE_BULK;
+ 729              		.loc 2 205 0
+ 730 0024 7B68     		ldr	r3, [r7, #4]
+ 731 0026 4FF00202 		mov	r2, #2
+ 732 002a 1A73     		strb	r2, [r3, #12]
+ 206:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	CDCInterfaceInfo->Config.NotificationEndpoint.Type = EP_TYPE_INTERRUPT;
+ 733              		.loc 2 206 0
+ 734 002c 7B68     		ldr	r3, [r7, #4]
+ 735 002e 4FF00302 		mov	r2, #3
+ 736 0032 9A74     		strb	r2, [r3, #18]
+ 207:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 208:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (!(Endpoint_ConfigureEndpointTable(
+ 209:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 							&CDCInterfaceInfo->Config.DataINEndpoint, 1)))
+ 737              		.loc 2 209 0
+ 738 0034 7B68     		ldr	r3, [r7, #4]
+ 739 0036 03F10203 		add	r3, r3, #2
+ 208:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (!(Endpoint_ConfigureEndpointTable(
+ 740              		.loc 2 208 0
+ 741 003a 1846     		mov	r0, r3
+ 742 003c 4FF00101 		mov	r1, #1
+ 743 0040 FFF7FEFF 		bl	Endpoint_ConfigureEndpointTable
+ 744 0044 0346     		mov	r3, r0
+ 745 0046 83F00103 		eor	r3, r3, #1
+ 746 004a DBB2     		uxtb	r3, r3
+ 747 004c 002B     		cmp	r3, #0
+ 748 004e 02D0     		beq	.L42
+ 210:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return false;
+ 749              		.loc 2 210 0
+ 750 0050 4FF00003 		mov	r3, #0
+ 751 0054 23E0     		b	.L43
+ 752              	.L42:
+ 211:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 212:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (!(Endpoint_ConfigureEndpointTable(
+ 213:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 							&CDCInterfaceInfo->Config.DataOUTEndpoint, 1)))
+ 753              		.loc 2 213 0
+ 754 0056 7B68     		ldr	r3, [r7, #4]
+ 755 0058 03F10803 		add	r3, r3, #8
+ 212:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (!(Endpoint_ConfigureEndpointTable(
+ 756              		.loc 2 212 0
+ 757 005c 1846     		mov	r0, r3
+ 758 005e 4FF00101 		mov	r1, #1
+ 759 0062 FFF7FEFF 		bl	Endpoint_ConfigureEndpointTable
+ 760 0066 0346     		mov	r3, r0
+ 761 0068 83F00103 		eor	r3, r3, #1
+ 762 006c DBB2     		uxtb	r3, r3
+ 763 006e 002B     		cmp	r3, #0
+ 764 0070 02D0     		beq	.L44
+ 214:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return false;
+ 765              		.loc 2 214 0
+ 766 0072 4FF00003 		mov	r3, #0
+ 767 0076 12E0     		b	.L43
+ 768              	.L44:
+ 215:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 216:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (!(Endpoint_ConfigureEndpointTable(
+ 217:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						&CDCInterfaceInfo->Config.NotificationEndpoint, 1)))
+ 769              		.loc 2 217 0
+ 770 0078 7B68     		ldr	r3, [r7, #4]
+ 771 007a 03F10E03 		add	r3, r3, #14
+ 216:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (!(Endpoint_ConfigureEndpointTable(
+ 772              		.loc 2 216 0
+ 773 007e 1846     		mov	r0, r3
+ 774 0080 4FF00101 		mov	r1, #1
+ 775 0084 FFF7FEFF 		bl	Endpoint_ConfigureEndpointTable
+ 776 0088 0346     		mov	r3, r0
+ 777 008a 83F00103 		eor	r3, r3, #1
+ 778 008e DBB2     		uxtb	r3, r3
+ 779 0090 002B     		cmp	r3, #0
+ 780 0092 02D0     		beq	.L45
+ 218:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return false;
+ 781              		.loc 2 218 0
+ 782 0094 4FF00003 		mov	r3, #0
+ 783 0098 01E0     		b	.L43
+ 784              	.L45:
+ 219:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 220:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	return true;
+ 785              		.loc 2 220 0
+ 786 009a 4FF00103 		mov	r3, #1
+ 787              	.L43:
+ 221:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 788              		.loc 2 221 0
+ 789 009e 1846     		mov	r0, r3
+ 790 00a0 07F10807 		add	r7, r7, #8
+ 791 00a4 BD46     		mov	sp, r7
+ 792 00a6 80BD     		pop	{r7, pc}
+ 793              		.cfi_endproc
+ 794              	.LFE134:
+ 796              		.section	.text.CDC_Device_USBTask,"ax",%progbits
+ 797              		.align	2
+ 798              		.global	CDC_Device_USBTask
+ 799              		.thumb
+ 800              		.thumb_func
+ 802              	CDC_Device_USBTask:
+ 803              	.LFB135:
+ 222:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 223:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** void CDC_Device_USBTask(USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+ 224:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 804              		.loc 2 224 0
+ 805              		.cfi_startproc
+ 806              		@ args = 0, pretend = 0, frame = 8
+ 807              		@ frame_needed = 1, uses_anonymous_args = 0
+ 808 0000 80B5     		push	{r7, lr}
+ 809              	.LCFI33:
+ 810              		.cfi_def_cfa_offset 8
+ 811              		.cfi_offset 7, -8
+ 812              		.cfi_offset 14, -4
+ 813 0002 82B0     		sub	sp, sp, #8
+ 814              	.LCFI34:
+ 815              		.cfi_def_cfa_offset 16
+ 816 0004 00AF     		add	r7, sp, #0
+ 817              	.LCFI35:
+ 818              		.cfi_def_cfa_register 7
+ 819 0006 7860     		str	r0, [r7, #4]
+ 225:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 820              		.loc 2 225 0
+ 821 0008 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 822 000c C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 823 0010 1B78     		ldrb	r3, [r3, #0]
+ 824 0012 DBB2     		uxtb	r3, r3
+ 825 0014 042B     		cmp	r3, #4
+ 826 0016 11D1     		bne	.L50
+ 226:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						!(CDCInterfaceInfo->State.LineEncoding.BaudRateBPS))
+ 827              		.loc 2 226 0 discriminator 1
+ 828 0018 7B68     		ldr	r3, [r7, #4]
+ 829 001a 9B69     		ldr	r3, [r3, #24]	@ unaligned
+ 225:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 830              		.loc 2 225 0 discriminator 1
+ 831 001c 002B     		cmp	r3, #0
+ 832 001e 0DD0     		beq	.L50
+ 833              	.L48:
+ 227:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return;
+ 228:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 229:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	#if !defined(NO_CLASS_DRIVER_AUTOFLUSH)
+ 230:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_SelectEndpoint(CDCInterfaceInfo->Config.DataINEndpoint.Address);
+ 834              		.loc 2 230 0
+ 835 0020 7B68     		ldr	r3, [r7, #4]
+ 836 0022 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 837 0024 1846     		mov	r0, r3
+ 838 0026 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 231:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 232:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (Endpoint_IsINReady())
+ 839              		.loc 2 232 0
+ 840 002a FFF7FEFF 		bl	Endpoint_IsINReady
+ 841 002e 0346     		mov	r3, r0
+ 842 0030 002B     		cmp	r3, #0
+ 843 0032 04D0     		beq	.L46
+ 233:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  CDC_Device_Flush(CDCInterfaceInfo);
+ 844              		.loc 2 233 0
+ 845 0034 7868     		ldr	r0, [r7, #4]
+ 846 0036 FFF7FEFF 		bl	CDC_Device_Flush
+ 847 003a 00E0     		b	.L46
+ 848              	.L50:
+ 227:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return;
+ 849              		.loc 2 227 0
+ 850 003c 00BF     		nop
+ 851              	.L46:
+ 234:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	#endif
+ 235:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 852              		.loc 2 235 0
+ 853 003e 07F10807 		add	r7, r7, #8
+ 854 0042 BD46     		mov	sp, r7
+ 855 0044 80BD     		pop	{r7, pc}
+ 856              		.cfi_endproc
+ 857              	.LFE135:
+ 859 0046 00BF     		.section	.text.CDC_Device_SendString,"ax",%progbits
+ 860              		.align	2
+ 861              		.global	CDC_Device_SendString
+ 862              		.thumb
+ 863              		.thumb_func
+ 865              	CDC_Device_SendString:
+ 866              	.LFB136:
+ 236:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 237:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** uint8_t CDC_Device_SendString(
+ 238:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo,
+ 239:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****                               const char* const String)
+ 240:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 867              		.loc 2 240 0
+ 868              		.cfi_startproc
+ 869              		@ args = 0, pretend = 0, frame = 8
+ 870              		@ frame_needed = 1, uses_anonymous_args = 0
+ 871 0000 80B5     		push	{r7, lr}
+ 872              	.LCFI36:
+ 873              		.cfi_def_cfa_offset 8
+ 874              		.cfi_offset 7, -8
+ 875              		.cfi_offset 14, -4
+ 876 0002 82B0     		sub	sp, sp, #8
+ 877              	.LCFI37:
+ 878              		.cfi_def_cfa_offset 16
+ 879 0004 00AF     		add	r7, sp, #0
+ 880              	.LCFI38:
+ 881              		.cfi_def_cfa_register 7
+ 882 0006 7860     		str	r0, [r7, #4]
+ 883 0008 3960     		str	r1, [r7, #0]
+ 241:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 884              		.loc 2 241 0
+ 885 000a 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 886 000e C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 887 0012 1B78     		ldrb	r3, [r3, #0]
+ 888 0014 DBB2     		uxtb	r3, r3
+ 889 0016 042B     		cmp	r3, #4
+ 890 0018 03D1     		bne	.L52
+ 242:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						!(CDCInterfaceInfo->State.LineEncoding.BaudRateBPS))
+ 891              		.loc 2 242 0 discriminator 1
+ 892 001a 7B68     		ldr	r3, [r7, #4]
+ 893 001c 9B69     		ldr	r3, [r3, #24]	@ unaligned
+ 241:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 894              		.loc 2 241 0 discriminator 1
+ 895 001e 002B     		cmp	r3, #0
+ 896 0020 02D1     		bne	.L53
+ 897              	.L52:
+ 243:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return ENDPOINT_RWSTREAM_DeviceDisconnected;
+ 898              		.loc 2 243 0
+ 899 0022 4FF00203 		mov	r3, #2
+ 900 0026 10E0     		b	.L54
+ 901              	.L53:
+ 244:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 245:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_SelectEndpoint(CDCInterfaceInfo->Config.DataINEndpoint.Address);
+ 902              		.loc 2 245 0
+ 903 0028 7B68     		ldr	r3, [r7, #4]
+ 904 002a 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 905 002c 1846     		mov	r0, r3
+ 906 002e FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 246:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	return Endpoint_Write_Stream_LE(String, strlen(String), NULL);
+ 907              		.loc 2 246 0
+ 908 0032 3868     		ldr	r0, [r7, #0]
+ 909 0034 FFF7FEFF 		bl	strlen
+ 910 0038 0346     		mov	r3, r0
+ 911 003a 9BB2     		uxth	r3, r3
+ 912 003c 3868     		ldr	r0, [r7, #0]
+ 913 003e 1946     		mov	r1, r3
+ 914 0040 4FF00002 		mov	r2, #0
+ 915 0044 FFF7FEFF 		bl	Endpoint_Write_Stream_LE
+ 916 0048 0346     		mov	r3, r0
+ 917              	.L54:
+ 247:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 918              		.loc 2 247 0
+ 919 004a 1846     		mov	r0, r3
+ 920 004c 07F10807 		add	r7, r7, #8
+ 921 0050 BD46     		mov	sp, r7
+ 922 0052 80BD     		pop	{r7, pc}
+ 923              		.cfi_endproc
+ 924              	.LFE136:
+ 926              		.section	.text.CDC_Device_SendData,"ax",%progbits
+ 927              		.align	2
+ 928              		.global	CDC_Device_SendData
+ 929              		.thumb
+ 930              		.thumb_func
+ 932              	CDC_Device_SendData:
+ 933              	.LFB137:
+ 248:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 249:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** uint8_t CDC_Device_SendData(USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo,
+ 250:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****                             const void* const Buffer,
+ 251:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****                             const uint16_t Length)
+ 252:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 934              		.loc 2 252 0
+ 935              		.cfi_startproc
+ 936              		@ args = 0, pretend = 0, frame = 16
+ 937              		@ frame_needed = 1, uses_anonymous_args = 0
+ 938 0000 80B5     		push	{r7, lr}
+ 939              	.LCFI39:
+ 940              		.cfi_def_cfa_offset 8
+ 941              		.cfi_offset 7, -8
+ 942              		.cfi_offset 14, -4
+ 943 0002 84B0     		sub	sp, sp, #16
+ 944              	.LCFI40:
+ 945              		.cfi_def_cfa_offset 24
+ 946 0004 00AF     		add	r7, sp, #0
+ 947              	.LCFI41:
+ 948              		.cfi_def_cfa_register 7
+ 949 0006 F860     		str	r0, [r7, #12]
+ 950 0008 B960     		str	r1, [r7, #8]
+ 951 000a 1346     		mov	r3, r2
+ 952 000c FB80     		strh	r3, [r7, #6]	@ movhi
+ 253:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 953              		.loc 2 253 0
+ 954 000e 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 955 0012 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 956 0016 1B78     		ldrb	r3, [r3, #0]
+ 957 0018 DBB2     		uxtb	r3, r3
+ 958 001a 042B     		cmp	r3, #4
+ 959 001c 03D1     		bne	.L56
+ 254:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						!(CDCInterfaceInfo->State.LineEncoding.BaudRateBPS))
+ 960              		.loc 2 254 0 discriminator 1
+ 961 001e FB68     		ldr	r3, [r7, #12]
+ 962 0020 9B69     		ldr	r3, [r3, #24]	@ unaligned
+ 253:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 963              		.loc 2 253 0 discriminator 1
+ 964 0022 002B     		cmp	r3, #0
+ 965 0024 02D1     		bne	.L57
+ 966              	.L56:
+ 255:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return ENDPOINT_RWSTREAM_DeviceDisconnected;
+ 967              		.loc 2 255 0
+ 968 0026 4FF00203 		mov	r3, #2
+ 969 002a 0CE0     		b	.L58
+ 970              	.L57:
+ 256:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 257:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_SelectEndpoint(CDCInterfaceInfo->Config.DataINEndpoint.Address);
+ 971              		.loc 2 257 0
+ 972 002c FB68     		ldr	r3, [r7, #12]
+ 973 002e 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 974 0030 1846     		mov	r0, r3
+ 975 0032 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 258:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	return Endpoint_Write_Stream_LE(Buffer, Length, NULL);
+ 976              		.loc 2 258 0
+ 977 0036 FB88     		ldrh	r3, [r7, #6]
+ 978 0038 B868     		ldr	r0, [r7, #8]
+ 979 003a 1946     		mov	r1, r3
+ 980 003c 4FF00002 		mov	r2, #0
+ 981 0040 FFF7FEFF 		bl	Endpoint_Write_Stream_LE
+ 982 0044 0346     		mov	r3, r0
+ 983              	.L58:
+ 259:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 984              		.loc 2 259 0
+ 985 0046 1846     		mov	r0, r3
+ 986 0048 07F11007 		add	r7, r7, #16
+ 987 004c BD46     		mov	sp, r7
+ 988 004e 80BD     		pop	{r7, pc}
+ 989              		.cfi_endproc
+ 990              	.LFE137:
+ 992              		.section	.text.CDC_Device_SendByte,"ax",%progbits
+ 993              		.align	2
+ 994              		.global	CDC_Device_SendByte
+ 995              		.thumb
+ 996              		.thumb_func
+ 998              	CDC_Device_SendByte:
+ 999              	.LFB138:
+ 260:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 261:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** uint8_t CDC_Device_SendByte(USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo,
+ 262:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c ****                             const uint8_t Data)
+ 263:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 1000              		.loc 2 263 0
+ 1001              		.cfi_startproc
+ 1002              		@ args = 0, pretend = 0, frame = 16
+ 1003              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1004 0000 80B5     		push	{r7, lr}
+ 1005              	.LCFI42:
+ 1006              		.cfi_def_cfa_offset 8
+ 1007              		.cfi_offset 7, -8
+ 1008              		.cfi_offset 14, -4
+ 1009 0002 84B0     		sub	sp, sp, #16
+ 1010              	.LCFI43:
+ 1011              		.cfi_def_cfa_offset 24
+ 1012 0004 00AF     		add	r7, sp, #0
+ 1013              	.LCFI44:
+ 1014              		.cfi_def_cfa_register 7
+ 1015 0006 7860     		str	r0, [r7, #4]
+ 1016 0008 0B46     		mov	r3, r1
+ 1017 000a FB70     		strb	r3, [r7, #3]
+ 264:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 1018              		.loc 2 264 0
+ 1019 000c 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1020 0010 C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1021 0014 1B78     		ldrb	r3, [r3, #0]
+ 1022 0016 DBB2     		uxtb	r3, r3
+ 1023 0018 042B     		cmp	r3, #4
+ 1024 001a 03D1     		bne	.L60
+ 265:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						!(CDCInterfaceInfo->State.LineEncoding.BaudRateBPS))
+ 1025              		.loc 2 265 0 discriminator 1
+ 1026 001c 7B68     		ldr	r3, [r7, #4]
+ 1027 001e 9B69     		ldr	r3, [r3, #24]	@ unaligned
+ 264:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 1028              		.loc 2 264 0 discriminator 1
+ 1029 0020 002B     		cmp	r3, #0
+ 1030 0022 02D1     		bne	.L61
+ 1031              	.L60:
+ 266:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return ENDPOINT_RWSTREAM_DeviceDisconnected;
+ 1032              		.loc 2 266 0
+ 1033 0024 4FF00203 		mov	r3, #2
+ 1034 0028 1DE0     		b	.L62
+ 1035              	.L61:
+ 267:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 268:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_SelectEndpoint(CDCInterfaceInfo->Config.DataINEndpoint.Address);
+ 1036              		.loc 2 268 0
+ 1037 002a 7B68     		ldr	r3, [r7, #4]
+ 1038 002c 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 1039 002e 1846     		mov	r0, r3
+ 1040 0030 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 269:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 270:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (!(Endpoint_IsReadWriteAllowed()))
+ 1041              		.loc 2 270 0
+ 1042 0034 FFF7FEFF 		bl	Endpoint_IsReadWriteAllowed
+ 1043 0038 0346     		mov	r3, r0
+ 1044 003a 83F00103 		eor	r3, r3, #1
+ 1045 003e DBB2     		uxtb	r3, r3
+ 1046 0040 002B     		cmp	r3, #0
+ 1047 0042 0AD0     		beq	.L63
+ 1048              	.LBB2:
+ 271:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	{
+ 272:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		Endpoint_ClearIN();
+ 1049              		.loc 2 272 0
+ 1050 0044 FFF7FEFF 		bl	Endpoint_ClearIN
+ 273:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 274:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		uint8_t ErrorCode;
+ 275:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 276:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		if ((ErrorCode = Endpoint_WaitUntilReady()) !=
+ 1051              		.loc 2 276 0
+ 1052 0048 FFF7FEFF 		bl	Endpoint_WaitUntilReady
+ 1053 004c 0346     		mov	r3, r0
+ 1054 004e FB73     		strb	r3, [r7, #15]
+ 1055 0050 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1056 0052 002B     		cmp	r3, #0
+ 1057 0054 01D0     		beq	.L63
+ 277:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 											ENDPOINT_READYWAIT_NoError)
+ 278:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		  return ErrorCode;
+ 1058              		.loc 2 278 0
+ 1059 0056 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 1060 0058 05E0     		b	.L62
+ 1061              	.L63:
+ 1062              	.LBE2:
+ 279:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	}
+ 280:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 281:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_Write_8(Data);
+ 1063              		.loc 2 281 0
+ 1064 005a FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1065 005c 1846     		mov	r0, r3
+ 1066 005e FFF7FEFF 		bl	Endpoint_Write_8
+ 282:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	return ENDPOINT_READYWAIT_NoError;
+ 1067              		.loc 2 282 0
+ 1068 0062 4FF00003 		mov	r3, #0
+ 1069              	.L62:
+ 283:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 1070              		.loc 2 283 0
+ 1071 0066 1846     		mov	r0, r3
+ 1072 0068 07F11007 		add	r7, r7, #16
+ 1073 006c BD46     		mov	sp, r7
+ 1074 006e 80BD     		pop	{r7, pc}
+ 1075              		.cfi_endproc
+ 1076              	.LFE138:
+ 1078              		.section	.text.CDC_Device_Flush,"ax",%progbits
+ 1079              		.align	2
+ 1080              		.global	CDC_Device_Flush
+ 1081              		.thumb
+ 1082              		.thumb_func
+ 1084              	CDC_Device_Flush:
+ 1085              	.LFB139:
+ 284:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 285:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** uint8_t CDC_Device_Flush(USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+ 286:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 1086              		.loc 2 286 0
+ 1087              		.cfi_startproc
+ 1088              		@ args = 0, pretend = 0, frame = 8
+ 1089              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1090 0000 80B5     		push	{r7, lr}
+ 1091              	.LCFI45:
+ 1092              		.cfi_def_cfa_offset 8
+ 1093              		.cfi_offset 7, -8
+ 1094              		.cfi_offset 14, -4
+ 1095 0002 82B0     		sub	sp, sp, #8
+ 1096              	.LCFI46:
+ 1097              		.cfi_def_cfa_offset 16
+ 1098 0004 00AF     		add	r7, sp, #0
+ 1099              	.LCFI47:
+ 1100              		.cfi_def_cfa_register 7
+ 1101 0006 7860     		str	r0, [r7, #4]
+ 287:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 1102              		.loc 2 287 0
+ 1103 0008 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1104 000c C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1105 0010 1B78     		ldrb	r3, [r3, #0]
+ 1106 0012 DBB2     		uxtb	r3, r3
+ 1107 0014 042B     		cmp	r3, #4
+ 1108 0016 03D1     		bne	.L65
+ 288:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						!(CDCInterfaceInfo->State.LineEncoding.BaudRateBPS))
+ 1109              		.loc 2 288 0 discriminator 1
+ 1110 0018 7B68     		ldr	r3, [r7, #4]
+ 1111 001a 9B69     		ldr	r3, [r3, #24]	@ unaligned
+ 287:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 1112              		.loc 2 287 0 discriminator 1
+ 1113 001c 002B     		cmp	r3, #0
+ 1114 001e 02D1     		bne	.L66
+ 1115              	.L65:
+ 289:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return ENDPOINT_RWSTREAM_DeviceDisconnected;
+ 1116              		.loc 2 289 0
+ 1117 0020 4FF00203 		mov	r3, #2
+ 1118 0024 10E0     		b	.L67
+ 1119              	.L66:
+ 290:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 291:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	/* IFX: Removed unused code, causing errors. */
+ 292:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 293:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_SelectEndpoint(CDCInterfaceInfo->Config.DataINEndpoint.Address);
+ 1120              		.loc 2 293 0
+ 1121 0026 7B68     		ldr	r3, [r7, #4]
+ 1122 0028 9B78     		ldrb	r3, [r3, #2]	@ zero_extendqisi2
+ 1123 002a 1846     		mov	r0, r3
+ 1124 002c FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 294:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 295:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (!(Endpoint_BytesInEndpoint()))
+ 1125              		.loc 2 295 0
+ 1126 0030 FFF7FEFF 		bl	Endpoint_BytesInEndpoint
+ 1127 0034 0346     		mov	r3, r0
+ 1128 0036 002B     		cmp	r3, #0
+ 1129 0038 02D1     		bne	.L68
+ 296:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return ENDPOINT_READYWAIT_NoError;
+ 1130              		.loc 2 296 0
+ 1131 003a 4FF00003 		mov	r3, #0
+ 1132 003e 03E0     		b	.L67
+ 1133              	.L68:
+ 297:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 298:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	/* IFX: Removed unused code, causing errors. */
+ 299:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 300:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_ClearIN();
+ 1134              		.loc 2 300 0
+ 1135 0040 FFF7FEFF 		bl	Endpoint_ClearIN
+ 301:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 302:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	/* IFX: Removed unused code, causing errors. */
+ 303:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 304:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	return ENDPOINT_READYWAIT_NoError;
+ 1136              		.loc 2 304 0
+ 1137 0044 4FF00003 		mov	r3, #0
+ 1138              	.L67:
+ 305:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 1139              		.loc 2 305 0
+ 1140 0048 1846     		mov	r0, r3
+ 1141 004a 07F10807 		add	r7, r7, #8
+ 1142 004e BD46     		mov	sp, r7
+ 1143 0050 80BD     		pop	{r7, pc}
+ 1144              		.cfi_endproc
+ 1145              	.LFE139:
+ 1147 0052 00BF     		.section	.text.CDC_Device_BytesReceived,"ax",%progbits
+ 1148              		.align	2
+ 1149              		.global	CDC_Device_BytesReceived
+ 1150              		.thumb
+ 1151              		.thumb_func
+ 1153              	CDC_Device_BytesReceived:
+ 1154              	.LFB140:
+ 306:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 307:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** uint16_t CDC_Device_BytesReceived(
+ 308:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+ 309:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 1155              		.loc 2 309 0
+ 1156              		.cfi_startproc
+ 1157              		@ args = 0, pretend = 0, frame = 8
+ 1158              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1159 0000 80B5     		push	{r7, lr}
+ 1160              	.LCFI48:
+ 1161              		.cfi_def_cfa_offset 8
+ 1162              		.cfi_offset 7, -8
+ 1163              		.cfi_offset 14, -4
+ 1164 0002 82B0     		sub	sp, sp, #8
+ 1165              	.LCFI49:
+ 1166              		.cfi_def_cfa_offset 16
+ 1167 0004 00AF     		add	r7, sp, #0
+ 1168              	.LCFI50:
+ 1169              		.cfi_def_cfa_register 7
+ 1170 0006 7860     		str	r0, [r7, #4]
+ 310:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 1171              		.loc 2 310 0
+ 1172 0008 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1173 000c C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1174 0010 1B78     		ldrb	r3, [r3, #0]
+ 1175 0012 DBB2     		uxtb	r3, r3
+ 1176 0014 042B     		cmp	r3, #4
+ 1177 0016 03D1     		bne	.L70
+ 311:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						!(CDCInterfaceInfo->State.LineEncoding.BaudRateBPS))
+ 1178              		.loc 2 311 0 discriminator 1
+ 1179 0018 7B68     		ldr	r3, [r7, #4]
+ 1180 001a 9B69     		ldr	r3, [r3, #24]	@ unaligned
+ 310:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 1181              		.loc 2 310 0 discriminator 1
+ 1182 001c 002B     		cmp	r3, #0
+ 1183 001e 02D1     		bne	.L71
+ 1184              	.L70:
+ 312:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return 0;
+ 1185              		.loc 2 312 0
+ 1186 0020 4FF00003 		mov	r3, #0
+ 1187 0024 19E0     		b	.L72
+ 1188              	.L71:
+ 313:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 314:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_SelectEndpoint(CDCInterfaceInfo->Config.DataOUTEndpoint.Address);
+ 1189              		.loc 2 314 0
+ 1190 0026 7B68     		ldr	r3, [r7, #4]
+ 1191 0028 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ 1192 002a 1846     		mov	r0, r3
+ 1193 002c FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 315:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 316:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (Endpoint_IsOUTReceived())
+ 1194              		.loc 2 316 0
+ 1195 0030 FFF7FEFF 		bl	Endpoint_IsOUTReceived
+ 1196 0034 0346     		mov	r3, r0
+ 1197 0036 002B     		cmp	r3, #0
+ 1198 0038 0DD0     		beq	.L73
+ 317:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	{
+ 318:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		if (!(Endpoint_BytesInEndpoint()))
+ 1199              		.loc 2 318 0
+ 1200 003a FFF7FEFF 		bl	Endpoint_BytesInEndpoint
+ 1201 003e 0346     		mov	r3, r0
+ 1202 0040 002B     		cmp	r3, #0
+ 1203 0042 04D1     		bne	.L74
+ 319:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		{
+ 320:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			Endpoint_ClearOUT();
+ 1204              		.loc 2 320 0
+ 1205 0044 FFF7FEFF 		bl	Endpoint_ClearOUT
+ 321:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			return 0;
+ 1206              		.loc 2 321 0
+ 1207 0048 4FF00003 		mov	r3, #0
+ 1208 004c 05E0     		b	.L72
+ 1209              	.L74:
+ 322:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		}
+ 323:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		else
+ 324:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		{
+ 325:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			return Endpoint_BytesInEndpoint();
+ 1210              		.loc 2 325 0
+ 1211 004e FFF7FEFF 		bl	Endpoint_BytesInEndpoint
+ 1212 0052 0346     		mov	r3, r0
+ 1213 0054 01E0     		b	.L72
+ 1214              	.L73:
+ 326:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		}
+ 327:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	}
+ 328:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	else
+ 329:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	{
+ 330:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		return 0;
+ 1215              		.loc 2 330 0
+ 1216 0056 4FF00003 		mov	r3, #0
+ 1217              	.L72:
+ 331:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	}
+ 332:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 1218              		.loc 2 332 0
+ 1219 005a 1846     		mov	r0, r3
+ 1220 005c 07F10807 		add	r7, r7, #8
+ 1221 0060 BD46     		mov	sp, r7
+ 1222 0062 80BD     		pop	{r7, pc}
+ 1223              		.cfi_endproc
+ 1224              	.LFE140:
+ 1226              		.section	.text.CDC_Device_ReceiveByte,"ax",%progbits
+ 1227              		.align	2
+ 1228              		.global	CDC_Device_ReceiveByte
+ 1229              		.thumb
+ 1230              		.thumb_func
+ 1232              	CDC_Device_ReceiveByte:
+ 1233              	.LFB141:
+ 333:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 334:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** int16_t CDC_Device_ReceiveByte(
+ 335:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+ 336:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 1234              		.loc 2 336 0
+ 1235              		.cfi_startproc
+ 1236              		@ args = 0, pretend = 0, frame = 16
+ 1237              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1238 0000 80B5     		push	{r7, lr}
+ 1239              	.LCFI51:
+ 1240              		.cfi_def_cfa_offset 8
+ 1241              		.cfi_offset 7, -8
+ 1242              		.cfi_offset 14, -4
+ 1243 0002 84B0     		sub	sp, sp, #16
+ 1244              	.LCFI52:
+ 1245              		.cfi_def_cfa_offset 24
+ 1246 0004 00AF     		add	r7, sp, #0
+ 1247              	.LCFI53:
+ 1248              		.cfi_def_cfa_register 7
+ 1249 0006 7860     		str	r0, [r7, #4]
+ 337:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 1250              		.loc 2 337 0
+ 1251 0008 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1252 000c C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1253 0010 1B78     		ldrb	r3, [r3, #0]
+ 1254 0012 DBB2     		uxtb	r3, r3
+ 1255 0014 042B     		cmp	r3, #4
+ 1256 0016 03D1     		bne	.L76
+ 338:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						!(CDCInterfaceInfo->State.LineEncoding.BaudRateBPS))
+ 1257              		.loc 2 338 0 discriminator 1
+ 1258 0018 7B68     		ldr	r3, [r7, #4]
+ 1259 001a 9B69     		ldr	r3, [r3, #24]	@ unaligned
+ 337:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 1260              		.loc 2 337 0 discriminator 1
+ 1261 001c 002B     		cmp	r3, #0
+ 1262 001e 02D1     		bne	.L77
+ 1263              	.L76:
+ 339:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return -1;
+ 1264              		.loc 2 339 0
+ 1265 0020 4FF6FF73 		movw	r3, #65535
+ 1266 0024 1DE0     		b	.L78
+ 1267              	.L77:
+ 340:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 341:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	int16_t ReceivedByte = -1;
+ 1268              		.loc 2 341 0
+ 1269 0026 4FF6FF73 		movw	r3, #65535
+ 1270 002a FB81     		strh	r3, [r7, #14]	@ movhi
+ 342:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 343:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_SelectEndpoint(CDCInterfaceInfo->Config.DataOUTEndpoint.Address);
+ 1271              		.loc 2 343 0
+ 1272 002c 7B68     		ldr	r3, [r7, #4]
+ 1273 002e 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ 1274 0030 1846     		mov	r0, r3
+ 1275 0032 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 344:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 345:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if (Endpoint_IsOUTReceived())
+ 1276              		.loc 2 345 0
+ 1277 0036 FFF7FEFF 		bl	Endpoint_IsOUTReceived
+ 1278 003a 0346     		mov	r3, r0
+ 1279 003c 002B     		cmp	r3, #0
+ 1280 003e 0FD0     		beq	.L79
+ 346:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	{
+ 347:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		if (Endpoint_BytesInEndpoint())
+ 1281              		.loc 2 347 0
+ 1282 0040 FFF7FEFF 		bl	Endpoint_BytesInEndpoint
+ 1283 0044 0346     		mov	r3, r0
+ 1284 0046 002B     		cmp	r3, #0
+ 1285 0048 03D0     		beq	.L80
+ 348:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		  ReceivedByte = Endpoint_Read_8();
+ 1286              		.loc 2 348 0
+ 1287 004a FFF7FEFF 		bl	Endpoint_Read_8
+ 1288 004e 0346     		mov	r3, r0
+ 1289 0050 FB81     		strh	r3, [r7, #14]	@ movhi
+ 1290              	.L80:
+ 349:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 350:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		if (!(Endpoint_BytesInEndpoint()))
+ 1291              		.loc 2 350 0
+ 1292 0052 FFF7FEFF 		bl	Endpoint_BytesInEndpoint
+ 1293 0056 0346     		mov	r3, r0
+ 1294 0058 002B     		cmp	r3, #0
+ 1295 005a 01D1     		bne	.L79
+ 351:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		  Endpoint_ClearOUT();
+ 1296              		.loc 2 351 0
+ 1297 005c FFF7FEFF 		bl	Endpoint_ClearOUT
+ 1298              	.L79:
+ 352:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	}
+ 353:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 354:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	return ReceivedByte;
+ 1299              		.loc 2 354 0
+ 1300 0060 FB89     		ldrh	r3, [r7, #14]
+ 1301              	.L78:
+ 1302 0062 1BB2     		sxth	r3, r3
+ 355:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 1303              		.loc 2 355 0
+ 1304 0064 1846     		mov	r0, r3
+ 1305 0066 07F11007 		add	r7, r7, #16
+ 1306 006a BD46     		mov	sp, r7
+ 1307 006c 80BD     		pop	{r7, pc}
+ 1308              		.cfi_endproc
+ 1309              	.LFE141:
+ 1311 006e 00BF     		.section	.rodata
+ 1312              		.align	2
+ 1313              	.LC0:
+ 1314 0000 A1       		.byte	-95
+ 1315 0001 20       		.byte	32
+ 1316 0002 0000     		.short	0
+ 1317 0004 0000     		.short	0
+ 1318 0006 0200     		.short	2
+ 1319              		.section	.text.CDC_Device_SendControlLineStateChange,"ax",%progbits
+ 1320              		.align	2
+ 1321              		.global	CDC_Device_SendControlLineStateChange
+ 1322              		.thumb
+ 1323              		.thumb_func
+ 1325              	CDC_Device_SendControlLineStateChange:
+ 1326              	.LFB142:
+ 356:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 357:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** void CDC_Device_SendControlLineStateChange(
+ 358:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						USB_ClassInfo_CDC_Device_t* const CDCInterfaceInfo)
+ 359:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** {
+ 1327              		.loc 2 359 0
+ 1328              		.cfi_startproc
+ 1329              		@ args = 0, pretend = 0, frame = 16
+ 1330              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1331 0000 80B5     		push	{r7, lr}
+ 1332              	.LCFI54:
+ 1333              		.cfi_def_cfa_offset 8
+ 1334              		.cfi_offset 7, -8
+ 1335              		.cfi_offset 14, -4
+ 1336 0002 84B0     		sub	sp, sp, #16
+ 1337              	.LCFI55:
+ 1338              		.cfi_def_cfa_offset 24
+ 1339 0004 00AF     		add	r7, sp, #0
+ 1340              	.LCFI56:
+ 1341              		.cfi_def_cfa_register 7
+ 1342 0006 7860     		str	r0, [r7, #4]
+ 360:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 1343              		.loc 2 360 0
+ 1344 0008 40F20003 		movw	r3, #:lower16:USB_DeviceState
+ 1345 000c C0F20003 		movt	r3, #:upper16:USB_DeviceState
+ 1346 0010 1B78     		ldrb	r3, [r3, #0]
+ 1347 0012 DBB2     		uxtb	r3, r3
+ 1348 0014 042B     		cmp	r3, #4
+ 1349 0016 26D1     		bne	.L81
+ 361:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 						!(CDCInterfaceInfo->State.LineEncoding.BaudRateBPS))
+ 1350              		.loc 2 361 0 discriminator 1
+ 1351 0018 7B68     		ldr	r3, [r7, #4]
+ 1352 001a 9B69     		ldr	r3, [r3, #24]	@ unaligned
+ 360:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	if ((USB_DeviceState != DEVICE_STATE_Configured) ||
+ 1353              		.loc 2 360 0 discriminator 1
+ 1354 001c 002B     		cmp	r3, #0
+ 1355 001e 22D0     		beq	.L81
+ 362:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	  return;
+ 363:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 364:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_SelectEndpoint(
+ 365:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 					CDCInterfaceInfo->Config.NotificationEndpoint.Address);
+ 1356              		.loc 2 365 0
+ 1357 0020 7B68     		ldr	r3, [r7, #4]
+ 364:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_SelectEndpoint(
+ 1358              		.loc 2 364 0
+ 1359 0022 9B7B     		ldrb	r3, [r3, #14]	@ zero_extendqisi2
+ 1360 0024 1846     		mov	r0, r3
+ 1361 0026 FFF7FEFF 		bl	Endpoint_SelectEndpoint
+ 366:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 367:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	USB_Request_Header_t Notification = (USB_Request_Header_t)
+ 1362              		.loc 2 367 0
+ 1363 002a 40F20002 		movw	r2, #:lower16:.LC0
+ 1364 002e C0F20002 		movt	r2, #:upper16:.LC0
+ 1365 0032 07F10803 		add	r3, r7, #8
+ 1366 0036 1068     		ldr	r0, [r2, #0]	@ unaligned
+ 1367 0038 5168     		ldr	r1, [r2, #4]	@ unaligned
+ 1368 003a 03C3     		stmia	r3!, {r0, r1}
+ 368:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		{
+ 369:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			.bmRequestType = (REQDIR_DEVICETOHOST | REQTYPE_CLASS |
+ 370:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 													REQREC_INTERFACE),
+ 371:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			.bRequest      = CDC_NOTIF_SerialState,
+ 372:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			.wValue        = 0,
+ 373:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			.wIndex        = 0,
+ 374:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			.wLength       =
+ 375:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 				sizeof(CDCInterfaceInfo->State.ControlLineStates.DeviceToHost),
+ 376:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 		};
+ 377:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 
+ 378:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_Write_Stream_LE(&Notification, sizeof(USB_Request_Header_t), NULL);
+ 1369              		.loc 2 378 0
+ 1370 003c 07F10803 		add	r3, r7, #8
+ 1371 0040 1846     		mov	r0, r3
+ 1372 0042 4FF00801 		mov	r1, #8
+ 1373 0046 4FF00002 		mov	r2, #0
+ 1374 004a FFF7FEFF 		bl	Endpoint_Write_Stream_LE
+ 379:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_Write_Stream_LE(
+ 380:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			&CDCInterfaceInfo->State.ControlLineStates.DeviceToHost,
+ 1375              		.loc 2 380 0
+ 1376 004e 7B68     		ldr	r3, [r7, #4]
+ 1377 0050 03F11603 		add	r3, r3, #22
+ 379:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_Write_Stream_LE(
+ 1378              		.loc 2 379 0
+ 1379 0054 1846     		mov	r0, r3
+ 1380 0056 4FF00201 		mov	r1, #2
+ 1381 005a 4FF00002 		mov	r2, #0
+ 1382 005e FFF7FEFF 		bl	Endpoint_Write_Stream_LE
+ 381:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 			sizeof(CDCInterfaceInfo->State.ControlLineStates.DeviceToHost),
+ 382:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	                         NULL);
+ 383:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** 	Endpoint_ClearIN();
+ 1383              		.loc 2 383 0
+ 1384 0062 FFF7FEFF 		bl	Endpoint_ClearIN
+ 1385              	.L81:
+ 384:../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.c **** }
+ 1386              		.loc 2 384 0
+ 1387 0066 07F11007 		add	r7, r7, #16
+ 1388 006a BD46     		mov	sp, r7
+ 1389 006c 80BD     		pop	{r7, pc}
+ 1390              		.cfi_endproc
+ 1391              	.LFE142:
+ 1393 006e 00BF     		.text
+ 1394              	.Letext0:
+ 1395              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1396              		.file 4 "../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/Endpoint.h"
+ 1397              		.file 5 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\MOTORLIBS/../.
+ 1398              		.file 6 "C:\\DAVE3_workspace\\wsHERBY\\LARIX_Software_150907\\Dave\\Generated\\inc\\MOTORLIBS/../.
+ 1399              		.file 7 "../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/../../usbd/usbd.h"
+ 1400              		.file 8 "../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/EndpointStream.h"
+ 1401              		.file 9 "../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/StdRequestType.h"
+ 1402              		.file 10 "../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/Device.h"
+ 1403              		.file 11 "../Dave/Generated/src/USBD_VCOM/cdc/Device/../Common/CDCClassCommon.h"
+ 1404              		.file 12 "../Dave/Generated/src/USBD_VCOM/cdc/Device/CDCClassDevice.h"
+ 1405              		.file 13 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 1406              		.file 14 "../Dave/Generated/src/USBD_VCOM/cdc/Device/../../../USBD/usb/Core/USBTask.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 CDCClassDevice.c
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:20     .text.Endpoint_SelectEndpoint:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:24     .text.Endpoint_SelectEndpoint:00000000 Endpoint_SelectEndpoint
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:67     .text.Endpoint_IsSETUPReceived:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:71     .text.Endpoint_IsSETUPReceived:00000000 Endpoint_IsSETUPReceived
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:105    .text.Endpoint_ClearSETUP:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:109    .text.Endpoint_ClearSETUP:00000000 Endpoint_ClearSETUP
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:137    .text.Endpoint_ClearStatusStage:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:141    .text.Endpoint_ClearStatusStage:00000000 Endpoint_ClearStatusStage
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:163    .text.Endpoint_IsINReady:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:167    .text.Endpoint_IsINReady:00000000 Endpoint_IsINReady
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:228    .text.Endpoint_IsOUTReceived:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:232    .text.Endpoint_IsOUTReceived:00000000 Endpoint_IsOUTReceived
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:280    .text.Endpoint_BytesInEndpoint:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:284    .text.Endpoint_BytesInEndpoint:00000000 Endpoint_BytesInEndpoint
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:340    .text.CDC_Device_ProcessControlRequest:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:345    .text.CDC_Device_ProcessControlRequest:00000000 CDC_Device_ProcessControlRequest
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:396    .text.CDC_Device_ProcessControlRequest:0000004c $d
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:402    .text.CDC_Device_ProcessControlRequest:0000005c $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:602    .text.EVENT_CDC_Device_LineEncodingChanged:00000000 EVENT_CDC_Device_LineEncodingChanged
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:634    .text.EVENT_CDC_Device_ControLineStateChanged:00000000 EVENT_CDC_Device_ControLineStateChanged
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:666    .text.EVENT_CDC_Device_BreakSent:00000000 EVENT_CDC_Device_BreakSent
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:597    .text.EVENT_CDC_Device_LineEncodingChanged:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:629    .text.EVENT_CDC_Device_ControLineStateChanged:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:661    .text.EVENT_CDC_Device_BreakSent:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:695    .text.CDC_Device_ConfigureEndpoints:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:700    .text.CDC_Device_ConfigureEndpoints:00000000 CDC_Device_ConfigureEndpoints
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:797    .text.CDC_Device_USBTask:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:802    .text.CDC_Device_USBTask:00000000 CDC_Device_USBTask
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:1084   .text.CDC_Device_Flush:00000000 CDC_Device_Flush
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:860    .text.CDC_Device_SendString:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:865    .text.CDC_Device_SendString:00000000 CDC_Device_SendString
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:927    .text.CDC_Device_SendData:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:932    .text.CDC_Device_SendData:00000000 CDC_Device_SendData
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:993    .text.CDC_Device_SendByte:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:998    .text.CDC_Device_SendByte:00000000 CDC_Device_SendByte
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:1079   .text.CDC_Device_Flush:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:1148   .text.CDC_Device_BytesReceived:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:1153   .text.CDC_Device_BytesReceived:00000000 CDC_Device_BytesReceived
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:1227   .text.CDC_Device_ReceiveByte:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:1232   .text.CDC_Device_ReceiveByte:00000000 CDC_Device_ReceiveByte
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:1312   .rodata:00000000 $d
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:1313   .rodata:00000000 .LC0
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:1320   .text.CDC_Device_SendControlLineStateChange:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\ccMRR4lL.s:1325   .text.CDC_Device_SendControlLineStateChange:00000000 CDC_Device_SendControlLineStateChange
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.Common.h.87.ed9fec00c6f9ec3cf5c2ac4c6cfcb530
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.Attributes.h.96.1b4ef8adf80de3cb4f8c62843bfaf7bf
+                           .group:00000000 wm4.StdDescriptors.h.107.d2322ff0c138acada78976933b16bf7b
+                           .group:00000000 wm4.Endpoint.h.111.e7536b4385918c15b4c37aa69fbe94e3
+                           .group:00000000 wm4.USBController.h.105.7da122fb9e42a1d4ae2ea1662b47f042
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.usbd_config.h.64.bd01b2d6be88400f5b6095cc78dd2cee
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.stdbool.h.29.1c9ee6859ce8145f7838a4f2549ccec2
+                           .group:00000000 wm4.xmc4_usb.h.86.0df8e4bc81775a7befde6c395bcdee4c
+                           .group:00000000 wm4.dwc_otg_regs.h.96.602358b1a0ef2f2c6d02620a154f0cfc
+                           .group:00000000 wm4.xmc4_usb.h.97.59ae14584bb42292696e2197b500e282
+                           .group:00000000 wm4.StdRequestType.h.87.0e2654a6e33ff7aef3db3461e4efa272
+                           .group:00000000 wm4.CDCClassCommon.h.122.d15a1de5444b7c9e23eadf1dd367720e
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+
+UNDEFINED SYMBOLS
+device
+USB_ControlRequest
+Endpoint_Write_32_LE
+Endpoint_Write_8
+Endpoint_ClearIN
+USB_DeviceState
+Endpoint_Read_32_LE
+Endpoint_Read_8
+memset
+Endpoint_ConfigureEndpointTable
+strlen
+Endpoint_Write_Stream_LE
+Endpoint_IsReadWriteAllowed
+Endpoint_WaitUntilReady
+Endpoint_ClearOUT

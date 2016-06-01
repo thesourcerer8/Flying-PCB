@@ -1,0 +1,83 @@
+<%@ jet package="CodeGenerator" class="pwmsp003externh_template"
+imports="java.util.* java.text.*  com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[pwmsp003.h]*/
+
+/*******************************************************************************
+**																			  **
+** Copyright (C) 2013 Infineon Technologies AG. All rights reserved.          **
+**                                                                            **
+** Infineon Technologies AG (Infineon) is supplying this software for use     **
+** with Infineon's microcontrollers.									      **
+** This file can be freely distributed within development tools that are      **
+** supporting such microcontrollers.                                          **
+**                                                                            **
+** THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS,        **
+** IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES    **
+** OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS      **
+** SOFTWARE. INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, **
+** INCIDENTAL, OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.           **
+**																			  **     
+********************************************************************************
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** NOTE     : Any changes made to this file will be overwritten during Code   **
+**            generation                                                      **
+**                                                                            **
+********************************************************************************
+** VERSION HISTORY:
+********************************************************************************
+** v1.0.0, 26 Nov 2013,  SSAM: Initial version
+*******************************************************************************/
+
+/**
+ * @file  PWMSP003_Extern.h
+ * @brief Provides extern declarations of the app configuration handles.
+ */
+ 
+<% String AppBaseuri = "app/pwmsp003/"; %>
+<% String appInst  = null; %>
+<% int instance  = 0; %>
+#ifndef PWMSP003_EXTERN_H_
+#define PWMSP003_EXTERN_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+ 
+/*******************************************************************************
+** INCLUDE FILES:
+*******************************************************************************/
+
+  
+/*******************************************************************************
+** GLOBAL VARIABLE DEFINITIONS: 
+*******************************************************************************/
+/* Extend the scope of variable to other files */   
+<% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/pwmsp003/")); %>
+<% for (String appIns : appsList ) {
+   appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+<% instance++; %>
+<%}%>
+
+<%for (String appIns : appsList ) {
+ appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+extern const PWMSP003_HandleType PWMSP003_Handle<%=appInst%>;
+<%}%>
+
+extern const PWMSP003_HandleType * PWMSP003_HandleArr[PWMSP003_NUM_INSTANCES];
+/* Support for C++ codebase */
+#ifdef __cplusplus
+}
+#endif
+
+
+#endif /* PWMSP003_EXTERN_H_ */
+
+/*CODE_BLOCK_END*/

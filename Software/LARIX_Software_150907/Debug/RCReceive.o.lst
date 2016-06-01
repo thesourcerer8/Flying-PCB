@@ -1,0 +1,1342 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"RCReceive.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	control_value,19,4
+  20              		.comm	dpacket,101,4
+  21              		.global	ReadBufRC
+  22              		.bss
+  23              		.align	2
+  26              	ReadBufRC:
+  27 0000 00000000 		.space	100
+  27      00000000 
+  27      00000000 
+  27      00000000 
+  27      00000000 
+  28              		.global	throttle
+  29              		.align	2
+  32              	throttle:
+  33 0064 00000000 		.space	4
+  34              		.global	rudder
+  35              		.align	2
+  38              	rudder:
+  39 0068 00000000 		.space	4
+  40              		.global	elevator
+  41              		.align	2
+  44              	elevator:
+  45 006c 00000000 		.space	4
+  46              		.global	aileron
+  47              		.align	2
+  50              	aileron:
+  51 0070 00000000 		.space	4
+  52              		.global	throttleBT
+  53              		.align	1
+  56              	throttleBT:
+  57 0074 0000     		.space	2
+  58              		.global	rudderBT
+  59 0076 0000     		.align	2
+  62              	rudderBT:
+  63 0078 00000000 		.space	4
+  64              		.global	aileronBT
+  65              		.align	2
+  68              	aileronBT:
+  69 007c 00000000 		.space	4
+  70              		.global	elevatorBT
+  71              		.align	2
+  74              	elevatorBT:
+  75 0080 00000000 		.space	4
+  76              		.global	modeBT
+  79              	modeBT:
+  80 0084 00       		.space	1
+  81              		.global	flightmode
+  84              	flightmode:
+  85 0085 00       		.space	1
+  86              		.global	RCTimeOut
+  87              		.data
+  90              	RCTimeOut:
+  91 0000 01       		.byte	1
+  92              		.global	RCCount
+  93              		.bss
+  96              	RCCount:
+  97 0086 00       		.space	1
+  98              		.global	BTTimeOut
+  99              		.data
+ 102              	BTTimeOut:
+ 103 0001 01       		.byte	1
+ 104              		.global	BTCount
+ 105              		.bss
+ 108              	BTCount:
+ 109 0087 00       		.space	1
+ 110              		.comm	TimerWatchRC,4,4
+ 111              		.section	.text.mergeBytes,"ax",%progbits
+ 112              		.align	2
+ 113              		.global	mergeBytes
+ 114              		.thumb
+ 115              		.thumb_func
+ 117              	mergeBytes:
+ 118              	.LFB135:
+ 119              		.file 1 "../RCReceive.c"
+   1:../RCReceive.c **** /*
+   2:../RCReceive.c ****  * RCReceive.c
+   3:../RCReceive.c ****  *
+   4:../RCReceive.c ****  *  Created on: 22.12.2014
+   5:../RCReceive.c ****  *      Author: maan
+   6:../RCReceive.c ****  */
+   7:../RCReceive.c **** 
+   8:../RCReceive.c **** #include "RCReceive.h"
+   9:../RCReceive.c **** #include "BluetoothProtocol.h"
+  10:../RCReceive.c **** 
+  11:../RCReceive.c **** 
+  12:../RCReceive.c **** ////////////////////Variablen Elias///////////////////////////////
+  13:../RCReceive.c **** 
+  14:../RCReceive.c **** ControlValue control_value;
+  15:../RCReceive.c **** DataPacket dpacket;
+  16:../RCReceive.c **** uint8_t ReadBufRC[BLUETOOTH_INPUT_BUFFER] = {0};
+  17:../RCReceive.c **** 
+  18:../RCReceive.c **** ///////////////////////////////////////////////////////////////////
+  19:../RCReceive.c **** 
+  20:../RCReceive.c **** 
+  21:../RCReceive.c **** //Joystick values (range between -1 and 1, 0 in middle position)
+  22:../RCReceive.c **** float throttle = 0.0;
+  23:../RCReceive.c **** float rudder = 0.0;
+  24:../RCReceive.c **** float elevator = 0.0;
+  25:../RCReceive.c **** float aileron = 0.0;
+  26:../RCReceive.c **** 
+  27:../RCReceive.c **** //short throttleBT = 0;
+  28:../RCReceive.c **** //short rudderBT = 0;
+  29:../RCReceive.c **** //short aileronBT = 0;
+  30:../RCReceive.c **** //short elevatorBT = 0;
+  31:../RCReceive.c **** 
+  32:../RCReceive.c **** uint16_t throttleBT = 0;
+  33:../RCReceive.c **** float rudderBT = 0;
+  34:../RCReceive.c **** float aileronBT = 0;
+  35:../RCReceive.c **** float elevatorBT = 0;
+  36:../RCReceive.c **** 
+  37:../RCReceive.c **** 
+  38:../RCReceive.c **** 
+  39:../RCReceive.c **** uint8_t modeBT = 0;
+  40:../RCReceive.c **** 
+  41:../RCReceive.c **** uint8_t flightmode = 0; //Flightmode switch
+  42:../RCReceive.c **** 
+  43:../RCReceive.c **** uint8_t RCTimeOut = 1; //Timeout remote control 0:OK 1:TimeOut
+  44:../RCReceive.c **** uint8_t RCCount = 0; //Counter for RC read (used for TimeOut)
+  45:../RCReceive.c **** 
+  46:../RCReceive.c **** uint8_t BTTimeOut = 1;
+  47:../RCReceive.c **** uint8_t BTCount = 0;
+  48:../RCReceive.c **** 
+  49:../RCReceive.c **** // Software timer
+  50:../RCReceive.c **** handle_t TimerWatchRC; //Timer for RC watchdog
+  51:../RCReceive.c **** 
+  52:../RCReceive.c **** /*
+  53:../RCReceive.c ****  * Merge two bytes to one integer
+  54:../RCReceive.c ****  *
+  55:../RCReceive.c ****  * Parameters:
+  56:../RCReceive.c ****  * uint8_t a: high-byte
+  57:../RCReceive.c ****  * uint8_t b: low-byte
+  58:../RCReceive.c ****  *
+  59:../RCReceive.c ****  * Returnvalue:
+  60:../RCReceive.c ****  * int Merged bytes
+  61:../RCReceive.c ****  */
+  62:../RCReceive.c **** int mergeBytes (uint8_t a, uint8_t b) {
+ 120              		.loc 1 62 0
+ 121              		.cfi_startproc
+ 122              		@ args = 0, pretend = 0, frame = 16
+ 123              		@ frame_needed = 1, uses_anonymous_args = 0
+ 124              		@ link register save eliminated.
+ 125 0000 80B4     		push	{r7}
+ 126              	.LCFI0:
+ 127              		.cfi_def_cfa_offset 4
+ 128              		.cfi_offset 7, -4
+ 129 0002 85B0     		sub	sp, sp, #20
+ 130              	.LCFI1:
+ 131              		.cfi_def_cfa_offset 24
+ 132 0004 00AF     		add	r7, sp, #0
+ 133              	.LCFI2:
+ 134              		.cfi_def_cfa_register 7
+ 135 0006 0246     		mov	r2, r0
+ 136 0008 0B46     		mov	r3, r1
+ 137 000a FA71     		strb	r2, [r7, #7]
+ 138 000c BB71     		strb	r3, [r7, #6]
+  63:../RCReceive.c ****    int c = a;
+ 139              		.loc 1 63 0
+ 140 000e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 141 0010 FB60     		str	r3, [r7, #12]
+  64:../RCReceive.c ****    return (c << 8) | b;
+ 142              		.loc 1 64 0
+ 143 0012 FB68     		ldr	r3, [r7, #12]
+ 144 0014 4FEA0322 		lsl	r2, r3, #8
+ 145 0018 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 146 001a 1343     		orrs	r3, r3, r2
+  65:../RCReceive.c **** }
+ 147              		.loc 1 65 0
+ 148 001c 1846     		mov	r0, r3
+ 149 001e 07F11407 		add	r7, r7, #20
+ 150 0022 BD46     		mov	sp, r7
+ 151 0024 80BC     		pop	{r7}
+ 152 0026 7047     		bx	lr
+ 153              		.cfi_endproc
+ 154              	.LFE135:
+ 156              		.global	__aeabi_i2d
+ 157              		.global	__aeabi_ddiv
+ 158              		.global	__aeabi_d2f
+ 159              		.section	.text.USIC1_0_IRQHandler,"ax",%progbits
+ 160              		.align	2
+ 161              		.global	USIC1_0_IRQHandler
+ 162              		.thumb
+ 163              		.thumb_func
+ 165              	USIC1_0_IRQHandler:
+ 166              	.LFB136:
+  66:../RCReceive.c **** 
+  67:../RCReceive.c **** /**
+  68:../RCReceive.c ****  * Interrupt routine from UART FIFO in buffer
+  69:../RCReceive.c ****  * Buffer is full, new data is ready to read
+  70:../RCReceive.c ****  */
+  71:../RCReceive.c **** 
+  72:../RCReceive.c **** 
+  73:../RCReceive.c **** void RC_Receive_Int_Handler()
+  74:../RCReceive.c **** {
+ 167              		.loc 1 74 0
+ 168              		.cfi_startproc
+ 169              		@ args = 0, pretend = 0, frame = 56
+ 170              		@ frame_needed = 1, uses_anonymous_args = 0
+ 171 0000 80B5     		push	{r7, lr}
+ 172              	.LCFI3:
+ 173              		.cfi_def_cfa_offset 8
+ 174              		.cfi_offset 7, -8
+ 175              		.cfi_offset 14, -4
+ 176 0002 90B0     		sub	sp, sp, #64
+ 177              	.LCFI4:
+ 178              		.cfi_def_cfa_offset 72
+ 179 0004 02AF     		add	r7, sp, #8
+ 180              	.LCFI5:
+ 181              		.cfi_def_cfa 7, 64
+  75:../RCReceive.c **** 	//Raw values from receiver
+  76:../RCReceive.c **** 	int throttleRaw;
+  77:../RCReceive.c **** 	int rudderRaw;
+  78:../RCReceive.c **** 	int elevatorRaw;
+  79:../RCReceive.c **** 	int aileronRaw;
+  80:../RCReceive.c **** 	int flightmodeRaw;
+  81:../RCReceive.c **** 
+  82:../RCReceive.c **** 	uint8_t ReadBufRC[32]; //Readbuffer
+  83:../RCReceive.c **** 	int start = 0; //Index of start byte (contains 0x30)
+ 182              		.loc 1 83 0
+ 183 0006 4FF00003 		mov	r3, #0
+ 184 000a 7B63     		str	r3, [r7, #52]
+  84:../RCReceive.c **** 
+  85:../RCReceive.c **** 	//Check if receive buffer interrupt is set
+  86:../RCReceive.c **** 	if(UART001_GetFlagStatus(&UART001_Handle0,UART001_FIFO_STD_RECV_BUF_FLAG) == UART001_SET)
+ 185              		.loc 1 86 0
+ 186 000c 40F20000 		movw	r0, #:lower16:UART001_Handle0
+ 187 0010 C0F20000 		movt	r0, #:upper16:UART001_Handle0
+ 188 0014 4FF01001 		mov	r1, #16
+ 189 0018 FFF7FEFF 		bl	UART001_GetFlagStatus
+ 190 001c 0346     		mov	r3, r0
+ 191 001e 022B     		cmp	r3, #2
+ 192 0020 40F07D81 		bne	.L3
+  87:../RCReceive.c **** 	{
+  88:../RCReceive.c **** 		//Read data from UART buffer
+  89:../RCReceive.c **** 		UART001_ReadDataBytes(&UART001_Handle0,ReadBufRC,32);
+ 193              		.loc 1 89 0
+ 194 0024 3B46     		mov	r3, r7
+ 195 0026 40F20000 		movw	r0, #:lower16:UART001_Handle0
+ 196 002a C0F20000 		movt	r0, #:upper16:UART001_Handle0
+ 197 002e 1946     		mov	r1, r3
+ 198 0030 4FF02002 		mov	r2, #32
+ 199 0034 FFF7FEFF 		bl	UART001_ReadDataBytes
+  90:../RCReceive.c **** 		//Clear receive buffer interrupt flag
+  91:../RCReceive.c **** 		UART001_ClearFlag(&UART001_Handle0,UART001_FIFO_STD_RECV_BUF_FLAG);
+ 200              		.loc 1 91 0
+ 201 0038 40F20000 		movw	r0, #:lower16:UART001_Handle0
+ 202 003c C0F20000 		movt	r0, #:upper16:UART001_Handle0
+ 203 0040 4FF01001 		mov	r1, #16
+ 204 0044 FFF7FEFF 		bl	UART001_ClearFlag
+  92:../RCReceive.c **** 
+  93:../RCReceive.c **** 		//Search for start byte and check static values
+  94:../RCReceive.c **** 		while (ReadBufRC[start] != 0x30 || ReadBufRC[start+1] != 0x00 || ReadBufRC[start+5] != 0xA2 || Re
+ 205              		.loc 1 94 0
+ 206 0048 0CE0     		b	.L5
+ 207              	.L7:
+  95:../RCReceive.c **** 		{
+  96:../RCReceive.c **** 			if (start++ > 16) {
+ 208              		.loc 1 96 0
+ 209 004a 7B6B     		ldr	r3, [r7, #52]
+ 210 004c 102B     		cmp	r3, #16
+ 211 004e D4BF     		ite	le
+ 212 0050 0023     		movle	r3, #0
+ 213 0052 0123     		movgt	r3, #1
+ 214 0054 DBB2     		uxtb	r3, r3
+ 215 0056 7A6B     		ldr	r2, [r7, #52]
+ 216 0058 02F10102 		add	r2, r2, #1
+ 217 005c 7A63     		str	r2, [r7, #52]
+ 218 005e 002B     		cmp	r3, #0
+ 219 0060 40F05D81 		bne	.L3
+ 220              	.L5:
+  94:../RCReceive.c **** 		while (ReadBufRC[start] != 0x30 || ReadBufRC[start+1] != 0x00 || ReadBufRC[start+5] != 0xA2 || Re
+ 221              		.loc 1 94 0 discriminator 1
+ 222 0064 3A46     		mov	r2, r7
+ 223 0066 7B6B     		ldr	r3, [r7, #52]
+ 224 0068 D318     		adds	r3, r2, r3
+ 225 006a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 226 006c 302B     		cmp	r3, #48
+ 227 006e ECD1     		bne	.L7
+  94:../RCReceive.c **** 		while (ReadBufRC[start] != 0x30 || ReadBufRC[start+1] != 0x00 || ReadBufRC[start+5] != 0xA2 || Re
+ 228              		.loc 1 94 0 is_stmt 0 discriminator 2
+ 229 0070 7B6B     		ldr	r3, [r7, #52]
+ 230 0072 03F10103 		add	r3, r3, #1
+ 231 0076 07F13801 		add	r1, r7, #56
+ 232 007a CB18     		adds	r3, r1, r3
+ 233 007c 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 234 0080 002B     		cmp	r3, #0
+ 235 0082 E2D1     		bne	.L7
+  94:../RCReceive.c **** 		while (ReadBufRC[start] != 0x30 || ReadBufRC[start+1] != 0x00 || ReadBufRC[start+5] != 0xA2 || Re
+ 236              		.loc 1 94 0 discriminator 1
+ 237 0084 7B6B     		ldr	r3, [r7, #52]
+ 238 0086 03F10503 		add	r3, r3, #5
+ 239 008a 07F13802 		add	r2, r7, #56
+ 240 008e D318     		adds	r3, r2, r3
+ 241 0090 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 242 0094 A22B     		cmp	r3, #162
+ 243 0096 D8D1     		bne	.L7
+ 244 0098 7B6B     		ldr	r3, [r7, #52]
+ 245 009a 03F10803 		add	r3, r3, #8
+ 246 009e 07F13801 		add	r1, r7, #56
+ 247 00a2 CB18     		adds	r3, r1, r3
+ 248 00a4 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 249 00a8 2B2B     		cmp	r3, #43
+ 250 00aa CED1     		bne	.L7
+ 251 00ac 7B6B     		ldr	r3, [r7, #52]
+ 252 00ae 03F10903 		add	r3, r3, #9
+ 253 00b2 07F13802 		add	r2, r7, #56
+ 254 00b6 D318     		adds	r3, r2, r3
+ 255 00b8 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 256 00bc FE2B     		cmp	r3, #254
+ 257 00be C4D1     		bne	.L7
+  97:../RCReceive.c **** 				//Communication check bytes not in buffer
+  98:../RCReceive.c **** 				return;
+  99:../RCReceive.c **** 			}
+ 100:../RCReceive.c **** 		}
+ 101:../RCReceive.c **** 
+ 102:../RCReceive.c **** 		//Get data from stream
+ 103:../RCReceive.c **** 		throttleRaw = mergeBytes(ReadBufRC[start+2],ReadBufRC[start+3]);
+ 258              		.loc 1 103 0 is_stmt 1
+ 259 00c0 7B6B     		ldr	r3, [r7, #52]
+ 260 00c2 03F10203 		add	r3, r3, #2
+ 261 00c6 07F13801 		add	r1, r7, #56
+ 262 00ca CB18     		adds	r3, r1, r3
+ 263 00cc 13F8382C 		ldrb	r2, [r3, #-56]	@ zero_extendqisi2
+ 264 00d0 7B6B     		ldr	r3, [r7, #52]
+ 265 00d2 03F10303 		add	r3, r3, #3
+ 266 00d6 07F13801 		add	r1, r7, #56
+ 267 00da CB18     		adds	r3, r1, r3
+ 268 00dc 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 269 00e0 1046     		mov	r0, r2
+ 270 00e2 1946     		mov	r1, r3
+ 271 00e4 FFF7FEFF 		bl	mergeBytes
+ 272 00e8 3863     		str	r0, [r7, #48]
+ 104:../RCReceive.c **** 		throttle = map(throttleRaw, THROTTLE_MIN, THROTTLE_MAX, 0, 60000)/60000.0;
+ 273              		.loc 1 104 0
+ 274 00ea 4EF66023 		movw	r3, #60000
+ 275 00ee 0093     		str	r3, [sp, #0]
+ 276 00f0 386B     		ldr	r0, [r7, #48]
+ 277 00f2 4FF49971 		mov	r1, #306
+ 278 00f6 40F2F762 		movw	r2, #1783
+ 279 00fa 4FF00003 		mov	r3, #0
+ 280 00fe FFF7FEFF 		bl	map
+ 281 0102 0346     		mov	r3, r0
+ 282 0104 1846     		mov	r0, r3
+ 283 0106 FFF7FEFF 		bl	__aeabi_i2d
+ 284 010a 0246     		mov	r2, r0
+ 285 010c 0B46     		mov	r3, r1
+ 286 010e 1046     		mov	r0, r2
+ 287 0110 1946     		mov	r1, r3
+ 288 0112 85A3     		adr	r3, .L11
+ 289 0114 D3E90023 		ldrd	r2, [r3]
+ 290 0118 FFF7FEFF 		bl	__aeabi_ddiv
+ 291 011c 0246     		mov	r2, r0
+ 292 011e 0B46     		mov	r3, r1
+ 293 0120 1046     		mov	r0, r2
+ 294 0122 1946     		mov	r1, r3
+ 295 0124 FFF7FEFF 		bl	__aeabi_d2f
+ 296 0128 0246     		mov	r2, r0	@ float
+ 297 012a 40F20003 		movw	r3, #:lower16:throttle
+ 298 012e C0F20003 		movt	r3, #:upper16:throttle
+ 299 0132 1A60     		str	r2, [r3, #0]	@ float
+ 105:../RCReceive.c **** 		aileronRaw = mergeBytes(ReadBufRC[start+6],ReadBufRC[start+7]);
+ 300              		.loc 1 105 0
+ 301 0134 7B6B     		ldr	r3, [r7, #52]
+ 302 0136 03F10603 		add	r3, r3, #6
+ 303 013a 07F13802 		add	r2, r7, #56
+ 304 013e D318     		adds	r3, r2, r3
+ 305 0140 13F8382C 		ldrb	r2, [r3, #-56]	@ zero_extendqisi2
+ 306 0144 7B6B     		ldr	r3, [r7, #52]
+ 307 0146 03F10703 		add	r3, r3, #7
+ 308 014a 07F13801 		add	r1, r7, #56
+ 309 014e CB18     		adds	r3, r1, r3
+ 310 0150 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 311 0154 1046     		mov	r0, r2
+ 312 0156 1946     		mov	r1, r3
+ 313 0158 FFF7FEFF 		bl	mergeBytes
+ 314 015c F862     		str	r0, [r7, #44]
+ 106:../RCReceive.c **** 		aileron = map(aileronRaw, AILERON_MIN, AILERON_MAX, -30000, 30000)/30000.0;
+ 315              		.loc 1 106 0
+ 316 015e 47F23053 		movw	r3, #30000
+ 317 0162 0093     		str	r3, [sp, #0]
+ 318 0164 F86A     		ldr	r0, [r7, #44]
+ 319 0166 40F63211 		movw	r1, #2354
+ 320 016a 40F6CC62 		movw	r2, #3788
+ 321 016e 48F6D023 		movw	r3, #35536
+ 322 0172 CFF6FF73 		movt	r3, 65535
+ 323 0176 FFF7FEFF 		bl	map
+ 324 017a 0346     		mov	r3, r0
+ 325 017c 1846     		mov	r0, r3
+ 326 017e FFF7FEFF 		bl	__aeabi_i2d
+ 327 0182 0246     		mov	r2, r0
+ 328 0184 0B46     		mov	r3, r1
+ 329 0186 1046     		mov	r0, r2
+ 330 0188 1946     		mov	r1, r3
+ 331 018a 69A3     		adr	r3, .L11+8
+ 332 018c D3E90023 		ldrd	r2, [r3]
+ 333 0190 FFF7FEFF 		bl	__aeabi_ddiv
+ 334 0194 0246     		mov	r2, r0
+ 335 0196 0B46     		mov	r3, r1
+ 336 0198 1046     		mov	r0, r2
+ 337 019a 1946     		mov	r1, r3
+ 338 019c FFF7FEFF 		bl	__aeabi_d2f
+ 339 01a0 0246     		mov	r2, r0	@ float
+ 340 01a2 40F20003 		movw	r3, #:lower16:aileron
+ 341 01a6 C0F20003 		movt	r3, #:upper16:aileron
+ 342 01aa 1A60     		str	r2, [r3, #0]	@ float
+ 107:../RCReceive.c **** 		elevatorRaw = mergeBytes(ReadBufRC[start+10],ReadBufRC[start+11]);
+ 343              		.loc 1 107 0
+ 344 01ac 7B6B     		ldr	r3, [r7, #52]
+ 345 01ae 03F10A03 		add	r3, r3, #10
+ 346 01b2 07F13802 		add	r2, r7, #56
+ 347 01b6 D318     		adds	r3, r2, r3
+ 348 01b8 13F8382C 		ldrb	r2, [r3, #-56]	@ zero_extendqisi2
+ 349 01bc 7B6B     		ldr	r3, [r7, #52]
+ 350 01be 03F10B03 		add	r3, r3, #11
+ 351 01c2 07F13801 		add	r1, r7, #56
+ 352 01c6 CB18     		adds	r3, r1, r3
+ 353 01c8 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 354 01cc 1046     		mov	r0, r2
+ 355 01ce 1946     		mov	r1, r3
+ 356 01d0 FFF7FEFF 		bl	mergeBytes
+ 357 01d4 B862     		str	r0, [r7, #40]
+ 108:../RCReceive.c **** 		elevator = map(elevatorRaw, ELEVATOR_MIN, ELEVATOR_MAX, -30000, 30000)/30000.0;
+ 358              		.loc 1 108 0
+ 359 01d6 47F23053 		movw	r3, #30000
+ 360 01da 0093     		str	r3, [sp, #0]
+ 361 01dc B86A     		ldr	r0, [r7, #40]
+ 362 01de 41F23011 		movw	r1, #4400
+ 363 01e2 41F2CA62 		movw	r2, #5834
+ 364 01e6 48F6D023 		movw	r3, #35536
+ 365 01ea CFF6FF73 		movt	r3, 65535
+ 366 01ee FFF7FEFF 		bl	map
+ 367 01f2 0346     		mov	r3, r0
+ 368 01f4 1846     		mov	r0, r3
+ 369 01f6 FFF7FEFF 		bl	__aeabi_i2d
+ 370 01fa 0246     		mov	r2, r0
+ 371 01fc 0B46     		mov	r3, r1
+ 372 01fe 1046     		mov	r0, r2
+ 373 0200 1946     		mov	r1, r3
+ 374 0202 4BA3     		adr	r3, .L11+8
+ 375 0204 D3E90023 		ldrd	r2, [r3]
+ 376 0208 FFF7FEFF 		bl	__aeabi_ddiv
+ 377 020c 0246     		mov	r2, r0
+ 378 020e 0B46     		mov	r3, r1
+ 379 0210 1046     		mov	r0, r2
+ 380 0212 1946     		mov	r1, r3
+ 381 0214 FFF7FEFF 		bl	__aeabi_d2f
+ 382 0218 0246     		mov	r2, r0	@ float
+ 383 021a 40F20003 		movw	r3, #:lower16:elevator
+ 384 021e C0F20003 		movt	r3, #:upper16:elevator
+ 385 0222 1A60     		str	r2, [r3, #0]	@ float
+ 109:../RCReceive.c **** 		rudderRaw = mergeBytes(ReadBufRC[start+14],ReadBufRC[start+15]);
+ 386              		.loc 1 109 0
+ 387 0224 7B6B     		ldr	r3, [r7, #52]
+ 388 0226 03F10E03 		add	r3, r3, #14
+ 389 022a 07F13802 		add	r2, r7, #56
+ 390 022e D318     		adds	r3, r2, r3
+ 391 0230 13F8382C 		ldrb	r2, [r3, #-56]	@ zero_extendqisi2
+ 392 0234 7B6B     		ldr	r3, [r7, #52]
+ 393 0236 03F10F03 		add	r3, r3, #15
+ 394 023a 07F13801 		add	r1, r7, #56
+ 395 023e CB18     		adds	r3, r1, r3
+ 396 0240 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 397 0244 1046     		mov	r0, r2
+ 398 0246 1946     		mov	r1, r3
+ 399 0248 FFF7FEFF 		bl	mergeBytes
+ 400 024c 7862     		str	r0, [r7, #36]
+ 110:../RCReceive.c **** 		rudder = map(rudderRaw, RUDDER_MIN, RUDDER_MAX, -30000, 30000)/30000.0;
+ 401              		.loc 1 110 0
+ 402 024e 47F23053 		movw	r3, #30000
+ 403 0252 0093     		str	r3, [sp, #0]
+ 404 0254 786A     		ldr	r0, [r7, #36]
+ 405 0256 41F63211 		movw	r1, #6450
+ 406 025a 41F6CC62 		movw	r2, #7884
+ 407 025e 48F6D023 		movw	r3, #35536
+ 408 0262 CFF6FF73 		movt	r3, 65535
+ 409 0266 FFF7FEFF 		bl	map
+ 410 026a 0346     		mov	r3, r0
+ 411 026c 1846     		mov	r0, r3
+ 412 026e FFF7FEFF 		bl	__aeabi_i2d
+ 413 0272 0246     		mov	r2, r0
+ 414 0274 0B46     		mov	r3, r1
+ 415 0276 1046     		mov	r0, r2
+ 416 0278 1946     		mov	r1, r3
+ 417 027a 2DA3     		adr	r3, .L11+8
+ 418 027c D3E90023 		ldrd	r2, [r3]
+ 419 0280 FFF7FEFF 		bl	__aeabi_ddiv
+ 420 0284 0246     		mov	r2, r0
+ 421 0286 0B46     		mov	r3, r1
+ 422 0288 1046     		mov	r0, r2
+ 423 028a 1946     		mov	r1, r3
+ 424 028c FFF7FEFF 		bl	__aeabi_d2f
+ 425 0290 0246     		mov	r2, r0	@ float
+ 426 0292 40F20003 		movw	r3, #:lower16:rudder
+ 427 0296 C0F20003 		movt	r3, #:upper16:rudder
+ 428 029a 1A60     		str	r2, [r3, #0]	@ float
+ 111:../RCReceive.c **** 		flightmodeRaw = mergeBytes(ReadBufRC[start+12],ReadBufRC[start+13]);
+ 429              		.loc 1 111 0
+ 430 029c 7B6B     		ldr	r3, [r7, #52]
+ 431 029e 03F10C03 		add	r3, r3, #12
+ 432 02a2 07F13802 		add	r2, r7, #56
+ 433 02a6 D318     		adds	r3, r2, r3
+ 434 02a8 13F8382C 		ldrb	r2, [r3, #-56]	@ zero_extendqisi2
+ 435 02ac 7B6B     		ldr	r3, [r7, #52]
+ 436 02ae 03F10D03 		add	r3, r3, #13
+ 437 02b2 07F13801 		add	r1, r7, #56
+ 438 02b6 CB18     		adds	r3, r1, r3
+ 439 02b8 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 440 02bc 1046     		mov	r0, r2
+ 441 02be 1946     		mov	r1, r3
+ 442 02c0 FFF7FEFF 		bl	mergeBytes
+ 443 02c4 3862     		str	r0, [r7, #32]
+ 112:../RCReceive.c **** 		if (flightmodeRaw == FLIGHTMODE0) flightmode = 0;
+ 444              		.loc 1 112 0
+ 445 02c6 3A6A     		ldr	r2, [r7, #32]
+ 446 02c8 42F23213 		movw	r3, #8498
+ 447 02cc 9A42     		cmp	r2, r3
+ 448 02ce 06D1     		bne	.L8
+ 449              		.loc 1 112 0 is_stmt 0 discriminator 1
+ 450 02d0 40F20003 		movw	r3, #:lower16:flightmode
+ 451 02d4 C0F20003 		movt	r3, #:upper16:flightmode
+ 452 02d8 4FF00002 		mov	r2, #0
+ 453 02dc 1A70     		strb	r2, [r3, #0]
+ 454              	.L8:
+ 113:../RCReceive.c **** 		if (flightmodeRaw == FLIGHTMODE1) flightmode = 1;
+ 455              		.loc 1 113 0 is_stmt 1
+ 456 02de 3A6A     		ldr	r2, [r7, #32]
+ 457 02e0 42F2CA63 		movw	r3, #9930
+ 458 02e4 9A42     		cmp	r2, r3
+ 459 02e6 06D1     		bne	.L9
+ 460              		.loc 1 113 0 is_stmt 0 discriminator 1
+ 461 02e8 40F20003 		movw	r3, #:lower16:flightmode
+ 462 02ec C0F20003 		movt	r3, #:upper16:flightmode
+ 463 02f0 4FF00102 		mov	r2, #1
+ 464 02f4 1A70     		strb	r2, [r3, #0]
+ 465              	.L9:
+ 114:../RCReceive.c **** 
+ 115:../RCReceive.c **** 		//Set values for RC Timeout check
+ 116:../RCReceive.c **** 		RCTimeOut = 0;
+ 466              		.loc 1 116 0 is_stmt 1
+ 467 02f6 40F20003 		movw	r3, #:lower16:RCTimeOut
+ 468 02fa C0F20003 		movt	r3, #:upper16:RCTimeOut
+ 469 02fe 4FF00002 		mov	r2, #0
+ 470 0302 1A70     		strb	r2, [r3, #0]
+ 117:../RCReceive.c **** 		RCCount++;
+ 471              		.loc 1 117 0
+ 472 0304 40F20003 		movw	r3, #:lower16:RCCount
+ 473 0308 C0F20003 		movt	r3, #:upper16:RCCount
+ 474 030c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 475 030e 03F10103 		add	r3, r3, #1
+ 476 0312 DAB2     		uxtb	r2, r3
+ 477 0314 40F20003 		movw	r3, #:lower16:RCCount
+ 478 0318 C0F20003 		movt	r3, #:upper16:RCCount
+ 479 031c 1A70     		strb	r2, [r3, #0]
+ 480              	.L3:
+ 118:../RCReceive.c **** 	}
+ 119:../RCReceive.c **** }
+ 481              		.loc 1 119 0
+ 482 031e 07F13807 		add	r7, r7, #56
+ 483 0322 BD46     		mov	sp, r7
+ 484 0324 80BD     		pop	{r7, pc}
+ 485              	.L12:
+ 486 0326 00BF     		.align	3
+ 487              	.L11:
+ 488 0328 00000000 		.word	0
+ 489 032c 004CED40 		.word	1089293312
+ 490 0330 00000000 		.word	0
+ 491 0334 004CDD40 		.word	1088244736
+ 492              		.cfi_endproc
+ 493              	.LFE136:
+ 495              		.section	.text.USIC0_5_IRQHandler,"ax",%progbits
+ 496              		.align	2
+ 497              		.global	USIC0_5_IRQHandler
+ 498              		.thumb
+ 499              		.thumb_func
+ 501              	USIC0_5_IRQHandler:
+ 502              	.LFB137:
+ 120:../RCReceive.c **** 
+ 121:../RCReceive.c **** void BT_Receive_Int_Handler()
+ 122:../RCReceive.c **** {
+ 503              		.loc 1 122 0
+ 504              		.cfi_startproc
+ 505              		@ args = 0, pretend = 0, frame = 8
+ 506              		@ frame_needed = 1, uses_anonymous_args = 0
+ 507 0000 80B5     		push	{r7, lr}
+ 508              	.LCFI6:
+ 509              		.cfi_def_cfa_offset 8
+ 510              		.cfi_offset 7, -8
+ 511              		.cfi_offset 14, -4
+ 512 0002 82B0     		sub	sp, sp, #8
+ 513              	.LCFI7:
+ 514              		.cfi_def_cfa_offset 16
+ 515 0004 00AF     		add	r7, sp, #0
+ 516              	.LCFI8:
+ 517              		.cfi_def_cfa_register 7
+ 123:../RCReceive.c **** //uint8_t ReadBufRC[20] = {0}; //Readbuffer
+ 124:../RCReceive.c **** //	int start = 0; //Index of start byte
+ 125:../RCReceive.c **** //
+ 126:../RCReceive.c **** //	//Check if receive buffer interrupt is set
+ 127:../RCReceive.c **** //	if(UART001_GetFlagStatus(&UART001_Handle1,UART001_FIFO_STD_RECV_BUF_FLAG) == UART001_SET)
+ 128:../RCReceive.c **** //	{
+ 129:../RCReceive.c **** //		//Read data from UART buffer
+ 130:../RCReceive.c **** //		UART001_ReadDataBytes(&UART001_Handle1,ReadBufRC,20);
+ 131:../RCReceive.c **** //
+ 132:../RCReceive.c **** //		//Clear receive buffer interrupt flag
+ 133:../RCReceive.c **** //		UART001_ClearFlag(&UART001_Handle1,UART001_FIFO_STD_RECV_BUF_FLAG);
+ 134:../RCReceive.c **** //
+ 135:../RCReceive.c **** //		//Search for start byte and check static values
+ 136:../RCReceive.c **** //		while (ReadBufRC[start] != 0x02)
+ 137:../RCReceive.c **** //		{
+ 138:../RCReceive.c **** //			if (start++ > 6) {
+ 139:../RCReceive.c **** //				//Communication check bytes not in buffer
+ 140:../RCReceive.c **** //				return;
+ 141:../RCReceive.c **** //			}
+ 142:../RCReceive.c **** //		}
+ 143:../RCReceive.c **** //
+ 144:../RCReceive.c **** //		throttleBT=(ReadBufRC[start+1] << 8 | ReadBufRC[start+2]);
+ 145:../RCReceive.c **** //		rudderBT=(ReadBufRC[start+3] << 8 | ReadBufRC[start+4]);
+ 146:../RCReceive.c **** //		elevatorBT=(ReadBufRC[start+5] << 8 | ReadBufRC[start+6]);
+ 147:../RCReceive.c **** //		aileronBT=(ReadBufRC[start+7] << 8 | ReadBufRC[start+8]);
+ 148:../RCReceive.c **** //		modeBT=(ReadBufRC[start+9]);
+ 149:../RCReceive.c **** //
+ 150:../RCReceive.c **** //		BTTimeOut = 0;
+ 151:../RCReceive.c **** //		BTCount++;
+ 152:../RCReceive.c **** //	}
+ 153:../RCReceive.c **** //////////////////////////////////////Teil Elias////////////////////////////////////////////
+ 154:../RCReceive.c **** 
+ 155:../RCReceive.c **** 	if(UART001_GetFlagStatus(&UART001_Handle1,UART001_FIFO_STD_RECV_BUF_FLAG) == UART001_SET)
+ 518              		.loc 1 155 0
+ 519 0006 40F20000 		movw	r0, #:lower16:UART001_Handle1
+ 520 000a C0F20000 		movt	r0, #:upper16:UART001_Handle1
+ 521 000e 4FF01001 		mov	r1, #16
+ 522 0012 FFF7FEFF 		bl	UART001_GetFlagStatus
+ 523 0016 0346     		mov	r3, r0
+ 524 0018 022B     		cmp	r3, #2
+ 525 001a 6BD1     		bne	.L13
+ 526              	.LBB2:
+ 156:../RCReceive.c **** 	{
+ 157:../RCReceive.c **** 
+ 158:../RCReceive.c **** 		UART001_ReadDataBytes(&UART001_Handle1,ReadBufRC,PACKET_SIZE);
+ 527              		.loc 1 158 0
+ 528 001c 40F20000 		movw	r0, #:lower16:UART001_Handle1
+ 529 0020 C0F20000 		movt	r0, #:upper16:UART001_Handle1
+ 530 0024 40F20001 		movw	r1, #:lower16:ReadBufRC
+ 531 0028 C0F20001 		movt	r1, #:upper16:ReadBufRC
+ 532 002c 4FF01302 		mov	r2, #19
+ 533 0030 FFF7FEFF 		bl	UART001_ReadDataBytes
+ 159:../RCReceive.c **** 	   	//Clear receive buffer interrupt flag
+ 160:../RCReceive.c **** 	   	UART001_ClearFlag(&UART001_Handle1,UART001_FIFO_STD_RECV_BUF_FLAG);
+ 534              		.loc 1 160 0
+ 535 0034 40F20000 		movw	r0, #:lower16:UART001_Handle1
+ 536 0038 C0F20000 		movt	r0, #:upper16:UART001_Handle1
+ 537 003c 4FF01001 		mov	r1, #16
+ 538 0040 FFF7FEFF 		bl	UART001_ClearFlag
+ 161:../RCReceive.c **** 	    status_t rec_mode = maintainBluetoothInputBuffer(&ReadBufRC[0],
+ 539              		.loc 1 161 0
+ 540 0044 40F20000 		movw	r0, #:lower16:ReadBufRC
+ 541 0048 C0F20000 		movt	r0, #:upper16:ReadBufRC
+ 542 004c 40F20001 		movw	r1, #:lower16:control_value
+ 543 0050 C0F20001 		movt	r1, #:upper16:control_value
+ 544 0054 40F20002 		movw	r2, #:lower16:dpacket
+ 545 0058 C0F20002 		movt	r2, #:upper16:dpacket
+ 546 005c FFF7FEFF 		bl	maintainBluetoothInputBuffer
+ 547 0060 7860     		str	r0, [r7, #4]
+ 162:../RCReceive.c **** 	   							&control_value, &dpacket);
+ 163:../RCReceive.c **** 
+ 164:../RCReceive.c **** 		switch (rec_mode)
+ 548              		.loc 1 164 0
+ 549 0062 7B68     		ldr	r3, [r7, #4]
+ 550 0064 012B     		cmp	r3, #1
+ 551 0066 42D0     		beq	.L19
+ 552 0068 012B     		cmp	r3, #1
+ 553 006a 05D3     		bcc	.L15
+ 554 006c 13F1020F 		cmn	r3, #2
+ 555 0070 3FD0     		beq	.L20
+ 556 0072 B3F1FF3F 		cmp	r3, #-1
+ 165:../RCReceive.c **** 		{
+ 166:../RCReceive.c **** 		  case RECEIVED_CONTROL_PACKET:
+ 167:../RCReceive.c **** 
+ 168:../RCReceive.c **** 		  throttleBT = control_value.speed;
+ 169:../RCReceive.c **** 		  aileronBT = control_value.x_pitch;
+ 170:../RCReceive.c **** 		  elevatorBT = control_value.y_roll;
+ 171:../RCReceive.c **** 		  //rudderBT = control_value.z_rotate;
+ 172:../RCReceive.c **** 		  BTTimeOut=0;
+ 173:../RCReceive.c **** 		  BTCount++;
+ 174:../RCReceive.c **** 
+ 175:../RCReceive.c **** 		  break;
+ 176:../RCReceive.c **** 
+ 177:../RCReceive.c **** 	      case RECEIVED_DATA_PACKET:
+ 178:../RCReceive.c **** 
+ 179:../RCReceive.c **** 		  break;
+ 180:../RCReceive.c **** 
+ 181:../RCReceive.c **** 		  case CHECKSUM_ERROR:
+ 182:../RCReceive.c **** 
+ 183:../RCReceive.c **** 		  //Todo: Add Error-Handling
+ 184:../RCReceive.c **** 		  break;
+ 557              		.loc 1 184 0
+ 558 0076 3DE0     		b	.L13
+ 559              	.L15:
+ 168:../RCReceive.c **** 		  throttleBT = control_value.speed;
+ 560              		.loc 1 168 0
+ 561 0078 40F20003 		movw	r3, #:lower16:control_value
+ 562 007c C0F20003 		movt	r3, #:upper16:control_value
+ 563 0080 B3F80130 		ldrh	r3, [r3, #1]	@ unaligned
+ 564 0084 9AB2     		uxth	r2, r3
+ 565 0086 40F20003 		movw	r3, #:lower16:throttleBT
+ 566 008a C0F20003 		movt	r3, #:upper16:throttleBT
+ 567 008e 1A80     		strh	r2, [r3, #0]	@ movhi
+ 169:../RCReceive.c **** 		  aileronBT = control_value.x_pitch;
+ 568              		.loc 1 169 0
+ 569 0090 40F20003 		movw	r3, #:lower16:control_value
+ 570 0094 C0F20003 		movt	r3, #:upper16:control_value
+ 571 0098 D3F80720 		ldr	r2, [r3, #7]	@ unaligned
+ 572 009c 1346     		mov	r3, r2
+ 573 009e 1A46     		mov	r2, r3	@ float
+ 574 00a0 40F20003 		movw	r3, #:lower16:aileronBT
+ 575 00a4 C0F20003 		movt	r3, #:upper16:aileronBT
+ 576 00a8 1A60     		str	r2, [r3, #0]	@ float
+ 170:../RCReceive.c **** 		  elevatorBT = control_value.y_roll;
+ 577              		.loc 1 170 0
+ 578 00aa 40F20003 		movw	r3, #:lower16:control_value
+ 579 00ae C0F20003 		movt	r3, #:upper16:control_value
+ 580 00b2 D3F80B20 		ldr	r2, [r3, #11]	@ unaligned
+ 581 00b6 1346     		mov	r3, r2
+ 582 00b8 1A46     		mov	r2, r3	@ float
+ 583 00ba 40F20003 		movw	r3, #:lower16:elevatorBT
+ 584 00be C0F20003 		movt	r3, #:upper16:elevatorBT
+ 585 00c2 1A60     		str	r2, [r3, #0]	@ float
+ 172:../RCReceive.c **** 		  BTTimeOut=0;
+ 586              		.loc 1 172 0
+ 587 00c4 40F20003 		movw	r3, #:lower16:BTTimeOut
+ 588 00c8 C0F20003 		movt	r3, #:upper16:BTTimeOut
+ 589 00cc 4FF00002 		mov	r2, #0
+ 590 00d0 1A70     		strb	r2, [r3, #0]
+ 173:../RCReceive.c **** 		  BTCount++;
+ 591              		.loc 1 173 0
+ 592 00d2 40F20003 		movw	r3, #:lower16:BTCount
+ 593 00d6 C0F20003 		movt	r3, #:upper16:BTCount
+ 594 00da 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 595 00dc 03F10103 		add	r3, r3, #1
+ 596 00e0 DAB2     		uxtb	r2, r3
+ 597 00e2 40F20003 		movw	r3, #:lower16:BTCount
+ 598 00e6 C0F20003 		movt	r3, #:upper16:BTCount
+ 599 00ea 1A70     		strb	r2, [r3, #0]
+ 175:../RCReceive.c **** 		  break;
+ 600              		.loc 1 175 0
+ 601 00ec 02E0     		b	.L13
+ 602              	.L19:
+ 179:../RCReceive.c **** 		  break;
+ 603              		.loc 1 179 0
+ 604 00ee 00BF     		nop
+ 605 00f0 00E0     		b	.L13
+ 606              	.L20:
+ 185:../RCReceive.c **** 
+ 186:../RCReceive.c **** 		  case UNDEFINED_ERROR:
+ 187:../RCReceive.c **** 
+ 188:../RCReceive.c **** 		  //Todo: Add Error-Handling
+ 189:../RCReceive.c **** 		  break;
+ 607              		.loc 1 189 0
+ 608 00f2 00BF     		nop
+ 609              	.L13:
+ 610              	.LBE2:
+ 190:../RCReceive.c **** 
+ 191:../RCReceive.c **** 		}
+ 192:../RCReceive.c **** 
+ 193:../RCReceive.c **** 
+ 194:../RCReceive.c **** 	}
+ 195:../RCReceive.c **** 
+ 196:../RCReceive.c **** //////////////////////////////////////////////////////////////////////////
+ 197:../RCReceive.c **** 
+ 198:../RCReceive.c **** }
+ 611              		.loc 1 198 0
+ 612 00f4 07F10807 		add	r7, r7, #8
+ 613 00f8 BD46     		mov	sp, r7
+ 614 00fa 80BD     		pop	{r7, pc}
+ 615              		.cfi_endproc
+ 616              	.LFE137:
+ 618              		.section	.text.WatchRC,"ax",%progbits
+ 619              		.align	2
+ 620              		.global	WatchRC
+ 621              		.thumb
+ 622              		.thumb_func
+ 624              	WatchRC:
+ 625              	.LFB138:
+ 199:../RCReceive.c **** 
+ 200:../RCReceive.c **** /*
+ 201:../RCReceive.c ****  * Check if new data has been arrived since last function call
+ 202:../RCReceive.c ****  * This function is called from software Timer "TimerWatchRC"
+ 203:../RCReceive.c ****  */
+ 204:../RCReceive.c **** void WatchRC(void* Temp)
+ 205:../RCReceive.c **** {
+ 626              		.loc 1 205 0
+ 627              		.cfi_startproc
+ 628              		@ args = 0, pretend = 0, frame = 8
+ 629              		@ frame_needed = 1, uses_anonymous_args = 0
+ 630              		@ link register save eliminated.
+ 631 0000 80B4     		push	{r7}
+ 632              	.LCFI9:
+ 633              		.cfi_def_cfa_offset 4
+ 634              		.cfi_offset 7, -4
+ 635 0002 83B0     		sub	sp, sp, #12
+ 636              	.LCFI10:
+ 637              		.cfi_def_cfa_offset 16
+ 638 0004 00AF     		add	r7, sp, #0
+ 639              	.LCFI11:
+ 640              		.cfi_def_cfa_register 7
+ 641 0006 7860     		str	r0, [r7, #4]
+ 206:../RCReceive.c **** 	static uint8_t lastCount;
+ 207:../RCReceive.c **** 	static uint8_t lastBTCount;
+ 208:../RCReceive.c **** 
+ 209:../RCReceive.c **** 	if (lastCount == RCCount) RCTimeOut = 1;
+ 642              		.loc 1 209 0
+ 643 0008 40F20003 		movw	r3, #:lower16:lastCount.10923
+ 644 000c C0F20003 		movt	r3, #:upper16:lastCount.10923
+ 645 0010 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 646 0012 40F20003 		movw	r3, #:lower16:RCCount
+ 647 0016 C0F20003 		movt	r3, #:upper16:RCCount
+ 648 001a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 649 001c 9A42     		cmp	r2, r3
+ 650 001e 06D1     		bne	.L22
+ 651              		.loc 1 209 0 is_stmt 0 discriminator 1
+ 652 0020 40F20003 		movw	r3, #:lower16:RCTimeOut
+ 653 0024 C0F20003 		movt	r3, #:upper16:RCTimeOut
+ 654 0028 4FF00102 		mov	r2, #1
+ 655 002c 1A70     		strb	r2, [r3, #0]
+ 656              	.L22:
+ 210:../RCReceive.c **** 	lastCount = RCCount;
+ 657              		.loc 1 210 0 is_stmt 1
+ 658 002e 40F20003 		movw	r3, #:lower16:RCCount
+ 659 0032 C0F20003 		movt	r3, #:upper16:RCCount
+ 660 0036 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 661 0038 40F20003 		movw	r3, #:lower16:lastCount.10923
+ 662 003c C0F20003 		movt	r3, #:upper16:lastCount.10923
+ 663 0040 1A70     		strb	r2, [r3, #0]
+ 211:../RCReceive.c **** 
+ 212:../RCReceive.c **** 	if (lastBTCount == BTCount) BTTimeOut = 1;
+ 664              		.loc 1 212 0
+ 665 0042 40F20003 		movw	r3, #:lower16:lastBTCount.10924
+ 666 0046 C0F20003 		movt	r3, #:upper16:lastBTCount.10924
+ 667 004a 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 668 004c 40F20003 		movw	r3, #:lower16:BTCount
+ 669 0050 C0F20003 		movt	r3, #:upper16:BTCount
+ 670 0054 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 671 0056 9A42     		cmp	r2, r3
+ 672 0058 06D1     		bne	.L23
+ 673              		.loc 1 212 0 is_stmt 0 discriminator 1
+ 674 005a 40F20003 		movw	r3, #:lower16:BTTimeOut
+ 675 005e C0F20003 		movt	r3, #:upper16:BTTimeOut
+ 676 0062 4FF00102 		mov	r2, #1
+ 677 0066 1A70     		strb	r2, [r3, #0]
+ 678              	.L23:
+ 213:../RCReceive.c **** 	lastBTCount = BTCount;
+ 679              		.loc 1 213 0 is_stmt 1
+ 680 0068 40F20003 		movw	r3, #:lower16:BTCount
+ 681 006c C0F20003 		movt	r3, #:upper16:BTCount
+ 682 0070 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 683 0072 40F20003 		movw	r3, #:lower16:lastBTCount.10924
+ 684 0076 C0F20003 		movt	r3, #:upper16:lastBTCount.10924
+ 685 007a 1A70     		strb	r2, [r3, #0]
+ 214:../RCReceive.c **** }
+ 686              		.loc 1 214 0
+ 687 007c 07F10C07 		add	r7, r7, #12
+ 688 0080 BD46     		mov	sp, r7
+ 689 0082 80BC     		pop	{r7}
+ 690 0084 7047     		bx	lr
+ 691              		.cfi_endproc
+ 692              	.LFE138:
+ 694 0086 00BF     		.section	.text.WatchRC_Init,"ax",%progbits
+ 695              		.align	2
+ 696              		.global	WatchRC_Init
+ 697              		.thumb
+ 698              		.thumb_func
+ 700              	WatchRC_Init:
+ 701              	.LFB139:
+ 215:../RCReceive.c **** 
+ 216:../RCReceive.c **** /*
+ 217:../RCReceive.c ****  * Initialize RC watchdog
+ 218:../RCReceive.c ****  */
+ 219:../RCReceive.c **** void WatchRC_Init()
+ 220:../RCReceive.c **** {
+ 702              		.loc 1 220 0
+ 703              		.cfi_startproc
+ 704              		@ args = 0, pretend = 0, frame = 0
+ 705              		@ frame_needed = 1, uses_anonymous_args = 0
+ 706 0000 80B5     		push	{r7, lr}
+ 707              	.LCFI12:
+ 708              		.cfi_def_cfa_offset 8
+ 709              		.cfi_offset 7, -8
+ 710              		.cfi_offset 14, -4
+ 711 0002 00AF     		add	r7, sp, #0
+ 712              	.LCFI13:
+ 713              		.cfi_def_cfa_register 7
+ 221:../RCReceive.c **** 	//Set timer to check every 100ms, if new data has arrived
+ 222:../RCReceive.c **** 	TimerWatchRC = SYSTM001_CreateTimer(100,SYSTM001_PERIODIC,WatchRC,NULL);
+ 714              		.loc 1 222 0
+ 715 0004 4FF06400 		mov	r0, #100
+ 716 0008 4FF00101 		mov	r1, #1
+ 717 000c 40F20002 		movw	r2, #:lower16:WatchRC
+ 718 0010 C0F20002 		movt	r2, #:upper16:WatchRC
+ 719 0014 4FF00003 		mov	r3, #0
+ 720 0018 FFF7FEFF 		bl	SYSTM001_CreateTimer
+ 721 001c 0246     		mov	r2, r0
+ 722 001e 40F20003 		movw	r3, #:lower16:TimerWatchRC
+ 723 0022 C0F20003 		movt	r3, #:upper16:TimerWatchRC
+ 724 0026 1A60     		str	r2, [r3, #0]
+ 223:../RCReceive.c **** 	if(TimerWatchRC != 0)
+ 725              		.loc 1 223 0
+ 726 0028 40F20003 		movw	r3, #:lower16:TimerWatchRC
+ 727 002c C0F20003 		movt	r3, #:upper16:TimerWatchRC
+ 728 0030 1B68     		ldr	r3, [r3, #0]
+ 729 0032 002B     		cmp	r3, #0
+ 730 0034 07D0     		beq	.L24
+ 224:../RCReceive.c **** 	{
+ 225:../RCReceive.c **** 		//Timer is created successfully
+ 226:../RCReceive.c **** 		if(SYSTM001_StartTimer(TimerWatchRC) == DAVEApp_SUCCESS)
+ 731              		.loc 1 226 0
+ 732 0036 40F20003 		movw	r3, #:lower16:TimerWatchRC
+ 733 003a C0F20003 		movt	r3, #:upper16:TimerWatchRC
+ 734 003e 1B68     		ldr	r3, [r3, #0]
+ 735 0040 1846     		mov	r0, r3
+ 736 0042 FFF7FEFF 		bl	SYSTM001_StartTimer
+ 737              	.L24:
+ 227:../RCReceive.c **** 		{
+ 228:../RCReceive.c **** 			//Timer started
+ 229:../RCReceive.c **** 		}
+ 230:../RCReceive.c **** 	}
+ 231:../RCReceive.c **** }
+ 738              		.loc 1 231 0
+ 739 0046 80BD     		pop	{r7, pc}
+ 740              		.cfi_endproc
+ 741              	.LFE139:
+ 743              		.section	.text.GetRCCount,"ax",%progbits
+ 744              		.align	2
+ 745              		.global	GetRCCount
+ 746              		.thumb
+ 747              		.thumb_func
+ 749              	GetRCCount:
+ 750              	.LFB140:
+ 232:../RCReceive.c **** 
+ 233:../RCReceive.c **** uint8_t GetRCCount()
+ 234:../RCReceive.c **** {
+ 751              		.loc 1 234 0
+ 752              		.cfi_startproc
+ 753              		@ args = 0, pretend = 0, frame = 0
+ 754              		@ frame_needed = 1, uses_anonymous_args = 0
+ 755              		@ link register save eliminated.
+ 756 0000 80B4     		push	{r7}
+ 757              	.LCFI14:
+ 758              		.cfi_def_cfa_offset 4
+ 759              		.cfi_offset 7, -4
+ 760 0002 00AF     		add	r7, sp, #0
+ 761              	.LCFI15:
+ 762              		.cfi_def_cfa_register 7
+ 235:../RCReceive.c **** 	return RCCount;
+ 763              		.loc 1 235 0
+ 764 0004 40F20003 		movw	r3, #:lower16:RCCount
+ 765 0008 C0F20003 		movt	r3, #:upper16:RCCount
+ 766 000c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 236:../RCReceive.c **** }
+ 767              		.loc 1 236 0
+ 768 000e 1846     		mov	r0, r3
+ 769 0010 BD46     		mov	sp, r7
+ 770 0012 80BC     		pop	{r7}
+ 771 0014 7047     		bx	lr
+ 772              		.cfi_endproc
+ 773              	.LFE140:
+ 775 0016 00BF     		.section	.text.GetRCData,"ax",%progbits
+ 776              		.align	2
+ 777              		.global	GetRCData
+ 778              		.thumb
+ 779              		.thumb_func
+ 781              	GetRCData:
+ 782              	.LFB141:
+ 237:../RCReceive.c **** 
+ 238:../RCReceive.c **** void GetRCData(float* power, float* yaw_dot, float* pitch, float* roll)
+ 239:../RCReceive.c **** {
+ 783              		.loc 1 239 0
+ 784              		.cfi_startproc
+ 785              		@ args = 0, pretend = 0, frame = 16
+ 786              		@ frame_needed = 1, uses_anonymous_args = 0
+ 787              		@ link register save eliminated.
+ 788 0000 80B4     		push	{r7}
+ 789              	.LCFI16:
+ 790              		.cfi_def_cfa_offset 4
+ 791              		.cfi_offset 7, -4
+ 792 0002 85B0     		sub	sp, sp, #20
+ 793              	.LCFI17:
+ 794              		.cfi_def_cfa_offset 24
+ 795 0004 00AF     		add	r7, sp, #0
+ 796              	.LCFI18:
+ 797              		.cfi_def_cfa_register 7
+ 798 0006 F860     		str	r0, [r7, #12]
+ 799 0008 B960     		str	r1, [r7, #8]
+ 800 000a 7A60     		str	r2, [r7, #4]
+ 801 000c 3B60     		str	r3, [r7, #0]
+ 240:../RCReceive.c **** 
+ 241:../RCReceive.c **** 
+ 242:../RCReceive.c **** 			if (BTTimeOut)
+ 802              		.loc 1 242 0
+ 803 000e 40F20003 		movw	r3, #:lower16:BTTimeOut
+ 804 0012 C0F20003 		movt	r3, #:upper16:BTTimeOut
+ 805 0016 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 806 0018 002B     		cmp	r3, #0
+ 807 001a 10D0     		beq	.L29
+ 243:../RCReceive.c **** 			{
+ 244:../RCReceive.c **** 				*power=0;
+ 808              		.loc 1 244 0
+ 809 001c FB68     		ldr	r3, [r7, #12]
+ 810 001e 4FF00002 		mov	r2, #0
+ 811 0022 1A60     		str	r2, [r3, #0]	@ float
+ 245:../RCReceive.c **** 				*yaw_dot=0;
+ 812              		.loc 1 245 0
+ 813 0024 BB68     		ldr	r3, [r7, #8]
+ 814 0026 4FF00002 		mov	r2, #0
+ 815 002a 1A60     		str	r2, [r3, #0]	@ float
+ 246:../RCReceive.c **** 				*pitch=0;
+ 816              		.loc 1 246 0
+ 817 002c 7B68     		ldr	r3, [r7, #4]
+ 818 002e 4FF00002 		mov	r2, #0
+ 819 0032 1A60     		str	r2, [r3, #0]	@ float
+ 247:../RCReceive.c **** 				*roll=0;
+ 820              		.loc 1 247 0
+ 821 0034 3B68     		ldr	r3, [r7, #0]
+ 822 0036 4FF00002 		mov	r2, #0
+ 823 003a 1A60     		str	r2, [r3, #0]	@ float
+ 824 003c 1DE0     		b	.L28
+ 825              	.L29:
+ 248:../RCReceive.c **** 			}
+ 249:../RCReceive.c **** 			else
+ 250:../RCReceive.c **** 			{
+ 251:../RCReceive.c **** 
+ 252:../RCReceive.c **** 
+ 253:../RCReceive.c **** 			*power=throttleBT;
+ 826              		.loc 1 253 0
+ 827 003e 40F20003 		movw	r3, #:lower16:throttleBT
+ 828 0042 C0F20003 		movt	r3, #:upper16:throttleBT
+ 829 0046 1B88     		ldrh	r3, [r3, #0]
+ 830 0048 07EE103A 		fmsr	s14, r3	@ int
+ 831 004c F8EE477A 		fuitos	s15, s14
+ 832 0050 FB68     		ldr	r3, [r7, #12]
+ 833 0052 C3ED007A 		fsts	s15, [r3, #0]
+ 254:../RCReceive.c **** 			*pitch=aileronBT;
+ 834              		.loc 1 254 0
+ 835 0056 40F20003 		movw	r3, #:lower16:aileronBT
+ 836 005a C0F20003 		movt	r3, #:upper16:aileronBT
+ 837 005e 1A68     		ldr	r2, [r3, #0]	@ float
+ 838 0060 7B68     		ldr	r3, [r7, #4]
+ 839 0062 1A60     		str	r2, [r3, #0]	@ float
+ 255:../RCReceive.c **** 			*roll=elevatorBT;
+ 840              		.loc 1 255 0
+ 841 0064 40F20003 		movw	r3, #:lower16:elevatorBT
+ 842 0068 C0F20003 		movt	r3, #:upper16:elevatorBT
+ 843 006c 1A68     		ldr	r2, [r3, #0]	@ float
+ 844 006e 3B68     		ldr	r3, [r7, #0]
+ 845 0070 1A60     		str	r2, [r3, #0]	@ float
+ 256:../RCReceive.c **** 			*yaw_dot = 0.f;
+ 846              		.loc 1 256 0
+ 847 0072 BB68     		ldr	r3, [r7, #8]
+ 848 0074 4FF00002 		mov	r2, #0
+ 849 0078 1A60     		str	r2, [r3, #0]	@ float
+ 850              	.L28:
+ 257:../RCReceive.c **** 			//*yaw_dot=-rudderBT;
+ 258:../RCReceive.c **** 
+ 259:../RCReceive.c **** 
+ 260:../RCReceive.c **** 
+ 261:../RCReceive.c **** 			}
+ 262:../RCReceive.c **** 
+ 263:../RCReceive.c **** 
+ 264:../RCReceive.c **** 
+ 265:../RCReceive.c **** //	if (flightmode == 0)
+ 266:../RCReceive.c **** //	{
+ 267:../RCReceive.c **** //		if (RCTimeOut)
+ 268:../RCReceive.c **** //		{
+ 269:../RCReceive.c **** //			*power=0;
+ 270:../RCReceive.c **** //			*yaw_dot=0;
+ 271:../RCReceive.c **** //			*pitch=0;
+ 272:../RCReceive.c **** //			*roll=0;
+ 273:../RCReceive.c **** //		}
+ 274:../RCReceive.c **** //		else
+ 275:../RCReceive.c **** //		{
+ 276:../RCReceive.c **** //			*power=SCALE_POWER*throttle;
+ 277:../RCReceive.c **** //			if (rudder > 0.01 || rudder < -0.01)
+ 278:../RCReceive.c **** //				*yaw_dot=rudder*SCALE_YAW;
+ 279:../RCReceive.c **** //			else
+ 280:../RCReceive.c **** //				*yaw_dot = 0;
+ 281:../RCReceive.c **** //			*pitch=-aileron*SCALE_PITCH;
+ 282:../RCReceive.c **** //			*roll=-elevator*SCALE_ROLL;
+ 283:../RCReceive.c **** //		}
+ 284:../RCReceive.c **** //	}
+ 285:../RCReceive.c **** //	else
+ 286:../RCReceive.c **** //	{
+ 287:../RCReceive.c **** //		if (BTTimeOut || RCTimeOut)
+ 288:../RCReceive.c **** //		{
+ 289:../RCReceive.c **** //			*power=0;
+ 290:../RCReceive.c **** //			*yaw_dot=0;
+ 291:../RCReceive.c **** //			*pitch=0;
+ 292:../RCReceive.c **** //			*roll=0;
+ 293:../RCReceive.c **** //		}
+ 294:../RCReceive.c **** //		else
+ 295:../RCReceive.c **** //		{
+ 296:../RCReceive.c **** //
+ 297:../RCReceive.c **** //
+ 298:../RCReceive.c **** //		*power=throttleBT;
+ 299:../RCReceive.c **** //		*pitch=aileronBT;
+ 300:../RCReceive.c **** //		*roll=elevatorBT;
+ 301:../RCReceive.c **** //		*yaw_dot = 0.f;
+ 302:../RCReceive.c **** //		//*yaw_dot=-rudderBT;
+ 303:../RCReceive.c **** //
+ 304:../RCReceive.c **** //
+ 305:../RCReceive.c **** //
+ 306:../RCReceive.c **** //			//BT_Methode//
+ 307:../RCReceive.c **** //
+ 308:../RCReceive.c **** ////			*power=SCALE_POWER*(throttleBT/32767.0+1)/2;
+ 309:../RCReceive.c **** ////			*yaw_dot=-rudderBT/32767.0*SCALE_YAW;
+ 310:../RCReceive.c **** ////			if (modeBT == 1)
+ 311:../RCReceive.c **** ////			{
+ 312:../RCReceive.c **** ////				*pitch=aileronBT/32767.0*90;
+ 313:../RCReceive.c **** ////				*roll=elevatorBT/32767.0*90;
+ 314:../RCReceive.c **** ////			}
+ 315:../RCReceive.c **** ////			else
+ 316:../RCReceive.c **** ////			{
+ 317:../RCReceive.c **** ////				*pitch=aileronBT/32767.0*SCALE_PITCH;
+ 318:../RCReceive.c **** ////				*roll=-elevatorBT/32767.0*SCALE_ROLL;
+ 319:../RCReceive.c **** ////			}
+ 320:../RCReceive.c **** //		}
+ 321:../RCReceive.c **** //	}
+ 322:../RCReceive.c **** }
+ 851              		.loc 1 322 0
+ 852 007a 07F11407 		add	r7, r7, #20
+ 853 007e BD46     		mov	sp, r7
+ 854 0080 80BC     		pop	{r7}
+ 855 0082 7047     		bx	lr
+ 856              		.cfi_endproc
+ 857              	.LFE141:
+ 859              		.section	.text.map,"ax",%progbits
+ 860              		.align	2
+ 861              		.global	map
+ 862              		.thumb
+ 863              		.thumb_func
+ 865              	map:
+ 866              	.LFB142:
+ 323:../RCReceive.c **** 
+ 324:../RCReceive.c **** long map(long x, long in_min, long in_max, long out_min, long out_max)
+ 325:../RCReceive.c **** {
+ 867              		.loc 1 325 0
+ 868              		.cfi_startproc
+ 869              		@ args = 4, pretend = 0, frame = 16
+ 870              		@ frame_needed = 1, uses_anonymous_args = 0
+ 871              		@ link register save eliminated.
+ 872 0000 80B4     		push	{r7}
+ 873              	.LCFI19:
+ 874              		.cfi_def_cfa_offset 4
+ 875              		.cfi_offset 7, -4
+ 876 0002 85B0     		sub	sp, sp, #20
+ 877              	.LCFI20:
+ 878              		.cfi_def_cfa_offset 24
+ 879 0004 00AF     		add	r7, sp, #0
+ 880              	.LCFI21:
+ 881              		.cfi_def_cfa_register 7
+ 882 0006 F860     		str	r0, [r7, #12]
+ 883 0008 B960     		str	r1, [r7, #8]
+ 884 000a 7A60     		str	r2, [r7, #4]
+ 885 000c 3B60     		str	r3, [r7, #0]
+ 326:../RCReceive.c ****   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+ 886              		.loc 1 326 0
+ 887 000e FA68     		ldr	r2, [r7, #12]
+ 888 0010 BB68     		ldr	r3, [r7, #8]
+ 889 0012 D31A     		subs	r3, r2, r3
+ 890 0014 B969     		ldr	r1, [r7, #24]
+ 891 0016 3A68     		ldr	r2, [r7, #0]
+ 892 0018 8A1A     		subs	r2, r1, r2
+ 893 001a 02FB03F2 		mul	r2, r2, r3
+ 894 001e 7968     		ldr	r1, [r7, #4]
+ 895 0020 BB68     		ldr	r3, [r7, #8]
+ 896 0022 CB1A     		subs	r3, r1, r3
+ 897 0024 92FBF3F2 		sdiv	r2, r2, r3
+ 898 0028 3B68     		ldr	r3, [r7, #0]
+ 899 002a D318     		adds	r3, r2, r3
+ 327:../RCReceive.c **** }
+ 900              		.loc 1 327 0
+ 901 002c 1846     		mov	r0, r3
+ 902 002e 07F11407 		add	r7, r7, #20
+ 903 0032 BD46     		mov	sp, r7
+ 904 0034 80BC     		pop	{r7}
+ 905 0036 7047     		bx	lr
+ 906              		.cfi_endproc
+ 907              	.LFE142:
+ 909              		.bss
+ 910              	lastCount.10923:
+ 911 0088 00       		.space	1
+ 912              	lastBTCount.10924:
+ 913 0089 00       		.space	1
+ 914 008a 0000     		.text
+ 915              	.Letext0:
+ 916              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 917              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 918              		.file 4 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESupp
+ 919              		.file 5 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESupp
+ 920              		.file 6 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESupp
+ 921              		.file 7 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESupp
+ 922              		.file 8 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESupp
+ 923              		.file 9 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESupp
+ 924              		.file 10 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESup
+ 925              		.file 11 "../BluetoothProtocol.h"
+ 926              		.file 12 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 927              		.file 13 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESup
+DEFINED SYMBOLS
+                            *ABS*:00000000 RCReceive.c
+                            *COM*:00000013 control_value
+                            *COM*:00000065 dpacket
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:26     .bss:00000000 ReadBufRC
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:23     .bss:00000000 $d
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:32     .bss:00000064 throttle
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:38     .bss:00000068 rudder
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:44     .bss:0000006c elevator
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:50     .bss:00000070 aileron
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:56     .bss:00000074 throttleBT
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:62     .bss:00000078 rudderBT
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:68     .bss:0000007c aileronBT
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:74     .bss:00000080 elevatorBT
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:79     .bss:00000084 modeBT
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:84     .bss:00000085 flightmode
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:90     .data:00000000 RCTimeOut
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:96     .bss:00000086 RCCount
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:102    .data:00000001 BTTimeOut
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:108    .bss:00000087 BTCount
+                            *COM*:00000004 TimerWatchRC
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:112    .text.mergeBytes:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:117    .text.mergeBytes:00000000 mergeBytes
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:160    .text.USIC1_0_IRQHandler:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:165    .text.USIC1_0_IRQHandler:00000000 USIC1_0_IRQHandler
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:865    .text.map:00000000 map
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:488    .text.USIC1_0_IRQHandler:00000328 $d
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:496    .text.USIC0_5_IRQHandler:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:501    .text.USIC0_5_IRQHandler:00000000 USIC0_5_IRQHandler
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:619    .text.WatchRC:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:624    .text.WatchRC:00000000 WatchRC
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:910    .bss:00000088 lastCount.10923
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:912    .bss:00000089 lastBTCount.10924
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:695    .text.WatchRC_Init:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:700    .text.WatchRC_Init:00000000 WatchRC_Init
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:744    .text.GetRCCount:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:749    .text.GetRCCount:00000000 GetRCCount
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:776    .text.GetRCData:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:781    .text.GetRCData:00000000 GetRCData
+C:\Users\WielandD\AppData\Local\Temp\cccmWwRD.s:860    .text.map:00000000 $t
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.ceef13b6fcd105ca548c93944b993ff6
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4.NVIC002_Conf.h.63.e0046f65d41519ed25458532a624f039
+                           .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415
+                           .group:00000000 wm4.ERU002_Conf.h.49.449ecc05b9e62e9b43f2dc6ead06a5ce
+                           .group:00000000 wm4.IO002_Conf.h.51.87e2c8c60b647393fe9ced2cae198f63
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.b11a40ec223e1dc7c2dcfbe90981605d
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.10a5fc586e1563647b9633c45b1b739e
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.usbd_config.h.64.bd01b2d6be88400f5b6095cc78dd2cee
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.stdbool.h.29.1c9ee6859ce8145f7838a4f2549ccec2
+                           .group:00000000 wm4.xmc4_usb.h.86.0df8e4bc81775a7befde6c395bcdee4c
+                           .group:00000000 wm4.dwc_otg_regs.h.96.602358b1a0ef2f2c6d02620a154f0cfc
+                           .group:00000000 wm4.xmc4_usb.h.97.59ae14584bb42292696e2197b500e282
+                           .group:00000000 wm4.CDCClass.h.89.7fca95873b1cbf8116f62fa27fd7c792
+                           .group:00000000 wm4.Common.h.87.ed9fec00c6f9ec3cf5c2ac4c6cfcb530
+                           .group:00000000 wm4.Attributes.h.96.1b4ef8adf80de3cb4f8c62843bfaf7bf
+                           .group:00000000 wm4.StdDescriptors.h.107.d2322ff0c138acada78976933b16bf7b
+                           .group:00000000 wm4.Endpoint.h.111.e7536b4385918c15b4c37aa69fbe94e3
+                           .group:00000000 wm4.USBController.h.105.7da122fb9e42a1d4ae2ea1662b47f042
+                           .group:00000000 wm4.StdRequestType.h.87.0e2654a6e33ff7aef3db3461e4efa272
+                           .group:00000000 wm4.CDCClassCommon.h.122.d15a1de5444b7c9e23eadf1dd367720e
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.Descriptors.h.92.e858ef8e2efa6b5ed9d1d80dd9b38006
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.2b816ac2c964c55a6c88f9c406d78c9f
+                           .group:00000000 wm4.RCReceive.h.14.92cf6b8e1b215eab5aaadf01cbee8343
+                           .group:00000000 wm4.BluetoothProtocol.h.15.8ef7c10eba5516b04a4e2961bc1e97bc
+
+UNDEFINED SYMBOLS
+__aeabi_i2d
+__aeabi_ddiv
+__aeabi_d2f
+UART001_Handle0
+UART001_GetFlagStatus
+UART001_ReadDataBytes
+UART001_ClearFlag
+UART001_Handle1
+maintainBluetoothInputBuffer
+SYSTM001_CreateTimer
+SYSTM001_StartTimer

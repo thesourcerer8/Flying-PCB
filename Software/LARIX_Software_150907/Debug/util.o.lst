@@ -1,0 +1,246 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"util.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	timer_cnt
+  20              		.bss
+  21              		.align	2
+  24              	timer_cnt:
+  25 0000 00000000 		.space	4
+  26              		.section	.text.CCU41_1_IRQHandler,"ax",%progbits
+  27              		.align	2
+  28              		.global	CCU41_1_IRQHandler
+  29              		.thumb
+  30              		.thumb_func
+  32              	CCU41_1_IRQHandler:
+  33              	.LFB135:
+  34              		.file 1 "../util.c"
+   1:../util.c     **** /*
+   2:../util.c     ****  * util.c
+   3:../util.c     ****  *
+   4:../util.c     ****  *  Created on: 04.04.2015
+   5:../util.c     ****  *      Author: maan
+   6:../util.c     ****  */
+   7:../util.c     **** 
+   8:../util.c     **** #include "util.h"
+   9:../util.c     **** 
+  10:../util.c     **** volatile uint32_t timer_cnt = 0U;
+  11:../util.c     **** 
+  12:../util.c     **** void Timer_CompareMatch_Int_Handler(void)
+  13:../util.c     **** {
+  35              		.loc 1 13 0
+  36              		.cfi_startproc
+  37              		@ args = 0, pretend = 0, frame = 0
+  38              		@ frame_needed = 1, uses_anonymous_args = 0
+  39              		@ link register save eliminated.
+  40 0000 80B4     		push	{r7}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 4
+  43              		.cfi_offset 7, -4
+  44 0002 00AF     		add	r7, sp, #0
+  45              	.LCFI1:
+  46              		.cfi_def_cfa_register 7
+  14:../util.c     **** 	timer_cnt++;
+  47              		.loc 1 14 0
+  48 0004 40F20003 		movw	r3, #:lower16:timer_cnt
+  49 0008 C0F20003 		movt	r3, #:upper16:timer_cnt
+  50 000c 1B68     		ldr	r3, [r3, #0]
+  51 000e 03F10102 		add	r2, r3, #1
+  52 0012 40F20003 		movw	r3, #:lower16:timer_cnt
+  53 0016 C0F20003 		movt	r3, #:upper16:timer_cnt
+  54 001a 1A60     		str	r2, [r3, #0]
+  15:../util.c     **** }
+  55              		.loc 1 15 0
+  56 001c BD46     		mov	sp, r7
+  57 001e 80BC     		pop	{r7}
+  58 0020 7047     		bx	lr
+  59              		.cfi_endproc
+  60              	.LFE135:
+  62 0022 00BF     		.section	.text.delay,"ax",%progbits
+  63              		.align	2
+  64              		.global	delay
+  65              		.thumb
+  66              		.thumb_func
+  68              	delay:
+  69              	.LFB136:
+  16:../util.c     **** 
+  17:../util.c     **** void delay(uint32_t pause)
+  18:../util.c     **** {
+  70              		.loc 1 18 0
+  71              		.cfi_startproc
+  72              		@ args = 0, pretend = 0, frame = 16
+  73              		@ frame_needed = 1, uses_anonymous_args = 0
+  74              		@ link register save eliminated.
+  75 0000 80B4     		push	{r7}
+  76              	.LCFI2:
+  77              		.cfi_def_cfa_offset 4
+  78              		.cfi_offset 7, -4
+  79 0002 85B0     		sub	sp, sp, #20
+  80              	.LCFI3:
+  81              		.cfi_def_cfa_offset 24
+  82 0004 00AF     		add	r7, sp, #0
+  83              	.LCFI4:
+  84              		.cfi_def_cfa_register 7
+  85 0006 7860     		str	r0, [r7, #4]
+  19:../util.c     **** 	uint32_t now = timer_cnt;
+  86              		.loc 1 19 0
+  87 0008 40F20003 		movw	r3, #:lower16:timer_cnt
+  88 000c C0F20003 		movt	r3, #:upper16:timer_cnt
+  89 0010 1B68     		ldr	r3, [r3, #0]
+  90 0012 FB60     		str	r3, [r7, #12]
+  20:../util.c     **** 	while((now+pause)>timer_cnt);
+  91              		.loc 1 20 0
+  92 0014 00BF     		nop
+  93              	.L3:
+  94              		.loc 1 20 0 is_stmt 0 discriminator 1
+  95 0016 FA68     		ldr	r2, [r7, #12]
+  96 0018 7B68     		ldr	r3, [r7, #4]
+  97 001a D218     		adds	r2, r2, r3
+  98 001c 40F20003 		movw	r3, #:lower16:timer_cnt
+  99 0020 C0F20003 		movt	r3, #:upper16:timer_cnt
+ 100 0024 1B68     		ldr	r3, [r3, #0]
+ 101 0026 9A42     		cmp	r2, r3
+ 102 0028 F5D8     		bhi	.L3
+  21:../util.c     **** }
+ 103              		.loc 1 21 0 is_stmt 1
+ 104 002a 07F11407 		add	r7, r7, #20
+ 105 002e BD46     		mov	sp, r7
+ 106 0030 80BC     		pop	{r7}
+ 107 0032 7047     		bx	lr
+ 108              		.cfi_endproc
+ 109              	.LFE136:
+ 111              		.section	.text.millis,"ax",%progbits
+ 112              		.align	2
+ 113              		.global	millis
+ 114              		.thumb
+ 115              		.thumb_func
+ 117              	millis:
+ 118              	.LFB137:
+  22:../util.c     **** 
+  23:../util.c     **** uint32_t millis()
+  24:../util.c     **** {
+ 119              		.loc 1 24 0
+ 120              		.cfi_startproc
+ 121              		@ args = 0, pretend = 0, frame = 0
+ 122              		@ frame_needed = 1, uses_anonymous_args = 0
+ 123              		@ link register save eliminated.
+ 124 0000 80B4     		push	{r7}
+ 125              	.LCFI5:
+ 126              		.cfi_def_cfa_offset 4
+ 127              		.cfi_offset 7, -4
+ 128 0002 00AF     		add	r7, sp, #0
+ 129              	.LCFI6:
+ 130              		.cfi_def_cfa_register 7
+  25:../util.c     **** 	return timer_cnt;
+ 131              		.loc 1 25 0
+ 132 0004 40F20003 		movw	r3, #:lower16:timer_cnt
+ 133 0008 C0F20003 		movt	r3, #:upper16:timer_cnt
+ 134 000c 1B68     		ldr	r3, [r3, #0]
+  26:../util.c     **** }
+ 135              		.loc 1 26 0
+ 136 000e 1846     		mov	r0, r3
+ 137 0010 BD46     		mov	sp, r7
+ 138 0012 80BC     		pop	{r7}
+ 139 0014 7047     		bx	lr
+ 140              		.cfi_endproc
+ 141              	.LFE137:
+ 143 0016 00BF     		.text
+ 144              	.Letext0:
+ 145              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 146              		.file 3 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESupp
+ 147              		.file 4 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESupp
+ 148              		.file 5 "C:\\DAVE3_workspace\\ws_FC\\AttitudeControl_MPU-9110_v0.1\\Dave\\Generated\\inc\\DAVESupp
+ 149              		.file 6 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 util.c
+C:\Users\WielandD\AppData\Local\Temp\ccd0pPwm.s:24     .bss:00000000 timer_cnt
+C:\Users\WielandD\AppData\Local\Temp\ccd0pPwm.s:21     .bss:00000000 $d
+C:\Users\WielandD\AppData\Local\Temp\ccd0pPwm.s:27     .text.CCU41_1_IRQHandler:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\ccd0pPwm.s:32     .text.CCU41_1_IRQHandler:00000000 CCU41_1_IRQHandler
+C:\Users\WielandD\AppData\Local\Temp\ccd0pPwm.s:63     .text.delay:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\ccd0pPwm.s:68     .text.delay:00000000 delay
+C:\Users\WielandD\AppData\Local\Temp\ccd0pPwm.s:112    .text.millis:00000000 $t
+C:\Users\WielandD\AppData\Local\Temp\ccd0pPwm.s:117    .text.millis:00000000 millis
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdio.h.31.f48311dde756a2aec27351b58a280fb9
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.stdint.h.10.90b695f550ca6cc3fb08fa83baf01e05
+                           .group:00000000 wm4.core_cmInstr.h.39.ceef13b6fcd105ca548c93944b993ff6
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.types.h.60.43223fdca13f7a32c3450deb52d058eb
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4.NVIC002_Conf.h.63.e0046f65d41519ed25458532a624f039
+                           .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415
+                           .group:00000000 wm4.ERU002_Conf.h.49.449ecc05b9e62e9b43f2dc6ead06a5ce
+                           .group:00000000 wm4.IO002_Conf.h.51.87e2c8c60b647393fe9ced2cae198f63
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.b11a40ec223e1dc7c2dcfbe90981605d
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.10a5fc586e1563647b9633c45b1b739e
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.usbd_config.h.64.bd01b2d6be88400f5b6095cc78dd2cee
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.string.h.8.ef946ad0bc9ad5c970c365dcd1fc4b0a
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.stdbool.h.29.1c9ee6859ce8145f7838a4f2549ccec2
+                           .group:00000000 wm4.xmc4_usb.h.86.0df8e4bc81775a7befde6c395bcdee4c
+                           .group:00000000 wm4.dwc_otg_regs.h.96.602358b1a0ef2f2c6d02620a154f0cfc
+                           .group:00000000 wm4.xmc4_usb.h.97.59ae14584bb42292696e2197b500e282
+                           .group:00000000 wm4.CDCClass.h.89.7fca95873b1cbf8116f62fa27fd7c792
+                           .group:00000000 wm4.Common.h.87.ed9fec00c6f9ec3cf5c2ac4c6cfcb530
+                           .group:00000000 wm4.Attributes.h.96.1b4ef8adf80de3cb4f8c62843bfaf7bf
+                           .group:00000000 wm4.StdDescriptors.h.107.d2322ff0c138acada78976933b16bf7b
+                           .group:00000000 wm4.Endpoint.h.111.e7536b4385918c15b4c37aa69fbe94e3
+                           .group:00000000 wm4.USBController.h.105.7da122fb9e42a1d4ae2ea1662b47f042
+                           .group:00000000 wm4.StdRequestType.h.87.0e2654a6e33ff7aef3db3461e4efa272
+                           .group:00000000 wm4.CDCClassCommon.h.122.d15a1de5444b7c9e23eadf1dd367720e
+                           .group:00000000 wm4.Descriptors.h.92.e858ef8e2efa6b5ed9d1d80dd9b38006
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.2b816ac2c964c55a6c88f9c406d78c9f
+
+NO UNDEFINED SYMBOLS
