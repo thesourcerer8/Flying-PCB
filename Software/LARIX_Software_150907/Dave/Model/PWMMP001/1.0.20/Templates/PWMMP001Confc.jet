@@ -1,0 +1,709 @@
+<%@ jet package="CodeGenerator" class="pwmmp001confc_template"
+imports="java.util.* java.text.* com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[PWMMP001Conf.c]*/
+
+/*******************************************************************************
+ Copyright (c) 2013, Infineon Technologies AG                                 **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without**
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : DAVE App Developer                                              **
+**                                                                            **
+** MAY BE CHANGED BY USER [yes/Yes]: Yes                                      **
+**                                                                            **
+** MODIFICATION DATE : Apr 25, 2013                                           **
+**                                                                            **
+*******************************************************************************/
+
+/*******************************************************************************
+**                       Author(s) Identity                                   **
+********************************************************************************
+**                                                                            **
+** Initials     Name                                                          **
+** ---------------------------------------------------------------------------**
+** KS           DAVE App Developer                                            **
+*******************************************************************************/
+<% String AppBaseuri = "app/pwmmp001/"; %>
+/**
+ * @file  PWMMP001_Conf.c
+ * @App Version PWMMP001 <<%=app.getAppVersion(AppBaseuri)%>>
+ * @brief This file contains App parameter data as per GUI configurations
+ */
+/* Revision History
+ * 01 Jan 2013   v1.0.10   taken as base version
+ * 25 Apr 2013   v1.0.12   Trap value affecting is updated
+ */
+
+#include <DAVE3.h>
+
+<% String kernelUri = null; %>
+<% String Phase1Uri = null; %>
+<% String Phase2Uri = null; %>
+<% String Phase3Uri = null; %>
+<% String Phase4Uri = null; %>
+<% String Phase1 = null; %>
+<% String Phase2 = null; %>
+<% String Phase3 = null; %>
+<% String Phase4 = null; %>
+<% int PhaseNo = 0; %>
+<% int shadow = 0; %>
+<% String kernelNo = null; %>
+<% String appInst  = null; %>
+
+<% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/pwmmp001/"));
+for (String appIns : appsList ) {
+		appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+  <% PhaseNo = app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irphases"); %>
+  <% Phase1Uri = app.getMappedUri(AppBaseuri + appInst +"/phase1"); %>
+  <% if ((Phase1Uri != null) && (Phase1Uri.trim() != "")) { %>
+    <% kernelNo = app.getUriSegment(Phase1Uri,4);%>
+    <% Phase1 = Phase1Uri.substring(Phase1Uri.length() -1); %>
+  <%}%>
+  <% Phase2Uri = app.getMappedUri(AppBaseuri + appInst +"/phase2"); %>
+  <% if ((Phase2Uri != null) && (Phase2Uri.trim() != "")) { %>
+    <% Phase2 = Phase2Uri.substring(Phase2Uri.length() -1); %>
+  <%}%>
+  <% if (PhaseNo == 3 || PhaseNo == 4) {%>
+    <% Phase3Uri = app.getMappedUri(AppBaseuri + appInst +"/phase3"); %>
+    <% if ((Phase3Uri != null) && (Phase3Uri.trim() != "")) { %>
+      <% Phase3 = Phase3Uri.substring(Phase3Uri.length() -1); %>
+    <%}%>
+  <%}%>
+  <% if (PhaseNo == 4) {%>
+    <% Phase4Uri = app.getMappedUri(AppBaseuri + appInst +"/phase4"); %>
+    <% if ((Phase4Uri != null) && (Phase4Uri.trim() != "")) { %>
+      <% Phase4 = Phase4Uri.substring(Phase4Uri.length() -1); %>
+    <%}%>
+  <%}%>
+<% int ph1 = Integer.valueOf(Phase1); %>
+<% int ph2 = Integer.valueOf(Phase2); %>
+<% int ph_3 = 0; %>
+<% int ph4 = 0; %>
+<% int interrupt1 = 0;
+  interrupt1 = app.getIntegerValue(AppBaseuri + appInst + "/phase1/inte") | (0x0000073F); %>
+<%  interrupt1 = interrupt1 & ((app.getIntegerValue(AppBaseuri + appInst + "/phase1/inte/cmd1e") << 3) | (app.getIntegerValue(AppBaseuri + appInst + "/phase1/inte/cmu1e") << 2) | app.getIntegerValue(AppBaseuri + appInst + "/phase1/inte/pme") 
+  |(app.getIntegerValue(AppBaseuri + appInst + "/phase1/inte/e1ae") << 9) |(app.getIntegerValue(AppBaseuri + appInst + "/phase1/inte/e2ae") << 10)
+  |(app.getIntegerValue(AppBaseuri + appInst + "/phase1/inte/e0ae") << 8));%>
+ <% int interrupt2 = 0; 
+ interrupt2 = app.getIntegerValue(AppBaseuri + appInst + "/phase2/inte") | (0x0000073F); %>
+<% interrupt2 = interrupt1 & ((app.getIntegerValue(AppBaseuri + appInst + "/phase2/inte/cmd1e") << 3) | (app.getIntegerValue(AppBaseuri + appInst + "/phase2/inte/cmu1e") << 2) | app.getIntegerValue(AppBaseuri + appInst + "/phase2/inte/pme") 
+  |(app.getIntegerValue(AppBaseuri + appInst + "/phase2/inte/e1ae") << 9) |(app.getIntegerValue(AppBaseuri + appInst + "/phase2/inte/e2ae") << 10)
+  |(app.getIntegerValue(AppBaseuri + appInst + "/phase2/inte/e0ae") << 8));%>
+ <% int interrupt3 = 0; 
+ interrupt3 = app.getIntegerValue(AppBaseuri + appInst + "/phase3/inte") | (0x0000073F); %>
+<% interrupt3 = interrupt3 & ((app.getIntegerValue(AppBaseuri + appInst + "/phase3/inte/cmd1e") << 3)|(app.getIntegerValue(AppBaseuri + appInst + "/phase3/inte/cmu1e") << 2) | app.getIntegerValue(AppBaseuri + appInst + "/phase3/inte/pme") 
+|(app.getIntegerValue(AppBaseuri + appInst + "/phase3/inte/e1ae") << 9) |(app.getIntegerValue(AppBaseuri + appInst + "/phase3/inte/e2ae") << 10)
+|(app.getIntegerValue(AppBaseuri + appInst + "/phase3/inte/e0ae") << 8));%>  
+ <% int interrupt4 = 0;
+ interrupt4 = app.getIntegerValue(AppBaseuri + appInst + "/phase4/inte") | (0x0000073F); %>
+<% interrupt4 = interrupt4 & ((app.getIntegerValue(AppBaseuri + appInst + "/phase4/inte/cmd1e") << 3)|(app.getIntegerValue(AppBaseuri + appInst + "/phase4/inte/cmu1e") << 2) | app.getIntegerValue(AppBaseuri + appInst + "/phase4/inte/pme") 
+  |(app.getIntegerValue(AppBaseuri + appInst + "/phase4/inte/e1ae") << 9) |(app.getIntegerValue(AppBaseuri + appInst + "/phase4/inte/e2ae") << 10)
+  |(app.getIntegerValue(AppBaseuri + appInst + "/phase4/inte/e0ae") << 8));%> 
+<%
+String SetDutyCycle = "CCU8PWMLIB_SetDutyCenterAlignAsymmetric";
+String SetCompare = "CCU8PWMLIB_SetCompareAsymmetric"; 
+%>
+
+<%DecimalFormat df = new DecimalFormat("0.000");%>
+
+CCU8PWMLIB_DynamicHandleType CCU8PWMLIB_DynamicHandle<%=Phase1%><%= appInst%> =
+{
+  .State = CCU8PWMLIB_UNINITIALIZED
+};
+
+const CCU8PWMLIB_HandleType CCU8PWMLIB_Handle<%=Phase1%><%= appInst%> =
+{
+    .kTimerMode= 0U,
+    .CompareMode= CCU8PWMLIB_ASYMMETRIC,
+    .CountingMode= CCU8PWMLIB_CENTER_ALIGNED,
+    
+    .kPassiveState0= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/chc/ocs1") %>U,
+    .kPassiveState1= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/chc/ocs2") %>U,
+    .kPassiveLevel0= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/psl/psl11") %>U,
+    .kPassiveLevel1= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/psl/psl12") %>U,
+
+    .kExtStartTrig = 1,
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/0")==1)%>
+    <% { %>
+    .kExtStopTrig = 0U,
+    <% } %>
+    <% else %>
+    <% { %>
+    .kExtStopTrig = 1U,
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/0")== 1)%>
+    <% { %>
+    .kStartEdge =  CCU8PWMLIB_RISINGEDGE,
+    <% } %>
+    <% else %>
+    <% { %>
+      <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/1")== 1)%>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_RISINGEDGE,
+      <% } %>
+      <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/2")== 1)%>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_FALLINGEDGE,
+      <% } %>
+      <% else %>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_BOTHEDGES,
+      <% } %>
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/0")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_NOTRIGGER,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/1")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_RISINGEDGE,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/2")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_FALLINGEDGE,
+    <% } %>
+    <% else %>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_BOTHEDGES,
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/0")== 1)%>
+    <% { %>
+    .ExtStartConfig = CCU8PWMLIB_CLEAR_START_TIMER,
+    <% } %>
+    <% else %>
+    <% { %>
+      <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartconf/0")== 1)%>
+      <% { %>
+    .ExtStartConfig = CCU8PWMLIB_START_TIMER,
+      <% } %>
+      <% else %>
+      <% { %>
+    .ExtStartConfig =  CCU8PWMLIB_CLEAR_START_TIMER,
+      <% } %>
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopconf/0")== 1)%>
+    <% { %>
+    .ExtStopConfig = CCU8PWMLIB_STOP_TIMER,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/2")== 1)%>
+    <% { %>
+    .ExtStopConfig = CCU8PWMLIB_CLEAR_TIMER,
+    <% } %>
+    <% else %>
+    <% { %>
+    .ExtStopConfig =  CCU8PWMLIB_CLEAR_STOP_TIMER,
+    <% } %>
+    .kTrapEnable= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwenabletrap/0") %>U,
+    .kTrapSync= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwtrapexittime/0") %>U,
+    .kTrapExitControl= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/tc/trpsw") %>U,
+    .kTrapLevel= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/ins/ev2lm") %>U,
+    
+    .kResolution = (float)<%= app.getFormattedDoubleValue((AppBaseuri + appInst + "/pwmmp001_irselresolution"),"0.000")%>,
+    .kCCUPrescalar= <%= app.getIntegerValue(AppBaseuri + appInst + "/PWMMP001_irSelprescalar") %>U,
+    .kTimerConcatenation= 0U,
+    .kCompareValue1= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwph1compareval1")  %>U, 
+    .kCompareValue2 = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwph1compareval2")  %>U,
+    .kPeriodVal= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irperiodreg")  %>U,
+    
+    .kFallingDeadTime = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwselFallDeadTimereg")%>U,
+    .kRisingDeadTime= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwselRiseDeadTimereg")%>U,
+    .kDeadTimePrescalar= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irseldeadtimeprescalar")%>U,
+    .DeadTimeConf= <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/0") ==1){%> CCU8PWMLIB_DISABLE, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/1") ==1 ){%> CCU8PWMLIB_ENABLEDIRECTOUTPUT, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/2") ==1 ){%> CCU8PWMLIB_ENABLEINVERTEDOUTPUT, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/3") ==1 ){%> CCU8PWMLIB_ENABLE, <%}
+    %>
+    
+    .kDitherSetting= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/tc/dithe")%>U,
+    .kDitherCompare = <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/dits/dcvs")%>U,  
+
+    .ShadowTransfer= 0U,
+    .ShadowTransferMask= 0x00U,
+  
+    .Start= 0U,
+    .StartMask= 0U,  
+        
+    .FirstSlice= CCU8PWMLIB_SLICE<%=Phase1%>,
+    .SecondSlice= CCU8PWMLIB_SLICE0,
+    .CC8yKernRegsPtr= (CCU8_GLOBAL_TypeDef*) CCU8<%= kernelNo%>_BASE,
+    .CC8yRegsPtr= CCU8<%= kernelNo%>_CC8<%=Phase1%>,
+    .CC8yRegs1Ptr= CCU8<%= kernelNo%>_CC8<%=Phase1%>,
+    .DynamicHandleType= &CCU8PWMLIB_DynamicHandle<%=Phase1%><%= appInst%>,
+    .StartControl = 0U,
+    .InterruptControl = 0x<%= Integer.toHexString(interrupt1) %>U,
+    .SetCompareFuncPtr = &<%= SetCompare%>,
+    .SetDutyFuncPtr = &<%= SetDutyCycle%>,
+};
+
+CCU8PWMLIB_DynamicHandleType CCU8PWMLIB_DynamicHandle<%=Phase2%><%= appInst%> =
+{
+  .State = CCU8PWMLIB_UNINITIALIZED
+};
+const CCU8PWMLIB_HandleType CCU8PWMLIB_Handle<%=Phase2%><%= appInst%> =
+{
+    .kTimerMode= 0U,
+    .CompareMode= CCU8PWMLIB_ASYMMETRIC,
+    .CountingMode= CCU8PWMLIB_CENTER_ALIGNED,
+    
+    .kPassiveState0= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/chc/ocs1") %>U,
+    .kPassiveState1= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/chc/ocs2") %>U,
+    .kPassiveLevel0= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/psl/psl11") %>U,
+    .kPassiveLevel1= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/psl/psl12") %>U,
+
+    .kExtStartTrig = 1U,
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/0")==1)%>
+    <% { %>
+    .kExtStopTrig = 0U,
+    <% } %>
+    <% else %>
+    <% { %>
+    .kExtStopTrig = 1U,
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/0")== 1)%>
+    <% { %>
+    .kStartEdge =  CCU8PWMLIB_RISINGEDGE,
+    <% } %>
+    <% else %>
+    <% { %>
+      <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/1")== 1)%>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_RISINGEDGE,
+      <% } %>
+      <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/2")== 1)%>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_FALLINGEDGE,
+      <% } %>
+      <% else %>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_BOTHEDGES,
+      <% } %>
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/0")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_NOTRIGGER,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/1")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_RISINGEDGE,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/2")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_FALLINGEDGE,
+    <% } %>
+    <% else %>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_BOTHEDGES,
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/0")== 1)%>
+    <% { %>
+    .ExtStartConfig = CCU8PWMLIB_CLEAR_START_TIMER,
+    <% } %>
+    <% else %>
+    <% { %>
+      <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartconf/0")== 1)%>
+      <% { %>
+    .ExtStartConfig = CCU8PWMLIB_START_TIMER,
+      <% } %>
+      <% else %>
+      <% { %>
+    .ExtStartConfig =  CCU8PWMLIB_CLEAR_START_TIMER,
+      <% } %>
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopconf/0")== 1)%>
+    <% { %>
+    .ExtStopConfig = CCU8PWMLIB_STOP_TIMER,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/2")== 1)%>
+    <% { %>
+    .ExtStopConfig = CCU8PWMLIB_CLEAR_TIMER,
+    <% } %>
+    <% else %>
+    <% { %>
+    .ExtStopConfig =  CCU8PWMLIB_CLEAR_STOP_TIMER,
+    <% } %>
+    
+    .kTrapEnable= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwenabletrap/0") %>U,
+    .kTrapSync= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwtrapexittime/0") %>U,
+    .kTrapExitControl= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/tc/trpsw") %>U,
+    .kTrapLevel= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/ins/ev2lm") %>U,
+    
+    .kResolution = (float)<%= app.getFormattedDoubleValue((AppBaseuri + appInst + "/pwmmp001_irselresolution"),"0.000")%>,
+    .kCCUPrescalar= <%= app.getIntegerValue(AppBaseuri + appInst + "/PWMMP001_irSelprescalar") %>U,
+    .kTimerConcatenation= 0U,
+    .kCompareValue1= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwph2compareval1")  %>U, 
+    .kCompareValue2 = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwph2compareval2")  %>U,
+    .kPeriodVal= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irperiodreg")  %>U,
+    
+    .kFallingDeadTime = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwselFallDeadTimereg")%>U,
+    .kRisingDeadTime= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwselRiseDeadTimereg")%>U,
+    .kDeadTimePrescalar= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irseldeadtimeprescalar")%>U,
+    .DeadTimeConf= <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/0") ==1){%> CCU8PWMLIB_DISABLE, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/1") ==1 ){%> CCU8PWMLIB_ENABLEDIRECTOUTPUT, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/2") ==1 ){%> CCU8PWMLIB_ENABLEINVERTEDOUTPUT, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/3") ==1 ){%> CCU8PWMLIB_ENABLE, <%}
+    %>
+    
+    .kDitherSetting= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/tc/dithe")%>U,
+    .kDitherCompare = <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/dits/dcvs")%>U,  
+
+    .ShadowTransfer= <%if (PhaseNo == 2){%> 1U <%}else{%> 0U <%}%>,
+    .ShadowTransferMask= <%if (PhaseNo == 2){shadow = (1 << (4*ph1)) | (1 << (4 * ph2));%> <%= shadow%>U <%} else { %> 0x00U <%}%>,
+  
+    .Start= <%if (PhaseNo == 2){%> 1U <%}else{%> 0U <%}%>,
+    .StartMask= <%if (PhaseNo == 2){shadow = (1 << ph1) | (1 << ph2);%> <%= shadow%>U <%} else { %> 0x00U <%}%>,
+        
+    .FirstSlice= CCU8PWMLIB_SLICE<%=Phase2%>,
+    .SecondSlice= CCU8PWMLIB_SLICE0,
+    .CC8yKernRegsPtr= (CCU8_GLOBAL_TypeDef*) CCU8<%= kernelNo%>_BASE,
+    .CC8yRegsPtr= CCU8<%= kernelNo%>_CC8<%=Phase2%>,
+    .CC8yRegs1Ptr= CCU8<%= kernelNo%>_CC8<%=Phase2%>,
+    .DynamicHandleType= &CCU8PWMLIB_DynamicHandle<%=Phase2%><%= appInst%>,
+    .StartControl = 0U,
+    .InterruptControl = 0x<%= Integer.toHexString(interrupt2) %>U,
+    .SetCompareFuncPtr = &<%= SetCompare%>,
+    .SetDutyFuncPtr = &<%= SetDutyCycle%>,
+};
+
+<%if (PhaseNo == 3 || PhaseNo == 4){%>
+<% ph_3 = Integer.valueOf(Phase3); %>
+
+CCU8PWMLIB_DynamicHandleType CCU8PWMLIB_DynamicHandle<%=Phase3%><%= appInst%> =
+{
+  .State = CCU8PWMLIB_UNINITIALIZED
+};
+
+const CCU8PWMLIB_HandleType CCU8PWMLIB_Handle<%=Phase3%><%= appInst%> =
+{
+    .kTimerMode= 0U,
+    .CompareMode= CCU8PWMLIB_ASYMMETRIC,
+    .CountingMode= CCU8PWMLIB_CENTER_ALIGNED,
+    
+    .kPassiveState0= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/chc/ocs1") %>U,
+    .kPassiveState1= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/chc/ocs2") %>U,
+    .kPassiveLevel0= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/psl/psl11") %>U,
+    .kPassiveLevel1= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/psl/psl12") %>U,
+    
+    .kExtStartTrig = 1U,
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/0")==1)%>
+    <% { %>
+    .kExtStopTrig = 0U,
+    <% } %>
+    <% else %>
+    <% { %>
+    .kExtStopTrig = 1U,
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/0")== 1)%>
+    <% { %>
+    .kStartEdge =  CCU8PWMLIB_RISINGEDGE,
+    <% } %>
+    <% else %>
+    <% { %>
+      <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/1")== 1)%>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_RISINGEDGE,
+      <% } %>
+      <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/2")== 1)%>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_FALLINGEDGE,
+      <% } %>
+      <% else %>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_BOTHEDGES,
+      <% } %>
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/0")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_NOTRIGGER,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/1")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_RISINGEDGE,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/2")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_FALLINGEDGE,
+    <% } %>
+    <% else %>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_BOTHEDGES,
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/0")== 1)%>
+    <% { %>
+    .ExtStartConfig = CCU8PWMLIB_CLEAR_START_TIMER,
+    <% } %>
+    <% else %>
+    <% { %>
+      <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartconf/0")== 1)%>
+      <% { %>
+    .ExtStartConfig = CCU8PWMLIB_START_TIMER,
+      <% } %>
+      <% else %>
+      <% { %>
+    .ExtStartConfig =  CCU8PWMLIB_CLEAR_START_TIMER,
+      <% } %>
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopconf/0")== 1)%>
+    <% { %>
+    .ExtStopConfig = CCU8PWMLIB_STOP_TIMER,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/2")== 1)%>
+    <% { %>
+    .ExtStopConfig = CCU8PWMLIB_CLEAR_TIMER,
+    <% } %>
+    <% else %>
+    <% { %>
+    .ExtStopConfig =  CCU8PWMLIB_CLEAR_STOP_TIMER,
+    <% } %>
+
+    .kTrapEnable= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwenabletrap/0") %>U,
+    .kTrapSync= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwtrapexittime/0") %>U,
+    .kTrapExitControl= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/tc/trpsw") %>U,
+    .kTrapLevel= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/ins/ev2lm") %>U,
+    
+    .kResolution = (float)<%= app.getFormattedDoubleValue((AppBaseuri + appInst + "/pwmmp001_irselresolution"),"0.000")%>,
+    .kCCUPrescalar= <%= app.getIntegerValue(AppBaseuri + appInst + "/PWMMP001_irSelprescalar") %>U,
+    .kTimerConcatenation= 0U,
+    .kCompareValue1= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwph3compareval1")  %>U, 
+    .kCompareValue2 = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwph3compareval2")  %>U,
+    .kPeriodVal= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irperiodreg")  %>U,
+    
+    .kFallingDeadTime = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwselFallDeadTimereg")%>U,
+    .kRisingDeadTime= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwselRiseDeadTimereg")%>U,
+    .kDeadTimePrescalar= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irseldeadtimeprescalar")%>U,
+    .DeadTimeConf= <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/0") ==1){%> CCU8PWMLIB_DISABLE, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/1") ==1 ){%> CCU8PWMLIB_ENABLEDIRECTOUTPUT, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/2") ==1 ){%> CCU8PWMLIB_ENABLEINVERTEDOUTPUT, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/3") ==1 ){%> CCU8PWMLIB_ENABLE, <%}
+    %>
+    
+    .kDitherSetting= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/tc/dithe")%>U,
+    .kDitherCompare = <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/dits/dcvs")%>U,  
+
+    .ShadowTransfer= <%if (PhaseNo == 3){%> 1U <%}else{%> 0U <%}%>,
+    .ShadowTransferMask= <%if (PhaseNo == 3){shadow = (1 << (4*ph1)) | (1 << (4 * ph2)) | (1 << (4 * ph_3));%> <%= shadow%>U <%} else { %> 0x00U <%}%>,
+  
+    .Start= <%if (PhaseNo == 3){%> 1U <%}else{%> 0U <%}%>,
+    .StartMask= <%if (PhaseNo == 3){shadow = (1 << ph1) | (1 << ph2) | (1 << ph_3);%> <%= shadow%>U <%} else { %> 0x00U <%}%>,
+        
+    .FirstSlice= CCU8PWMLIB_SLICE<%=Phase3%>,
+    .SecondSlice= CCU8PWMLIB_SLICE0,
+    .CC8yKernRegsPtr= (CCU8_GLOBAL_TypeDef*) CCU8<%= kernelNo%>_BASE,
+    .CC8yRegsPtr= CCU8<%= kernelNo%>_CC8<%=Phase3%>,
+    .CC8yRegs1Ptr= CCU8<%= kernelNo%>_CC8<%=Phase3%>,
+    .DynamicHandleType= &CCU8PWMLIB_DynamicHandle<%=Phase3%><%= appInst%>,
+    .StartControl = 0U,
+    .InterruptControl = 0x<%= Integer.toHexString(interrupt3) %>U,
+    .SetCompareFuncPtr = &<%= SetCompare%>,
+    .SetDutyFuncPtr = &<%= SetDutyCycle%>,
+};
+<% } %>
+
+<%if (PhaseNo == 4){%>
+<% ph4 = Integer.valueOf(Phase4); %>
+CCU8PWMLIB_DynamicHandleType CCU8PWMLIB_DynamicHandle<%=Phase4%><%= appInst%> =
+{
+  .State = CCU8PWMLIB_UNINITIALIZED
+};
+
+const CCU8PWMLIB_HandleType CCU8PWMLIB_Handle<%=Phase4%><%= appInst%> =
+{
+    .kTimerMode= 0U,
+    .CompareMode= CCU8PWMLIB_ASYMMETRIC,
+    .CountingMode= CCU8PWMLIB_CENTER_ALIGNED,
+    
+    .kPassiveState0= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/chc/ocs1") %>U,
+    .kPassiveState1= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/chc/ocs2") %>U,
+    .kPassiveLevel0= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/psl/psl11") %>U,
+    .kPassiveLevel1= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/psl/psl12") %>U,
+
+    .kExtStartTrig = 1U,
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/0")==1)%>
+    <% { %>
+    .kExtStopTrig = 0U,
+    <% } %>
+    <% else %>
+    <% { %>
+    .kExtStopTrig = 1U,
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/0")== 1)%>
+    <% { %>
+    .kStartEdge =  CCU8PWMLIB_RISINGEDGE,
+    <% } %>
+    <% else %>
+    <% { %>
+      <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/1")== 1)%>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_RISINGEDGE,
+      <% } %>
+      <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/2")== 1)%>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_FALLINGEDGE,
+      <% } %>
+      <% else %>
+      <% { %>
+    .kStartEdge =  CCU8PWMLIB_BOTHEDGES,
+      <% } %>
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/0")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_NOTRIGGER,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/1")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_RISINGEDGE,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopedge/2")== 1)%>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_FALLINGEDGE,
+    <% } %>
+    <% else %>
+    <% { %>
+    .kStopEdge =  CCU8PWMLIB_BOTHEDGES,
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/0")== 1)%>
+    <% { %>
+    .ExtStartConfig = CCU8PWMLIB_CLEAR_START_TIMER,
+    <% } %>
+    <% else %>
+    <% { %>
+      <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartconf/0")== 1)%>
+      <% { %>
+    .ExtStartConfig = CCU8PWMLIB_START_TIMER,
+      <% } %>
+      <% else %>
+      <% { %>
+    .ExtStartConfig =  CCU8PWMLIB_CLEAR_START_TIMER,
+      <% } %>
+    <% } %>
+    <% if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstopconf/0")== 1)%>
+    <% { %>
+    .ExtStopConfig = CCU8PWMLIB_STOP_TIMER,
+    <% } %>
+    <% else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/2")== 1)%>
+    <% { %>
+    .ExtStopConfig = CCU8PWMLIB_CLEAR_TIMER,
+    <% } %>
+    <% else %>
+    <% { %>
+    .ExtStopConfig =  CCU8PWMLIB_CLEAR_STOP_TIMER,
+    <% } %>
+
+    .kTrapEnable= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwenabletrap/0") %>U,
+    .kTrapSync= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwtrapexittime/0") %>U,
+    .kTrapExitControl= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/tc/trpsw") %>U,
+    .kTrapLevel= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/ins/ev2lm") %>U,
+    
+    .kResolution = (float)<%= app.getFormattedDoubleValue((AppBaseuri + appInst + "/pwmmp001_irselresolution"),"0.000")%>,
+    .kCCUPrescalar= <%= app.getIntegerValue(AppBaseuri + appInst + "/PWMMP001_irSelprescalar") %>U,
+    .kTimerConcatenation= 0u,
+    .kCompareValue1= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwph4compareval1")  %>U, 
+    .kCompareValue2 = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwph4compareval2")  %>U,
+    .kPeriodVal= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irperiodreg")  %>U,
+    
+    .kFallingDeadTime = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwselFallDeadTimereg")%>U,
+    .kRisingDeadTime= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irwselRiseDeadTimereg")%>U,
+    .kDeadTimePrescalar= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irseldeadtimeprescalar")%>U,
+    .DeadTimeConf= <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/0") ==1){%> CCU8PWMLIB_DISABLE, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/1") ==1 ){%> CCU8PWMLIB_ENABLEDIRECTOUTPUT, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/2") ==1 ){%> CCU8PWMLIB_ENABLEINVERTEDOUTPUT, <%}
+    else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwDeadTimeConf/3") ==1 ){%> CCU8PWMLIB_ENABLE, <%}
+    %>
+    
+    .kDitherSetting= <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/tc/dithe")%>U,
+    .kDitherCompare = <%= app.getIntegerValue(AppBaseuri + appInst + "/phase1/dits/dcvs")%>U,  
+
+    .ShadowTransfer= <%if(PhaseNo == 4){%> 1U <%}else{%> 0U <%}%>,
+    .ShadowTransferMask= <%if (PhaseNo == 4){shadow = (1 << (4*ph1)) | (1 << (4 * ph2)) | (1 << (4 * ph_3)) | (1 << (4*ph4));%> <%= shadow%>U <%} else { %> 0x00U <%}%>,
+  
+    .Start= <%if (PhaseNo == 4){%> 1U <%}else{%> 0U <%}%>,
+    .StartMask= <%if (PhaseNo == 4){shadow = (1 << ph1) | (1 << ph2) | (1 << ph_3) | (1 << ph4);%> <%= shadow%>U <%} else { %> 0x00U <%}%>,  
+        
+    .FirstSlice= CCU8PWMLIB_SLICE<%=Phase4%>,
+    .SecondSlice= CCU8PWMLIB_SLICE0,
+    .CC8yKernRegsPtr= (CCU8_GLOBAL_TypeDef*) CCU8<%= kernelNo%>_BASE,
+    .CC8yRegsPtr= CCU8<%= kernelNo%>_CC8<%=Phase4%>,
+    .CC8yRegs1Ptr= CCU8<%= kernelNo%>_CC8<%=Phase4%>,
+    .DynamicHandleType= &CCU8PWMLIB_DynamicHandle<%=Phase4%><%= appInst%>,
+    .StartControl = 0U,
+    .InterruptControl = 0x<%= Integer.toHexString(interrupt4) %>U,
+    .SetCompareFuncPtr = &<%= SetCompare%>,
+    .SetDutyFuncPtr = &<%= SetDutyCycle%>,
+};
+<% } %>
+
+PWMMP001_DynamicHandleType PWMMP001_DynamicHandle<%= appInst%> =
+{
+  .State = PWMMP001_UNINITIALIZED
+};
+
+
+const PWMMP001_HandleType PWMMP001_Handle<%= appInst%> =
+{
+  .SCUSyncStart = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstartedge/0")%>U,
+  .kMultiChanModeSupport= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwmultichannelsupport/0") %>U,
+  .kNumPhases= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_irphases")%>U,
+  .kModuleNo = PWMMP001_CCU8<%= kernelNo%>,
+  .StartControl = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmmp001_erwstart/0") %>U,
+  .PhaseHandlePtr=
+  {
+    &CCU8PWMLIB_Handle<%=Phase1%><%= appInst%>,
+    &CCU8PWMLIB_Handle<%=Phase2%><%= appInst%>,
+    <% if (PhaseNo == 3 || PhaseNo == 4) {%>
+    &CCU8PWMLIB_Handle<%=Phase3%><%= appInst%>,
+    <%} else {%>
+    NULL,
+    <%}%>        
+    <% if (PhaseNo == 4) {%>
+    &CCU8PWMLIB_Handle<%=Phase4%><%= appInst%>,
+    <%} else {%>
+    NULL,
+    <%}%>
+  },
+  .CCU8KernRegsPtr = (CCU8_GLOBAL_TypeDef*) CCU8<%= kernelNo%>_BASE,
+  .DynamicHandle = &PWMMP001_DynamicHandle<%= appInst%>
+}; 
+
+<%}%>
+
+
+/**
+ * @}
+ */
+ 
+/*CODE_BLOCK_END*/

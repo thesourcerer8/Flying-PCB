@@ -1,0 +1,973 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"System_LibcStubs.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text._open,"ax",%progbits
+  20              		.align	2
+  21              		.weak	_open
+  22              		.thumb
+  23              		.thumb_func
+  25              	_open:
+  26              	.LFB0:
+  27              		.file 1 "../Lib/System_LibcStubs.c"
+   1:../Lib/System_LibcStubs.c **** /****************************************************************************/
+   2:../Lib/System_LibcStubs.c **** /**
+   3:../Lib/System_LibcStubs.c **** * @file     System_LibcStubs.c
+   4:../Lib/System_LibcStubs.c **** *           XMC4000 Device Series
+   5:../Lib/System_LibcStubs.c **** * @version  V1.3
+   6:../Lib/System_LibcStubs.c **** * @date     Jan 2014
+   7:../Lib/System_LibcStubs.c **** *
+   8:../Lib/System_LibcStubs.c **** * Copyright (C) 2012-2014 Infineon Technologies AG. All rights reserved.
+   9:../Lib/System_LibcStubs.c **** *
+  10:../Lib/System_LibcStubs.c **** *
+  11:../Lib/System_LibcStubs.c **** * @par
+  12:../Lib/System_LibcStubs.c **** * Infineon Technologies AG (Infineon) is supplying this software for use with 
+  13:../Lib/System_LibcStubs.c **** * Infineon's microcontrollers.  This file can be freely distributed within
+  14:../Lib/System_LibcStubs.c **** * development tools that are supporting such microcontrollers.
+  15:../Lib/System_LibcStubs.c **** *
+  16:../Lib/System_LibcStubs.c **** * @par
+  17:../Lib/System_LibcStubs.c **** * THIS SOFTWARE IS PROVIDED AS IS.  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  18:../Lib/System_LibcStubs.c **** * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  19:../Lib/System_LibcStubs.c **** * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  20:../Lib/System_LibcStubs.c **** * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
+  21:../Lib/System_LibcStubs.c **** * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  22:../Lib/System_LibcStubs.c **** *
+  23:../Lib/System_LibcStubs.c **** ******************************************************************************/
+  24:../Lib/System_LibcStubs.c **** 
+  25:../Lib/System_LibcStubs.c **** /* ============================ REVISION HISTORY ==============================
+  26:../Lib/System_LibcStubs.c ****    1. Prakash Kalanjeri Balasubramanian , V0.1 , Initial draft
+  27:../Lib/System_LibcStubs.c ****    2. Prakash Kalanjeri Balasubramanian , V0.2 , Label updates
+  28:../Lib/System_LibcStubs.c ****    3. Prakash Kalanjeri Balasubramanian , V1.0 , Made _Sbrk device agnostic
+  29:../Lib/System_LibcStubs.c ****    3. Prakash Kalanjeri Balasubramanian , V1.1 , C++ support
+  30:../Lib/System_LibcStubs.c ****    3. Prakash Kalanjeri Balasubramanian , V1.2 , Restored compatibilty with old
+  31:../Lib/System_LibcStubs.c ****                                                  project files
+  32:../Lib/System_LibcStubs.c ****    4. Prakash Kalanjeri Balasubramanian, V1.3 ,  Encapsulating everything in
+  33:../Lib/System_LibcStubs.c ****                                                  this file for use only with
+  34:../Lib/System_LibcStubs.c ****                                                  GCC
+  35:../Lib/System_LibcStubs.c ****    ========================================================================= */
+  36:../Lib/System_LibcStubs.c **** 
+  37:../Lib/System_LibcStubs.c **** /*
+  38:../Lib/System_LibcStubs.c ****  * This file contains stubs for standard C library functionality that must
+  39:../Lib/System_LibcStubs.c ****  * typically be provided for the underlying platform.
+  40:../Lib/System_LibcStubs.c ****  *
+  41:../Lib/System_LibcStubs.c ****  * All routines are WEAKLY defined. This creates an opportunity for application
+  42:../Lib/System_LibcStubs.c ****  * developers to override the provided implementation and define a final
+  43:../Lib/System_LibcStubs.c ****  * implementation for their platforms.
+  44:../Lib/System_LibcStubs.c ****  */
+  45:../Lib/System_LibcStubs.c **** #if   defined ( __GNUC__ )
+  46:../Lib/System_LibcStubs.c **** 
+  47:../Lib/System_LibcStubs.c **** #include <sys/stat.h>
+  48:../Lib/System_LibcStubs.c **** #include <sys/times.h>
+  49:../Lib/System_LibcStubs.c **** #include <unistd.h>
+  50:../Lib/System_LibcStubs.c **** 
+  51:../Lib/System_LibcStubs.c **** /* ========================================================================= */
+  52:../Lib/System_LibcStubs.c **** /* =========================== File I/O related ============================ */
+  53:../Lib/System_LibcStubs.c **** /* ========================================================================= */
+  54:../Lib/System_LibcStubs.c **** /*
+  55:../Lib/System_LibcStubs.c ****  * File open
+  56:../Lib/System_LibcStubs.c ****  */
+  57:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _open(const char *name, int flags, int mode)
+  58:../Lib/System_LibcStubs.c **** {
+  28              		.loc 1 58 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 85B0     		sub	sp, sp, #20
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
+  59:../Lib/System_LibcStubs.c ****  flags = flags;
+  60:../Lib/System_LibcStubs.c ****  mode = mode;
+  61:../Lib/System_LibcStubs.c ****  return -1;
+  46              		.loc 1 61 0
+  47 000c 4FF0FF33 		mov	r3, #-1
+  62:../Lib/System_LibcStubs.c **** }
+  48              		.loc 1 62 0
+  49 0010 1846     		mov	r0, r3
+  50 0012 07F11407 		add	r7, r7, #20
+  51 0016 BD46     		mov	sp, r7
+  52 0018 80BC     		pop	{r7}
+  53 001a 7047     		bx	lr
+  54              		.cfi_endproc
+  55              	.LFE0:
+  57              		.section	.text._lseek,"ax",%progbits
+  58              		.align	2
+  59              		.weak	_lseek
+  60              		.thumb
+  61              		.thumb_func
+  63              	_lseek:
+  64              	.LFB1:
+  63:../Lib/System_LibcStubs.c **** 
+  64:../Lib/System_LibcStubs.c **** /*
+  65:../Lib/System_LibcStubs.c ****  * File position seek
+  66:../Lib/System_LibcStubs.c ****  */
+  67:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _lseek(int file, int offset, int whence)
+  68:../Lib/System_LibcStubs.c **** {
+  65              		.loc 1 68 0
+  66              		.cfi_startproc
+  67              		@ args = 0, pretend = 0, frame = 16
+  68              		@ frame_needed = 1, uses_anonymous_args = 0
+  69              		@ link register save eliminated.
+  70 0000 80B4     		push	{r7}
+  71              	.LCFI3:
+  72              		.cfi_def_cfa_offset 4
+  73              		.cfi_offset 7, -4
+  74 0002 85B0     		sub	sp, sp, #20
+  75              	.LCFI4:
+  76              		.cfi_def_cfa_offset 24
+  77 0004 00AF     		add	r7, sp, #0
+  78              	.LCFI5:
+  79              		.cfi_def_cfa_register 7
+  80 0006 F860     		str	r0, [r7, #12]
+  81 0008 B960     		str	r1, [r7, #8]
+  82 000a 7A60     		str	r2, [r7, #4]
+  69:../Lib/System_LibcStubs.c ****  file = file;
+  70:../Lib/System_LibcStubs.c ****  offset = offset;
+  71:../Lib/System_LibcStubs.c ****  whence = whence;
+  72:../Lib/System_LibcStubs.c ****  return -1;
+  83              		.loc 1 72 0
+  84 000c 4FF0FF33 		mov	r3, #-1
+  73:../Lib/System_LibcStubs.c **** }
+  85              		.loc 1 73 0
+  86 0010 1846     		mov	r0, r3
+  87 0012 07F11407 		add	r7, r7, #20
+  88 0016 BD46     		mov	sp, r7
+  89 0018 80BC     		pop	{r7}
+  90 001a 7047     		bx	lr
+  91              		.cfi_endproc
+  92              	.LFE1:
+  94              		.section	.text._read,"ax",%progbits
+  95              		.align	2
+  96              		.weak	_read
+  97              		.thumb
+  98              		.thumb_func
+ 100              	_read:
+ 101              	.LFB2:
+  74:../Lib/System_LibcStubs.c **** 
+  75:../Lib/System_LibcStubs.c **** /*
+  76:../Lib/System_LibcStubs.c ****  * File read
+  77:../Lib/System_LibcStubs.c ****  */
+  78:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _read(int file, char *ptr, int len)
+  79:../Lib/System_LibcStubs.c **** {
+ 102              		.loc 1 79 0
+ 103              		.cfi_startproc
+ 104              		@ args = 0, pretend = 0, frame = 16
+ 105              		@ frame_needed = 1, uses_anonymous_args = 0
+ 106              		@ link register save eliminated.
+ 107 0000 80B4     		push	{r7}
+ 108              	.LCFI6:
+ 109              		.cfi_def_cfa_offset 4
+ 110              		.cfi_offset 7, -4
+ 111 0002 85B0     		sub	sp, sp, #20
+ 112              	.LCFI7:
+ 113              		.cfi_def_cfa_offset 24
+ 114 0004 00AF     		add	r7, sp, #0
+ 115              	.LCFI8:
+ 116              		.cfi_def_cfa_register 7
+ 117 0006 F860     		str	r0, [r7, #12]
+ 118 0008 B960     		str	r1, [r7, #8]
+ 119 000a 7A60     		str	r2, [r7, #4]
+  80:../Lib/System_LibcStubs.c ****  file = file;
+  81:../Lib/System_LibcStubs.c ****  len  = len;
+  82:../Lib/System_LibcStubs.c ****  return 0;
+ 120              		.loc 1 82 0
+ 121 000c 4FF00003 		mov	r3, #0
+  83:../Lib/System_LibcStubs.c **** }
+ 122              		.loc 1 83 0
+ 123 0010 1846     		mov	r0, r3
+ 124 0012 07F11407 		add	r7, r7, #20
+ 125 0016 BD46     		mov	sp, r7
+ 126 0018 80BC     		pop	{r7}
+ 127 001a 7047     		bx	lr
+ 128              		.cfi_endproc
+ 129              	.LFE2:
+ 131              		.section	.text._write,"ax",%progbits
+ 132              		.align	2
+ 133              		.weak	_write
+ 134              		.thumb
+ 135              		.thumb_func
+ 137              	_write:
+ 138              	.LFB3:
+  84:../Lib/System_LibcStubs.c **** 
+  85:../Lib/System_LibcStubs.c **** /*
+  86:../Lib/System_LibcStubs.c ****  * File write
+  87:../Lib/System_LibcStubs.c ****  */
+  88:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _write(int file, char *buf, int nbytes)
+  89:../Lib/System_LibcStubs.c **** {
+ 139              		.loc 1 89 0
+ 140              		.cfi_startproc
+ 141              		@ args = 0, pretend = 0, frame = 16
+ 142              		@ frame_needed = 1, uses_anonymous_args = 0
+ 143              		@ link register save eliminated.
+ 144 0000 80B4     		push	{r7}
+ 145              	.LCFI9:
+ 146              		.cfi_def_cfa_offset 4
+ 147              		.cfi_offset 7, -4
+ 148 0002 85B0     		sub	sp, sp, #20
+ 149              	.LCFI10:
+ 150              		.cfi_def_cfa_offset 24
+ 151 0004 00AF     		add	r7, sp, #0
+ 152              	.LCFI11:
+ 153              		.cfi_def_cfa_register 7
+ 154 0006 F860     		str	r0, [r7, #12]
+ 155 0008 B960     		str	r1, [r7, #8]
+ 156 000a 7A60     		str	r2, [r7, #4]
+  90:../Lib/System_LibcStubs.c ****  return -1;
+ 157              		.loc 1 90 0
+ 158 000c 4FF0FF33 		mov	r3, #-1
+  91:../Lib/System_LibcStubs.c **** }
+ 159              		.loc 1 91 0
+ 160 0010 1846     		mov	r0, r3
+ 161 0012 07F11407 		add	r7, r7, #20
+ 162 0016 BD46     		mov	sp, r7
+ 163 0018 80BC     		pop	{r7}
+ 164 001a 7047     		bx	lr
+ 165              		.cfi_endproc
+ 166              	.LFE3:
+ 168              		.section	.text._close,"ax",%progbits
+ 169              		.align	2
+ 170              		.weak	_close
+ 171              		.thumb
+ 172              		.thumb_func
+ 174              	_close:
+ 175              	.LFB4:
+  92:../Lib/System_LibcStubs.c **** 
+  93:../Lib/System_LibcStubs.c **** /*
+  94:../Lib/System_LibcStubs.c ****  * File close
+  95:../Lib/System_LibcStubs.c ****  */
+  96:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _close(void)
+  97:../Lib/System_LibcStubs.c **** {
+ 176              		.loc 1 97 0
+ 177              		.cfi_startproc
+ 178              		@ args = 0, pretend = 0, frame = 0
+ 179              		@ frame_needed = 1, uses_anonymous_args = 0
+ 180              		@ link register save eliminated.
+ 181 0000 80B4     		push	{r7}
+ 182              	.LCFI12:
+ 183              		.cfi_def_cfa_offset 4
+ 184              		.cfi_offset 7, -4
+ 185 0002 00AF     		add	r7, sp, #0
+ 186              	.LCFI13:
+ 187              		.cfi_def_cfa_register 7
+  98:../Lib/System_LibcStubs.c ****  return -1;
+ 188              		.loc 1 98 0
+ 189 0004 4FF0FF33 		mov	r3, #-1
+  99:../Lib/System_LibcStubs.c **** }
+ 190              		.loc 1 99 0
+ 191 0008 1846     		mov	r0, r3
+ 192 000a BD46     		mov	sp, r7
+ 193 000c 80BC     		pop	{r7}
+ 194 000e 7047     		bx	lr
+ 195              		.cfi_endproc
+ 196              	.LFE4:
+ 198              		.section	.text._fstat,"ax",%progbits
+ 199              		.align	2
+ 200              		.weak	_fstat
+ 201              		.thumb
+ 202              		.thumb_func
+ 204              	_fstat:
+ 205              	.LFB5:
+ 100:../Lib/System_LibcStubs.c **** 
+ 101:../Lib/System_LibcStubs.c **** /*
+ 102:../Lib/System_LibcStubs.c ****  * File status
+ 103:../Lib/System_LibcStubs.c ****  */
+ 104:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _fstat(int file, struct stat *st)
+ 105:../Lib/System_LibcStubs.c **** {
+ 206              		.loc 1 105 0
+ 207              		.cfi_startproc
+ 208              		@ args = 0, pretend = 0, frame = 8
+ 209              		@ frame_needed = 1, uses_anonymous_args = 0
+ 210              		@ link register save eliminated.
+ 211 0000 80B4     		push	{r7}
+ 212              	.LCFI14:
+ 213              		.cfi_def_cfa_offset 4
+ 214              		.cfi_offset 7, -4
+ 215 0002 83B0     		sub	sp, sp, #12
+ 216              	.LCFI15:
+ 217              		.cfi_def_cfa_offset 16
+ 218 0004 00AF     		add	r7, sp, #0
+ 219              	.LCFI16:
+ 220              		.cfi_def_cfa_register 7
+ 221 0006 7860     		str	r0, [r7, #4]
+ 222 0008 3960     		str	r1, [r7, #0]
+ 106:../Lib/System_LibcStubs.c ****  file = file;
+ 107:../Lib/System_LibcStubs.c ****  if(st)
+ 223              		.loc 1 107 0
+ 224 000a 3B68     		ldr	r3, [r7, #0]
+ 225 000c 002B     		cmp	r3, #0
+ 226 000e 02D0     		beq	.L12
+ 108:../Lib/System_LibcStubs.c ****   return -1;
+ 227              		.loc 1 108 0
+ 228 0010 4FF0FF33 		mov	r3, #-1
+ 229 0014 01E0     		b	.L13
+ 230              	.L12:
+ 109:../Lib/System_LibcStubs.c ****  else
+ 110:../Lib/System_LibcStubs.c ****   return -2;
+ 231              		.loc 1 110 0
+ 232 0016 6FF00103 		mvn	r3, #1
+ 233              	.L13:
+ 111:../Lib/System_LibcStubs.c **** }
+ 234              		.loc 1 111 0
+ 235 001a 1846     		mov	r0, r3
+ 236 001c 07F10C07 		add	r7, r7, #12
+ 237 0020 BD46     		mov	sp, r7
+ 238 0022 80BC     		pop	{r7}
+ 239 0024 7047     		bx	lr
+ 240              		.cfi_endproc
+ 241              	.LFE5:
+ 243 0026 00BF     		.section	.text._link,"ax",%progbits
+ 244              		.align	2
+ 245              		.weak	_link
+ 246              		.thumb
+ 247              		.thumb_func
+ 249              	_link:
+ 250              	.LFB6:
+ 112:../Lib/System_LibcStubs.c **** /*
+ 113:../Lib/System_LibcStubs.c ****  * File linking
+ 114:../Lib/System_LibcStubs.c ****  */
+ 115:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _link (char *old, char *new)
+ 116:../Lib/System_LibcStubs.c **** {
+ 251              		.loc 1 116 0
+ 252              		.cfi_startproc
+ 253              		@ args = 0, pretend = 0, frame = 8
+ 254              		@ frame_needed = 1, uses_anonymous_args = 0
+ 255              		@ link register save eliminated.
+ 256 0000 80B4     		push	{r7}
+ 257              	.LCFI17:
+ 258              		.cfi_def_cfa_offset 4
+ 259              		.cfi_offset 7, -4
+ 260 0002 83B0     		sub	sp, sp, #12
+ 261              	.LCFI18:
+ 262              		.cfi_def_cfa_offset 16
+ 263 0004 00AF     		add	r7, sp, #0
+ 264              	.LCFI19:
+ 265              		.cfi_def_cfa_register 7
+ 266 0006 7860     		str	r0, [r7, #4]
+ 267 0008 3960     		str	r1, [r7, #0]
+ 117:../Lib/System_LibcStubs.c ****  if (old == new)
+ 268              		.loc 1 117 0
+ 269 000a 7A68     		ldr	r2, [r7, #4]
+ 270 000c 3B68     		ldr	r3, [r7, #0]
+ 271 000e 9A42     		cmp	r2, r3
+ 272 0010 02D1     		bne	.L15
+ 118:../Lib/System_LibcStubs.c ****   return -1;
+ 273              		.loc 1 118 0
+ 274 0012 4FF0FF33 		mov	r3, #-1
+ 275 0016 01E0     		b	.L16
+ 276              	.L15:
+ 119:../Lib/System_LibcStubs.c ****  else
+ 120:../Lib/System_LibcStubs.c ****   return -2;
+ 277              		.loc 1 120 0
+ 278 0018 6FF00103 		mvn	r3, #1
+ 279              	.L16:
+ 121:../Lib/System_LibcStubs.c **** }
+ 280              		.loc 1 121 0
+ 281 001c 1846     		mov	r0, r3
+ 282 001e 07F10C07 		add	r7, r7, #12
+ 283 0022 BD46     		mov	sp, r7
+ 284 0024 80BC     		pop	{r7}
+ 285 0026 7047     		bx	lr
+ 286              		.cfi_endproc
+ 287              	.LFE6:
+ 289              		.section	.text._unlink,"ax",%progbits
+ 290              		.align	2
+ 291              		.weak	_unlink
+ 292              		.thumb
+ 293              		.thumb_func
+ 295              	_unlink:
+ 296              	.LFB7:
+ 122:../Lib/System_LibcStubs.c **** 
+ 123:../Lib/System_LibcStubs.c **** /*
+ 124:../Lib/System_LibcStubs.c ****  * Unlinking directory entry
+ 125:../Lib/System_LibcStubs.c ****  */
+ 126:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _unlink(char *name)
+ 127:../Lib/System_LibcStubs.c **** {
+ 297              		.loc 1 127 0
+ 298              		.cfi_startproc
+ 299              		@ args = 0, pretend = 0, frame = 8
+ 300              		@ frame_needed = 1, uses_anonymous_args = 0
+ 301              		@ link register save eliminated.
+ 302 0000 80B4     		push	{r7}
+ 303              	.LCFI20:
+ 304              		.cfi_def_cfa_offset 4
+ 305              		.cfi_offset 7, -4
+ 306 0002 83B0     		sub	sp, sp, #12
+ 307              	.LCFI21:
+ 308              		.cfi_def_cfa_offset 16
+ 309 0004 00AF     		add	r7, sp, #0
+ 310              	.LCFI22:
+ 311              		.cfi_def_cfa_register 7
+ 312 0006 7860     		str	r0, [r7, #4]
+ 128:../Lib/System_LibcStubs.c ****  return -1;
+ 313              		.loc 1 128 0
+ 314 0008 4FF0FF33 		mov	r3, #-1
+ 129:../Lib/System_LibcStubs.c **** }
+ 315              		.loc 1 129 0
+ 316 000c 1846     		mov	r0, r3
+ 317 000e 07F10C07 		add	r7, r7, #12
+ 318 0012 BD46     		mov	sp, r7
+ 319 0014 80BC     		pop	{r7}
+ 320 0016 7047     		bx	lr
+ 321              		.cfi_endproc
+ 322              	.LFE7:
+ 324              		.section	.text._sbrk,"ax",%progbits
+ 325              		.align	2
+ 326              		.weak	_sbrk
+ 327              		.thumb
+ 328              		.thumb_func
+ 330              	_sbrk:
+ 331              	.LFB8:
+ 130:../Lib/System_LibcStubs.c **** /* ========================================================================= */
+ 131:../Lib/System_LibcStubs.c **** /* =================== Dynamic memory management related =================== */
+ 132:../Lib/System_LibcStubs.c **** /* ========================================================================= */
+ 133:../Lib/System_LibcStubs.c **** /*
+ 134:../Lib/System_LibcStubs.c ****  * Heap break (position)
+ 135:../Lib/System_LibcStubs.c ****  */
+ 136:../Lib/System_LibcStubs.c **** __attribute__((weak)) void *_sbrk(int RequestedSize)
+ 137:../Lib/System_LibcStubs.c **** {
+ 332              		.loc 1 137 0
+ 333              		.cfi_startproc
+ 334              		@ args = 0, pretend = 0, frame = 24
+ 335              		@ frame_needed = 1, uses_anonymous_args = 0
+ 336              		@ link register save eliminated.
+ 337 0000 80B4     		push	{r7}
+ 338              	.LCFI23:
+ 339              		.cfi_def_cfa_offset 4
+ 340              		.cfi_offset 7, -4
+ 341 0002 87B0     		sub	sp, sp, #28
+ 342              	.LCFI24:
+ 343              		.cfi_def_cfa_offset 32
+ 344 0004 00AF     		add	r7, sp, #0
+ 345              	.LCFI25:
+ 346              		.cfi_def_cfa_register 7
+ 347 0006 7860     		str	r0, [r7, #4]
+ 138:../Lib/System_LibcStubs.c ****  /* Heap limits from linker script file */
+ 139:../Lib/System_LibcStubs.c ****  extern unsigned int Heap_Bank1_Start;
+ 140:../Lib/System_LibcStubs.c ****  extern unsigned int Heap_Bank1_Size;
+ 141:../Lib/System_LibcStubs.c **** 
+ 142:../Lib/System_LibcStubs.c ****  unsigned char *CurrBreak, *NextBreak; 
+ 143:../Lib/System_LibcStubs.c ****  unsigned int  HeapSize;
+ 144:../Lib/System_LibcStubs.c ****  static unsigned char *HeapBound;
+ 145:../Lib/System_LibcStubs.c ****  static unsigned char * heap= (unsigned char *)NULL;
+ 146:../Lib/System_LibcStubs.c **** 
+ 147:../Lib/System_LibcStubs.c **** 
+ 148:../Lib/System_LibcStubs.c ****  HeapSize   = (unsigned int)(&Heap_Bank1_Size);
+ 348              		.loc 1 148 0
+ 349 0008 40F20003 		movw	r3, #:lower16:Heap_Bank1_Size
+ 350 000c C0F20003 		movt	r3, #:upper16:Heap_Bank1_Size
+ 351 0010 7B61     		str	r3, [r7, #20]
+ 149:../Lib/System_LibcStubs.c **** 
+ 150:../Lib/System_LibcStubs.c ****  /*
+ 151:../Lib/System_LibcStubs.c ****   * If this is the first time malloc() was invoked, we start with the
+ 152:../Lib/System_LibcStubs.c ****   * begining of the heap.
+ 153:../Lib/System_LibcStubs.c ****   */
+ 154:../Lib/System_LibcStubs.c ****  if(heap == (unsigned char *)NULL)
+ 352              		.loc 1 154 0
+ 353 0012 40F20003 		movw	r3, #:lower16:heap.4604
+ 354 0016 C0F20003 		movt	r3, #:upper16:heap.4604
+ 355 001a 1B68     		ldr	r3, [r3, #0]
+ 356 001c 002B     		cmp	r3, #0
+ 357 001e 14D1     		bne	.L20
+ 155:../Lib/System_LibcStubs.c ****   {
+ 156:../Lib/System_LibcStubs.c ****    heap = (unsigned char *)&Heap_Bank1_Start;
+ 358              		.loc 1 156 0
+ 359 0020 40F20003 		movw	r3, #:lower16:heap.4604
+ 360 0024 C0F20003 		movt	r3, #:upper16:heap.4604
+ 361 0028 40F20002 		movw	r2, #:lower16:Heap_Bank1_Start
+ 362 002c C0F20002 		movt	r2, #:upper16:Heap_Bank1_Start
+ 363 0030 1A60     		str	r2, [r3, #0]
+ 157:../Lib/System_LibcStubs.c ****    HeapBound  = (unsigned char *) (heap + HeapSize);
+ 364              		.loc 1 157 0
+ 365 0032 40F20003 		movw	r3, #:lower16:heap.4604
+ 366 0036 C0F20003 		movt	r3, #:upper16:heap.4604
+ 367 003a 1A68     		ldr	r2, [r3, #0]
+ 368 003c 7B69     		ldr	r3, [r7, #20]
+ 369 003e D218     		adds	r2, r2, r3
+ 370 0040 40F20003 		movw	r3, #:lower16:HeapBound.4603
+ 371 0044 C0F20003 		movt	r3, #:upper16:HeapBound.4603
+ 372 0048 1A60     		str	r2, [r3, #0]
+ 373              	.L20:
+ 158:../Lib/System_LibcStubs.c ****   }
+ 159:../Lib/System_LibcStubs.c **** 
+ 160:../Lib/System_LibcStubs.c ****  /* Super duper algo to find out if we have memory for the latest request */
+ 161:../Lib/System_LibcStubs.c ****  /* Given conditions are: */
+ 162:../Lib/System_LibcStubs.c ****  /* 1. Latest break */
+ 163:../Lib/System_LibcStubs.c ****  CurrBreak = heap;
+ 374              		.loc 1 163 0
+ 375 004a 40F20003 		movw	r3, #:lower16:heap.4604
+ 376 004e C0F20003 		movt	r3, #:upper16:heap.4604
+ 377 0052 1B68     		ldr	r3, [r3, #0]
+ 378 0054 3B61     		str	r3, [r7, #16]
+ 164:../Lib/System_LibcStubs.c **** 
+ 165:../Lib/System_LibcStubs.c ****  /* And 2. Potential break based on requested size */
+ 166:../Lib/System_LibcStubs.c ****  NextBreak = (unsigned char *)( (((unsigned int)(heap)) + RequestedSize + 7)
+ 379              		.loc 1 166 0
+ 380 0056 40F20003 		movw	r3, #:lower16:heap.4604
+ 381 005a C0F20003 		movt	r3, #:upper16:heap.4604
+ 382 005e 1B68     		ldr	r3, [r3, #0]
+ 383 0060 1A46     		mov	r2, r3
+ 384 0062 7B68     		ldr	r3, [r7, #4]
+ 385 0064 D318     		adds	r3, r2, r3
+ 386 0066 03F10703 		add	r3, r3, #7
+ 167:../Lib/System_LibcStubs.c ****                                           & 0xFFFFFFF8);
+ 387              		.loc 1 167 0
+ 388 006a 23F00703 		bic	r3, r3, #7
+ 166:../Lib/System_LibcStubs.c ****  NextBreak = (unsigned char *)( (((unsigned int)(heap)) + RequestedSize + 7)
+ 389              		.loc 1 166 0
+ 390 006e FB60     		str	r3, [r7, #12]
+ 168:../Lib/System_LibcStubs.c **** 
+ 169:../Lib/System_LibcStubs.c ****  /* Return no memory condition if we sense we are crossing the limit */
+ 170:../Lib/System_LibcStubs.c ****  if (NextBreak >=  HeapBound )
+ 391              		.loc 1 170 0
+ 392 0070 40F20003 		movw	r3, #:lower16:HeapBound.4603
+ 393 0074 C0F20003 		movt	r3, #:upper16:HeapBound.4603
+ 394 0078 1B68     		ldr	r3, [r3, #0]
+ 395 007a FA68     		ldr	r2, [r7, #12]
+ 396 007c 9A42     		cmp	r2, r3
+ 397 007e 02D3     		bcc	.L21
+ 171:../Lib/System_LibcStubs.c ****   return ((unsigned char *)NULL);
+ 398              		.loc 1 171 0
+ 399 0080 4FF00003 		mov	r3, #0
+ 400 0084 06E0     		b	.L22
+ 401              	.L21:
+ 172:../Lib/System_LibcStubs.c ****  else
+ 173:../Lib/System_LibcStubs.c ****  {
+ 174:../Lib/System_LibcStubs.c ****   heap = NextBreak;
+ 402              		.loc 1 174 0
+ 403 0086 40F20003 		movw	r3, #:lower16:heap.4604
+ 404 008a C0F20003 		movt	r3, #:upper16:heap.4604
+ 405 008e FA68     		ldr	r2, [r7, #12]
+ 406 0090 1A60     		str	r2, [r3, #0]
+ 175:../Lib/System_LibcStubs.c ****   return CurrBreak;
+ 407              		.loc 1 175 0
+ 408 0092 3B69     		ldr	r3, [r7, #16]
+ 409              	.L22:
+ 176:../Lib/System_LibcStubs.c ****  }
+ 177:../Lib/System_LibcStubs.c **** }
+ 410              		.loc 1 177 0
+ 411 0094 1846     		mov	r0, r3
+ 412 0096 07F11C07 		add	r7, r7, #28
+ 413 009a BD46     		mov	sp, r7
+ 414 009c 80BC     		pop	{r7}
+ 415 009e 7047     		bx	lr
+ 416              		.cfi_endproc
+ 417              	.LFE8:
+ 419              		.section	.text._times,"ax",%progbits
+ 420              		.align	2
+ 421              		.weak	_times
+ 422              		.thumb
+ 423              		.thumb_func
+ 425              	_times:
+ 426              	.LFB9:
+ 178:../Lib/System_LibcStubs.c **** 
+ 179:../Lib/System_LibcStubs.c **** /* ========================================================================= */
+ 180:../Lib/System_LibcStubs.c **** /* ====================== Process related ================================== */
+ 181:../Lib/System_LibcStubs.c **** /* ========================================================================= */
+ 182:../Lib/System_LibcStubs.c **** /*
+ 183:../Lib/System_LibcStubs.c ****  * Process timing information
+ 184:../Lib/System_LibcStubs.c ****  */
+ 185:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _times(struct tms *buf)
+ 186:../Lib/System_LibcStubs.c **** {
+ 427              		.loc 1 186 0
+ 428              		.cfi_startproc
+ 429              		@ args = 0, pretend = 0, frame = 8
+ 430              		@ frame_needed = 1, uses_anonymous_args = 0
+ 431              		@ link register save eliminated.
+ 432 0000 80B4     		push	{r7}
+ 433              	.LCFI26:
+ 434              		.cfi_def_cfa_offset 4
+ 435              		.cfi_offset 7, -4
+ 436 0002 83B0     		sub	sp, sp, #12
+ 437              	.LCFI27:
+ 438              		.cfi_def_cfa_offset 16
+ 439 0004 00AF     		add	r7, sp, #0
+ 440              	.LCFI28:
+ 441              		.cfi_def_cfa_register 7
+ 442 0006 7860     		str	r0, [r7, #4]
+ 187:../Lib/System_LibcStubs.c ****  return -1;
+ 443              		.loc 1 187 0
+ 444 0008 4FF0FF33 		mov	r3, #-1
+ 188:../Lib/System_LibcStubs.c **** }
+ 445              		.loc 1 188 0
+ 446 000c 1846     		mov	r0, r3
+ 447 000e 07F10C07 		add	r7, r7, #12
+ 448 0012 BD46     		mov	sp, r7
+ 449 0014 80BC     		pop	{r7}
+ 450 0016 7047     		bx	lr
+ 451              		.cfi_endproc
+ 452              	.LFE9:
+ 454              		.section	.text._wait,"ax",%progbits
+ 455              		.align	2
+ 456              		.weak	_wait
+ 457              		.thumb
+ 458              		.thumb_func
+ 460              	_wait:
+ 461              	.LFB10:
+ 189:../Lib/System_LibcStubs.c **** /*
+ 190:../Lib/System_LibcStubs.c ****  * Waiting for a child process to complete
+ 191:../Lib/System_LibcStubs.c ****  */
+ 192:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _wait(int *status)
+ 193:../Lib/System_LibcStubs.c **** {
+ 462              		.loc 1 193 0
+ 463              		.cfi_startproc
+ 464              		@ args = 0, pretend = 0, frame = 8
+ 465              		@ frame_needed = 1, uses_anonymous_args = 0
+ 466              		@ link register save eliminated.
+ 467 0000 80B4     		push	{r7}
+ 468              	.LCFI29:
+ 469              		.cfi_def_cfa_offset 4
+ 470              		.cfi_offset 7, -4
+ 471 0002 83B0     		sub	sp, sp, #12
+ 472              	.LCFI30:
+ 473              		.cfi_def_cfa_offset 16
+ 474 0004 00AF     		add	r7, sp, #0
+ 475              	.LCFI31:
+ 476              		.cfi_def_cfa_register 7
+ 477 0006 7860     		str	r0, [r7, #4]
+ 194:../Lib/System_LibcStubs.c ****  return -1;
+ 478              		.loc 1 194 0
+ 479 0008 4FF0FF33 		mov	r3, #-1
+ 195:../Lib/System_LibcStubs.c **** }
+ 480              		.loc 1 195 0
+ 481 000c 1846     		mov	r0, r3
+ 482 000e 07F10C07 		add	r7, r7, #12
+ 483 0012 BD46     		mov	sp, r7
+ 484 0014 80BC     		pop	{r7}
+ 485 0016 7047     		bx	lr
+ 486              		.cfi_endproc
+ 487              	.LFE10:
+ 489              		.section	.text._kill,"ax",%progbits
+ 490              		.align	2
+ 491              		.weak	_kill
+ 492              		.thumb
+ 493              		.thumb_func
+ 495              	_kill:
+ 496              	.LFB11:
+ 196:../Lib/System_LibcStubs.c **** 
+ 197:../Lib/System_LibcStubs.c **** /*
+ 198:../Lib/System_LibcStubs.c ****  * Kill a process
+ 199:../Lib/System_LibcStubs.c ****  */
+ 200:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _kill(int pid,int sig)
+ 201:../Lib/System_LibcStubs.c **** {
+ 497              		.loc 1 201 0
+ 498              		.cfi_startproc
+ 499              		@ args = 0, pretend = 0, frame = 8
+ 500              		@ frame_needed = 1, uses_anonymous_args = 0
+ 501              		@ link register save eliminated.
+ 502 0000 80B4     		push	{r7}
+ 503              	.LCFI32:
+ 504              		.cfi_def_cfa_offset 4
+ 505              		.cfi_offset 7, -4
+ 506 0002 83B0     		sub	sp, sp, #12
+ 507              	.LCFI33:
+ 508              		.cfi_def_cfa_offset 16
+ 509 0004 00AF     		add	r7, sp, #0
+ 510              	.LCFI34:
+ 511              		.cfi_def_cfa_register 7
+ 512 0006 7860     		str	r0, [r7, #4]
+ 513 0008 3960     		str	r1, [r7, #0]
+ 202:../Lib/System_LibcStubs.c ****  pid = pid;
+ 203:../Lib/System_LibcStubs.c ****  sig = sig;
+ 204:../Lib/System_LibcStubs.c ****  return -1;
+ 514              		.loc 1 204 0
+ 515 000a 4FF0FF33 		mov	r3, #-1
+ 205:../Lib/System_LibcStubs.c **** }
+ 516              		.loc 1 205 0
+ 517 000e 1846     		mov	r0, r3
+ 518 0010 07F10C07 		add	r7, r7, #12
+ 519 0014 BD46     		mov	sp, r7
+ 520 0016 80BC     		pop	{r7}
+ 521 0018 7047     		bx	lr
+ 522              		.cfi_endproc
+ 523              	.LFE11:
+ 525 001a 00BF     		.section	.text._fork,"ax",%progbits
+ 526              		.align	2
+ 527              		.weak	_fork
+ 528              		.thumb
+ 529              		.thumb_func
+ 531              	_fork:
+ 532              	.LFB12:
+ 206:../Lib/System_LibcStubs.c **** 
+ 207:../Lib/System_LibcStubs.c **** /*
+ 208:../Lib/System_LibcStubs.c ****  * Forking a child process
+ 209:../Lib/System_LibcStubs.c ****  */
+ 210:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _fork(void)
+ 211:../Lib/System_LibcStubs.c **** {
+ 533              		.loc 1 211 0
+ 534              		.cfi_startproc
+ 535              		@ args = 0, pretend = 0, frame = 0
+ 536              		@ frame_needed = 1, uses_anonymous_args = 0
+ 537              		@ link register save eliminated.
+ 538 0000 80B4     		push	{r7}
+ 539              	.LCFI35:
+ 540              		.cfi_def_cfa_offset 4
+ 541              		.cfi_offset 7, -4
+ 542 0002 00AF     		add	r7, sp, #0
+ 543              	.LCFI36:
+ 544              		.cfi_def_cfa_register 7
+ 212:../Lib/System_LibcStubs.c ****  return -1;
+ 545              		.loc 1 212 0
+ 546 0004 4FF0FF33 		mov	r3, #-1
+ 213:../Lib/System_LibcStubs.c **** }
+ 547              		.loc 1 213 0
+ 548 0008 1846     		mov	r0, r3
+ 549 000a BD46     		mov	sp, r7
+ 550 000c 80BC     		pop	{r7}
+ 551 000e 7047     		bx	lr
+ 552              		.cfi_endproc
+ 553              	.LFE12:
+ 555              		.section	.text._getpid,"ax",%progbits
+ 556              		.align	2
+ 557              		.weak	_getpid
+ 558              		.thumb
+ 559              		.thumb_func
+ 561              	_getpid:
+ 562              	.LFB13:
+ 214:../Lib/System_LibcStubs.c **** 
+ 215:../Lib/System_LibcStubs.c **** /*
+ 216:../Lib/System_LibcStubs.c ****  * Process ID
+ 217:../Lib/System_LibcStubs.c ****  */
+ 218:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _getpid(void)
+ 219:../Lib/System_LibcStubs.c **** {
+ 563              		.loc 1 219 0
+ 564              		.cfi_startproc
+ 565              		@ args = 0, pretend = 0, frame = 0
+ 566              		@ frame_needed = 1, uses_anonymous_args = 0
+ 567              		@ link register save eliminated.
+ 568 0000 80B4     		push	{r7}
+ 569              	.LCFI37:
+ 570              		.cfi_def_cfa_offset 4
+ 571              		.cfi_offset 7, -4
+ 572 0002 00AF     		add	r7, sp, #0
+ 573              	.LCFI38:
+ 574              		.cfi_def_cfa_register 7
+ 220:../Lib/System_LibcStubs.c ****  return -1;
+ 575              		.loc 1 220 0
+ 576 0004 4FF0FF33 		mov	r3, #-1
+ 221:../Lib/System_LibcStubs.c **** }
+ 577              		.loc 1 221 0
+ 578 0008 1846     		mov	r0, r3
+ 579 000a BD46     		mov	sp, r7
+ 580 000c 80BC     		pop	{r7}
+ 581 000e 7047     		bx	lr
+ 582              		.cfi_endproc
+ 583              	.LFE13:
+ 585              		.section	.text._exit,"ax",%progbits
+ 586              		.align	2
+ 587              		.weak	_exit
+ 588              		.thumb
+ 589              		.thumb_func
+ 591              	_exit:
+ 592              	.LFB14:
+ 222:../Lib/System_LibcStubs.c **** 
+ 223:../Lib/System_LibcStubs.c **** /*
+ 224:../Lib/System_LibcStubs.c ****  * Program/process exit
+ 225:../Lib/System_LibcStubs.c ****  */
+ 226:../Lib/System_LibcStubs.c **** __attribute__((weak)) void _exit(int rc)
+ 227:../Lib/System_LibcStubs.c **** {
+ 593              		.loc 1 227 0
+ 594              		.cfi_startproc
+ 595              		@ args = 0, pretend = 0, frame = 8
+ 596              		@ frame_needed = 1, uses_anonymous_args = 0
+ 597              		@ link register save eliminated.
+ 598 0000 80B4     		push	{r7}
+ 599              	.LCFI39:
+ 600              		.cfi_def_cfa_offset 4
+ 601              		.cfi_offset 7, -4
+ 602 0002 83B0     		sub	sp, sp, #12
+ 603              	.LCFI40:
+ 604              		.cfi_def_cfa_offset 16
+ 605 0004 00AF     		add	r7, sp, #0
+ 606              	.LCFI41:
+ 607              		.cfi_def_cfa_register 7
+ 608 0006 7860     		str	r0, [r7, #4]
+ 609              	.L34:
+ 228:../Lib/System_LibcStubs.c ****  rc = rc;
+ 229:../Lib/System_LibcStubs.c ****  while(1){}
+ 610              		.loc 1 229 0 discriminator 1
+ 611 0008 FEE7     		b	.L34
+ 612              		.cfi_endproc
+ 613              	.LFE14:
+ 615 000a 00BF     		.section	.text._init,"ax",%progbits
+ 616              		.align	2
+ 617              		.weak	_init
+ 618              		.thumb
+ 619              		.thumb_func
+ 621              	_init:
+ 622              	.LFB15:
+ 230:../Lib/System_LibcStubs.c **** }
+ 231:../Lib/System_LibcStubs.c **** 
+ 232:../Lib/System_LibcStubs.c **** /* Init */
+ 233:../Lib/System_LibcStubs.c **** __attribute__((weak)) void _init(void)
+ 234:../Lib/System_LibcStubs.c **** {}
+ 623              		.loc 1 234 0
+ 624              		.cfi_startproc
+ 625              		@ args = 0, pretend = 0, frame = 0
+ 626              		@ frame_needed = 1, uses_anonymous_args = 0
+ 627              		@ link register save eliminated.
+ 628 0000 80B4     		push	{r7}
+ 629              	.LCFI42:
+ 630              		.cfi_def_cfa_offset 4
+ 631              		.cfi_offset 7, -4
+ 632 0002 00AF     		add	r7, sp, #0
+ 633              	.LCFI43:
+ 634              		.cfi_def_cfa_register 7
+ 635              		.loc 1 234 0
+ 636 0004 BD46     		mov	sp, r7
+ 637 0006 80BC     		pop	{r7}
+ 638 0008 7047     		bx	lr
+ 639              		.cfi_endproc
+ 640              	.LFE15:
+ 642 000a 00BF     		.section	.text._isatty,"ax",%progbits
+ 643              		.align	2
+ 644              		.weak	_isatty
+ 645              		.thumb
+ 646              		.thumb_func
+ 648              	_isatty:
+ 649              	.LFB16:
+ 235:../Lib/System_LibcStubs.c **** 
+ 236:../Lib/System_LibcStubs.c **** /* ========================================================================= */
+ 237:../Lib/System_LibcStubs.c **** /* ======================= TERMIO related ================================== */
+ 238:../Lib/System_LibcStubs.c **** /* ========================================================================= */
+ 239:../Lib/System_LibcStubs.c **** 
+ 240:../Lib/System_LibcStubs.c **** /*
+ 241:../Lib/System_LibcStubs.c ****  * Terminal type evaluation
+ 242:../Lib/System_LibcStubs.c ****  */
+ 243:../Lib/System_LibcStubs.c **** __attribute__((weak)) int _isatty(int file)
+ 244:../Lib/System_LibcStubs.c **** {
+ 650              		.loc 1 244 0
+ 651              		.cfi_startproc
+ 652              		@ args = 0, pretend = 0, frame = 8
+ 653              		@ frame_needed = 1, uses_anonymous_args = 0
+ 654              		@ link register save eliminated.
+ 655 0000 80B4     		push	{r7}
+ 656              	.LCFI44:
+ 657              		.cfi_def_cfa_offset 4
+ 658              		.cfi_offset 7, -4
+ 659 0002 83B0     		sub	sp, sp, #12
+ 660              	.LCFI45:
+ 661              		.cfi_def_cfa_offset 16
+ 662 0004 00AF     		add	r7, sp, #0
+ 663              	.LCFI46:
+ 664              		.cfi_def_cfa_register 7
+ 665 0006 7860     		str	r0, [r7, #4]
+ 245:../Lib/System_LibcStubs.c ****  file = file;
+ 246:../Lib/System_LibcStubs.c ****  return -1;
+ 666              		.loc 1 246 0
+ 667 0008 4FF0FF33 		mov	r3, #-1
+ 247:../Lib/System_LibcStubs.c **** }
+ 668              		.loc 1 247 0
+ 669 000c 1846     		mov	r0, r3
+ 670 000e 07F10C07 		add	r7, r7, #12
+ 671 0012 BD46     		mov	sp, r7
+ 672 0014 80BC     		pop	{r7}
+ 673 0016 7047     		bx	lr
+ 674              		.cfi_endproc
+ 675              	.LFE16:
+ 677              		.global	__dso_handle
+ 678              		.bss
+ 679              		.align	2
+ 682              	__dso_handle:
+ 683 0000 00000000 		.space	4
+ 684              		.align	2
+ 685              	heap.4604:
+ 686 0004 00000000 		.space	4
+ 687              		.align	2
+ 688              	HeapBound.4603:
+ 689 0008 00000000 		.space	4
+ 690              		.text
+ 691              	.Letext0:
+ 692              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 693              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 694              		.file 4 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 695              		.file 5 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 696              		.file 6 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+DEFINED SYMBOLS
+                            *ABS*:00000000 System_LibcStubs.c
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:20     .text._open:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:25     .text._open:00000000 _open
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:58     .text._lseek:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:63     .text._lseek:00000000 _lseek
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:95     .text._read:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:100    .text._read:00000000 _read
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:132    .text._write:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:137    .text._write:00000000 _write
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:169    .text._close:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:174    .text._close:00000000 _close
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:199    .text._fstat:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:204    .text._fstat:00000000 _fstat
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:244    .text._link:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:249    .text._link:00000000 _link
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:290    .text._unlink:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:295    .text._unlink:00000000 _unlink
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:325    .text._sbrk:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:330    .text._sbrk:00000000 _sbrk
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:685    .bss:00000004 heap.4604
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:688    .bss:00000008 HeapBound.4603
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:420    .text._times:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:425    .text._times:00000000 _times
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:455    .text._wait:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:460    .text._wait:00000000 _wait
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:490    .text._kill:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:495    .text._kill:00000000 _kill
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:526    .text._fork:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:531    .text._fork:00000000 _fork
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:556    .text._getpid:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:561    .text._getpid:00000000 _getpid
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:586    .text._exit:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:591    .text._exit:00000000 _exit
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:616    .text._init:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:621    .text._init:00000000 _init
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:643    .text._isatty:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:648    .text._isatty:00000000 _isatty
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:682    .bss:00000000 __dso_handle
+C:\Users\Herbert\AppData\Local\Temp\cc1LQVpI.s:679    .bss:00000000 $d
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.349.31f4c5baff3fa2689010b32028da9c47
+                           .group:00000000 wm4.reent.h.16.9e42f0e588b85e70b2bf6572af57ce64
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.stddef.h.187.9e651b6b8b16e149c1353259404973ea
+                           .group:00000000 wm4.types.h.23.0d949686bbcadd1621462d4fa1f884f9
+                           .group:00000000 wm4.stddef.h.40.cf962ebbec441b3ac67502735f0765db
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.stat.h.69.169a67369ef31f6ea38a12bc9ba4e5dd
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+
+UNDEFINED SYMBOLS
+Heap_Bank1_Size
+Heap_Bank1_Start

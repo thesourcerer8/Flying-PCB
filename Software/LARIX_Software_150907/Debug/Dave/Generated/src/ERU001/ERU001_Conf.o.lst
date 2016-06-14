@@ -1,0 +1,81 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ERU001_Conf.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	ERU001_Handle0
+  20              		.section	.rodata
+  21              		.align	2
+  24              	ERU001_Handle0:
+  25 0000 00400440 		.word	1074020352
+  26 0004 03       		.byte	3
+  27 0005 01       		.byte	1
+  28 0006 01       		.byte	1
+  29 0007 00       		.byte	0
+  30 0008 00       		.byte	0
+  31 0009 00       		.byte	0
+  32 000a 00       		.byte	0
+  33 000b 00       		.space	1
+  34              		.global	ERU001_Handle1
+  35              		.align	2
+  38              	ERU001_Handle1:
+  39 000c 00400440 		.word	1074020352
+  40 0010 01       		.byte	1
+  41 0011 01       		.byte	1
+  42 0012 00       		.byte	0
+  43 0013 01       		.byte	1
+  44 0014 00       		.byte	0
+  45 0015 00       		.byte	0
+  46 0016 00       		.byte	0
+  47 0017 00       		.space	1
+  48              		.global	ERU001_HandleArray
+  49              		.data
+  50              		.align	2
+  53              	ERU001_HandleArray:
+  54 0000 00000000 		.word	ERU001_Handle0
+  55 0004 00000000 		.word	ERU001_Handle1
+  56              		.text
+  57              	.Letext0:
+  58              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+  59              		.file 2 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+  60              		.file 3 "../Dave/Generated/src/ERU001/../../inc/ERU001/ERU001.h"
+  61              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+  62              		.file 5 "../Dave/Generated/src/ERU001/ERU001_Conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ERU001_Conf.c
+C:\Users\Herbert\AppData\Local\Temp\cclDpTLd.s:24     .rodata:00000000 ERU001_Handle0
+C:\Users\Herbert\AppData\Local\Temp\cclDpTLd.s:21     .rodata:00000000 $d
+C:\Users\Herbert\AppData\Local\Temp\cclDpTLd.s:38     .rodata:0000000c ERU001_Handle1
+C:\Users\Herbert\AppData\Local\Temp\cclDpTLd.s:53     .data:00000000 ERU001_HandleArray
+C:\Users\Herbert\AppData\Local\Temp\cclDpTLd.s:50     .data:00000000 $d
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415
+
+NO UNDEFINED SYMBOLS

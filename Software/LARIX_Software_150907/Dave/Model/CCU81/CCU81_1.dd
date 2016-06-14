@@ -1,0 +1,1972 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="CCU81" description="Capture/Compare Unit 8 (CAPCOM8)" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="global" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/global">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CCU8GLOBAL/1.0.20/ccu8global_0.app#//@consumed.0"/>
+    <resourcesList name="gctrl" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gctrl" isResolved="true"/>
+    <resourcesList name="gctrl_pcis" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gctrl/pcis" isResolved="true"/>
+    <resourcesList name="gstat" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gstat" isResolved="true"/>
+    <resourcesList name="gidls_cprb" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gidls/cprb" isResolved="true"/>
+    <resourcesList name="gidls_psic" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gidls/psic" isResolved="true"/>
+    <resourcesList name="gidlc_sprb" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gidlc/sprb" isResolved="true"/>
+    <resourcesList name="ecrd" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ecrd" isResolved="true"/>
+    <resourcesList name="midr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/midr" isResolved="true"/>
+    <resourcesList name="global_signal" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/global_signal_out" isResolved="true"/>
+    <resourcesList name="clk" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/clk" isResolved="true"/>
+    <resourcesList name="gctrl_mse0" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gctrl/mse0" isResolved="true"/>
+    <resourcesList name="gctrl_mse1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gctrl/mse1" isResolved="true"/>
+    <resourcesList name="gctrl_mse2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gctrl/mse2" isResolved="true"/>
+    <resourcesList name="gctrl_mse3" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gctrl/mse3" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="global_signal_out" description="global_signal_out" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/global/global_signal" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CCU8GLOBAL/1.0.20/ccu8global_0.app#//@consumed.4"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="clk" description="clk" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/global/clk" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../CCU8GLOBAL/1.0.20/ccu8global_0.app#//@consumed.5"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="CC81" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.39"/>
+    <resourcesList name="ins" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81ins" isResolved="true"/>
+    <resourcesList name="cmc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81cmc" isResolved="true"/>
+    <resourcesList name="tcst" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81tcst" isResolved="true"/>
+    <resourcesList name="tcset" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81tcset" isResolved="true"/>
+    <resourcesList name="tcclr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81tcclr" isResolved="true"/>
+    <resourcesList name="tc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81tc" isResolved="true"/>
+    <resourcesList name="psl" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81psl" isResolved="true"/>
+    <resourcesList name="dit" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81dit" isResolved="true"/>
+    <resourcesList name="dits" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81dits" isResolved="true"/>
+    <resourcesList name="psc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81psc" isResolved="true"/>
+    <resourcesList name="fpc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81fpc" isResolved="true"/>
+    <resourcesList name="fpcs" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81fpcs" isResolved="true"/>
+    <resourcesList name="pr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81pr" isResolved="true"/>
+    <resourcesList name="prs" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81prs" isResolved="true"/>
+    <resourcesList name="cr1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81cr1" isResolved="true"/>
+    <resourcesList name="cr1s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81cr1s" isResolved="true"/>
+    <resourcesList name="cr2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81cr2" isResolved="true"/>
+    <resourcesList name="cr2s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81cr2s" isResolved="true"/>
+    <resourcesList name="chc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81chc" isResolved="true"/>
+    <resourcesList name="dtc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81dtc" isResolved="true"/>
+    <resourcesList name="dc1r" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81dc1r" isResolved="true"/>
+    <resourcesList name="dc2r" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81dc2r" isResolved="true"/>
+    <resourcesList name="timer" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81timer" isResolved="true"/>
+    <resourcesList name="c0v" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81c0v" isResolved="true"/>
+    <resourcesList name="c1v" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81c1v" isResolved="true"/>
+    <resourcesList name="c2v" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81c2v" isResolved="true"/>
+    <resourcesList name="c3v" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81c3v" isResolved="true"/>
+    <resourcesList name="ints" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81ints" isResolved="true"/>
+    <resourcesList name="inte" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81inte" isResolved="true"/>
+    <resourcesList name="sws" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81sws" isResolved="true"/>
+    <resourcesList name="swr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81swr" isResolved="true"/>
+    <resourcesList name="gctrl_mse" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gctrl/mse1" isResolved="true"/>
+    <resourcesList name="gstat_si" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gstat/s1i" isResolved="true"/>
+    <resourcesList name="gidls_ssi" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gidls/ss1i" isResolved="true"/>
+    <resourcesList name="gidlc_csi" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gidlc/cs1i" isResolved="true"/>
+    <resourcesList name="gcss_sse" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcss/s1se" isResolved="true"/>
+    <resourcesList name="gcss_sdse" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcss/s1dse" isResolved="true"/>
+    <resourcesList name="gcss_spse" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcss/s1pse" isResolved="true"/>
+    <resourcesList name="gcss_sst1s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcss/s1st1s" isResolved="true"/>
+    <resourcesList name="gcss_sst2s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcss/s1st2s" isResolved="true"/>
+    <resourcesList name="gcsc_ssc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcsc/s1sc" isResolved="true"/>
+    <resourcesList name="gcsc_sdsc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcsc/s1dsc" isResolved="true"/>
+    <resourcesList name="gcsc_spsc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcsc/s1psc" isResolved="true"/>
+    <resourcesList name="gcsc_sst1c" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcsc/s1st1c" isResolved="true"/>
+    <resourcesList name="gcsc_sst2c" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcsc/s1st2c" isResolved="true"/>
+    <resourcesList name="gcst_sss" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcst/s1ss" isResolved="true"/>
+    <resourcesList name="gcst_sdss" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcst/s1dss" isResolved="true"/>
+    <resourcesList name="gcst_spss" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcst/s1pss" isResolved="true"/>
+    <resourcesList name="gcst_cc8st1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcst/cc81st1" isResolved="true"/>
+    <resourcesList name="gcst_cc8st2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcst/cc81st2" isResolved="true"/>
+    <resourcesList name="gp0_unsync" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81_gp0_unsync" isResolved="true"/>
+    <resourcesList name="gp1_unsync" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81_gp1_unsync" isResolved="true"/>
+    <resourcesList name="gp2_unsync" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81_gp2_unsync" isResolved="true"/>
+    <resourcesList name="mci0" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81mci10" isResolved="true"/>
+    <resourcesList name="mci1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81mci11" isResolved="true"/>
+    <resourcesList name="mci2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81mci12" isResolved="true"/>
+    <resourcesList name="mci3" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81mci13" isResolved="true"/>
+    <resourcesList name="out0" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81out10" isResolved="true"/>
+    <resourcesList name="out1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81out11" isResolved="true"/>
+    <resourcesList name="out2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81out12" isResolved="true"/>
+    <resourcesList name="out3" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81out13" isResolved="true"/>
+    <resourcesList name="st" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81st1" isResolved="true"/>
+    <resourcesList name="sta" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81st1a" isResolved="true"/>
+    <resourcesList name="stb" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81st1b" isResolved="true"/>
+    <resourcesList name="gp0" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81gp10" isResolved="true"/>
+    <resourcesList name="gp1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81gp11" isResolved="true"/>
+    <resourcesList name="gp2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81gp12" isResolved="true"/>
+    <resourcesList name="ps" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81ps1" isResolved="true"/>
+    <resourcesList name="pmus_omds" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81_pmus_omds" isResolved="true"/>
+    <resourcesList name="e0as" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81_e0as" isResolved="true"/>
+    <resourcesList name="e1as" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81_e1as" isResolved="true"/>
+    <resourcesList name="e2as" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81_e2as" isResolved="true"/>
+    <resourcesList name="cmd1s_cmu1s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81_cmd1s_cmu1s" isResolved="true"/>
+    <resourcesList name="cmd2s_cmu2s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81_cmd2s_cmu2s" isResolved="true"/>
+    <resourcesList name="concat_bus_in" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/concat_bus_cc81in" isResolved="true"/>
+    <resourcesList name="concat_bus_out" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/concat_bus_cc81out" isResolved="true"/>
+    <resourcesList name="global_signal" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/global_signal_cc81in" isResolved="true"/>
+    <resourcesList name="pchck_int" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/pchck_int_i81" isResolved="true"/>
+    <resourcesList name="mcss_slice" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/mcss_slice1" isResolved="true"/>
+    <resourcesList name="ins_ev0is" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81ins/ev0is" isResolved="true"/>
+    <resourcesList name="ins_ev1is" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81ins/ev1is" isResolved="true"/>
+    <resourcesList name="ins_ev2s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81ins/ev2s" isResolved="true"/>
+    <resourcesList name="srs_posr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81srs/posr" isResolved="true"/>
+    <resourcesList name="srs_e0sr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81srs/e0sr" isResolved="true"/>
+    <resourcesList name="srs_e1sr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81srs/e1sr" isResolved="true"/>
+    <resourcesList name="srs_e2sr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81srs/e2sr" isResolved="true"/>
+    <resourcesList name="srs_cm1sr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81srs/cm1sr" isResolved="true"/>
+    <resourcesList name="srs_cm2sr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc81srs/cm2sr" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc81_gp2_unsync" description="cc81_gp2_unsync" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/gp2_unsync" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.55"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="global_signal_cc81in" description="global_signal_cc81in" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/global_signal" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.57"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc81_gp1_unsync" description="cc81_gp1_unsync" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/gp1_unsync" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.58"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc81_gp0_unsync" description="cc81_gp0_unsync" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/gp0_unsync" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.59"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc81_e1as" description="cc81_e1as" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/e1as" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.61"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="SS1I" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/gidls_ssi" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.62"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>CC81 IDLE mode set</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="CS1I" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/gidlc_csi" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.63"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>CC81 IDLE mode clear</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="S1SE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/gcss_sse" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.64"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Slice 1 shadow transfer set enable</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="S1DSE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/gcss_sdse" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.65"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Slice 1 Dither shadow transfer set enable</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="S1PSE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/gcss_spse" maxValue="1" minValue="0" startPos="6" stopPos="6" accessPermission="w">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.66"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Slice 1 Prescaler shadow transfer set enable</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81INS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins" accessPermission="rw" addressOffset="0x0200" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.67"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Input Selector Configuration</toolTipHelpDescription>
+    <bitFields name="EV0IS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/ev0is" maxValue="15" minValue="0" startPos="0" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 0 signal selection</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0000" description="CCU8xINy[A]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0001" description="CCU8xINy[B]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0010" description="CCU8xINy[C]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0011" description="CCU8xINy[D]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0100" description="CCU8xINy[E]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0101" description="CCU8xINy[F]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0110" description="CCU8xINy[G]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0111" description="CCU8xINy[H]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1000" description="CCU8xINy[I]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1001" description="CCU8xINy[J]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1010" description="CCU8xINy[K]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1011" description="CCU8xINy[L]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1100" description="CCU8xINy[M]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1101" description="CCU8xINy[N]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1110" description="CCU8xINy[O]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1111" description="CCU8xINy[P]"/>
+    </bitFields>
+    <bitFields name="EV1IS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/ev1is" maxValue="15" minValue="0" startPos="4" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 1 signal selection</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="EV2S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/ev2s" maxValue="15" minValue="0" startPos="8" stopPos="11" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 2 signal selection</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="EV0EM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/ev0em" maxValue="3" minValue="0" startPos="16" stopPos="17" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.68"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 0 Edge Selection</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="No action"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Signal active on rising edge"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Signal active on falling edge"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Signal active on both edges"/>
+    </bitFields>
+    <bitFields name="EV1EM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/ev1em" maxValue="3" minValue="0" startPos="18" stopPos="19" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.69"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 1 Edge Selection</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="EV2EM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/ev2em" maxValue="3" minValue="0" startPos="20" stopPos="21" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 2 Edge Selection</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="EV0LM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/ev0lm" maxValue="1" minValue="0" startPos="22" stopPos="22" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 0 Level Selection</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Active on HIGH level"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Active on LOW level"/>
+    </bitFields>
+    <bitFields name="EV1LM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/ev1lm" maxValue="1" minValue="0" startPos="23" stopPos="23" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 1 Level Selection</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="EV2LM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/ev2lm" maxValue="1" minValue="0" startPos="24" stopPos="24" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.70"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <toolTipHelpDescription>Event 2 Level Selection</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="LPF0M" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/lpf0m" maxValue="3" minValue="0" startPos="25" stopPos="26" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 0 Low Pass Filter Configuration</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="LPF is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="3 clock cycles of fCCU4"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="5 clock cycles of fCCU4"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="7 clock cycles of fCCU4"/>
+    </bitFields>
+    <bitFields name="LPF1M" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/lpf1m" maxValue="3" minValue="0" startPos="27" stopPos="28" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 1 Low Pass Filter Configuration</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="LPF2M" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins/lpf2m" maxValue="3" minValue="0" startPos="29" stopPos="30" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 2 Low Pass Filter Configuration</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81CMC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc" accessPermission="rw" addressOffset="0x0204" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.71"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Connection Matrix Control</toolTipHelpDescription>
+    <bitFields name="STRTS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/strts" maxValue="3" minValue="0" startPos="0" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Start Functionality Selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="External Start Function deactivated"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="External Start Function triggered by Event 0"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="External Start Function triggered by Event 1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="External Start Function triggered by Event 2"/>
+    </bitFields>
+    <bitFields name="ENDS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/ends" maxValue="3" minValue="0" startPos="2" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Stop Functionality Selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="External Stop Function deactivated"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="External Stop Function triggered by Event 0"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="External Stop Function triggered by Event 1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="External Stop Function triggered by Event 2"/>
+    </bitFields>
+    <bitFields name="CAP0S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/cap0s" maxValue="3" minValue="0" startPos="4" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Capture 0 Functionality Selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="External Capture 0 Function deactivated"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="External Capture 0 Function triggered by Event 0"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="External Capture 0 Function triggered by Event 1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="External Capture 0 Function triggered by Event 2"/>
+    </bitFields>
+    <bitFields name="CAP1S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/cap1s" maxValue="3" minValue="0" startPos="6" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Capture 1 Functionality Selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="External Capture 1 Function deactivated"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="External Capture 1 Function triggered by Event 0"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="External Capture 1 Function triggered by Event 1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="External Capture 1 Function triggered by Event 2"/>
+    </bitFields>
+    <bitFields name="GATES" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/gates" maxValue="3" minValue="0" startPos="8" stopPos="9" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Gate Functionality Selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="External Gating Function deactivated"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="External Gating Function triggered by Event 0"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="External Gating Function triggered by Event 1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="External Gating Function triggered by Event 2"/>
+    </bitFields>
+    <bitFields name="UDS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/uds" maxValue="3" minValue="0" startPos="10" stopPos="11" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Up/Down Functionality Selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="External Up/Down Function deactivated"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="External Up/Down Function triggered by Event 0"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="External Up/Down Function triggered by Event 1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="External Up/Down Function triggered by Event 2"/>
+    </bitFields>
+    <bitFields name="LDS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/lds" maxValue="3" minValue="0" startPos="12" stopPos="13" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Timer Load Functionality Selector</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="CNTS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/cnts" maxValue="3" minValue="0" startPos="14" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Count Selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="External Count Function deactivated"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="External Count Function triggered by Event 0"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="External Count Function triggered by Event 1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="External Count Function triggered by Event 2"/>
+    </bitFields>
+    <bitFields name="OFS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/ofs" maxValue="1" minValue="0" startPos="16" stopPos="16" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Override Function Selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Override functionality disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Status bit trigger override connected to Event 1; Status bit value override connected to Event 2"/>
+    </bitFields>
+    <bitFields name="TS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/ts" maxValue="1" minValue="0" startPos="17" stopPos="17" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Trap Function Selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Trap function disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="TRAP function connected to Event 2"/>
+    </bitFields>
+    <bitFields name="MOS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/mos" maxValue="3" minValue="0" startPos="18" stopPos="19" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Modulation Functionality Selector</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="TCE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmc/tce" maxValue="1" minValue="0" startPos="20" stopPos="20" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.72"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Timer Concatenation Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Timer concatenation is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Timer concatenation is enabled"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81TCST" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcst" addressOffset="0x0208" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.73"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Slice Timer Status</toolTipHelpDescription>
+    <bitFields name="TRB" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcst/trb" maxValue="1" minValue="0" startPos="0" stopPos="0">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Timer Run Bit</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Timer is stopped"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Timer is running"/>
+    </bitFields>
+    <bitFields name="CDIR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcst/cdir" maxValue="1" minValue="0" startPos="1" stopPos="1">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Timer Counting Direction</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Timer is counting up"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Timer is counting down"/>
+    </bitFields>
+    <bitFields name="DTR1" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcst/dtr1" maxValue="1" minValue="0" startPos="3" stopPos="3">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time Counter 1 Run bit</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Dead Time counter is idle"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Dead Time counter is running"/>
+    </bitFields>
+    <bitFields name="DTR2" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcst/dtr2" maxValue="1" minValue="0" startPos="4" stopPos="4">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time Counter 2 Run bit</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Dead Time counter is idle"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Dead Time counter is running"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81TCSET" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcset" accessPermission="w" addressOffset="0x020C" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.74"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Slice Timer Run Set</toolTipHelpDescription>
+    <bitFields name="TRBS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcset/trbs" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Timer Run Bit set</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81TCCLR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcclr" accessPermission="w" addressOffset="0x0210" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.75"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Slice Timer Clear</toolTipHelpDescription>
+    <bitFields name="TRBC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcclr/trbc" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Timer Run Bit Clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="TCC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcclr/tcc" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Timer Clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="DITC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcclr/ditc" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dither Counter Clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="DTC1C" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcclr/dtc1c" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time Counter 1 Clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="DTC2C" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tcclr/dtc2c" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time Counter 2 Clear</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81TC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc" accessPermission="rw" addressOffset="0x0214" resetValue="18000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="18000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.76"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="18000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="18000000"/>
+    <toolTipHelpDescription>Slice Timer Control</toolTipHelpDescription>
+    <bitFields name="TCM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/tcm" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.80"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Timer Counting Mode</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Edge aligned mode"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Center aligned mode"/>
+    </bitFields>
+    <bitFields name="TSSM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/tssm" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.79"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Timer Single Shot Mode</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Single shot mode is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Single shot mode is enabled"/>
+    </bitFields>
+    <bitFields name="CLST" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/clst" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Shadow Transfer on Clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="CMOD" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/cmod" maxValue="1" minValue="0" startPos="3" stopPos="3">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Capture Compare Mode</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare Mode"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Capture Mode"/>
+    </bitFields>
+    <bitFields name="ECM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/ecm" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Extended Capture Mode</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Normal Capture Mode. Clear of the Full Flag of each capture register is done by accessing the registers individually only."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Extended Capture Mode. Clear of the Full Flag of each capture register is done not only by accessing the individual registers but also by accessing the ECRDThis register holds the information related to the extended capture mode. register. When reading the ECRDThis register holds the information related to the extended capture mode. register, only the capture register register full flag pointed by the ECRDThis register holds the information related to the extended capture mode..VPTR is cleared"/>
+    </bitFields>
+    <bitFields name="CAPC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/capc" maxValue="3" minValue="0" startPos="5" stopPos="6" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Clear on Capture Control</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Timer is never cleared on a capture event"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Timer is cleared on a capture event into capture registers 2 and 3. (When SCE = 1#, Timer is always cleared in a capture event)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Timer is cleared on a capture event into capture registers 0 and 1. (When SCE = 1#, Timer is always cleared in a capture event)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Timer is always cleared in a capture event."/>
+    </bitFields>
+    <bitFields name="TLS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/tls" maxValue="1" minValue="0" startPos="7" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Timer Load selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Timer is loaded with the value of CR1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Timer is loaded with the value of CR2"/>
+    </bitFields>
+    <bitFields name="ENDM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/endm" maxValue="3" minValue="0" startPos="8" stopPos="9" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.78"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Extended Stop Function Control</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Clears the timer run bit only (default stop)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Clears the timer only (flush)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Clears the timer and run bit (flush/stop)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Reserved"/>
+    </bitFields>
+    <bitFields name="STRM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/strm" maxValue="1" minValue="0" startPos="10" stopPos="10" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.77"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Extended Start Function Control</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Sets run bit only (default start)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Clears the timer and sets run bit, if not set (flush/start)"/>
+    </bitFields>
+    <bitFields name="SCE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/sce" maxValue="1" minValue="0" startPos="11" stopPos="11" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Equal Capture Event enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Capture into CC8yC0VThis register contains the info associated with the Capture 0 field./CC8yC1VThis register contains the info associated with the Capture 1 field. registers control by CCycapt0 and capture into CC8yC3VThis register contains the info associated with the Capture 3 field./CC8yC2VThis register contains the info associated with the Capture 2 field. control by CCycapt1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Capture into CC8yC0VThis register contains the info associated with the Capture 0 field./CC8yC1VThis register contains the info associated with the Capture 1 field. and CC8yC3VThis register contains the info associated with the Capture 3 field./CC8yC2VThis register contains the info associated with the Capture 2 field. control by CCycapt1"/>
+    </bitFields>
+    <bitFields name="CCS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/ccs" maxValue="1" minValue="0" startPos="12" stopPos="12" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Continuous Capture Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The capture into a specific capture register is done with the rules linked with the full flags, described at ."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The capture into the capture registers is always done regardless of the full flag status (even if the register has not been read back)."/>
+    </bitFields>
+    <bitFields name="DITHE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/dithe" maxValue="3" minValue="0" startPos="13" stopPos="14" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.81"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dither Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Dither is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Dither is applied to the PeriodConstant-not defined"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Dither is applied to the CompareConstant-not defined"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Dither is applied to the Period and Compare"/>
+    </bitFields>
+    <bitFields name="DIM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/dim" maxValue="1" minValue="0" startPos="15" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dither input selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Slice is using it own dither unit"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Slice is connected to the dither unit of slice 0."/>
+    </bitFields>
+    <bitFields name="FPE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/fpe" maxValue="1" minValue="0" startPos="16" stopPos="16" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Floating Prescaler enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Floating prescaler mode is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Floating prescaler mode is enabled"/>
+    </bitFields>
+    <bitFields name="TRAPE0" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/trape0" maxValue="1" minValue="0" startPos="17" stopPos="17" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.82"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>TRAP enable for CCU8xOUTy0</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="TRAP functionality has no effect on the CCU8xOUTy0 output"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="TRAP functionality affects the CCU8xOUTy0 output"/>
+    </bitFields>
+    <bitFields name="TRAPE1" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/trape1" maxValue="1" minValue="0" startPos="18" stopPos="18" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.83"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>TRAP enable for CCU8xOUTy1</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="TRAPE2" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/trape2" maxValue="1" minValue="0" startPos="19" stopPos="19" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>TRAP enable for CCU8xOUTy2</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="TRAPE3" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/trape3" maxValue="1" minValue="0" startPos="20" stopPos="20" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>TRAP enable for CCU8xOUTy3</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="TRPSE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/trpse" maxValue="1" minValue="0" startPos="21" stopPos="21" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.84"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>TRAP Synchronization Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Exiting from TRAP state isn&#x2019;t synchronized with the PWM signal"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Exiting from TRAP state is synchronized with the PWM signal"/>
+    </bitFields>
+    <bitFields name="TRPSW" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/trpsw" maxValue="1" minValue="0" startPos="22" stopPos="22" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.85"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>TRAP State Clear Control</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="The slice exits the TRAP state automatically when the TRAP condition is not present (Trap state cleared by HW and SW)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="The TRAP state can only be exited by a SW request."/>
+    </bitFields>
+    <bitFields name="EMS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/ems" maxValue="1" minValue="0" startPos="23" stopPos="23" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Modulation Synchronization</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="External Modulation functionality is not synchronized with the PWM signal"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="External Modulation functionality is synchronized with the PWM signal"/>
+    </bitFields>
+    <bitFields name="EMT" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/emt" maxValue="1" minValue="0" startPos="24" stopPos="24" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>External Modulation Type</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="External Modulation functionality is clearing the ST bits."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="External Modulation functionality is gating the outputs."/>
+    </bitFields>
+    <bitFields name="MCME1" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/mcme1" maxValue="1" minValue="0" startPos="25" stopPos="25" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Multi Channel Mode Enable for Channel 1</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Multi Channel Mode in Channel 1 is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Multi Channel Mode in Channel 1 is enabled"/>
+    </bitFields>
+    <bitFields name="MCME2" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/mcme2" maxValue="1" minValue="0" startPos="26" stopPos="26" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Multi Channel Mode Enable for Channel 2</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Multi Channel Mode in Channel 2 is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Multi Channel Mode in Channel 2 is enabled"/>
+    </bitFields>
+    <bitFields name="EME" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/eme" maxValue="3" minValue="0" startPos="27" stopPos="28" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="3"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="3"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="3"/>
+      <toolTipHelpDescription>External Modulation Channel enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="External Modulation functionality doesn&#x2019;t affect any channel"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="External Modulation only applied on channel 1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="External Modulation only applied on channel 2"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="External Modulation applied on both channels"/>
+    </bitFields>
+    <bitFields name="STOS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/tc/stos" maxValue="3" minValue="0" startPos="29" stopPos="30" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Status bit output selector</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="CCST1 forward to CC8yST"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="CCST2 forward to CC8yST"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="CCST1 AND CCST2 forward to CC8yST"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Reserved"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81PSL" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/psl" accessPermission="rw" addressOffset="0x0218" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.86"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Passive Level Config</toolTipHelpDescription>
+    <bitFields name="PSL11" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/psl/psl11" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.87"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Output Passive Level for CC8xOUTy0</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Passive Level is LOW"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Passive Level is HIGH"/>
+    </bitFields>
+    <bitFields name="PSL12" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/psl/psl12" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.88"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Output Passive Level for CC8xOUTy1</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Passive Level is LOW"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Passive Level is HIGH"/>
+    </bitFields>
+    <bitFields name="PSL21" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/psl/psl21" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Output Passive Level for CC8xOUTy2</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Passive Level is LOW"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Passive Level is HIGH"/>
+    </bitFields>
+    <bitFields name="PSL22" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/psl/psl22" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Output Passive Level for CC8xOUTy1</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Passive Level is LOW"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Passive Level is HIGH"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81DIT" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dit" addressOffset="0x021C" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.89"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Dither Config</toolTipHelpDescription>
+    <bitFields name="DCV" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dit/dcv" maxValue="15" minValue="0" startPos="0" stopPos="3">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dither compare Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="DCNT" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dit/dcnt" maxValue="15" minValue="0" startPos="8" stopPos="11">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dither counter actual value</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81DITS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dits" accessPermission="rw" addressOffset="0x0220" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.90"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Dither Shadow Register</toolTipHelpDescription>
+    <bitFields name="DCVS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dits/dcvs" maxValue="15" minValue="0" startPos="0" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.91"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dither Shadow Compare Value</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81PSC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/psc" accessPermission="rw" addressOffset="0x0224" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.92"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Prescaler Control</toolTipHelpDescription>
+    <bitFields name="PSIV" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/psc/psiv" maxValue="15" minValue="0" startPos="0" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.93"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <toolTipHelpDescription>Prescaler Initial Value</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81FPC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/fpc" accessPermission="rw" addressOffset="0x0228" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.94"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Floating Prescaler Control</toolTipHelpDescription>
+    <bitFields name="PCMP" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/fpc/pcmp" maxValue="15" minValue="0" startPos="0" stopPos="3">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Floating Prescaler Compare Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="PVAL" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/fpc/pval" maxValue="15" minValue="0" startPos="8" stopPos="11" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Actual Prescaler Value</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81FPCS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/fpcs" accessPermission="rw" addressOffset="0x022C" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.95"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Floating Prescaler Shadow</toolTipHelpDescription>
+    <bitFields name="PCMP" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/fpcs/pcmp" maxValue="15" minValue="0" startPos="0" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Floating Prescaler Shadow Compare Value</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81PR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/pr" addressOffset="0x0230" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.96"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Timer Period Value</toolTipHelpDescription>
+    <bitFields name="PR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/pr/pr" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Period Register</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81PRS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/prs" accessPermission="rw" addressOffset="0x0234" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.97"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Timer Shadow Period Value</toolTipHelpDescription>
+    <bitFields name="PRS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/prs/prs" maxValue="65535" minValue="0" startPos="0" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.98"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Period Register</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81CR1" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cr1" addressOffset="0x0238" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.99"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Channel 1 Compare Value</toolTipHelpDescription>
+    <bitFields name="CR1" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cr1/cr1" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Compare Register for Channel 1</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81CR1S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cr1s" accessPermission="rw" addressOffset="0x023C" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.100"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>Channel 1 Compare Shadow Value</toolTipHelpDescription>
+    <bitFields name="CR1S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cr1s/cr1s" maxValue="65535" minValue="0" startPos="0" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Shadow Compare Register for Channel 1</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81CR2" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cr2" addressOffset="0x0240" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.101"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Channel 2 Compare Value</toolTipHelpDescription>
+    <bitFields name="CR2" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cr2/cr2" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Compare Register for Channel 2</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81CR2S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cr2s" accessPermission="rw" addressOffset="0x0244" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.102"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>Channel 2 Compare Shadow Value</toolTipHelpDescription>
+    <bitFields name="CR2S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cr2s/cr2s" maxValue="65535" minValue="0" startPos="0" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Shadow Compare Register for Channel 2</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81CHC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/chc" accessPermission="rw" addressOffset="0x0248" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.109"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Channel Control</toolTipHelpDescription>
+    <bitFields name="ASE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/chc/ase" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.110"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Asymmetric PWM mode Enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Asymmetric PWM is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Asymmetric PWM is enabled"/>
+    </bitFields>
+    <bitFields name="OCS1" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/chc/ocs1" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.111"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Output selector for CCU8xOUTy0</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="CCST1 signal path is connected to the CCU8xOUTy0"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Inverted CCST1 signal path is connected to the CCU8xOUTy0"/>
+    </bitFields>
+    <bitFields name="OCS2" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/chc/ocs2" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.112"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+      <toolTipHelpDescription>Output selector for CCU8xOUTy1</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Inverted CCST1 signal path is connected to the CCU8xOUTy1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="CCST1 signal path is connected to the CCU8xOUTy1"/>
+    </bitFields>
+    <bitFields name="OCS3" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/chc/ocs3" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Output selector for CCU8xOUTy2</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="CCST2 signal path is connected to the CCU8xOUTy2"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Inverted CCST2 signal path is connected to the CCU8xOUTy2"/>
+    </bitFields>
+    <bitFields name="OCS4" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/chc/ocs4" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Output selector for CCU8xOUTy3</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Inverted CCST2 signal path is connected to the CCU8xOUTy3"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="CCST2 signal path is connected to the CCU8xOUTy3"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81DTC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dtc" accessPermission="rw" addressOffset="0x024C" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.113"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Dead Time Control</toolTipHelpDescription>
+    <bitFields name="DTE1" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dtc/dte1" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.114"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time Enable for Channel 1</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Dead Time for channel 1 is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Dead Time for channel 1 is enabled"/>
+    </bitFields>
+    <bitFields name="DTE2" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dtc/dte2" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time Enable for Channel 2</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Dead Time for channel 2 is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Dead Time for channel 2 is enabled"/>
+    </bitFields>
+    <bitFields name="DCEN1" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dtc/dcen1" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.115"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time Enable for CCST1</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Dead Time for CCST1 path is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Dead Time for CCST1 path is enabled"/>
+    </bitFields>
+    <bitFields name="DCEN2" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dtc/dcen2" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.116"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time Enable for inverted CCST1</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Dead Time for inverted CCST1 path is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Dead Time for inverted CCST1 path is enabled"/>
+    </bitFields>
+    <bitFields name="DCEN3" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dtc/dcen3" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time Enable for CCST2</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Dead Time for CCST2 path is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Dead Time for CCST2 path is enabled"/>
+    </bitFields>
+    <bitFields name="DCEN4" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dtc/dcen4" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time Enable for inverted CCST2</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Dead Time for inverted CCST2 path is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Dead Time for inverted CCST2 path is enabled"/>
+    </bitFields>
+    <bitFields name="DTCC" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dtc/dtcc" maxValue="3" minValue="0" startPos="6" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.117"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Dead Time clock control</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="fTclk"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="fTclk/2"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="fTclk/4"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="fTclk/8"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81DC1R" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dc1r" accessPermission="rw" addressOffset="0x0250" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.118"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Channel 1 Dead Time Values</toolTipHelpDescription>
+    <bitFields name="DT1R" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dc1r/dt1r" maxValue="255" minValue="0" startPos="0" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.119"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Rise Value for Dead Time of Channel 1</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="DT1F" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dc1r/dt1f" maxValue="255" minValue="0" startPos="8" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.120"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Fall Value for Dead Time of Channel 1</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81DC2R" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dc2r" accessPermission="rw" addressOffset="0x0254" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.121"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Channel 2 Dead Time Values</toolTipHelpDescription>
+    <bitFields name="DT2R" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dc2r/dt2r" maxValue="255" minValue="0" startPos="0" stopPos="7" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Rise Value for Dead Time of Channel 2</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="DT2F" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/dc2r/dt2f" maxValue="255" minValue="0" startPos="8" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Fall Value for Dead Time of Channel 2</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81TIMER" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/timer" accessPermission="rw" addressOffset="0x0270" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.122"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Timer Value</toolTipHelpDescription>
+    <bitFields name="TVAL" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/timer/tval" maxValue="65535" minValue="0" startPos="0" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Timer Value</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81C0V" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c0v" addressOffset="0x0274" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.123"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Capture Register 0</toolTipHelpDescription>
+    <bitFields name="CAPTV" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c0v/captv" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Capture Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="FPCV" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c0v/fpcv" maxValue="15" minValue="0" startPos="16" stopPos="19">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Prescaler Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="FFL" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c0v/ffl" maxValue="1" minValue="0" startPos="20" stopPos="20">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Full Flag</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No new value was captured into the specific capture register"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="A new value was captured into the specific register"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81C1V" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c1v" addressOffset="0x0278" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.124"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Capture Register 1</toolTipHelpDescription>
+    <bitFields name="CAPTV" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c1v/captv" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Capture Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="FPCV" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c1v/fpcv" maxValue="15" minValue="0" startPos="16" stopPos="19">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Prescaler Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="FFL" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c1v/ffl" maxValue="1" minValue="0" startPos="20" stopPos="20">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Full Flag</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No new value was captured into the specific capture register"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="A new value was captured into the specific register"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81C2V" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c2v" addressOffset="0x027C" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.125"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Capture Register 2</toolTipHelpDescription>
+    <bitFields name="CAPTV" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c2v/captv" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Capture Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="FPCV" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c2v/fpcv" maxValue="15" minValue="0" startPos="16" stopPos="19">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Prescaler Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="FFL" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c2v/ffl" maxValue="1" minValue="0" startPos="20" stopPos="20">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Full Flag</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No new value was captured into the specific capture register"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="A new value was captured into the specific register"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81C3V" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c3v" addressOffset="0x0280" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.126"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Capture Register 3</toolTipHelpDescription>
+    <bitFields name="CAPTV" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c3v/captv" maxValue="65535" minValue="0" startPos="0" stopPos="15">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Capture Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="FPCV" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c3v/fpcv" maxValue="15" minValue="0" startPos="16" stopPos="19">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Prescaler Value</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="FFL" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/c3v/ffl" maxValue="1" minValue="0" startPos="20" stopPos="20">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Full Flag</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="No new value was captured into the specific capture register"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="A new value was captured into the specific register"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81INTS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints" addressOffset="0x02A0" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.127"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Interrupt Status</toolTipHelpDescription>
+    <bitFields name="PMUS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints/pmus" maxValue="1" minValue="0" startPos="0" stopPos="0">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Period Match while Counting Up</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Period match while counting up not detected"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Period match while counting up detected"/>
+    </bitFields>
+    <bitFields name="OMDS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints/omds" maxValue="1" minValue="0" startPos="1" stopPos="1">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>One Match while Counting Down</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="One match while counting down not detected"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="One match while counting down detected"/>
+    </bitFields>
+    <bitFields name="CMU1S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints/cmu1s" maxValue="1" minValue="0" startPos="2" stopPos="2">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 1 Compare Match while Counting Up</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare match while counting up not detected"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare match while counting up detected"/>
+    </bitFields>
+    <bitFields name="CMD1S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints/cmd1s" maxValue="1" minValue="0" startPos="3" stopPos="3">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 1 Compare Match while Counting Down</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare match while counting down not detected"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare match while counting down detected"/>
+    </bitFields>
+    <bitFields name="CMU2S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints/cmu2s" maxValue="1" minValue="0" startPos="4" stopPos="4">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 2 Compare Match while Counting Up</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare match while counting up not detected"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare match while counting up detected"/>
+    </bitFields>
+    <bitFields name="CMD2S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints/cmd2s" maxValue="1" minValue="0" startPos="5" stopPos="5">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 2 Compare Match while Counting Down</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare match while counting down not detected"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare match while counting down detected"/>
+    </bitFields>
+    <bitFields name="E0AS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints/e0as" maxValue="1" minValue="0" startPos="8" stopPos="8">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 0 Detection Status</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Event 0 not detected"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Event 0 detected"/>
+    </bitFields>
+    <bitFields name="E1AS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints/e1as" maxValue="1" minValue="0" startPos="9" stopPos="9">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 1 Detection Status</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Event 1 not detected"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Event 1 detected"/>
+    </bitFields>
+    <bitFields name="E2AS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints/e2as" maxValue="1" minValue="0" startPos="10" stopPos="10">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 2 Detection Status</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Event 2 not detected"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Event 2 detected"/>
+    </bitFields>
+    <bitFields name="TRPF" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ints/trpf" maxValue="1" minValue="0" startPos="11" stopPos="11">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Trap Flag Status</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81INTE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/inte" accessPermission="rw" addressOffset="0x02A4" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.128"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Interrupt Enable Control</toolTipHelpDescription>
+    <bitFields name="PME" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/inte/pme" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.129"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Period match while counting up enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Period Match interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Period Match interrupt is enable"/>
+    </bitFields>
+    <bitFields name="OME" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/inte/ome" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>One match while counting down enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="One Match interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="One Match interrupt is enable"/>
+    </bitFields>
+    <bitFields name="CMU1E" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/inte/cmu1e" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.130"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 1 Compare match while counting up enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare Match while counting up interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare Match while counting up interrupt is enable"/>
+    </bitFields>
+    <bitFields name="CMD1E" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/inte/cmd1e" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.131"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 1 Compare match while counting down enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare Match while counting down interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare Match while counting down interrupt is enable"/>
+    </bitFields>
+    <bitFields name="CMU2E" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/inte/cmu2e" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 2 Compare match while counting up enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare Match while counting up interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare Match while counting up interrupt is enable"/>
+    </bitFields>
+    <bitFields name="CMD2E" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/inte/cmd2e" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 2 Compare match while counting down enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare Match while counting down interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare Match while counting down interrupt is enable"/>
+    </bitFields>
+    <bitFields name="E0AE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/inte/e0ae" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.132"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 0 interrupt enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Event 0 detection interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Event 0 detection interrupt is enable"/>
+    </bitFields>
+    <bitFields name="E1AE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/inte/e1ae" maxValue="1" minValue="0" startPos="9" stopPos="9" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.133"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 1 interrupt enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Event 1 detection interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Event 1 detection interrupt is enable"/>
+    </bitFields>
+    <bitFields name="E2AE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/inte/e2ae" maxValue="1" minValue="0" startPos="10" stopPos="10" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.134"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 2 interrupt enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Event 2 detection interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Event 2 detection interrupt is enable"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81SWS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws" accessPermission="w" addressOffset="0x02AC" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.156"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Interrupt Status Set</toolTipHelpDescription>
+    <bitFields name="SPM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws/spm" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Period match while counting up set</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="SOM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws/som" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>One match while counting down set</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="SCM1U" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws/scm1u" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 1 Compare match while counting up set</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="SCM1D" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws/scm1d" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 1 Compare match while counting down set</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="SCM2U" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws/scm2u" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Compare match while counting up set</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="SCM2D" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws/scm2d" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Compare match while counting down set</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="SE0A" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws/se0a" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 0 detection set</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="SE1A" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws/se1a" maxValue="1" minValue="0" startPos="9" stopPos="9" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 1 detection set</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="SE2A" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws/se2a" maxValue="1" minValue="0" startPos="10" stopPos="10" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 2 detection set</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="STRPF" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/sws/strpf" maxValue="1" minValue="0" startPos="11" stopPos="11" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Trap Flag status set</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC81SWR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr" accessPermission="w" addressOffset="0x02B0" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.157"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Interrupt Status Clear</toolTipHelpDescription>
+    <bitFields name="RPM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr/rpm" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Period match while counting up clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="ROM" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr/rom" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>One match while counting down clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RCM1U" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr/rcm1u" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 1 Compare match while counting up clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RCM1D" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr/rcm1d" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 1 Compare match while counting down clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RCM2U" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr/rcm2u" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 2 Compare match while counting up clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RCM2D" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr/rcm2d" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 2 Compare match while counting down clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RE0A" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr/re0a" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 0 detection clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RE1A" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr/re1a" maxValue="1" minValue="0" startPos="9" stopPos="9" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 1 detection clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RE2A" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr/re2a" maxValue="1" minValue="0" startPos="10" stopPos="10" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 2 detection clear</toolTipHelpDescription>
+    </bitFields>
+    <bitFields name="RTRPF" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/swr/rtrpf" maxValue="1" minValue="0" startPos="11" stopPos="11" accessPermission="w">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Trap Flag status clear</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81out10" description="ccu81out10" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/out0" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.175"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81out11" description="ccu81out11" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/out1" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.176"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81st1" description="ccu81st1" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/st" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.178"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc81_cmd1s_cmu1s" description="cc81_cmd1s_cmu1s" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/cmd1s_cmu1s" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.185"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81mci11" description="ccu81mci11" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/mci1" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.190"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc81_e2as" description="cc81_e2as" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/e2as" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.197"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81ps1" description="ccu81ps1" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ps" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.214"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81mci10" description="ccu81mci10" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/mci0" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.215"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="concat_bus_cc81out" description="concat_bus_cc81out" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/concat_bus_out" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.224"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc81_e0as" description="cc81_e0as" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/e0as" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.232"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc81_pmus_omds" description="cc81_pmus_omds" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/pmus_omds" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.233"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="CC82" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.40"/>
+    <resourcesList name="ins" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82ins" isResolved="true"/>
+    <resourcesList name="cmc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82cmc" isResolved="true"/>
+    <resourcesList name="tcst" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82tcst" isResolved="true"/>
+    <resourcesList name="tcset" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82tcset" isResolved="true"/>
+    <resourcesList name="tcclr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82tcclr" isResolved="true"/>
+    <resourcesList name="tc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82tc" isResolved="true"/>
+    <resourcesList name="psl" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82psl" isResolved="true"/>
+    <resourcesList name="dit" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82dit" isResolved="true"/>
+    <resourcesList name="dits" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82dits" isResolved="true"/>
+    <resourcesList name="psc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82psc" isResolved="true"/>
+    <resourcesList name="fpc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82fpc" isResolved="true"/>
+    <resourcesList name="fpcs" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82fpcs" isResolved="true"/>
+    <resourcesList name="pr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82pr" isResolved="true"/>
+    <resourcesList name="prs" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82prs" isResolved="true"/>
+    <resourcesList name="cr1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82cr1" isResolved="true"/>
+    <resourcesList name="cr1s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82cr1s" isResolved="true"/>
+    <resourcesList name="cr2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82cr2" isResolved="true"/>
+    <resourcesList name="cr2s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82cr2s" isResolved="true"/>
+    <resourcesList name="chc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82chc" isResolved="true"/>
+    <resourcesList name="dtc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82dtc" isResolved="true"/>
+    <resourcesList name="dc1r" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82dc1r" isResolved="true"/>
+    <resourcesList name="dc2r" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82dc2r" isResolved="true"/>
+    <resourcesList name="timer" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82timer" isResolved="true"/>
+    <resourcesList name="c0v" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82c0v" isResolved="true"/>
+    <resourcesList name="c1v" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82c1v" isResolved="true"/>
+    <resourcesList name="c2v" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82c2v" isResolved="true"/>
+    <resourcesList name="c3v" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82c3v" isResolved="true"/>
+    <resourcesList name="ints" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82ints" isResolved="true"/>
+    <resourcesList name="inte" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82inte" isResolved="true"/>
+    <resourcesList name="sws" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82sws" isResolved="true"/>
+    <resourcesList name="swr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82swr" isResolved="true"/>
+    <resourcesList name="gctrl_mse" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gctrl/mse2" isResolved="true"/>
+    <resourcesList name="gstat_si" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gstat/s2i" isResolved="true"/>
+    <resourcesList name="gidls_ssi" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gidls/ss2i" isResolved="true"/>
+    <resourcesList name="gidlc_csi" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gidlc/cs2i" isResolved="true"/>
+    <resourcesList name="gcss_sse" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcss/s2se" isResolved="true"/>
+    <resourcesList name="gcss_sdse" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcss/s2dse" isResolved="true"/>
+    <resourcesList name="gcss_spse" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcss/s2pse" isResolved="true"/>
+    <resourcesList name="gcss_sst1s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcss/s2st1s" isResolved="true"/>
+    <resourcesList name="gcss_sst2s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcss/s2st2s" isResolved="true"/>
+    <resourcesList name="gcsc_ssc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcsc/s2sc" isResolved="true"/>
+    <resourcesList name="gcsc_sdsc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcsc/s2dsc" isResolved="true"/>
+    <resourcesList name="gcsc_spsc" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcsc/s2psc" isResolved="true"/>
+    <resourcesList name="gcsc_sst1c" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcsc/s2st1c" isResolved="true"/>
+    <resourcesList name="gcsc_sst2c" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcsc/s2st2c" isResolved="true"/>
+    <resourcesList name="gcst_sss" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcst/s2ss" isResolved="true"/>
+    <resourcesList name="gcst_sdss" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcst/s2dss" isResolved="true"/>
+    <resourcesList name="gcst_spss" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcst/s2pss" isResolved="true"/>
+    <resourcesList name="gcst_cc8st1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcst/cc82st1" isResolved="true"/>
+    <resourcesList name="gcst_cc8st2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/gcst/cc82st2" isResolved="true"/>
+    <resourcesList name="gp0_unsync" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82_gp0_unsync" isResolved="true"/>
+    <resourcesList name="gp1_unsync" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82_gp1_unsync" isResolved="true"/>
+    <resourcesList name="gp2_unsync" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82_gp2_unsync" isResolved="true"/>
+    <resourcesList name="mci0" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81mci20" isResolved="true"/>
+    <resourcesList name="mci1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81mci21" isResolved="true"/>
+    <resourcesList name="mci2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81mci22" isResolved="true"/>
+    <resourcesList name="mci3" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81mci23" isResolved="true"/>
+    <resourcesList name="out0" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81out20" isResolved="true"/>
+    <resourcesList name="out1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81out21" isResolved="true"/>
+    <resourcesList name="out2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81out22" isResolved="true"/>
+    <resourcesList name="out3" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81out23" isResolved="true"/>
+    <resourcesList name="st" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81st2" isResolved="true"/>
+    <resourcesList name="sta" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81st2a" isResolved="true"/>
+    <resourcesList name="stb" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81st2b" isResolved="true"/>
+    <resourcesList name="gp0" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81gp20" isResolved="true"/>
+    <resourcesList name="gp1" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81gp21" isResolved="true"/>
+    <resourcesList name="gp2" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81gp22" isResolved="true"/>
+    <resourcesList name="ps" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/ccu81ps2" isResolved="true"/>
+    <resourcesList name="pmus_omds" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82_pmus_omds" isResolved="true"/>
+    <resourcesList name="e0as" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82_e0as" isResolved="true"/>
+    <resourcesList name="e1as" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82_e1as" isResolved="true"/>
+    <resourcesList name="e2as" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82_e2as" isResolved="true"/>
+    <resourcesList name="cmd1s_cmu1s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82_cmd1s_cmu1s" isResolved="true"/>
+    <resourcesList name="cmd2s_cmu2s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82_cmd2s_cmu2s" isResolved="true"/>
+    <resourcesList name="concat_bus_in" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/concat_bus_cc82in" isResolved="true"/>
+    <resourcesList name="concat_bus_out" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/concat_bus_cc82out" isResolved="true"/>
+    <resourcesList name="global_signal" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/global_signal_cc82in" isResolved="true"/>
+    <resourcesList name="pchck_int" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/pchck_int_i82" isResolved="true"/>
+    <resourcesList name="mcss_slice" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/mcss_slice2" isResolved="true"/>
+    <resourcesList name="ins_ev0is" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82ins/ev0is" isResolved="true"/>
+    <resourcesList name="ins_ev1is" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82ins/ev1is" isResolved="true"/>
+    <resourcesList name="ins_ev2s" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82ins/ev2s" isResolved="true"/>
+    <resourcesList name="srs_posr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82srs/posr" isResolved="true"/>
+    <resourcesList name="srs_e0sr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82srs/e0sr" isResolved="true"/>
+    <resourcesList name="srs_e1sr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82srs/e1sr" isResolved="true"/>
+    <resourcesList name="srs_e2sr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82srs/e2sr" isResolved="true"/>
+    <resourcesList name="srs_cm1sr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82srs/cm1sr" isResolved="true"/>
+    <resourcesList name="srs_cm2sr" requiredResourceUri="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc82srs/cm2sr" isResolved="true"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC82CR1S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/cr1s" accessPermission="rw" addressOffset="0x033C" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.103"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>Channel 1 Compare Shadow Value</toolTipHelpDescription>
+    <bitFields name="CR1S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/cr1s/cr1s" maxValue="65535" minValue="0" startPos="0" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Shadow Compare Register for Channel 1</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC82CR2S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/cr2s" accessPermission="rw" addressOffset="0x0344" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.104"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <toolTipHelpDescription>Channel 2 Compare Shadow Value</toolTipHelpDescription>
+    <bitFields name="CR2S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/cr2s/cr2s" maxValue="65535" minValue="0" startPos="0" stopPos="15" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Shadow Compare Register for Channel 2</toolTipHelpDescription>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CC82INTE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/inte" accessPermission="rw" addressOffset="0x03A4" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.135"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="00000000"/>
+    <toolTipHelpDescription>Interrupt Enable Control</toolTipHelpDescription>
+    <bitFields name="PME" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/inte/pme" maxValue="1" minValue="0" startPos="0" stopPos="0" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.136"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Period match while counting up enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Period Match interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Period Match interrupt is enable"/>
+    </bitFields>
+    <bitFields name="OME" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/inte/ome" maxValue="1" minValue="0" startPos="1" stopPos="1" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>One match while counting down enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="One Match interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="One Match interrupt is enable"/>
+    </bitFields>
+    <bitFields name="CMU1E" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/inte/cmu1e" maxValue="1" minValue="0" startPos="2" stopPos="2" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.137"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 1 Compare match while counting up enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare Match while counting up interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare Match while counting up interrupt is enable"/>
+    </bitFields>
+    <bitFields name="CMD1E" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/inte/cmd1e" maxValue="1" minValue="0" startPos="3" stopPos="3" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.138"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 1 Compare match while counting down enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare Match while counting down interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare Match while counting down interrupt is enable"/>
+    </bitFields>
+    <bitFields name="CMU2E" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/inte/cmu2e" maxValue="1" minValue="0" startPos="4" stopPos="4" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 2 Compare match while counting up enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare Match while counting up interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare Match while counting up interrupt is enable"/>
+    </bitFields>
+    <bitFields name="CMD2E" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/inte/cmd2e" maxValue="1" minValue="0" startPos="5" stopPos="5" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Channel 2 Compare match while counting down enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Compare Match while counting down interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Compare Match while counting down interrupt is enable"/>
+    </bitFields>
+    <bitFields name="E0AE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/inte/e0ae" maxValue="1" minValue="0" startPos="8" stopPos="8" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.139"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 0 interrupt enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Event 0 detection interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Event 0 detection interrupt is enable"/>
+    </bitFields>
+    <bitFields name="E1AE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/inte/e1ae" maxValue="1" minValue="0" startPos="9" stopPos="9" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.140"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 1 interrupt enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Event 1 detection interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Event 1 detection interrupt is enable"/>
+    </bitFields>
+    <bitFields name="E2AE" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/inte/e2ae" maxValue="1" minValue="0" startPos="10" stopPos="10" accessPermission="rw">
+      <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.141"/>
+      <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+      <toolTipHelpDescription>Event 2 interrupt enable</toolTipHelpDescription>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Event 2 detection interrupt is disabled"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Event 2 detection interrupt is enable"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc82_gp2_unsync" description="cc82_gp2_unsync" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/gp2_unsync" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.167"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc82_e0as" description="cc82_e0as" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/e0as" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.169"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81out21" description="ccu81out21" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/out1" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.171"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81st2" description="ccu81st2" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/st" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.179"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81mci20" description="ccu81mci20" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/mci0" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.182"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="concat_bus_cc82out" description="concat_bus_cc82out" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/concat_bus_out" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.183"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc82_e2as" description="cc82_e2as" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/e2as" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.187"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="concat_bus_cc82in" description="concat_bus_cc82in" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/concat_bus_in" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.193"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81out20" description="ccu81out20" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/out0" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.194"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc82_cmd1s_cmu1s" description="cc82_cmd1s_cmu1s" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/cmd1s_cmu1s" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.198"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc82_pmus_omds" description="cc82_pmus_omds" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/pmus_omds" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.207"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81mci21" description="ccu81mci21" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/mci1" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.209"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="global_signal_cc82in" description="global_signal_cc82in" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/global_signal" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.211"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc82_e1as" description="cc82_e1as" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/e1as" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.212"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="ccu81ps2" description="ccu81ps2" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/ps" signalType="SINGAL" direction="OUT" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.220"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc82_gp1_unsync" description="cc82_gp1_unsync" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/gp1_unsync" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.223"/>
+  </provided>
+  <provided xsi:type="ResourceModel:SignalDeclaration" name="cc82_gp0_unsync" description="cc82_gp0_unsync" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/gp0_unsync" signalType="SINGAL" direction="IN" isVisible="true">
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../PWMMP001/1.0.20/pwmmp001_0.app#//@consumed.230"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PCIS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/global/gctrl_pcis" maxValue="3" minValue="0" startPos="4" stopPos="5" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Prescaler Input Clock Selection</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Module clock"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="CCU8xECLK[A]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="CCU8xECLK[B]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="CCU8xECLK[C]"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="EV0IS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/ins_ev0is" maxValue="15" minValue="0" startPos="0" stopPos="3" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="7"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="7"/>
+    <toolTipHelpDescription>Event 0 signal selection</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0000" description="CCU8xINy[A]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0001" description="CCU8xINy[B]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0010" description="CCU8xINy[C]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0011" description="CCU8xINy[D]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0100" description="CCU8xINy[E]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0101" description="CCU8xINy[F]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0110" description="CCU8xINy[G]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0111" description="CCU8xINy[H]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1000" description="CCU8xINy[I]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1001" description="CCU8xINy[J]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1010" description="CCU8xINy[K]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1011" description="CCU8xINy[L]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1100" description="CCU8xINy[M]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1101" description="CCU8xINy[N]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1110" description="CCU8xINy[O]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1111" description="CCU8xINy[P]"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="EV1IS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/ins_ev1is" maxValue="15" minValue="0" startPos="4" stopPos="7" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Event 1 signal selection</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="EV2S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/ins_ev2s" maxValue="15" minValue="0" startPos="8" stopPos="11" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Event 2 signal selection</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="CM1SR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/srs_cm1sr" maxValue="3" minValue="0" startPos="2" stopPos="3" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Channel 1 Compare match Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="E2SR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/srs_e2sr" maxValue="3" minValue="0" startPos="12" stopPos="13" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Event 2 Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="CM2SR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/srs_cm2sr" maxValue="3" minValue="0" startPos="4" stopPos="5" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Channel 2 Compare match Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="E1SR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/srs_e1sr" maxValue="3" minValue="0" startPos="10" stopPos="11" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Event 1 Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="POSR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/srs_posr" maxValue="3" minValue="0" startPos="0" stopPos="1" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Period/One match Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="E0SR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/2/srs_e0sr" maxValue="3" minValue="0" startPos="8" stopPos="9" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Event 0 Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="EV0IS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins_ev0is" maxValue="15" minValue="0" startPos="0" stopPos="3" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="7"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="7"/>
+    <toolTipHelpDescription>Event 0 signal selection</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0000" description="CCU8xINy[A]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0001" description="CCU8xINy[B]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0010" description="CCU8xINy[C]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0011" description="CCU8xINy[D]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0100" description="CCU8xINy[E]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0101" description="CCU8xINy[F]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0110" description="CCU8xINy[G]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0111" description="CCU8xINy[H]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1000" description="CCU8xINy[I]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1001" description="CCU8xINy[J]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1010" description="CCU8xINy[K]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1011" description="CCU8xINy[L]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1100" description="CCU8xINy[M]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1101" description="CCU8xINy[N]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1110" description="CCU8xINy[O]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1111" description="CCU8xINy[P]"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="EV1IS" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins_ev1is" maxValue="15" minValue="0" startPos="4" stopPos="7" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Event 1 signal selection</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="EV2S" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/ins_ev2s" maxValue="15" minValue="0" startPos="8" stopPos="11" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Event 2 signal selection</toolTipHelpDescription>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="CM1SR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/srs_cm1sr" maxValue="3" minValue="0" startPos="2" stopPos="3" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Channel 1 Compare match Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="E2SR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/srs_e2sr" maxValue="3" minValue="0" startPos="12" stopPos="13" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Event 2 Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="CM2SR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/srs_cm2sr" maxValue="3" minValue="0" startPos="4" stopPos="5" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Channel 2 Compare match Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="E1SR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/srs_e1sr" maxValue="3" minValue="0" startPos="10" stopPos="11" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Event 1 Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="POSR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/srs_posr" maxValue="3" minValue="0" startPos="0" stopPos="1" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Period/One match Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="E0SR" URI="http://www.infineon.com/0.1.28/peripheral/ccu8/1/cc8/1/srs_e0sr" maxValue="3" minValue="0" startPos="8" stopPos="9" accessPermission="rw">
+    <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
+    <toolTipHelpDescription>Event 0 Service request selector</toolTipHelpDescription>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Forward to CC4ySR0"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Forward to CC4ySR1"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Forward to CC4ySR2"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Forward to CC4ySR3"/>
+  </provided>
+  <categoryDescription description="Capture/Compare Unit 8 (CAPCOM8)" name="CAPCOM8"/>
+</ResourceModel:Peripheral>

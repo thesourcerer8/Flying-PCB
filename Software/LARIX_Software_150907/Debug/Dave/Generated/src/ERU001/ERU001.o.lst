@@ -1,0 +1,546 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ERU001.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ERU001_lInit,"ax",%progbits
+  20              		.align	2
+  21              		.global	ERU001_lInit
+  22              		.thumb
+  23              		.thumb_func
+  25              	ERU001_lInit:
+  26              	.LFB112:
+  27              		.file 1 "../Dave/Generated/src/ERU001/ERU001.c"
+   1:../Dave/Generated/src/ERU001/ERU001.c **** 
+   2:../Dave/Generated/src/ERU001/ERU001.c **** /*CODE_BLOCK_BEGIN[ERU001.c]*/
+   3:../Dave/Generated/src/ERU001/ERU001.c **** 
+   4:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+   5:../Dave/Generated/src/ERU001/ERU001.c ****  Copyright (c) 2014, Infineon Technologies AG                                 **
+   6:../Dave/Generated/src/ERU001/ERU001.c ****  All rights reserved.                                                         **
+   7:../Dave/Generated/src/ERU001/ERU001.c ****                                                                               **
+   8:../Dave/Generated/src/ERU001/ERU001.c ****  Redistribution and use in source and binary forms, with or without           **
+   9:../Dave/Generated/src/ERU001/ERU001.c ****  modification,are permitted provided that the following conditions are met:   **
+  10:../Dave/Generated/src/ERU001/ERU001.c ****                                                                               **
+  11:../Dave/Generated/src/ERU001/ERU001.c ****  *Redistributions of source code must retain the above copyright notice,      **
+  12:../Dave/Generated/src/ERU001/ERU001.c ****  this list of conditions and the following disclaimer.                        **
+  13:../Dave/Generated/src/ERU001/ERU001.c ****  *Redistributions in binary form must reproduce the above copyright notice,   **
+  14:../Dave/Generated/src/ERU001/ERU001.c ****  this list of conditions and the following disclaimer in the documentation    **
+  15:../Dave/Generated/src/ERU001/ERU001.c ****  and/or other materials provided with the distribution.                       **
+  16:../Dave/Generated/src/ERU001/ERU001.c ****  *Neither the name of the copyright holders nor the names of its contributors **
+  17:../Dave/Generated/src/ERU001/ERU001.c ****  may be used to endorse or promote products derived from this software without**
+  18:../Dave/Generated/src/ERU001/ERU001.c ****  specific prior written permission.                                           **
+  19:../Dave/Generated/src/ERU001/ERU001.c ****                                                                               **
+  20:../Dave/Generated/src/ERU001/ERU001.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+  21:../Dave/Generated/src/ERU001/ERU001.c ****  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+  22:../Dave/Generated/src/ERU001/ERU001.c ****  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+  23:../Dave/Generated/src/ERU001/ERU001.c ****  ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+  24:../Dave/Generated/src/ERU001/ERU001.c ****  LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+  25:../Dave/Generated/src/ERU001/ERU001.c ****  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+  26:../Dave/Generated/src/ERU001/ERU001.c ****  SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+  27:../Dave/Generated/src/ERU001/ERU001.c ****  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+  28:../Dave/Generated/src/ERU001/ERU001.c ****  CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+  29:../Dave/Generated/src/ERU001/ERU001.c ****  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+  30:../Dave/Generated/src/ERU001/ERU001.c ****  POSSIBILITY OF SUCH DAMAGE.                                                  **
+  31:../Dave/Generated/src/ERU001/ERU001.c ****                                                                               **
+  32:../Dave/Generated/src/ERU001/ERU001.c ****  To improve the quality of the software, users are encouraged to share        **
+  33:../Dave/Generated/src/ERU001/ERU001.c ****  modifications, enhancements or bug fixes with Infineon Technologies AG       **
+  34:../Dave/Generated/src/ERU001/ERU001.c ****  dave@infineon.com).                                                          **
+  35:../Dave/Generated/src/ERU001/ERU001.c ****                                                                               **
+  36:../Dave/Generated/src/ERU001/ERU001.c **** ********************************************************************************
+  37:../Dave/Generated/src/ERU001/ERU001.c **** **                                                                            **
+  38:../Dave/Generated/src/ERU001/ERU001.c **** ** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+  39:../Dave/Generated/src/ERU001/ERU001.c **** **                                                                            **
+  40:../Dave/Generated/src/ERU001/ERU001.c **** ** COMPILER : Compiler Independent                                            **
+  41:../Dave/Generated/src/ERU001/ERU001.c **** **                                                                            **
+  42:../Dave/Generated/src/ERU001/ERU001.c **** ** AUTHOR   : App Developer                                                   **
+  43:../Dave/Generated/src/ERU001/ERU001.c **** **                                                                            **
+  44:../Dave/Generated/src/ERU001/ERU001.c **** ** NOTE     : Any Changes made to this file will be overwritten during Code   **
+  45:../Dave/Generated/src/ERU001/ERU001.c **** **            Generation                                                      **
+  46:../Dave/Generated/src/ERU001/ERU001.c **** **                                                                            **
+  47:../Dave/Generated/src/ERU001/ERU001.c **** ********************************************************************************
+  48:../Dave/Generated/src/ERU001/ERU001.c **** ** VERSION HISTORY:
+  49:../Dave/Generated/src/ERU001/ERU001.c **** ********************************************************************************
+  50:../Dave/Generated/src/ERU001/ERU001.c **** ** v1.0.4,  25 Jan 2013,  BRG: Initial version.
+  51:../Dave/Generated/src/ERU001/ERU001.c **** ** v1.0.6,  14 Mar 2013,  BRG: Supported to XMC4200 and XMC4400 device series.
+  52:../Dave/Generated/src/ERU001/ERU001.c **** ** v1.0.10, 30 Sep 2013,  BRG: Code has been updated in complaint to coding 
+  53:../Dave/Generated/src/ERU001/ERU001.c **** **                             guidelines.               
+  54:../Dave/Generated/src/ERU001/ERU001.c **** ** v1.0.16, 26 Mar 2014,  BRG: DBG002 macros are removed.         
+  55:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+  56:../Dave/Generated/src/ERU001/ERU001.c **** /**
+  57:../Dave/Generated/src/ERU001/ERU001.c ****  * @file   ERU001.c
+  58:../Dave/Generated/src/ERU001/ERU001.c ****  *
+  59:../Dave/Generated/src/ERU001/ERU001.c ****  * @brief  This file contains public and private function implementations of 
+  60:../Dave/Generated/src/ERU001/ERU001.c ****  * ERU001.
+  61:../Dave/Generated/src/ERU001/ERU001.c ****  *
+  62:../Dave/Generated/src/ERU001/ERU001.c ****  */
+  63:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+  64:../Dave/Generated/src/ERU001/ERU001.c ****  ** INCLUDE FILES                                                             **
+  65:../Dave/Generated/src/ERU001/ERU001.c ****  ******************************************************************************/
+  66:../Dave/Generated/src/ERU001/ERU001.c **** 
+  67:../Dave/Generated/src/ERU001/ERU001.c **** /* Included to access ERU001 app data structure, functions & enumerations */
+  68:../Dave/Generated/src/ERU001/ERU001.c **** #include "../../inc/ERU001/ERU001.h"
+  69:../Dave/Generated/src/ERU001/ERU001.c **** 
+  70:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+  71:../Dave/Generated/src/ERU001/ERU001.c **** ** PRIVATE MACRO DEFINITIONS:
+  72:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+  73:../Dave/Generated/src/ERU001/ERU001.c **** 
+  74:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+  75:../Dave/Generated/src/ERU001/ERU001.c **** ** PRIVATE TYPE DEFINITIONS:
+  76:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+  77:../Dave/Generated/src/ERU001/ERU001.c **** 
+  78:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+  79:../Dave/Generated/src/ERU001/ERU001.c **** ** PRIVATE FUNCTION DECLARATIONS:
+  80:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+  81:../Dave/Generated/src/ERU001/ERU001.c **** /**
+  82:../Dave/Generated/src/ERU001/ERU001.c ****  * @brief This function initialises the Event Request Select(ERSx) and 
+  83:../Dave/Generated/src/ERU001/ERU001.c ****  * Event Trigger Logic(ETLx) input channel according GUI configuration.
+  84:../Dave/Generated/src/ERU001/ERU001.c ****  * values.
+  85:../Dave/Generated/src/ERU001/ERU001.c ****  *
+  86:../Dave/Generated/src/ERU001/ERU001.c ****  * @param[in]  Pointer to ERU001_HandleType
+  87:../Dave/Generated/src/ERU001/ERU001.c ****  *
+  88:../Dave/Generated/src/ERU001/ERU001.c ****  * @return  None <BR>
+  89:../Dave/Generated/src/ERU001/ERU001.c ****  *
+  90:../Dave/Generated/src/ERU001/ERU001.c ****  * <b>Reentrant: Yes </b><BR>
+  91:../Dave/Generated/src/ERU001/ERU001.c ****  */
+  92:../Dave/Generated/src/ERU001/ERU001.c **** void ERU001_lInit(const ERU001_HandleType *Handle);
+  93:../Dave/Generated/src/ERU001/ERU001.c **** 
+  94:../Dave/Generated/src/ERU001/ERU001.c **** #if ((__TARGET_DEVICE__ == XMC44) || (__TARGET_DEVICE__ == XMC42) || \
+  95:../Dave/Generated/src/ERU001/ERU001.c **** 	 (__TARGET_DEVICE__ == XMC41))
+  96:../Dave/Generated/src/ERU001/ERU001.c **** /**
+  97:../Dave/Generated/src/ERU001/ERU001.c ****  * @brief This function Disables clock gating for ERU1 kernel
+  98:../Dave/Generated/src/ERU001/ERU001.c ****  *
+  99:../Dave/Generated/src/ERU001/ERU001.c ****  * @param[in]  Pointer to ERU001_HandleType
+ 100:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 101:../Dave/Generated/src/ERU001/ERU001.c ****  * @return  Clock gating disable status <BR>
+ 102:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 103:../Dave/Generated/src/ERU001/ERU001.c ****  * <b>Reentrant: Yes </b><BR>
+ 104:../Dave/Generated/src/ERU001/ERU001.c ****  */
+ 105:../Dave/Generated/src/ERU001/ERU001.c **** uint32_t ERU001_lDisableClkGating(const ERU001_HandleType *Handle);
+ 106:../Dave/Generated/src/ERU001/ERU001.c **** #endif
+ 107:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 108:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+ 109:../Dave/Generated/src/ERU001/ERU001.c **** ** GLOBAL CONSTANT DEFINITIONS:
+ 110:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+ 111:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 112:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+ 113:../Dave/Generated/src/ERU001/ERU001.c **** ** GLOBAL VARIABLE DEFINITIONS:
+ 114:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+ 115:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 116:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+ 117:../Dave/Generated/src/ERU001/ERU001.c **** ** PRIVATE CONSTANT DEFINITIONS:
+ 118:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+ 119:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 120:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+ 121:../Dave/Generated/src/ERU001/ERU001.c **** ** FUNCTION LIKE MACRO DEFINITIONS:
+ 122:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+ 123:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 124:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+ 125:../Dave/Generated/src/ERU001/ERU001.c **** ** PRIVATE VARIABLES:
+ 126:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+ 127:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 128:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+ 129:../Dave/Generated/src/ERU001/ERU001.c **** ** PRIVATE FUNCTION DEFINITIONS:
+ 130:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+ 131:../Dave/Generated/src/ERU001/ERU001.c **** /** @addtogroup ERU001_app Func
+ 132:../Dave/Generated/src/ERU001/ERU001.c ****  * @{
+ 133:../Dave/Generated/src/ERU001/ERU001.c ****  */
+ 134:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 135:../Dave/Generated/src/ERU001/ERU001.c **** /**
+ 136:../Dave/Generated/src/ERU001/ERU001.c ****  * @brief This function initialises the Event Request Select(ERSx) and 
+ 137:../Dave/Generated/src/ERU001/ERU001.c ****  * Event Trigger Logic(ETLx) input channel according GUI configuration.
+ 138:../Dave/Generated/src/ERU001/ERU001.c ****  * values.
+ 139:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 140:../Dave/Generated/src/ERU001/ERU001.c ****  * @param[in]  Pointer to ERU001_HandleType
+ 141:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 142:../Dave/Generated/src/ERU001/ERU001.c ****  * @return  None <BR>
+ 143:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 144:../Dave/Generated/src/ERU001/ERU001.c ****  * <b>Reentrant: Yes </b><BR>
+ 145:../Dave/Generated/src/ERU001/ERU001.c ****  */
+ 146:../Dave/Generated/src/ERU001/ERU001.c **** void ERU001_lInit(const ERU001_HandleType *Handle)
+ 147:../Dave/Generated/src/ERU001/ERU001.c **** {
+  28              		.loc 1 147 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 84B0     		sub	sp, sp, #16
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+ 148:../Dave/Generated/src/ERU001/ERU001.c ****   /* Used to store the value that needs to be loaded to 
+ 149:../Dave/Generated/src/ERU001/ERU001.c ****      Event Input Control register */
+ 150:../Dave/Generated/src/ERU001/ERU001.c ****   uint32_t uRegValue = 0U;
+  44              		.loc 1 150 0
+  45 0008 4FF00003 		mov	r3, #0
+  46 000c FB60     		str	r3, [r7, #12]
+ 151:../Dave/Generated/src/ERU001/ERU001.c ****   
+ 152:../Dave/Generated/src/ERU001/ERU001.c **** #if (UC_FAMILY == XMC4)
+ 153:../Dave/Generated/src/ERU001/ERU001.c ****   /* Check instantiated app resource is ERU1 kernel*/
+ 154:../Dave/Generated/src/ERU001/ERU001.c ****   if (ERU1 == Handle->ERURegs)
+  47              		.loc 1 154 0
+  48 000e 7B68     		ldr	r3, [r7, #4]
+  49 0010 1A68     		ldr	r2, [r3, #0]
+  50 0012 4FF48043 		mov	r3, #16384
+  51 0016 C4F20403 		movt	r3, 16388
+  52 001a 9A42     		cmp	r2, r3
+  53 001c 0AD1     		bne	.L2
+ 155:../Dave/Generated/src/ERU001/ERU001.c ****   {
+ 156:../Dave/Generated/src/ERU001/ERU001.c ****     /* Get the reset status of the ERU1 peripheral */
+ 157:../Dave/Generated/src/ERU001/ERU001.c ****     if (TRUE == RESET001_GetStatus(PER0_ERU1))
+  54              		.loc 1 157 0
+  55 001e 4FF48030 		mov	r0, #65536
+  56 0022 FFF7FEFF 		bl	RESET001_GetStatus
+  57 0026 0346     		mov	r3, r0
+  58 0028 012B     		cmp	r3, #1
+  59 002a 03D1     		bne	.L2
+ 158:../Dave/Generated/src/ERU001/ERU001.c **** 	{ 
+ 159:../Dave/Generated/src/ERU001/ERU001.c **** 	  /* De-assert the ERU1 peripheral */
+ 160:../Dave/Generated/src/ERU001/ERU001.c **** 	  RESET001_DeassertReset(PER0_ERU1);
+  60              		.loc 1 160 0
+  61 002c 4FF48030 		mov	r0, #65536
+  62 0030 FFF7FEFF 		bl	RESET001_DeassertReset
+  63              	.L2:
+ 161:../Dave/Generated/src/ERU001/ERU001.c **** 	}
+ 162:../Dave/Generated/src/ERU001/ERU001.c ****   }
+ 163:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 164:../Dave/Generated/src/ERU001/ERU001.c **** #endif
+ 165:../Dave/Generated/src/ERU001/ERU001.c ****   
+ 166:../Dave/Generated/src/ERU001/ERU001.c ****   /* Rebuild Level Detection for Status Flag ETLx */
+ 167:../Dave/Generated/src/ERU001/ERU001.c ****   uRegValue |= ( ( (uint32_t)Handle->LevelDetect   << ERU_EXICON_LD_Pos ) & \
+  64              		.loc 1 167 0
+  65 0034 7B68     		ldr	r3, [r7, #4]
+  66 0036 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+  67 0038 4FEA4303 		lsl	r3, r3, #1
+  68 003c 03F00203 		and	r3, r3, #2
+  69 0040 FA68     		ldr	r2, [r7, #12]
+  70 0042 1343     		orrs	r3, r3, r2
+  71 0044 FB60     		str	r3, [r7, #12]
+ 168:../Dave/Generated/src/ERU001/ERU001.c **** 		  ERU_EXICON_LD_Msk );
+ 169:../Dave/Generated/src/ERU001/ERU001.c ****   /* Rising Edge Detection Enable ETLx */
+ 170:../Dave/Generated/src/ERU001/ERU001.c ****   uRegValue |= ( ( (uint32_t)Handle->RiseEdgeDetEn << ERU_EXICON_RE_Pos ) & \
+  72              		.loc 1 170 0
+  73 0046 7B68     		ldr	r3, [r7, #4]
+  74 0048 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+  75 004a 4FEA8303 		lsl	r3, r3, #2
+  76 004e 03F00403 		and	r3, r3, #4
+  77 0052 FA68     		ldr	r2, [r7, #12]
+  78 0054 1343     		orrs	r3, r3, r2
+  79 0056 FB60     		str	r3, [r7, #12]
+ 171:../Dave/Generated/src/ERU001/ERU001.c **** 		  ERU_EXICON_RE_Msk );
+ 172:../Dave/Generated/src/ERU001/ERU001.c ****   /* Falling Edge Detection Enable ETLx */
+ 173:../Dave/Generated/src/ERU001/ERU001.c ****   uRegValue |= ( ( (uint32_t)Handle->FallEdgeDetEn << ERU_EXICON_FE_Pos ) & \
+  80              		.loc 1 173 0
+  81 0058 7B68     		ldr	r3, [r7, #4]
+  82 005a DB79     		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+  83 005c 4FEAC303 		lsl	r3, r3, #3
+  84 0060 03F00803 		and	r3, r3, #8
+  85 0064 FA68     		ldr	r2, [r7, #12]
+  86 0066 1343     		orrs	r3, r3, r2
+  87 0068 FB60     		str	r3, [r7, #12]
+ 174:../Dave/Generated/src/ERU001/ERU001.c **** 		  ERU_EXICON_FE_Msk );
+ 175:../Dave/Generated/src/ERU001/ERU001.c ****   /* Input Source Select for ERSx */
+ 176:../Dave/Generated/src/ERU001/ERU001.c ****   uRegValue |= ( ( (uint32_t)Handle->InputSrcSel   << ERU_EXICON_SS_Pos ) & \
+  88              		.loc 1 176 0
+  89 006a 7B68     		ldr	r3, [r7, #4]
+  90 006c 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+  91 006e 4FEA0323 		lsl	r3, r3, #8
+  92 0072 03F44073 		and	r3, r3, #768
+  93 0076 FA68     		ldr	r2, [r7, #12]
+  94 0078 1343     		orrs	r3, r3, r2
+  95 007a FB60     		str	r3, [r7, #12]
+ 177:../Dave/Generated/src/ERU001/ERU001.c **** 		  ERU_EXICON_SS_Msk );
+ 178:../Dave/Generated/src/ERU001/ERU001.c ****   /* Input A Negation Select for ERSx */
+ 179:../Dave/Generated/src/ERU001/ERU001.c ****   uRegValue |= ( ( (uint32_t)Handle->InputANegSel  << ERU_EXICON_NA_Pos ) & \
+  96              		.loc 1 179 0
+  97 007c 7B68     		ldr	r3, [r7, #4]
+  98 007e 5B7A     		ldrb	r3, [r3, #9]	@ zero_extendqisi2
+  99 0080 4FEA8323 		lsl	r3, r3, #10
+ 100 0084 03F48063 		and	r3, r3, #1024
+ 101 0088 FA68     		ldr	r2, [r7, #12]
+ 102 008a 1343     		orrs	r3, r3, r2
+ 103 008c FB60     		str	r3, [r7, #12]
+ 180:../Dave/Generated/src/ERU001/ERU001.c ****           ERU_EXICON_NA_Msk );
+ 181:../Dave/Generated/src/ERU001/ERU001.c ****   /* Input B Negation Select for ERSx */
+ 182:../Dave/Generated/src/ERU001/ERU001.c ****   uRegValue |= ( ( (uint32_t)Handle->InputBNegSel  << ERU_EXICON_NB_Pos ) & \
+ 104              		.loc 1 182 0
+ 105 008e 7B68     		ldr	r3, [r7, #4]
+ 106 0090 9B7A     		ldrb	r3, [r3, #10]	@ zero_extendqisi2
+ 107 0092 4FEAC323 		lsl	r3, r3, #11
+ 108 0096 03F40063 		and	r3, r3, #2048
+ 109 009a FA68     		ldr	r2, [r7, #12]
+ 110 009c 1343     		orrs	r3, r3, r2
+ 111 009e FB60     		str	r3, [r7, #12]
+ 183:../Dave/Generated/src/ERU001/ERU001.c **** 		  ERU_EXICON_NB_Msk );
+ 184:../Dave/Generated/src/ERU001/ERU001.c ****   /* Update of Event Input Control register*/
+ 185:../Dave/Generated/src/ERU001/ERU001.c ****   Handle->ERURegs->EXICON[Handle->InputChannel] |= uRegValue;
+ 112              		.loc 1 185 0
+ 113 00a0 7B68     		ldr	r3, [r7, #4]
+ 114 00a2 1B68     		ldr	r3, [r3, #0]
+ 115 00a4 7A68     		ldr	r2, [r7, #4]
+ 116 00a6 1279     		ldrb	r2, [r2, #4]	@ zero_extendqisi2
+ 117 00a8 7968     		ldr	r1, [r7, #4]
+ 118 00aa 0968     		ldr	r1, [r1, #0]
+ 119 00ac 7868     		ldr	r0, [r7, #4]
+ 120 00ae 0079     		ldrb	r0, [r0, #4]	@ zero_extendqisi2
+ 121 00b0 00F10400 		add	r0, r0, #4
+ 122 00b4 51F82000 		ldr	r0, [r1, r0, lsl #2]
+ 123 00b8 F968     		ldr	r1, [r7, #12]
+ 124 00ba 0143     		orrs	r1, r1, r0
+ 125 00bc 02F10402 		add	r2, r2, #4
+ 126 00c0 43F82210 		str	r1, [r3, r2, lsl #2]
+ 186:../Dave/Generated/src/ERU001/ERU001.c **** } 
+ 127              		.loc 1 186 0
+ 128 00c4 07F11007 		add	r7, r7, #16
+ 129 00c8 BD46     		mov	sp, r7
+ 130 00ca 80BD     		pop	{r7, pc}
+ 131              		.cfi_endproc
+ 132              	.LFE112:
+ 134              		.section	.text.ERU001_Init,"ax",%progbits
+ 135              		.align	2
+ 136              		.global	ERU001_Init
+ 137              		.thumb
+ 138              		.thumb_func
+ 140              	ERU001_Init:
+ 141              	.LFB113:
+ 187:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 188:../Dave/Generated/src/ERU001/ERU001.c **** /**
+ 189:../Dave/Generated/src/ERU001/ERU001.c ****  * @brief This function Disables clock gating for ERU1 kernel
+ 190:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 191:../Dave/Generated/src/ERU001/ERU001.c ****  * @param[in]  Pointer to ERU001_HandleType
+ 192:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 193:../Dave/Generated/src/ERU001/ERU001.c ****  * @return  Clock gating disable status <BR>
+ 194:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 195:../Dave/Generated/src/ERU001/ERU001.c ****  * <b>Reentrant: Yes </b><BR>
+ 196:../Dave/Generated/src/ERU001/ERU001.c ****  */
+ 197:../Dave/Generated/src/ERU001/ERU001.c **** #if ((__TARGET_DEVICE__ == XMC44) || (__TARGET_DEVICE__ == XMC42) || \
+ 198:../Dave/Generated/src/ERU001/ERU001.c **** 	 (__TARGET_DEVICE__ == XMC41))
+ 199:../Dave/Generated/src/ERU001/ERU001.c **** uint32_t ERU001_lDisableClkGating(const ERU001_HandleType *Handle)
+ 200:../Dave/Generated/src/ERU001/ERU001.c **** {
+ 201:../Dave/Generated/src/ERU001/ERU001.c ****   /* Clock gating status variable */
+ 202:../Dave/Generated/src/ERU001/ERU001.c ****   uint32_t ClkGatStat; 
+ 203:../Dave/Generated/src/ERU001/ERU001.c ****   /* Check instantiated app resource is ERU1 kernel*/
+ 204:../Dave/Generated/src/ERU001/ERU001.c ****   if (ERU1 == Handle->ERURegs)
+ 205:../Dave/Generated/src/ERU001/ERU001.c ****   {
+ 206:../Dave/Generated/src/ERU001/ERU001.c ****      /* Disable clock gating for ERU1 peripheral */
+ 207:../Dave/Generated/src/ERU001/ERU001.c **** 	 SCU_CLK->CGATCLR0 |= (uint32_t)1U << SCU_CLK_CGATCLR0_ERU1_Pos;	
+ 208:../Dave/Generated/src/ERU001/ERU001.c **** 	 /* Disable clock gating is performed */	  
+ 209:../Dave/Generated/src/ERU001/ERU001.c **** 	 ClkGatStat = TRUE;
+ 210:../Dave/Generated/src/ERU001/ERU001.c ****   }
+ 211:../Dave/Generated/src/ERU001/ERU001.c ****   else
+ 212:../Dave/Generated/src/ERU001/ERU001.c ****   {
+ 213:../Dave/Generated/src/ERU001/ERU001.c ****      /* Disable clock gating is Not performed */
+ 214:../Dave/Generated/src/ERU001/ERU001.c **** 	 ClkGatStat = FALSE;
+ 215:../Dave/Generated/src/ERU001/ERU001.c ****   }
+ 216:../Dave/Generated/src/ERU001/ERU001.c ****   /* Return Disable Clock gating status */
+ 217:../Dave/Generated/src/ERU001/ERU001.c ****   return ClkGatStat;
+ 218:../Dave/Generated/src/ERU001/ERU001.c **** }
+ 219:../Dave/Generated/src/ERU001/ERU001.c **** #endif
+ 220:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 221:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 222:../Dave/Generated/src/ERU001/ERU001.c **** /*******************************************************************************
+ 223:../Dave/Generated/src/ERU001/ERU001.c **** ** PUBLIC FUNCTION DEFINITIONS:
+ 224:../Dave/Generated/src/ERU001/ERU001.c **** *******************************************************************************/
+ 225:../Dave/Generated/src/ERU001/ERU001.c **** 
+ 226:../Dave/Generated/src/ERU001/ERU001.c **** /**
+ 227:../Dave/Generated/src/ERU001/ERU001.c ****  * @brief This function Initialises a  ERU001 App instances (ERSx+ETLx)
+ 228:../Dave/Generated/src/ERU001/ERU001.c ****  *            based on user configuration.
+ 229:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 230:../Dave/Generated/src/ERU001/ERU001.c ****  * @param[in]   None
+ 231:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 232:../Dave/Generated/src/ERU001/ERU001.c ****  * @return      None
+ 233:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 234:../Dave/Generated/src/ERU001/ERU001.c ****  * <b>Reentrant: Yes </b><BR>
+ 235:../Dave/Generated/src/ERU001/ERU001.c ****  */
+ 236:../Dave/Generated/src/ERU001/ERU001.c **** void ERU001_Init()
+ 237:../Dave/Generated/src/ERU001/ERU001.c **** {
+ 142              		.loc 1 237 0
+ 143              		.cfi_startproc
+ 144              		@ args = 0, pretend = 0, frame = 8
+ 145              		@ frame_needed = 1, uses_anonymous_args = 0
+ 146 0000 80B5     		push	{r7, lr}
+ 147              	.LCFI3:
+ 148              		.cfi_def_cfa_offset 8
+ 149              		.cfi_offset 7, -8
+ 150              		.cfi_offset 14, -4
+ 151 0002 82B0     		sub	sp, sp, #8
+ 152              	.LCFI4:
+ 153              		.cfi_def_cfa_offset 16
+ 154 0004 00AF     		add	r7, sp, #0
+ 155              	.LCFI5:
+ 156              		.cfi_def_cfa_register 7
+ 238:../Dave/Generated/src/ERU001/ERU001.c ****   /* Controls the loop iterations variable */
+ 239:../Dave/Generated/src/ERU001/ERU001.c ****   uint32_t HandleCnt;
+ 240:../Dave/Generated/src/ERU001/ERU001.c ****   		
+ 241:../Dave/Generated/src/ERU001/ERU001.c **** #if ((__TARGET_DEVICE__ == XMC44) || (__TARGET_DEVICE__ == XMC42) || \
+ 242:../Dave/Generated/src/ERU001/ERU001.c **** 	  (__TARGET_DEVICE__ == XMC41))
+ 243:../Dave/Generated/src/ERU001/ERU001.c ****   /* Clock gating status variable */
+ 244:../Dave/Generated/src/ERU001/ERU001.c ****   uint32_t ClkGatStat;  
+ 245:../Dave/Generated/src/ERU001/ERU001.c **** #endif
+ 246:../Dave/Generated/src/ERU001/ERU001.c ****  
+ 247:../Dave/Generated/src/ERU001/ERU001.c ****   /* ERU001_lDisableClkGating for XMC4400 or XMC4200 Device Series  */
+ 248:../Dave/Generated/src/ERU001/ERU001.c **** #if ((__TARGET_DEVICE__ == XMC44) || (__TARGET_DEVICE__ == XMC42) || \
+ 249:../Dave/Generated/src/ERU001/ERU001.c **** 	  (__TARGET_DEVICE__ == XMC41))
+ 250:../Dave/Generated/src/ERU001/ERU001.c ****   
+ 251:../Dave/Generated/src/ERU001/ERU001.c ****   for (HandleCnt = 0U; HandleCnt < ERU001_NUM_INSTANCES; HandleCnt++)
+ 252:../Dave/Generated/src/ERU001/ERU001.c ****   {
+ 253:../Dave/Generated/src/ERU001/ERU001.c ****     /* Disable clock gating for ERU1 peripheral */ 
+ 254:../Dave/Generated/src/ERU001/ERU001.c **** 	ClkGatStat = ERU001_lDisableClkGating(ERU001_HandleArray[HandleCnt]);
+ 255:../Dave/Generated/src/ERU001/ERU001.c **** 	/* Check clock gating status */
+ 256:../Dave/Generated/src/ERU001/ERU001.c **** 	if ( TRUE == ClkGatStat )
+ 257:../Dave/Generated/src/ERU001/ERU001.c **** 	{
+ 258:../Dave/Generated/src/ERU001/ERU001.c **** 	  /* Exit from the for loop */
+ 259:../Dave/Generated/src/ERU001/ERU001.c **** 	  break;
+ 260:../Dave/Generated/src/ERU001/ERU001.c **** 	}
+ 261:../Dave/Generated/src/ERU001/ERU001.c ****   }  
+ 262:../Dave/Generated/src/ERU001/ERU001.c **** #endif
+ 263:../Dave/Generated/src/ERU001/ERU001.c ****  
+ 264:../Dave/Generated/src/ERU001/ERU001.c ****   for (HandleCnt = 0U; HandleCnt < ERU001_NUM_INSTANCES; HandleCnt++)
+ 157              		.loc 1 264 0
+ 158 0006 4FF00003 		mov	r3, #0
+ 159 000a 7B60     		str	r3, [r7, #4]
+ 160 000c 0DE0     		b	.L4
+ 161              	.L5:
+ 265:../Dave/Generated/src/ERU001/ERU001.c ****   {
+ 266:../Dave/Generated/src/ERU001/ERU001.c ****     /* Initialise the ERU0 or ERU1 channel/s handles */
+ 267:../Dave/Generated/src/ERU001/ERU001.c **** 	ERU001_lInit(ERU001_HandleArray[HandleCnt]);
+ 162              		.loc 1 267 0 discriminator 2
+ 163 000e 40F20003 		movw	r3, #:lower16:ERU001_HandleArray
+ 164 0012 C0F20003 		movt	r3, #:upper16:ERU001_HandleArray
+ 165 0016 7A68     		ldr	r2, [r7, #4]
+ 166 0018 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 167 001c 1846     		mov	r0, r3
+ 168 001e FFF7FEFF 		bl	ERU001_lInit
+ 264:../Dave/Generated/src/ERU001/ERU001.c ****   for (HandleCnt = 0U; HandleCnt < ERU001_NUM_INSTANCES; HandleCnt++)
+ 169              		.loc 1 264 0 discriminator 2
+ 170 0022 7B68     		ldr	r3, [r7, #4]
+ 171 0024 03F10103 		add	r3, r3, #1
+ 172 0028 7B60     		str	r3, [r7, #4]
+ 173              	.L4:
+ 264:../Dave/Generated/src/ERU001/ERU001.c ****   for (HandleCnt = 0U; HandleCnt < ERU001_NUM_INSTANCES; HandleCnt++)
+ 174              		.loc 1 264 0 is_stmt 0 discriminator 1
+ 175 002a 7B68     		ldr	r3, [r7, #4]
+ 176 002c 012B     		cmp	r3, #1
+ 177 002e EED9     		bls	.L5
+ 268:../Dave/Generated/src/ERU001/ERU001.c ****   }	
+ 269:../Dave/Generated/src/ERU001/ERU001.c **** }
+ 178              		.loc 1 269 0 is_stmt 1
+ 179 0030 07F10807 		add	r7, r7, #8
+ 180 0034 BD46     		mov	sp, r7
+ 181 0036 80BD     		pop	{r7, pc}
+ 182              		.cfi_endproc
+ 183              	.LFE113:
+ 185              		.section	.text.ERU001_ClearFlag,"ax",%progbits
+ 186              		.align	2
+ 187              		.global	ERU001_ClearFlag
+ 188              		.thumb
+ 189              		.thumb_func
+ 191              	ERU001_ClearFlag:
+ 192              	.LFB114:
+ 270:../Dave/Generated/src/ERU001/ERU001.c ****   
+ 271:../Dave/Generated/src/ERU001/ERU001.c ****   
+ 272:../Dave/Generated/src/ERU001/ERU001.c **** /**
+ 273:../Dave/Generated/src/ERU001/ERU001.c ****  * @brief This function clears the Status Flag of ETLx..
+ 274:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 275:../Dave/Generated/src/ERU001/ERU001.c ****  * @param[in]   None
+ 276:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 277:../Dave/Generated/src/ERU001/ERU001.c ****  * @return      None
+ 278:../Dave/Generated/src/ERU001/ERU001.c ****  *
+ 279:../Dave/Generated/src/ERU001/ERU001.c ****  * <b>Reentrant: Yes </b><BR>
+ 280:../Dave/Generated/src/ERU001/ERU001.c ****  */
+ 281:../Dave/Generated/src/ERU001/ERU001.c **** inline void ERU001_ClearFlag(ERU001_HandleType Handle)
+ 282:../Dave/Generated/src/ERU001/ERU001.c **** {
+ 193              		.loc 1 282 0
+ 194              		.cfi_startproc
+ 195              		@ args = 0, pretend = 0, frame = 16
+ 196              		@ frame_needed = 1, uses_anonymous_args = 0
+ 197              		@ link register save eliminated.
+ 198 0000 80B4     		push	{r7}
+ 199              	.LCFI6:
+ 200              		.cfi_def_cfa_offset 4
+ 201              		.cfi_offset 7, -4
+ 202 0002 85B0     		sub	sp, sp, #20
+ 203              	.LCFI7:
+ 204              		.cfi_def_cfa_offset 24
+ 205 0004 00AF     		add	r7, sp, #0
+ 206              	.LCFI8:
+ 207              		.cfi_def_cfa_register 7
+ 208 0006 07F10403 		add	r3, r7, #4
+ 209 000a 83E80700 		stmia	r3, {r0, r1, r2}
+ 283:../Dave/Generated/src/ERU001/ERU001.c ****   Handle.ERURegs->EXICON[Handle.InputChannel] &= ~( (uint32_t)1U << ERU_EXICON_FL_Pos);
+ 210              		.loc 1 283 0
+ 211 000e 7B68     		ldr	r3, [r7, #4]
+ 212 0010 3A7A     		ldrb	r2, [r7, #8]	@ zero_extendqisi2
+ 213 0012 7968     		ldr	r1, [r7, #4]
+ 214 0014 387A     		ldrb	r0, [r7, #8]	@ zero_extendqisi2
+ 215 0016 00F10400 		add	r0, r0, #4
+ 216 001a 51F82010 		ldr	r1, [r1, r0, lsl #2]
+ 217 001e 21F08001 		bic	r1, r1, #128
+ 218 0022 02F10402 		add	r2, r2, #4
+ 219 0026 43F82210 		str	r1, [r3, r2, lsl #2]
+ 284:../Dave/Generated/src/ERU001/ERU001.c **** }
+ 220              		.loc 1 284 0
+ 221 002a 07F11407 		add	r7, r7, #20
+ 222 002e BD46     		mov	sp, r7
+ 223 0030 80BC     		pop	{r7}
+ 224 0032 7047     		bx	lr
+ 225              		.cfi_endproc
+ 226              	.LFE114:
+ 228              		.text
+ 229              	.Letext0:
+ 230              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 231              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 232              		.file 4 "../Dave/Generated/src/ERU001/../../inc/ERU001/../../inc/RESET001/../../inc/LIBS/types.h"
+ 233              		.file 5 "../Dave/Generated/src/ERU001/../../inc/ERU001/../../inc/RESET001/RESET001.h"
+ 234              		.file 6 "../Dave/Generated/src/ERU001/../../inc/ERU001/ERU001.h"
+ 235              		.file 7 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 236              		.file 8 "../Dave/Generated/src/ERU001/../../inc/ERU001/ERU001_Extern.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ERU001.c
+C:\Users\Herbert\AppData\Local\Temp\cc6GYHPa.s:20     .text.ERU001_lInit:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc6GYHPa.s:25     .text.ERU001_lInit:00000000 ERU001_lInit
+C:\Users\Herbert\AppData\Local\Temp\cc6GYHPa.s:135    .text.ERU001_Init:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc6GYHPa.s:140    .text.ERU001_Init:00000000 ERU001_Init
+C:\Users\Herbert\AppData\Local\Temp\cc6GYHPa.s:186    .text.ERU001_ClearFlag:00000000 $t
+C:\Users\Herbert\AppData\Local\Temp\cc6GYHPa.s:191    .text.ERU001_ClearFlag:00000000 ERU001_ClearFlag
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.uc_id.h.35.91819d6149ee56f9404d69053d48d018
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415
+
+UNDEFINED SYMBOLS
+RESET001_GetStatus
+RESET001_DeassertReset
+ERU001_HandleArray

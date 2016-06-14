@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ifx.davex.uimodel:UIDataModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ifx.davex.uimodel="com.ifx.davex.uimodel">
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="DefaultPage" displayName="USIC Channel Configuration" className="IfxGroupBox" controlId="1320050775171">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group23" displayName="Bit Rate" className="IfxGroupBox" controlId="1320050901765">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/i2c001_irwbitrate" displayName="Bit Rate" className="IntegerType" paramName="app/i2c001/0/i2c001_irwbitrate:Selects desired Bit Rate(kHz)" controlId="1332247207703" defaultType="Kbaud" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>Kbaud</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/i2c001_irocalbaudrate" displayName="Real Bit Rate" readonly="true" className="IntegerType" paramName="app/i2c001/0/i2c001_irocalbaudrate:Real Baud rate (baud)" controlId="1322117223140" defaultType="Kbaud" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>Kbaud</conversionType>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/i2c001_iroclock" displayName="Peripheral Clock" readonly="true" className="IntegerType" paramName="app/i2c001/0/i2c001_iroclock:Peripheral Clock" controlId="1322117334375" defaultType="MHz" customControl="true">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>MHz</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group23" displayName="Transmit FIFO" className="IfxGroupBox" controlId="1331570890179">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwtxfifosize" displayName="Size" className="EnumerationType" paramName="app/i2c001/0/I2C001_erwtxfifosize:Transmit FIFO size" controlId="1331570903610">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" grabExcessHorizontalSpace="true"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_irwtxfifotrigger" displayName="Trigger Limit" className="IntegerType" paramName="app/i2c001/0/I2C001_irwtxfifotrigger:Transmit FIFO trigger limit" controlId="1331570906106">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT" verticalAlignment="CENTER" verticalSpan="2"/>
+        <conversionType>dec</conversionType>
+        <conversionType>hex</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group25" displayName="Receive FIFO" className="IfxGroupBox" controlId="1331570919772">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_irwrxfifosize" displayName="Size" className="EnumerationType" paramName="app/i2c001/0/I2C001_irwrxfifosize:Receive FIFO size" controlId="1331570931144">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_irwrxfifotrigger" displayName="Trigger Limit" className="IntegerType" paramName="app/i2c001/0/I2C001_irwrxfifotrigger:Receive FIFO trigger limit" controlId="1331570934046">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData" horizontalAlignment="RIGHT"/>
+        <conversionType>dec</conversionType>
+        <conversionType>hex</conversionType>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page41" displayName="Interrupt Configuration" className="IfxGroupBox" controlId="1331370394952">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group1" displayName="I2C Protocol Specific Interrupt Configuration" className="IfxGroupBox" controlId="1331370399507">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwStartCondRecvInt" displayName="Enable start condition received interrupt" labelRequired="false" className="EnumerationType" paramName="app/i2c001/0/I2C001_erwStartCondRecvInt:Enable start condition received interrupt" controlId="1331370406917">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwRepStartCondRecvInt" displayName="Enable repeated start condition received interrupt" labelRequired="false" className="EnumerationType" paramName="app/i2c001/0/I2C001_erwRepStartCondRecvInt:Enable repeated start condition received interrupt" controlId="1331370409335">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwStopCondRecvInt" displayName="Enable stop condition received interrupt" labelRequired="false" className="EnumerationType" paramName="app/i2c001/0/I2C001_erwStopCondRecvInt:Enable stop condition received interrupt" controlId="1331370414155">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwNackDetectInt" displayName="Enable non-acknowledge interrupt" labelRequired="false" className="EnumerationType" paramName="app/i2c001/0/I2C001_erwNackDetectInt:Enable non-acknowledge interrupt" controlId="1331370436713">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwArbLostInt" displayName="Enable arbitration lost interrupt" labelRequired="false" className="EnumerationType" paramName="app/i2c001/0/I2C001_erwArbLostInt:Enable arbitration lost interrupt" controlId="1331370446011">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwErrorInt" displayName="Enable error interrupt" labelRequired="false" className="EnumerationType" paramName="app/i2c001/0/I2C001_erwErrorInt:Enable error interrupt" controlId="1331370456728">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwAckInt" displayName="Enable acknowledge interrupt" labelRequired="false" className="EnumerationType" paramName="app/i2c001/0/I2C001_erwAckInt:Enable acknowledge interrupt" controlId="1331370460987">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+  <controls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Page58" displayName="Pin Configuration" className="IfxGroupBox" controlId="1337343253189">
+    <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+    <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group41" displayName="Pin Settings" className="IfxGroupBox" constraint="" controlId="1337343258399">
+      <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group81" displayName="SCL Pin" className="IfxGroupBox" controlId="1337343261535">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwSCLPadClass" displayName="Pad Class" className="EnumerationType" constraint="if((CM.getSoftwareId().substring(0,1).compareTo(&quot;4&quot;) == 0))&#xD;&#xA;{&#xD;&#xA; CM.setEnable(true);&#xD;&#xA; CM.setVisible(true); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;}" paramName="app/i2c001/0/I2C001_erwSCLPadClass:SCL Pad Class" controlId="1337343285044">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwPadDriverModeSCL" displayName="Pin Driver Mode" className="EnumerationType" constraint="if((CM.getSoftwareId().substring(0,1).compareTo(&quot;4&quot;) == 0))&#xD;&#xA;{&#xD;&#xA; CM.setEnable(true);&#xD;&#xA; CM.setVisible(true); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;}" paramName="app/i2c001/0/I2C001_erwPadDriverModeSCL:SCL Pin Driver Mode" controlId="1337592566102">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwSCLOutputChar" displayName="Output Characteristics" className="EnumerationType" constraint="" paramName="app/i2c001/0/I2C001_erwSCLOutputChar:SCL Output characteristics" controlId="1337347790041">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <subControls xsi:type="com.ifx.davex.uimodel:CompoundWidget" propertyId="Group3" displayName="SDA Pin" className="IfxGroupBox" controlId="1337343264967">
+        <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwSDAPadClass" displayName="Pad Class" className="EnumerationType" constraint="if((CM.getSoftwareId().substring(0,1).compareTo(&quot;4&quot;) == 0))&#xD;&#xA;{&#xD;&#xA; CM.setEnable(true);&#xD;&#xA; CM.setVisible(true); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;}" paramName="app/i2c001/0/I2C001_erwSDAPadClass:Pad Class" controlId="1337343288757">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwPadDriverModeSDA" displayName="Pin Driver Mode" className="EnumerationType" constraint="if((CM.getSoftwareId().substring(0,1).compareTo(&quot;4&quot;) == 0))&#xD;&#xA;{&#xD;&#xA; CM.setEnable(true);&#xD;&#xA; CM.setVisible(true); &#xD;&#xA;}&#xD;&#xA;else&#xD;&#xA;{&#xD;&#xA;    CM.setEnable(false);&#xD;&#xA;    CM.setVisible(false); &#xD;&#xA;}" paramName="app/i2c001/0/I2C001_erwPadDriverModeSDA:SDA Pin Driver Mode" controlId="1337343307197">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <subControls xsi:type="com.ifx.davex.uimodel:SimpleWidget" propertyId="app/i2c001/0/I2C001_erwSDAOutputChar" displayName="Output Characteristics" className="EnumerationType" constraint="" paramName="app/i2c001/0/I2C001_erwSDAOutputChar:SDA Output characteristics" controlId="1337347798580">
+          <layoutData xsi:type="com.ifx.davex.uimodel:IfxGridData"/>
+        </subControls>
+        <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+      </subControls>
+      <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout" numColumns="2"/>
+    </subControls>
+    <layout xsi:type="com.ifx.davex.uimodel:IfxGridLayout"/>
+  </controls>
+</com.ifx.davex.uimodel:UIDataModel>

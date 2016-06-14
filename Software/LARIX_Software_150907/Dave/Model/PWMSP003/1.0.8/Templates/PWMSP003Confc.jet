@@ -1,0 +1,337 @@
+<%@ jet package="CodeGenerator" class="pwmsp003confc_template"
+imports="java.util.* java.text.*  com.ifx.davex.appjetinteract.App2JetInterface" %>
+<% App2JetInterface app = (App2JetInterface) argument; %>
+
+/*CODE_BLOCK_BEGIN[pwmsp003_Conf.c]*/
+
+/*******************************************************************************
+ Copyright (c) 2013, Infineon Technologies AG                                 **
+ All rights reserved.                                                         **
+                                                                              **
+ Redistribution and use in source and binary forms, with or without           **
+ modification,are permitted provided that the following conditions are met:   **
+                                                                              **
+ *Redistributions of source code must retain the above copyright notice,      **
+ this list of conditions and the following disclaimer.                        **
+ *Redistributions in binary form must reproduce the above copyright notice,   **
+ this list of conditions and the following disclaimer in the documentation    **
+ and/or other materials provided with the distribution.                       **
+ *Neither the name of the copyright holders nor the names of its contributors **
+ may be used to endorse or promote products derived from this software without**
+ specific prior written permission.                                           **
+                                                                              **
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"  **
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE    **
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   **
+ ARE  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE   **
+ LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR         **
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF         **
+ SUBSTITUTE GOODS OR  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS    **
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN      **
+ CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)       **
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE   **
+ POSSIBILITY OF SUCH DAMAGE.                                                  **
+                                                                              **
+ To improve the quality of the software, users are encouraged to share        **
+ modifications, enhancements or bug fixes with Infineon Technologies AG       **
+ dave@infineon.com).                                                          **
+                                                                              **
+********************************************************************************
+**                                                                            **
+** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+**                                                                            **
+** COMPILER : Compiler Independent                                            **
+**                                                                            **
+** AUTHOR   : App Developer                                                   **
+**                                                                            **
+** NOTE     : Any changes made to this file will be overwritten during Code   **
+**            generation                                                      **
+**                                                                            **
+********************************************************************************
+** VERSION HISTORY:
+********************************************************************************
+** v1.0.0, 26 Nov 2013,  SSAM: Initial version
+*******************************************************************************/
+/**
+ * @file  PWMSP003_Conf.c
+ *
+ * @brief This file contains App parameter data as per GUI configurations
+ */
+
+<% String AppBaseuri = "app/pwmsp003/"; %>
+
+#include "../../inc/PWMSP003/PWMSP003.h"
+
+extern void PWMSP003_lSetDutyCenterAlign(const void* HandlePtr,float Duty);
+extern void PWMSP003_lSetDutyEdgeAlign(const void* HandlePtr,float Duty);
+extern void PWMSP003_lSetCompareCenterAlign(const void* HandlePtr,uint32_t Compare);
+extern void PWMSP003_lSetCompareEdgeAlign(const void* HandlePtr,uint32_t Compare);
+
+<% String SliceUri = null; %>
+<% String Slice1Uri = null; %>
+<% String kernelNo = null; %>
+<% String sliceNo = null; %>
+<% String slice1No = null; %>
+
+<% String appInst  = null; %>
+
+<% ArrayList<String> appsList = (ArrayList<String>)(app.getApps("app/pwmsp003/"));
+for (String appIns : appsList ) {
+    appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+
+<% SliceUri = app.getMappedUri(AppBaseuri + appInst +"/slice"); %>
+<% if ((SliceUri != null) && (SliceUri.trim() != "")) { %>
+<% kernelNo = SliceUri.substring(SliceUri.indexOf("/ccu4")+6,SliceUri.indexOf("/cc4/")); %>
+<% sliceNo = SliceUri.substring(SliceUri.length() -1); %>
+<% int interrupt = app.getIntegerValue(AppBaseuri + appInst + "/slice/inte/pme")
+| (app.getIntegerValue(AppBaseuri + appInst + "/slice/inte/ome") << 1)
+| (app.getIntegerValue(AppBaseuri + appInst + "/slice/inte/cmue") << 2)
+| (app.getIntegerValue(AppBaseuri + appInst + "/slice/inte/cmde") << 3)
+| (app.getIntegerValue(AppBaseuri + appInst + "/slice/inte/e0ae") << 8)
+| (app.getIntegerValue(AppBaseuri + appInst + "/slice/inte/e1ae") << 9)
+| (app.getIntegerValue(AppBaseuri + appInst + "/slice/inte/e2ae") << 10);%>
+<% String SetDutyCycle = null;
+String SetCompare = null;
+int countingmode = app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/tcm");
+if(countingmode == 0){
+  SetDutyCycle = "PWMSP003_lSetDutyEdgeAlign";
+  SetCompare = "PWMSP003_lSetCompareEdgeAlign";
+}
+else if (countingmode == 1){
+  SetDutyCycle = "PWMSP003_lSetDutyCenterAlign";
+  SetCompare = "PWMSP003_lSetCompareCenterAlign";
+}
+%>
+
+PWMSP003_DynamicDataType PWMSP003_DynamicData<%= appInst%> =
+{
+  .StateType = PWMSP003_UNINITIALIZED
+};
+
+const PWMSP003_HandleType PWMSP003_Handle<%= appInst%> =
+{
+  .StartControl = <%=app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_erwstart/0")%>U,
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/tcm")==0)%>
+  <%{%>
+  .CountingModeType = PWMSP003_EDGE_ALIGNED,
+  <%}%>
+  <%else%>
+  <%{%>
+  .CountingModeType = PWMSP003_CENTER_ALIGNED,
+  <%}%>
+  .kCountDirection = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tcst/cdir")%>U,
+  .kPassiveLevel = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/psl/psl") %>U,
+  .kTimerMode = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/tssm")%>U,
+
+  .kResolution = (float)<%= app.getFormattedDoubleValue((AppBaseuri + appInst + "/pwmsp003_irselresolution"),"0.000")%>,
+  .kCCUPrescaler= <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_irSelprescaler") %>U,
+  .kCompareValue = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_ircompareval")%>U,
+  .kPeriodVal = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_irperiodval")%>U,
+  .kMaxPeriodVal= 65535U,
+
+  .kPrescalerMode = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/fpe")%>U,
+  .kFloatingPrescalepcmpvalue = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/fpcs/pcmp")%>U,
+
+  .kEvent0Function =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 0){%> PWMSP003_NO_FUNCTION,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 1){%> PWMSP003_EXTERNAL_START,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 2){%> PWMSP003_EXTERNAL_STOP,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 3){%> PWMSP003_EXTERNAL_MODULATION,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 4){%> PWMSP003_EXTERNAL_COUNT_DIRECTION,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 5){%> PWMSP003_EXTERNAL_GATING,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 6){%> PWMSP003_EXTERNAL_LOAD,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 7){%> PWMSP003_EXTERNAL_COUNT,<%}%>
+  .kEvent1Function =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 0){%> PWMSP003_NO_FUNCTION,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 1){%> PWMSP003_EXTERNAL_START,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 2){%> PWMSP003_EXTERNAL_STOP,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 3){%> PWMSP003_EXTERNAL_MODULATION,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 4){%> PWMSP003_EXTERNAL_COUNT_DIRECTION,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 5){%> PWMSP003_EXTERNAL_GATING,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 6){%> PWMSP003_EXTERNAL_LOAD,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 7){%> PWMSP003_EXTERNAL_COUNT,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 8){%> PWMSP003_EXTERNAL_OVERRIDE,<%}%>
+  .kEvent2Function =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 0){%> PWMSP003_NO_FUNCTION,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 1){%> PWMSP003_EXTERNAL_START,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 2){%> PWMSP003_EXTERNAL_STOP,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 3){%> PWMSP003_EXTERNAL_MODULATION,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 4){%> PWMSP003_EXTERNAL_COUNT_DIRECTION,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 5){%> PWMSP003_EXTERNAL_GATING,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 6){%> PWMSP003_EXTERNAL_LOAD,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 7){%> PWMSP003_EXTERNAL_COUNT,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 8){%> PWMSP003_EXTERNAL_OVERRIDE,
+             <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 9){%> PWMSP003_EXTERNAL_TRAP,<%}%>
+
+  .kStartEvent =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 1){%> PWMSP003_EVENT_0,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 1){%> PWMSP003_EVENT_1,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 1){%> PWMSP003_EVENT_2,
+               <%}else{%> PWMSP003_NO_EVENT,<%}%>
+  .kStopEvent =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 2){%> PWMSP003_EVENT_0,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 2){%> PWMSP003_EVENT_1,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 2){%> PWMSP003_EVENT_2,
+               <%}else{%> PWMSP003_NO_EVENT,<%}%>
+  .kModulationEvent =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 3){%> PWMSP003_EVENT_0,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 3){%> PWMSP003_EVENT_1,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 3){%> PWMSP003_EVENT_2,
+               <%}else{%> PWMSP003_NO_EVENT,<%}%>
+  .kCountDirEvent =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 4){%> PWMSP003_EVENT_0,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 4){%> PWMSP003_EVENT_1,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 4){%> PWMSP003_EVENT_2,
+               <%}else{%> PWMSP003_NO_EVENT,<%}%>
+  .kGatingEvent =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 5){%> PWMSP003_EVENT_0,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 5){%> PWMSP003_EVENT_1,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 5){%> PWMSP003_EVENT_2,
+               <%}else{%> PWMSP003_NO_EVENT,<%}%>
+  .kLoadEvent =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 6){%> PWMSP003_EVENT_0,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 6){%> PWMSP003_EVENT_1,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 6){%> PWMSP003_EVENT_2,
+               <%}else{%> PWMSP003_NO_EVENT,<%}%>
+  .kCountEvent =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent0selection") == 7){%> PWMSP003_EVENT_0,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 7){%> PWMSP003_EVENT_1,
+               <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 7){%> PWMSP003_EVENT_2,
+               <%}else{%> PWMSP003_NO_EVENT,<%}%>
+
+  /** Override event should be mapped in both Event1 and Event2 for TRIGGER and
+   *  VALUE respectively. Else Override function cannot be performed properly.
+   */
+  .kOverrideEvent =<%if((app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent1selection") == 8)
+                    && (app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 8)){%> PWMSP003_EVENT_1,
+                <%}else{%> PWMSP003_NO_EVENT,<%}%>
+  .kTraptEvent =<%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempevent2selection") == 9){%> PWMSP003_EVENT_2,
+                <%}else{%> PWMSP003_NO_EVENT,<%}%>
+
+  .kEvent0_lpfconfig =<%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf0m") == 0){%> PWMSP003_LPF_DISABLED,
+                     <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf0m") == 1){%> PWMSP003_LPF_3_CLOCKS,
+                     <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf0m") == 2){%> PWMSP003_LPF_5_CLOCKS,
+                     <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf0m") == 3){%> PWMSP003_LPF_7_CLOCKS,<%}%>
+  .kEvent1_lpfconfig =<%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf1m") == 0){%> PWMSP003_LPF_DISABLED,
+                     <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf1m") == 1){%> PWMSP003_LPF_3_CLOCKS,
+                     <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf1m") == 2){%> PWMSP003_LPF_5_CLOCKS,
+                     <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf1m") == 3){%> PWMSP003_LPF_7_CLOCKS,<%}%>
+  .kEvent2_lpfconfig =<%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf2m") == 0){%> PWMSP003_LPF_DISABLED,
+                     <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf2m") == 1){%> PWMSP003_LPF_3_CLOCKS,
+                     <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf2m") == 2){%> PWMSP003_LPF_5_CLOCKS,
+                     <%}else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/ins/lpf2m") == 3){%> PWMSP003_LPF_7_CLOCKS,<%}%>
+
+  .kExtStartTrig = <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_erwstartedge/0") ==1){%> 0U, <%}else{%> 1U, <%}%>
+  .kExtStopTrig = <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_erwstopedge/0") == 1){%> 0U, <%}else{%> 1U, <%}%>
+
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextstrttriggeredge") == 0) {%>
+  .kStartEdge = PWMSP003_NO_TRIGGER,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextstrttriggeredge") == 1 ) {%>
+  .kStartEdge = PWMSP003_RISING_EDGE,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextstrttriggeredge")==2) {%>
+  .kStartEdge = PWMSP003_FALLING_EDGE,
+  <% } else { %>
+  .kStartEdge = PWMSP003_BOTH_EDGES,
+  <% } %>
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextstoptriggeredge") == 0) {%>
+  .kStopEdge = PWMSP003_NO_TRIGGER,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextstoptriggeredge") == 1 ) {%>
+  .kStopEdge = PWMSP003_RISING_EDGE,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextstoptriggeredge")==2) {%>
+  .kStopEdge = PWMSP003_FALLING_EDGE,
+  <% } else { %>
+  .kStopEdge = PWMSP003_BOTH_EDGES,
+  <% } %>
+
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/strm") == 0) {%>
+  .ExtStartConfigType = PWMSP003_START_TIMER,
+  <% } else { %>
+  .ExtStartConfigType = PWMSP003_CLEAR_START_TIMER,
+  <% } %>
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/endm") == 0) {%>
+  .ExtStopConfigType = PWMSP003_STOP_TIMER,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/endm") == 1) {%>
+  .ExtStopConfigType = PWMSP003_CLEAR_TIMER,
+  <% } else { %>
+  .ExtStopConfigType = PWMSP003_CLEAR_STOP_TIMER,
+  <% } %>
+
+  .kTrapEnable = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/trape") %>U,
+  .kTrapLevel = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_temptraplevel") %>U,
+  .kTrapSync = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/trpse") %>U,
+  .kTrapExitControl = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/trpsw") %>U,
+
+  .kModulationActiveLevel = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextmodactivelvl") %>U,
+  .kModulationMode = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/emt") %>U,
+  .kModulationSync = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/ems") %>U,
+
+  .kCntDirActiveLevel = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempcntdir") %>U,
+
+  .kGateEventActiveLevel = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextgateactivelvl") %>U,
+
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextcnttriggeredge") == 0) {%>
+  .kCountEventEdge = PWMSP003_NO_TRIGGER,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextcnttriggeredge") == 1 ) {%>
+  .kCountEventEdge = PWMSP003_RISING_EDGE,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextcnttriggeredge")==2) {%>
+  .kCountEventEdge = PWMSP003_FALLING_EDGE,
+  <% } else { %>
+  .kCountEventEdge = PWMSP003_BOTH_EDGES,
+  <% } %>
+
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextloadtriggeredge") == 0) {%>
+  .kLoadEventEdge = PWMSP003_NO_TRIGGER,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextloadtriggeredge") == 1 ) {%>
+  .kLoadEventEdge = PWMSP003_RISING_EDGE,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextloadtriggeredge")==2) {%>
+  .kLoadEventEdge = PWMSP003_FALLING_EDGE,
+  <% } else { %>
+  .kLoadEventEdge = PWMSP003_BOTH_EDGES,
+  <% } %>
+
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextoverridetriggeredge") == 0) {%>
+  .kOverrideTriggerEdge = PWMSP003_NO_TRIGGER,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextoverridetriggeredge") == 1 ) {%>
+  .kOverrideTriggerEdge = PWMSP003_RISING_EDGE,
+  <% } else if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextoverridetriggeredge")==2) {%>
+  .kOverrideTriggerEdge = PWMSP003_FALLING_EDGE,
+  <% } else { %>
+  .kOverrideTriggerEdge = PWMSP003_BOTH_EDGES,
+  <% } %>
+
+  .kOverrideActiveLevel = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempextoverridevalactivelvl") %>U,
+
+  .kMCMode = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/mcme") %>U,
+  .kMCModeShadowRequest = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempmcmshadowtransfer") %>U,
+  <%if(app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempmcmshadowtransconf") == 2) {%>
+  .kMCModeShadowConfig = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempmcmshadowtransconf")+1 %>U,
+  <% } else { %>
+  .kMCModeShadowConfig = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_tempmcmshadowtransconf") %>U,  
+  <% } %>
+  .kDitherSetting = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/tc/dithe")%>U,
+  .kDitherCompare = <%= app.getIntegerValue(AppBaseuri + appInst + "/slice/dits/dcvs")%>U,
+
+  .kOutputEnable = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_directoutputpadenabledummy")%>U,
+  .kOutputChar = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_directoutputpadchardummy")%>U,
+  .kOutPadclass = <%= app.getIntegerValue(AppBaseuri + appInst + "/pwmsp003_directoutputpadclassdummy")%>U,
+  .kOutDriverMode = <%= app.getIntegerValue(AppBaseuri + appInst + "/pin_directoutput/pdr_pd")%>U,
+
+  .Slice = PWMSP003_SLICE<%=sliceNo%>,
+  .CC4yKernRegsPtr = (CCU4_GLOBAL_TypeDef*) CCU4<%= kernelNo%>_BASE,
+  .CC4yRegsPtr = (CCU4_CC4_TypeDef*)CCU4<%= kernelNo%>_CC4<%=sliceNo%>,
+
+  .DynamicDataType = &PWMSP003_DynamicData<%= appInst%>,
+  .InterruptControl = 0x<%= Integer.toHexString(interrupt) %>U,
+  .SetCompareFuncPtr = <%= SetCompare%>,
+  .SetDutyFuncPtr = <%= SetDutyCycle%>
+};
+
+<%}else {%>
+//This app is not mapped to any CCU4 slice.
+<%}}%>
+
+const PWMSP003_HandleType * PWMSP003_HandleArr[PWMSP003_NUM_INSTANCES] =
+{
+<% int instance = 0; %>
+<% for (String appIns : appsList ) { %>
+<% appInst = appIns.substring(appIns.lastIndexOf("/")+1);%>
+<% instance++; %>
+<%}%>
+<% String lastAppInstance = null; %>
+<% for (int index = 0;  index < (instance); index++) {  %>
+   &PWMSP003_Handle<%=index%><% if(index+1 != (instance)) {%>,<%} %>
+<%}%>
+};
+
+/*CODE_BLOCK_END*/
+

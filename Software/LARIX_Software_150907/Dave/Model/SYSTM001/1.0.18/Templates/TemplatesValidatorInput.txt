@@ -1,0 +1,2 @@
+http://www.infineon.com/App/SYSTM001/1.0.0/0/SysTick_Interval = 1
+http://www.infineon.com/App/SYSTM001/1.0.0/0/SW_Timers = 2
