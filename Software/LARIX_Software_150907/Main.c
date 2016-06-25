@@ -55,6 +55,8 @@
 #define DEBUG_SPECIFIC
 //#define DEBUG_CONTINOUS0
 #define LED_test
+//Be careful, do not enable the motor test when you have propellers installed!
+//#define DEBUG_MOTOR_TEST
 //--------------------------------Enable DEBUG-----------------------------------------------//
 
 //--------------------------------OUTPUT Config-----------------------------------------------//
@@ -287,7 +289,8 @@ void Initialize()
 
 int main(void)
 {
-
+	int i=0;
+	int orcount=0;
 
 	Control_P0_9(OUTPUT_PP_GP, VERYSTRONG);
 	Control_P3_2(OUTPUT_PP_GP, VERYSTRONG);
@@ -325,6 +328,20 @@ int main(void)
 	DAVE_Init();			// Initialization of DAVE Apps
 	Initialize();
 
+#ifdef DEBUG_MOTOR_TEST
+	for(j=0;j<100;j++)
+	{
+		for(i=45;i<90;i++)
+		{
+	  		PWMSP001_SetDutyCycle((PWMSP001_HandleType*)&ESC_PWM_Handle0, i);
+	  		PWMSP001_SetDutyCycle((PWMSP001_HandleType*)&ESC_PWM_Handle1, i);
+	  		PWMSP001_SetDutyCycle((PWMSP001_HandleType*)&ESC_PWM_Handle2, i);
+ 	  		PWMSP001_SetDutyCycle((PWMSP001_HandleType*)&ESC_PWM_Handle3, i);
+			for (int orcount = 0; orcount<3000000; orcount++)__NOP();
+
+		}
+	}
+#endif
 
 	Control_P0_0(INPUT, STRONG); //SET UART PIN to TRISTATE: necessary with LARIX_V3
 	Control_P0_1(INPUT, STRONG); //SET UART PIN to TRISTATE: necessary with LARIX_V3
