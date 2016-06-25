@@ -15,22 +15,35 @@
  *
  */
 
-
+#ifndef DEBUG_ON_PC
 #include <DAVE3.h>			//Declarations from DAVE3 Code Generation (includes SFR declaration)
+#else
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
+#define bool int
+#endif
+
 #include <limits.h>
 
+#ifndef DEBUG_ON_PC
 #include "_Quadrocopter/_HAL/GPIO.h"
 #include "_Quadrocopter/_HAL/Delay/util.h"
 #include "_Quadrocopter/_HAL/I2C/I2Cdev.h"
+#endif
 
 #include "_Quadrocopter/Sensors/MPU9X50/MPU9150.h"
 #include "_Quadrocopter/Sensors/DPS310/DPS310.h"
 
 #include "_Quadrocopter/RadioControl/RCReceive.h"
 
-#include "_Quadrocopter/Attitude_Control/Attitudecontroller.h"
+#include "_Quadrocopter/Attitude_Control/AttitudeController.h"
 
+#ifndef DEBUG_ON_PC
 #include "_Quadrocopter/MCI_DaisyChain/DaisyChain.h"
+#else
+#include "simulator.h"
+#endif
 
 //#define LARIX_with_PWM_used
 #define WIDEFIELD_used
@@ -294,14 +307,14 @@ int main(void)
 	#ifdef LED_test
 	int ortime=0L;
 				while(ortime<10){
-
-						for (int orcount = 0; orcount<200000; orcount++)__NOP();
+						int orcount=0;
+						for (orcount = 0; orcount<200000; orcount++)__NOP();
 						TOGGLE_P3_0;
-						for (int orcount = 0; orcount<200000; orcount++)__NOP();
+						for (orcount = 0; orcount<200000; orcount++)__NOP();
 						TOGGLE_P3_1;
-						for (int orcount = 0; orcount<200000; orcount++)__NOP();
+						for (orcount = 0; orcount<200000; orcount++)__NOP();
 						TOGGLE_P3_2;
-						for (int orcount = 0; orcount<200000; orcount++)__NOP();
+						for (orcount = 0; orcount<200000; orcount++)__NOP();
 						TOGGLE_P0_9;
 						ortime++;
 				}
@@ -323,9 +336,10 @@ int main(void)
 		ortime=0;
 		while(ortime<20){
 
-								for (int orcount = 0; orcount<300000; orcount++)__NOP();
+								int orcount=0;
+								for (orcount = 0; orcount<300000; orcount++)__NOP();
 								TOGGLE_P3_0;
-								for (int orcount = 0; orcount<300000; orcount++)__NOP();
+								for (orcount = 0; orcount<300000; orcount++)__NOP();
 								TOGGLE_P3_2;
 								ortime++;
 						}

@@ -9,7 +9,9 @@
 #define ATTITUDECONTROLLER_H_
 #define MIN_SPEED 15
 
+#ifndef DEBUG_ON_PC
 #include <arm_math.h>
+#endif
 
 void AngleController(float *r, float *y, int n, const float *a, const float *b, float *x, float *u);
 void AngleRateController(float *r, float *y, const float *P, float *u);

@@ -8,9 +8,11 @@
 #ifndef DPS310_H_
 #define DPS310_H_
 
+#ifndef DEBUG_ON_PC
 #include <Dave3.h>
 #include "../../_HAL/Delay/util.h"
 #include "../../_HAL/I2C/I2Cdev.h"
+#endif
 
 #define DPS310_Address (0x77<<1)
 

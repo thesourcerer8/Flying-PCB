@@ -10,6 +10,7 @@ float FLY = 0.0;
 
 void AngleController(float *r, float *y, int n, const float *a, const float *b, float *x, float *u)
 {
+	int i=0;
 	//PID-Controller
 
 	//control error
@@ -19,7 +20,7 @@ void AngleController(float *r, float *y, int n, const float *a, const float *b, 
 	*u = x[n-1]+b[n]*e;
 
 	//calculate new coefficients
-	for (int i=n-1; i>0; i--)
+	for (i=n-1; i>0; i--)
 		x[i]=b[i]*e-a[i]*(*u)+x[i-1];
 
 	x[0]=b[0]*e-a[0]*(*u);

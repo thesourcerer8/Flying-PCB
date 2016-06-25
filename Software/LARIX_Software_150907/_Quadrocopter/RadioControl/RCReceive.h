@@ -8,7 +8,9 @@
 #ifndef RCRECEIVE_H_
 #define RCRECEIVE_H_
 
+#ifndef DEBUG_ON_PC
 #include <DAVE3.h>
+#endif
 
 #define RC_UART_Handle 		  UART001_Handle0
 #define BT_UART_Handle UART001_Handle1

@@ -8,10 +8,12 @@
 #ifndef MPU9150_H_
 #define MPU9150_H_
 
+#ifndef DEBUG_ON_PC
 #include <DAVE3.h>
 #include <arm_math.h>
 #include "../../_HAL/I2C/I2Cdev.h"
 #include "../../_HAL/Delay/util.h"
+#endif
 
 #define ATTITUDEALGORITHM 	2
 

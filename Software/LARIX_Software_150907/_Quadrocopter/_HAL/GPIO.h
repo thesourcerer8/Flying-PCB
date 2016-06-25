@@ -34,7 +34,9 @@
 #ifndef __GPIO_H__
 #define __GPIO_H__
 
+#ifndef DEBUG_ON_PC
 #include <XMC4500.h>		/*!< SFR declarations of the selected device */
+#endif
 
 /*! \addtogroup lib
 *  @{

@@ -8,8 +8,10 @@
 #ifndef QUATERNIONFILTERS_H_
 #define QUATERNIONFILTERS_H_
 
+#ifndef DEBUG_ON_PC
 #include <DAVE3.h>
 #include <arm_math.h>
+#endif
 
 #define GYROMEASERROR	PI * (40.0f / 180.0f)
 #define Kp 2.0f * 5.0f // these are the free parameters in the Mahony filter and fusion scheme, Kp for proportional feedback, Ki for integral
