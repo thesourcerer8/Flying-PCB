@@ -54,7 +54,7 @@ while(1)
   if($char=~m/(\d+) \| (\d+) - (\d+) - (\d+) - (\d+) - (\d+) - (\d+) - (\d+) - (\d+) -/)
   {
     #print "Found!\n";
-    $message->send("sendpos Plane controllerstate [".mymap($2).",".mymap($3).",".mymap($4).",".mymap($5)."]");
+    $message->send("sendpos Plane controllerstate [".mymap($2).",".mymap($3).",".mymap($4).",".mymap($5).",".mymap($6).",".mymap($7).",".mymap($8).",".mymap($9)."]");
   }
   $char = $port->read(100);
 }
