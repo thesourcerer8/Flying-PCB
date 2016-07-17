@@ -11,17 +11,18 @@ use IO::Socket;
 
 
 #Linux:
-#use Device::SerialPort;
-#my $port = Device::SerialPort->new("/dev/ttyUSB3");
+use Device::SerialPort;
+my $port = Device::SerialPort->new("/dev/ttyUSB0");
 #Windows:
-use Win32::SerialPort;
-my $port = Win32::SerialPort->new("COM14");
+#use Win32::SerialPort;
+#my $port = Win32::SerialPort->new("COM14");
 
 $port->baudrate(115200); # Configure this to match your device
 $port->databits(8);
 $port->parity("none");
 $port->stopbits(1);
-$port->read_interval(1);
+
+#$port->read_interval(1);
 
 $|++;
 
@@ -48,13 +49,16 @@ sub mymap($)
 }
 
 my $char = $port->read(100);
+my $buf=$char;
 while(1)
 {
-  print " *** ".$char if(defined($char));
-  if($char=~m/(\d+) \| (\d+) - (\d+) - (\d+) - (\d+) - (\d+) - (\d+) - (\d+) - (\d+) -/)
+  print " *** ".$char if(defined($char) && $char);
+  if($buf=~m/(\d+) \| (\d+) - (\d+) - (\d+) - (\d+) - (\d+) - (\d+) - (\d+) - (\d+) -/)
   {
     #print "Found!\n";
-    $message->send("sendpos Plane controllerstate [".mymap($2).",".mymap($3).",".mymap($4).",".mymap($5).",".mymap($6).",".mymap($7).",".mymap($8).",".mymap($9)."]");
+    $message->send("sendpos Plane controllerstate [".mymap($2).",".mymap($3).",".mymap($4).",".mymap($5).",".mymap($6).",".mymap($7)."]");
+    $buf="";
   }
   $char = $port->read(100);
+  $buf.=$char;
 }
